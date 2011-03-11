@@ -1,10 +1,14 @@
-// Copyright (C) 2008-2010 by One Guy Group, Inc., All rights reserved worldwide.
+// Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
+// This file is released under the MIT License:
+// http://www.opensource.org/licenses/mit-license.php
 
 #include "vf/vf_StandardHeader.h"
 
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_FPUFlags.h"
+
+//------------------------------------------------------------------------------
 
 void FPUFlags::clearUnsetFlagsFrom (const FPUFlags& flags)
 {
@@ -23,6 +27,8 @@ void FPUFlags::clearUnsetFlagsFrom (const FPUFlags& flags)
 //
 // Platform specific implementations
 //
+
+//------------------------------------------------------------------------------
 
 #ifdef _MSC_VER
 
@@ -135,6 +141,8 @@ void FPUFlags::setCurrent (const FPUFlags& flags)
   if (result != 0)
     throw std::runtime_error ("error in _controlfp_s");
 }
+
+//------------------------------------------------------------------------------
 
 #else
 

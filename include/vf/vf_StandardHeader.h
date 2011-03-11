@@ -5,6 +5,17 @@
 #ifndef __VF_STANDARDHEADER_VFHEADER__
 #define __VF_STANDARDHEADER_VFHEADER__
 
+// Handy macro that lets pragma warnings be clicked in the output window
+#define VF_STR2_(x) #x
+#define VF_STR1_(x) VF_STR2_(x)
+#define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "
+// Usage:
+// #pragma message(VF_LOC_"Description of problem")
+
+#include "vf/vf_Config.h"
+
+//------------------------------------------------------------------------------
+
 // Users of the vf library need to include juce first
 #if VF_PUBLIC_INCLUDES
 # ifndef __JUCE_JUCEHEADER__
@@ -29,19 +40,6 @@
 #  pragma pop_macro("free")
 # endif
 #endif
-
-//------------------------------------------------------------------------------
-
-// Handy macro that lets pragma warnings be clicked in the output window
-#define VF_STR2_(x) #x
-#define VF_STR1_(x) VF_STR2_(x)
-#define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "
-// Usage:
-// #pragma message(VF_LOC_"Description of problem")
-
-//------------------------------------------------------------------------------
-
-#include "vf/vf_Config.h"
 
 #ifdef VF_NAMESPACE
   #define BEGIN_VF_NAMESPACE    namespace VF_NAMESPACE {
