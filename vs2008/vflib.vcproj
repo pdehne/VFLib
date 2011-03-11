@@ -145,8 +145,48 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="include"
+			>
+		</Filter>
+		<Filter
+			Name="source"
+			>
+		</Filter>
 		<File
 			RelativePath="..\source\vf.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_boost_includes.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_Config.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_ext_includes.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_HeaderTemplate.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_StandardHeader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_std_includes.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_Uncopyable.h"
 			>
 		</File>
 	</Files>
