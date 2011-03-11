@@ -5,7 +5,8 @@
 // This just includes the public header to make sure
 // everything compiles as expected. It is not needed.
 
-// This is the only header that library users should include
-//#include "vf/vf.h"
+// Must include Juce before vf.h
+#include "src/juce_WithoutMacros.h"
 
-#include "vf/vf_HeaderTemplate.h"
+// This is the only header that library users should include
+#include "vf/vf.h"
