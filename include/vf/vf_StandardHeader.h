@@ -15,31 +15,53 @@
 #include "vf/vf_Config.h"
 
 //------------------------------------------------------------------------------
+//
+// Juce
+//
 
-// Users of the vf library need to include juce first
-#if VF_PUBLIC_INCLUDES
-# ifndef __JUCE_JUCEHEADER__
-#  error Must include juce first
+#if VF_USE_JUCE
+# if VF_PUBLIC_INCLUDES
+#  ifndef __JUCE_JUCEHEADER__
+#   error Must include juce first
+#  endif
+# else
+#  ifdef _CRTDBG_MAP_ALLOC
+#   pragma push_macro("calloc")
+#   pragma push_macro("malloc")
+#   pragma push_macro("realloc")
+#   pragma push_macro("free")
+#   undef calloc
+#   undef malloc
+#   undef realloc
+#   undef free
+#  endif
+#  include "src/juce_WithoutMacros.h"
+#  ifdef _CRTDBG_MAP_ALLOC
+#   pragma pop_macro("calloc")
+#   pragma pop_macro("malloc")
+#   pragma pop_macro("realloc")
+#   pragma pop_macro("free")
+#  endif
 # endif
-#else
-# ifdef _CRTDBG_MAP_ALLOC
-#  pragma push_macro("calloc")
-#  pragma push_macro("malloc")
-#  pragma push_macro("realloc")
-#  pragma push_macro("free")
-#  undef calloc
-#  undef malloc
-#  undef realloc
-#  undef free
-# endif
-# include "src/juce_WithoutMacros.h"
-# ifdef _CRTDBG_MAP_ALLOC
-#  pragma pop_macro("calloc")
-#  pragma pop_macro("malloc")
-#  pragma pop_macro("realloc")
-#  pragma pop_macro("free")
-# endif
+# define VF_JUCE JUCE_NAMESPACE
 #endif
+
+//------------------------------------------------------------------------------
+//
+// Boost
+//
+#if VF_USE_BOOST
+# include "vf/vf_boost_includes.h"
+#endif
+
+//------------------------------------------------------------------------------
+//
+// Standard C/C++ Libraries
+//
+
+#include "vf/vf_stdlib_includes.h"
+
+//------------------------------------------------------------------------------
 
 #ifdef VF_NAMESPACE
   #define BEGIN_VF_NAMESPACE    namespace VF_NAMESPACE {
@@ -49,16 +71,18 @@
   #define END_VF_NAMESPACE
 #endif
 
-// Get some useful Boost functionality
-#include "vf/vf_boost_includes.h"
+//
+// These are always avaialble
+//
 
-// Some standard C/C++ library stuff
-#include "vf/vf_stdlib_includes.h"
-
-// Some basics that everyone needs
 BEGIN_VF_NAMESPACE
+
+#include "vf/vf_Throw.h"
 #include "vf/vf_Uncopyable.h"
+
 END_VF_NAMESPACE
+
+
 
 
 // EVERYTHING BELOW HERE IS A PIECE OF SHIT!!!!

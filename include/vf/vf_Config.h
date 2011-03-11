@@ -14,7 +14,14 @@
 #endif
 
 //
-// Features that require boost will be disabled if this is off
+// This will enable features that require Juce
+//
+#ifndef VF_USE_JUCE
+#define VF_USE_JUCE 1
+#endif
+
+//
+// This will enable features that require boost
 //
 #ifndef VF_USE_BOOST
 #define VF_USE_BOOST 1

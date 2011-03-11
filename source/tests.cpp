@@ -4,7 +4,7 @@
 
 // This file is used for detecting compile problems.
 
-#define WHICH_TEST 1 /* choose a test */
+//#define WHICH_TEST 1 /* choose a test */
 
 #if WHICH_TEST == 1
 
@@ -31,6 +31,13 @@ BEGIN_VF_NAMESPACE
 END_VF_NAMESPACE
 
 #else
+
+// Custom test
+
+#define VF_USE_JUCE 0
+#define VF_USE_BOOST 0
+#include "vf/vf.h"
+
 
 #endif
 

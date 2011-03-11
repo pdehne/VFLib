@@ -170,6 +170,46 @@
 				RelativePath="..\include\vf\vf_FPUFlags.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_Throw.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="native"
+			>
+			<File
+				RelativePath="..\source\vf_Native.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Native.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tests"
+			>
+			<File
+				RelativePath="..\source\tests.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\source\pch.cpp"
@@ -190,26 +230,6 @@
 					Name="VCCLCompilerTool"
 					UsePrecompiledHeader="1"
 					PrecompiledHeaderThrough="vf/vf_StandardHeader.h"
-				/>
-			</FileConfiguration>
-		</File>
-		<File
-			RelativePath="..\source\tests.cpp"
-			>
-			<FileConfiguration
-				Name="Debug|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="0"
-				/>
-			</FileConfiguration>
-			<FileConfiguration
-				Name="Release|Win32"
-				>
-				<Tool
-					Name="VCCLCompilerTool"
-					UsePrecompiledHeader="0"
 				/>
 			</FileConfiguration>
 		</File>
