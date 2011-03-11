@@ -11,4 +11,5 @@
 // This is the only header that library users should include
 #include "vf/vf.h"
 
-#pragma message(VF_LOC_"Description of problem")
+// Test the macro
+//#pragma message(VF_LOC_"Description of problem")
