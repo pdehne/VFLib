@@ -10,7 +10,14 @@
 //
 
 #ifndef VF_NAMESPACE
-#  define VF_NAMESPACE vf
+#define VF_NAMESPACE vf
+#endif
+
+//
+// Features that require boost will be disabled if this is off
+//
+#ifndef VF_USE_BOOST
+#define VF_USE_BOOST 1
 #endif
 
 #endif

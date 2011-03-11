@@ -5,6 +5,10 @@
 #ifndef __VF_BOOST_INCLUDES_VFHEADER__
 #define __VF_BOOST_INCLUDES_VFHEADER__
 
+#if !VF_USE_BOOST
+#error "VF_USE_BOOST is 0"
+#endif
+
 // Includes essential boost headers
 
 // TODO: TRY TO REMOVE AS MANY OF THESE AS POSSIBLE TO REDUCE DEPENDENCIES
@@ -36,6 +40,7 @@
 #include <boost/utility/enable_if.hpp>
 #include <boost/detail/atomic_count.hpp>
 
+// REVIEW THESE WARNINGS AND TRY TO REMOVE THEM
 #ifdef _MSC_VER
 #  pragma warning(push)
 #  pragma warning(disable:4244) // conversion from X to Y: possible loss of data

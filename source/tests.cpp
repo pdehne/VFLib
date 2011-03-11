@@ -2,15 +2,9 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-// This file is used for testing that the headers are well-formed.
-/*
- * #1 Includes the public header file to make sure it compiles.
- *
- * #2 Makes sure that a header file is properly stand-alone.
- *
- */
+// This file is used for detecting compile problems.
 
-#define WHICH_TEST 2
+#define WHICH_TEST 1 /* choose a test */
 
 #if WHICH_TEST == 1
 
