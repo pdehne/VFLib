@@ -154,10 +154,6 @@
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
-			<File
-				RelativePath="..\include\vf\vf_Uncopyable.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="diagnostic"
@@ -168,6 +164,14 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_FPUFlags.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LeakChecked.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_NonCopyable.h"
 				>
 			</File>
 			<File
@@ -209,6 +213,14 @@
 						UsePrecompiledHeader="0"
 					/>
 				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="audio"
+			>
+			<File
+				RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
+				>
 			</File>
 		</Filter>
 		<File

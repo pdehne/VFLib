@@ -5,6 +5,10 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
+#ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
+#include "vf/vf_AudioSampleBufferArray.h"
+#endif
+
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
 #endif

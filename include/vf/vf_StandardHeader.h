@@ -78,19 +78,17 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_Throw.h"
-#include "vf/vf_Uncopyable.h"
+#include "vf/vf_NonCopyable.h"
+#include "vf/vf_LeakChecked.h"
 
 END_VF_NAMESPACE
-
-
-
 
 // EVERYTHING BELOW HERE IS A PIECE OF SHIT!!!!
 // Basic vf includes needed by almost everyone
 // TODO: REMOVE AS MUCH OF THIS AS POSSIBLE!!!!
 BEGIN_VF_NAMESPACE
 // The order is important here
-#ifdef HAVE_VF_PRIVATE
+#ifdef VF_HAVE_PRIVATE_INCLUDES
   // NONE OF THESE SHOULD INCLUDE OTHER FILES
   #include "vf/Assure.h"
   #include "vf/Types.h"

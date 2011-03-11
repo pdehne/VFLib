@@ -24,7 +24,7 @@ BEGIN_VF_NAMESPACE
 
 END_VF_NAMESPACE
 
-#ifdef HAVE_VF_PRIVATE
+#ifdef VF_HAVE_PRIVATE_INCLUDES
   #include "vf/vf_private_includes.h"
 #endif
 

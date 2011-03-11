@@ -12,7 +12,7 @@
 // Commented out because bzlib.h includes <windows.h>
 //#include "vf/bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
 
-#ifdef HAVE_VF_PRIVATE
+#ifdef VF_HAVE_PRIVATE_INCLUDES
   #include "vf/lua/luabridge.hpp"
 #endif
 
