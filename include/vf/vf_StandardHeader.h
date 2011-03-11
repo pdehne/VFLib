@@ -30,6 +30,17 @@
 # endif
 #endif
 
+//------------------------------------------------------------------------------
+
+// Handy macro that lets pragma warnings be clicked in the output window
+#define VF_STR2_(x) #x
+#define VF_STR1_(x) VF_STR2_(x)
+#define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "
+// Usage:
+// #pragma message(VF_LOC_"Description of problem")
+
+//------------------------------------------------------------------------------
+
 #include "vf/vf_Config.h"
 
 #ifdef VF_NAMESPACE
@@ -44,11 +55,12 @@
 #include "vf/vf_boost_includes.h"
 
 // Some standard C/C++ library stuff
-#include "vf/vf_std_includes.h"
+#include "vf/vf_stdlib_includes.h"
 
 // Basic vf includes needed by almost everyone
 // TODO: REMOVE AS MUCH OF THIS AS POSSIBLE!!!!
 BEGIN_VF_NAMESPACE
+// GET THESE OUT OF HERE!!!!
 #include "vf/vf_Uncopyable.h"
 // The order is important here
 #ifdef HAVE_VF_PRIVATE

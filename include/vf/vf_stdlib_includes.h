@@ -2,8 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_STD_INCLUDES_VFHEADER__
-#define __VF_STD_INCLUDES_VFHEADER__
+#ifndef __VF_STDLIB_INCLUDES_VFHEADER__
+#define __VF_STDLIB_INCLUDES_VFHEADER__
 
 // The most commonly used C and C++ Standard library includes
 

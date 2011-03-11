@@ -25,6 +25,8 @@ namespace vf_DummyNamespace {}
 // Bring in everything in the vf library within our namespace.
 BEGIN_VF_NAMESPACE
 
+//#include "vf/vf_core_includes.h"
+
 #ifdef HAVE_VF_PRIVATE
   #include "vf/vf_lib_includes.h"
   #include "vf/shared_data.h"

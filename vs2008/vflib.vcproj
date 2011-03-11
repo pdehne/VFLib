@@ -155,6 +155,14 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="diagnostic"
+			>
+			<File
+				RelativePath="..\include\vf\vf_FPUFlags.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\source\pch.cpp"
 			>
@@ -222,7 +230,7 @@
 			>
 		</File>
 		<File
-			RelativePath="..\include\vf\vf_std_includes.h"
+			RelativePath="..\include\vf\vf_stdlib_includes.h"
 			>
 		</File>
 	</Files>
