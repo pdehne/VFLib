@@ -151,6 +151,10 @@
 			Name="containers"
 			>
 			<File
+				RelativePath="..\include\vf\vf_List.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Uncopyable.h"
 				>
 			</File>
@@ -186,7 +190,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\source\vf.cpp"
+			RelativePath="..\source\tests.cpp"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"

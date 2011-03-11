@@ -6,3 +6,6 @@
 
 //#define VF_PUBLIC_INCLUDES 0
 #include "vf/vf_StandardHeader.h"
+
+// Stops the linker from complaining about a lack of public symbols
+namespace { void dummmy () { } }

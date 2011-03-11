@@ -5,10 +5,12 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
-// Includes all the public headers
-
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
+#endif
+
+#ifndef __VF_LIST_VFHEADER__
+#include "vf/vf_List.h"
 #endif
 
 #endif

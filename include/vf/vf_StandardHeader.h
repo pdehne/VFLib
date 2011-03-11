@@ -57,11 +57,16 @@
 // Some standard C/C++ library stuff
 #include "vf/vf_stdlib_includes.h"
 
+// Some basics that everyone needs
+BEGIN_VF_NAMESPACE
+#include "vf/vf_Uncopyable.h"
+END_VF_NAMESPACE
+
+
+// EVERYTHING BELOW HERE IS A PIECE OF SHIT!!!!
 // Basic vf includes needed by almost everyone
 // TODO: REMOVE AS MUCH OF THIS AS POSSIBLE!!!!
 BEGIN_VF_NAMESPACE
-// GET THESE OUT OF HERE!!!!
-#include "vf/vf_Uncopyable.h"
 // The order is important here
 #ifdef HAVE_VF_PRIVATE
   // NONE OF THESE SHOULD INCLUDE OTHER FILES
