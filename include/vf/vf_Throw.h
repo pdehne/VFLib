@@ -5,7 +5,7 @@
 #ifndef __VF_THROW_VFHEADER__
 #define __VF_THROW_VFHEADER__
 
-#include "vf/vf_Native.h"
+#include "vf/vf_Debug.h"
 
 //
 // Throw an exception, with the opportunity to a breakpoint
@@ -15,7 +15,7 @@
 template <class Exception>
 inline void Throw (const Exception& e)
 {
-  Native::breakToDebugger ();
+  Debug::breakPoint ();
 
 #if VF_USE_BOOST
   boost::throw_exception (e);

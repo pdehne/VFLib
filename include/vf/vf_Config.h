@@ -27,4 +27,19 @@
 #define VF_USE_BOOST 1
 #endif
 
+//
+// Turns vflib specific debugging support on or off
+//
+#ifndef VF_DEBUG
+  #if VF_USE_JUCE
+    #define VF_DEBUG JUCE_DEBUG
+  #else
+    #ifndef NDEBUG
+      #define VF_DEBUG 1
+    #else
+      #define VF_DEBUG 0
+    #endif
+  #endif
+#endif
+
 #endif

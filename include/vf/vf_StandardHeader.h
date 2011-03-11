@@ -39,6 +39,7 @@
 
 BEGIN_VF_NAMESPACE
 
+#include "vf/vf_Debug.h"
 #include "vf/vf_Throw.h"
 #include "vf/vf_NonCopyable.h"
 #include "vf/vf_LeakChecked.h"

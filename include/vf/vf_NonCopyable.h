@@ -23,7 +23,4 @@ private:
 
 typedef detail::NonCopyable NonCopyable;
 
-// legacy
-typedef detail::NonCopyable Uncopyable;
-
 #endif

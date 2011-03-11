@@ -11,3 +11,4 @@
 #include "vf/vf.h"
 
 namespace { void dummmy () { } } // hides the linker warning
+
