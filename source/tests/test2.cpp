@@ -4,19 +4,6 @@
 
 // This file is used for detecting compile problems.
 
-//#define WHICH_TEST 1 /* choose a test */
-
-#if WHICH_TEST == 1
-
-//
-// Checks that the public library header compiles
-//
-
-#include "src/juce_WithoutMacros.h"
-#include "vf/vf.h"
-
-#elif WHICH_TEST == 2
-
 //
 // Checks a single include to make sure it compiles
 // without requiring anything else included before hand
@@ -30,16 +17,4 @@ BEGIN_VF_NAMESPACE
 
 END_VF_NAMESPACE
 
-#else
-
-// Custom test
-
-#define VF_USE_JUCE 0
-#define VF_USE_BOOST 0
-#include "vf/vf.h"
-
-
-#endif
-
-// Stops the linker from complaining about a lack of public symbols
-namespace { void dummmy () { } }
+namespace { void dummmy () { } } // hides the linker warning

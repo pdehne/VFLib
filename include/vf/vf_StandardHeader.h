@@ -9,55 +9,17 @@
 #define VF_STR2_(x) #x
 #define VF_STR1_(x) VF_STR2_(x)
 #define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "
-// Usage:
-// #pragma message(VF_LOC_"Description of problem")
 
 #include "vf/vf_Config.h"
 
-//------------------------------------------------------------------------------
-//
-// Juce
-//
-
 #if VF_USE_JUCE
-# if VF_PUBLIC_INCLUDES
-#  ifndef __JUCE_JUCEHEADER__
-#   error Must include juce first
-#  endif
-# else
-#  ifdef _CRTDBG_MAP_ALLOC
-#   pragma push_macro("calloc")
-#   pragma push_macro("malloc")
-#   pragma push_macro("realloc")
-#   pragma push_macro("free")
-#   undef calloc
-#   undef malloc
-#   undef realloc
-#   undef free
-#  endif
-#  include "src/juce_WithoutMacros.h"
-#  ifdef _CRTDBG_MAP_ALLOC
-#   pragma pop_macro("calloc")
-#   pragma pop_macro("malloc")
-#   pragma pop_macro("realloc")
-#   pragma pop_macro("free")
-#  endif
-# endif
-# define VF_JUCE JUCE_NAMESPACE
+#include "vf/vf_juce_includes.h"
+#define VF_JUCE JUCE_NAMESPACE
 #endif
 
-//------------------------------------------------------------------------------
-//
-// Boost
-//
 #if VF_USE_BOOST
-# include "vf/vf_boost_includes.h"
+#include "vf/vf_boost_includes.h"
 #endif
-
-//------------------------------------------------------------------------------
-//
-// Standard C/C++ Libraries
-//
 
 #include "vf/vf_stdlib_includes.h"
 

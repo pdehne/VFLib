@@ -178,6 +178,10 @@
 				RelativePath="..\include\vf\vf_Throw.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_Unleaked.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="native"
@@ -195,7 +199,87 @@
 			Name="tests"
 			>
 			<File
-				RelativePath="..\source\tests.cpp"
+				RelativePath="..\source\tests\test1.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\source\tests\test2.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\source\tests\test3.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\source\tests\test4.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\source\tests\test5.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -263,6 +347,10 @@
 		</File>
 		<File
 			RelativePath="..\include\vf\vf_HeaderTemplate.h"
+			>
+		</File>
+		<File
+			RelativePath="..\include\vf\vf_juce_includes.h"
 			>
 		</File>
 		<File
