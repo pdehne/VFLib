@@ -163,6 +163,10 @@
 			Name="diagnostic"
 			>
 			<File
+				RelativePath="..\source\vf_FPUFlags.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_FPUFlags.h"
 				>
 			</File>
