@@ -25,4 +25,11 @@
 #include "vf/vf_Mutex.h"
 #endif
 
+// These require Juce
+#if VF_USE_JUCE
+  #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+  #include "vf/vf_AudioBufferPool.h"
+  #endif
+#endif
+
 #endif

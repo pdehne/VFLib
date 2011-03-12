@@ -191,6 +191,14 @@
 			Name="audio"
 			>
 			<File
+				RelativePath="..\source\vf_AudioBufferPool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_AudioBufferPool.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
 				>
 			</File>
