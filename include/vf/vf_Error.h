@@ -76,19 +76,6 @@ public:
   const char* what() const throw();
 
   static const String getReasonTextForCode (Code code);
-  static const String getFileNameFromPath (const char *sourceFileName);
-
-  // These handy routines are not directly related to Error but they
-  // are useful for bullet-proof diagnostics via a command line launch.
-
-  // Convert a String that may contain double quotes and newlines
-  // into a String with double quotes escaped as \" and each
-  // line as a separate quoted command line argument.
-  static String stringToCommandLine (const String& string);
-
-  // Convert a quoted and escaped command line back into a String
-  // that can contain newlines and double quotes.
-  static String commandLineToString (const String& commandLine);
 
 private:
   Code m_code;

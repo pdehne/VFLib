@@ -39,8 +39,8 @@
 
 BEGIN_VF_NAMESPACE
 
+#include "vf/vf_String.h" // before vf_Error.h and vf_Debug.h
 #include "vf/vf_Debug.h"
-#include "vf/vf_String.h" // before vf_Error.h
 #include "vf/vf_Error.h"
 #include "vf/vf_Throw.h"
 #include "vf/vf_NonCopyable.h"
