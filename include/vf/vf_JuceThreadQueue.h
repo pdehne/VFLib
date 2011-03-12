@@ -5,11 +5,11 @@
 #ifndef __VF_JUCETHREADQUEUE_VFHEADER__
 #define __VF_JUCETHREADQUEUE_VFHEADER__
 
-#if !VF_USE_JUCE
-#error "Requires Juce"
-#endif
+#include "vf/vf_Threads.h"
 
-#include "vf/ThreadQueue.h"
+#if VF_HAVE_THREADS
+
+#include "vf/vf_ThreadQueue.h"
 
 //
 // A thread queue processed by a the Juce Message thread (gui thread)
@@ -28,5 +28,7 @@ private:
   void reset ();
   void handleAsyncUpdate();
 };
+
+#endif
 
 #endif

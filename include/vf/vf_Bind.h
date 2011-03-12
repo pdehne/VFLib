@@ -9,7 +9,7 @@
 #error "VF_HAVE_BIND already set"
 #endif
 
-#if VF_USE_BOOST
+#if VF_HAVE_BOOST
 
 //
 // Boost

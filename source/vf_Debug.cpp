@@ -20,7 +20,7 @@ namespace Debug {
 //
 // Debug::breakPoint
 //
-#if VF_USE_JUCE && JUCE_DEBUG && defined (juce_breakDebugger)
+#if VF_HAVE_JUCE && JUCE_DEBUG && defined (juce_breakDebugger)
   void breakPoint () { juce_breakDebugger; }
 
 #elif defined (_MSC_VER)
@@ -37,7 +37,7 @@ namespace Debug {
 //
 // Debug::isDebuggerAttached
 //
-#if VF_USE_JUCE
+#if VF_HAVE_JUCE
   bool isDebuggerAttached () { return VF_JUCE::juce_isRunningUnderDebugger (); }
 
 #elif defined (_WINDOWS)

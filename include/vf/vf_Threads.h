@@ -7,7 +7,12 @@
 
 namespace Threads {
 
-#if VF_USE_BOOST
+//------------------------------------------------------------------------------
+//
+// Boost
+//
+
+#if VF_HAVE_BOOST
 
 typedef boost::thread::id id;
 
@@ -16,8 +21,17 @@ inline id getCurrent ()
   return boost::this_thread::get_id ();
 }
 
+#define VF_HAVE_THREADS 1
+
+//------------------------------------------------------------------------------
+//
+// (nothing)
+//
+
 #else
   #pragma message(VF_LOC_"Missing namespace Threads")
+
+#define VF_HAVE_THREADS 0
 
 #endif
 

@@ -8,7 +8,7 @@
 //
 // This is the only header file that should be included by outside applications.
 //
-// SOURCE AND HEADER FILES IN THE VF LIBRARY SHOULD NEVER INCLUDE THIS!!!!
+// SOURCE AND HEADER FILES IN THE LIBRARY SHOULD NEVER INCLUDE THIS!!!!
 //
 
 namespace vf_DummyNamespace {}      // To catch unbalanced braces before here
@@ -20,12 +20,12 @@ namespace vf_DummyNamespace {}      // To catch unbalanced braces before here
 
 BEGIN_VF_NAMESPACE
 
-  #include "vf/vf_public_includes.h"
+#include "vf/vf_public_includes.h"  // All public headers
 
 END_VF_NAMESPACE
 
 #ifdef VF_HAVE_PRIVATE_INCLUDES
-  #include "vf/vf_private_includes.h"
+#include "vf/vf_private_includes.h" // Unreleased stuff
 #endif
 
 #endif

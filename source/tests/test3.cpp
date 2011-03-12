@@ -8,8 +8,8 @@
 // Compiles without Juce or Boost
 //
 
-#define VF_USE_JUCE 0
-#define VF_USE_BOOST 0
+#define VF_HAVE_JUCE 0
+#define VF_HAVE_BOOST 0
 
 #include "vf/vf.h"
 

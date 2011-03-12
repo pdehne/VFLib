@@ -5,10 +5,6 @@
 #ifndef __VF_BOOST_INCLUDES_VFHEADER__
 #define __VF_BOOST_INCLUDES_VFHEADER__
 
-#if !VF_USE_BOOST
-#error "VF_USE_BOOST is 0"
-#endif
-
 // Includes essential boost headers
 
 // TODO: TRY TO REMOVE AS MANY OF THESE AS POSSIBLE TO REDUCE DEPENDENCIES

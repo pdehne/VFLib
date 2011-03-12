@@ -12,12 +12,12 @@
 
 #include "vf/vf_Config.h"
 
-#if VF_USE_JUCE
+#if VF_HAVE_JUCE
 #include "vf/vf_juce_includes.h"
 #define VF_JUCE JUCE_NAMESPACE
 #endif
 
-#if VF_USE_BOOST
+#if VF_HAVE_BOOST
 #include "vf/vf_boost_includes.h"
 #endif
 

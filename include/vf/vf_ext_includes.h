@@ -13,7 +13,7 @@
 //#include "vf/bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
 
 #ifdef VF_HAVE_PRIVATE_INCLUDES
-  #include "vf/lua/luabridge.hpp"
+#include "vf/lua/luabridge.hpp"
 #endif
 
 #endif

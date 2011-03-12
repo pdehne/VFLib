@@ -109,7 +109,7 @@ public:
     return m_numSamples;
   }
 
-#if VF_USE_JUCE
+#if VF_HAVE_JUCE
 public:
   // if AudioSampleBuffer ever becomes a template, we can
   // move the Sample typedef into the template parameters.

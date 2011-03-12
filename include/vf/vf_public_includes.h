@@ -33,11 +33,24 @@
 #include "vf/vf_Threads.h"
 #endif
 
-// These require Juce
-#if VF_USE_JUCE
-  #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-  #include "vf/vf_AudioBufferPool.h"
-  #endif
+#ifndef __VF_THREADQUEUE_VFHEADER__
+#include "vf/vf_ThreadQueue.h"
+#endif
+
+//
+// Juce-specific
+//
+
+#if VF_HAVE_JUCE
+
+#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+#include "vf/vf_AudioBufferPool.h"
+#endif
+
+#ifndef __VF_JUCETHREADQUEUE_VFHEADER__
+#include "vf/vf_JuceThreadQueue.h"
+#endif
+
 #endif
 
 #endif

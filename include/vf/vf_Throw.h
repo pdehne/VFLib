@@ -17,7 +17,7 @@ inline void Throw (const Exception& e)
 {
   Debug::breakPoint ();
 
-#if VF_USE_BOOST
+#if VF_HAVE_BOOST
   boost::throw_exception (e);
 #else
   throw e;

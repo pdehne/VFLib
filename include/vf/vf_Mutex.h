@@ -7,7 +7,7 @@
 
 // Simple recursive mutex
 
-#if VF_USE_JUCE
+#if VF_HAVE_JUCE
 
 //
 // Juce
@@ -21,7 +21,7 @@ private:
   VF_JUCE::CriticalSection m_mutex;
 };
 
-#elif VF_USE_BOOST
+#elif VF_HAVE_BOOST
 
 //
 // Boost

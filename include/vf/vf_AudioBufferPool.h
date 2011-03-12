@@ -5,10 +5,6 @@
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
 #define __VF_AUDIOBUFFERPOOL_VFHEADER__
 
-#if !VF_USE_JUCE
-#error "Requires Juce"
-#endif
-
 #include "vf/vf_Mutex.h"
 
 // Manages a collection of AudioSampleBuffer that

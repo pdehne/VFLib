@@ -8,7 +8,7 @@
 // Compiles without Juce
 //
 
-#define VF_USE_JUCE 0
+#define VF_HAVE_JUCE 0
 
 #include "vf/vf.h"
 

@@ -377,6 +377,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_JuceThreadQueue.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_JuceThreadQueue.h"
 				>
 			</File>
@@ -386,6 +390,14 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_SynchronizedObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_ThreadQueue.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ThreadQueue.h"
 				>
 			</File>
 			<File
