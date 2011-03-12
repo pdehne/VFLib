@@ -9,30 +9,30 @@
 // Derived classes are automatically leak-checked on exit
 //
 
-#if VF_USE_JUCE && JUCE_CHECK_MEMORY_LEAKS
+#if VF_CHECK_LEAKS
+  #if VF_USE_JUCE && JUCE_CHECK_MEMORY_LEAKS
+    // Use Juce
+    template <class OwnerClass>
+    class LeakChecked
+    {
+      struct Detector
+      {
+        friend class VF_JUCE::LeakedObjectDetector <Detector>;
+        VF_JUCE::LeakedObjectDetector <Detector> m_leakDetector;
+        static const char* getLeakedObjectClassName() throw()
+          { return typeid (OwnerClass).name (); }
+      };
+      Detector m_detector;
+    };
 
-//
-// Uses Juce to track the leaks
-//
-template <class OwnerClass>
-class LeakChecked
-{
-  friend class VF_JUCE::LeakedObjectDetector <OwnerClass>;
-  VF_JUCE::LeakedObjectDetector <OwnerClass> m_leakDetector;
-  static const char* getLeakedObjectClassName() throw()
-    { return typeid (OwnerClass).name (); }
-};
+  #else
+    #pragma message(VF_LOC_"Missing class LeakChecked")
+    template <class OwnerClass> struct LeakChecked { };
+
+  #endif
 
 #else
-
-//
-// No leak tracking
-//
-
-template <class OwnerClass>
-struct LeakChecked
-{
-};
+  template <class OwnerClass> struct LeakChecked { };
 
 #endif
 

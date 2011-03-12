@@ -42,4 +42,15 @@
   #endif
 #endif
 
+//
+// Enables leak checking
+//
+#ifndef VF_CHECK_LEAKS
+  #if VF_USE_JUCE
+    #define VF_CHECK_LEAKS JUCE_CHECK_MEMORY_LEAKS
+  #else
+    #define VF_CHECK_LEAKS VF_DEBUG
+  #endif
+#endif
+
 #endif
