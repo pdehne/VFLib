@@ -1,0 +1,104 @@
+// Copyright (C) 2008-2011 by One Guy Group, Inc., All rights reserved worldwide.
+
+#ifndef VF_ERROR_H
+#define VF_ERROR_H
+
+// Yet another error reporting class. This one records the file/line
+// where the error occurred along with some human readable text. It
+// can be freely copied and passed around as a return value and all that.
+
+class Error : public std::exception
+{
+public:
+  // These are for when the caller wants to distinguish
+  // results, for example, knowing that a file is locked.
+  enum Code
+  {
+    success,        // "the operation was successful"
+
+    general,			  // "a general error occurred"
+
+    canceled,			  // "the operation was canceled"
+    exception,		  // "an exception was thrown"
+    unexpected,     // "an unexpected result was encountered"
+    platform,       // "a system exception was signaled"
+
+    noMemory,       // "there was not enough memory"
+    noMoreData,			// "the end of data was reached"
+    invalidData,		// "the data is corrupt or invalid"
+    bufferSpace,		// "the buffer is too small"
+    badParameter,		// "one or more parameters were invalid"
+    assertFailed,		// "an assertion failed"
+
+    fileInUse,			// "the file is in use"
+    fileExists,			// "the file exists"
+    fileNoPerm,			// "permission was denied" (file attributes conflict)
+    fileIOError,		// "an I/O or device error occurred"
+    fileNoSpace,		// "there is no space left on the device"
+    fileNotFound,		// "the file was not found"
+    fileNameInvalid	// "the file name was illegal or malformed"
+  };
+
+  Error ();
+  Error (const Error& other);
+  Error& operator= (const Error& other);
+
+  ~Error();
+
+  Code code () const;
+  bool failed () const;
+  operator bool() const;
+
+  const String getReasonText () const;
+  const String getSourceFilename () const;
+  const String getLineNumber () const;
+
+  Error& fail (const char* sourceFileName,
+               int lineNumber,
+               const String reasonText,
+               Code errorCode = general);
+
+  Error& fail (const char* sourceFileName,
+               int lineNumber,
+               Code errorCode = general);
+
+  // A function that is capable of recovering from an error (for
+  // example, by performing a different action) can reset the
+  // object so it can be passed up.
+  void reset ();
+
+  // Call this when reporting the error to clear the "checked" flag
+  void willBeReported () const;
+
+  // for std::exception. This lets you throw an Error that should
+  // terminate the application. The what() message will be less
+  // descriptive so ideally you should catch the Error object instead.
+  const char* what() const throw();
+
+  static const String getReasonTextForCode (Code code);
+  static const String getFileNameFromPath (const char *sourceFileName);
+
+  // These handy routines are not directly related to Error but they
+  // are useful for bullet-proof diagnostics via a command line launch.
+
+  // Convert a String that may contain double quotes and newlines
+  // into a String with double quotes escaped as \" and each
+  // line as a separate quoted command line argument.
+  static String stringToCommandLine (const String& string);
+
+  // Convert a quoted and escaped command line back into a String
+  // that can contain newlines and double quotes.
+  static String commandLineToString (const String& commandLine);
+
+private:
+  Code m_code;
+  String m_reasonText;
+  String m_sourceFileName;
+  int m_lineNumber;
+  mutable bool m_needsToBeChecked;
+
+  mutable String m_what; // created on demand
+  mutable const char* m_szWhat;
+};
+
+#endif

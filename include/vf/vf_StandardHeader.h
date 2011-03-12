@@ -40,6 +40,8 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_Debug.h"
+#include "vf/vf_String.h" // before vf_Error.h
+#include "vf/vf_Error.h"
 #include "vf/vf_Throw.h"
 #include "vf/vf_NonCopyable.h"
 #include "vf/vf_LeakChecked.h"
@@ -57,7 +59,6 @@ BEGIN_VF_NAMESPACE
   #include "vf/Types.h"
   #include "vf/Str.h"
   #include "vf/Err.h"
-  #include "vf/Error.h"
 #endif
 END_VF_NAMESPACE
 

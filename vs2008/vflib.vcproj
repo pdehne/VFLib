@@ -154,6 +154,10 @@
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_String.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="diagnostic"
@@ -164,6 +168,14 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Debug.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_Error.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Error.h"
 				>
 			</File>
 			<File
@@ -184,6 +196,14 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Throw.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_TryCatch.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_TryCatch.h"
 				>
 			</File>
 		</Filter>
