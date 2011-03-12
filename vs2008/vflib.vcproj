@@ -388,6 +388,10 @@
 				RelativePath="..\include\vf\vf_SynchronizedObject.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_Threads.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

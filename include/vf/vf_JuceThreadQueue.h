@@ -21,10 +21,12 @@ class JuceThreadQueue : public ThreadQueue,
 public:
   JuceThreadQueue ();
 
+  void close ()         { ThreadQueue::close (); }
+
 private:
-  void handleAsyncUpdate();
   void signal ();
   void reset ();
+  void handleAsyncUpdate();
 };
 
 #endif

@@ -29,6 +29,10 @@
 #include "vf/vf_SynchronizedObject.h"
 #endif
 
+#ifndef __VF_THREADS_VFHEADER__
+#include "vf/vf_Threads.h"
+#endif
+
 // These require Juce
 #if VF_USE_JUCE
   #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
