@@ -9,19 +9,19 @@
 
 #if VF_HAVE_THREADS
 
-#include "vf/vf_ThreadQueue.h"
+#include "vf/vf_Worker.h"
 
 //
 // A thread queue processed by a the Juce Message thread (gui thread)
 //
 
-class JuceThreadQueue : public ThreadQueue,
+class JuceThreadQueue : public Worker,
                         private VF_JUCE::AsyncUpdater
 {
 public:
   JuceThreadQueue ();
 
-  void close ()         { ThreadQueue::close (); }
+  void close ()         { Worker::close (); }
 
 private:
   void signal ();

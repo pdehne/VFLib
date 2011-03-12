@@ -37,12 +37,12 @@
 #include "vf/vf_Threads.h"
 #endif
 
-#ifndef __VF_THREADQUEUE_VFHEADER__
-#include "vf/vf_ThreadQueue.h"
-#endif
-
 #ifndef __VF_TRYCATCH_VFHEADER__
 #include "vf/vf_TryCatch.h"
+#endif
+
+#ifndef __VF_WORKER_VFHEADER__
+#include "vf/vf_Worker.h"
 #endif
 
 //

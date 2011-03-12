@@ -7,7 +7,7 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_Mutex.h"
-#include "vf/vf_ThreadQueue.h"
+#include "vf/vf_Worker.h"
 
 // If this is set to 1, then call() may execute the functor
 // immediately if the call is made from the thread used to process the queue.
@@ -94,26 +94,26 @@ public:
 
 static Allocator globalAllocator;
 
-void* ThreadQueue::global_alloc (size_t bytes)
+void* Worker::global_alloc (size_t bytes)
 {
   return globalAllocator.alloc (bytes);
 }
 
-void ThreadQueue::global_free (void* p)
+void Worker::global_free (void* p)
 {
   globalAllocator.free (p);
 }
 
 //------------------------------------------------------------------------------
 
-ThreadQueue::ThreadQueue (const char* szName)
+Worker::Worker (const char* szName)
 : m_szName (szName)
 , m_open (false)
 , m_in_process (false)
 {
 }
 
-ThreadQueue::~ThreadQueue ()
+Worker::~Worker ()
 {
   // Someone forget to close the queue.
   jassert (!m_open);
@@ -122,12 +122,12 @@ ThreadQueue::~ThreadQueue ()
   jassert (m_calls.empty());
 }
 
-bool ThreadQueue::in_process ()
+bool Worker::in_process ()
 {
   return m_in_process;
 }
 
-void ThreadQueue::open ()
+void Worker::open ()
 {
   m_mutex.enter ();
 
@@ -137,7 +137,7 @@ void ThreadQueue::open ()
   m_mutex.exit ();
 }
 
-void ThreadQueue::close ()
+void Worker::close ()
 {
   m_mutex.enter ();
   jassert (m_open);
@@ -147,7 +147,7 @@ void ThreadQueue::close ()
   // Can still have pending calls, just can't put new ones in.
 }
 
-bool ThreadQueue::process ()
+bool Worker::process ()
 {
   return do_process (false);
 }
@@ -158,7 +158,7 @@ bool ThreadQueue::process ()
 //
 // Returns true if any functors were called.
 //
-bool ThreadQueue::do_process (const bool from_call)
+bool Worker::do_process (const bool from_call)
 {
   bool did_something;
 
@@ -280,7 +280,7 @@ bool ThreadQueue::do_process (const bool from_call)
 // thread as the last thread that called process(), then the call
 // will execute synchronously.
 //
-void ThreadQueue::do_call (Call* c)
+void Worker::do_call (Call* c)
 {
   m_mutex.enter ();
 
@@ -357,20 +357,20 @@ void ThreadQueue::do_call (Call* c)
 
 //******************************************************************************
 
-PollingThreadQueue::PollingThreadQueue (const char *szName)
-: ThreadQueue (szName)
+PollingWorker::PollingWorker (const char *szName)
+: Worker (szName)
 {
   // HACK! To get this thing open before member variables
   // that depend on it construct!
   open ();
 }
 
-void PollingThreadQueue::signal()
+void PollingWorker::signal()
 {
   // NO-OP
 }
 
-void PollingThreadQueue::reset()
+void PollingWorker::reset()
 {
   // NO-OP
 }

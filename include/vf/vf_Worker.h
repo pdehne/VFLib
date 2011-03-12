@@ -2,8 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_THREADQUEUE_VFHEADER__
-#define __VF_THREADQUEUE_VFHEADER__
+#ifndef __VF_WORKER_VFHEADER__
+#define __VF_WORKER_VFHEADER__
 
 #include "vf/vf_Threads.h"
 
@@ -34,7 +34,7 @@
 //
 // TODO: CHANGE jassert TO THROW EXCEPTIONS?
 //
-class ThreadQueue
+class Worker
 {
 private:
   class Call;
@@ -109,8 +109,8 @@ public:
   virtual void reset () = 0;
 
 public:
-  explicit ThreadQueue (const char* szName = "");
-  ~ThreadQueue ();
+  explicit Worker (const char* szName = "");
+  ~Worker ();
 
   // used for diagnostics
   bool in_process ();
@@ -191,14 +191,14 @@ public:
 
 // No signaling - requires regular calls to process().
 //
-class PollingThreadQueue : public ThreadQueue
+class PollingWorker : public Worker
 {
 public:
-  explicit PollingThreadQueue (const char* szName = "");
+  explicit PollingWorker (const char* szName = "");
 
-  void open ()          { ThreadQueue::open (); }
-  void close ()         { ThreadQueue::close (); }
-  bool process ()       { return ThreadQueue::process (); }
+  void open ()          { Worker::open (); }
+  void close ()         { Worker::close (); }
+  bool process ()       { return Worker::process (); }
 
 private:
   void signal ();

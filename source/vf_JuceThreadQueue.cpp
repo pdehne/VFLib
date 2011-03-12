@@ -35,7 +35,7 @@ void updateAllTopLevelWindows ()
 
 }
 
-JuceThreadQueue::JuceThreadQueue () : ThreadQueue ("JuceThreadQueue")
+JuceThreadQueue::JuceThreadQueue () : Worker ("JuceWorker")
 {
   open ();
 }

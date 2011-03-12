@@ -409,15 +409,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\source\vf_ThreadQueue.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_ThreadQueue.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_Threads.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_Worker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Worker.h"
 				>
 			</File>
 		</Filter>
