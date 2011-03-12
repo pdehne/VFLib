@@ -10,7 +10,7 @@
 
 #include "vf/vf.h"
 
-//#include <boost/bind/bind_template.hpp>
+#include <boost/bind/bind.hpp>
 
 namespace { void dummmy () { } } // hides the linker warning
 

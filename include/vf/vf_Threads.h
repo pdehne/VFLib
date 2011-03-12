@@ -24,6 +24,17 @@ inline id getCurrent ()
 #define VF_HAVE_THREADS 1
 
 //------------------------------------------------------------------------------
+
+#elif VF_HAVE_JUCE
+
+typedef VF_JUCE::Thread::ThreadID id;
+
+inline id getCurrent ()
+{
+  return VF_JUCE::Thread::getCurrentThreadId ();
+}
+
+//------------------------------------------------------------------------------
 //
 // (nothing)
 //
