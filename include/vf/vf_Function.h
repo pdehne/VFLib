@@ -57,7 +57,7 @@ public:
   }
 
 private:
-  static const int Max = 32;
+  static const int Max = 128;
 
   static inline void checkSize (const int bytes)
   {

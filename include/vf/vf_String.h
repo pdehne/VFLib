@@ -13,6 +13,12 @@ using JUCE_NAMESPACE::String;
 
 typedef std::string String;
 
+template <typename S>
+inline S TRANS (const S& s)
+{
+  return s;
+}
+
 #endif
 
 #endif
