@@ -186,10 +186,6 @@
 				RelativePath="..\include\vf\vf_Throw.h"
 				>
 			</File>
-			<File
-				RelativePath="..\include\vf\vf_Unleaked.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="audio"
@@ -364,6 +360,14 @@
 					</FileConfiguration>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="threads"
+			>
+			<File
+				RelativePath="..\include\vf\vf_Mutex.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

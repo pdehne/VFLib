@@ -17,4 +17,8 @@
 #include "vf/vf_List.h"
 #endif
 
+#ifndef __VF_MUTEX_VFHEADER__
+#include "vf/vf_Mutex.h"
+#endif
+
 #endif

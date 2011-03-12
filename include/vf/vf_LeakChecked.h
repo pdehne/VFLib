@@ -10,29 +10,41 @@
 //
 
 #if VF_CHECK_LEAKS
-  #if VF_USE_JUCE && JUCE_CHECK_MEMORY_LEAKS
-    // Use Juce
-    template <class OwnerClass>
-    class LeakChecked
-    {
-      struct Detector
-      {
-        friend class VF_JUCE::LeakedObjectDetector <Detector>;
-        VF_JUCE::LeakedObjectDetector <Detector> m_leakDetector;
-        static const char* getLeakedObjectClassName() throw()
-          { return typeid (OwnerClass).name (); }
-      };
-      Detector m_detector;
-    };
 
-  #else
-    #pragma message(VF_LOC_"Missing class LeakChecked")
-    template <class OwnerClass> struct LeakChecked { };
+#if VF_USE_JUCE && JUCE_CHECK_MEMORY_LEAKS
 
-  #endif
+//
+// Juce
+//
+template <class OwnerClass>
+class LeakChecked
+{
+  struct Detector
+  {
+    friend class VF_JUCE::LeakedObjectDetector <Detector>;
+    VF_JUCE::LeakedObjectDetector <Detector> m_leakDetector;
+    static const char* getLeakedObjectClassName() throw()
+      { return typeid (OwnerClass).name (); }
+  };
+  Detector m_detector;
+};
 
 #else
-  template <class OwnerClass> struct LeakChecked { };
+
+//
+// (missing)
+//
+#pragma message(VF_LOC_"Missing class LeakChecked")
+template <class OwnerClass> struct LeakChecked { };
+
+#endif
+
+#else
+
+//
+// (inactive)
+//
+template <class OwnerClass> struct LeakChecked { };
 
 #endif
 
