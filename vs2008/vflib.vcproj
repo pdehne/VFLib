@@ -373,10 +373,6 @@
 			Name="threads"
 			>
 			<File
-				RelativePath="..\include\vf\vf_Bind.h"
-				>
-			</File>
-			<File
 				RelativePath="..\source\vf_JuceThreadQueue.cpp"
 				>
 			</File>
@@ -402,6 +398,18 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Threads.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="functional"
+			>
+			<File
+				RelativePath="..\include\vf\vf_Bind.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Function.h"
 				>
 			</File>
 		</Filter>

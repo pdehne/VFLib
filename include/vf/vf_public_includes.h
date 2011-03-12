@@ -17,6 +17,10 @@
 #include "vf/vf_FPUFlags.h"
 #endif
 
+#ifndef __VF_FUNCTION_VFHEADER__
+#include "vf/vf_Function.h"
+#endif
+
 #ifndef __VF_LIST_VFHEADER__
 #include "vf/vf_List.h"
 #endif
