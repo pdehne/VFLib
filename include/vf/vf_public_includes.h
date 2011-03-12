@@ -9,6 +9,10 @@
 #include "vf/vf_AudioSampleBufferArray.h"
 #endif
 
+#ifndef __VF_BIND_VFHEADER__
+#include "vf/vf_Bind.h"
+#endif
+
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
 #endif

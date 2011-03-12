@@ -22,6 +22,7 @@
 #include <cstdarg>
 #include <cstddef>
 #include <exception>
+#include <functional>
 #include <istream>
 #include <iterator>
 #include <limits>

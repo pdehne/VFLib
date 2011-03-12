@@ -365,6 +365,10 @@
 			Name="threads"
 			>
 			<File
+				RelativePath="..\include\vf\vf_Bind.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
