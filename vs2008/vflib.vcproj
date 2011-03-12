@@ -380,6 +380,10 @@
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_SynchronizedObject.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

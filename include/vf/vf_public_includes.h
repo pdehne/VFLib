@@ -25,6 +25,10 @@
 #include "vf/vf_Mutex.h"
 #endif
 
+#ifndef __VF_SYNCHRONIZEDOBJECT_VFHEADER__
+#include "vf/vf_SynchronizedObject.h"
+#endif
+
 // These require Juce
 #if VF_USE_JUCE
   #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
