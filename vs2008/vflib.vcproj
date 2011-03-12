@@ -377,6 +377,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_JuceThreadQueue.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
