@@ -15,7 +15,7 @@ namespace {
 void updateAllTopLevelWindows ()
 {
 #if JUCE_WIN32
-  static bool inUpdate = false;
+  static bool inUpdate = true;
 
   if (!inUpdate)
   {
@@ -29,6 +29,8 @@ void updateAllTopLevelWindows ()
       if (peer)
         peer->performAnyPendingRepaintsNow ();
     }
+
+    inUpdate = false;
   }
 #endif
 }
@@ -53,9 +55,8 @@ void GuiWorker::handleAsyncUpdate()
 {
   process ();
 
-  // This tries to solve the problem where continual streams
-  // of updates from the deck and mixer prevents the drag
-  // image from drawing.
+  // This tries to solve the problem where continual
+  // streams of work cause some painting not to occur.
   updateAllTopLevelWindows ();
 }
 

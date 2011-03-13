@@ -24,7 +24,7 @@ public:
 private:
   void signal ();
   void reset ();
-  void handleAsyncUpdate();
+  void handleAsyncUpdate ();
 };
 
 #else

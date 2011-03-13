@@ -9,9 +9,7 @@
 // Derived classes are automatically leak-checked on exit
 //
 
-#if VF_CHECK_LEAKS
-
-#if VF_HAVE_JUCE && JUCE_CHECK_MEMORY_LEAKS
+#if VF_CHECK_LEAKS && VF_HAVE_JUCE && JUCE_CHECK_MEMORY_LEAKS
 
 //
 // Juce
@@ -19,6 +17,7 @@
 template <class OwnerClass>
 class LeakChecked
 {
+private:
   struct Detector
   {
     friend class VF_JUCE::LeakedObjectDetector <Detector>;
@@ -31,19 +30,10 @@ class LeakChecked
 
 #else
 
-//
-// (missing)
-//
+#if VF_CHECK_LEAKS
 #pragma message(VF_LOC_"Missing class LeakChecked")
-template <class OwnerClass> struct LeakChecked { };
-
 #endif
 
-#else
-
-//
-// (inactive)
-//
 template <class OwnerClass> struct LeakChecked { };
 
 #endif

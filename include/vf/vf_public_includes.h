@@ -29,6 +29,10 @@
 #include "vf/vf_List.h"
 #endif
 
+#ifndef __VF_MANUALWORKER_VFHEADER__
+#include "vf/vf_ManualWorker.h"
+#endif
+
 #ifndef __VF_MUTEX_VFHEADER__
 #include "vf/vf_Mutex.h"
 #endif
@@ -37,8 +41,12 @@
 #include "vf/vf_SynchronizedObject.h"
 #endif
 
-#ifndef __VF_THREADS_VFHEADER__
-#include "vf/vf_Threads.h"
+#ifndef __VF_THREAD_VFHEADER__
+#include "vf/vf_Thread.h"
+#endif
+
+#ifndef __VF_THREADWORKER_VFHEADER__
+#include "vf/vf_ThreadWorker.h"
 #endif
 
 #ifndef __VF_TRYCATCH_VFHEADER__

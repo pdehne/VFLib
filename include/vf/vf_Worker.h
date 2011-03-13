@@ -5,11 +5,10 @@
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
-#include "vf/vf_Threads.h"
-
 #include "vf/vf_Bind.h"
 #include "vf/vf_List.h"
 #include "vf/vf_Mutex.h"
+#include "vf/vf_Thread.h"
 
 //
 // Queue that executes functors on another thread, with these invariants:
@@ -63,7 +62,7 @@ private:
   bool m_in_process;
   Calls m_calls;
   Mutex m_mutex;
-  Threads::id m_id;
+  Thread::id m_id;
 
 private:
   // Call all the functors in the queue.
@@ -89,7 +88,7 @@ protected:
 public:
   bool process ();
 
-public:
+protected:
   // Derived classes implement these functions to know the
   // signaled state:
   //
@@ -183,24 +182,6 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { callf (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 #endif
-};
-
-//--------------------------------------------------------------------------
-
-// No signaling - requires regular calls to process().
-//
-class PollingWorker : public Worker
-{
-public:
-  explicit PollingWorker (const char* szName = "");
-
-  void open ()          { Worker::open (); }
-  void close ()         { Worker::close (); }
-  bool process ()       { return Worker::process (); }
-
-private:
-  void signal ();
-  void reset ();
 };
 
 #endif

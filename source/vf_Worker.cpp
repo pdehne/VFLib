@@ -176,7 +176,7 @@ bool Worker::do_process (const bool from_call)
       // Remember the thread we are called on. This
       // is done inside the mutex to handle the case
       // where the thread used to call process() changed.
-      m_id = Threads::getCurrent();
+      m_id = CurrentThread::getId();
     }
     else
     {
@@ -186,7 +186,7 @@ bool Worker::do_process (const bool from_call)
       // If we got here from do_call() then the thread
       // should have already been set and tested safely
       // while the mutex was held.
-      jassert (m_id == Threads::getCurrent());
+      jassert (m_id == CurrentThread::getId());
     }
 
     // Transfer the current set of calls into a local
@@ -295,7 +295,7 @@ void Worker::do_call (Call* c)
   {
     // Remember if we are on the process thread. Because the
     // thread id is set within the mutex, this test is atomic.
-    const bool on_process_thread = Threads::getCurrent() == m_id;
+    const bool on_process_thread = CurrentThread::getId() == m_id;
 
     // See if do_process() is already in our call chain because
     // of tail recursion. This value is not meaningful unless
@@ -353,26 +353,6 @@ void Worker::do_call (Call* c)
     }
   }
 #endif
-}
-
-//******************************************************************************
-
-PollingWorker::PollingWorker (const char *szName)
-: Worker (szName)
-{
-  // HACK! To get this thing open before member variables
-  // that depend on it construct!
-  open ();
-}
-
-void PollingWorker::signal()
-{
-  // NO-OP
-}
-
-void PollingWorker::reset()
-{
-  // NO-OP
 }
 
 END_VF_NAMESPACE

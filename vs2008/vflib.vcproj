@@ -401,6 +401,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_ManualWorker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
@@ -409,7 +413,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_Threads.h"
+				RelativePath="..\include\vf\vf_Thread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_ThreadWorker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ThreadWorker.h"
 				>
 			</File>
 			<File
