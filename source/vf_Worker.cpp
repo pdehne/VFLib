@@ -217,6 +217,11 @@ bool Worker::do_process (const bool from_call)
       // interruption point from a call functor is undefined!
       Throw (std::runtime_error ("invalid interruption from thread queue call"));
     }
+    catch (vf::Thread::Interruption&)
+    {
+      // Undefined behavior
+      Throw (std::runtime_error ("invalid interruption from thread queue call"));
+    }
 #endif
 
     // Clear the recursion flag since we are past the
@@ -239,7 +244,9 @@ bool Worker::do_process (const bool from_call)
       globalAllocator.unlock ();
     }
 
-    // WHAT ARE WE REALLY GAINING by deferring the reset()???
+    // We defer the reset() so that the related thread
+    // implementation doesn't have to use a condition
+    // variable to synchronize its "interrupted" flag.
     //
     // Because we defer the call to reset(), functors added
     // after we picked up the list won't call signal(), therefore

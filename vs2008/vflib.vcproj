@@ -413,6 +413,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_Thread.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Thread.h"
 				>
 			</File>

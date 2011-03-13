@@ -26,8 +26,8 @@
 //------------------------------------------------------------------------------
 
 #ifdef VF_NAMESPACE
-  #define BEGIN_VF_NAMESPACE    namespace VF_NAMESPACE {
-  #define END_VF_NAMESPACE      }
+  #define BEGIN_VF_NAMESPACE namespace VF_NAMESPACE {
+  #define END_VF_NAMESPACE   }
 #else
   #define BEGIN_VF_NAMESPACE
   #define END_VF_NAMESPACE
@@ -39,7 +39,14 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_String.h" // before vf_Error.h and vf_Debug.h
+// Borrowed from Juce so we are not dependent on it
+template <bool b> struct VfStaticAssert;
+template <> struct VfStaticAssert <true>
+  { static void static_assert_failed() {} };
+#define static_vfassert(expression) \
+  VF_NAMESPACE::VfStaticAssert<expression>::static_assert_failed();
+
+#include "vf/vf_String.h"
 #include "vf/vf_Debug.h"
 #include "vf/vf_Error.h"
 #include "vf/vf_Throw.h"
@@ -47,6 +54,8 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LeakChecked.h"
 
 END_VF_NAMESPACE
+
+
 
 // EVERYTHING BELOW HERE IS A PIECE OF SHIT!!!!
 // Basic vf includes needed by almost everyone

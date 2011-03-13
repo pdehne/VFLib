@@ -1,7 +1,11 @@
-// Copyright (C) 2008-2011 by One Guy Group, Inc., All rights reserved worldwide.
+// Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
+// This file is released under the MIT License:
+// http://www.opensource.org/licenses/mit-license.php
 
-#ifndef VF_ERROR_H
-#define VF_ERROR_H
+#ifndef __VF_ERROR_VFHEADER__
+#define __VF_ERROR_VFHEADER__
+
+#include "vf/vf_String.h"
 
 // Yet another error reporting class. This one records the file/line
 // where the error occurred along with some human readable text. It

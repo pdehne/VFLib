@@ -29,7 +29,7 @@ public:
   explicit ThreadWorker (const char* szName = "");
   ~ThreadWorker ();
 
-  // Start the thread.
+  // Start the worker.
   // A thread may only be started if it is stopped.
   void start (Function thread_idle,
               Function thread_init = Function(),

@@ -23,6 +23,8 @@ inline bool isDebuggerAttached () { return false; }
 
 #endif
 
+// VF: IS THIS REALLY THE RIGHT PLACE FOR THESE??
+
 // Return only the filename portion of sourceFileName
 // This hides the programmer's directory structure from end-users.
 const String getFileNameFromPath (const char *sourceFileName);

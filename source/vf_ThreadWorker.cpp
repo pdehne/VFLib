@@ -169,6 +169,9 @@ void BoostWorker::idle_and_wait ()
   catch (boost::thread_interrupted&)
   {
   }
+  catch (vf::Thread::Interruption&)
+  {
+  }
 }
 
 //------------------------------------------------------------------------------

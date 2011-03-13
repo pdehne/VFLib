@@ -6,6 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
+#include "vf/vf_Thread.h"
 #include "vf/vf_TryCatch.h"
 
 END_VF_NAMESPACE
@@ -137,10 +138,15 @@ void TryCatch (Function f)
   {
     f();
   }
+  catch (vf::Thread::Interruption&)
+  {
+    throw;
+  }
 
 #if VF_HAVE_BOOST
   catch (boost::thread_interrupted&)
   {
+    // should never see these!
     throw;
   }
 #endif

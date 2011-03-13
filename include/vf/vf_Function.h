@@ -16,20 +16,23 @@ class Function
 public:
   typedef void result_type;
 
+  struct None { typedef void result_type; void operator()() { } };
+
+  // Default constructor is a function that does nothing.
   Function()
   {
-    copyConstructFrom (NoCall());
+    constructCopyOf (None ());
   }
 
   Function (const Function& f)
   {
-    f.getCall().copyConstructTo (m_storage);
+    f.getCall().constructCopyInto (m_storage);
   }
 
   template <class Functor>
   Function (const Functor& f)
   {
-    copyConstructFrom (f);
+    constructCopyOf (f);
   }
 
   ~Function ()
@@ -40,7 +43,7 @@ public:
   Function& operator= (const Function& f)
   {
     getCall().~Call();
-    f.getCall().copyConstructTo (m_storage);
+    f.getCall().constructCopyInto (m_storage);
     return *this;
   }
 
@@ -48,7 +51,7 @@ public:
   Function& operator= (const Functor& f)
   {
     getCall().~Call();
-    copyConstructFrom (f);
+    constructCopyOf (f);
   }
 
   void operator()()
@@ -57,18 +60,18 @@ public:
   }
 
 private:
-  static const int Max = 128;
-
-  static inline void checkSize (const int bytes)
-  {
-    if (bytes > Max)
-      Throw (std::bad_alloc ());
-  }
+  static const int Max = 64;
 
   template <class Functor>
-  void copyConstructFrom (const Functor& f)
+  void constructCopyOf (const Functor& f)
   {
-    checkSize (sizeof (StoredCall <Functor>));
+    // If this generates a compile error it means that
+    // your functor is too large for our static buffer.
+    // This class was not designed as a general purpose
+    // replacement for boost::function, it is only used
+    // to provide the functionality needed for this
+    // library without depending on boost.
+    static_vfassert (sizeof (StoredCall <Functor>) <= Max);
     new (m_storage) StoredCall <Functor> (f);
   }
 
@@ -76,16 +79,8 @@ private:
   struct Call
   {
     virtual ~Call () {}
-    virtual void copyConstructTo (void* p) const = 0;
+    virtual void constructCopyInto (void* p) const = 0;
     virtual void operator()() = 0;
-  };
-
-  struct NoCall
-  {
-    NoCall() { }
-    NoCall (const NoCall& c) { }
-    void copyConstructTo (void* p) const { new (p) NoCall (); }
-    void operator()() { }
   };
 
   template <class Functor>
@@ -93,7 +88,7 @@ private:
   {
     explicit StoredCall (const Functor& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
-    void copyConstructTo (void* p) const { new (p) StoredCall (m_f); }
+    void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
     void operator()() { m_f(); }
   private:
     Functor m_f;

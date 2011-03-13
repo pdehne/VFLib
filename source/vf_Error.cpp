@@ -216,11 +216,12 @@ END_VF_NAMESPACE
 class vf::Worker        // thread queue interface
 class vf::GuiWorker     // worker that operates on the ui, using Juce if available
 class vf::ManualWorker  // polling style worker, good for audio mixer
-class vf::ThreadWorker  // base that uses a vf::Thread
 
 class vf::Thread        // thread interface
-class vf::BoostThread   // implementation using boost threads and interruption point exceptions
-class vf::JuceThread    // implementation using juce threads and polling
+
+class vf::ThreadWorker  // base that uses a vf::Thread
+class vf::BoostThread ? // implementation using boost threads and interruption point exceptions
+class vf::JuceThread  ? // implementation using juce threads and polling
 
 template <>
 class vf::Listeners     // set of listeners, each registered to a Worker

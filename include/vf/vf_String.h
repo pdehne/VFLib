@@ -14,7 +14,7 @@ using JUCE_NAMESPACE::String;
 typedef std::string String;
 
 template <typename S>
-inline S TRANS (const S& s)
+inline S const& TRANS (S const& s)
 {
   return s;
 }
