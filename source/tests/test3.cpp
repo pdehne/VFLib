@@ -8,6 +8,10 @@
 // Compiles without Juce or Boost
 //
 
+// This will result in an error since we would be missing support
+
+#if 0
+
 #define VF_HAVE_JUCE 0
 #define VF_HAVE_BOOST 0
 
@@ -15,3 +19,4 @@
 
 namespace { void dummmy () { } } // stop linker warning
 
+#endif

@@ -6,9 +6,9 @@
 
 BEGIN_VF_NAMESPACE
 
-#if VF_HAVE_JUCE
+#include "vf/vf_GuiWorker.h"
 
-#include "vf/vf_JuceThreadQueue.h"
+#if VF_HAVE_JUCE
 
 namespace {
 
@@ -35,21 +35,21 @@ void updateAllTopLevelWindows ()
 
 }
 
-JuceThreadQueue::JuceThreadQueue () : Worker ("JuceWorker")
+GuiWorker::GuiWorker () : Worker ("JuceWorker")
 {
   open ();
 }
 
-void JuceThreadQueue::signal ()
+void GuiWorker::signal ()
 {
   triggerAsyncUpdate ();
 }
 
-void JuceThreadQueue::reset ()
+void GuiWorker::reset ()
 {
 }
 
-void JuceThreadQueue::handleAsyncUpdate()
+void GuiWorker::handleAsyncUpdate()
 {
   process ();
 
@@ -58,6 +58,8 @@ void JuceThreadQueue::handleAsyncUpdate()
   // image from drawing.
   updateAllTopLevelWindows ();
 }
+
+#else
 
 #endif
 

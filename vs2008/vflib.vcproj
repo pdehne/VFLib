@@ -393,11 +393,11 @@
 			Name="threads"
 			>
 			<File
-				RelativePath="..\source\vf_JuceThreadQueue.cpp"
+				RelativePath="..\source\vf_GuiWorker.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_JuceThreadQueue.h"
+				RelativePath="..\include\vf\vf_GuiWorker.h"
 				>
 			</File>
 			<File

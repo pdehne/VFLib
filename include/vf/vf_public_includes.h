@@ -21,6 +21,10 @@
 #include "vf/vf_Function.h"
 #endif
 
+#ifndef __VF_GUIWORKER_VFHEADER__
+#include "vf/vf_GuiWorker.h"
+#endif
+
 #ifndef __VF_LIST_VFHEADER__
 #include "vf/vf_List.h"
 #endif
@@ -53,10 +57,6 @@
 
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
 #include "vf/vf_AudioBufferPool.h"
-#endif
-
-#ifndef __VF_JUCETHREADQUEUE_VFHEADER__
-#include "vf/vf_JuceThreadQueue.h"
 #endif
 
 #endif

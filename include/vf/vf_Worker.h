@@ -7,8 +7,6 @@
 
 #include "vf/vf_Threads.h"
 
-#if VF_HAVE_THREADS
-
 #include "vf/vf_Bind.h"
 #include "vf/vf_List.h"
 #include "vf/vf_Mutex.h"
@@ -204,7 +202,5 @@ private:
   void signal ();
   void reset ();
 };
-
-#endif
 
 #endif

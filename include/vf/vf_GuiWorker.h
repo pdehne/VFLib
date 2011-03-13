@@ -2,32 +2,33 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_JUCETHREADQUEUE_VFHEADER__
-#define __VF_JUCETHREADQUEUE_VFHEADER__
-
-#include "vf/vf_Threads.h"
-
-#if VF_HAVE_THREADS
+#ifndef __VF_GUIWORKER_VFHEADER__
+#define __VF_GUIWORKER_VFHEADER__
 
 #include "vf/vf_Worker.h"
+
+#if VF_HAVE_JUCE
 
 //
 // A thread queue processed by a the Juce Message thread (gui thread)
 //
 
-class JuceThreadQueue : public Worker,
-                        private VF_JUCE::AsyncUpdater
+class GuiWorker : public Worker,
+                  private VF_JUCE::AsyncUpdater
 {
 public:
-  JuceThreadQueue ();
+  GuiWorker ();
 
-  void close ()         { Worker::close (); }
+  void close () { Worker::close (); }
 
 private:
   void signal ();
   void reset ();
   void handleAsyncUpdate();
 };
+
+#else
+  #pragma message(VF_LOC_"Missing GuiWorker")
 
 #endif
 

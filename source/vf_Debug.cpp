@@ -49,6 +49,8 @@ namespace Debug {
 
 #endif
 
+#endif
+
 //------------------------------------------------------------------------------
 
 const String getFileNameFromPath (const char *sourceFileName)
@@ -191,8 +193,6 @@ String commandLineToString (const String& commandLine)
 
   return string;
 }
-
-#endif
 
 }
 

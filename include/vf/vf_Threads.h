@@ -21,8 +21,6 @@ inline id getCurrent ()
   return boost::this_thread::get_id ();
 }
 
-#define VF_HAVE_THREADS 1
-
 //------------------------------------------------------------------------------
 
 #elif VF_HAVE_JUCE
@@ -41,8 +39,6 @@ inline id getCurrent ()
 
 #else
   #pragma message(VF_LOC_"Missing namespace Threads")
-
-#define VF_HAVE_THREADS 0
 
 #endif
 
