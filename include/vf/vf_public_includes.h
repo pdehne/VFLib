@@ -13,6 +13,10 @@
 #include "vf/vf_Bind.h"
 #endif
 
+#ifndef __VF_CATCHANY_VFHEADER__
+#include "vf/vf_CatchAny.h"
+#endif
+
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
 #endif
@@ -49,12 +53,20 @@
 #include "vf/vf_ThreadWorker.h"
 #endif
 
-#ifndef __VF_TRYCATCH_VFHEADER__
-#include "vf/vf_TryCatch.h"
-#endif
-
 #ifndef __VF_WORKER_VFHEADER__
 #include "vf/vf_Worker.h"
+#endif
+
+//
+// Boost-specific
+//
+
+#if VF_HAVE_BOOST
+
+#ifndef __VF_BOOSTTHREAD_VFHEADER__
+#include "vf/vf_BoostThread.h"
+#endif
+
 #endif
 
 //
@@ -65,6 +77,10 @@
 
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
 #include "vf/vf_AudioBufferPool.h"
+#endif
+
+#ifndef __VF_JUCETHREAD_VFHEADER__
+#include "vf/vf_JuceThread.h"
 #endif
 
 #endif

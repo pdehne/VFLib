@@ -12,7 +12,7 @@
 class AudioBufferPool : LeakChecked <AudioBufferPool>
 {
 public:
-  class Buffer : public AudioSampleBuffer
+  class Buffer : public VF_JUCE::AudioSampleBuffer
   {
   public:
     Buffer (int numChannels,
@@ -37,7 +37,7 @@ public:
 
 private:
   Mutex m_mutex;
-  Array <Buffer*> m_buffers;
+  VF_JUCE::Array <Buffer*> m_buffers;
 };
 
 //------------------------------------------------------------------------------

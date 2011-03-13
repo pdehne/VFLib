@@ -39,6 +39,12 @@
 
 BEGIN_VF_NAMESPACE
 
+#if VF_USE_JUCE
+  #define vfassert jassert
+#else
+  #define vfassert assert
+#endif
+
 // Borrowed from Juce so we are not dependent on it
 template <bool b> struct VfStaticAssert;
 template <> struct VfStaticAssert <true>

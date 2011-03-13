@@ -6,8 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_Thread.h"
-#include "vf/vf_TryCatch.h"
+#include "vf/vf_CatchAny.h"
 
 END_VF_NAMESPACE
 
@@ -25,10 +24,14 @@ BEGIN_VF_NAMESPACE
 
 namespace {
 
-class ScopedSignalHandler : NonCopyable
+//
+// While this object is in scope, any Windows SEH
+// exceptions will be caught and re-thrown as an Error object.
+//
+class ScopedPlatformExceptionCatcher : NonCopyable
 {
 public:
-  ScopedSignalHandler ()
+  ScopedPlatformExceptionCatcher ()
   {
     s_mutex.enter ();
 
@@ -38,7 +41,7 @@ public:
     s_mutex.exit ();
   }
 
-  ~ScopedSignalHandler ()
+  ~ScopedPlatformExceptionCatcher ()
   {
     s_mutex.enter ();
 
@@ -100,25 +103,27 @@ private:
   static LPTOP_LEVEL_EXCEPTION_FILTER s_sehPrev;
 };
 
-Mutex ScopedSignalHandler::s_mutex;
-int ScopedSignalHandler::s_count = 0;
-LPTOP_LEVEL_EXCEPTION_FILTER ScopedSignalHandler::s_sehPrev = 0;
+Mutex ScopedPlatformExceptionCatcher::s_mutex;
+int ScopedPlatformExceptionCatcher::s_count = 0;
+LPTOP_LEVEL_EXCEPTION_FILTER ScopedPlatformExceptionCatcher::s_sehPrev = 0;
 
 }
 
+END_VF_NAMESPACE
+
 //------------------------------------------------------------------------------
-//
-//
-//
+
 #else
 
-#pragma message(VF_LOC_"Missing class ScopedSignalHandler")
+// TODO: POSIX SIGNAL HANDLER
+
+#pragma message(VF_LOC_"Missing class ScopedPlatformExceptionCatcher")
 
 BEGIN_VF_NAMESPACE
 
 namespace {
 
-class ScopedSignalHandler
+class ScopedPlatformExceptionCatcher
 {
 public:
   // Missing
@@ -126,41 +131,45 @@ public:
 
 }
 
+END_VF_NAMESPACE
+
 #endif
 
 //------------------------------------------------------------------------------
 
-void TryCatch (Function f)
+BEGIN_VF_NAMESPACE
+
+bool CatchAny (Function f, bool returnFromException)
 {
-  ScopedSignalHandler handler;
+  bool caughtException = true; // assume the worst
 
   try
   {
-    f();
-  }
-  catch (vf::Thread::Interruption&)
-  {
-    throw;
-  }
+    ScopedPlatformExceptionCatcher platformExceptionCatcher;
+  
+    f ();
 
-#if VF_HAVE_BOOST
-  catch (boost::thread_interrupted&)
-  {
-    // should never see these!
-    throw;
+    caughtException = false;
   }
-#endif
-
 #if VF_HAVE_JUCE
   catch (std::exception& e)
   {
-    JUCEApplication::getInstance()->unhandledException (&e, __FILE__, __LINE__);
+    if (!returnFromException)
+      JUCEApplication::getInstance()->unhandledException (&e, __FILE__, __LINE__);
   }
   catch (...)
   {
-    JUCEApplication::getInstance()->unhandledException (0, __FILE__, __LINE__);
+    if (!returnFromException)
+      JUCEApplication::getInstance()->unhandledException (0, __FILE__, __LINE__);
+  }
+#else
+  catch (...)
+  {
+    std::unexpected ();
   }
 #endif
+
+  return caughtException;
 }
 
 END_VF_NAMESPACE

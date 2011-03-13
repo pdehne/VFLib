@@ -163,6 +163,14 @@
 			Name="diagnostic"
 			>
 			<File
+				RelativePath="..\source\vf_CatchAny.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_CatchAny.h"
+				>
+			</File>
+			<File
 				RelativePath="..\source\vf_Debug.cpp"
 				>
 			</File>
@@ -196,14 +204,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Throw.h"
-				>
-			</File>
-			<File
-				RelativePath="..\source\vf_TryCatch.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_TryCatch.h"
 				>
 			</File>
 		</Filter>
@@ -393,11 +393,19 @@
 			Name="threads"
 			>
 			<File
+				RelativePath="..\include\vf\vf_BoostThread.h"
+				>
+			</File>
+			<File
 				RelativePath="..\source\vf_GuiWorker.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_GuiWorker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_JuceThread.h"
 				>
 			</File>
 			<File

@@ -16,7 +16,7 @@ class Function
 public:
   typedef void result_type;
 
-  struct None { typedef void result_type; void operator()() { } };
+  struct None { typedef void result_type; void operator()() const { } };
 
   // Default constructor is a function that does nothing.
   Function()
@@ -52,6 +52,7 @@ public:
   {
     getCall().~Call();
     constructCopyOf (f);
+    return *this;
   }
 
   void operator()()

@@ -10,6 +10,8 @@
 
 // This will result in an error since we would be missing support
 
+#pragma message("test5.cpp: TURN ON THIS TEST")
+
 #if 0
 
 #define VF_HAVE_JUCE 0

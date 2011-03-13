@@ -73,7 +73,15 @@ private:
 
 protected:
   // Derived classes call these at appropriate times.
+  // TODO: Think about always starting out open,
+  // remove this function, allow only closing once.
   void open ();
+  // This function should be called as early as possible.
+  // Closing the Worker is done for diagnostics, it allows
+  // detection of when new calls are being made when they
+  // shouldn't be.
+  // TODO: Consider making this virtual and having the
+  // derived class cause the thread to stop ?
   void close ();
   bool closed () const { return !m_open; }
 
@@ -137,7 +145,7 @@ public:
   //
 
   template <class Fn>
-  void call (Fn f)
+  void call (Fn const& f)
   { callf (bind (f)); }
 
   template <class Fn, typename  T1>

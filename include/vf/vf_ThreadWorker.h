@@ -10,30 +10,26 @@
 #include "vf/vf_Thread.h"
 #include "vf/vf_Worker.h"
 
-// FIX THIS ASAP!
-#if VF_HAVE_BOOST && VF_HAVE_JUCE
-
 //
-// Worker which uses a thread to process its queue.
-// When there is no queue work, the idle function will run.
-// The idle function must check for interrupts periodically.
+// Worker that comes with its own thread of execution used
+// to process calls. When there are no calls to process,
+// an idle function will run. The idle function must either
+// return quickly, or periodically call the interruptionPoint()
+// function in order to stop what it is doing in order to
+// process new calls.
 //
-// Thread objects with built in thread queue and
-// unexpected exception handling (via JUCEApplication)
-//
-// Note that derived classes must call stop(true) from
-// their destructor or else the result is undefined behavior.
 class ThreadWorker : public Worker
 {
 public:
   explicit ThreadWorker (const char* szName = "");
   ~ThreadWorker ();
 
-  // Start the worker.
+  // Start the worker. This should only hapen once
   // A thread may only be started if it is stopped.
-  void start (Function thread_idle,
-              Function thread_init = Function(),
-              Function thread_exit = Function());
+  // TODO: Do this right at construction.
+  void start (Function worker_idle,
+              Function worker_init = Function::None(),
+              Function worker_exit = Function::None());
 
   // Stop the thread and optionally wait until it exits.
   // All thread objects must eventually be called with stop(true).
@@ -43,29 +39,36 @@ public:
   void stop_request () { stop (false); }
   void stop_and_wait () { stop (true); }
 
-  // restarts the process function. equivalent to call() with no functor.
-  void interrupt ();
+  // Interrupts the idle function by queueing a call that does nothing.
+  // TODO: SEE IF THIS IS NEEDED?!
+  void interrupt ()
+  {
+    call (Function::None ());
+  }
+
+  // Should be called periodically by the idle function.
+  // There are three possible results:
+  //
+  // #1 Returns false. The idle function may continue or return.
+  // #2 Returns true. The idle function should return as soon as possible.
+  // #3 Throws a Thread::Interruption exception.
+  //
+  bool interruptionPoint ();
 
   // These are here so code can switch back and forth between the
   // exception style and the polling style without change
+protected:
   virtual bool interrupt_requested () const { return false; }
   virtual void interruption_point () { }
-
-  // Thread idle functions should call this routine and stop
-  // what they are doing if it returns true. Depending on the
-  // choice of implementation of thread, this might throw
-  // boost::thread_interrupted instead of returning, so callers
-  // need to handle both cases.
-  virtual bool wants_interrupt () { return false; }
 
 protected:
   void do_idle ();
 
-  virtual void idle_and_wait () = 0;
-
-  void interrupt_boost_thread ();
+  virtual void idle_and_wait () { }
 
 private:
+  void signal ();
+  void reset ();
   void do_stop ();
   void do_run ();
   void run ();
@@ -74,55 +77,14 @@ private:
   bool m_stop;
   bool m_stopped;
   Mutex m_mutex;
-  boost::thread m_thread;
-  Function m_thread_idle;
-  Function m_thread_exit;
+  Thread m_thread;
+  Function m_worker_idle;
+  Function m_worker_exit;
 };
 
 //------------------------------------------------------------------------------
 
-//
-// Thread which uses boost::thread interruption points
-//
-class BoostWorker : public ThreadWorker
-{
-public:
-  explicit BoostWorker (const char* szName = "");
-  ~BoostWorker ();
-
-  void interruption_point () { interrupt_boost_thread (); }
-
-private:
-  void signal ();
-  void reset ();
-  void idle_and_wait ();
-};
-
-//------------------------------------------------------------------------------
-
-//
-// Thread which has 'soft' interruption points (i.e. requires polling).
-// However, it still uses a waitable event when it goes to sleep.
-//
-class SoftWorker : public ThreadWorker
-{
-public:
-  explicit SoftWorker (const char* szName = "");
-  ~SoftWorker ();
-
-  // This has to be called periodically by the thread
-  // idle function in order to know if it should return.
-  bool interrupt_requested () const { return m_interrupt_requested; }
-
-private:
-  void signal ();
-  void reset ();
-  void idle_and_wait ();
-
-  WaitableEvent m_event;
-  volatile bool m_interrupt_requested;
-};
-
-#endif
+typedef ThreadWorker BoostWorker;
+typedef ThreadWorker SoftWorker;
 
 #endif

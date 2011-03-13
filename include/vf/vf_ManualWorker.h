@@ -17,16 +17,19 @@ public:
   explicit ManualWorker (const char* szName = "")
     : Worker (szName)
   {
+    // Start out open to solve some RAII issues.
+    // This may change in the future. It is still
+    // required to call close() appropriately.
     open ();
   }
 
-  void open ()          { Worker::open (); }
-  void close ()         { Worker::close (); }
-  bool process ()       { return Worker::process (); }
+  void open ()    { Worker::open (); }
+  void close ()   { Worker::close (); }
+  bool process () { return Worker::process (); }
 
 private:
-  void signal () { }
-  void reset () { }
+  void signal ()  { }
+  void reset ()   { }
 };
 
 #endif
