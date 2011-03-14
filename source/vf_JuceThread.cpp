@@ -13,15 +13,171 @@ BEGIN_VF_NAMESPACE
 
 namespace Juce {
 
-Thread::Thread (const VF_NAMESPACE::String& name)
-  : VF_JUCE::Thread (name)
-  , m_interrupted (false)
+Thread::ExceptionBased::ExceptionBased ()
+  : m_waiting (false)
+  , m_interrupt (false)
+{
+}
+
+void Thread::ExceptionBased::wait (Thread& thread)
+{
+  bool do_wait;
+
+  {
+    ScopedLock lock (m_mutex);
+
+    fatal_vfassert (!m_waiting);
+
+    if (m_interrupt)
+    {
+      m_interrupt = false;
+      do_wait = false;
+    }
+    else
+    {
+      m_waiting = true;
+      do_wait = true;
+    }
+  }
+
+  if (do_wait)
+    thread.wait (-1);
+  else
+    throw detail::Thread::Interruption();
+}
+
+void Thread::ExceptionBased::interrupt (Thread& thread)
+{
+  {
+    ScopedLock lock (m_mutex);
+
+    // TODO: USE ATOMIC
+    if (m_waiting)
+    {
+      m_waiting = false;
+
+      thread.notify ();
+    }
+    else
+    {
+      m_interrupt = true;
+    }
+  }
+}
+
+bool Thread::ExceptionBased::interruptionPoint (Thread& thread)
+{
+  bool do_interrupt;
+
+  // TODO: USE ATOMIC
+  {
+    ScopedLock lock (m_mutex);
+
+    fatal_vfassert (!m_waiting);
+
+    do_interrupt = m_interrupt;
+
+    m_interrupt = false;
+  }
+
+  if (do_interrupt)
+    throw detail::Thread::Interruption();
+
+  return false;
+}
+
+//------------------------------------------------------------------------------
+
+Thread::PollingBased::PollingBased ()
+  : m_waiting (false)
+  , m_interrupt (false)
+{
+}
+
+void Thread::PollingBased::wait (Thread& thread)
+{
+  bool do_wait;
+
+  {
+    ScopedLock lock (m_mutex);
+
+    fatal_vfassert (!m_waiting);
+    
+    if (m_interrupt)
+    {
+      do_wait = false;
+      m_interrupt = false;
+      m_waiting = false;
+    }
+    else
+    {
+      do_wait = true;
+      m_waiting = true;
+    }
+  }
+
+  if (do_wait)
+  {
+    thread.wait (-1);
+
+    {
+      ScopedLock lock (m_mutex);
+
+      fatal_vfassert (!m_waiting);
+
+      m_waiting = false;
+    }
+  }
+}
+
+void Thread::PollingBased::interrupt (Thread& thread)
+{
+  {
+    ScopedLock lock (m_mutex);
+
+    // TODO: USE ATOMIC
+    if (m_waiting)
+    {
+      fatal_vfassert (!m_interrupt);
+
+      m_waiting = false;
+
+      thread.notify ();
+    }
+    else
+    {
+      m_interrupt = true;
+    }
+  }
+}
+
+bool Thread::PollingBased::interruptionPoint (Thread& thread)
+{
+  bool interrupted;
+
+  {
+    ScopedLock lock (m_mutex);
+
+    // TODO: USE ATOMIC
+    fatal_vfassert (!m_waiting);
+    fatal_vfassert (thread.isTheCurrentThread ());
+
+    interrupted = m_interrupt;
+
+    m_interrupt = false;
+  }
+
+  return interrupted;
+}
+
+//------------------------------------------------------------------------------
+
+Thread::Thread (const VF_NAMESPACE::String& name) : VF_JUCE::Thread (name)
 {
 }
 
 Thread::~Thread ()
 {
-  interrupt ();
   join ();
 }
 
@@ -46,42 +202,12 @@ void Thread::setPriority (int priority)
   VF_JUCE::Thread::setPriority (priority);
 }
 
-// TODO: CONDITION VARIABLE TO FIX THIS
-// this is not thread safe, and the caller must synchronize
-void Thread::wait ()
-{
-  vfassert (isTheCurrentThread ());
-
-  if (!m_interrupted)
-    VF_JUCE::Thread::wait (-1);
-  m_interrupted = false;
-}
-
-void Thread::interrupt ()
-{
-  m_interrupted = true;
-  VF_JUCE::Thread::notify ();
-}
-
-bool Thread::interruptionPoint ()
-{
-  vfassert (isTheCurrentThread ());
-
-  // This needs to be atomic!
-  if (m_interrupted)
-  {
-    m_interrupted = false;
-    // Avoid using vf::Throw() here
-    throw detail::Thread::Interruption(); 
-  }
-
-  return m_interrupted;
-}
-
 void Thread::run ()
 {
   CatchAny (m_callable);
 }
+
+//------------------------------------------------------------------------------
 
 namespace CurrentThread {
 

@@ -11,36 +11,44 @@
 // Lightweight but limited replacement for boost::function
 //
 
-class Function
+template <typename ReturnType>
+class FunctionType
 {
 public:
-  typedef void result_type;
+  typedef ReturnType result_type;
 
-  struct None { typedef void result_type; void operator()() const { } };
+  struct None
+  {
+    typedef typename ReturnType result_type;
+    ReturnType operator()() const
+    {
+      return ReturnType();
+    } 
+  };
 
   // Default constructor is a function that does nothing.
-  Function()
+  FunctionType()
   {
     constructCopyOf (None ());
   }
 
-  Function (const Function& f)
+  FunctionType (const FunctionType& f)
   {
     f.getCall().constructCopyInto (m_storage);
   }
 
   template <class Functor>
-  Function (const Functor& f)
+  FunctionType (const Functor& f)
   {
     constructCopyOf (f);
   }
 
-  ~Function ()
+  ~FunctionType ()
   {
     getCall().~Call();
   }
 
-  Function& operator= (const Function& f)
+  FunctionType& operator= (const FunctionType& f)
   {
     getCall().~Call();
     f.getCall().constructCopyInto (m_storage);
@@ -48,16 +56,16 @@ public:
   }
 
   template <class Functor>
-  Function& operator= (const Functor& f)
+  FunctionType& operator= (const Functor& f)
   {
     getCall().~Call();
     constructCopyOf (f);
     return *this;
   }
 
-  void operator()()
+  ReturnType operator()()
   {
-    getCall().operator()();
+    return getCall().operator()();
   }
 
 private:
@@ -81,7 +89,7 @@ private:
   {
     virtual ~Call () {}
     virtual void constructCopyInto (void* p) const = 0;
-    virtual void operator()() = 0;
+    virtual ReturnType operator()() = 0;
   };
 
   template <class Functor>
@@ -90,7 +98,7 @@ private:
     explicit StoredCall (const Functor& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
-    void operator()() { m_f(); }
+    ReturnType operator()() { return m_f(); }
   private:
     Functor m_f;
   };
@@ -107,5 +115,7 @@ private:
 
   char m_storage [Max]; // should be enough
 };
+
+typedef FunctionType <void> Function;
 
 #endif

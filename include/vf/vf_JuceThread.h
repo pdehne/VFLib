@@ -27,84 +27,11 @@ public:
   class ExceptionBased
   {
   public:
-    explicit ExceptionBased (Thread& thread)
-      : m_thread (thread)
-      , m_waiting (false)
-      , m_interrupt (false)
-    {
-    }
-
-    ~ExceptionBased ()
-    {
-    }
-
-    void wait ()
-    {
-      bool do_wait;
-
-      {
-        ScopedLock lock (m_mutex);
-
-        fatal_vfassert (!m_waiting);
-
-        if (m_interrupt)
-        {
-          m_interrupt = false;
-          do_wait = false;
-        }
-        else
-        {
-          m_waiting = true;
-          do_wait = true;
-        }
-      }
-
-      if (do_wait)
-        m_thread.wait ();
-      else
-        throw detail::Thread::Interruption();
-    }
-
-    void interrupt ()
-    {
-      {
-        ScopedLock lock (m_mutex);
-
-        if (m_waiting)
-        {
-          m_waiting = false;
-
-          m_thread.notify ();
-        }
-        else
-        {
-          m_interrupt = true;
-        }
-      }
-    }
-
-    bool interruptionPoint ()
-    {
-      bool do_interrupt;
-
-      {
-        ScopedLock lock (m_mutex);
-
-        fatal_vfassert (!m_waiting);
-
-        do_interrupt = m_interrupt;
-
-        m_interrupt = false;
-      }
-
-      if (do_interrupt)
-        throw detail::Thread::Interruption();
-
-      return false;
-    }
-
+    ExceptionBased ();
+    void wait (Thread& thread);
+    void interrupt (Thread& thread);
+    bool interruptionPoint (Thread& thread);
   private:
-    Thread& m_thread;
     Mutex m_mutex;
     bool m_waiting;
     bool m_interrupt;
@@ -113,89 +40,11 @@ public:
   class PollingBased
   {
   public:
-    explicit PollingBased (Thread& thread)
-      : m_thread (thread)
-      , m_waiting (false)
-      , m_interrupt (false)
-    {
-    }
-
-    ~PollingBased ()
-    {
-    }
-
-    void wait ()
-    {
-      bool do_wait;
-
-      {
-        ScopedLock lock (m_mutex);
-
-        fatal_vfassert (!m_waiting);
-        
-        do_wait = !m_interrupt;
-
-        if (m_interrupt)
-        {
-          do_wait = false;
-          m_interrupt = false;
-        }
-        else
-        {
-          do_wait = true;
-          m_waiting = true;
-        }
-      }
-
-      if (do_wait)
-        m_thread.wait ();
-    }
-
-    void interrupt ()
-    {
-      {
-        ScopedLock lock (m_mutex);
-
-        if (m_waiting)
-        {
-          fatal_vfassert (!m_interrupt);
-
-          m_waiting = false;
-
-          m_thread.notify ();
-        }
-        else
-        {
-          m_interrupt = true;
-        }
-      }
-    }
-
-    bool interruptionPoint ()
-    {
-      bool do_interrupt;
-
-      {
-        ScopedLock lock (m_mutex);
-
-        fatal_vfassert (!m_waiting);
-
-        do_interrupt = m_interrupt;
-
-        if (do_interrupt)
-          m_interrupt = false;
-      }
-
-      m_mutex.exit ();
-
-      if (do_interrupt)
-        throw detail::Thread::Interruption();
-
-      return false;
-    }
-
+    PollingBased ();
+    void wait (Thread& thread);
+    void interrupt (Thread& thread);
+    bool interruptionPoint (Thread& thread);
   private:
-    Thread& m_thread;
     Mutex m_mutex;
     bool m_waiting;
     bool m_interrupt;
@@ -225,17 +74,39 @@ public:
 
   void setPriority (int priority);
 
-  void wait ();
-
-  void interrupt ();
-
-  bool interruptionPoint ();
+  virtual bool interruptionPoint () = 0;
 
 private:
   void run ();
 
-  volatile bool m_interrupted; // caller must synchronize!
   Function m_callable;
+};
+
+template <class InterruptionModel>
+class ThreadType : public Thread
+{
+public:
+  ThreadType (const VF_NAMESPACE::String& name) : Thread (name)
+  {
+  }
+
+  void wait ()
+  {
+    m_model.wait (*this);
+  }
+
+  void interrupt ()
+  {
+    m_model.interrupt (*this);
+  }
+
+  bool interruptionPoint ()
+  {
+    return m_model.interruptionPoint (*this);
+  }
+
+private:
+  InterruptionModel m_model;
 };
 
 namespace CurrentThread {

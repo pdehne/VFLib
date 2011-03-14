@@ -57,7 +57,7 @@ public:
   //
   // #5 start() MUST be called once.
   //
-  void start (Function worker_idle,
+  void start (FunctionType <bool> worker_idle,
               Function worker_init,
               Function worker_exit)
   {
@@ -126,6 +126,9 @@ public:
   // #2 Returns true. The idle function should return as soon as possible.
   // #3 Throws a Thread::Interruption exception.
   //
+  // If interruptionPoint returns true or throws, it must
+  // not be called again before the threat has the opportunity to reset.
+  //
   bool interruptionPoint ()
   {
     return m_thread.interruptionPoint ();
@@ -163,12 +166,13 @@ private:
 
       try
       {
-        m_idle ();
+        bool interrupted = m_idle ();
 
-        if (!interruptionPoint ())
-        {
+        if (!interrupted)
+          interrupted = interruptionPoint ();
+
+        if (!interrupted)
           m_thread.wait ();
-        }
       }
       catch (VF_NAMESPACE::Thread::Interruption&)
       {
@@ -185,91 +189,21 @@ private:
   bool m_shouldStop;
   VF_NAMESPACE::Mutex m_mutex;
   ThreadType m_thread;
-  Function m_idle;
+  FunctionType <bool> m_idle;
   Function m_exit;
 };
 
 }
 
-#if 0
-class ThreadWorker : public Worker
-{
-public:
-  explicit ThreadWorker (const char* szName = "");
-
-  ~ThreadWorker ();
-
-  //
-  // Starts the worker.
-  //
-  // #1 Worker is opened and init function queued as call.
-  //
-  // #2 Worker calls are processed on the thread.
-  //
-  // #3 The idle function is called on the thread after
-  //    all current Worker calls finish processing.
-  //
-  // #4 The exit function is called on the thread when
-  //    the Worker is stopped and there are no more calls.
-  //
-  // #5 start() may only be called once.
-  //
-  void start (Function worker_idle,
-              Function worker_init = Function::None(),
-              Function worker_exit = Function::None());
-
-  // Stop the thread and optionally wait until it exits.
-  // All thread objects must eventually be called with stop(true).
-  // It is an error to call stop(true) from inside any thread_ function.
-  // It is ok to call stop() if start() was never called.
-  void stop (const bool wait = true);
-
-  // Sugar
-  void stop_request () { stop (false); }
-  void stop_and_wait () { stop (true); }
-
-  // Interrupts the idle function by queueing a call that does nothing.
-  // TODO: SEE IF THIS IS NEEDED?!
-  void interrupt ()
-  {
-    call (Function::None ());
-  }
-
-  // Should be called periodically by the idle function.
-  // There are three possible results:
-  //
-  // #1 Returns false. The idle function may continue or return.
-  // #2 Returns true. The idle function should return as soon as possible.
-  // #3 Throws a Thread::Interruption exception.
-  //
-  bool interruptionPoint ();
-
-private:
-  void reset ();
-  void signal ();
-  void do_stop ();
-  void run ();
-
-private:
-  bool m_calledStart;
-  bool m_calledStop;
-  bool m_shouldStop;
-  Mutex m_mutex;
-  Thread m_thread;
-  Function m_idle;
-  Function m_exit;
-};
-#endif
-
 //------------------------------------------------------------------------------
 
 #if VF_HAVE_JUCE
-typedef detail::ThreadWorker <Juce::Thread> BoostWorker;
-typedef detail::ThreadWorker <Juce::Thread> SoftWorker;
+typedef detail::ThreadWorker <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
+typedef detail::ThreadWorker <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
 
 #elif VF_HAVE_BOOST
-typedef detail::ThreadWorker <Boost::Thread> BoostWorker;
-typedef detail::ThreadWorker <Boost::Thread> SoftWorker;
+typedef detail::ThreadWorker <Boost::Thread> ExceptionWorker;
+typedef detail::ThreadWorker <Boost::Thread> PollingWorker;
 
 #endif
 
