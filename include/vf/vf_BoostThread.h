@@ -21,9 +21,10 @@ class Thread
 {
 public:
   typedef boost::thread::id id;
-
+  typedef detail::Thread::Interrupted Interrupted;
   typedef detail::Thread::Interruption Interruption;
 
+public:
   explicit Thread (const VF_NAMESPACE::String& name);
   ~Thread ();
 
@@ -47,7 +48,7 @@ public:
 
   void interrupt ();
 
-  bool interruptionPoint ();
+  Interrupted interruptionPoint ();
 
 private:
   boost::thread m_thread;
@@ -59,7 +60,7 @@ extern Thread::id getId ();
 
 // Avoid using this routine.
 // Use Boost::Thread::interruptionPoint() instead.
-extern bool interruptionPoint ();
+extern Thread::Interrupted interruptionPoint ();
 
 // Boost has no equivalent, and pthreads doesn't support it.
 inline void setPriority (int) { }

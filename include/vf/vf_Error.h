@@ -55,7 +55,7 @@ public:
 
   const String getReasonText () const;
   const String getSourceFilename () const;
-  const String getLineNumber () const;
+  int getLineNumber () const;
 
   Error& fail (const char* sourceFileName,
                int lineNumber,

@@ -8,8 +8,8 @@
 #include "vf/vf_Debug.h"
 
 //
-// Throw an exception, with the opportunity to a breakpoint
-// with the call stack before the throw.
+// Throw an exception, with the opportunity to get a
+// breakpoint with the call stack before the throw.
 //
 
 template <class Exception>

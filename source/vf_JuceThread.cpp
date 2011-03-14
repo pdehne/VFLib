@@ -65,7 +65,7 @@ void Thread::ExceptionBased::interrupt (Thread& thread)
   }
 }
 
-bool Thread::ExceptionBased::interruptionPoint (Thread& thread)
+Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
 {
   bool do_interrupt;
 
@@ -151,7 +151,7 @@ void Thread::PollingBased::interrupt (Thread& thread)
   }
 }
 
-bool Thread::PollingBased::interruptionPoint (Thread& thread)
+Thread::Interrupted Thread::PollingBased::interruptionPoint (Thread& thread)
 {
   bool interrupted;
 
@@ -216,7 +216,7 @@ Juce::Thread::id getId ()
   return VF_JUCE::Thread::getCurrentThreadId ();
 }
 
-bool interruptionPoint ()
+Juce::Thread::Interrupted interruptionPoint ()
 {
   bool interrupted;
 

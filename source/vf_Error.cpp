@@ -105,9 +105,9 @@ const String Error::getSourceFilename () const
   return m_sourceFileName;
 }
 
-const String Error::getLineNumber () const
+int Error::getLineNumber () const
 {
-  return String (m_lineNumber);
+  return m_lineNumber;
 }
 
 Error& Error::fail (const char* sourceFileName,

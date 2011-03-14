@@ -21,6 +21,11 @@ namespace Juce {
 class Thread : public VF_JUCE::Thread
 {
 public:
+  typedef VF_JUCE::Thread::ThreadID id;
+  typedef detail::Thread::Interrupted Interrupted;
+  typedef detail::Thread::Interruption Interruption;
+
+public:
   //
   // Interruption models
   //
@@ -30,7 +35,7 @@ public:
     ExceptionBased ();
     void wait (Thread& thread);
     void interrupt (Thread& thread);
-    bool interruptionPoint (Thread& thread);
+    Interrupted interruptionPoint (Thread& thread);
   private:
     Mutex m_mutex;
     bool m_waiting;
@@ -43,7 +48,7 @@ public:
     PollingBased ();
     void wait (Thread& thread);
     void interrupt (Thread& thread);
-    bool interruptionPoint (Thread& thread);
+    Interrupted interruptionPoint (Thread& thread);
   private:
     Mutex m_mutex;
     bool m_waiting;
@@ -51,10 +56,6 @@ public:
   };
 
 public:
-  typedef VF_JUCE::Thread::ThreadID id;
-
-  typedef detail::Thread::Interruption Interruption;
-
   explicit Thread (const VF_NAMESPACE::String& name);
   ~Thread ();
 
@@ -74,7 +75,7 @@ public:
 
   void setPriority (int priority);
 
-  virtual bool interruptionPoint () = 0;
+  virtual Interrupted interruptionPoint () = 0;
 
 private:
   void run ();
@@ -100,7 +101,7 @@ public:
     m_model.interrupt (*this);
   }
 
-  bool interruptionPoint ()
+  Interrupted interruptionPoint ()
   {
     return m_model.interruptionPoint (*this);
   }
@@ -115,7 +116,7 @@ extern Thread::id getId ();
 
 // Avoid this function because the implementation is slow.
 // Use Juce::Thread::interruptionPoint() instead.
-extern bool interruptionPoint ();
+extern Thread::Interrupted interruptionPoint ();
 
 extern void setPriority (int priority);
 

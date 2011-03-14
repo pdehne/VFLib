@@ -57,7 +57,7 @@ void Thread::interrupt ()
   m_thread.interrupt ();
 }
 
-bool Thread::interruptionPoint ()
+Thread::Interrupted Thread::interruptionPoint ()
 {
   vfassert (isTheCurrentThread ());
 
@@ -81,7 +81,7 @@ Boost::Thread::id getId ()
   return boost::this_thread::get_id ();
 }
 
-bool interruptionPoint ()
+Thread::Interrupted interruptionPoint ()
 {
   try
   {

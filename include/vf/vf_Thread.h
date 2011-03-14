@@ -9,9 +9,55 @@ namespace detail {
 
 namespace Thread {
 
-// Used to throw generic thread interruptions when this option is desired.
+// Used to throw generic thread interruptions
+// when using the exception interruption model.
 class Interruption
 {
+};
+
+// This is the flag used to indicate if an interruption
+// occurred when using the polling model. It is designed
+// to detect improper usage (specifically, not checking
+// the flag, which would result in incorrect behavior).
+
+class Interrupted
+{
+public:
+  Interrupted (bool interrupted = false)
+   : m_interrupted (interrupted)
+   , m_checked (false)
+  {
+  }
+
+  Interrupted (const Interrupted& other)
+    : m_interrupted (other.m_interrupted)
+    , m_checked (false)
+  {
+    other.m_checked = true;
+  }
+
+  ~Interrupted ()
+  {
+    vfassert (!m_interrupted || m_checked);
+  }
+
+  Interrupted& operator= (const Interrupted& other)
+  {
+    m_interrupted = other.m_interrupted;
+    m_checked = false;
+    other.m_checked = true;
+    return *this;
+  }
+
+  operator bool () const
+  {
+    m_checked = true;
+    return m_interrupted;
+  }
+
+private:
+  bool m_interrupted;
+  mutable bool m_checked;
 };
 
 }

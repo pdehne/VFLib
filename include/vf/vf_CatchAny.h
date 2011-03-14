@@ -24,7 +24,7 @@
 // and disabling its future use for example.
 //
 
-extern bool CatchAny (Function f,
+extern bool CatchAny (FunctionType <void> f,
                       bool returnFromException = false);
 
 #endif
