@@ -5,13 +5,15 @@
 #ifndef __VF_BOOSTTHREAD_VFHEADER__
 #define __VF_BOOSTTHREAD_VFHEADER__
 
+#if VF_HAVE_BOOST
+
+#include "vf/vf_Function.h"
+#include "vf/vf_String.h"
 #include "vf/vf_Thread.h"
 
 //
 // Implementation of vf::Thread using Boost
 //
-
-#if VF_HAVE_BOOST
 
 namespace Boost {
 
@@ -22,14 +24,8 @@ public:
 
   typedef detail::Thread::Interruption Interruption;
 
-  explicit Thread (const VF_NAMESPACE::String& name)
-  {
-  }
-
-  ~Thread ()
-  {
-    join ();
-  }
+  explicit Thread (const VF_NAMESPACE::String& name);
+  ~Thread ();
 
   template <class Callable>
   void start (const Callable& c)
@@ -37,63 +33,21 @@ public:
     m_thread = boost::thread (c);
   }
 
-  void join ()
-  {
-    m_thread.join ();
-  }
+  void join ();
 
-  id getId ()
-  {
-    return m_thread.get_id ();
-  }
+  id getId ();
 
   // only valid if the thread is running
-  bool isTheCurrentThread () const
-  {
-    return m_thread.get_id () == boost::this_thread::get_id ();
-  }
+  bool isTheCurrentThread () const;
 
-  void setPriority (int)
-  {
-    // Unavailable in boost or pthreads.
-  }
+  // unavailable in boost
+  inline void setPriority (int) { }
 
-  void wait ()
-  {
-    try
-    {
-      // sleep until interrupted
-      boost::this_thread::sleep (
-        boost::posix_time::ptime (
-          boost::date_time::max_date_time));
-    }
-    catch (boost::thread_interrupted&)
-    {
-      // wake up
-    }
-  }
+  void wait ();
 
-  void interrupt ()
-  {
-    m_thread.interrupt ();
-  }
+  void interrupt ();
 
-  bool interruptionPoint ()
-  {
-    vfassert (isTheCurrentThread ());
-
-    try
-    {
-      boost::this_thread::interruption_point ();
-    }
-    catch (boost::thread_interrupted&)
-    {
-      // re-throw it as a boost-independent object
-      throw detail::Thread::Interruption();
-    }
-
-    return false;
-  }
+  bool interruptionPoint ();
 
 private:
   boost::thread m_thread;
@@ -101,32 +55,14 @@ private:
 
 namespace CurrentThread {
 
-inline Thread::id getId ()
-{
-  return boost::this_thread::get_id ();
-}
+extern Thread::id getId ();
 
 // Avoid using this routine.
 // Use Boost::Thread::interruptionPoint() instead.
-inline bool interruptionPoint ()
-{
-  try
-  {
-    boost::this_thread::interruption_point ();
-  }
-  catch (boost::thread_interrupted&)
-  {
-    // re-throw it as a boost-independent object
-    throw detail::Thread::Interruption();
-  }
+extern bool interruptionPoint ();
 
-  return false;
-}
-
-inline void setPriority (int)
-{
-  // Boost has no equivalent, and pthreads doesn't support it.
-}
+// Boost has no equivalent, and pthreads doesn't support it.
+inline void setPriority (int) { }
 
 }
 

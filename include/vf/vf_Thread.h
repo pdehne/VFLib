@@ -5,11 +5,6 @@
 #ifndef __VF_THREAD_VFHEADER__
 #define __VF_THREAD_VFHEADER__
 
-#include "vf/vf_Function.h"
-
-// MOVE THIS INTO THE .CPP ASAP
-#include "vf/vf_CatchAny.h"
-
 namespace detail {
 
 namespace Thread {
@@ -22,35 +17,5 @@ class Interruption
 }
 
 }
-
-#include "vf/vf_JuceThread.h"
-#include "vf/vf_BoostThread.h"
-
-// THIS IS A CLUSTERFUCK
-
-#if 1 // Juce first
-#if VF_HAVE_JUCE
-typedef Juce::Thread Thread;
-namespace CurrentThread = Juce::CurrentThread;
-#elif VF_HAVE_BOOST
-typedef Boost::Thread Thread;
-namespace CurrentThread = Boost::CurrentThread;
-#else
-  #pragma message(VF_LOC_"Missing CurrentThread")
-#endif
-
-#else // Boost first
-
-#if VF_HAVE_BOOST
-typedef Boost::Thread Thread;
-namespace CurrentThread = Boost::CurrentThread;
-#elif VF_HAVE_JUCE
-typedef Juce::Thread Thread;
-namespace CurrentThread = Juce::CurrentThread;
-#else
-  #pragma message(VF_LOC_"Missing CurrentThread")
-#endif
-
-#endif
 
 #endif

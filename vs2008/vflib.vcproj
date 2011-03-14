@@ -393,6 +393,10 @@
 			Name="threads"
 			>
 			<File
+				RelativePath="..\source\vf_BoostThread.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_BoostThread.h"
 				>
 			</File>
@@ -402,6 +406,10 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_GuiWorker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_JuceThread.cpp"
 				>
 			</File>
 			<File
@@ -426,6 +434,10 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Thread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Threads.h"
 				>
 			</File>
 			<File

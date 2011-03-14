@@ -8,7 +8,7 @@
 #include "vf/vf_Bind.h"
 #include "vf/vf_List.h"
 #include "vf/vf_Mutex.h"
-#include "vf/vf_Thread.h"
+#include "vf/vf_Threads.h"
 
 //
 // Queue that executes functors on another thread, with these invariants:
@@ -62,7 +62,7 @@ private:
   bool m_in_process;
   Calls m_calls;
   Mutex m_mutex;
-  Thread::id m_id;
+  VF_NAMESPACE::Thread::id m_id;
 
 private:
   // Call all the functors in the queue.
@@ -110,8 +110,8 @@ protected:
   //
   // #4 The mutex is held during the calls.
   //
-  virtual void signal () = 0;
   virtual void reset () = 0;
+  virtual void signal () = 0;
 
 public:
   explicit Worker (const char* szName = "");

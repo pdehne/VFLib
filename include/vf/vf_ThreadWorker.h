@@ -55,22 +55,12 @@ public:
   //
   bool interruptionPoint ();
 
-  // These are here so code can switch back and forth between the
-  // exception style and the polling style without change
 protected:
-  virtual bool interrupt_requested () const { return false; }
-  virtual void interruption_point () { }
-
-protected:
-  void do_idle ();
-
-  virtual void idle_and_wait () { }
 
 private:
-  void signal ();
   void reset ();
+  void signal ();
   void do_stop ();
-  void do_run ();
   void run ();
 
 private:

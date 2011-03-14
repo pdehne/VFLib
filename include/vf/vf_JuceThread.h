@@ -5,11 +5,15 @@
 #ifndef __VF_JUCETHREAD_VFHEADER__
 #define __VF_JUCETHREAD_VFHEADER__
 
+#if VF_HAVE_JUCE
+
+#include "vf/vf_Function.h"
+#include "vf/vf_Thread.h"
+#include "vf/vf_String.h"
+
 //
 // Implementation of vf::Thread using Juce
 //
-
-#if VF_HAVE_JUCE
 
 namespace Juce {
 
@@ -20,17 +24,8 @@ public:
 
   typedef detail::Thread::Interruption Interruption;
 
-  explicit Thread (const VF_NAMESPACE::String& name)
-    : VF_JUCE::Thread (name)
-    , m_interrupted (false)
-  {
-  }
-
-  ~Thread ()
-  {
-    interrupt ();
-    join ();
-  }
+  explicit Thread (const VF_NAMESPACE::String& name);
+  ~Thread ();
 
   template <class Callable>
   void start (const Callable& c)
@@ -39,64 +34,23 @@ public:
     VF_JUCE::Thread::startThread ();
   }
 
-  void join ()
-  {
-    VF_JUCE::Thread::stopThread (-1);
-  }
+  void join ();
 
-  id getId () const
-  {
-    return VF_JUCE::Thread::getThreadId ();
-  }
+  id getId () const;
 
   // only valid if the thread is running
-  bool isTheCurrentThread () const
-  {
-    return VF_JUCE::Thread::getCurrentThreadId () ==
-           VF_JUCE::Thread::getThreadId ();
-  }
+  bool isTheCurrentThread () const;
 
-  inline void setPriority (int priority)
-  {
-    VF_JUCE::Thread::setPriority (priority);
-  }
+  void setPriority (int priority);
 
-  // TODO: CONDITION VARIABLE TO FIX THIS
-  // this is not thread safe, and the caller must synchronize
-  void wait ()
-  {
-    if (!m_interrupted)
-      VF_JUCE::Thread::wait (-1);
-    m_interrupted = false;
-  }
+  void wait ();
 
-  // this is not thread safe, and the caller must synchronize
-  void interrupt ()
-  {
-    m_interrupted = true;
-    VF_JUCE::Thread::notify ();
-  }
+  void interrupt ();
 
-  bool interruptionPoint ()
-  {
-    vfassert (isTheCurrentThread ());
-
-    // This needs to be atomic!
-    if (m_interrupted)
-    {
-      m_interrupted = false;
-      // Avoid using vf::Throw() here
-      throw detail::Thread::Interruption(); 
-    }
-
-    return m_interrupted;
-  }
+  bool interruptionPoint ();
 
 private:
-  void run ()
-  {
-    CatchAny (m_callable);
-  }
+  void run ();
 
   volatile bool m_interrupted; // caller must synchronize!
   Function m_callable;
@@ -104,46 +58,13 @@ private:
 
 namespace CurrentThread {
 
-inline Thread::id getId ()
-{
-  return VF_JUCE::Thread::getCurrentThreadId ();
-}
+extern Thread::id getId ();
 
 // Avoid this function because the implementation is slow.
 // Use Juce::Thread::interruptionPoint() instead.
-inline bool interruptionPoint ()
-{
-  bool interrupted;
+extern bool interruptionPoint ();
 
-  VF_JUCE::Thread* thread = VF_JUCE::Thread::getCurrentThread();
-
-  // Can't use interruption points on the message thread
-  vfassert (thread != 0);
-  
-  if (thread)
-  {
-    Juce::Thread* vfThread = dynamic_cast <VF_NAMESPACE::Juce::Thread*> (thread);
-
-    // Can only use interruption points from a Juce::Thread
-    vfassert (vfThread != 0);
-
-    if (vfThread)
-      interrupted = vfThread->interruptionPoint ();
-    else
-      interrupted = false;
-  }
-  else
-  {
-    interrupted = false;
-  }
-
-  return interrupted;
-}
-
-inline void setPriority (int priority) // [0, 10] where 5 = normal
-{
-  VF_JUCE::Thread::setCurrentThreadPriority (priority);
-}
+extern void setPriority (int priority);
 
 }
 

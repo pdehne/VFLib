@@ -56,7 +56,6 @@ void ThreadWorker::stop (bool wait)
   {
     // can't call stop(true) from within a thread function
     jassert (!wait || !m_thread.isTheCurrentThread ());
-      //m_thread.getId() != Boost::CurrentThread::getId());
 
     // Use the thread queue open status as a flag
     // to know if we already queued a call to do_stop.
@@ -92,18 +91,13 @@ bool ThreadWorker::interruptionPoint ()
   return m_thread.interruptionPoint();
 }
 
-void ThreadWorker::do_idle ()
+void ThreadWorker::reset ()
 {
-  m_worker_idle ();
 }
 
 void ThreadWorker::signal ()
 {
   m_thread.interrupt ();
-}
-
-void ThreadWorker::reset ()
-{
 }
 
 void ThreadWorker::do_stop ()
@@ -113,8 +107,6 @@ void ThreadWorker::do_stop ()
 
 void ThreadWorker::run ()
 {
-  // Not needed because vf::Thread does it
-  //CatchAny (Bind (&ThreadWorker::do_run, this));
   for (;;)
   {
     Worker::process ();
@@ -124,36 +116,13 @@ void ThreadWorker::run ()
 
     try
     {
-      // WRONG!!!
-      // This is here so we can immediately take care
-      // of anything put into the ThreadQueue while
-      // the ThreadQueue was being processed.
-      //
-      // WRONG! This could cause the idle function
-      // to get starved, and also the way that the
-      // thread queue works with synchronous calls
-      // it should not be needed!!
-      //boost::this_thread::interruption_point();
-
-      //do_idle ();
       m_worker_idle ();
 
-      // sleep() is a a boost interruption point
-      /*
-      boost::this_thread::sleep (
-        boost::posix_time::ptime (
-          boost::date_time::max_date_time)); // forever
-      */
       m_thread.wait ();
     }
-    /* SHOULD NEVER SEE THIS HERE
-    catch (boost::thread_interrupted&)
-    {
-    }
-    */
     catch (vf::Thread::Interruption&)
     {
-      // loop again
+      // loop
     }
   }
 

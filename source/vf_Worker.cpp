@@ -201,28 +201,11 @@ bool Worker::do_process (const bool from_call)
   {
     // Process the calls outside the mutex using our
     // local list. We will delete the call objects later.
-#if VF_HAVE_BOOST
-    try
+    // Calling interruption points is invalid from here.
+    for (Calls::iterator iter = list.begin(); iter != list.end(); ++iter)
     {
-#endif
-      for (Calls::iterator iter = list.begin(); iter != list.end(); ++iter)
-      {
-        iter->operator ()();
-      }
-#if VF_HAVE_BOOST
+      iter->operator ()();
     }
-    catch (boost::thread_interrupted&)
-    {
-      // This is for diagnostics, calling a boost
-      // interruption point from a call functor is undefined!
-      Throw (std::runtime_error ("invalid interruption from thread queue call"));
-    }
-    catch (vf::Thread::Interruption&)
-    {
-      // Undefined behavior
-      Throw (std::runtime_error ("invalid interruption from thread queue call"));
-    }
-#endif
 
     // Clear the recursion flag since we are past the
     // point where it is possible to invoke the functors.
