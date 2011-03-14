@@ -166,6 +166,8 @@ private:
 
       try
       {
+        // HACK! Relying on FunctionType <bool> returning
+        // false for None()::operator()()
         bool interrupted = m_idle ();
 
         if (!interrupted)

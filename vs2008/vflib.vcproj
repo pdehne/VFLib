@@ -387,6 +387,10 @@
 						/>
 					</FileConfiguration>
 				</File>
+				<File
+					RelativePath="..\source\test6.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

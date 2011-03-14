@@ -2,15 +2,14 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
+//
 // This file is used for detecting compile problems.
-
 //
-// Compiles without Juce or Boost
-//
-
+// Checks to make sure everything compiles without juce or boost.
 // Without Juce or Boost, significant functionality will
 // be missing but it should still be possible to include
 // the library and get the framework-independent stuff.
+//
 
 // TODO: IMPLEMENT THIS
 

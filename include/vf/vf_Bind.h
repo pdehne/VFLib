@@ -57,118 +57,109 @@ using std::tr1::placeholders::_9;
 //
 // Bind
 //
-// Simple version of boost::bind that works only for free functions
-// or class member functions taking 0 or 1 arguments.
+// Simplified bind to be used internally to
+// remove the dependence on boost or tr1.
 //
 
 namespace detail {
 
-template <typename R, class P>
-struct Bind0 { typedef typename R result_type; typedef R (P::*mf_t)();
-  Bind0 (mf_t mf, P* p) : m_mf (mf), m_p (p) { }
-  void operator()() { return (m_p->*m_mf)(); } private:
-  mf_t m_mf; P* m_p; };
+template <class R>
+struct BindF0
+{
+  typedef typename R result_type;
+  typedef R (*f_t)();
+  BindF0 (f_t f):m_f(f){}
+  R operator()(){return m_f();}
+private:
+  f_t m_f;
+};
 
-template <typename R, class P,typename T1>
-struct Bind1 { typedef typename R result_type; typedef R (P::*mf_t)(T1);
-  Bind1 (mf_t mf, P* p, T1 t1) : m_mf (mf), m_p (p),
+template <class R, class T1>
+struct BindF1 { typedef typename R result_type; typedef R (*f_t)
+  (T1); BindF1 (f_t f, const T1& t1):m_f(f), m_t1(t1) { }
+  R operator()(){return m_f(m_t1);}
+private:
+  f_t m_f; T1 m_t1;
+};
+
+template <class R, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
+struct BindF8 { typedef typename R result_type; typedef R (*f_t)
+  (T1,T2,T3,T4,T5,T6,T7,T8); BindF8 (f_t f,
+  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  const T5& t5, const T6& t6, const T7& t7, const T8& t8) : m_f(f),
+  m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4), m_t5(t5), m_t6(t6), m_t7(t7), m_t8(t8) { }
+  R operator()(){return m_f(m_t1,m_t2,m_t3,m_t4,m_t5,m_t6,m_t7,m_t8);}
+private:
+  f_t m_f; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; T5 m_t5; T6 m_t6; T7 m_t7; T8 m_t8; 
+};
+
+template <class R,class P>
+struct BindMf0
+{
+  typedef typename R result_type;
+  typedef R (P::*mf_t)();
+  BindMf0 (mf_t mf,P*p):m_mf(mf),m_p(p){}
+  R operator()(){return(m_p->*m_mf)();}
+private:
+  mf_t m_mf;P*m_p;
+};
+
+template <class R,class P>
+struct BindMfc0
+{
+  typedef typename R result_type;
+  typedef R (P::*mf_t)() const;
+  BindMfc0 (mf_t mf, const P* p):m_mf(mf),m_p(p){}
+  R operator()(){return(m_p->*m_mf)();}
+private:
+  mf_t m_mf; const P* m_p;
+};
+
+template <class R, class P, class T1>
+struct BindMf1 { typedef typename R result_type; typedef R (P::*mf_t)(T1);
+  BindMf1 (mf_t mf, P* p, T1 t1) : m_mf (mf), m_p (p),
     m_t1(t1) { }
-  void operator()() { return (m_p->*m_mf)(m_t1); } private:
+  R operator()() { return (m_p->*m_mf)(m_t1); } private:
   mf_t m_mf; P* m_p; T1 m_t1; };
 
-template <class P,typename T1,typename T2>
-struct Bind2 { typedef void (P::*mf_t)(T1,T2);
-  Bind2 (mf_t mf, P* p, T1 t1, T2 t2) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; };
-
-template <class P,typename T1,typename T2,typename T3>
-struct Bind3 { typedef void (P::*mf_t)(T1,T2,T3);
-  Bind3 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2, m_t3); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; };
-
-template <class P,typename T1,typename T2,typename T3,typename T4>
-struct Bind4 { typedef void (P::*mf_t)(T1,T2,T3,T4);
-  Bind4 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3, T4 t4) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2, m_t3, m_t4); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; };
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5>
-struct Bind5 { typedef void (P::*mf_t)(T1,T2,T3,T4,T5);
-  Bind5 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4), m_t5(t5) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2, m_t3, m_t4, m_t5); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; T5 m_t5; };
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5,typename T6>
-struct Bind6 { typedef void (P::*mf_t)(T1,T2,T3,T4,T5,T6);
-  Bind6 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4), m_t5(t5), m_t6(t6) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2, m_t3, m_t4, m_t5, m_t6); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; T5 m_t5; T6 m_t6; };
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5,typename T6,typename T7>
-struct Bind7 { typedef void (P::*mf_t)(T1,T2,T3,T4,T5,T6,T7);
-  Bind7 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4), m_t5(t5), m_t6(t6), m_t7(t7) { }
-  void operator()() { (m_p->*m_mf)(m_t1, m_t2, m_t3, m_t4, m_t5, m_t6, m_t7); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; T5 m_t5; T6 m_t6; T7 m_t7; };
-
-template <typename R,class P,typename T1,typename T2,typename T3,typename T4,typename T5,typename T6,typename T7,typename T8>
-struct Bind8 { typedef typename R result_type; typedef R (P::*mf_t)(T1,T2,T3,T4,T5,T6,T7,T8);
-  Bind8 (mf_t mf, P* p, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) : m_mf (mf), m_p (p),
-    m_t1(t1), m_t2(t2), m_t3(t3), m_t4(t4), m_t5(t5), m_t6(t6), m_t7(t7), m_t8(t8) { }
-  R operator()() { return (m_p->*m_mf)(m_t1, m_t2, m_t3, m_t4, m_t5, m_t6, m_t7, m_t8); } private:
-  mf_t m_mf; P* m_p; T1 m_t1; T2 m_t2; T3 m_t3; T4 m_t4; T5 m_t5; T6 m_t6; T7 m_t7; T8 m_t8; };
-
+template <class R, class P, class T1>
+struct BindMfc1 { typedef typename R result_type; typedef R (P::*mf_t)(T1) const;
+  BindMfc1 (mf_t mf, const P* p, T1 t1) : m_mf (mf), m_p (p),
+    m_t1(t1) { }
+  R operator()() { return (m_p->*m_mf)(m_t1); } private:
+  mf_t m_mf; const P* m_p; T1 m_t1; };
 }
 
-template <typename R, class P>
-detail::Bind0 <R,P> Bind (R (P::*f)(), P* p) { return
-  detail::Bind0 <R, P> (f,p); }
+template <class R>
+detail::BindF0 <R> Bind (R (*f)()) { return
+  detail::BindF0 <R> (f); }
 
-template <typename R, class P, typename T1>
-detail::Bind1 <R,P,T1> Bind (R (P::*f)(T1), P* p,
+template <class R, class T1>
+detail::BindF1 <R,T1> Bind (R (*f)(T1), const T1& t1) { return
+  detail::BindF1 <R,T1> (f,t1); }
+
+template <class R, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
+detail::BindF8 <R,T1,T2,T3,T4,T5,T6,T7,T8> Bind (R (*f)(T1,T2,T3,T4,T5,T6,T7,T8),
+  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  const T5& t5, const T6& t6, const T7& t7, const T8& t8) { return
+  detail::BindF8 <R,T1,T2,T3,T4,T5,T6,T7,T8> (f,t1,t2,t3,t4,t5,t6,t7,t8); }
+
+template <class R, class P>
+detail::BindMf0 <R,P> Bind (R (P::*f)(), P* p) { return
+  detail::BindMf0 <R, P> (f,p); }
+
+template <class R, class P>
+detail::BindMfc0 <R,P> Bind (R (P::*f)() const, const P* p) { return
+  detail::BindMfc0 <R, P> (f,p); }
+
+template <class R, class P, class T1>
+detail::BindMf1 <R,P,T1> Bind (R (P::*f)(T1), P* p,
   T1 t1) { return
-  detail::Bind1 <R,P,T1> (f,p,t1); }
+  detail::BindMf1 <R,P,T1> (f,p,t1); }
 
-template <class P,typename T1,typename T2>
-detail::Bind2 <P,T1,T2> Bind (void (P::*f)(T1,T2), P* p,
-  T1 t1, T2 t2) { return
-  detail::Bind2 <P,T1,T2> (f,p,t1,t2); }
-
-template <class P,typename T1,typename T2,typename T3>
-detail::Bind3 <P,T1,T2,T3> Bind (void (P::*f)(T1,T2,T3), P* p,
-  T1 t1, T2 t2, T3 t3) { return
-  detail::Bind3 <P,T1,T2,T3> (f,p,t1,t2,t3); }
-
-template <class P,typename T1,typename T2,typename T3,typename T4>
-detail::Bind4 <P,T1,T2,T3,T4> Bind (void (P::*f)(T1,T2,T3,T4), P* p,
-  T1 t1, T2 t2, T3 t3, T4 t4) { return
-  detail::Bind4 <P,T1,T2,T3,T4> (f,p,t1,t2,t3,t4); }
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5>
-detail::Bind5 <P,T1,T2,T3,T4,T5> Bind (void (P::*f)(T1,T2,T3,T4,T5), P* p,
-  T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) { return
-  detail::Bind5 <P,T1,T2,T3,T4,T5> (f,p,t1,t2,t3,t4,t5); }
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5,typename T6>
-detail::Bind6 <P,T1,T2,T3,T4,T5,T6> Bind (void (P::*f)(T1,T2,T3,T4,T5,T6), P* p,
-  T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) { return
-  detail::Bind6 <P,T1,T2,T3,T4,T5,T6> (f,p,t1,t2,t3,t4,t5,t6); }
-
-template <class P,typename T1,typename T2,typename T3,typename T4,typename T5,typename T6,typename T7>
-detail::Bind7 <P,T1,T2,T3,T4,T5,T6,T7> Bind (void (P::*f)(T1,T2,T3,T4,T5,T6,T7), P* p,
-  T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) { return
-  detail::Bind7 <P,T1,T2,T3,T4,T5,T6,T7> (f,p,t1,t2,t3,t4,t5,t6,t7); }
-
-template <typename R, class P, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-detail::Bind8 <R,P,T1,T2,T3,T4,T5,T6,T7,T8> Bind (R (P::*f)(T1,T2,T3,T4,T5,T6,T7,T8), P* p,
-  T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8 ) { return
-detail::Bind8 <R,P,T1,T2,T3,T4,T5,T6,T7,T8> (f,p,t1,t2,t3,t4,t5,t6,t7,t8); }
+template <class R, class P, class T1>
+detail::BindMfc1 <R,P,T1> Bind (R (P::*f)(T1) const, P const* p,
+  T1 t1) { return
+  detail::BindMfc1 <R,P,T1> (f,p,t1); }
 
 #endif
