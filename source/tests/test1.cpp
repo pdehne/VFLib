@@ -2,40 +2,15 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-// This file is used for detecting compile problems.
-
 //
-// Checks that the public library header compiles
+// This file is used for detecting compile problems.
+//
+//
+// Checks that the public library header
+// compiles with the default configuration.
 //
 
 #include "vf/vf.h"
 
-#include <boost/bind/bind.hpp>
-
-namespace { void dummmy () { } } // hides the linker warning
-
-namespace {
-
-struct Foo
-{
-  void bar ();
-  void bar1 (int);
-};
-
-template <typename return_type>
-return_type doit ()
-{
-  return return_type();
-}
-
-void test ()
-{
-  Foo f;
-
-  doit <void> ();
-
-  //vf::Bind (&Foo::bar, &f);
-  vf::Bind (&Foo::bar1, &f, 1);
-}
-
-}
+// Hides a linker warning
+namespace { void dummmy () { } }

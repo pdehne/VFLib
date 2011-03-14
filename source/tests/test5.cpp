@@ -5,13 +5,27 @@
 // This file is used for detecting compile problems.
 
 //
-// Compiles without Boost
+// Compiles without Juce or Boost
 //
 
+// Without Juce or Boost, significant functionality will
+// be missing but it should still be possible to include
+// the library and get the framework-independent stuff.
+
+// TODO: IMPLEMENT THIS
+
+#define VF_STR2_(x) #x
+#define VF_STR1_(x) VF_STR2_(x)
+#define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "
+#pragma message(VF_LOC_"Missing test")
+
+#if 0
+
+#define VF_HAVE_JUCE 0
 #define VF_HAVE_BOOST 0
 
 #include "vf/vf.h"
 
 namespace { void dummmy () { } } // stop linker warning
 
-
+#endif

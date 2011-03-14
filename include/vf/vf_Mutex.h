@@ -5,49 +5,105 @@
 #ifndef __VF_MUTEX_VFHEADER__
 #define __VF_MUTEX_VFHEADER__
 
-// Simple recursive mutex
+//
+// Simple lightweight recursive mutex
+//
+// Juce::Mutex
+// Boost::Mutex
+// template <MutexType> detail::ScopedLock
+// template <MutexType> detail::ScopedUnlock
+// Mutex
+// ScopedLock
+// ScopedUnlock
+//
+
+//------------------------------------------------------------------------------
+//
+// Juce Mutex
+//
 
 #if VF_HAVE_JUCE
 
-//
-// Juce
-//
-class Mutex
+namespace Juce {
+
+struct Mutex : NonCopyable
 {
-public:
-  void enter () { m_mutex.enter (); }
-  void exit () { m_mutex.exit (); }
+  inline void enter () const { m_mutex.enter (); }
+  inline void exit () const { m_mutex.exit (); }
+
 private:
   VF_JUCE::CriticalSection m_mutex;
 };
 
-#elif VF_HAVE_BOOST
+}
 
+#endif
+
+//------------------------------------------------------------------------------
 //
-// Boost
+// Boost Mutex
 //
-class Mutex
+
+#if VF_HAVE_BOOST
+
+namespace Boost {
+
+struct Mutex : NonCopyable
 {
-public:
-  void enter () { m_mutex.lock (); }
-  void exit () { m_mutex.unlock (); }
+  inline void enter () { m_mutex.lock (); }
+  inline void exit () { m_mutex.unlock (); }
+
 private:
   boost::recursive_mutex m_mutex;
 };
 
-#else
-
-//
-// (none)
-//
-#pragma message(VF_LOC_"Missing class Mutex")
-class Mutex
-{
-public:
-  void enter () {}
-  void exit () {}
-};
+}
 
 #endif
+
+//------------------------------------------------------------------------------
+
+namespace detail {
+
+// Ideas based on Juce
+
+template <class MutexType>
+struct ScopedLock : NonCopyable
+{
+  inline explicit ScopedLock (const MutexType& mutex)
+    : m_mutex (mutex) { m_mutex.enter (); }
+  inline ~ScopedLock () { m_mutex.exit (); }
+private:
+  const MutexType& m_mutex;
+};
+
+template <class MutexType>
+struct ScopedUnlock : NonCopyable
+{
+  inline explicit ScopedUnlock (const MutexType& mutex)
+    : m_mutex (mutex) { m_mutex.exit (); }
+  inline ~ScopedUnlock () { m_mutex.enter (); }
+private:
+  const MutexType& m_mutex;
+};
+
+}
+
+//------------------------------------------------------------------------------
+
+// Lift one implementation
+
+#if VF_HAVE_JUCE
+
+using Juce::Mutex;
+
+#elif VF_HAVE_BOOST
+
+using Boost::Mutex;
+
+#endif
+
+typedef detail::ScopedLock <Mutex> ScopedLock;
+typedef detail::ScopedUnlock <Mutex> ScopedUnlock;
 
 #endif

@@ -5,9 +5,12 @@
 #ifndef __VF_NONCOPYABLE_VFHEADER__
 #define __VF_NONCOPYABLE_VFHEADER__
 
-// borrowed to remove the dependency on boost
+// Prevents warnings about missing copy
+// constructors and assignment operators.
 
 namespace detail {
+
+// Ideas based on boost
 
 class NonCopyable
 {

@@ -2,19 +2,27 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
+//
 // This file is used for detecting compile problems.
-
 //
-// Checks a single include to make sure it compiles
-// without requiring anything else included before hand
+//
+// Every include file needs to be able to be included on
+// its own without requiring any other dependencies with
+// the exception of the standard header
 //
 
-#include "vf/vf_StandardHeader.h" // always needed
+// This always needs to be here
+#include "vf/vf_StandardHeader.h"
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_FPUFlags.h" // put the file to test here
+//
+// Change this to the file to check for problems
+//
+
+#include "vf/vf_Threads.h"
 
 END_VF_NAMESPACE
 
-namespace { void dummmy () { } } // hides the linker warning
+// Hides a linker warning
+namespace { void dummmy () { } }

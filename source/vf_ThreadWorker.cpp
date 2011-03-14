@@ -6,13 +6,16 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_CatchAny.h"
 #include "vf/vf_ThreadWorker.h"
+
+#if 0
 
 ThreadWorker::ThreadWorker (const char* szName)
   : Worker (szName)
   , m_thread (szName)
-  , m_stopped (true)
+  , m_calledStart (false)
+  , m_calledStop (false)
+  , m_shouldStop (false)
 {
 }
 
@@ -25,70 +28,56 @@ void ThreadWorker::start (Function worker_idle,
                           Function worker_init,
                           Function worker_exit)
 {
-  m_mutex.enter ();
+  {
+    ScopedLock lock (m_mutex);
 
-  // May not start unless stopped.
-  jassert (m_stopped);
-  m_stopped = false;
+    fatal_vfassert (!m_calledStart);
 
-  m_worker_idle = worker_idle;
-  m_worker_exit = worker_exit;
+    m_calledStart = true;
 
-  open ();
+    m_idle = worker_idle;
+    m_exit = worker_exit;
 
-  m_stop = false;
+    open ();
 
-  // Call the init function so it happens on the thread.
-  // NOTE vf::Thread wraps the thread in a CatchAny
-  call (worker_init);
+    call (worker_init);
 
-  m_thread.start (Bind (&ThreadWorker::run, this));
-
-  m_mutex.exit ();
+    m_thread.start (Bind (&ThreadWorker::run, this));
+  }
 }
 
-void ThreadWorker::stop (bool wait)
+void ThreadWorker::stop (const bool wait)
 {
-  m_mutex.enter ();
-
-  // Check if we started.
-  if (!m_stopped)
   {
+    ScopedLock lock (m_mutex);
+
+    fatal_vfassert (m_calledStart);
+
     // can't call stop(true) from within a thread function
-    jassert (!wait || !m_thread.isTheCurrentThread ());
+    vfassert (!wait || !m_thread.isTheCurrentThread ());
 
-    // Use the thread queue open status as a flag
-    // to know if we already queued a call to do_stop.
-    lock ();
-    if (!closed ())
+    if (!m_calledStop)
     {
-      // Queue a stop call, and close the thread queue in one atomic operation.
-      call (&ThreadWorker::do_stop, this);
-      close ();
+      m_calledStop = true;
+
+      // Atomically queue a stop and close the worker.
+      {
+        ScopedLock lock (ThreadWorker::getMutex ());
+      
+        call (&ThreadWorker::do_stop, this);
+
+        close ();
+      }
     }
-    unlock ();
-
-    m_mutex.exit ();
-
-    if (wait)
-      m_thread.join ();
   }
-  else
-  {
-    // needed to prevent asserts if the thread is never started
-    // or if the thread is already stopped by the time we get here.
-    lock ();
-    if (!closed ())
-      close ();
-    unlock ();
 
-    m_mutex.exit ();
-  }
+  if (wait)
+    m_thread.join ();
 }
 
 bool ThreadWorker::interruptionPoint ()
 {
-  return m_thread.interruptionPoint();
+  return m_thread.interruptionPoint ();
 }
 
 void ThreadWorker::reset ()
@@ -102,7 +91,7 @@ void ThreadWorker::signal ()
 
 void ThreadWorker::do_stop ()
 {
-  m_stop = true;
+  m_shouldStop = true;
 }
 
 void ThreadWorker::run ()
@@ -111,14 +100,17 @@ void ThreadWorker::run ()
   {
     Worker::process ();
 
-    if (m_stop)
+    if (m_shouldStop)
       break;
 
     try
     {
-      m_worker_idle ();
+      m_idle ();
 
-      m_thread.wait ();
+      if (!interruptionPoint ())
+      {
+        m_thread.wait ();
+      }
     }
     catch (vf::Thread::Interruption&)
     {
@@ -126,10 +118,10 @@ void ThreadWorker::run ()
     }
   }
 
-  m_worker_exit ();
-
-  m_stopped = true;
+  m_exit ();
 }
+
+#endif
 
 //------------------------------------------------------------------------------
 

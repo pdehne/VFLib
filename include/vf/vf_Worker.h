@@ -86,8 +86,7 @@ protected:
   bool closed () const { return !m_open; }
 
   // Derived class uses this to perform additional synchronization
-  void lock () { m_mutex.enter (); }
-  void unlock () { m_mutex.exit (); }
+  Mutex& getMutex () { return m_mutex; }
 
   // Derived class calls this when the queue is signaled,
   // or whenever it wants to. It is disallowed to call

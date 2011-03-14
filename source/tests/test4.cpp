@@ -2,15 +2,16 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
+//
 // This file is used for detecting compile problems.
-
 //
-// Compiles without Juce
+//
+// Checks to make sure the public header compiles without Boost.
 //
 
-#define VF_HAVE_JUCE 0
+#define VF_HAVE_BOOST 0
 
 #include "vf/vf.h"
 
-namespace { void dummmy () { } } // stop linker warning
-
+// Hides a linker warning
+namespace { void dummmy () { } }

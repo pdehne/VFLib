@@ -48,9 +48,15 @@ BEGIN_VF_NAMESPACE
 // Borrowed from Juce so we are not dependent on it
 template <bool b> struct VfStaticAssert;
 template <> struct VfStaticAssert <true>
-  { static void static_assert_failed() {} };
+  { static void static_assert_failed () {} };
 #define static_vfassert(expression) \
-  VF_NAMESPACE::VfStaticAssert<expression>::static_assert_failed();
+  VF_NAMESPACE::VfStaticAssert <expression>::static_assert_failed ();
+
+// This assertion goes into every build and causes an exception
+#ifndef fatal_vfassert
+#define fatal_vfassert(expression) if (!(expression)) \
+  VF_NAMESPACE::Throw (Error().fail (__FILE__, __LINE__, #expression, VF_NAMESPACE::Error::assertFailed))
+#endif
 
 #include "vf/vf_String.h"
 #include "vf/vf_Debug.h"
