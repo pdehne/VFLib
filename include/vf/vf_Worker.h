@@ -120,8 +120,8 @@ public:
   explicit Worker (const char* szName = "");
   ~Worker ();
 
-  // used for diagnostics
-  bool in_process ();
+  // used for diagnostics in Listener
+  bool in_process () const { return m_in_process; }
 
   // Custom allocator optimized for this pattern of use.
   // This is also used by the listeners system.

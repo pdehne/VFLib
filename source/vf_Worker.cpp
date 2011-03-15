@@ -123,11 +123,6 @@ Worker::~Worker ()
   vfassert (m_calls.empty());
 }
 
-bool Worker::in_process ()
-{
-  return m_in_process;
-}
-
 void Worker::open ()
 {
   ScopedLock lock (m_mutex);
@@ -331,7 +326,7 @@ void Worker::do_call (Call* c)
   // in the queue if we are on the same thread. Because functors
   // may make additional calls during process(), we loop until
   // there is no work left. This is manual unrolling of the
-  // implicit tail recusion.
+  // implicit tail recursion.
 #if SYNCHRONIZED_CALL
   if (sync)
   {

@@ -40,7 +40,7 @@ Listeners::ReadWriteMutex::ReadWriteMutex ()
 Listeners::ReadWriteMutex::~ReadWriteMutex ()
 {
   m_event.wait ();
-  jassert (m_readers == 0);
+  vfassert (m_readers == 0);
 }
 
 void Listeners::ReadWriteMutex::enter_read ()
@@ -62,7 +62,7 @@ void Listeners::ReadWriteMutex::enter_write ()
 {
   m_write_mutex.enter ();       // block other threads
   m_event.wait ();              // wait for last reader if any
-  jassert (m_readers <= 0);
+  vfassert (m_readers <= 0);
   --m_readers;                  // add a nesting
 }
 
@@ -70,7 +70,7 @@ void Listeners::ReadWriteMutex::promote_to_write ()
 {
   m_write_mutex.enter ();       // block other threads
   m_mutex.enter ();             // protect state
-  jassert (m_readers != 0);     // unbalanced call
+  vfassert (m_readers != 0);     // unbalanced call
   if (m_readers > 0) {          // we are a true reader
     if (--m_readers == 0) {     // we are the last reader
       m_event.signal ();        // unblock future writers
@@ -78,26 +78,26 @@ void Listeners::ReadWriteMutex::promote_to_write ()
     } else {
       m_mutex.exit (); 
       m_event.wait (); } }      // wait for last reader
-  jassert (m_readers <= 0);
+  vfassert (m_readers <= 0);
   --m_readers;                  // add a nesting
 }
 
 void Listeners::ReadWriteMutex::exit_read ()
 {
   m_mutex.enter ();             // protect state
-  jassert (m_readers != 0);     // unbalanced call
+  vfassert (m_readers != 0);     // unbalanced call
   if (m_readers > 0) {          // we are a true reader
     if (--m_readers == 0)       // we are the last reader
       m_event.signal ();        // unblock writers
   } else {                      // we are a nested writer
     ++m_readers;                // remove a nesting
-    jassert (m_readers != 0); }
+    vfassert (m_readers != 0); }
   m_mutex.exit ();
 }
 
 void Listeners::ReadWriteMutex::exit_write ()
 {
-  jassert (m_readers < 0);      // unbalanced call
+  vfassert (m_readers < 0);      // unbalanced call
   ++m_readers;                  // remove a nesting
   m_write_mutex.exit ();
 }
@@ -105,7 +105,7 @@ void Listeners::ReadWriteMutex::exit_write ()
 void Listeners::ReadWriteMutex::demote_to_read ()
 {
   m_mutex.enter ();             // protect state
-  jassert (m_readers < 0);      // unbalanced call
+  vfassert (m_readers < 0);      // unbalanced call
   if (m_readers == -1) {        // last nested write
     m_readers = 1;              // become a reader
     m_event.reset ();           // block writers
@@ -180,10 +180,10 @@ Listeners::Group::Group (Worker* worker)
 Listeners::Group::~Group ()
 {
   // If this goes off it means a Listener forgot to remove.
-  jassert (m_list.empty());
+  vfassert (m_list.empty());
 
   // shouldn't be deleting group during a call
-  jassert (m_listener == 0);
+  vfassert (m_listener == 0);
 }
 
 // Adds the listener to the group.
@@ -193,10 +193,10 @@ void Listeners::Group::add (void* listener,
 {
   m_mutex.enter ();
 
-  jassert (!contains (listener));
+  vfassert (!contains (listener));
 
   // Should never be able to get here while in do_call()
-  jassert (m_listener == 0);
+  vfassert (m_listener == 0);
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
@@ -217,7 +217,7 @@ bool Listeners::Group::remove (void* listener)
   m_mutex.enter ();
 
   // Should never be able to get here while in do_call()
-  jassert (m_listener == 0);
+  vfassert (m_listener == 0);
 
   for (list_t::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
   {
@@ -256,7 +256,7 @@ bool Listeners::Group::contains (void const* listener) const
 void Listeners::Group::queue_call (Call::Ptr c)
 {
   // Caller shouldn't know about us if we're empty.
-  jassert (!empty ());
+  vfassert (!empty ());
 
   // The Group::Ptr cast is required to maintain the reference count,
   // because boost::bind peforms the conversion from Group* to
@@ -282,7 +282,7 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
     m_mutex.enter ();
 
     // Recursion not allowed.
-    jassert (m_listener == 0);
+    vfassert (m_listener == 0);
 
     // The body of the loop MUST NOT cause listeners to get called.
     // Therefore, we don't have to worry about listeners removing
@@ -304,7 +304,7 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
         // stack to guarantee that these calls will not execute immediately.
         // They will be handled by the tail recusion unrolling in the
         // thread queue.
-        jassert (m_worker->in_process ());
+        vfassert (m_worker->in_process ());
 
         m_worker->call (&Call::do_call, c, m_listener);
 
@@ -355,7 +355,7 @@ Listeners::Proxy::~Proxy ()
 
   // But all listeners should have removed themselves
   // so our list of groups should still be empty.
-  jassert (m_entries.empty ());
+  vfassert (m_entries.empty ());
 }
 
 // Adds the group to the Proxy.
@@ -397,7 +397,7 @@ void Listeners::Proxy::remove (Group::Ptr group)
 void Listeners::Proxy::do_calls (Call::Ptr c)
 {
   // why would we even want to be called?
-  jassert (!m_entries.empty());
+  vfassert (!m_entries.empty());
 
   // With the read lock, this list can't change on us unless someone
   // adds a listener to a new thread queue in response to a call.
@@ -424,7 +424,7 @@ void Listeners::Proxy::do_call (Entry::Ptr entry)
   // Atomically acquire the call, which also serves as the queued flag
   Call::Ptr c = entry->call.exchange (0);
 
-  jassert (c);
+  vfassert (c);
 
   Group::Ptr group = entry->group;
 
@@ -459,11 +459,11 @@ Listeners::~Listeners ()
     Group* group = *iter++;
 
     // If this goes off it means a Listener forgot to remove.
-    jassert (group->empty ());
+    vfassert (group->empty ());
 
 #ifdef JUCE_DEBUG
     const bool final = group->decReferenceCount ();
-    jassert (final);
+    vfassert (final);
 #else
     group->decReferenceCount ();
 #endif
@@ -526,7 +526,7 @@ void Listeners::add_void (void* const listener, Worker* worker)
 
     // We can be in do_call() on another thread now, but it
     // doesn't modify the list, and we have the write lock.
-    jassert (!group->contains (listener));
+    vfassert (!group->contains (listener));
   }
 #endif
 
@@ -588,18 +588,18 @@ void Listeners::remove_void (void* const listener)
       Group* group = *iter++;
 
       // this should never happen while we hold the mutex
-      jassert (!group->empty ());
+      vfassert (!group->empty ());
 
       if (group->contains (listener))
       {
-        jassert (!exists); // added twice?
+        vfassert (!exists); // added twice?
 
         exists = true;
         // keep going to make sure there are no empty groups
       }
     }
 
-    jassert (exists);
+    vfassert (exists);
   }
 #endif
 

@@ -40,7 +40,13 @@ void updateAllTopLevelWindows ()
 
 GuiWorker::GuiWorker () : Worker ("JuceWorker")
 {
+  vfassert (VF_JUCE::MessageManager::getInstance()->isThisTheMessageThread());
+
   open ();
+
+  // HACK! trick the Worker into getting the thread
+  // id so that  calls become synchronous.
+  process ();
 }
 
 void GuiWorker::signal ()

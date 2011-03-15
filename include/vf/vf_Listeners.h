@@ -13,7 +13,7 @@
 // get deleted while a callback is pending.
 
 //
-// TODO: CONST CORRECTNESS
+// TODO: CONST CORRECTNESS?
 //
 
 namespace detail {
@@ -176,12 +176,42 @@ private:
   /*@ Implementation @*/
   Proxy* find_proxy (const void* member, int bytes);
 
+private:
+  // Global deleted list from a pool of
+  // recycled blocks would be best for this
+  Groups m_groups;
+  Proxies m_proxies;
+  timestamp_t m_timestamp;
+  ReadWriteMutex m_groups_mutex;
+  ReadWriteMutex m_proxies_mutex;
+
 protected:
   Listeners ();
   ~Listeners ();
   void queue_call (Call::Ptr c);
   void add_void (void* const listener, Worker* worker);
   void remove_void (void* const listener);
+
+  struct ScopedAdd : NonCopyable
+  {
+    ScopedAdd (Listeners& listeners,
+               void* const listener,
+               Worker* worker)
+      : m_listeners (listeners)
+    {
+      m_listeners.m_groups_mutex.enter_write ();
+
+      m_listeners.add_void (listener, worker);
+    }
+    
+    ~ScopedAdd ()
+    {
+      m_listeners.m_groups_mutex.exit_write ();
+    }
+
+  private:
+    Listeners& m_listeners;
+  };
 
   template <class ListenerClass, class Functor>
   Call::Ptr newCall (const Functor& f)
@@ -246,15 +276,6 @@ protected:
       m_groups_mutex.exit_read ();
     }
   }
-
-private:
-  // Global deleted list from a pool of
-  // recycled blocks would be best for this
-  Groups m_groups;
-  Proxies m_proxies;
-  timestamp_t m_timestamp;
-  ReadWriteMutex m_groups_mutex;
-  ReadWriteMutex m_proxies_mutex;
 };
 
 }
@@ -299,6 +320,18 @@ public:
   {
     add_void (listener, worker);
   }
+
+  // Adds a listener and allows other operations to
+  // occur atomically within the scope of the add.
+  struct ScopedAdd : private detail::Listeners::ScopedAdd
+  {
+    ScopedAdd (Listeners& listeners,
+               ListenerClass* const listener,
+               Worker* worker)
+      : detail::Listeners::ScopedAdd (listeners, listener, worker)
+    {
+    }
+  };
 
   //
   // Remove a listener from the list

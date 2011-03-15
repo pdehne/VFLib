@@ -28,7 +28,7 @@ public:
 
   inline bool decReferenceCount() throw()
   {
-    jassert (getReferenceCount() > 0);
+    vfassert (getReferenceCount() > 0);
 
     bool final;
 
@@ -57,7 +57,7 @@ protected:
 
   virtual ~SharedObject()
   {
-    jassert (getReferenceCount() == 0);
+    vfassert (getReferenceCount() == 0);
   }
 
   virtual void destroySharedObject ()
