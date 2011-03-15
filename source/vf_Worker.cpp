@@ -43,17 +43,16 @@ public:
 
   void* alloc (size_t bytes)
   {
-    m_mutex.enter ();
-    void* p = m_blocks.alloc (bytes);
-    m_mutex.exit ();
-    return p;
+    ScopedLock lock (m_Mutex);
+
+    return m_blocks.alloc (bytes);
   }
 
   void free (void* p)
   {
-    m_mutex.enter ();
+    ScopedLock lock (m_mutex);
+
     m_blocks.dealloc (p);
-    m_mutex.exit ();
   }
 
   void lock ()
@@ -115,11 +114,13 @@ Worker::Worker (const char* szName)
 
 Worker::~Worker ()
 {
+  ScopedLock lock (m_mutex);
+
   // Someone forget to close the queue.
-  jassert (!m_open);
+  vfassert (!m_open);
 
   // Can't destroy queue with unprocessed calls.
-  jassert (m_calls.empty());
+  vfassert (m_calls.empty());
 }
 
 bool Worker::in_process ()
@@ -129,22 +130,22 @@ bool Worker::in_process ()
 
 void Worker::open ()
 {
-  m_mutex.enter ();
+  ScopedLock lock (m_mutex);
 
-  jassert (!m_open);
+  vfassert (!m_open);
+
   m_open = true;
-
-  m_mutex.exit ();
 }
+
+// Can still have pending calls, just can't put new ones in.
 
 void Worker::close ()
 {
-  m_mutex.enter ();
-  jassert (m_open);
-  m_open = false;
-  m_mutex.exit ();
+  ScopedLock lock (m_mutex);
 
-  // Can still have pending calls, just can't put new ones in.
+  vfassert (m_open);
+
+  m_open = false;
 }
 
 bool Worker::process ()
@@ -170,7 +171,7 @@ bool Worker::do_process (const bool from_call)
     if (!from_call)
     {
       // Recursive calls to process() are disallowed.
-      jassert (!m_in_process);
+      vfassert (!m_in_process);
       m_in_process = true;
 
       // Remember the thread we are called on. This
@@ -181,12 +182,12 @@ bool Worker::do_process (const bool from_call)
     else
     {
       // do_call() should have set this flag
-      jassert (m_in_process);
+      vfassert (m_in_process);
 
       // If we got here from do_call() then the thread
       // should have already been set and tested safely
       // while the mutex was held.
-      jassert (m_id == CurrentThread::getId());
+      vfassert (m_id == CurrentThread::getId());
     }
 
     // Transfer the current set of calls into a local
@@ -255,7 +256,7 @@ bool Worker::do_process (const bool from_call)
     if (!from_call)
     {
       m_mutex.enter ();
-      jassert (m_in_process);
+      vfassert (m_in_process);
       m_in_process = false;
       m_mutex.exit ();
     }
@@ -264,6 +265,18 @@ bool Worker::do_process (const bool from_call)
   }
 
   return did_something;
+}
+
+void Worker::do_queue (Call* c)
+{
+  ScopedLock lock (m_mutex);
+
+  const bool was_empty = m_calls.empty ();
+
+  m_calls.push_back (c);
+
+  if (was_empty)
+    signal ();
 }
 
 // Append the Call to the queue. If this call is made from the same
@@ -277,7 +290,7 @@ void Worker::do_call (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-  jassert (m_open);
+  vfassert (m_open);
 
 #if SYNCHRONIZED_CALL
   bool sync;
@@ -334,7 +347,7 @@ void Worker::do_call (Call* c)
       m_mutex.enter ();
 
       // Should still be set
-      jassert (m_in_process);
+      vfassert (m_in_process);
 
       // set the flag back
       m_in_process = false;

@@ -15,6 +15,7 @@ namespace {
 void updateAllTopLevelWindows ()
 {
 #if JUCE_WIN32
+  // This screws up
   static bool inUpdate = true;
 
   if (!inUpdate)

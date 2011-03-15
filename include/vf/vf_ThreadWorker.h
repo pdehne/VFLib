@@ -17,9 +17,9 @@
 // Worker that comes with its own thread of execution used
 // to process calls. When there are no calls to process,
 // an idle function will run. The idle function must either
-// return quickly, or periodically call the interruptionPoint()
-// function in order to stop what it is doing in order to
-// process new calls.
+// return quickly, or periodically return the result of the
+// interruptionPoint() function in order to stop what it is
+// doing in order to process new calls.
 //
 
 namespace detail {
@@ -45,33 +45,24 @@ public:
   //
   // Starts the worker.
   //
-  // #1 Worker is opened and init function queued as call.
-  //
-  // #2 Worker calls are processed on the thread.
-  //
-  // #3 The idle function is called on the thread after
-  //    all current Worker calls finish processing.
-  //
-  // #4 The exit function is called on the thread when
-  //    the Worker is stopped and there are no more calls.
-  //
-  // #5 start() MUST be called once.
-  //
   void start (FunctionType <bool> worker_idle,
               Function worker_init,
               Function worker_exit)
   {
     {
+      // TODO: Atomic for this
       VF_NAMESPACE::ScopedLock lock (m_mutex);
       // start() MUST be called.
-      fatal_vfassert (!m_calledStart);
+      vfassert (!m_calledStart);
       m_calledStart = true;
     }
 
+    m_init = worker_init;
     m_idle = worker_idle;
     m_exit = worker_exit;
+
     open ();
-    call (worker_init);
+
     m_thread.start (Bind (&ThreadWorker::run, this));
   }
 
@@ -85,15 +76,16 @@ public:
   //
   void stop (const bool wait)
   {
+    // can't call stop(true) from within a thread function
+    vfassert (!wait || !m_thread.isTheCurrentThread ());
+
     {
       VF_NAMESPACE::ScopedLock lock (m_mutex);
 
       // start() MUST be called.
-      fatal_vfassert (m_calledStart);
+      vfassert (m_calledStart);
 
-      // can't call stop(true) from within a thread function
-      fatal_vfassert (!wait || !m_thread.isTheCurrentThread ());
-
+      // TODO: Atomic for this
       if (!m_calledStop)
       {
         m_calledStop = true;
@@ -129,7 +121,7 @@ public:
   // If interruptionPoint returns true or throws, it must
   // not be called again before the threat has the opportunity to reset.
   //
-  bool interruptionPoint ()
+  const Thread::Interrupted interruptionPoint ()
   {
     return m_thread.interruptionPoint ();
   }
@@ -157,6 +149,8 @@ private:
 
   void run ()
   {
+    m_init ();
+
     for (;;)
     {
       Worker::process ();
@@ -191,6 +185,7 @@ private:
   bool m_shouldStop;
   VF_NAMESPACE::Mutex m_mutex;
   ThreadType m_thread;
+  Function m_init;
   FunctionType <bool> m_idle;
   Function m_exit;
 };

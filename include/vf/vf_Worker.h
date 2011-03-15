@@ -68,8 +68,11 @@ private:
   // Call all the functors in the queue.
   bool do_process (const bool from_call);
 
+  // Adds a call to the queue of execution.
+  void do_queue (Call* c);
+
   // Queues a call for execution and possibly processes the queue.
-  void do_call (Call* element);
+  void do_call (Call* c);
 
 protected:
   // Derived classes call these at appropriate times.
@@ -96,6 +99,7 @@ public:
   bool process ();
 
 protected:
+  //
   // Derived classes implement these functions to know the
   // signaled state:
   //
@@ -124,6 +128,21 @@ public:
 private:
   static void* global_alloc (size_t bytes);
   static void  global_free (void* p);
+
+  //
+  // queuef()
+  //
+  // Adds the functor but never synchronizes.
+  //
+private:
+  // NOT USED
+  template <class Functor>
+  void queuef (const Functor& f)
+  {
+    Call* c = new (global_alloc (sizeof (StoredCall <Functor>)))
+                  StoredCall <Functor> (f);
+    do_queue (c);
+  }
 
 public:
   //
