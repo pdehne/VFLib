@@ -23,7 +23,7 @@ class Listeners
 private:
   typedef unsigned long timestamp_t;
 
-  // MAKE LIST WORK WITH SHARED OBJECTS
+  // MAKE Vf::List WORK WITH SHARED OBJECTS and raw pointers
   class Group;
   typedef vf::List <Group> Groups;
 
