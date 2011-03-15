@@ -83,6 +83,15 @@
 #include "vf/vf_JuceThread.h"
 #endif
 
+  // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
+  #ifndef __VF_SHAREDOBJECT_VFHEADER__
+  #include "vf/vf_SharedObject.h"
+  #endif
+
+  #ifndef __VF_LISTENERS_VFHEADER__
+  #include "vf/vf_Listeners.h"
+  #endif
+
 #endif
 
 #endif
