@@ -16,7 +16,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/bind/protect.hpp>
-//#include <boost/function.hpp>
+#include <boost/function.hpp>
 #include <boost/thread.hpp>
 #include <boost/ref.hpp>
 
