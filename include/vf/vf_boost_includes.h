@@ -45,7 +45,9 @@
 #endif
 // singleton isn't part of boost yet,
 // there's a copy floating around on the net
-#include <boost/utility/singleton.hpp> // DEPRECATED, REMOVE ASAP, USE JUCE
+#ifdef VF_HAVE_PRIVATE_INCLUDES
+#  include <boost/utility/singleton.hpp> // DEPRECATED, REMOVE ASAP, USE JUCE
+#endif
 #ifdef _MSC_VER
 #  pragma warning(pop)
 #endif
