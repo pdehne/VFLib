@@ -45,9 +45,9 @@ public:
   //
   // Starts the worker.
   //
-  void start (FunctionType <bool> worker_idle,
-              Function worker_init,
-              Function worker_exit)
+  void start (FunctionType <bool> worker_idle = Function::None(),
+			  Function worker_init = Function::None(),
+              Function worker_exit = Function::None())
   {
     {
       // TODO: Atomic for this
