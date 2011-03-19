@@ -38,4 +38,9 @@ template <class OwnerClass> struct LeakChecked { };
 
 #endif
 
+template <class OwnerClass>
+class LeakCheckedAndNonCopyable : LeakChecked <OwnerClass>, NonCopyable
+{
+};
+
 #endif
