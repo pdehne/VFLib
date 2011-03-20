@@ -10,7 +10,7 @@
 // all the includes for external libraries bundled with vf lib
 
 // Commented out because bzlib.h includes <windows.h>
-//#include "vf/bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
+//#include "bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
 
 #ifdef VF_HAVE_PRIVATE_INCLUDES
 #include "vf/lua/luabridge.hpp"

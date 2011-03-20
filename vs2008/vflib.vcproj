@@ -45,7 +45,7 @@
 				PreprocessorDefinitions="DONT_AUTOLINK_TO_JUCE_LIBRARY;WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="vf/vf_StandardHeader.h"
 				WarningLevel="3"
@@ -108,7 +108,7 @@
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="../include"
 				PreprocessorDefinitions="DONT_AUTOLINK_TO_JUCE_LIBRARY;WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="vf/vf_StandardHeader.h"
@@ -532,7 +532,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -542,7 +542,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -556,7 +556,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -566,7 +566,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -584,7 +584,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -594,7 +594,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -608,7 +608,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -618,7 +618,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -632,7 +632,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -642,7 +642,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -656,7 +656,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -666,7 +666,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -680,7 +680,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -690,7 +690,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/bzip2"
+								AdditionalIncludeDirectories="../include/bzip2"
 								PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE"
 								UsePrecompiledHeader="0"
 							/>
@@ -746,7 +746,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/sqlite"
+								AdditionalIncludeDirectories="../include/sqlite"
 								UsePrecompiledHeader="0"
 								DisableSpecificWarnings="4244"
 							/>
@@ -756,7 +756,7 @@
 							>
 							<Tool
 								Name="VCCLCompilerTool"
-								AdditionalIncludeDirectories="../include/vf/sqlite"
+								AdditionalIncludeDirectories="../include/sqlite"
 								UsePrecompiledHeader="0"
 								DisableSpecificWarnings="4244"
 							/>
