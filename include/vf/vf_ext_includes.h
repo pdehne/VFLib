@@ -7,6 +7,12 @@
 
 // These are included outside of our namespace.
 
+// forward declare
+// not the best place for this but convenient.
+struct sqlite3;
+struct sqlite3_blob;
+struct sqlite3_stmt;
+
 // all the includes for external libraries bundled with vf lib
 
 // Commented out because bzlib.h includes <windows.h>

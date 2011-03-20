@@ -1059,6 +1059,10 @@
 				</Filter>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="database"
+			>
+		</Filter>
 		<File
 			RelativePath="..\license.txt"
 			>
