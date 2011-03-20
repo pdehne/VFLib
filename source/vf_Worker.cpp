@@ -18,8 +18,8 @@ BEGIN_VF_NAMESPACE
 
 #if CUSTOM_ALLOCATOR && VF_HAVE_PRIVATE_INCLUDES
 
-#include "vf/page_pool.h"
-#include "vf/block_pool.h"
+#include "vfp/page_pool.h"
+#include "vfp/block_pool.h"
 
 namespace {
 

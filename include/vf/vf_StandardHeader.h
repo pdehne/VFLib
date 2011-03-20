@@ -67,20 +67,4 @@ template <> struct VfStaticAssert <true>
 
 END_VF_NAMESPACE
 
-
-
-// EVERYTHING BELOW HERE IS A PIECE OF SHIT!!!!
-// Basic vf includes needed by almost everyone
-// TODO: REMOVE AS MUCH OF THIS AS POSSIBLE!!!!
-BEGIN_VF_NAMESPACE
-// The order is important here
-#ifdef VF_HAVE_PRIVATE_INCLUDES
-  // NONE OF THESE SHOULD INCLUDE OTHER FILES
-  #include "vf/Assure.h"
-  #include "vf/Types.h"
-  #include "vf/Str.h"
-  #include "vf/Err.h"
-#endif
-END_VF_NAMESPACE
-
 #endif

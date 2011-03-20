@@ -24,8 +24,4 @@ BEGIN_VF_NAMESPACE
 
 END_VF_NAMESPACE
 
-#ifdef VF_HAVE_PRIVATE_INCLUDES
-#include "vf/vf_private_includes.h" // Unreleased stuff
-#endif
-
 #endif
