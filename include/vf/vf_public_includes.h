@@ -87,8 +87,16 @@
   #include "vf/vf_AudioBufferPool.h"
   #endif
 
+  #ifndef __VF_CONDITIONVARIABLE_VFHEADER__
+  #include "vf/vf_ConditionVariable.h"
+  #endif
+
   #ifndef __VF_JUCETHREAD_VFHEADER__
   #include "vf/vf_JuceThread.h"
+  #endif
+
+  #ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
+  #include "vf/vf_RadialImageConvolutionKernel.h"
   #endif
 
   // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED

@@ -296,6 +296,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_ConditionVariable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ConditionVariable.h"
+				>
+			</File>
+			<File
 				RelativePath="..\source\vf_GuiWorker.cpp"
 				>
 			</File>
@@ -2229,6 +2237,18 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="graphics"
+			>
+			<File
+				RelativePath="..\source\vf_RadialImageConvolutionKernel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_RadialImageConvolutionKernel.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"
