@@ -100,6 +100,11 @@
   #include "vf/vf_Listeners.h"
   #endif
 
+  // Depends on some declarations and macros
+  #ifndef __VF_MURMURHASH_VFHEADER__
+  #include "vf/vf_MurmurHash.h"
+  #endif
+
 #endif
 
 #if VF_HAVE_BOOST && VF_HAVE_JUCE

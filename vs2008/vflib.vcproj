@@ -387,6 +387,14 @@
 				RelativePath="..\include\vf\vf_Math.h"
 				>
 			</File>
+			<File
+				RelativePath="..\source\vf_MurmurHash.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_MurmurHash.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="tests"

@@ -14,13 +14,10 @@ struct sqlite3_blob;
 struct sqlite3_stmt;
 
 // all the includes for external libraries bundled with vf lib
+// But maybe not...this isn't a good idea.
 
 // Commented out because bzlib.h includes <windows.h>
 //#include "bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
-
-#ifdef VF_HAVE_PRIVATE_INCLUDES
-#include "vf/lua/luabridge.hpp"
-#endif
 
 #endif
 
