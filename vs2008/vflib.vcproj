@@ -698,6 +698,72 @@
 					</File>
 				</Filter>
 			</Filter>
+			<Filter
+				Name="sqlite"
+				>
+				<File
+					RelativePath="..\include\vf\sqlite\sqlite3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\sqlite\sqlite3async.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\sqlite\sqlite3ext.h"
+					>
+				</File>
+				<Filter
+					Name="source"
+					>
+					<File
+						RelativePath="..\external\sqlite\sqlite3.c"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories="../include/vf/sqlite"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories="../include/vf/sqlite"
+								UsePrecompiledHeader="0"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\external\sqlite\sqlite3async.c"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories="../include/vf/sqlite"
+								UsePrecompiledHeader="0"
+								DisableSpecificWarnings="4244"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								AdditionalIncludeDirectories="../include/vf/sqlite"
+								UsePrecompiledHeader="0"
+								DisableSpecificWarnings="4244"
+							/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"
