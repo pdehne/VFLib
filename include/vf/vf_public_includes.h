@@ -71,9 +71,9 @@
 
 #if VF_HAVE_BOOST
 
-#ifndef __VF_BOOSTTHREAD_VFHEADER__
-#include "vf/vf_BoostThread.h"
-#endif
+  #ifndef __VF_BOOSTTHREAD_VFHEADER__
+  #include "vf/vf_BoostThread.h"
+  #endif
 
 #endif
 
@@ -91,20 +91,22 @@
   #include "vf/vf_JuceThread.h"
   #endif
 
-    // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
-    #ifndef __VF_SHAREDOBJECT_VFHEADER__
-    #include "vf/vf_SharedObject.h"
-    #endif
+  // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
+  #ifndef __VF_SHAREDOBJECT_VFHEADER__
+  #include "vf/vf_SharedObject.h"
+  #endif
 
-    #ifndef __VF_LISTENERS_VFHEADER__
-    #include "vf/vf_Listeners.h"
-    #endif
+  #ifndef __VF_LISTENERS_VFHEADER__
+  #include "vf/vf_Listeners.h"
+  #endif
 
-  // db uses some Juce
-  #ifdef VF_HAVE_PRIVATE_INCLUDES
+#endif
+
+#if VF_HAVE_BOOST && VF_HAVE_JUCE
+
+  // db uses both some Juce and Boost
   #ifndef __VF_DB_VFHEADER__
   #include "vf/vf_db.h"
-  #endif
   #endif
 
 #endif
