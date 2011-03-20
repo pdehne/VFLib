@@ -19,6 +19,7 @@
 #include <boost/function.hpp>
 #include <boost/thread.hpp>
 #include <boost/ref.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include <boost/cstdint.hpp>
 #include <boost/foreach.hpp>

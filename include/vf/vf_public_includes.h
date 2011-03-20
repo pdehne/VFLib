@@ -83,21 +83,28 @@
 
 #if VF_HAVE_JUCE
 
-#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-#include "vf/vf_AudioBufferPool.h"
-#endif
-
-#ifndef __VF_JUCETHREAD_VFHEADER__
-#include "vf/vf_JuceThread.h"
-#endif
-
-  // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
-  #ifndef __VF_SHAREDOBJECT_VFHEADER__
-  #include "vf/vf_SharedObject.h"
+  #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+  #include "vf/vf_AudioBufferPool.h"
   #endif
 
-  #ifndef __VF_LISTENERS_VFHEADER__
-  #include "vf/vf_Listeners.h"
+  #ifndef __VF_JUCETHREAD_VFHEADER__
+  #include "vf/vf_JuceThread.h"
+  #endif
+
+    // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
+    #ifndef __VF_SHAREDOBJECT_VFHEADER__
+    #include "vf/vf_SharedObject.h"
+    #endif
+
+    #ifndef __VF_LISTENERS_VFHEADER__
+    #include "vf/vf_Listeners.h"
+    #endif
+
+  // db uses some Juce
+  #ifdef VF_HAVE_PRIVATE_INCLUDES
+  #ifndef __VF_DB_VFHEADER__
+  #include "vf/vf_db.h"
+  #endif
   #endif
 
 #endif
