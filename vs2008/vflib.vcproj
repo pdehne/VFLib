@@ -725,6 +725,7 @@
 							<Tool
 								Name="VCCLCompilerTool"
 								AdditionalIncludeDirectories="../include/vf/sqlite"
+								PreprocessorDefinitions="SQLITE_THREADSAFE=1"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -734,6 +735,7 @@
 							<Tool
 								Name="VCCLCompilerTool"
 								AdditionalIncludeDirectories="../include/vf/sqlite"
+								PreprocessorDefinitions="SQLITE_THREADSAFE=1"
 								UsePrecompiledHeader="0"
 							/>
 						</FileConfiguration>
@@ -747,6 +749,7 @@
 							<Tool
 								Name="VCCLCompilerTool"
 								AdditionalIncludeDirectories="../include/sqlite"
+								PreprocessorDefinitions="SQLITE_THREADSAFE=1"
 								UsePrecompiledHeader="0"
 								DisableSpecificWarnings="4244"
 							/>
@@ -757,6 +760,7 @@
 							<Tool
 								Name="VCCLCompilerTool"
 								AdditionalIncludeDirectories="../include/sqlite"
+								PreprocessorDefinitions="SQLITE_THREADSAFE=1"
 								UsePrecompiledHeader="0"
 								DisableSpecificWarnings="4244"
 							/>
