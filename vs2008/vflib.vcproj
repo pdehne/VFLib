@@ -268,11 +268,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_juce_includes.h"
+				RelativePath="..\include\vf\vf_includes.h"
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_public_includes.h"
+				RelativePath="..\include\vf\vf_juce_includes.h"
 				>
 			</File>
 			<File

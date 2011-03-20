@@ -20,7 +20,7 @@ namespace vf_DummyNamespace {}      // To catch unbalanced braces before here
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_public_includes.h"  // All public headers
+#include "vf/vf_includes.h"         // All public headers
 
 END_VF_NAMESPACE
 
