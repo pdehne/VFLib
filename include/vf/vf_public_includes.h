@@ -29,8 +29,16 @@
 #include "vf/vf_GuiWorker.h"
 #endif
 
+#ifndef __VF_INTERVAL_VFHEADER__
+#include "vf/vf_Interval.h"
+#endif
+
 #ifndef __VF_LIST_VFHEADER__
 #include "vf/vf_List.h"
+#endif
+
+#ifndef __VF_MATH_VFHEADER__
+#include "vf/vf_Math.h"
 #endif
 
 #ifndef __VF_MANUALWORKER_VFHEADER__
