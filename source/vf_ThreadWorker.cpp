@@ -12,3 +12,4 @@ BEGIN_VF_NAMESPACE
 
 END_VF_NAMESPACE
 
+namespace { void dummy() { } } // supress linker warnings

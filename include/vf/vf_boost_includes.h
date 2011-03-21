@@ -7,51 +7,15 @@
 
 // Includes essential boost headers
 
-// TODO: TRY TO REMOVE AS MANY OF THESE AS POSSIBLE TO REDUCE DEPENDENCIES
-
-#include <boost/config.hpp>
-
-// This thing is so big it blows up visual studio
-//#include <boost/spirit/include/phoenix1.hpp>
-
+// We actually need these
 #include <boost/bind.hpp>
-#include <boost/bind/protect.hpp>
-#include <boost/function.hpp>
-#include <boost/thread.hpp>
-#include <boost/ref.hpp>
-#include <boost/shared_ptr.hpp>
+#include <boost/thread/recursive_mutex.hpp>
+#include <boost/thread/thread.hpp>
+//#include <boost/spirit/include/phoenix1.hpp> // blows up visual studio
 
-#include <boost/cstdint.hpp>
-#include <boost/foreach.hpp>
-#include <boost/noncopyable.hpp>
-
-#include <boost/filesystem.hpp>        // DEPRECATED, REMOVE ASAP
-#include <boost/intrusive/list.hpp>    // DEPRECATED, REMOVE ASAP
-#include <boost/intrusive/avl_set.hpp> // DEPRECATED, REMOVE ASAP
-#include <boost/intrusive/list.hpp>    // DEPRECATED, REMOVE ASAP
-
-#include <boost/throw_exception.hpp>
-
-// HOLY FUCK GET THESE OUT OF HERE!!!
-#include <boost/cstdint.hpp>
-#include <boost/mpl/and.hpp>
-#include <boost/utility/enable_if.hpp>
-#include <boost/detail/atomic_count.hpp>
-
-// REVIEW THESE WARNINGS AND TRY TO REMOVE THEM
-#ifdef _MSC_VER
-#  pragma warning(push)
-#  pragma warning(disable:4244) // conversion from X to Y: possible loss of data
-#  pragma warning(disable:4706) // assignment within conditional expression
-#endif
-// singleton isn't part of boost yet,
-// there's a copy floating around on the net
-#ifdef VF_HAVE_PRIVATE_INCLUDES
-#  include <boost/utility/singleton.hpp> // DEPRECATED, REMOVE ASAP, USE JUCE
-#endif
-#ifdef _MSC_VER
-#  pragma warning(pop)
-#endif
-
+// THESE ARE NOT STRICTLY NEEDED
+#include <boost/foreach.hpp>          // various places
+#include <boost/shared_ptr.hpp>       // because of db
+#include <boost/intrusive/list.hpp>   // because of Ui::Event and DJ library
 
 #endif

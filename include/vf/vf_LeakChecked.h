@@ -15,17 +15,12 @@
 // Juce
 //
 template <class OwnerClass>
-class LeakChecked
+class LeakChecked : private VF_JUCE::LeakedObjectDetector <LeakChecked <OwnerClass> >
 {
 private:
-  struct Detector
-  {
-    friend class VF_JUCE::LeakedObjectDetector <Detector>;
-    VF_JUCE::LeakedObjectDetector <Detector> m_leakDetector;
-    static const char* getLeakedObjectClassName() throw()
-      { return typeid (OwnerClass).name (); }
-  };
-  Detector m_detector;
+  friend class VF_JUCE::LeakedObjectDetector <LeakChecked>;
+  static const char* getLeakedObjectClassName() throw()
+    { return typeid (OwnerClass).name (); }
 };
 
 #else

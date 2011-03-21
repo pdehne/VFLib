@@ -9,7 +9,9 @@
 // Checks to make sure the public header compiles without Juce.
 //
 
-#define VF_HAVE_JUCE 0
+// Unfortunately, we require Juce now
+
+//#define VF_HAVE_JUCE 0
 
 #include "vf/vf.h"
 

@@ -57,8 +57,9 @@ public:
   {
   }
 
-  // This constructor atomically transfers the
-  // entire contents of another stack into this.
+  // This constructor atomically acquires the
+  // contents of the other stack. The other
+  // stack is cleared.
   explicit Stack (Stack& other)
   {
     Node* head;
@@ -100,9 +101,15 @@ public:
 
       head = node->m_next.get();
     }
-    while (!m_head.compareAndSetBool (node, head));
+    while (!m_head.compareAndSetBool (head, node));
 
     return static_cast <Elem*> (node);
+  }
+
+  // This is not thread-safe
+  bool empty () const
+  {
+    return m_head.get() == 0;
   }
 
   // Reverse the order of all items.
@@ -181,12 +188,12 @@ public:
       {
         if (next == 0)
         {
-          if (m_tail.get()->m_next.compareAndSetBool (0, node))
+          if (m_tail.get()->m_next.compareAndSetBool (node, 0))
             break;
         }
         else
         {
-          m_tail.compareAndSetBool (tail, next);
+          m_tail.compareAndSetBool (next, tail);
         }
       }
     }
@@ -214,10 +221,10 @@ public:
           }
           else
           {
-            m_tail.compareAndSetBool (tail, next);
+            m_tail.compareAndSetBool (next, tail);
           }
         }
-        else if (m_head.compareAndSetBool (head, next))
+        else if (m_head.compareAndSetBool (next, head))
         {
           break;
         }
@@ -231,6 +238,138 @@ private:
   VF_JUCE::Atomic <Node*> m_head;
   VF_JUCE::Atomic <Node*> m_tail;
   Node m_null;
+};
+
+//------------------------------------------------------------------------------
+
+//
+// Mostly Lock-free allocator
+//
+// Use of this allocator ensures the correctness of
+// the containers in the LockFree implementation.
+//
+// It is required that Elem be derived from a LockFree::List::Node.
+// If no tag is specified, the default tag is used.
+//
+template <class Elem,
+          class Tag = detail::List_default_tag>
+class Allocator
+{
+public:
+  ~Allocator ()
+  {
+    for(;;)
+    {
+      Elem* elem = m_free.pop_front ();
+      if (elem)
+        ::operator delete (elem);
+      else
+        break;
+    }
+  }
+
+  Elem* New ()
+    { return new (alloc()) Elem(); }
+
+  template <class T1>
+  Elem* New (T1 t1)
+    { return new (alloc()) Elem(t1); }
+
+  template <class T1, class T2>
+  Elem* New (T1 t1, T2 t2)
+    { return new (alloc()) Elem(t1, t2); }
+
+  template <class T1, class T2, class T3>
+  Elem* New (T1 t1, T2 t2, T3 t3)
+    { return new (alloc()) Elem(t1, t2, t3); }
+
+  template <class T1, class T2, class T3, class T4>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4)
+    { return new (alloc()) Elem(t1, t2, t3, t4); }
+
+  template <class T1, class T2, class T3, class T4, class T5>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+    { return new (alloc()) Elem(t1, t2, t3, t4, t5); }
+
+  template <class T1, class T2, class T3, class T4, class T5, class T6>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+    { return new (alloc()) Elem(t1, t2, t3, t4, t5, t6); }
+
+  void Delete (Elem* e)
+  {
+    e->~Elem();
+    free (e);
+  }
+
+private:
+  void* alloc ()
+  {
+    void* p = m_free.pop_front();
+
+    if (!p)
+      // implicit global mutex here
+      p = ::operator new (sizeof(Elem));
+
+    return p;
+  }
+
+  void free (Elem* elem)
+  {
+    m_free.push_front (elem);
+  }
+
+private:
+  //Mutex m_mutex;
+  Stack <Elem, Tag> m_free;
+};
+
+//------------------------------------------------------------------------------
+
+//
+// Standard allocator has the same interface as the
+// Lock-Free allocator but doesn't use a deleted list.
+// It is not compatible with lock-free containers.
+//
+template <class Elem,
+          class Tag = detail::List_default_tag>
+class StandardAllocator
+{
+public:
+  StandardAllocator ()
+  {
+  }
+
+  Elem* New ()
+    { return new Elem(); }
+
+  template <class T1>
+  Elem* New (T1 t1)
+    { return new Elem(t1); }
+
+  template <class T1, class T2>
+  Elem* New (T1 t1, T2 t2)
+    { return new Elem(t1, t2); }
+
+  template <class T1, class T2, class T3>
+  Elem* New (T1 t1, T2 t2, T3 t3)
+    { return new Elem(t1, t2, t3); }
+
+  template <class T1, class T2, class T3, class T4>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4)
+    { return new Elem(t1, t2, t3, t4); }
+
+  template <class T1, class T2, class T3, class T4, class T5>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+    { return new Elem(t1, t2, t3, t4, t5); }
+
+  template <class T1, class T2, class T3, class T4, class T5, class T6>
+  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+    { return new Elem(t1, t2, t3, t4, t5, t6); }
+
+  void Delete (Elem* e)
+  {
+    delete e;
+  }
 };
 
 }

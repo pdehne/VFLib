@@ -16,7 +16,7 @@ void updateAllTopLevelWindows ()
 {
 #if JUCE_WIN32
   // This screws up
-  static bool inUpdate = true;
+  static bool inUpdate = false;
 
   if (!inUpdate)
   {
@@ -64,7 +64,8 @@ void GuiWorker::handleAsyncUpdate()
 
   // This tries to solve the problem where continual
   // streams of work cause some painting not to occur.
-  updateAllTopLevelWindows ();
+  // FIXED in the latest Juce tip
+  //updateAllTopLevelWindows ();
 }
 
 #else

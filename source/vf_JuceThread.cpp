@@ -123,7 +123,7 @@ void Thread::PollingBased::wait (Thread& thread)
     {
       ScopedLock lock (m_mutex);
 
-      fatal_vfassert (!m_waiting);
+      vfassert (!m_waiting);
 
       m_waiting = false;
     }

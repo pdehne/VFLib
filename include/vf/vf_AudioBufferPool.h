@@ -43,9 +43,11 @@ private:
 //------------------------------------------------------------------------------
 
 // scoped lifetime management for a temporary audio buffer
-class ScopedAudioSampleBuffer : LeakChecked <ScopedAudioSampleBuffer>,
-                                NonCopyable
+class ScopedAudioSampleBuffer
+//  : LeakChecked <ScopedAudioSampleBuffer>, NonCopyable
 {
+  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedAudioSampleBuffer);
+
 public:
   ScopedAudioSampleBuffer (AudioBufferPool& pool,
                            int numChannels,

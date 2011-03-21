@@ -55,7 +55,13 @@ namespace Debug {
 
 const String getFileNameFromPath (const char *sourceFileName)
 {
+#if VF_HAVE_JUCE
+  return File (sourceFileName).getFileName();
+#elif VF_HAVE_BOOST
   return String (boost::filesystem::path (sourceFileName).filename().c_str());
+#else
+  return sourceFileName;
+#endif
 }
 
 // Returns a String with double quotes escaped

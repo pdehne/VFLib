@@ -11,7 +11,7 @@
 namespace detail {
 
 // used for "once" and "prepare"
-class ref_counted_statement_base : public boost::noncopyable
+class ref_counted_statement_base : vf::NonCopyable
 {
 public:
   ref_counted_statement_base (session& s);

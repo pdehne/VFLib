@@ -12,7 +12,7 @@
 namespace detail {
 
 // statement implementation
-class statement_imp : public boost::noncopyable
+class statement_imp : vf::NonCopyable
 {
 public:
   explicit statement_imp (session& s);

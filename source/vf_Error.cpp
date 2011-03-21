@@ -8,37 +8,6 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_Error.h"
 
-// For this to work, <boost/utility/singleton.hpp>
-// must be included in vf_boost_includes.
-//
-#if VF_HAVE_BOOST && defined (BOOST_UTILITY_SINGLETON_HPP_INCLUDED)
-
-namespace {
-
-// Work-around for visual studio, which does not construct or destroy objects
-// at global scope if the translation unit it contains does not contain
-// other referenced objects.
-//
-// Put this in Error.cpp since it is almost certain to be used
-//
-class BoostSingletonsCleanerUpper
-{
-public:
-  BoostSingletonsCleanerUpper()
-  {
-    // makes sure singletons get destroyed
-    atexit (boost::destroy_singletons);
-  }
-};
-
-BoostSingletonsCleanerUpper boostCleanerUpper;
-
-}
-
-#endif
-
-//------------------------------------------------------------------------------
-
 Error::Error()
   : m_code (success)
   , m_lineNumber (0)

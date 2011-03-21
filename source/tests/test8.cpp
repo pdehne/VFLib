@@ -41,6 +41,9 @@ void test ()
   q.pop_front ();
   q.pop_front ();
   q.pop_front ();
+
+  LockFree::Allocator<Data> a;
+  a.New ();
 }
 
 }

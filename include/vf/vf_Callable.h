@@ -12,17 +12,6 @@
 // memory requirements.
 //
 
-namespace detail {
-
-template <int Bytes>
-class CallableBase
-{
-protected:
-  char m_storage [Bytes];
-};
-
-}
-
 template <typename Signature, int Bytes = 64>
 class Callable;
 
