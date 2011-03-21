@@ -6,6 +6,7 @@
 #define __VF_THREADWORKER_VFHEADER__
 
 #include "vf/vf_Bind.h"
+#include "vf/vf_Callable.h"
 #include "vf/vf_CatchAny.h"
 #include "vf/vf_Function.h"
 #include "vf/vf_Mutex.h"
@@ -45,8 +46,8 @@ public:
   //
   // Starts the worker.
   //
-  void start (FunctionType <bool> worker_idle = Function::None(),
-			  Function worker_init = Function::None(),
+  void start (Callable <bool (void)> worker_idle = Callable <bool (void)>::None(),
+			        Function worker_init = Function::None(),
               Function worker_exit = Function::None())
   {
     {
@@ -94,7 +95,7 @@ public:
           VF_NAMESPACE::ScopedUnlock unlock (m_mutex); // getting fancy
 
           // Atomically queue a stop and close the worker.
-          VF_NAMESPACE::ScopedLock lock (ThreadWorker::getMutex ());
+          VF_NAMESPACE::ScopedLock lock (Worker::getMutex ());
         
           call (&ThreadWorker::do_stop, this);
 
@@ -186,7 +187,8 @@ private:
   VF_NAMESPACE::Mutex m_mutex;
   ThreadType m_thread;
   Function m_init;
-  FunctionType <bool> m_idle;
+  //FunctionType <bool> m_idle;
+  Callable <bool (void)> m_idle;
   Function m_exit;
 };
 

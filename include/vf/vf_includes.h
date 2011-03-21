@@ -13,6 +13,10 @@
 #include "vf/vf_Bind.h"
 #endif
 
+#ifndef __VF_CALLABLE_VFHEADER__
+#include "vf/vf_Callable.h"
+#endif
+
 #ifndef __VF_CATCHANY_VFHEADER__
 #include "vf/vf_CatchAny.h"
 #endif
@@ -100,6 +104,9 @@
   #endif
 
   // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
+  #ifndef __VF_LOCKFREE_VFHEADER__
+  #include "vf/vf_LockFree.h"
+  #endif
   #ifndef __VF_SHAREDOBJECT_VFHEADER__
   #include "vf/vf_SharedObject.h"
   #endif

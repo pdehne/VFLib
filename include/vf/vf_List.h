@@ -139,6 +139,15 @@ public:
     reset ();
   }
 
+  explicit List (List& other)
+  {
+    m_head.m_prev = 0; // identifies the head
+    m_tail.m_next = 0; // identifies the tail
+    reset ();
+
+    append (other);
+  }
+
   bool empty () const       { return m_head.m_next == &m_tail; }
   iterator begin ()         { return m_head.m_next; }
   iterator end ()           { return &m_tail; }
@@ -214,7 +223,6 @@ public:
   }
 
 private:
-  List (const List& other);
   List& operator= (const List& other);
 
   Node m_head;

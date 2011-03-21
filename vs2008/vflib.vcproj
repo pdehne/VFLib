@@ -376,7 +376,15 @@
 			Name="functional"
 			>
 			<File
+				RelativePath="..\source\tests\test7.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Bind.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Callable.h"
 				>
 			</File>
 			<File
@@ -4587,6 +4595,18 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_RadialImageConvolutionKernel.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="lockfree"
+			>
+			<File
+				RelativePath="..\source\tests\test8.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFree.h"
 				>
 			</File>
 		</Filter>

@@ -55,7 +55,6 @@ private:
   private:
     Functor m_f;
   };
-
 private:
   const char* m_szName; // for debugging
   bool m_open;

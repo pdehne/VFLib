@@ -158,40 +158,37 @@ bool Worker::do_process (const bool from_call)
 {
   bool did_something;
 
-  Calls list;
+  m_mutex.enter ();
 
+  if (!from_call)
   {
-    m_mutex.enter ();
+    // Recursive calls to process() are disallowed.
+    vfassert (!m_in_process);
+    m_in_process = true;
 
-    if (!from_call)
-    {
-      // Recursive calls to process() are disallowed.
-      vfassert (!m_in_process);
-      m_in_process = true;
-
-      // Remember the thread we are called on. This
-      // is done inside the mutex to handle the case
-      // where the thread used to call process() changed.
-      m_id = CurrentThread::getId();
-    }
-    else
-    {
-      // do_call() should have set this flag
-      vfassert (m_in_process);
-
-      // If we got here from do_call() then the thread
-      // should have already been set and tested safely
-      // while the mutex was held.
-      vfassert (m_id == CurrentThread::getId());
-    }
-
-    // Transfer the current set of calls into a local
-    // list to process so that we can process the functors
-    // without holding the mutex.
-    list.append (m_calls);
-
-    m_mutex.exit ();
+    // Remember the thread we are called on. This
+    // is done inside the mutex to handle the case
+    // where the thread used to call process() changed.
+    m_id = CurrentThread::getId();
   }
+  else
+  {
+    // do_call() should have set this flag
+    vfassert (m_in_process);
+
+    // If we got here from do_call() then the thread
+    // should have already been set and tested safely
+    // while the mutex was held.
+    vfassert (m_id == CurrentThread::getId());
+  }
+
+  // Transfer the current set of calls into a local
+  // list to process so that we can process the functors
+  // without holding the mutex.
+  //list.append (m_calls);
+  Calls list (m_calls);
+
+  m_mutex.exit ();
 
   if (!list.empty ())
   {
