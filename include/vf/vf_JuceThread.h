@@ -37,6 +37,13 @@ public:
     void interrupt (Thread& thread);
     Interrupted interruptionPoint (Thread& thread);
   private:
+    enum
+    {
+      stateReset = 0,
+      stateSignaled = 1,
+      stateWaiting = 2
+    };
+    VF_JUCE::Atomic <int> m_state;
     Mutex m_mutex;
     bool m_waiting;
     bool m_interrupt;
@@ -50,6 +57,13 @@ public:
     void interrupt (Thread& thread);
     Interrupted interruptionPoint (Thread& thread);
   private:
+    enum
+    {
+      stateReset = 0,
+      stateSignaled = 1,
+      stateWaiting = 2
+    };
+    VF_JUCE::Atomic <int> m_state;
     Mutex m_mutex;
     bool m_waiting;
     bool m_interrupt;
