@@ -7,7 +7,7 @@
 
 #if VF_HAVE_JUCE
 
-#include "vf/vf_Function.h"
+#include "vf/vf_Callable.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Thread.h"
 #include "vf/vf_String.h"
@@ -71,8 +71,7 @@ public:
   explicit Thread (const VF_NAMESPACE::String& name);
   ~Thread ();
 
-  template <class Callable>
-  void start (const Callable& c)
+  void start (Callable <void (void)> c)
   {
     m_callable = c;
     VF_JUCE::Thread::startThread ();
@@ -92,7 +91,7 @@ public:
 private:
   void run ();
 
-  Function m_callable;
+  Callable <void (void)> m_callable;
 };
 
 template <class InterruptionType>

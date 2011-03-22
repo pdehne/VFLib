@@ -25,16 +25,16 @@
 #include "vf/vf_FPUFlags.h"
 #endif
 
-#ifndef __VF_FUNCTION_VFHEADER__
-#include "vf/vf_Function.h"
-#endif
-
 #ifndef __VF_GUIWORKER_VFHEADER__
 #include "vf/vf_GuiWorker.h"
 #endif
 
 #ifndef __VF_INTERVAL_VFHEADER__
 #include "vf/vf_Interval.h"
+#endif
+
+#ifndef __VF_INTRINSICS_VFHEADER__
+#include "vf/vf_Intrinsics.h"
 #endif
 
 #ifndef __VF_LIST_VFHEADER__

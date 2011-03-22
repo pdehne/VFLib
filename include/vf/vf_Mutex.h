@@ -5,63 +5,12 @@
 #ifndef __VF_MUTEX_VFHEADER__
 #define __VF_MUTEX_VFHEADER__
 
+#include "vf/vf_BoostMutex.h"
+#include "vf/vf_JuceMutex.h"
+
 //
 // Simple lightweight recursive mutex
 //
-// Juce::Mutex
-// Boost::Mutex
-// template <MutexType> detail::ScopedLock
-// template <MutexType> detail::ScopedUnlock
-// Mutex
-// ScopedLock
-// ScopedUnlock
-//
-
-//------------------------------------------------------------------------------
-//
-// Juce Mutex
-//
-
-#if VF_HAVE_JUCE
-
-namespace Juce {
-
-struct Mutex : NonCopyable
-{
-  inline void enter () const { m_mutex.enter (); }
-  inline void exit () const { m_mutex.exit (); }
-
-private:
-  VF_JUCE::CriticalSection m_mutex;
-};
-
-}
-
-#endif
-
-//------------------------------------------------------------------------------
-//
-// Boost Mutex
-//
-
-#if VF_HAVE_BOOST
-
-namespace Boost {
-
-struct Mutex : NonCopyable
-{
-  inline void enter () { m_mutex.lock (); }
-  inline void exit () { m_mutex.unlock (); }
-
-private:
-  boost::recursive_mutex m_mutex;
-};
-
-}
-
-#endif
-
-//------------------------------------------------------------------------------
 
 namespace detail {
 
@@ -89,8 +38,6 @@ private:
 
 }
 
-//------------------------------------------------------------------------------
-
 // Lift one implementation
 
 #if VF_HAVE_JUCE
@@ -100,6 +47,10 @@ using Juce::Mutex;
 #elif VF_HAVE_BOOST
 
 using Boost::Mutex;
+
+#else
+
+#pragma error ("Missing Mutex implementation")
 
 #endif
 

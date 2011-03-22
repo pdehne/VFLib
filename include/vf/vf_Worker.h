@@ -34,6 +34,8 @@
 class Worker
 {
 public:
+  typedef Callable <void (void)> func_t;
+
   explicit Worker (const char* szName = "");
   ~Worker ();
 
@@ -44,8 +46,7 @@ public:
   //
   // Functors MUST NOT cause thread interruptions.
   //
-  template <class Functor>
-  void callf (const Functor& f)
+  void callf (func_t const& f)
   {
     do_call (m_allocator.New (f));
   }
@@ -55,6 +56,10 @@ public:
   template <class Fn>
   void call (Fn const& f)
   { callf (bind (f)); }
+
+  template <>
+  void call (func_t const& f)
+  { callf (f); }
 
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
@@ -131,8 +136,8 @@ private:
   // List of fixed-size abstract functor of void(*)(void).
   struct Call;
   typedef LockFree::Stack <Call> Calls;
-  struct Call : LockFree::List <Call>::Node, Callable <void (void)>
-    { template <class F> Call (F f) : Callable (f) { } };
+  struct Call : LockFree::List <Call>::Node, func_t
+    { Call (func_t const& c) : Callable (c) { } };
 
 private:
   bool do_process ();

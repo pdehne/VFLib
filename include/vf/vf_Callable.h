@@ -8,10 +8,19 @@
 #include "vf/vf_Throw.h"
 
 //
-// Strong replacement for boost::function with bounded
-// memory requirements.
+// Strong replacement for boost::function:
 //
-
+// #1 Bounded memory requirements.
+//
+// #2 Always refers to a functor (i.e. is never invalid)
+//
+// #3 Default value (None) is a function that
+//    returns a default object (the result type
+//    constructed with a default constructor).
+//    
+// #4 The return value type must be copyable with
+//    have a default constructor.
+//
 template <typename Signature, int Bytes = 64>
 class Callable;
 

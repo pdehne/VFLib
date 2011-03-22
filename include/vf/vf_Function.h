@@ -5,6 +5,7 @@
 #ifndef __VF_FUNCTION_VFHEADER__
 #define __VF_FUNCTION_VFHEADER__
 
+#if 0
 #include "vf/vf_Throw.h"
 
 //
@@ -118,5 +119,6 @@ private:
 };
 
 typedef FunctionType <void> Function;
+#endif
 
 #endif

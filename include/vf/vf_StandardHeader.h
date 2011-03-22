@@ -24,6 +24,8 @@
 
 #include "vf/vf_stdlib_includes.h"
 
+#include "vf/vf_ext_includes.h"     // Outside our namespace
+
 //------------------------------------------------------------------------------
 
 #ifdef VF_NAMESPACE

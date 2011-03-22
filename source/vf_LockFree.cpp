@@ -63,9 +63,10 @@ void ReadWriteMutex::enter_write ()
   if (first)
   {
     // Wait for readers to drain out if we're first
-    Spinner wait; 
+    Delay delay; 
+
     while (m_readers.is_signaled ())
-      wait.delay ();
+      delay.spin ();
   }
 }
 

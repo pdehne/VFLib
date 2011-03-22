@@ -19,7 +19,12 @@ class Interruption
 // occurred when using the polling model. It is designed
 // to detect improper usage (specifically, not checking
 // the flag, which would result in incorrect behavior).
-
+//
+// #1 The default constructor must produce an object that
+//    is considered non-signaled (i.e. not interrupted)
+//    in order for ThreadWorker that uses a default Callable
+//    for its idle function to work.
+//
 class Interrupted
 {
 public:

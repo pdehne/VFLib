@@ -8,7 +8,6 @@
 #include "vf/vf_Bind.h"
 #include "vf/vf_Callable.h"
 #include "vf/vf_CatchAny.h"
-#include "vf/vf_Function.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
@@ -23,9 +22,10 @@
 // doing in order to process new calls.
 //
 
-namespace detail {
-
-template <class ThreadType>
+// Factored out the types so that callers don't need to
+// supply template arguments when they want to use a type,
+// for example, idle_t::None()
+//
 class ThreadWorker : public Worker
 {
 public:
@@ -33,9 +33,19 @@ public:
   typedef Callable <void (void)> init_t;
   typedef Callable <void (void)> exit_t;
 
+  ThreadWorker (const char* szName) : Worker (szName)
+  {
+  }
+};
 
-  explicit ThreadWorker (const char* szName)
-    : Worker (szName)
+namespace detail {
+
+template <class ThreadType>
+class ThreadWorkerType : public ThreadWorker
+{
+public:
+  explicit ThreadWorkerType (const char* szName)
+    : ThreadWorker (szName)
     , m_thread (szName)
     , m_calledStart (false)
     , m_calledStop (false)
@@ -43,7 +53,7 @@ public:
   {
   }
 
-  ~ThreadWorker ()
+  ~ThreadWorkerType ()
   {
     stop_and_wait ();
   }
@@ -67,7 +77,7 @@ public:
     m_idle = worker_idle;
     m_exit = worker_exit;
 
-    m_thread.start (Bind (&ThreadWorker::run, this));
+    m_thread.start (Bind (&ThreadWorkerType::run, this));
   }
 
   //
@@ -100,7 +110,7 @@ public:
         {
           VF_NAMESPACE::ScopedUnlock unlock (m_mutex); // getting fancy
 
-          call (&ThreadWorker::do_stop, this);
+          call (&ThreadWorkerType::do_stop, this);
 
           // in theory something could slip in here
 
@@ -135,7 +145,7 @@ public:
   // Interrupts the idle function by queueing a call that does nothing.
   void interrupt ()
   {
-    call (Function::None ());
+    call (Callable <void (void)>::None ());
   }
 
 private:
@@ -166,8 +176,7 @@ private:
 
       try
       {
-        // HACK! Relying on FunctionType <Thread::Interrupted> returning
-        // false for None()::operator()()
+        // idle_t::None() must return a non signaled Thread::Interrupted.
         Thread::Interrupted interrupted = m_idle ();
 
         if (!interrupted)
@@ -201,12 +210,12 @@ private:
 //------------------------------------------------------------------------------
 
 #if VF_HAVE_JUCE
-typedef detail::ThreadWorker <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
-typedef detail::ThreadWorker <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
+typedef detail::ThreadWorkerType <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
+typedef detail::ThreadWorkerType <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
 
 #elif VF_HAVE_BOOST
-typedef detail::ThreadWorker <Boost::Thread> ExceptionWorker;
-typedef detail::ThreadWorker <Boost::Thread> PollingWorker;
+typedef detail::ThreadWorkerType <Boost::Thread> ExceptionWorker;
+typedef detail::ThreadWorkerType <Boost::Thread> PollingWorker;
 
 #endif
 

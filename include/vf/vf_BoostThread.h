@@ -7,7 +7,7 @@
 
 #if VF_HAVE_BOOST
 
-#include "vf/vf_Function.h"
+#include "vf/vf_Callable.h"
 #include "vf/vf_String.h"
 #include "vf/vf_Thread.h"
 
@@ -28,8 +28,7 @@ public:
   explicit Thread (const VF_NAMESPACE::String& name);
   ~Thread ();
 
-  template <class Callable>
-  void start (const Callable& c)
+  void start (Callable <void (void)> c)
   {
     m_thread = boost::thread (c);
   }

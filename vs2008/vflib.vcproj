@@ -376,10 +376,6 @@
 			Name="functional"
 			>
 			<File
-				RelativePath="..\source\tests\test7.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_Bind.h"
 				>
 			</File>
@@ -534,6 +530,14 @@
 						UsePrecompiledHeader="0"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\source\tests\test7.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\source\tests\test8.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
@@ -4601,10 +4605,6 @@
 		<Filter
 			Name="lockfree"
 			>
-			<File
-				RelativePath="..\source\tests\test8.cpp"
-				>
-			</File>
 			<File
 				RelativePath="..\source\vf_LockFree.cpp"
 				>

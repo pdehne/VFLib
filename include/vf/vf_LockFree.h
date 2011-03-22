@@ -5,6 +5,7 @@
 #ifndef __VF_LOCKFREE_VFHEADER__
 #define __VF_LOCKFREE_VFHEADER__
 
+#include "vf/vf_Intrinsics.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Threads.h"
 
@@ -481,14 +482,15 @@ public:
 //
 // Synchronization delay element which avoids kernel blocking
 //
-class Spinner
+class Delay
 {
 public:
-  Spinner ()
+  Delay ()
     : m_backoff (0)
   {
   }
 
+#if 0
   ~Spinner ()
   {
     if (m_backoff > 1)
@@ -498,30 +500,19 @@ public:
       Logger::outputDebugString (s);
     }
   }
+#endif
 
-  inline void delay ()
+  inline void spin ()
   {
-#if VF_HAVE_SIMD_INTRINSICS
     if (m_backoff < 10)
     {
-      _mm_pause();
+      Intrinsic::mm_pause <1> ();
     }
     else if (m_backoff < 20)
     {
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
-      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      Intrinsic::mm_pause <50> ();
     }
-    else
-#endif
-    /*else*/ if (m_backoff < 22)
+    else if (m_backoff < 22)
     {
       CurrentThread::yield();
     }

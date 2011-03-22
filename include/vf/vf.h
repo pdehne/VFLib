@@ -16,8 +16,6 @@ namespace vf_DummyNamespace {}      // To catch unbalanced braces before here
 #define VF_PUBLIC_INCLUDES 1        // Flag to know when we're compiling the lib
 #include "vf/vf_StandardHeader.h"   // Minimum requirements
 
-#include "vf/vf_ext_includes.h"     // Outside our namespace
-
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_includes.h"         // All public headers
