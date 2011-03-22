@@ -11,6 +11,7 @@
 // Lightweight but limited replacement for boost::function
 //
 
+// DEPRECATED
 template <typename ReturnType>
 class FunctionType
 {
