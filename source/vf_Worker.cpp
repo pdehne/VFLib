@@ -15,7 +15,7 @@ namespace {
 class ScopedFlag : NonCopyable
 {
 public:
-  explicit ScopedFlag (Atomic <int>& flag) : m_flag (flag)
+  explicit ScopedFlag (VF_JUCE::Atomic <int>& flag) : m_flag (flag)
   {
 #if VF_DEBUG
     const bool success = m_flag.compareAndSetBool (1, 0);
@@ -36,7 +36,7 @@ public:
   }
 
 private:
-  Atomic <int>& m_flag;
+  VF_JUCE::Atomic <int>& m_flag;
 };
 
 }
@@ -155,7 +155,7 @@ void Worker::do_call (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-  vfassert (!closed ());
+  vfassert (m_closed.get() != 1);
 
   const bool first = m_calls.push_front (c);
 

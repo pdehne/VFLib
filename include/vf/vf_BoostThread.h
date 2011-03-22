@@ -63,7 +63,20 @@ extern Thread::id getId ();
 extern Thread::Interrupted interruptionPoint ();
 
 // Boost has no equivalent, and pthreads doesn't support it.
-inline void setPriority (int) { }
+inline void setPriority (int)
+{
+}
+
+inline void yield ()
+{
+  boost::this_thread::yield();
+}
+
+inline void sleep (const int milliseconds)
+{
+  // bit of a hack but nice to avoid all the boost ptime/reltime nonsense
+  boost::this_thread::interruptible_wait (milliseconds);
+}
 
 }
 

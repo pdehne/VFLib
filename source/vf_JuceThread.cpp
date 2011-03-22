@@ -172,11 +172,6 @@ void Thread::run ()
 
 namespace CurrentThread {
 
-Juce::Thread::id getId ()
-{
-  return VF_JUCE::Thread::getCurrentThreadId ();
-}
-
 Juce::Thread::Interrupted interruptionPoint ()
 {
   bool interrupted;
@@ -204,11 +199,6 @@ Juce::Thread::Interrupted interruptionPoint ()
   }
 
   return Thread::Interrupted (interrupted);
-}
-
-void setPriority (int priority) // [0, 10] where 5 = normal
-{
-  VF_JUCE::Thread::setCurrentThreadPriority (priority);
 }
 
 }

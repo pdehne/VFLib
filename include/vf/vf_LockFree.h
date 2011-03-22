@@ -5,23 +5,112 @@
 #ifndef __VF_LOCKFREE_VFHEADER__
 #define __VF_LOCKFREE_VFHEADER__
 
+#include "vf/vf_Mutex.h"
+#include "vf/vf_Threads.h"
+
 //
 // Lock-free data structure implementations
 //
 
+// Our own atomic primitives
+namespace Atomic {
+
+inline void memoryBarrier ()
+{
+  VF_JUCE::Atomic <int>::memoryBarrier ();
+}
+
+//------------------------------------------------------------------------------
+
+// Tracks the amount of usage of a particular resource.
+// The object is considered signaled if there are one or more uses
+class UsageCounter
+{
+public:
+  // These always start at zero
+  UsageCounter () : m_value (0) { }
+
+  // Increments the usage count.
+  // Returns true if the counter was previously non-signaled.
+  bool addref () { return (++m_value) == 1; }
+
+  // Decrements the usage count.
+  // Returns true if the counter became non-signaled.
+  int release () { return (--m_value) == 0; }
+
+  // Returns the signaled state of the counter.
+  // The caller must synchronize the value.
+  bool is_reset () const { return m_value.get() == 0; }
+  bool is_signaled () const { return m_value.get() > 0; }
+
+private:
+  VF_JUCE::Atomic <int> m_value;
+};
+
+//------------------------------------------------------------------------------
+
+// Atomic flag
+class Flag
+{
+public:
+  // Starts non-signaled
+  Flag () : m_value (0) { }
+
+  void set ()
+  {
+#if VF_DEBUG
+    const bool success = m_value.compareAndSetBool (1, 0);
+    vfassert (success);
+#else
+    m_value.set (1);
+#endif
+  }
+
+  void clear ()
+  {
+#if VF_DEBUG
+    const bool success = m_value.compareAndSetBool (0, 1);
+    vfassert (success);
+#else
+    m_value.set (0);
+#endif
+  }
+
+  // returns true if it was successful at changing the flag
+  bool trySet ()
+  {
+    return m_value.compareAndSetBool (1, 0);
+  }
+
+  // returns true if it was successful at changing the flag
+  bool tryClear ()
+  {
+    return m_value.compareAndSetBool (0, 1);
+  }
+
+  // Caller must synchronize
+  bool isSet () const { return m_value.get() == 1; }
+  bool isClear () const { return m_value.get() == 0; }
+
+private:
+  VF_JUCE::Atomic <int> m_value;
+};
+
+}
+
+//------------------------------------------------------------------------------
+
 namespace LockFree {
+
+//
+// Intrusive singly linked list basics
+//
 
 namespace detail {
 
 struct List_default_tag { };
 
 }
-
-//------------------------------------------------------------------------------
-
-//
-// Intrusive singly linked list basics
-//
 
 template <class Elem,
           class Tag = detail::List_default_tag>
@@ -148,6 +237,10 @@ private:
 // This implementation requires that Nodes are never deleted, only re-used.
 //
 
+//
+// TODO: THIS SEEMS FLAWED!
+// AND push_back() needs to return a bool
+//
 template <class Elem,
           class Tag = detail::List_default_tag>
 class Queue
@@ -270,7 +363,7 @@ public:
     {
       Elem* elem = m_free.pop_front ();
       if (elem)
-        ::operator delete (elem);
+        ::operator delete (elem); // implicit global mutex
       else
         break;
     }
@@ -315,8 +408,7 @@ private:
     void* p = m_free.pop_front();
 
     if (!p)
-      // implicit global mutex here
-      p = ::operator new (sizeof(Elem));
+      p = ::operator new (sizeof(Elem)); // implicit global mutex
 
     return p;
   }
@@ -327,7 +419,6 @@ private:
   }
 
 private:
-  //Mutex m_mutex;
   Stack <Elem, Tag> m_free;
 };
 
@@ -378,6 +469,89 @@ public:
   {
     delete e;
   }
+};
+
+//------------------------------------------------------------------------------
+
+//
+// Synchronization delay element which avoids kernel blocking
+//
+class Spinner
+{
+public:
+  Spinner ()
+    : m_backoff (0)
+  {
+  }
+
+  inline void delay ()
+  {
+#if VF_HAVE_SIMD_INTRINSICS
+    if (m_backoff < 10)
+    {
+      _mm_pause();
+    }
+    else if (m_backoff < 20)
+    {
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+      _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause(); _mm_pause();
+    }
+    else
+#endif
+    /*else*/ if (m_backoff < 22)
+    {
+      CurrentThread::yield();
+    }
+    else if (m_backoff < 24)
+    {
+      CurrentThread::sleep (0);
+    }
+    else if (m_backoff < 26)
+    {
+      CurrentThread::sleep (1);
+    }
+    else
+    {
+      CurrentThread::sleep (10);
+    }
+
+    ++m_backoff;
+  }
+
+private:
+  int m_backoff;
+};
+
+//------------------------------------------------------------------------------
+
+// Multiple-reader, single writer, write preferenced
+// recursive mutex with a lock-free fast path.
+class ReadWriteMutex
+{
+public:
+  ReadWriteMutex ();
+  ~ReadWriteMutex ();
+
+  // recursive
+  void enter_read ();
+  void exit_read ();
+
+  // recursive
+  void enter_write ();
+  void exit_write ();
+
+private:
+  Mutex m_mutex;
+  Atomic::UsageCounter m_writes;
+  Atomic::UsageCounter m_readers;
 };
 
 }

@@ -124,13 +124,30 @@ private:
 
 namespace CurrentThread {
 
-extern Thread::id getId ();
-
 // Avoid this function because the implementation is slow.
 // Use Juce::Thread::interruptionPoint() instead.
 extern Thread::Interrupted interruptionPoint ();
 
-extern void setPriority (int priority);
+inline Thread::id getId ()
+{
+  return VF_JUCE::Thread::getCurrentThreadId ();
+}
+
+// [0, 10] where 5 = normal
+inline void setPriority (int priority) 
+{
+  VF_JUCE::Thread::setCurrentThreadPriority (priority);
+}
+
+inline void yield ()
+{
+  VF_JUCE::Thread::yield ();
+}
+
+inline void sleep (const int milliseconds)
+{
+  VF_JUCE::Thread::sleep (milliseconds);
+}
 
 }
 

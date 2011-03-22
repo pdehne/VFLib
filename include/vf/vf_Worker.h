@@ -105,7 +105,6 @@ protected:
   // 
   bool process ();
 
-protected:
   // This function should be called as early as possible.
   // Closing the Worker is done for diagnostics, it allows
   // detection of when new calls are being made when they
@@ -114,7 +113,6 @@ protected:
   // TODO: Consider making this virtual and having the
   // derived class cause the thread to stop ?
   void close ();
-  bool closed () const { return m_closed.get() == 1; }
 
   // The worker is in the signaled state when there are unprocessed
   // work items, and in the reset state when the list of work items
@@ -151,8 +149,8 @@ private:
 private:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
-  Atomic <int> m_closed;
-  Atomic <int> m_in_process;
+  VF_JUCE::Atomic <int> m_closed;
+  VF_JUCE::Atomic <int> m_in_process;
   LockFree::Allocator <Call> m_allocator;
   Calls m_calls;
 };

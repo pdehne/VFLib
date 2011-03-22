@@ -19,5 +19,10 @@ struct sqlite3_stmt;
 // Commented out because bzlib.h includes <windows.h>
 //#include "bzip2/bzlib.h" // ACK THIS BRINGS IN WINDOWS.H!!!
 
+// When this causes an error (compiling on iOs or android?), we
+// will need to add some stuff to detect if intrinsics are available
+#include <xmmintrin.h>
+#define VF_HAVE_SIMD_INTRINSICS 1
+
 #endif
 

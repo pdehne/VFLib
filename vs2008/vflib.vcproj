@@ -4606,6 +4606,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_LockFree.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_LockFree.h"
 				>
 			</File>

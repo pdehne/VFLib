@@ -6,6 +6,7 @@
 #define __VF_LISTENERS_VFHEADER__
 
 #include "vf/vf_List.h"
+#include "vf/vf_LockFree.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
 
@@ -31,30 +32,6 @@ private:
 
   class Proxy;
   typedef vf::List <Proxy> Proxies;
-
-  // Special multi-reader single writer write-preferenced
-  // mutex With upgrade and downgrade capabilities.
-  //
-  // THIS IS GARBAGE
-  //
-  class ReadWriteMutex
-  {
-  private:
-    int m_readers;
-    WaitableEvent m_event;
-    CriticalSection m_mutex;
-    CriticalSection m_write_mutex;
-
-  public:
-    ReadWriteMutex ();
-    ~ReadWriteMutex ();
-    void enter_read ();
-    void enter_write ();
-    void exit_read ();
-    void exit_write ();
-    void promote_to_write ();
-    void demote_to_read ();
-  };
 
   //
   // Reference counted polymorphic unary functor of <void (Listener*)>.
@@ -152,13 +129,14 @@ private:
       explicit Entry (Group::Ptr g) : group (g) {}
       ~Entry () { jassert (call.get () == 0); }
       Group::Ptr group;
-      Atomic <Call*> call;
+      // DOES THIS NEED TO BE ATOMIC?
+      VF_JUCE::Atomic <Call*> call;
     };
     void do_call (Entry::Ptr entry);
 
   private:
     Entries m_entries;
-    Atomic <Call*> m_call;
+    VF_JUCE::Atomic <Call*> m_call;
   };
 
   // The physical memory for the pointer to member is
@@ -177,15 +155,6 @@ private:
 
   /*@ Implementation @*/
   Proxy* find_proxy (const void* member, int bytes);
-
-private:
-  // Global deleted list from a pool of
-  // recycled blocks would be best for this
-  Groups m_groups;
-  Proxies m_proxies;
-  timestamp_t m_timestamp;
-  ReadWriteMutex m_groups_mutex;
-  ReadWriteMutex m_proxies_mutex;
 
 protected:
   Listeners ();
@@ -226,39 +195,47 @@ protected:
 
   // Search for an existing Proxy that matches the pointer to
   // member and replace it's Call, or create a new Proxy for it.
-  // Caller must acquire the read lock.
+  // Caller must acquire the group read lock.
   template <int Bytes>
   void proxy_call (const void *member, Call::Ptr c)
   {
     if (!m_groups.empty ())
     {
-      // TODO: CHANGE THIS to an atomic fast path
-      // with a reader count and an unlocked creation
+      Proxy* proxy;
+      
       m_proxies_mutex.enter_read ();
 
       // See if there's already a proxy
-      Proxy* proxy = find_proxy (member, Bytes);
+      proxy = find_proxy (member, Bytes);
 
+      // No, try to create one
       if (!proxy)
       {
-        // Create a new empty proxy
-        proxy = new StoredProxy <Bytes> (member);
+        // Have to let go of this in order to get a write lock
+        m_proxies_mutex.exit_read ();
 
-        // We need the write lock to keep readers
-        // out of find_proxy() and do_calls() while
-        // we construct
-        m_proxies_mutex.promote_to_write ();
+        // Get the write lock
+        m_proxies_mutex.enter_write ();
 
-        // Add all current groups to the Proxy.
-        // We need the group read lock for this.
-        for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+        // Have to search for it again in case someone else added it
+        proxy = find_proxy (member, Bytes);
+
+        if (!proxy)
         {
-          Group* group = *iter++;
-          proxy->add (group);
-        }
+          // Create a new empty proxy
+          proxy = new StoredProxy <Bytes> (member);
 
-        // Add it to the list.
-        m_proxies.push_front (proxy);
+          // Add all current groups to the Proxy.
+          // We need the group read lock for this (caller provided).
+          for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+          {
+            Group* group = *iter++;
+            proxy->add (group);
+          }
+
+          // Add it to the list.
+          m_proxies.push_front (proxy);
+        }
 
         m_proxies_mutex.exit_write ();
       }
@@ -267,17 +244,22 @@ protected:
         m_proxies_mutex.exit_read ();
       }
 
+      // Requires the group read lock
       proxy->do_calls (c);
-      
-      // Caller acquired the read mutex so release it.
-      m_groups_mutex.exit_read ();
     }
-    else
-    {
-      // No Groups, nothing to do.
-      m_groups_mutex.exit_read ();
-    }
+
+    // Caller acquired the read mutex so release it.
+    m_groups_mutex.exit_read ();
   }
+
+private:
+  // Global deleted list from a pool of
+  // recycled blocks would be best for this
+  Groups m_groups;
+  Proxies m_proxies;
+  timestamp_t m_timestamp;
+  LockFree::ReadWriteMutex m_groups_mutex;
+  LockFree::ReadWriteMutex m_proxies_mutex;
 };
 
 }
