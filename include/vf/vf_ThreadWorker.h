@@ -29,6 +29,11 @@ template <class ThreadType>
 class ThreadWorker : public Worker
 {
 public:
+  typedef Callable <const Thread::Interrupted (void)> idle_t;
+  typedef Callable <void (void)> init_t;
+  typedef Callable <void (void)> exit_t;
+
+
   explicit ThreadWorker (const char* szName)
     : Worker (szName)
     , m_thread (szName)
@@ -46,10 +51,9 @@ public:
   //
   // Starts the worker.
   //
-  void start (Callable <const Thread::Interrupted (void)> worker_idle =
-                Callable <const Thread::Interrupted (void)>::None(),
-			        Function worker_init = Function::None(),
-              Function worker_exit = Function::None())
+  void start (idle_t worker_idle = idle_t::None(),
+              init_t worker_init = init_t::None(),
+              exit_t worker_exit = exit_t::None())
   {
     {
       // TODO: Atomic for this
@@ -62,8 +66,6 @@ public:
     m_init = worker_init;
     m_idle = worker_idle;
     m_exit = worker_exit;
-
-    open ();
 
     m_thread.start (Bind (&ThreadWorker::run, this));
   }
@@ -164,7 +166,7 @@ private:
 
       try
       {
-        // HACK! Relying on FunctionType <bool> returning
+        // HACK! Relying on FunctionType <Thread::Interrupted> returning
         // false for None()::operator()()
         Thread::Interrupted interrupted = m_idle ();
 
@@ -189,10 +191,9 @@ private:
   bool m_shouldStop;
   VF_NAMESPACE::Mutex m_mutex;
   ThreadType m_thread;
-  Function m_init;
-  //FunctionType <bool> m_idle;
-  Callable <const Thread::Interrupted (void)> m_idle;
-  Function m_exit;
+  idle_t m_idle;
+  init_t m_init;
+  exit_t m_exit;
 };
 
 }

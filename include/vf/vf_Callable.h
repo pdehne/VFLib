@@ -19,15 +19,15 @@ template <typename R, int Bytes>
 class Callable <R (void), Bytes>
 {
 public:
-  typedef R result_type;
+  typedef typename R result_type;
   typedef Callable self_type;
 
   struct None
   {
     typedef typename R result_type;
-    R operator() () const
+    result_type operator() () const
     {
-      return R();
+      return result_type();
     } 
   };
 
@@ -67,7 +67,7 @@ public:
     return *this;
   }
 
-  R operator()()
+  result_type operator()()
   {
     return getCall().operator()();
   }
@@ -91,7 +91,7 @@ private:
   {
     virtual ~Call () {}
     virtual void constructCopyInto (void* p) const = 0;
-    virtual R operator()() = 0;
+    virtual result_type operator()() = 0;
   };
 
   template <class Functor>
@@ -100,7 +100,7 @@ private:
     explicit StoredCall (const Functor& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
-    R operator() () { return m_f (); }
+    result_type operator() () { return m_f (); }
   private:
     Functor m_f;
   };
@@ -124,15 +124,15 @@ template <typename R, typename T1, int Bytes>
 class Callable <R (T1 t1), Bytes>
 {
 public:
-  typedef R result_type;
+  typedef typename R result_type;
   typedef Callable self_type;
 
   struct None
   {
     typedef typename R result_type;
-    R operator() (T1) const
+    result_type operator() (T1) const
     {
-      return R();
+      return result_type();
     } 
   };
 
@@ -172,7 +172,7 @@ public:
     return *this;
   }
 
-  R operator() (T1 t1)
+  result_type operator() (T1 t1)
   {
     return getCall().operator() (t1);
   }
@@ -196,7 +196,7 @@ private:
   {
     virtual ~Call () {}
     virtual void constructCopyInto (void* p) const = 0;
-    virtual R operator() (T1 t1) = 0;
+    virtual result_type operator() (T1 t1) = 0;
   };
 
   template <class Functor>
@@ -205,7 +205,7 @@ private:
     explicit StoredCall (const Functor& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
-    R operator() (T1 t1) { return m_f (t1); }
+    result_type operator() (T1 t1) { return m_f (t1); }
   private:
     Functor m_f;
   };

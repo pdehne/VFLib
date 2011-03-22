@@ -20,6 +20,7 @@ public:
   GuiWorker ();
 
   void close () { Worker::close (); }
+  bool process () { return Worker::process (); }
 
 private:
   void signal ();
