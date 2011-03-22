@@ -98,10 +98,9 @@ public:
         {
           VF_NAMESPACE::ScopedUnlock unlock (m_mutex); // getting fancy
 
-          // Atomically queue a stop and close the worker.
-          VF_NAMESPACE::ScopedLock lock (Worker::getMutex ());
-        
           call (&ThreadWorker::do_stop, this);
+
+          // in theory something could slip in here
 
           close ();
         }

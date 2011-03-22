@@ -44,6 +44,10 @@ struct List
 //
 // This implementation requires that Nodes are never deleted, only re-used.
 //
+// As an added feature, push_front() returns true if it causes the stack
+// to go from empty to non-empty. This greatly assists the implementation
+// of other objects.
+//
 
 template <class Elem,
           class Tag = detail::List_default_tag>
@@ -57,9 +61,8 @@ public:
   {
   }
 
-  // This constructor atomically acquires the
-  // contents of the other stack. The other
-  // stack is cleared.
+  // This constructor atomically acquires the contents
+  // of the other stack. The other stack is cleared.
   explicit Stack (Stack& other)
   {
     Node* head;
@@ -73,18 +76,23 @@ public:
     m_head = head;
   }
 
-  void push_front (Node* node)
+  // returns true if it pushed the first element
+  bool push_front (Node* node)
   {
+    bool first;
     Node* head;
 
     do
     {
       head = m_head.get();
 
+      first = head == 0;
+
       node->m_next = head;
     }
-
     while (!m_head.compareAndSetBool (node, head));
+
+    return first;
   }
 
   Elem* pop_front ()

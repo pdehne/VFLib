@@ -37,11 +37,10 @@ class Worker
 {
 private:
   class Call;
-  typedef List <Call> Calls;
+  typedef LockFree::Stack <Call> Calls;
 
   // Abstract nullary functor which can be a list element.
   class Call : public LockFree::List <Call>::Node,
-               public Calls::Node,
                public Callable <void (void)>
   {
   public:
