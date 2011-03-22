@@ -103,7 +103,7 @@ private:
 namespace LockFree {
 
 //
-// Intrusive singly linked list basics
+// Lock-free intrusive singly linked list basics
 //
 
 namespace detail {
@@ -203,14 +203,16 @@ public:
     return static_cast <Elem*> (node);
   }
 
-  // This is not thread-safe
+  // Not thread safe.
+  // Caller must synchronize.
   bool empty () const
   {
     return m_head.get() == 0;
   }
 
   // Reverse the order of all items.
-  // This is not thread-safe.
+  // Not thread safe.
+  // Caller must synchronize.
   void reverse ()
   {
     Stack s (*this);
@@ -429,6 +431,8 @@ private:
 // Lock-Free allocator but doesn't use a deleted list.
 // It is not compatible with lock-free containers.
 //
+// AVOID
+/* 
 template <class Elem,
           class Tag = detail::List_default_tag>
 class StandardAllocator
@@ -470,6 +474,7 @@ public:
     delete e;
   }
 };
+*/
 
 //------------------------------------------------------------------------------
 
@@ -482,6 +487,16 @@ public:
   Spinner ()
     : m_backoff (0)
   {
+  }
+
+  ~Spinner ()
+  {
+    if (m_backoff > 1)
+    {
+      String s;
+      s << "m_backoff = " << String (m_backoff);
+      Logger::outputDebugString (s);
+    }
   }
 
   inline void delay ()
