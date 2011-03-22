@@ -29,44 +29,42 @@ public:
   //
   // Interruption models
   //
-  class ExceptionBased
+
+  class InterruptionModel
   {
+  protected:
+    InterruptionModel ();
+    bool do_wait ();
+
   public:
-    ExceptionBased ();
-    void wait (Thread& thread);
     void interrupt (Thread& thread);
-    Interrupted interruptionPoint (Thread& thread);
-  private:
+
+  protected:
+    bool do_interruptionPoint ();
+
+  protected:
     enum
     {
       stateReset = 0,
       stateSignaled = 1,
       stateWaiting = 2
     };
+
     VF_JUCE::Atomic <int> m_state;
-    Mutex m_mutex;
-    bool m_waiting;
-    bool m_interrupt;
   };
 
-  class PollingBased
+  class ExceptionBased : public InterruptionModel
   {
   public:
-    PollingBased ();
     void wait (Thread& thread);
-    void interrupt (Thread& thread);
     Interrupted interruptionPoint (Thread& thread);
-  private:
-    enum
-    {
-      stateReset = 0,
-      stateSignaled = 1,
-      stateWaiting = 2
-    };
-    VF_JUCE::Atomic <int> m_state;
-    Mutex m_mutex;
-    bool m_waiting;
-    bool m_interrupt;
+  };
+
+  class PollingBased : public InterruptionModel
+  {
+  public:
+    void wait (Thread& thread);
+    Interrupted interruptionPoint (Thread& thread);
   };
 
 public:
@@ -97,7 +95,7 @@ private:
   Function m_callable;
 };
 
-template <class InterruptionModel>
+template <class InterruptionType>
 class ThreadType : public Thread
 {
 public:
@@ -121,7 +119,7 @@ public:
   }
 
 private:
-  InterruptionModel m_model;
+  InterruptionType m_model;
 };
 
 namespace CurrentThread {

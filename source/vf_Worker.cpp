@@ -37,17 +37,15 @@ void Worker::global_free (void* p)
 
 Worker::Worker (const char* szName)
 : m_szName (szName)
-, m_open (false)
+, m_open (0)
 , m_in_process (false)
 {
 }
 
 Worker::~Worker ()
 {
-  ScopedLock lock (m_mutex);
-
   // Someone forget to close the queue.
-  vfassert (!m_open);
+  vfassert (m_open.get() == 0);
 
   // Can't destroy queue with unprocessed calls.
   vfassert (m_calls.empty());
@@ -55,22 +53,24 @@ Worker::~Worker ()
 
 void Worker::open ()
 {
-  ScopedLock lock (m_mutex);
-
-  vfassert (!m_open);
-
-  m_open = true;
+#if VF_DEBUG
+  bool success = m_open.compareAndSetBool (1, 0);
+  vfassert (success);
+#else
+  m_open.compareAndSetBool (1, 0);
+#endif
 }
 
 // Can still have pending calls, just can't put new ones in.
 
 void Worker::close ()
 {
-  ScopedLock lock (m_mutex);
-
-  vfassert (m_open);
-
-  m_open = false;
+#if VF_DEBUG
+  bool success = m_open.compareAndSetBool (0, 1);
+  vfassert (success);
+#else
+  m_open.compareAndSetBool (0, 1);
+#endif
 }
 
 bool Worker::process ()
@@ -91,8 +91,12 @@ bool Worker::do_process (const bool from_call)
   if (!from_call)
   {
     // Recursive calls to process() are disallowed.
-    vfassert (!m_in_process);
-    m_in_process = true;
+#if VF_DEBUG
+    bool success = m_in_process.compareAndSetBool (1, 0);
+    vfassert (success);
+#else
+    m_in_process.compareAndSetBool (1, 0);
+#endif
 
     // Remember the thread we are called on. This
     // is done inside the mutex to handle the case
@@ -102,7 +106,7 @@ bool Worker::do_process (const bool from_call)
   else
   {
     // do_call() should have set this flag
-    vfassert (m_in_process);
+    vfassert (m_in_process.get() == 1);
 
     // If we got here from do_call() then the thread
     // should have already been set and tested safely
@@ -158,8 +162,12 @@ bool Worker::do_process (const bool from_call)
     // Turn off the process flag if we turned it on
     if (!from_call)
     {
-      vfassert (m_in_process);
-      m_in_process = false;
+#if VF_DEBUG
+      bool success = m_in_process.compareAndSetBool (0, 1);
+      vfassert (success);
+#else
+      m_in_process.compareAndSetBool (0, 1);
+#endif
     }
 
     did_something = false;
@@ -186,7 +194,7 @@ void Worker::do_call (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-  vfassert (m_open);
+  vfassert (m_open.get() == 1);
 
   bool sync;
 
@@ -198,7 +206,7 @@ void Worker::do_call (Call* c)
     // See if do_process() is already in our call chain because
     // of tail recursion. This value is not meaningful unless
     // on_process_thread is true.
-    const bool in_process = m_in_process;
+    const bool in_process = m_in_process.get() == 1;
 
     sync = on_process_thread && !in_process;
   }
@@ -207,12 +215,20 @@ void Worker::do_call (Call* c)
   // flag to detect if another thread tries to process, which
   // is undefined behavior.
   if (sync)
-    m_in_process = true;
+  {
+#if VF_DEBUG
+    bool success = m_in_process.compareAndSetBool (1, 0);
+    vfassert (success);
+#else
+    m_in_process.compareAndSetBool (1, 0);
+#endif
+  }
 
   const bool first = m_calls.push_front (c);
 
   // TODO: IS there a way to better manage the signal
   // when we are called on the process thread?
+  // THIS LOOKS WRONG for the case of sync==true ???
   if (first)
     signal ();
 
@@ -232,11 +248,13 @@ void Worker::do_call (Call* c)
     {
     }
 
+#if VF_DEBUG
+    bool success = m_in_process.compareAndSetBool (0, 1);
     // Should still be set
-    vfassert (m_in_process);
-
-    // set the flag back
-    m_in_process = false;
+    vfassert (success);
+#else
+    m_in_process.compareAndSetBool (0, 1);
+#endif
   }
 }
 

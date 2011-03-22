@@ -52,12 +52,11 @@ private:
 
 private:
   const char* m_szName; // for debugging
-  bool m_open;
-  bool m_in_process;
-  Calls m_calls;
-  Mutex m_mutex;
-  VF_NAMESPACE::Thread::id m_id;
+  Atomic <int> m_open;
+  Atomic <int> m_in_process;
   LockFree::Allocator <Call> m_allocator;
+  Calls m_calls;
+  volatile Thread::id m_id;
 
 private:
   // Call all the functors in the queue.
@@ -81,10 +80,7 @@ protected:
   // TODO: Consider making this virtual and having the
   // derived class cause the thread to stop ?
   void close ();
-  bool closed () const { return !m_open; }
-
-  // Derived class uses this to perform additional synchronization
-  Mutex& getMutex () { return m_mutex; }
+  bool closed () const { return m_open.get() == 0; }
 
   // Derived class calls this when the queue is signaled,
   // or whenever it wants to. It is disallowed to call
@@ -116,7 +112,7 @@ public:
   ~Worker ();
 
   // used for diagnostics in Listener
-  bool in_process () const { return m_in_process; }
+  bool in_process () const { return m_in_process.get() == 1; }
 
   // Custom allocator optimized for this pattern of use.
   // This is also used by the listeners system.
@@ -143,7 +139,7 @@ public:
   //
   // Add a functor to the queue. It may be executed immediately.
   //
-  // Functors may not cause thread interruption points.
+  // Functors MUST NOT cause thread interruptions.
   //
   template <class Functor>
   void callf (const Functor& f)

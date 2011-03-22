@@ -11,23 +11,17 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_CatchAny.h"
 #include "vf/vf_JuceThread.h"
 
-#define LOCK_FREE 1
-
 namespace Juce {
 
-Thread::ExceptionBased::ExceptionBased ()
+Thread::InterruptionModel::InterruptionModel ()
   : m_state (stateReset)
-  , m_waiting (false)
-  , m_interrupt (false)
 {
 }
 
-void Thread::ExceptionBased::wait (Thread& thread)
+bool Thread::InterruptionModel::do_wait ()
 {
-  bool do_wait;
+  bool should_wait;
 
-#if LOCK_FREE
-  // Lock-free
   for (;;)
   {
     const int state = m_state.get ();
@@ -36,7 +30,7 @@ void Thread::ExceptionBased::wait (Thread& thread)
 
     if (state == stateSignaled)
     {
-      do_wait = false;
+      should_wait = false;
 
       m_state.set (stateReset);
 
@@ -44,43 +38,19 @@ void Thread::ExceptionBased::wait (Thread& thread)
     }
     else if (m_state.compareAndSetBool (stateWaiting, stateReset))
     {
-      do_wait = true;
+      should_wait = true;
 
       break;
     }
   }
 
-#else
-  {
-    ScopedLock lock (m_mutex);
-
-    fatal_vfassert (!m_waiting);
-
-    if (m_interrupt)
-    {
-      m_interrupt = false;
-      do_wait = false;
-    }
-    else
-    {
-      m_waiting = true;
-      do_wait = true;
-    }
-  }
-#endif
-
-  if (do_wait)
-    thread.wait (-1);
-  else
-    throw detail::Thread::Interruption();
+  return should_wait;
 }
 
-void Thread::ExceptionBased::interrupt (Thread& thread)
+void Thread::InterruptionModel::interrupt (Thread& thread)
 {
-#if LOCK_FREE
-  bool do_signal;
+  bool should_signal;
 
-  // Lock-free
   for (;;)
   {
     const int state = m_state.get ();
@@ -88,69 +58,52 @@ void Thread::ExceptionBased::interrupt (Thread& thread)
     if (state == stateSignaled ||
         m_state.compareAndSetBool (stateSignaled, stateReset))
     {
-      do_signal = false;
+      should_signal = false;
 
       break;
     }
     else if (m_state.compareAndSetBool (stateReset, stateWaiting))
     {
-      do_signal = true;
+      should_signal = true;
 
       break;
     }
   }
 
-  if (do_signal)
+  if (should_signal)
     thread.notify ();
-
-#else
-  ScopedLock lock (m_mutex);
-
-  // TODO: USE ATOMIC
-  if (m_waiting)
-  {
-    m_waiting = false;
-
-    thread.notify ();
-  }
-  else
-  {
-    m_interrupt = true;
-  }
-
-#endif
 }
 
-Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
+bool Thread::InterruptionModel::do_interruptionPoint ()
 {
-  bool interrupted;
-
-  //
-  // Lock-free
-  //
-#if LOCK_FREE
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
   // How could we possibly be in the wait state and get called?
   vfassert (m_state.get() != stateWaiting);
 
   // If we are in the signaled state, switch to reset, and interrupt.
   // Only one thread will "win" this contest.
-  interrupted = m_state.compareAndSetBool (stateReset, stateSignaled);
+  const bool interrupted = m_state.compareAndSetBool (stateReset, stateSignaled);
 
-#else
-  // TODO: USE ATOMIC
-  {
-    ScopedLock lock (m_mutex);
+  return interrupted;
+}
 
-    fatal_vfassert (!m_waiting);
+//------------------------------------------------------------------------------
 
-    do_interrupt = m_interrupt;
+void Thread::ExceptionBased::wait (Thread& thread)
+{
+  const bool should_wait = do_wait ();
 
-    m_interrupt = false;
-  }
+  if (should_wait)
+    thread.wait (-1);
+  else
+    throw detail::Thread::Interruption();
+}
 
-#endif
+Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
+{
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  const bool interrupted = do_interruptionPoint ();
 
   if (interrupted)
     throw detail::Thread::Interruption();
@@ -160,160 +113,20 @@ Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
 
 //------------------------------------------------------------------------------
 
-Thread::PollingBased::PollingBased ()
-  : m_state (stateReset)
-  , m_waiting (false)
-  , m_interrupt (false)
-{
-}
-
 void Thread::PollingBased::wait (Thread& thread)
 {
-  bool do_wait;
+  const bool should_wait = do_wait ();
 
-#if LOCK_FREE
-  // Lock-free
-  for (;;)
-  {
-    const int state = m_state.get ();
-
-    vfassert (state != stateWaiting);
-
-    if (state == stateSignaled)
-    {
-      do_wait = false;
-
-      m_state.set (stateReset);
-
-      break;
-    }
-    else if (m_state.compareAndSetBool (stateWaiting, stateReset))
-    {
-      do_wait = true;
-
-      break;
-    }
-  }
-
-  if (do_wait)
+  if (should_wait)
     thread.wait (-1);
-
-#else
-  // Wait-states
-  {
-    ScopedLock lock (m_mutex);
-
-    fatal_vfassert (!m_waiting);
-    
-    if (m_interrupt)
-    {
-      do_wait = false;
-      m_interrupt = false;
-      m_waiting = false;
-    }
-    else
-    {
-      do_wait = true;
-      m_waiting = true;
-    }
-  }
-
-  if (do_wait)
-  {
-    thread.wait (-1);
-
-    {
-      ScopedLock lock (m_mutex);
-
-      vfassert (!m_waiting);
-
-      m_waiting = false;
-    }
-  }
-
-#endif
-}
-
-void Thread::PollingBased::interrupt (Thread& thread)
-{
-#if LOCK_FREE
-  bool do_signal;
-
-  // Lock-free
-  for (;;)
-  {
-    const int state = m_state.get ();
-
-    if (state == stateSignaled ||
-        m_state.compareAndSetBool (stateSignaled, stateReset))
-    {
-      do_signal = false;
-
-      break;
-    }
-    else if (m_state.compareAndSetBool (stateReset, stateWaiting))
-    {
-      do_signal = true;
-
-      break;
-    }
-  }
-
-  if (do_signal)
-    thread.notify ();
-
-#else
-  {
-    ScopedLock lock (m_mutex);
-
-    // TODO: USE ATOMIC
-    if (m_waiting)
-    {
-      fatal_vfassert (!m_interrupt);
-
-      m_waiting = false;
-
-      thread.notify ();
-    }
-    else
-    {
-      m_interrupt = true;
-    }
-  }
-#endif
 }
 
 Thread::Interrupted Thread::PollingBased::interruptionPoint (Thread& thread)
 {
-  bool interrupted;
-
-  //
-  // Lock-free
-  //
-#if LOCK_FREE
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
-  // How could we possibly be in the wait state and get called?
-  vfassert (m_state.get() != stateWaiting);
 
-  // If we are in the signaled state, switch to reset, and interrupt.
-  // Only one thread will "win" this contest.
-  interrupted = m_state.compareAndSetBool (stateReset, stateSignaled);
-
-#else
-  {
-    ScopedLock lock (m_mutex);
-
-    // TODO: USE ATOMIC
-    fatal_vfassert (!m_waiting);
-    fatal_vfassert (thread.isTheCurrentThread ());
-
-    interrupted = m_interrupt;
-
-    m_interrupt = false;
-  }
-
-#endif
+  const bool interrupted = do_interruptionPoint ();
 
   return Thread::Interrupted (interrupted);
 }
