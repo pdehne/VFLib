@@ -43,6 +43,11 @@ public:
   bool is_reset () const { return m_value.get() == 0; }
   bool is_signaled () const { return m_value.get() > 0; }
 
+  // for diagnostics ONLY!
+#if VF_DEBUG
+  int get_value () const { return m_value.get(); }
+#endif
+
 private:
   VF_JUCE::Atomic <int> m_value;
 };

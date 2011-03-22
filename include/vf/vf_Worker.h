@@ -133,7 +133,7 @@ protected:
   virtual void signal () = 0;
 
 private:
-  // List of fixed-size abstract functor of void(*)(void).
+  // List of fixed-size functors
   struct Call;
   typedef LockFree::Stack <Call> Calls;
   struct Call : LockFree::List <Call>::Node, func_t

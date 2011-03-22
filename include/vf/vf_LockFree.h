@@ -324,7 +324,18 @@ private:
     void* p = m_free.pop_front();
 
     if (!p)
+    {
       p = ::operator new (sizeof(Elem)); // implicit global mutex
+
+#if 0
+#if VF_DEBUG
+      m_count.addref ();
+      String s;
+      s << "m_count = " << String (m_count.get_value());
+      Logger::outputDebugString (s);
+#endif
+#endif
+    }
 
     return p;
   }
@@ -336,6 +347,11 @@ private:
 
 private:
   Stack <Elem, Tag> m_free;
+#if 0
+#if VF_DEBUG
+  Atomic::UsageCounter m_count;
+#endif
+#endif
 };
 
 //------------------------------------------------------------------------------
