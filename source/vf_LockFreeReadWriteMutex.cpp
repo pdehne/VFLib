@@ -10,7 +10,8 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_LockFree.h"
+#include "vf/vf_LockFreeDelay.h"
+#include "vf/vf_LockFreeReadWriteMutex.h"
 
 namespace LockFree {
 

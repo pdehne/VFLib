@@ -4574,11 +4574,35 @@
 				>
 			</File>
 			<File
-				RelativePath="..\source\vf_LockFree.cpp"
+				RelativePath="..\include\vf\vf_LockFree.h"
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_LockFree.h"
+				RelativePath="..\include\vf\vf_LockFreeAllocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFreeDelay.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFreeList.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFreeQueue.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_LockFreeReadWriteMutex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFreeReadWriteMutex.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LockFreeStack.h"
 				>
 			</File>
 		</Filter>
