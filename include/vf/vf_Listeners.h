@@ -129,14 +129,12 @@ private:
       explicit Entry (Group::Ptr g) : group (g) {}
       ~Entry () { jassert (call.get () == 0); }
       Group::Ptr group;
-      // DOES THIS NEED TO BE ATOMIC?
-      VF_JUCE::Atomic <Call*> call;
+      Atomic::Pointer <Call> call;
     };
     void do_call (Entry::Ptr entry);
 
   private:
     Entries m_entries;
-    VF_JUCE::Atomic <Call*> m_call;
   };
 
   // The physical memory for the pointer to member is

@@ -20,9 +20,8 @@ BEGIN_VF_NAMESPACE
 // Change this to the file to check for problems
 //
 
-#include "vf/vf_Threads.h"
+#include "vf/vf_JuceThread.h"
 
 END_VF_NAMESPACE
 
-// Hides a linker warning
-namespace { void dummmy () { } }
+namespace { void dummmy () { } } // Hides a linker warning

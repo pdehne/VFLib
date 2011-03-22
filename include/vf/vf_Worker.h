@@ -10,7 +10,7 @@
 #include "vf/vf_List.h"
 #include "vf/vf_LockFree.h"
 #include "vf/vf_Mutex.h"
-#include "vf/vf_Threads.h"
+#include "vf/vf_Thread.h"
 
 //
 // Queue that executes functors on another thread, with these invariants:
@@ -40,7 +40,7 @@ public:
   ~Worker ();
 
   // used for diagnostics in Listener
-  bool in_process () const { return m_in_process.get() == 1; }
+  bool in_process () const { return m_in_process.isSet(); }
 
   // Add a functor to the queue. It may be executed immediately.
   //
@@ -154,10 +154,10 @@ private:
 private:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
-  VF_JUCE::Atomic <int> m_closed;
-  VF_JUCE::Atomic <int> m_in_process;
-  LockFree::Allocator <Call> m_allocator;
   Calls m_calls;
+  Atomic::Flag m_closed;
+  Atomic::Flag m_in_process;
+  static LockFree::Allocator <Call> m_allocator;
 };
 
 #endif

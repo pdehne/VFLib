@@ -9,3 +9,5 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Thread.h"
 
 END_VF_NAMESPACE
+
+namespace { void dummmy () { } } // Hides a linker warning

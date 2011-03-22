@@ -9,7 +9,8 @@
 // Checks to make sure the public header compiles without Boost.
 //
 
-#define VF_HAVE_BOOST 0
+// We need boost now
+//#define VF_HAVE_BOOST 0
 
 #include "vf/vf.h"
 

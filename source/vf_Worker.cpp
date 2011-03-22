@@ -15,43 +15,33 @@ namespace {
 class ScopedFlag : NonCopyable
 {
 public:
-  explicit ScopedFlag (VF_JUCE::Atomic <int>& flag) : m_flag (flag)
+  explicit ScopedFlag (Atomic::Flag& flag) : m_flag (flag)
   {
-#if VF_DEBUG
-    const bool success = m_flag.compareAndSetBool (1, 0);
-    vfassert (success);
-#else
-    m_flag.compareAndSetBool (1, 0);
-#endif
+    m_flag.set ();
   }
 
   ~ScopedFlag ()
   {
-#if VF_DEBUG
-    const bool success = m_flag.compareAndSetBool (0, 1);
-    vfassert (success);
-#else
-    m_flag.compareAndSetBool (0, 1);
-#endif
+    m_flag.clear ();
   }
 
 private:
-  VF_JUCE::Atomic <int>& m_flag;
+  Atomic::Flag& m_flag;
 };
 
 }
 
+LockFree::Allocator <Worker::Call> Worker::m_allocator;
+
 Worker::Worker (const char* szName)
 : m_szName (szName)
-, m_closed (0)
-, m_in_process (0)
 {
 }
 
 Worker::~Worker ()
 {
   // Someone forget to close the queue.
-  vfassert (m_closed.get() == 1);
+  vfassert (m_closed.isSet());
 
   // Can't destroy queue with unprocessed calls.
   vfassert (m_calls.empty());
@@ -73,12 +63,7 @@ bool Worker::process ()
 // Can still have pending calls, just can't put new ones in.
 void Worker::close ()
 {
-#if VF_DEBUG
-  bool success = m_closed.compareAndSetBool (1, 0);
-  vfassert (success);
-#else
-  m_closed.compareAndSetBool (1, 0);
-#endif
+  m_closed.set ();
 }
 
 // Process everything in the queue. The list of pending calls is
@@ -155,7 +140,7 @@ void Worker::do_call (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-  vfassert (m_closed.get() != 1);
+  vfassert (m_closed.isClear());
 
   const bool first = m_calls.push_front (c);
 

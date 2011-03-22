@@ -155,10 +155,6 @@
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
-			<File
-				RelativePath="..\include\vf\vf_String.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="diagnostic"
@@ -193,10 +189,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_FPUFlags.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_LeakChecked.h"
 				>
 			</File>
 			<File
@@ -288,14 +280,6 @@
 			Name="threads"
 			>
 			<File
-				RelativePath="..\source\vf_BoostThread.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_BoostThread.h"
-				>
-			</File>
-			<File
 				RelativePath="..\source\vf_ConditionVariable.cpp"
 				>
 			</File>
@@ -309,14 +293,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_GuiWorker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\source\vf_JuceThread.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_JuceThread.h"
 				>
 			</File>
 			<File
@@ -352,10 +328,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_Threads.h"
-				>
-			</File>
-			<File
 				RelativePath="..\source\vf_ThreadWorker.cpp"
 				>
 			</File>
@@ -375,14 +347,6 @@
 		<Filter
 			Name="functional"
 			>
-			<File
-				RelativePath="..\include\vf\vf_Bind.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_Callable.h"
-				>
-			</File>
 			<File
 				RelativePath="..\include\vf\vf_Function.h"
 				>
@@ -4606,6 +4570,10 @@
 			Name="lockfree"
 			>
 			<File
+				RelativePath="..\include\vf\vf_Atomic.h"
+				>
+			</File>
+			<File
 				RelativePath="..\source\vf_LockFree.cpp"
 				>
 			</File>
@@ -4613,6 +4581,62 @@
 				RelativePath="..\include\vf\vf_LockFree.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="_native"
+			>
+			<File
+				RelativePath="..\include\vf\vf_Bind.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Intrinsics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_LeakChecked.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_String.h"
+				>
+			</File>
+			<Filter
+				Name="boost"
+				>
+				<File
+					RelativePath="..\include\vf\vf_BoostMutex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\vf_BoostThread.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_BoostThread.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="juce"
+				>
+				<File
+					RelativePath="..\include\vf\vf_JuceAtomic.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_JuceMutex.h"
+					>
+				</File>
+				<File
+					RelativePath="..\source\vf_JuceThread.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_JuceThread.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"

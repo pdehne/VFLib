@@ -9,7 +9,7 @@
 
 #include "vf/vf_Function.h"
 #include "vf/vf_String.h"
-#include "vf/vf_Thread.h"
+#include "vf/vf_ThreadBase.h"
 
 //
 // Implementation of vf::Thread using Boost

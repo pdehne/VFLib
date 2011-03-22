@@ -17,37 +17,24 @@
 // - Derived class may override the behavior of destruction.
 //   For example, to offload the delete cost to another thread.
 //
-// TODO: REMOVE DEPEDENDENCE ON JUCE ATOMIC!!!
 class SharedObject
 {
 public:
   inline void incReferenceCount() throw()
   {
-    ++refCount;
+    m_refs.addref ();
   }
 
   inline bool decReferenceCount() throw()
   {
-    vfassert (getReferenceCount() > 0);
+    vfassert (m_refs.is_signaled());
 
-    bool final;
+    const bool final = m_refs.release ();
 
-    if (--refCount == 0)
-    {
+    if (final)
       destroySharedObject ();
-      final = true;
-    }
-    else
-    {
-      final = false;
-    }
     
     return final;
-  }
-
-  inline int getReferenceCount() const throw()
-  {
-    return refCount.get();
   }
 
 protected:
@@ -57,7 +44,7 @@ protected:
 
   virtual ~SharedObject()
   {
-    vfassert (getReferenceCount() == 0);
+    vfassert (m_refs.is_reset ());
   }
 
   virtual void destroySharedObject ()
@@ -67,7 +54,7 @@ protected:
   }
 
 private:
-  VF_JUCE::Atomic <int> refCount;
+  Atomic::UsageCounter m_refs;
 };
 
 template <class SharedObjectClass>

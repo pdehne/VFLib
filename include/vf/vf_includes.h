@@ -5,6 +5,10 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
+#ifndef __VF_ATOMIC_VFHEADER__
+#include "vf/vf_Atomic.h"
+#endif
+
 #ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
 #include "vf/vf_AudioSampleBufferArray.h"
 #endif
@@ -69,17 +73,26 @@
 #include "vf/vf_Worker.h"
 #endif
 
-//
-// Boost-specific
-//
 
-#if VF_HAVE_BOOST
-
-  #ifndef __VF_BOOSTTHREAD_VFHEADER__
-  #include "vf/vf_BoostThread.h"
+  #ifndef __VF_LOCKFREE_VFHEADER__
+  #include "vf/vf_LockFree.h"
   #endif
 
-#endif
+  #ifndef __VF_SHAREDOBJECT_VFHEADER__
+  #include "vf/vf_SharedObject.h"
+  #endif
+
+  #ifndef __VF_LISTENERS_VFHEADER__
+  #include "vf/vf_Listeners.h"
+  #endif
+
+  #ifndef __VF_MURMURHASH_VFHEADER__
+  #include "vf/vf_MurmurHash.h" // Depends on some Juce declarations and macros
+  #endif
+
+  #ifndef __VF_DB_VFHEADER__
+  #include "vf/vf_db.h" // db uses both some Juce and Boost
+  #endif
 
 //
 // Juce-specific
@@ -91,42 +104,8 @@
   #include "vf/vf_AudioBufferPool.h"
   #endif
 
-  #ifndef __VF_CONDITIONVARIABLE_VFHEADER__
-  #include "vf/vf_ConditionVariable.h"
-  #endif
-
-  #ifndef __VF_JUCETHREAD_VFHEADER__
-  #include "vf/vf_JuceThread.h"
-  #endif
-
   #ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
   #include "vf/vf_RadialImageConvolutionKernel.h"
-  #endif
-
-  // UNFORTUNATELY BOOST IS MISSING ATOMICS, WHICH WE NEED
-  #ifndef __VF_LOCKFREE_VFHEADER__
-  #include "vf/vf_LockFree.h"
-  #endif
-  #ifndef __VF_SHAREDOBJECT_VFHEADER__
-  #include "vf/vf_SharedObject.h"
-  #endif
-
-  #ifndef __VF_LISTENERS_VFHEADER__
-  #include "vf/vf_Listeners.h"
-  #endif
-
-  // Depends on some declarations and macros
-  #ifndef __VF_MURMURHASH_VFHEADER__
-  #include "vf/vf_MurmurHash.h"
-  #endif
-
-#endif
-
-#if VF_HAVE_BOOST && VF_HAVE_JUCE
-
-  // db uses both some Juce and Boost
-  #ifndef __VF_DB_VFHEADER__
-  #include "vf/vf_db.h"
   #endif
 
 #endif

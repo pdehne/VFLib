@@ -8,16 +8,11 @@
 #if VF_HAVE_JUCE
 
 #include "vf/vf_Function.h"
-#include "vf/vf_Mutex.h"
-#include "vf/vf_Thread.h"
-#include "vf/vf_String.h"
-
-//
-// Implementation of vf::Thread using Juce
-//
+#include "vf/vf_ThreadBase.h"
 
 namespace Juce {
 
+// derivation must be public for dynamic_cast to work
 class Thread : public VF_JUCE::Thread
 {
 public:
@@ -26,10 +21,6 @@ public:
   typedef detail::Thread::Interruption Interruption;
 
 public:
-  //
-  // Interruption models
-  //
-
   class InterruptionModel
   {
   protected:

@@ -5,101 +5,14 @@
 #ifndef __VF_LOCKFREE_VFHEADER__
 #define __VF_LOCKFREE_VFHEADER__
 
+#include "vf/vf_Atomic.h"
 #include "vf/vf_Intrinsics.h"
 #include "vf/vf_Mutex.h"
-#include "vf/vf_Threads.h"
+#include "vf/vf_Thread.h"
 
 //
 // Lock-free data structure implementations
 //
-
-// Our own atomic primitives
-namespace Atomic {
-
-inline void memoryBarrier ()
-{
-  VF_JUCE::Atomic <int>::memoryBarrier ();
-}
-
-//------------------------------------------------------------------------------
-
-// Tracks the amount of usage of a particular resource.
-// The object is considered signaled if there are one or more uses
-class UsageCounter
-{
-public:
-  // These always start at zero
-  UsageCounter () : m_value (0) { }
-
-  // Increments the usage count.
-  // Returns true if the counter was previously non-signaled.
-  bool addref () { return (++m_value) == 1; }
-
-  // Decrements the usage count.
-  // Returns true if the counter became non-signaled.
-  int release () { return (--m_value) == 0; }
-
-  // Returns the signaled state of the counter.
-  // The caller must synchronize the value.
-  bool is_reset () const { return m_value.get() == 0; }
-  bool is_signaled () const { return m_value.get() > 0; }
-
-private:
-  VF_JUCE::Atomic <int> m_value;
-};
-
-//------------------------------------------------------------------------------
-
-// Atomic flag
-class Flag
-{
-public:
-  // Starts non-signaled
-  Flag () : m_value (0) { }
-
-  void set ()
-  {
-#if VF_DEBUG
-    const bool success = m_value.compareAndSetBool (1, 0);
-    vfassert (success);
-#else
-    m_value.set (1);
-#endif
-  }
-
-  void clear ()
-  {
-#if VF_DEBUG
-    const bool success = m_value.compareAndSetBool (0, 1);
-    vfassert (success);
-#else
-    m_value.set (0);
-#endif
-  }
-
-  // returns true if it was successful at changing the flag
-  bool trySet ()
-  {
-    return m_value.compareAndSetBool (1, 0);
-  }
-
-  // returns true if it was successful at changing the flag
-  bool tryClear ()
-  {
-    return m_value.compareAndSetBool (0, 1);
-  }
-
-  // Caller must synchronize
-  bool isSet () const { return m_value.get() == 1; }
-  bool isClear () const { return m_value.get() == 0; }
-
-private:
-  VF_JUCE::Atomic <int> m_value;
-};
-
-}
-
-//------------------------------------------------------------------------------
 
 namespace LockFree {
 
@@ -123,7 +36,7 @@ struct List
     Node () { }
     explicit Node (Node* next) : m_next (next) { }
 
-    VF_JUCE::Atomic <Node*> m_next;
+    Atomic::Pointer <Node> m_next;
   };
 };
 
@@ -161,7 +74,7 @@ public:
     {
       head = other.m_head.get();
     }
-    while (!other.m_head.compareAndSetBool (0, head));
+    while (!other.m_head.compareAndSet (0, head));
 
     m_head = head;
   }
@@ -180,7 +93,7 @@ public:
 
       node->m_next = head;
     }
-    while (!m_head.compareAndSetBool (node, head));
+    while (!m_head.compareAndSet (node, head));
 
     return first;
   }
@@ -199,7 +112,7 @@ public:
 
       head = node->m_next.get();
     }
-    while (!m_head.compareAndSetBool (head, node));
+    while (!m_head.compareAndSet (head, node));
 
     return static_cast <Elem*> (node);
   }
@@ -229,7 +142,7 @@ public:
   }
 
 private:
-  VF_JUCE::Atomic <Node*> m_head;
+  Atomic::Pointer <Node> m_head;
 };
 
 //------------------------------------------------------------------------------
@@ -292,12 +205,12 @@ public:
       {
         if (next == 0)
         {
-          if (m_tail.get()->m_next.compareAndSetBool (node, 0))
+          if (m_tail.get()->m_next.compareAndSet (node, 0))
             break;
         }
         else
         {
-          m_tail.compareAndSetBool (next, tail);
+          m_tail.compareAndSet (next, tail);
         }
       }
     }
@@ -325,10 +238,10 @@ public:
           }
           else
           {
-            m_tail.compareAndSetBool (next, tail);
+            m_tail.compareAndSet (next, tail);
           }
         }
-        else if (m_head.compareAndSetBool (next, head))
+        else if (m_head.compareAndSet (next, head))
         {
           break;
         }
@@ -339,8 +252,8 @@ public:
   }
 
 private:
-  VF_JUCE::Atomic <Node*> m_head;
-  VF_JUCE::Atomic <Node*> m_tail;
+  Atomic::Pointer <Node> m_head;
+  Atomic::Pointer <Node> m_tail;
   Node m_null;
 };
 

@@ -50,7 +50,7 @@ using Boost::Mutex;
 
 #else
 
-#pragma error ("Missing Mutex implementation")
+#error "Missing Mutex"
 
 #endif
 

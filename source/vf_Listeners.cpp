@@ -248,8 +248,8 @@ void Listeners::Proxy::remove (Group::Ptr group)
   }
 }
 
-// Updates m_call and queues do_call for each Group
-// in our list that isn't already in the queue.
+// For each group, updates the call.
+// Queues each group for do_call that isn't already queued.
 // Caller must acquire the group read lock.
 void Listeners::Proxy::do_calls (Call::Ptr c)
 {
@@ -268,7 +268,7 @@ void Listeners::Proxy::do_calls (Call::Ptr c)
     // Atomically exchange the new call for the old one
     Call* old = entry->call.exchange (c.getObject());
 
-    // If no old call then they need to be requeued
+    // If no old call then they need to be queued
     if (!old)
       entry->group->getWorker()->call (&Proxy::do_call, this, entry);
     else
