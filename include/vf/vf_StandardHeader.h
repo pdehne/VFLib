@@ -6,6 +6,7 @@
 #define __VF_STANDARDHEADER_VFHEADER__
 
 // Handy macro that lets pragma warnings be clicked in the output window
+// Usage: #pragma message(VF_LOC_"Advertise here!")
 #define VF_STR2_(x) #x
 #define VF_STR1_(x) VF_STR2_(x)
 #define VF_LOC_ __FILE__ "("VF_STR1_(__LINE__)") : WARNING: "

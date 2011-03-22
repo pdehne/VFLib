@@ -16,64 +16,7 @@ BEGIN_VF_NAMESPACE
 // If this is 1 then we will use a custom allocator
 #define CUSTOM_ALLOCATOR 0
 
-#if CUSTOM_ALLOCATOR && VF_HAVE_PRIVATE_INCLUDES
-
-#include "vfp/page_pool.h"
-#include "vfp/block_pool.h"
-
-namespace {
-
-class Allocator
-{
-private:
-  Mutex m_mutex;
-  page_pool m_pages;
-  block_pool m_blocks;
-
-public:
-  Allocator ()
-    : m_pages (1024)
-    , m_blocks (m_pages)
-  {
-  }
-
-  ~Allocator ()
-  {
-  }
-
-  void* alloc (size_t bytes)
-  {
-    ScopedLock lock (m_Mutex);
-
-    return m_blocks.alloc (bytes);
-  }
-
-  void free (void* p)
-  {
-    ScopedLock lock (m_mutex);
-
-    m_blocks.dealloc (p);
-  }
-
-  void lock ()
-  {
-    m_mutex.enter ();
-  }
-
-  void unlock ()
-  {
-    m_mutex.exit ();
-  }
-
-  void locked_free (void* p)
-  {
-    m_blocks.dealloc (p);
-  }
-};
-
-}
-
-#else
+#define LOCK_FREE 1
 
 namespace {
 
@@ -88,8 +31,6 @@ public:
 };
 
 }
-
-#endif
 
 static Allocator globalAllocator;
 
@@ -188,6 +129,10 @@ bool Worker::do_process (const bool from_call)
   //list.append (m_calls);
   Calls list (m_calls);
 
+#if LOCK_FREE
+  reset ();
+#endif
+
   m_mutex.exit ();
 
   if (!list.empty ())
@@ -195,9 +140,14 @@ bool Worker::do_process (const bool from_call)
     // Process the calls outside the mutex using our
     // local list. We will delete the call objects later.
     // Calling interruption points is invalid from here.
-    for (Calls::iterator iter = list.begin(); iter != list.end(); ++iter)
+    for (Calls::iterator iter = list.begin(); iter != list.end();)
     {
-      iter->operator ()();
+      Call* call = *iter++;
+      call->operator ()();
+
+#if LOCK_FREE
+      m_allocator.Delete (call);
+#endif
     }
 
     // Clear the recursion flag since we are past the
@@ -205,6 +155,7 @@ bool Worker::do_process (const bool from_call)
     if (!from_call)
       m_in_process = false;
 
+#if ! LOCK_FREE
     {
       // Coalesce all the deletes under a single lock
       globalAllocator.lock ();
@@ -239,6 +190,7 @@ bool Worker::do_process (const bool from_call)
 
       m_mutex.exit ();
     }
+#endif
 
     did_something = true;
   }

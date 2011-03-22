@@ -1,12 +1,14 @@
 // Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
+  // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
 #include "vf/vf_Bind.h"
+#include "vf/vf_Callable.h"
 #include "vf/vf_List.h"
+#include "vf/vf_LockFree.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Threads.h"
 
@@ -38,23 +40,17 @@ private:
   typedef List <Call> Calls;
 
   // Abstract nullary functor which can be a list element.
-  class Call : public Calls::Node
-  { 
-  public:
-    virtual ~Call () { }
-    virtual void operator ()() = 0;
-  };
-
-  // Stores the Functor. It must be copy constructible.
-  template <class Functor>
-  class StoredCall : public Call
+  class Call : public LockFree::List <Call>::Node,
+               public Calls::Node,
+               public Callable <void (void)>
   {
   public:
-    explicit StoredCall (Functor const& f) : m_f (f) { }
-    void operator()() { m_f.operator()(); }
-  private:
-    Functor m_f;
+    template <class F>
+    Call (F f) : Callable (f)
+    {
+    }
   };
+
 private:
   const char* m_szName; // for debugging
   bool m_open;
@@ -62,6 +58,7 @@ private:
   Calls m_calls;
   Mutex m_mutex;
   VF_NAMESPACE::Thread::id m_id;
+  LockFree::Allocator <Call> m_allocator;
 
 private:
   // Call all the functors in the queue.
@@ -138,9 +135,7 @@ private:
   template <class Functor>
   void queuef (const Functor& f)
   {
-    Call* c = new (global_alloc (sizeof (StoredCall <Functor>)))
-                  StoredCall <Functor> (f);
-    do_queue (c);
+    do_queue (m_allocator.New (f));
   }
 
 public:
@@ -154,8 +149,7 @@ public:
   template <class Functor>
   void callf (const Functor& f)
   {
-    do_call (new (global_alloc (sizeof (StoredCall <Functor>)))
-                 StoredCall <Functor> (f));
+    do_call (m_allocator.New (f));
   }
 
 #if VF_HAVE_BIND
