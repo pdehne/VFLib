@@ -6,7 +6,7 @@
 #define __VF_WORKER_VFHEADER__
 
 #include "vf/vf_Bind.h"
-#include "vf/vf_Callable.h"
+#include "vf/vf_Function.h"
 #include "vf/vf_List.h"
 #include "vf/vf_LockFree.h"
 #include "vf/vf_Mutex.h"
@@ -34,7 +34,7 @@
 class Worker
 {
 public:
-  typedef Callable <void (void)> func_t;
+  typedef Function <void (void)> func_t;
 
   explicit Worker (const char* szName = "");
   ~Worker ();
@@ -137,7 +137,7 @@ private:
   struct Call;
   typedef LockFree::Stack <Call> Calls;
   struct Call : LockFree::List <Call>::Node, func_t
-    { Call (func_t const& c) : Callable (c) { } };
+    { Call (func_t const& c) : Function (c) { } };
 
 private:
   bool do_process ();

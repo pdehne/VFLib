@@ -165,7 +165,7 @@ void Thread::setPriority (int priority)
 
 void Thread::run ()
 {
-  CatchAny (m_callable);
+  CatchAny (m_function);
 }
 
 //------------------------------------------------------------------------------

@@ -13,16 +13,16 @@
 #include "vf/vf_Bind.h"
 #endif
 
-#ifndef __VF_CALLABLE_VFHEADER__
-#include "vf/vf_Callable.h"
-#endif
-
 #ifndef __VF_CATCHANY_VFHEADER__
 #include "vf/vf_CatchAny.h"
 #endif
 
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
+#endif
+
+#ifndef __VF_FUNCTION_VFHEADER__
+#include "vf/vf_Function.h"
 #endif
 
 #ifndef __VF_GUIWORKER_VFHEADER__

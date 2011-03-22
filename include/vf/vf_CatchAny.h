@@ -5,7 +5,7 @@
 #ifndef __VF_CATCHANY_VFHEADER__
 #define __VF_CATCHANY_VFHEADER__
 
-#include "vf/vf_Callable.h"
+#include "vf/vf_Function.h"
 
 //
 // Executes the function and catches any exception.
@@ -24,7 +24,7 @@
 // and disabling its future use for example.
 //
 
-extern bool CatchAny (Callable <void (void)> f,
+extern bool CatchAny (Function <void (void)> f,
                       bool returnFromException = false);
 
 #endif

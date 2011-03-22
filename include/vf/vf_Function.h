@@ -5,52 +5,68 @@
 #ifndef __VF_FUNCTION_VFHEADER__
 #define __VF_FUNCTION_VFHEADER__
 
-#if 0
 #include "vf/vf_Throw.h"
 
 //
-// Lightweight but limited replacement for boost::function
+// Strong replacement for boost::function:
+//
+// #1 Bounded memory requirements.
+//
+// #2 Always refers to a functor (i.e. is never invalid)
+//
+// #3 Default value (None) is a function that
+//    returns a default object (the result type
+//    constructed with a default constructor).
+//    
+// #4 The return value type must be copyable with
+//    have a default constructor.
 //
 
-// DEPRECATED
-template <typename ReturnType>
-class FunctionType
+template <typename Signature, int Bytes = 64>
+class Function;
+
+//
+// nullary function
+//
+
+template <typename R, int Bytes>
+class Function <R (void), Bytes>
 {
 public:
-  typedef ReturnType result_type;
+  typedef typename R result_type;
+  typedef Function self_type;
 
   struct None
   {
-    typedef typename ReturnType result_type;
-    ReturnType operator()() const
+    typedef typename R result_type;
+    result_type operator() () const
     {
-      return ReturnType();
+      return result_type();
     } 
   };
 
-  // Default constructor is a function that does nothing.
-  FunctionType()
+  Function()
   {
     constructCopyOf (None ());
   }
 
-  FunctionType (const FunctionType& f)
+  Function (const Function& f)
   {
     f.getCall().constructCopyInto (m_storage);
   }
 
   template <class Functor>
-  FunctionType (const Functor& f)
+  Function (const Functor& f)
   {
     constructCopyOf (f);
   }
 
-  ~FunctionType ()
+  ~Function ()
   {
     getCall().~Call();
   }
 
-  FunctionType& operator= (const FunctionType& f)
+  Function& operator= (const Function& f)
   {
     getCall().~Call();
     f.getCall().constructCopyInto (m_storage);
@@ -58,31 +74,29 @@ public:
   }
 
   template <class Functor>
-  FunctionType& operator= (const Functor& f)
+  Function& operator= (const Functor& f)
   {
     getCall().~Call();
     constructCopyOf (f);
     return *this;
   }
 
-  ReturnType operator()()
+  result_type operator()()
   {
     return getCall().operator()();
   }
 
 private:
-  static const int Max = 64;
-
   template <class Functor>
   void constructCopyOf (const Functor& f)
   {
     // If this generates a compile error it means that
-    // your functor is too large for our static buffer.
-    // This class was not designed as a general purpose
-    // replacement for boost::function, it is only used
-    // to provide the functionality needed for this
-    // library without depending on boost.
-    static_vfassert (sizeof (StoredCall <Functor>) <= Max);
+    // the functor is too large for the static buffer.
+    // Increase the storage template parameter until
+    // the error message goes away. This might cause
+    // changes throughout the application with other
+    // template classes that depend on the size.
+    static_vfassert (sizeof (StoredCall <Functor>) <= Bytes);
     new (m_storage) StoredCall <Functor> (f);
   }
 
@@ -91,7 +105,7 @@ private:
   {
     virtual ~Call () {}
     virtual void constructCopyInto (void* p) const = 0;
-    virtual ReturnType operator()() = 0;
+    virtual result_type operator()() = 0;
   };
 
   template <class Functor>
@@ -100,7 +114,7 @@ private:
     explicit StoredCall (const Functor& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
-    ReturnType operator()() { return m_f(); }
+    result_type operator() () { return m_f (); }
   private:
     Functor m_f;
   };
@@ -115,10 +129,116 @@ private:
     return *reinterpret_cast <const Call*> (&m_storage[0]);
   }
 
-  char m_storage [Max]; // should be enough
+  char m_storage [Bytes]; // should be enough
 };
 
-typedef FunctionType <void> Function;
-#endif
+//------------------------------------------------------------------------------
+
+//
+// unary function
+//
+
+template <typename R, typename T1, int Bytes>
+class Function <R (T1 t1), Bytes>
+{
+public:
+  typedef typename R result_type;
+  typedef Function self_type;
+
+  struct None
+  {
+    typedef typename R result_type;
+    result_type operator() (T1) const
+    {
+      return result_type();
+    } 
+  };
+
+  Function()
+  {
+    constructCopyOf (None ());
+  }
+
+  Function (const Function& f)
+  {
+    f.getCall().constructCopyInto (m_storage);
+  }
+
+  template <class Functor>
+  Function (const Functor& f)
+  {
+    constructCopyOf (f);
+  }
+
+  ~Function ()
+  {
+    getCall().~Call();
+  }
+
+  Function& operator= (const Function& f)
+  {
+    getCall().~Call();
+    f.getCall().constructCopyInto (m_storage);
+    return *this;
+  }
+
+  template <class Functor>
+  Function& operator= (const Functor& f)
+  {
+    getCall().~Call();
+    constructCopyOf (f);
+    return *this;
+  }
+
+  result_type operator() (T1 t1)
+  {
+    return getCall().operator() (t1);
+  }
+
+private:
+  template <class Functor>
+  void constructCopyOf (const Functor& f)
+  {
+    // If this generates a compile error it means that
+    // the functor is too large for the static buffer.
+    // Increase the storage template parameter until
+    // the error message goes away. This might cause
+    // changes throughout the application with other
+    // template classes that depend on the size.
+    static_vfassert (sizeof (StoredCall <Functor>) <= Bytes);
+    new (m_storage) StoredCall <Functor> (f);
+  }
+
+private:
+  struct Call
+  {
+    virtual ~Call () {}
+    virtual void constructCopyInto (void* p) const = 0;
+    virtual result_type operator() (T1 t1) = 0;
+  };
+
+  template <class Functor>
+  struct StoredCall : Call
+  {
+    explicit StoredCall (const Functor& f) : m_f (f) { }
+    StoredCall (const StoredCall& c) : m_f (c.m_f) { }
+    void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
+    result_type operator() (T1 t1) { return m_f (t1); }
+  private:
+    Functor m_f;
+  };
+
+  Call& getCall ()
+  {
+    return *reinterpret_cast <Call*> (&m_storage[0]);
+  }
+
+  const Call& getCall () const
+  {
+    return *reinterpret_cast <const Call*> (&m_storage[0]);
+  }
+
+  char m_storage [Bytes]; // should be enough
+};
 
 #endif

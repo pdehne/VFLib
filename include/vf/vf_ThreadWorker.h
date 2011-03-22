@@ -6,8 +6,8 @@
 #define __VF_THREADWORKER_VFHEADER__
 
 #include "vf/vf_Bind.h"
-#include "vf/vf_Callable.h"
 #include "vf/vf_CatchAny.h"
+#include "vf/vf_Function.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
@@ -29,9 +29,9 @@
 class ThreadWorker : public Worker
 {
 public:
-  typedef Callable <const Thread::Interrupted (void)> idle_t;
-  typedef Callable <void (void)> init_t;
-  typedef Callable <void (void)> exit_t;
+  typedef Function <const Thread::Interrupted (void)> idle_t;
+  typedef Function <void (void)> init_t;
+  typedef Function <void (void)> exit_t;
 
   ThreadWorker (const char* szName) : Worker (szName)
   {
@@ -145,7 +145,7 @@ public:
   // Interrupts the idle function by queueing a call that does nothing.
   void interrupt ()
   {
-    call (Callable <void (void)>::None ());
+    call (Function <void (void)>::None ());
   }
 
 private:

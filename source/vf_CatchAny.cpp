@@ -139,7 +139,7 @@ END_VF_NAMESPACE
 
 BEGIN_VF_NAMESPACE
 
-bool CatchAny (Callable <void (void)> f, bool returnFromException)
+bool CatchAny (Function <void (void)> f, bool returnFromException)
 {
   bool caughtException = true; // assume the worst
 
