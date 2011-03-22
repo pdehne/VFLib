@@ -149,6 +149,8 @@ public:
   //
   // Add a functor to the queue. It may be executed immediately.
   //
+  // Functors may not cause thread interruption points.
+  //
   template <class Functor>
   void callf (const Functor& f)
   {

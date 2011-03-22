@@ -46,7 +46,8 @@ public:
   //
   // Starts the worker.
   //
-  void start (Callable <bool (void)> worker_idle = Callable <bool (void)>::None(),
+  void start (Callable <const Thread::Interrupted (void)> worker_idle =
+                Callable <const Thread::Interrupted (void)>::None(),
 			        Function worker_init = Function::None(),
               Function worker_exit = Function::None())
   {
@@ -74,6 +75,9 @@ public:
   //
   // During a call to stop() the Worker is closed, and attempts to
   // queue new calls will throw a runtime exception.
+  //
+  // Any listeners registered on the worker need to be removed
+  // before stop is called
   //
   void stop (const bool wait)
   {
@@ -163,7 +167,7 @@ private:
       {
         // HACK! Relying on FunctionType <bool> returning
         // false for None()::operator()()
-        bool interrupted = m_idle ();
+        Thread::Interrupted interrupted = m_idle ();
 
         if (!interrupted)
           interrupted = interruptionPoint ();
@@ -188,7 +192,7 @@ private:
   ThreadType m_thread;
   Function m_init;
   //FunctionType <bool> m_idle;
-  Callable <bool (void)> m_idle;
+  Callable <const Thread::Interrupted (void)> m_idle;
   Function m_exit;
 };
 

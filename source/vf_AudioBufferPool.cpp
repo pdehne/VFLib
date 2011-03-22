@@ -11,6 +11,7 @@ BEGIN_VF_NAMESPACE
 AudioBufferPool::Buffer::Buffer (int numChannels,
                                  int numSamples)
   : AudioSampleBuffer (numChannels, numSamples)
+  , m_samplesAllocated (numChannels * numSamples)
 {
 }
 

@@ -83,7 +83,7 @@ Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
   if (do_interrupt)
     throw detail::Thread::Interruption();
 
-  return false;
+  return Thread::Interrupted (false);
 }
 
 //------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ Thread::Interrupted Thread::PollingBased::interruptionPoint (Thread& thread)
     m_interrupt = false;
   }
 
-  return interrupted;
+  return Thread::Interrupted (interrupted);
 }
 
 //------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ Juce::Thread::Interrupted interruptionPoint ()
     interrupted = false;
   }
 
-  return interrupted;
+  return Thread::Interrupted (interrupted);
 }
 
 void setPriority (int priority) // [0, 10] where 5 = normal

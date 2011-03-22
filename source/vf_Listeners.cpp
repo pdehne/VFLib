@@ -377,7 +377,7 @@ void Listeners::Proxy::add (Group::Ptr group)
 // Caller is responsible for making sure the group exists.
 void Listeners::Proxy::remove (Group::Ptr group)
 {
-  for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end(); ++iter)
+  for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end();)
   {
     Entry::Ptr entry = *iter++;
 
@@ -617,13 +617,13 @@ void Listeners::remove_void (void* const listener)
       if (group->empty ())
       {
         // Tell proxies to remove the group
-        m_proxies_mutex.enter_read ();
+        m_proxies_mutex.enter_write ();
         for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
         {
           Proxy* proxy = *iter++;
           proxy->remove (group);
         }
-        m_proxies_mutex.exit_read ();
+        m_proxies_mutex.exit_write ();
 
         // Remove it from the list and manually release
         // the reference since the list uses raw pointers.

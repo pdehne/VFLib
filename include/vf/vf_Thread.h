@@ -23,7 +23,13 @@ class Interruption
 class Interrupted
 {
 public:
-  Interrupted (bool interrupted = false)
+  Interrupted ()
+   : m_interrupted (false)
+   , m_checked (false)
+  {
+  }
+
+  explicit Interrupted (bool interrupted)
    : m_interrupted (interrupted)
    , m_checked (false)
   {
@@ -49,6 +55,7 @@ public:
     return *this;
   }
 
+  // TODO: safe bool idiom
   operator bool () const
   {
     m_checked = true;

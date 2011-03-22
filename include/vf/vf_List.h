@@ -28,7 +28,7 @@ protected:
   static void check_null (const void* node)
   {
     if (!node)
-      throw std::out_of_range ("invalid iterator");
+      Throw (std::out_of_range ("invalid iterator"));
   }
 
 private:

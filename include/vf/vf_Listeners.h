@@ -344,6 +344,9 @@ public:
   //  #3 The listener must exist in the list.
   //  #4 This can be called from any thread.
   //
+  // A listener should always be removed before it's corresponding
+  //   Worker is closed.
+  //
   void remove (ListenerClass* const listener)
   {
     remove_void (listener);

@@ -71,7 +71,7 @@ Thread::Interrupted Thread::interruptionPoint ()
     throw detail::Thread::Interruption();
   }
 
-  return false;
+  return Thread::Interrupted (false);
 }
 
 namespace CurrentThread {
@@ -93,7 +93,7 @@ Thread::Interrupted interruptionPoint ()
     throw detail::Thread::Interruption();
   }
 
-  return false;
+  return Thread::Interrupted (false);
 }
 
 }
