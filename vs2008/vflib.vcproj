@@ -359,6 +359,10 @@
 				RelativePath="..\include\vf\vf_Function.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_Type.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="math"
