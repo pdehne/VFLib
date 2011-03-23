@@ -29,7 +29,6 @@ class Listeners
 private:
   typedef unsigned long timestamp_t;
 
-  // MAKE Vf::List WORK WITH SHARED OBJECTS and raw pointers
   class Group;
   typedef List <Group> Groups;
 
@@ -42,8 +41,6 @@ private:
   //
   class Call : public SharedObject, NonCopyable
   {
-  //protected:
-  //  virtual ~Call () {}
   public:
     typedef SharedObjectPtr <Call> Ptr;
     explicit Call (const timestamp_t timestamp)
