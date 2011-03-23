@@ -318,12 +318,7 @@ Listeners::~Listeners ()
     // If this goes off it means a Listener forgot to remove.
     vfassert (group->empty ());
 
-#ifdef JUCE_DEBUG
-    const bool final = group->decReferenceCount ();
-    vfassert (final);
-#else
     group->decReferenceCount ();
-#endif
   }
 
   // Proxies are never deleted until here.
