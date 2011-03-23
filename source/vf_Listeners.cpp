@@ -48,7 +48,7 @@ Listeners::Group::~Group ()
 void Listeners::Group::add (void* listener,
                             const timestamp_t timestamp)
 {
-  m_mutex.enter ();
+  VF_NAMESPACE::ScopedLock lock (m_mutex);
 
   vfassert (!contains (listener));
 
@@ -61,8 +61,6 @@ void Listeners::Group::add (void* listener,
   entry->listener = listener;
   entry->timestamp = timestamp;
   m_list.push_back (entry);
-
-  m_mutex.exit ();
 }
 
 // Removes the listener from the group if it exists.
@@ -71,7 +69,7 @@ bool Listeners::Group::remove (void* listener)
 {
   bool found = false;
 
-  m_mutex.enter ();
+  VF_NAMESPACE::ScopedLock lock (m_mutex);
 
   // Should never be able to get here while in do_call()
   vfassert (m_listener == 0);
@@ -87,8 +85,6 @@ bool Listeners::Group::remove (void* listener)
       break;
     }
   }
-
-  m_mutex.exit ();
 
   return found;
 }
@@ -138,7 +134,7 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
 {
   if (!empty ())
   {
-    m_mutex.enter ();
+    VF_NAMESPACE::ScopedLock lock (m_mutex);
 
     // Recursion not allowed.
     vfassert (m_listener == 0);
@@ -170,8 +166,6 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
         m_listener = 0;
       }
     }
-
-    m_mutex.exit ();
   }
   else
   {
