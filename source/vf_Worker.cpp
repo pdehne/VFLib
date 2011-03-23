@@ -66,6 +66,26 @@ void Worker::close ()
   m_closed.set ();
 }
 
+// Call the signal function if it hasn't already been called
+// without a matching call to reset.
+//
+void Worker::do_signal ()
+{
+  const bool first = m_signal.trySet ();
+
+  if (first)
+    signal ();
+}
+
+// Call the reset function if we are signaled.
+//
+void Worker::do_reset ()
+{
+  const bool last = m_signal.tryClear ();
+  if (last)
+    reset ();
+}
+
 // Process everything in the queue. The list of pending calls is
 // acquired atomically. New calls may enter the queue while we are
 // processing.
@@ -76,42 +96,31 @@ bool Worker::do_process ()
 {
   bool did_something;
 
-  // Atomically transfer the list of calls into an unshared
-  // local variable.
-  //
-  // WARNING
-  // These two should happen atomically but they don't.
-  // My work-around is to perform the reset first. This means
-  // the possibility of a signal and then causing an empty process
-  // list. This is preferable to the alternative, which is no signal
-  // with some unprocessed stuff. It all depends on the ordering of
-  // the next two lines.
-  reset ();
-  // NOTE: another thread could cause signal() here
-  Calls list (m_calls);
-  // NOTE: at this point we could be signaled, but m_calls is empty.
+  Call* call = m_list.pop_front ();
 
-  // this is safe since list is unshared
-  if (!list.empty ())
+  // We must reset here to fulfill requirements. However, due
+  // to the implementation of the queue, it is possible that
+  // we will get an extra signal but get called with an empty list.
+  //
+  do_reset ();
+
+  if (call)
   {
-    // process the calls
-    list.reverse ();
+    did_something = true;
+
+    // This method of processing one at a time has the side
+    // effect of synchronizing calls to the same worker from
+    // a functor.
+    //
     for (;;)
     {
-      Call* call = list.pop_front ();
+      call->operator ()();
+      m_allocator.Delete (call);
 
-      if (call)
-      {
-        call->operator ()();
-        m_allocator.Delete (call);
-      }
-      else
-      {
+      call = m_list.pop_front ();
+      if (call == 0)
         break;
-      }
     }
-
-    did_something = true;
   }
   else
   {
@@ -124,11 +133,9 @@ bool Worker::do_process ()
 // Adds a call to the queue of execution.
 void Worker::do_queue (Call* c)
 {
-  const bool first = m_calls.push_front (c);
+  m_list.push_back (c);
 
-  // if we cause the queue to become non-empty then signal
-  if (first)
-    signal ();
+  do_signal ();
 }
 
 // Append the Call to the queue. If this call is made from the same
@@ -142,11 +149,9 @@ void Worker::do_call (Call* c)
   // process it.
   vfassert (m_closed.isClear());
 
-  const bool first = m_calls.push_front (c);
+  m_list.push_back (c);
 
-  // Must do this to follow spec.
-  if (first)
-    signal ();
+  do_signal ();
 
   // If we are called on the process thread and we are not
   // recursed into do_process, then process the queue. This

@@ -135,11 +135,13 @@ protected:
 private:
   // List of fixed-size functors
   struct Call;
-  typedef LockFree::Stack <Call> Calls;
-  struct Call : LockFree::List <Call>::Node, func_t
+  typedef LockFree::Queue <Call> Calls;
+  struct Call : Calls::Node, func_t
     { Call (func_t const& c) : Function (c) { } };
 
 private:
+  void do_reset ();
+  void do_signal ();
   bool do_process ();
   void do_queue (Call* c);
   void do_call (Call* c);
@@ -154,7 +156,8 @@ private:
 private:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
-  Calls m_calls;
+  Calls m_list;
+  Atomic::Flag m_signal;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
   static LockFree::Allocator <Call> m_allocator;

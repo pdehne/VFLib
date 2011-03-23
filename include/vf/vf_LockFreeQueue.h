@@ -30,7 +30,6 @@ public:
 
   void push_back (Node* node)
   {
-#if 1
     node->m_next.set (0);
 
     Node* prev = m_head.exchange (node);
@@ -38,35 +37,10 @@ public:
     // small window where producer could get caught here
 
     prev->m_next.set (node);
-
-#else
-    Node* tail;
-    Node* next;
-
-    for (;;)
-    {
-      tail = m_tail.get();
-      next = tail->m_next.get();
-
-      if (tail == m_tail.get ())
-      {
-        if (next == 0)
-        {
-          if (m_tail.get()->m_next.compareAndSet (node, 0))
-            break;
-        }
-        else
-        {
-          m_tail.compareAndSet (next, tail);
-        }
-      }
-    }
-#endif
   }
 
   Elem* pop_front ()
   {
-#if 1
     Node* tail = m_tail;
     Node* next = tail->m_next.get ();
 
@@ -104,39 +78,6 @@ public:
     }
 
     return 0;
-#else
-    Node* head;
-    Node* next;
-    Node* tail;
-
-    for (;;)
-    {
-      head = m_head.get();
-      next = head->m_next.get();
-      tail = m_tail.get();
-
-      if (head == m_head.get())
-      {
-        if (head == tail)
-        {
-          if (next == 0)
-          {
-            break;
-          }
-          else
-          {
-            m_tail.compareAndSet (next, tail);
-          }
-        }
-        else if (m_head.compareAndSet (next, head))
-        {
-          break;
-        }
-      }
-    }
-
-    return static_cast <Elem*> (next);
-#endif
   }
 
 private:
