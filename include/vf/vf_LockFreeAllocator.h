@@ -91,11 +91,13 @@ public:
 
   void* alloc ()
   {
-    m_mutex.enter_read ();
+    Node* node;
 
-    Node* node = m_free.pop_front ();
+    {
+      ScopedReadLock lock (m_mutex);
 
-    m_mutex.exit_read ();
+      node = m_free.pop_front ();
+    }
 
     void* p;
 
@@ -123,11 +125,11 @@ public:
   {
     Node* node = toNode (p);
 
-    m_mutex.enter_read ();
+    {
+      ScopedReadLock lock (m_mutex);
 
-    m_junk.push_front (node);
-
-    m_mutex.exit_read ();
+      m_junk.push_front (node);
+    }
 
 #if VF_CHECK_LEAKS
     m_used.release ();
@@ -136,7 +138,7 @@ public:
     // See if we need to perform garbage collection
     if (m_count.release ())
     {
-      m_mutex.enter_write ();
+      ScopedWriteLock lock (m_mutex);
 
       m_free.swap (m_junk);
   
@@ -147,8 +149,6 @@ public:
       s << "swap " << String (++m_swaps);
       Logger::outputDebugString (s);
 #endif
-
-      m_mutex.exit_write ();
     }
   }
 
