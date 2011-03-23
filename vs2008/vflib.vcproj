@@ -316,6 +316,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_SharedObject.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_SharedObject.h"
 				>
 			</File>
