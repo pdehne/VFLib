@@ -58,7 +58,7 @@ protected:
   virtual void destroySharedObject ();
 
 private:
-  Atomic::UsageCounter m_refs;
+  Atomic::Counter m_refs;
 };
 
 //

@@ -24,11 +24,11 @@ inline void memoryBarrier ()
 
 // Tracks the amount of usage of a particular resource.
 // The object is considered signaled if there are one or more uses
-class UsageCounter
+class Counter
 {
 public:
   // These always start at zero
-  UsageCounter () : m_value (0) { }
+  Counter () : m_value (0) { }
 
   // Increments the usage count.
   // Returns true if the counter was previously non-signaled.

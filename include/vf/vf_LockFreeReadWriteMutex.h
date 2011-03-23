@@ -30,8 +30,8 @@ public:
 
 private:
   Mutex m_mutex;
-  Atomic::UsageCounter m_writes;
-  Atomic::UsageCounter m_readers;
+  Atomic::Counter m_writes;
+  Atomic::Counter m_readers;
 };
 
 }

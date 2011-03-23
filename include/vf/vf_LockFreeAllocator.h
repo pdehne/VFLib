@@ -11,98 +11,159 @@
 namespace LockFree {
 
 //
+// Mostly Lock-free allocator for fixed size memory blocks
+//
+
+template <int Bytes>
+class FixedAllocator
+{
+public:
+  FixedAllocator ()
+  {
+  }
+
+  ~FixedAllocator ()
+  {
+#if VF_CHECK_LEAKS
+    vfassert (m_used.is_reset ());
+#endif
+
+    for(;;)
+    {
+      Node* node = m_free.pop_front ();
+      if (node)
+      {
+        ::operator delete (fromNode (node)); // implicit global mutex
+#if VF_CHECK_LEAKS
+        m_total.release ();
+#endif
+      }
+      else
+      {
+        break;
+      }
+    }
+  }
+
+  void* alloc ()
+  {
+    void* p;
+
+    Node* node = m_free.pop_front ();
+
+    if (!node)
+    {
+      p = ::operator new (Bytes + sizeof (Node)); // implicit global mutex
+
+#if VF_CHECK_LEAKS
+      m_total.addref ();
+#endif
+    }
+    else
+    {
+      p = fromNode (node);
+    }
+
+#if VF_CHECK_LEAKS
+    m_used.addref ();
+#endif
+
+    return p;
+  }
+
+  void free (void* p)
+  {
+    Node* node = toNode (p);
+
+    m_free.push_front (node);
+
+#if VF_CHECK_LEAKS
+    m_used.release ();
+#endif
+  }
+
+  size_t element_size () const
+  {
+    return Bytes;
+  }
+
+private:
+  // In order to assure that allocated elements have the
+  // same alignment as what we would get from a straight
+  // new, the List::Node is placed just after the allocated
+  // storage, rather than before. However this might cause
+  // alignment issues for the List::Node itslf (which contains
+  // an Atomic::Pointer that may need more strict alignment)
+
+  struct Node;
+  typedef Stack <Node> List;
+  struct Node : List::Node
+  {
+  };
+
+  static inline void* fromNode (Node* node)
+  {
+    return reinterpret_cast <char *> (node) - Bytes;
+  }
+
+  static inline Node* toNode (void* p)
+  {
+    return reinterpret_cast <Node*> (reinterpret_cast <char *> (p) + Bytes);
+  }
+
+  List m_free;
+
+#if VF_CHECK_LEAKS
+  Atomic::Counter m_total;
+  Atomic::Counter m_used;
+#endif
+};
+
+//
 // Mostly Lock-free allocator
 //
 // Use of this allocator ensures the correctness of
 // the containers in the LockFree implementation.
 //
-// It is required that Elem be derived from a LockFree::List::Node.
-// If no tag is specified, the default tag is used.
-//
-template <class Elem,
-          class Tag = detail::List_default_tag>
+template <class Elem>
 class Allocator
 {
 public:
-  ~Allocator ()
-  {
-    for(;;)
-    {
-      Elem* elem = m_free.pop_front ();
-      if (elem)
-        ::operator delete (elem); // implicit global mutex
-      else
-        break;
-    }
-  }
-
   Elem* New ()
-    { return new (alloc()) Elem(); }
+    { return new (m_storage.alloc()) Elem(); }
 
   template <class T1>
   Elem* New (T1 t1)
-    { return new (alloc()) Elem(t1); }
+    { return new (m_storage.alloc()) Elem(t1); }
 
   template <class T1, class T2>
   Elem* New (T1 t1, T2 t2)
-    { return new (alloc()) Elem(t1, t2); }
+    { return new (m_storage.alloc()) Elem(t1, t2); }
 
   template <class T1, class T2, class T3>
   Elem* New (T1 t1, T2 t2, T3 t3)
-    { return new (alloc()) Elem(t1, t2, t3); }
+    { return new (m_storage.alloc()) Elem(t1, t2, t3); }
 
   template <class T1, class T2, class T3, class T4>
   Elem* New (T1 t1, T2 t2, T3 t3, T4 t4)
-    { return new (alloc()) Elem(t1, t2, t3, t4); }
+    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4); }
 
   template <class T1, class T2, class T3, class T4, class T5>
   Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
-    { return new (alloc()) Elem(t1, t2, t3, t4, t5); }
+    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4, t5); }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6>
   Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
-    { return new (alloc()) Elem(t1, t2, t3, t4, t5, t6); }
+    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4, t5, t6); }
 
   void Delete (Elem* e)
   {
     e->~Elem();
-    free (e);
+    m_storage.free (e);
   }
 
 private:
-  void* alloc ()
-  {
-    void* p = m_free.pop_front();
-
-    if (!p)
-    {
-      p = ::operator new (sizeof(Elem)); // implicit global mutex
-
-#if 0
-#if VF_DEBUG
-      m_count.addref ();
-      String s;
-      s << "m_count = " << String (m_count.get_value());
-      Logger::outputDebugString (s);
-#endif
-#endif
-    }
-
-    return p;
-  }
-
-  void free (Elem* elem)
-  {
-    m_free.push_front (elem);
-  }
-
-private:
-  Stack <Elem, Tag> m_free;
-#if 0
-#if VF_DEBUG
-  Atomic::UsageCounter m_count;
-#endif
-#endif
+  FixedAllocator <sizeof (Elem)> m_storage;
 };
 
 }

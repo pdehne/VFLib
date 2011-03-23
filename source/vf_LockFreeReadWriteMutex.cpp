@@ -2,10 +2,6 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-// Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
 #include "vf/vf_StandardHeader.h"
 
 BEGIN_VF_NAMESPACE
@@ -25,18 +21,23 @@ ReadWriteMutex::~ReadWriteMutex ()
 
 void ReadWriteMutex::enter_read ()
 {
-  // loop makes us write-preferenced
   for (;;)
   {
+    // attempt the lock optimistically
     m_readers.addref ();
 
+    // is there a writer?
     if (m_writes.is_signaled ())
     {
+      // a writer exists, give up the read lock
       m_readers.release ();
 
+      // block until the writer is done
       {
         ScopedLock lock (m_mutex);
       }
+
+      // now try the loop again
     }
     else
     {
@@ -52,32 +53,32 @@ void ReadWriteMutex::exit_read ()
 
 void ReadWriteMutex::enter_write ()
 {
-  // Take this right away
+  // Optimistically acquire the write lock.
+  m_writes.addref ();
+
+  // Go for the mutex.
+  // Another writer might block us here.
   m_mutex.enter ();
 
-  // Increment write usage
-  const bool first = m_writes.addref ();
-
-  // is this needed?
-  //Atomic::memoryBarrier();
-
-  if (first)
-  {
-    // Wait for readers to drain out if we're first
-    Delay delay; 
-
-    while (m_readers.is_signaled ())
-      delay.spin ();
-  }
+  // Only one competing writer will get here,
+  // but we don't know who, so we have to drain
+  // readers no matter what. New readers will be
+  // blocked by the mutex.
+  Delay delay; 
+  while (m_readers.is_signaled ())
+    delay.spin ();
 }
 
 void ReadWriteMutex::exit_write ()
 {
-  // Must happen inside the mutex in case
-  // there's another writer waiting.
-  m_writes.release ();
+  // Releasing the mutex first and then decrementing the
+  // writer count allows another waiting writer to atomically
+  // acquire the lock, thus starving readers. This fulfills
+  // the write-preferencing requirement.
 
   m_mutex.exit ();
+
+  m_writes.release ();
 }
 
 }
