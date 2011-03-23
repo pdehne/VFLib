@@ -8,6 +8,7 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_LockFreeStack.h"
+#include "vf/vf_Type.h"
 
 #define ALLOCATOR_COUNT_SWAPS 0
 
@@ -140,6 +141,109 @@ public:
   size_t element_size () const
   {
     return Bytes;
+  }
+
+  // Sugar
+
+  template <class C>
+  C* New ()
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C;
+  }
+
+  template <class C, class T1>
+  C* New (typename Type::Param <T1>::t t1)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1);
+  }
+
+  template <class C, class T1, class T2>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2);
+  }
+
+  template <class C, class T1, class T2, class T3>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3);
+  }
+
+  template <class C, class T1, class T2, class T3, class T4>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3,
+          typename Type::Param <T4>::t t4)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3, t4);
+  }
+
+  template <class C, class T1, class T2, class T3,
+                     class T4, class T5>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3,
+          typename Type::Param <T4>::t t4,
+          typename Type::Param <T5>::t t5)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3, t4, t5);
+  }
+
+  template <class C, class T1, class T2, class T3,
+                     class T4, class T5, class T6>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3,
+          typename Type::Param <T4>::t t4,
+          typename Type::Param <T5>::t t5,
+          typename Type::Param <T6>::t t6)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3, t4, t5, t6);
+  }
+
+  template <class C, class T1, class T2, class T3, class T4,
+                     class T5, class T6, class T7>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3,
+          typename Type::Param <T4>::t t4,
+          typename Type::Param <T5>::t t5,
+          typename Type::Param <T6>::t t6,
+          typename Type::Param <T7>::t t7)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3, t4, t5, t6, t7);
+  }
+
+  template <class C, class T1, class T2, class T3, class T4,
+                     class T5, class T6, class T7, class T8>
+  C* New (typename Type::Param <T1>::t t1,
+          typename Type::Param <T2>::t t2,
+          typename Type::Param <T3>::t t3,
+          typename Type::Param <T4>::t t4,
+          typename Type::Param <T5>::t t5,
+          typename Type::Param <T6>::t t6,
+          typename Type::Param <T7>::t t7,
+          typename Type::Param <T8>::t t8)
+  {
+    static_vfassert (sizeof (C) <= Bytes);
+    return new (alloc()) C (t1, t2, t3, t4, t5, t6, t7, t8);
+  }
+
+  template <class C>
+  void Delete (C* c)
+  {
+    free (c);
   }
 
 private:

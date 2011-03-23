@@ -7,6 +7,7 @@
 
 #include "vf/vf_List.h"
 #include "vf/vf_LockFree.h"
+#include "vf/vf_Mutex.h" // REMOVE ASAP!!
 #include "vf/vf_Worker.h"
 
 // List where each Listener registers with the desired Worker
@@ -33,7 +34,7 @@ private:
   typedef vf::List <Proxy> Proxies;
 
   //
-  // Reference counted polymorphic unary functor of <void (Listener*)>.
+  // Reference counted polymorphic unary functor of <void (void* listener)>.
   // A timestamp distinguishes a Call created before a listener is added.
   //
   class Call : public VF_JUCE::ReferenceCountedObject, NonCopyable
@@ -100,7 +101,7 @@ private:
 
     list_t m_list;
     void* m_listener;
-    CriticalSection m_mutex;
+    Mutex m_mutex;
     Worker* m_worker;
   };
 

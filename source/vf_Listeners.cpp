@@ -331,8 +331,7 @@ Listeners::~Listeners ()
 
 // Searches for a proxy that matches the pointer to member.
 // Caller synchronizes.
-Listeners::Proxy*
-  Listeners::find_proxy (const void* member, int bytes)
+Listeners::Proxy* Listeners::find_proxy (const void* member, int bytes)
 {
   Proxy* proxy = 0;
 

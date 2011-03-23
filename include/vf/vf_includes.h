@@ -69,6 +69,10 @@
 #include "vf/vf_ThreadWorker.h"
 #endif
 
+#ifndef __VF_TYPE_VFHEADER__
+#include "vf/vf_Type.h"
+#endif
+
 #ifndef __VF_WORKER_VFHEADER__
 #include "vf/vf_Worker.h"
 #endif
