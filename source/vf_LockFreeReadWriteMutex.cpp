@@ -9,9 +9,20 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeReadWriteMutex.h"
 
+#define USE_DEBUG_MUTEX 0
+
 namespace LockFree {
 
-#if 0
+#if USE_DEBUG_MUTEX
+
+ReadWriteMutex::ReadWriteMutex () { }
+ReadWriteMutex::~ReadWriteMutex () { }
+void ReadWriteMutex::enter_read () { m_mutex.enter (); }
+void ReadWriteMutex::exit_read () { m_mutex.exit (); }
+void ReadWriteMutex::enter_write () { m_mutex.enter (); }
+void ReadWriteMutex::exit_write () { m_mutex.exit (); }
+
+#else
 
 ReadWriteMutex::ReadWriteMutex ()
 {
@@ -81,36 +92,6 @@ void ReadWriteMutex::exit_write ()
   m_mutex.exit ();
 
   m_writes.release ();
-}
-
-#else
-
-ReadWriteMutex::ReadWriteMutex ()
-{
-}
-
-ReadWriteMutex::~ReadWriteMutex ()
-{
-}
-
-void ReadWriteMutex::enter_read ()
-{
-  m_mutex.enter ();
-}
-
-void ReadWriteMutex::exit_read ()
-{
-  m_mutex.exit ();
-}
-
-void ReadWriteMutex::enter_write ()
-{
-  m_mutex.enter ();
-}
-
-void ReadWriteMutex::exit_write ()
-{
-  m_mutex.exit ();
 }
 
 #endif
