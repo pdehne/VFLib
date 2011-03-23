@@ -19,11 +19,10 @@ namespace LockFree {
 //
 // Lock-free intrusive stack
 //
-// This implementation requires that Nodes are never deleted, only re-used.
+// Caller is responsible for preventing the ABA problem.
 //
-// As an added feature, push_front() returns true if it causes the stack
-// to go from empty to non-empty. This greatly assists the implementation
-// of other objects.
+// The use of LockFree::Allocator for stack elements will
+// fulfill this requirement.
 //
 
 template <class Elem,
@@ -108,6 +107,16 @@ public:
     while (!m_head.compareAndSet (head, node));
 
     return static_cast <Elem*> (node);
+  }
+
+  // Swap contents with another stack.
+  // Not thread safe or atomic.
+  // Caller must synchronize.
+  void swap (Stack& other)
+  {
+    Node* temp = other.m_head.get ();
+    other.m_head.set (m_head.get ());
+    m_head.set (temp);
   }
 
   // Reverse the order of all items.

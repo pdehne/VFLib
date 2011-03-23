@@ -8,7 +8,7 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeList.h"
 
-#define QUEUE_USE_MUTEX 1
+#define QUEUE_USE_MUTEX 0
 #if QUEUE_USE_MUTEX
 #include "vf/vf_Mutex.h"
 #endif

@@ -27,8 +27,7 @@ inline void memoryBarrier ()
 class Counter
 {
 public:
-  // These always start at zero
-  Counter () : m_value (0) { }
+  Counter (int initialValue = 0) : m_value (initialValue) { }
 
   // Increments the usage count.
   // Returns true if the counter was previously non-signaled.
@@ -42,6 +41,9 @@ public:
   // The caller must synchronize the value.
   bool is_reset () const { return m_value.get() == 0; }
   bool is_signaled () const { return m_value.get() > 0; }
+
+  // Caller must synchronize.
+  void set (int value) { m_value.set (value); }
 
   // for diagnostics ONLY!
 #if VF_DEBUG
@@ -114,6 +116,9 @@ public:
 
   // returns the previous value
   P* exchange (P* p) { return m_value.exchange (p); }
+
+  // swap with another Pointer
+  void swap (Pointer& other) { m_value.exchange (other.m_value); }
 
   void operator= (P* p) { set (p); }
 

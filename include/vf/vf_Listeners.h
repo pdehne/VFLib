@@ -7,7 +7,6 @@
 
 #include "vf/vf_List.h"
 #include "vf/vf_LockFree.h"
-#include "vf/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
 
 // List where each Listener registers with the desired Worker
@@ -37,12 +36,12 @@ private:
   // Reference counted polymorphic unary functor of <void (Listener*)>.
   // A timestamp distinguishes a Call created before a listener is added.
   //
-  class Call : public SharedObject, NonCopyable
+  class Call : public VF_JUCE::ReferenceCountedObject, NonCopyable
   {
   protected:
     virtual ~Call () {}
   public:
-    typedef SharedObjectPtr <Call> Ptr;
+    typedef VF_JUCE::ReferenceCountedObjectPtr <Call> Ptr;
     explicit Call (const timestamp_t timestamp)
       : m_timestamp (timestamp) { }
     bool is_newer_than (const timestamp_t when) const
@@ -71,10 +70,10 @@ private:
   //
   // Maintains a list of listeners registered on the same thread queue
   //
-  class Group : public Groups::Node, public SharedObject
+  class Group : public Groups::Node, public VF_JUCE::ReferenceCountedObject
   {
   public:
-    typedef public SharedObjectPtr <Group> Ptr;
+    typedef public VF_JUCE::ReferenceCountedObjectPtr <Group> Ptr;
     explicit Group (Worker* worker);
     bool empty () const { return m_list.empty(); } // caller syncs
     void add (void* listener, const unsigned long timestamp);
@@ -123,9 +122,9 @@ private:
   private:
     struct Entry;
     typedef vf::List <Entry> Entries;
-    struct Entry : Entries::Node, SharedObject
+    struct Entry : Entries::Node, VF_JUCE::ReferenceCountedObject
     {
-      typedef SharedObjectPtr <Entry> Ptr;
+      typedef VF_JUCE::ReferenceCountedObjectPtr <Entry> Ptr;
       explicit Entry (Group::Ptr g) : group (g) {}
       ~Entry () { jassert (call.get () == 0); }
       Group::Ptr group;

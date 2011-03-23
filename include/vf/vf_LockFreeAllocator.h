@@ -6,7 +6,10 @@
 #define __VF_LOCKFREEALLOCATOR_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_LockFreeStack.h"
+
+#define ALLOCATOR_COUNT_SWAPS 0
 
 namespace LockFree {
 
@@ -21,12 +24,39 @@ namespace LockFree {
 //   becomes a locking algorithm since we resort to the
 //   standard library to get more memory.
 //
+// - Every once in a while we will perform garbage collection
+//   using a blocking algorithm. This eliminates the ABA problem
+//   for anyone using the allocator.
+//
+// Because the underlying Stack is vulnerable to the ABA problem,
+// we use two stacks. One for re-using blocks during allocation,
+// and a different one for keeping track of freed blocks.
+// Every once in a while, we take a mutex (the write lock), block
+// all readers (a reader is someone who is calling alloc() or free()),
+// and swap the stacks in O(1).
+//
 
 template <int Bytes>
 class FixedAllocator
 {
 public:
-  FixedAllocator ()
+  //
+  // This allocator will time its garbage collections to
+  // try to keep the memory utilization at or below the byteLimit.
+  //
+  // This is something of a soft limit but we should be close.
+  //
+  enum
+  {
+    defaultMegaBytes = 2
+  };
+
+  FixedAllocator (int byteLimit = defaultMegaBytes * 1024 * 1024)
+    : m_interval (byteLimit / (2 * (Bytes + sizeof(Node))))
+    , m_count (m_interval)
+#if ALLOCATOR_COUNT_SWAPS
+    , m_swaps (0)
+#endif
   {
   }
 
@@ -36,28 +66,23 @@ public:
     vfassert (m_used.is_reset ());
 #endif
 
-    for(;;)
-    {
-      Node* node = m_free.pop_front ();
-      if (node)
-      {
-        ::operator delete (fromNode (node)); // implicit global mutex
+    free (m_free);
+    free (m_junk);
+
 #if VF_CHECK_LEAKS
-        m_total.release ();
+    vfassert (m_total.is_reset ());
 #endif
-      }
-      else
-      {
-        break;
-      }
-    }
   }
 
   void* alloc ()
   {
-    void* p;
+    m_mutex.enter_read ();
 
     Node* node = m_free.pop_front ();
+
+    m_mutex.exit_read ();
+
+    void* p;
 
     if (!node)
     {
@@ -83,11 +108,33 @@ public:
   {
     Node* node = toNode (p);
 
-    m_free.push_front (node);
+    m_mutex.enter_read ();
+
+    m_junk.push_front (node);
+
+    m_mutex.exit_read ();
 
 #if VF_CHECK_LEAKS
     m_used.release ();
 #endif
+
+    // See if we need to perform garbage collection
+    if (m_count.release ())
+    {
+      m_mutex.enter_write ();
+
+      m_free.swap (m_junk);
+  
+      m_count.set (m_interval);
+
+#if ALLOCATOR_COUNT_SWAPS
+      String s;
+      s << "swap " << String (++m_swaps);
+      Logger::outputDebugString (s);
+#endif
+
+      m_mutex.exit_write ();
+    }
   }
 
   size_t element_size () const
@@ -119,7 +166,37 @@ private:
     return reinterpret_cast <Node*> (reinterpret_cast <char *> (p) + Bytes);
   }
 
+  void free (List& list)
+  {
+    for (;;)
+    {
+      Node* node = list.pop_front ();
+
+      if (node)
+      {
+        ::operator delete (fromNode (node)); // implicit global mutex
+
+#if VF_CHECK_LEAKS
+        m_total.release ();
+#endif
+      }
+      else
+      {
+        break;
+      }
+    }
+  }
+
+private:
   List m_free;
+  List m_junk;
+  int m_interval;
+  Atomic::Counter m_count;
+  ReadWriteMutex m_mutex;
+
+#if ALLOCATOR_COUNT_SWAPS
+  int m_swaps;
+#endif
 
 #if VF_CHECK_LEAKS
   Atomic::Counter m_total;
