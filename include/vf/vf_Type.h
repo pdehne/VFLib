@@ -20,9 +20,11 @@
     pass-by-value, but passing objects as a const reference, to avoid copying.
 */
 
+#if 0
+
 namespace Type {
 
-template <typename T> struct Param                  { typedef T const& t; };
+template <typename T> struct Param                  { typedef T t; };
 
 template <typename T> struct Param <T&>             { typedef T& t; };
 template <typename T> struct Param <T*>             { typedef T* t; };
@@ -46,5 +48,7 @@ template <>           struct Param <VF_JUCE::uint64> { typedef VF_JUCE::uint64 t
 //#define PARAMETER_TYPE(a)    typename T::Param<a>::t
 
 }
+
+#endif
 
 #endif

@@ -5,10 +5,12 @@
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
+#include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
 #include "vf/vf_Function.h"
 #include "vf/vf_List.h"
-#include "vf/vf_LockFree.h"
+#include "vf/vf_LockFreeAllocator.h"
+#include "vf/vf_LockFreeQueue.h"
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Thread.h"
 
@@ -46,9 +48,9 @@ public:
   //
   // Functors MUST NOT cause thread interruptions.
   //
-  void callf (func_t const& f)
+  void callf (func_t f)
   {
-    do_call (m_allocator.New (f));
+    do_call (LockFree::globalAlloc <Call>::New (f));
   }
 
   // Sugar for calling functions with arguments.
@@ -150,7 +152,7 @@ private:
   template <class Functor>
   void queuef (const Functor& f)
   {
-    do_queue (m_allocator.New (f));
+    do_queue (LockFree::globalAllocator.New <Call> (f));
   }
 
 private:
@@ -160,7 +162,6 @@ private:
   Atomic::Flag m_signal;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
-  static LockFree::Allocator <Call> m_allocator;
 };
 
 #endif

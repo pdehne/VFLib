@@ -4590,6 +4590,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_LockFreeAllocator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_LockFreeAllocator.h"
 				>
 			</File>

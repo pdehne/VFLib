@@ -57,9 +57,9 @@ void Listeners::Group::add (void* listener,
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
-  Entry entry;
-  entry.listener = listener;
-  entry.timestamp = timestamp;
+  Entry* entry = LockFree::globalAlloc <Entry>::New ();
+  entry->listener = listener;
+  entry->timestamp = timestamp;
   m_list.push_back (entry);
 
   m_mutex.exit ();
@@ -76,11 +76,13 @@ bool Listeners::Group::remove (void* listener)
   // Should never be able to get here while in do_call()
   vfassert (m_listener == 0);
 
-  for (list_t::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
+  for (List::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
   {
-    if (iter->listener == listener)
+    Entry* entry = *iter;
+    if (entry->listener == listener)
     {
-      m_list.erase (iter);
+      m_list.remove (entry);
+      LockFree::globalDelete (entry);
       found = true;
       break;
     }
@@ -93,11 +95,11 @@ bool Listeners::Group::remove (void* listener)
 
 // Used for assertions.
 // The caller must synchronize.
-bool Listeners::Group::contains (void const* listener) const
+bool Listeners::Group::contains (void const* listener)
 {
   bool found = false;
 
-  for (list_t::const_iterator iter = m_list.begin(); iter != m_list.end(); iter++)
+  for (List::iterator iter = m_list.begin(); iter != m_list.end(); iter++)
   {
     if (iter->listener == listener)
     {
@@ -145,17 +147,17 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
     // Therefore, we don't have to worry about listeners removing
     // themselves while iterating the list.
     //
-    for (list_t::const_iterator iter = m_list.begin(); iter != m_list.end();)
+    for (List::iterator iter = m_list.begin(); iter != m_list.end();)
     {
-      Entry const& entry = *iter++;
+      Entry* entry = *iter++;
 
       // Since it is possible for a listener to be added after a
       // Call gets queued but before it executes, this prevents listeners
       // from seeing Calls created before they were added.
       //
-      if (entry.came_before (c))
+      if (entry->came_before (c))
       {
-        m_listener = entry.listener;
+        m_listener = entry->listener;
 
         // The thread queue's process() function MUST be in our call
         // stack to guarantee that these calls will not execute immediately.
@@ -220,7 +222,7 @@ Listeners::Proxy::~Proxy ()
 // Caller is responsible for preventing duplicates.
 void Listeners::Proxy::add (Group::Ptr group)
 {
-  Entry::Ptr entry (new Entry (group));
+  Entry::Ptr entry (LockFree::globalAlloc <Entry>::New (group));
 
   // Manual addref and put raw pointer in list
   entry.getObject()->incReferenceCount ();
@@ -325,7 +327,7 @@ Listeners::~Listeners ()
   for (Proxies::iterator iter = m_proxies.begin(); iter != m_proxies.end ();)
   {
     Proxy* proxy = *iter++;
-    delete proxy;
+    LockFree::globalDelete (proxy);
   }
 }
 
@@ -397,7 +399,7 @@ void Listeners::add_void (void* const listener, Worker* worker)
 
   if (!group)
   {
-    group = new Group (worker);
+    group = LockFree::globalAlloc <Group>::New (worker);
 
     // Add it to the list, and give it a manual ref
     // since the list currently uses raw pointers.
@@ -494,4 +496,3 @@ void Listeners::remove_void (void* const listener)
 }
 
 END_VF_NAMESPACE
-

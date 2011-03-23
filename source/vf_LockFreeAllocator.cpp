@@ -6,6 +6,13 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_LockFree.h"
+#include "vf/vf_LockFreeAllocator.h"
+
+namespace LockFree {
+
+FixedAllocator <globalAllocatorBlockSize> globalAllocator;
+
+}
 
 END_VF_NAMESPACE
+

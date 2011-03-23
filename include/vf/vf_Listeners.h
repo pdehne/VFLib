@@ -6,9 +6,12 @@
 #define __VF_LISTENERS_VFHEADER__
 
 #include "vf/vf_List.h"
-#include "vf/vf_LockFree.h"
-#include "vf/vf_Mutex.h" // REMOVE ASAP!!
+#include "vf/vf_LockFreeAllocator.h"
+#include "vf/vf_LockFreeReadWriteMutex.h"
+#include "vf/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
+
+#include "vf/vf_Mutex.h" // REMOVE ASAP!!
 
 // List where each Listener registers with the desired Worker
 // on which the call is made. Since the list traversal for an associated
@@ -28,21 +31,21 @@ private:
 
   // MAKE Vf::List WORK WITH SHARED OBJECTS and raw pointers
   class Group;
-  typedef vf::List <Group> Groups;
+  typedef List <Group> Groups;
 
   class Proxy;
-  typedef vf::List <Proxy> Proxies;
+  typedef List <Proxy> Proxies;
 
   //
   // Reference counted polymorphic unary functor of <void (void* listener)>.
   // A timestamp distinguishes a Call created before a listener is added.
   //
-  class Call : public VF_JUCE::ReferenceCountedObject, NonCopyable
+  class Call : public SharedObject, NonCopyable
   {
-  protected:
-    virtual ~Call () {}
+  //protected:
+  //  virtual ~Call () {}
   public:
-    typedef VF_JUCE::ReferenceCountedObjectPtr <Call> Ptr;
+    typedef SharedObjectPtr <Call> Ptr;
     explicit Call (const timestamp_t timestamp)
       : m_timestamp (timestamp) { }
     bool is_newer_than (const timestamp_t when) const
@@ -51,6 +54,7 @@ private:
       { c->operator()(listener); }
     virtual void operator ()(void* listener) = 0;
   private:
+    void destroySharedObject () { LockFree::globalDelete (this); }
     const timestamp_t m_timestamp;
   };
 
@@ -71,35 +75,35 @@ private:
   //
   // Maintains a list of listeners registered on the same thread queue
   //
-  class Group : public Groups::Node, public VF_JUCE::ReferenceCountedObject
+  class Group : public Groups::Node, public SharedObject
   {
   public:
-    typedef public VF_JUCE::ReferenceCountedObjectPtr <Group> Ptr;
+    typedef SharedObjectPtr <Group> Ptr;
     explicit Group (Worker* worker);
+    virtual ~Group ();
     bool empty () const { return m_list.empty(); } // caller syncs
     void add (void* listener, const unsigned long timestamp);
     bool remove (void* listener);
-    bool contains (void const* listener) const;
+    bool contains (void const* listener);
     void queue_call (Call::Ptr c);
     void do_call (Call::Ptr c, Group::Ptr);
     Worker* getWorker () { return m_worker; }
 
   private:
-    virtual ~Group ();
+    void destroySharedObject () { LockFree::globalDelete (this); }
 
   private:
-    // Global deleted list from a pool of
-    // recycled blocks would be best for this
-    struct Entry
+    struct Entry;
+    typedef List <Entry> List;
+    struct Entry : List::Node
     {
       void* listener; // the listener
       timestamp_t timestamp; // timestamp when they were added
       bool came_before (Call const* c) const
         { return c->is_newer_than (timestamp); }
     };
-    typedef std::list <Entry> list_t;
 
-    list_t m_list;
+    List m_list;
     void* m_listener;
     Mutex m_mutex;
     Worker* m_worker;
@@ -122,12 +126,13 @@ private:
     virtual bool match (const void* member, int bytes) const = 0;
   private:
     struct Entry;
-    typedef vf::List <Entry> Entries;
-    struct Entry : Entries::Node, VF_JUCE::ReferenceCountedObject
+    typedef List <Entry> Entries;
+    struct Entry : Entries::Node, SharedObject
     {
-      typedef VF_JUCE::ReferenceCountedObjectPtr <Entry> Ptr;
+      typedef SharedObjectPtr <Entry> Ptr;
       explicit Entry (Group::Ptr g) : group (g) {}
       ~Entry () { jassert (call.get () == 0); }
+      void destroySharedObject () { LockFree::globalDelete (this); }
       Group::Ptr group;
       Atomic::Pointer <Call> call;
     };
@@ -185,10 +190,13 @@ protected:
   template <class ListenerClass, class Functor>
   Call::Ptr newCall (const Functor& f)
   {
+    typedef typename StoredCall <ListenerClass, Functor> call_t;
+
     // Mutex is required to access the timestamp. Ownership of the
     // lock is transferred to the caller since we dont release it.
     m_groups_mutex.enter_read ();
-    return new StoredCall <ListenerClass, Functor> (m_timestamp, f);
+    
+    return LockFree::globalAlloc <call_t>::New (m_timestamp, f);
   }
 
   // Search for an existing Proxy that matches the pointer to
@@ -221,7 +229,8 @@ protected:
         if (!proxy)
         {
           // Create a new empty proxy
-          proxy = new StoredProxy <Bytes> (member);
+          proxy = LockFree::globalAlloc <StoredProxy <Bytes> >::New (member);
+          //proxy = new StoredProxy <Bytes> (member);
 
           // Add all current groups to the Proxy.
           // We need the group read lock for this (caller provided).
@@ -277,12 +286,8 @@ private:
   template <class Member, class Function>
   void proxy_fn (Member member, const Function& f)
   {
-#if 1
     proxy_call <sizeof (member)> (reinterpret_cast <void*> (&member),
                                   newCall <ListenerClass> (f));
-#else
-    queue_fn (f);
-#endif
   }
 
 public:

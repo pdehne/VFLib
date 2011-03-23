@@ -31,8 +31,6 @@ private:
 
 }
 
-LockFree::Allocator <Worker::Call> Worker::m_allocator;
-
 Worker::Worker (const char* szName)
 : m_szName (szName)
 {
@@ -115,7 +113,7 @@ bool Worker::do_process ()
     for (;;)
     {
       call->operator() ();
-      m_allocator.Delete (call);
+      LockFree::globalDelete (call);
 
       call = m_list.pop_front ();
       if (call == 0)

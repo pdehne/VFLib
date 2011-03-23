@@ -15,6 +15,15 @@
 namespace LockFree {
 
 //
+// This number should be as small as possible
+// without generating compile time assertions.
+//
+enum
+{
+  globalAllocatorBlockSize = 96
+};
+
+//
 // Mostly lock-free allocator for fixed size memory blocks
 //
 // - Any thread may allocate and free concurrently.
@@ -37,7 +46,7 @@ namespace LockFree {
 // and swap the stacks in O(1).
 //
 
-template <int Bytes>
+template <size_t BlockSize>
 class FixedAllocator
 {
 public:
@@ -52,8 +61,13 @@ public:
     defaultMegaBytes = 2
   };
 
+  enum
+  {
+    blockSize = BlockSize
+  };
+
   FixedAllocator (int byteLimit = defaultMegaBytes * 1024 * 1024)
-    : m_interval (byteLimit / (2 * (Bytes + sizeof(Node))))
+    : m_interval (byteLimit / (2 * (BlockSize + sizeof(Node))))
     , m_count (m_interval)
 #if ALLOCATOR_COUNT_SWAPS
     , m_swaps (0)
@@ -87,7 +101,7 @@ public:
 
     if (!node)
     {
-      p = ::operator new (Bytes + sizeof (Node)); // implicit global mutex
+      p = ::operator new (BlockSize + sizeof (Node)); // implicit global mutex
 
 #if VF_CHECK_LEAKS
       m_total.addref ();
@@ -138,114 +152,6 @@ public:
     }
   }
 
-  size_t element_size () const
-  {
-    return Bytes;
-  }
-
-  // Sugar
-
-  template <class C>
-  C* New ()
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C;
-  }
-
-  template <class C, class T1>
-  C* New (typename Type::Param <T1>::t t1)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1);
-  }
-
-  template <class C, class T1, class T2>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2);
-  }
-
-  template <class C, class T1, class T2, class T3>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3);
-  }
-
-  template <class C, class T1, class T2, class T3, class T4>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3,
-          typename Type::Param <T4>::t t4)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3, t4);
-  }
-
-  template <class C, class T1, class T2, class T3,
-                     class T4, class T5>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3,
-          typename Type::Param <T4>::t t4,
-          typename Type::Param <T5>::t t5)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3, t4, t5);
-  }
-
-  template <class C, class T1, class T2, class T3,
-                     class T4, class T5, class T6>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3,
-          typename Type::Param <T4>::t t4,
-          typename Type::Param <T5>::t t5,
-          typename Type::Param <T6>::t t6)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3, t4, t5, t6);
-  }
-
-  template <class C, class T1, class T2, class T3, class T4,
-                     class T5, class T6, class T7>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3,
-          typename Type::Param <T4>::t t4,
-          typename Type::Param <T5>::t t5,
-          typename Type::Param <T6>::t t6,
-          typename Type::Param <T7>::t t7)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3, t4, t5, t6, t7);
-  }
-
-  template <class C, class T1, class T2, class T3, class T4,
-                     class T5, class T6, class T7, class T8>
-  C* New (typename Type::Param <T1>::t t1,
-          typename Type::Param <T2>::t t2,
-          typename Type::Param <T3>::t t3,
-          typename Type::Param <T4>::t t4,
-          typename Type::Param <T5>::t t5,
-          typename Type::Param <T6>::t t6,
-          typename Type::Param <T7>::t t7,
-          typename Type::Param <T8>::t t8)
-  {
-    static_vfassert (sizeof (C) <= Bytes);
-    return new (alloc()) C (t1, t2, t3, t4, t5, t6, t7, t8);
-  }
-
-  template <class C>
-  void Delete (C* c)
-  {
-    free (c);
-  }
-
 private:
   // In order to assure that allocated elements have the
   // same alignment as what we would get from a straight
@@ -262,12 +168,12 @@ private:
 
   static inline void* fromNode (Node* node)
   {
-    return reinterpret_cast <char *> (node) - Bytes;
+    return reinterpret_cast <char *> (node) - BlockSize;
   }
 
   static inline Node* toNode (void* p)
   {
-    return reinterpret_cast <Node*> (reinterpret_cast <char *> (p) + Bytes);
+    return reinterpret_cast <Node*> (reinterpret_cast <char *> (p) + BlockSize);
   }
 
   void free (List& list)
@@ -308,52 +214,91 @@ private:
 #endif
 };
 
+typedef FixedAllocator <globalAllocatorBlockSize> GlobalAllocator; 
+extern GlobalAllocator globalAllocator;
+
+// Sugar hack since the compiler cannot infer
+// template arguments based on the return type.
 //
-// Mostly Lock-free allocator
+// Usage:
 //
-// Use of this allocator ensures the correctness of
-// the containers in the LockFree implementation.
+//  C* c = globalAlloc<C>::New (arg1, arg2,...);
 //
-template <class Elem>
-class Allocator
+template <class C>
+struct globalAlloc
 {
-public:
-  Elem* New ()
-    { return new (m_storage.alloc()) Elem(); }
-
-  template <class T1>
-  Elem* New (T1 t1)
-    { return new (m_storage.alloc()) Elem(t1); }
-
-  template <class T1, class T2>
-  Elem* New (T1 t1, T2 t2)
-    { return new (m_storage.alloc()) Elem(t1, t2); }
-
-  template <class T1, class T2, class T3>
-  Elem* New (T1 t1, T2 t2, T3 t3)
-    { return new (m_storage.alloc()) Elem(t1, t2, t3); }
-
-  template <class T1, class T2, class T3, class T4>
-  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4)
-    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4); }
-
-  template <class T1, class T2, class T3, class T4, class T5>
-  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
-    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4, t5); }
-
-  template <class T1, class T2, class T3, class T4, class T5, class T6>
-  Elem* New (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
-    { return new (m_storage.alloc()) Elem(t1, t2, t3, t4, t5, t6); }
-
-  void Delete (Elem* e)
+  static C* New ()
   {
-    e->~Elem();
-    m_storage.free (e);
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C;
   }
 
-private:
-  FixedAllocator <sizeof (Elem)> m_storage;
+  template <class T1>
+  static C* New (const T1& t1)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1);
+  }
+
+  template <class T1, class T2>
+  static C* New (const T1& t1, const T2& t2)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2);
+  }
+
+  template <class T1, class T2, class T3>
+  static C* New (const T1& t1, const T2& t2, const T3& t3)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3);
+  }
+
+  template <class T1, class T2, class T3, class T4>
+  static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3, t4);
+  }
+
+  template <class T1, class T2, class T3, class T4, class T5>
+  static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5);
+  }
+
+  template <class T1, class T2, class T3, class T4, class T5, class T6>
+  static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
+                 const T5& t5, const T6& t6)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6);
+  }
+
+  template <class T1, class T2, class T3, class T4, class T5, class T6, class T7>
+  static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
+                 const T5& t5, const T6& t6, const T7& t7)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6, t7);
+  }
+
+  template <class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
+  static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
+                 const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  {
+    static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
+    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6, t7, t8);
+  }
 };
+
+template <class C>
+void globalDelete (C* c)
+{
+  c->~C();
+  globalAllocator.free (c);
+}
 
 }
 
