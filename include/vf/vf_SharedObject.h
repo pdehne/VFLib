@@ -15,8 +15,10 @@
 //   object was deleted (This can be handy for assertions)
 //
 // - Derived class may override the behavior of destruction.
-//   For example, to offload the delete cost to another thread.
 //
+// - Default behavior performs the delete on a separate thread.
+//
+
 class SharedObject
 {
 public:
@@ -37,6 +39,8 @@ public:
     return final;
   }
 
+  class Deleter;
+
 protected:
   SharedObject()
   {
@@ -47,16 +51,19 @@ protected:
     vfassert (m_refs.is_reset ());
   }
 
-  virtual void destroySharedObject ()
-  {
-    // default implementation
-    delete this;
-  }
+  // default implementation performs the delete
+  // on a separate, provided thread that cleans up
+  // after itself on exit.
+  //
+  virtual void destroySharedObject ();
 
 private:
   Atomic::UsageCounter m_refs;
 };
 
+//
+// RAII wrapper for a SharedObject
+//
 template <class SharedObjectClass>
 class SharedObjectPtr
 {
@@ -140,6 +147,10 @@ public:
 private:
   SharedObjectClass* referencedObject;
 };
+
+//
+// Comparisons
+//
 
 template <class SharedObjectClass>
 bool operator== (const SharedObjectPtr<SharedObjectClass>& object1, SharedObjectClass* const object2) throw()

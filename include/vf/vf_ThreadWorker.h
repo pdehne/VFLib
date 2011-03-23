@@ -38,8 +38,6 @@ public:
   }
 };
 
-namespace detail {
-
 template <class ThreadType>
 class ThreadWorkerType : public ThreadWorker
 {
@@ -205,17 +203,15 @@ private:
   exit_t m_exit;
 };
 
-}
-
 //------------------------------------------------------------------------------
 
 #if VF_HAVE_JUCE
-typedef detail::ThreadWorkerType <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
-typedef detail::ThreadWorkerType <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
+typedef ThreadWorkerType <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
+typedef ThreadWorkerType <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
 
 #elif VF_HAVE_BOOST
-typedef detail::ThreadWorkerType <Boost::Thread> ExceptionWorker;
-typedef detail::ThreadWorkerType <Boost::Thread> PollingWorker;
+typedef ThreadWorkerType <Boost::Thread> ExceptionWorker;
+typedef ThreadWorkerType <Boost::Thread> PollingWorker;
 
 #endif
 
