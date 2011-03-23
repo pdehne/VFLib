@@ -61,6 +61,7 @@ template <> struct VfStaticAssert <true>
   VF_NAMESPACE::Throw (Error().fail (__FILE__, __LINE__, #expression, VF_NAMESPACE::Error::assertFailed))
 #endif
 
+// Stuff here is available without having to include it directly
 #include "vf/vf_String.h"
 #include "vf/vf_Debug.h"
 #include "vf/vf_Error.h"

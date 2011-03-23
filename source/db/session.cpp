@@ -9,7 +9,6 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_Throw.h"
 #include "vf/vf_db.h"
 
 namespace db {

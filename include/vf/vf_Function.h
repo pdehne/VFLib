@@ -5,8 +5,6 @@
 #ifndef __VF_FUNCTION_VFHEADER__
 #define __VF_FUNCTION_VFHEADER__
 
-#include "vf/vf_Throw.h"
-
 //
 // Strong replacement for boost::function:
 //
