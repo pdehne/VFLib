@@ -41,10 +41,10 @@ Worker::Worker (const char* szName)
 Worker::~Worker ()
 {
   // Someone forget to close the queue.
-  vfassert (m_closed.isSet());
+  vfassert (m_closed.isSet ());
 
   // Can't destroy queue with unprocessed calls.
-  vfassert (m_calls.empty());
+  vfassert (m_list.empty ());
 }
 
 bool Worker::process ()
@@ -114,7 +114,7 @@ bool Worker::do_process ()
     //
     for (;;)
     {
-      call->operator ()();
+      call->operator() ();
       m_allocator.Delete (call);
 
       call = m_list.pop_front ();

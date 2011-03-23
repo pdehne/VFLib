@@ -11,7 +11,15 @@
 namespace LockFree {
 
 //
-// Mostly Lock-free allocator for fixed size memory blocks
+// Mostly lock-free allocator for fixed size memory blocks
+//
+// - Any thread may allocate and free concurrently.
+//
+// - Freed blocks are recycled and deleted in the destructor.
+//
+// - If the free block list is exhausted, the algorithm
+//   becomes a locking algorithm since we resort to the
+//   standard library to get more memory.
 //
 
 template <int Bytes>

@@ -47,6 +47,13 @@ public:
     m_head = head;
   }
 
+  // Not thread safe.
+  // Caller must synchronize.
+  bool empty () const
+  {
+    return m_head.get() == 0;
+  }
+
   // returns true if it pushed the first element
   bool push_front (Node* node)
   {
@@ -83,13 +90,6 @@ public:
     while (!m_head.compareAndSet (head, node));
 
     return static_cast <Elem*> (node);
-  }
-
-  // Not thread safe.
-  // Caller must synchronize.
-  bool empty () const
-  {
-    return m_head.get() == 0;
   }
 
   // Reverse the order of all items.
