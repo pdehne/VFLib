@@ -361,14 +361,11 @@ void Listeners::queue_call (Call::Ptr c)
     Group::Ptr group = *iter++;
     group->queue_call (c);
   }
-
-  m_groups_mutex.exit_read ();
 }
 
 void Listeners::add_void (void* const listener, Worker* worker)
 {
-  // Take the write lock for groups.
-  m_groups_mutex.enter_write ();
+  LockFree::ScopedWriteLock lock (m_groups_mutex);
 
 #ifdef JUCE_DEBUG
   // Make sure the listener has not already been added
@@ -407,13 +404,15 @@ void Listeners::add_void (void* const listener, Worker* worker)
     m_groups.push_back (group);
 
     // Tell existing proxies to add the group
-    m_proxies_mutex.enter_read ();
-    for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
     {
-      Proxy* proxy = *iter++;
-      proxy->add (group);
+      LockFree::ScopedReadLock lock (m_proxies_mutex);
+
+      for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
+      {
+        Proxy* proxy = *iter++;
+        proxy->add (group);
+      }
     }
-    m_proxies_mutex.exit_read ();
   }
 
   // Add the listener to the group with the current timestamp
@@ -422,14 +421,11 @@ void Listeners::add_void (void* const listener, Worker* worker)
   // Increment the timestamp within the mutex so
   // future calls will be newer than this listener.
   ++m_timestamp;
-
-  m_groups_mutex.exit_write ();
 }
 
 void Listeners::remove_void (void* const listener)
 {
-  // Take the write lock for groups.
-  m_groups_mutex.enter_write ();
+  LockFree::ScopedWriteLock lock (m_groups_mutex);
 
   // Make sure the listener exists
 #ifdef JUCE_DEBUG
@@ -468,13 +464,15 @@ void Listeners::remove_void (void* const listener)
       if (group->empty ())
       {
         // Tell proxies to remove the group
-        m_proxies_mutex.enter_write ();
-        for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
         {
-          Proxy* proxy = *iter++;
-          proxy->remove (group);
+          LockFree::ScopedWriteLock lock (m_proxies_mutex);
+
+          for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
+          {
+            Proxy* proxy = *iter++;
+            proxy->remove (group);
+          }
         }
-        m_proxies_mutex.exit_write ();
 
         // Remove it from the list and manually release
         // the reference since the list uses raw pointers.
@@ -489,8 +487,6 @@ void Listeners::remove_void (void* const listener)
       break;
     }
   }
-
-  m_groups_mutex.exit_write ();
 }
 
 }

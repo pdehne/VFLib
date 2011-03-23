@@ -187,15 +187,13 @@ protected:
     Listeners& m_listeners;
   };
 
+  // Caller is responsible for a group read lock.
   template <class ListenerClass, class Functor>
   Call::Ptr newCall (const Functor& f)
   {
     typedef typename StoredCall <ListenerClass, Functor> call_t;
 
-    // Mutex is required to access the timestamp. Ownership of the
-    // lock is transferred to the caller since we dont release it.
-    m_groups_mutex.enter_read ();
-    
+    // group read lock needed for access to m_timestamp    
     return LockFree::globalAlloc <call_t>::New (m_timestamp, f);
   }
 
@@ -209,19 +207,17 @@ protected:
     {
       Proxy* proxy;
       
-      m_proxies_mutex.enter_read ();
+      {
+        LockFree::ScopedReadLock lock (m_proxies_mutex);
 
-      // See if there's already a proxy
-      proxy = find_proxy (member, Bytes);
+        // See if there's already a proxy
+        proxy = find_proxy (member, Bytes);
+      }
 
-      // No, try to create one
+      // Possibly create one
       if (!proxy)
       {
-        // Have to let go of this in order to get a write lock
-        m_proxies_mutex.exit_read ();
-
-        // Get the write lock
-        m_proxies_mutex.enter_write ();
+        LockFree::ScopedWriteLock lock (m_proxies_mutex);
 
         // Have to search for it again in case someone else added it
         proxy = find_proxy (member, Bytes);
@@ -230,7 +226,6 @@ protected:
         {
           // Create a new empty proxy
           proxy = LockFree::globalAlloc <StoredProxy <Bytes> >::New (member);
-          //proxy = new StoredProxy <Bytes> (member);
 
           // Add all current groups to the Proxy.
           // We need the group read lock for this (caller provided).
@@ -243,30 +238,20 @@ protected:
           // Add it to the list.
           m_proxies.push_front (proxy);
         }
-
-        m_proxies_mutex.exit_write ();
-      }
-      else
-      {
-        m_proxies_mutex.exit_read ();
       }
 
       // Requires the group read lock
       proxy->do_calls (c);
     }
-
-    // Caller acquired the read mutex so release it.
-    m_groups_mutex.exit_read ();
   }
 
 private:
-  // Global deleted list from a pool of
-  // recycled blocks would be best for this
   Groups m_groups;
   Proxies m_proxies;
   timestamp_t m_timestamp;
-  LockFree::ReadWriteMutex m_groups_mutex;
   LockFree::ReadWriteMutex m_proxies_mutex;
+protected:
+  LockFree::ReadWriteMutex m_groups_mutex;
 };
 
 }
@@ -280,12 +265,16 @@ private:
   template <class Functor>
   void queue_fn (const Functor& f)
   {
+    LockFree::ScopedReadLock lock (m_groups_mutex);
+
     queue_call (newCall <ListenerClass> (f));
   }
 
   template <class Member, class Function>
   void proxy_fn (Member member, const Function& f)
   {
+    LockFree::ScopedReadLock lock (m_groups_mutex);
+
     proxy_call <sizeof (member)> (reinterpret_cast <void*> (&member),
                                   newCall <ListenerClass> (f));
   }

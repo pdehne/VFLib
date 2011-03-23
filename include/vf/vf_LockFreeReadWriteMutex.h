@@ -34,6 +34,24 @@ private:
   Atomic::Counter m_readers;
 };
 
+struct ScopedReadLock : NonCopyable
+{
+  inline explicit ScopedReadLock (ReadWriteMutex& mutex)
+    : m_mutex (mutex) { m_mutex.enter_read (); }
+  inline ~ScopedReadLock () { m_mutex.exit_read (); }
+private:
+  ReadWriteMutex& m_mutex;
+};
+
+struct ScopedWriteLock : NonCopyable
+{
+  inline explicit ScopedWriteLock (ReadWriteMutex& mutex)
+    : m_mutex (mutex) { m_mutex.enter_write (); }
+  inline ~ScopedWriteLock () { m_mutex.exit_write (); }
+private:
+  ReadWriteMutex& m_mutex;
+};
+
 }
 
 #endif
