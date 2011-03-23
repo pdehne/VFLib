@@ -13,12 +13,7 @@ namespace LockFree {
 //
 // Lock-free intrusive queue
 //
-// This implementation requires that Nodes are never deleted, only re-used.
-//
-//
-// TODO: THIS SEEMS FLAWED!
-// AND push_back() needs to return a bool
-//
+
 template <class Elem,
           class Tag = detail::List_default_tag>
 class Queue
@@ -33,28 +28,18 @@ public:
   {
   }
 
-  // This constructor atomically transfers the
-  // entire contents of another queue into this.
-  explicit Queue (Queue& other)
-    : m_head (&m_null)
-    , m_tail (&m_null)
-    , m_null (0)
-  {
-    // worst-case implementation
-    for(;;)
-    {
-      Node* node = other.pop_front();
-      if (node)
-        push_back (node);
-      else
-        break;
-    }
-
-    // TODO: O(1) thread-safe implementation
-  }
-
   void push_back (Node* node)
   {
+#if 1
+    node->m_next.set (0);
+
+    Node* prev = m_head.exchange (node);
+
+    // small window where producer could get caught here
+
+    prev->m_next.set (node);
+
+#else
     Node* tail;
     Node* next;
 
@@ -76,10 +61,50 @@ public:
         }
       }
     }
+#endif
   }
 
   Elem* pop_front ()
   {
+#if 1
+    Node* tail = m_tail;
+    Node* next = tail->m_next.get ();
+
+    if (tail == &m_null)
+    {
+      if (next == 0)
+        return 0;
+
+      m_tail = next;
+      tail = next;
+      next = next->m_next.get ();
+    }
+
+    if (next)
+    {
+      m_tail = next;
+
+      return static_cast <Elem*> (tail);
+    }
+
+    Node* head = m_head.get ();
+    
+    if (tail != head)
+      return 0;
+
+    push_back (&m_null);
+
+    next = tail->m_next.get();
+
+    if (next)
+    {
+      m_tail = next;
+      
+      return static_cast <Elem*> (tail);
+    }
+
+    return 0;
+#else
     Node* head;
     Node* next;
     Node* tail;
@@ -111,11 +136,12 @@ public:
     }
 
     return static_cast <Elem*> (next);
+#endif
   }
 
 private:
   Atomic::Pointer <Node> m_head;
-  Atomic::Pointer <Node> m_tail;
+  Node* m_tail;
   Node m_null;
 };
 
