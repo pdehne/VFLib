@@ -8,6 +8,11 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeList.h"
 
+#define QUEUE_USE_MUTEX 1
+#if QUEUE_USE_MUTEX
+#include "vf/vf_Mutex.h"
+#endif
+
 namespace LockFree {
 
 //
@@ -28,6 +33,10 @@ template <class Elem,
 class Queue
 {
 public:
+#if QUEUE_USE_MUTEX
+  Mutex m_mutex;
+#endif
+
   typedef typename List <Elem, Tag>::Node Node;
 
   Queue ()
@@ -44,9 +53,12 @@ public:
     return (m_head.get () == m_tail);
   }
 
-
   void push_back (Node* node)
   {
+#if QUEUE_USE_MUTEX
+    ScopedLock lock (m_mutex);
+#endif
+
     node->m_next.set (0);
 
     Node* prev = m_head.exchange (node);
@@ -61,6 +73,10 @@ public:
 
   Elem* pop_front ()
   {
+#if QUEUE_USE_MUTEX
+    ScopedLock lock (m_mutex);
+#endif
+
     Node* tail = m_tail;
     Node* next = tail->m_next.get ();
 

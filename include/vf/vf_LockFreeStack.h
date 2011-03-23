@@ -8,6 +8,12 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeList.h"
 
+#define STACK_USE_MUTEX 0
+
+#if STACK_USE_MUTEX
+#include "vf/vf_Mutex.h" // debugging
+#endif
+
 namespace LockFree {
 
 //
@@ -36,6 +42,10 @@ public:
   // of the other stack. The other stack is cleared.
   explicit Stack (Stack& other)
   {
+#if STACK_USE_MUTEX
+    ScopedLock lock (other.m_mutex);
+#endif
+
     Node* head;
 
     do
@@ -57,6 +67,10 @@ public:
   // returns true if it pushed the first element
   bool push_front (Node* node)
   {
+#if STACK_USE_MUTEX
+    ScopedLock lock (m_mutex);
+#endif
+
     bool first;
     Node* head;
 
@@ -75,6 +89,10 @@ public:
 
   Elem* pop_front ()
   {
+#if STACK_USE_MUTEX
+    ScopedLock lock (m_mutex);
+#endif
+
     Node* node;
     Node* head;
 
@@ -111,6 +129,10 @@ public:
 
 private:
   Atomic::Pointer <Node> m_head;
+
+#if STACK_USE_MUTEX
+  Mutex m_mutex;
+#endif
 };
 
 }

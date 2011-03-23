@@ -11,6 +11,8 @@ BEGIN_VF_NAMESPACE
 
 namespace LockFree {
 
+#if 0
+
 ReadWriteMutex::ReadWriteMutex ()
 {
 }
@@ -80,6 +82,38 @@ void ReadWriteMutex::exit_write ()
 
   m_writes.release ();
 }
+
+#else
+
+ReadWriteMutex::ReadWriteMutex ()
+{
+}
+
+ReadWriteMutex::~ReadWriteMutex ()
+{
+}
+
+void ReadWriteMutex::enter_read ()
+{
+  m_mutex.enter ();
+}
+
+void ReadWriteMutex::exit_read ()
+{
+  m_mutex.exit ();
+}
+
+void ReadWriteMutex::enter_write ()
+{
+  m_mutex.enter ();
+}
+
+void ReadWriteMutex::exit_write ()
+{
+  m_mutex.exit ();
+}
+
+#endif
 
 }
 
