@@ -362,6 +362,8 @@ void Listeners::queue_call (Call::Ptr c, bool sync)
 
 void Listeners::add_void (void* const listener, Worker* worker)
 {
+  vfassert (worker != 0);
+
   LockFree::ScopedWriteLock lock (m_groups_mutex);
 
 #ifdef JUCE_DEBUG
