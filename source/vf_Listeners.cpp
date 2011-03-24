@@ -108,7 +108,7 @@ bool Listeners::Group::contains (void const* listener)
 }
 
 // Add the group to its thread queue with the given Call.
-void Listeners::Group::queue_call (Call::Ptr c)
+void Listeners::Group::queue_call (Call::Ptr c, bool sync)
 {
   // Caller shouldn't know about us if we're empty.
   vfassert (!empty ());
@@ -117,9 +117,12 @@ void Listeners::Group::queue_call (Call::Ptr c)
   // because boost::bind peforms the conversion from Group* to
   // to Group::Ptr at the point of call instead of bind time.
   //
-  // NOTE: do_call() may execute synchronously.
+  // NOTE: do_call() may execute synchronously if sync is true.
   //
-  m_worker->call (&Group::do_call, this, c, Group::Ptr (this));
+  if (sync)
+    m_worker->call (&Group::do_call, this, c, Group::Ptr (this));
+  else
+    m_worker->queue (&Group::do_call, this, c, Group::Ptr (this));
 }
 
 // Queues a reference to the Call on the thread queue of each listener
@@ -345,15 +348,15 @@ Listeners::Proxy* Listeners::find_proxy (const void* member, int bytes)
 
 // Puts the Call on each existing group's queue.
 // The caller must acquire the read mutex, but we release it.
-// It is possible that the call will execute immediately.
-void Listeners::queue_call (Call::Ptr c)
+// It is possible that the call will execute immediately if sync is true.
+void Listeners::queue_call (Call::Ptr c, bool sync)
 {
   // can't be const iterator because queue_call might cause called functors
   // to modify the list.
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
     Group::Ptr group = *iter++;
-    group->queue_call (c);
+    group->queue_call (c, sync);
   }
 }
 

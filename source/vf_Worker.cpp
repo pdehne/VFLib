@@ -45,6 +45,16 @@ Worker::~Worker ()
   vfassert (m_list.empty ());
 }
 
+void Worker::queuef (const func_t& f)
+{
+  do_queue (LockFree::globalAlloc <Call>::New (f));
+}
+
+void Worker::callf (const func_t& f)
+{
+  do_call (LockFree::globalAlloc <Call>::New (f));
+}
+
 bool Worker::process ()
 {
   // Detect recursion into do_process()
@@ -131,6 +141,11 @@ bool Worker::do_process ()
 // Adds a call to the queue of execution.
 void Worker::do_queue (Call* c)
 {
+  // If this goes off it means calls are being made after the
+  // queue is closed, and probably there is no one around to
+  // process it.
+  vfassert (m_closed.isClear());
+
   m_list.push_back (c);
 
   do_signal ();
@@ -142,14 +157,7 @@ void Worker::do_queue (Call* c)
 //
 void Worker::do_call (Call* c)
 {
-  // If this goes off it means calls are being made after the
-  // queue is closed, and probably there is no one around to
-  // process it.
-  vfassert (m_closed.isClear());
-
-  m_list.push_back (c);
-
-  do_signal ();
+  do_queue (c);
 
   // If we are called on the process thread and we are not
   // recursed into do_process, then process the queue. This
@@ -162,8 +170,7 @@ void Worker::do_call (Call* c)
   // might get an undesired synchronization if new thread
   // calls process() concurrently.
   //
-  if (CurrentThread::getId() == m_id &&
-     !in_process())
+  if (CurrentThread::getId() == m_id && !in_process())
   {
     // Detect recursion into do_process()
     ScopedFlag flag (m_in_process);

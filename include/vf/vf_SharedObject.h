@@ -39,6 +39,12 @@ public:
     return final;
   }
 
+  // Caller must synchronize.
+  inline bool isBeingReferenced () const
+  {
+    return m_refs.is_signaled();
+  }
+
   class Deleter;
 
 protected:

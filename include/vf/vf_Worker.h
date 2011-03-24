@@ -44,23 +44,75 @@ public:
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }
 
+  //
+  // Add the functor without executing immediately.
+  //
+  void queuef (const func_t& f);
+
   // Add a functor to the queue. It may be executed immediately.
   //
   // Functors MUST NOT cause thread interruptions.
   //
-  void callf (func_t f)
-  {
-    do_call (LockFree::globalAlloc <Call>::New (f));
-  }
+  void callf (const func_t& f);
 
   // Sugar for calling functions with arguments.
+
+  template <class Fn>
+  void queue (Fn const& f)
+  { queuef (bind (f)); }
+
+  template <>
+  void queue (const func_t& f)
+  { queuef (f); }
+
+  template <class Fn, typename  T1>
+  void queue (Fn f,    const T1& t1)
+  { queuef (bind (f, t1)); }
+
+  template <class Fn, typename  T1, typename  T2>
+  void queue (Fn f,   const T1& t1, const T2& t2)
+  { queuef (bind (f, t1, t2)); }
+
+  template <class Fn, typename  T1, typename  T2, typename  T3>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3)
+  { queuef (bind (f, t1, t2, t3)); }
+
+  template <class Fn, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  void queue (Fn f,   const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { queuef (bind (f, t1, t2, t3, t4)); }
+
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { queuef (bind (f, t1, t2, t3, t4, t5)); }
+
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { queuef (bind (f, t1, t2, t3, t4, t5, t6)); }
+
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7)); }
+
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   template <class Fn>
   void call (Fn const& f)
   { callf (bind (f)); }
 
   template <>
-  void call (func_t const& f)
+  void call (const func_t& f)
   { callf (f); }
 
   template <class Fn, typename  T1>
@@ -117,8 +169,6 @@ protected:
   // detection of when new calls are being made when they
   // shouldn't be.
   //
-  // TODO: Consider making this virtual and having the
-  // derived class cause the thread to stop ?
   void close ();
 
   // The worker is in the signaled state when there are unprocessed
@@ -147,13 +197,6 @@ private:
   bool do_process ();
   void do_queue (Call* c);
   void do_call (Call* c);
-
-  // Add the functor without synchronizing. (NOT USED)
-  template <class Functor>
-  void queuef (const Functor& f)
-  {
-    do_queue (LockFree::globalAllocator.New <Call> (f));
-  }
 
 private:
   const char* m_szName; // for debugging

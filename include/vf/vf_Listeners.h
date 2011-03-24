@@ -82,7 +82,7 @@ private:
     void add (void* listener, const unsigned long timestamp);
     bool remove (void* listener);
     bool contains (void const* listener);
-    void queue_call (Call::Ptr c);
+    void queue_call (Call::Ptr c, bool sync);
     void do_call (Call::Ptr c, Group::Ptr);
     Worker* getWorker () { return m_worker; }
 
@@ -159,7 +159,7 @@ private:
 protected:
   Listeners ();
   ~Listeners ();
-  void queue_call (Call::Ptr c);
+  void queue_call (Call::Ptr c, bool sync);
   void add_void (void* const listener, Worker* worker);
   void remove_void (void* const listener);
 
@@ -260,11 +260,11 @@ class Listeners : public detail::Listeners
 {
 private:
   template <class Functor>
-  void queue_fn (const Functor& f)
+  void queue_fn (const Functor& f, bool sync)
   {
     LockFree::ScopedReadLock lock (m_groups_mutex);
 
-    queue_call (newCall <ListenerClass> (f));
+    queue_call (newCall <ListenerClass> (f), sync);
   }
 
   template <class Member, class Function>
@@ -338,49 +338,95 @@ public:
 
   template <class Mf>
   void call (Mf mf)
-  { queue_fn (bind (mf, _1)); }
+  { queue_fn (bind (mf, _1), true); }
 
   template <class Mf, typename  T1>
   void call (Mf mf,   const T1& t1)
-  { queue_fn (bind (mf, _1, t1)); }
+  { queue_fn (bind (mf, _1, t1), true); }
 
   template <class Mf, typename  T1, typename  T2>
   void call (Mf mf,   const T1& t1, const T2& t2)
-  { queue_fn (bind (mf, _1, t1, t2)); }
+  { queue_fn (bind (mf, _1, t1, t2), true); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3)
-  { queue_fn (bind (mf, _1, t1, t2, t3)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3), true); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void call (Mf mf,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4), true); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5), true); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6), true); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), true); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), true); }
+
+  template <class Mf>
+  void queue (Mf mf)
+  { queue_fn (bind (mf, _1), false); }
+
+  template <class Mf, typename  T1>
+  void queue (Mf mf,   const T1& t1)
+  { queue_fn (bind (mf, _1, t1), false); }
+
+  template <class Mf, typename  T1, typename  T2>
+  void queue (Mf mf,   const T1& t1, const T2& t2)
+  { queue_fn (bind (mf, _1, t1, t2), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3>
+  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3)
+  { queue_fn (bind (mf, _1, t1, t2, t3), false); }
+
+  template <class Mf, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  void queue (Mf mf,   const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
 
   //
   // call1()
