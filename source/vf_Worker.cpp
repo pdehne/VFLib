@@ -106,7 +106,7 @@ bool Worker::do_process ()
   // to the implementation of the queue, it is possible that
   // we will get an extra signal but get called with an empty list.
   //
-#if 1
+#if 0
   if (m_signal.tryClear ())
     reset ();
 #else
@@ -121,8 +121,7 @@ bool Worker::do_process ()
     did_something = true;
 
     // This method of processing one at a time has the side
-    // effect of synchronizing calls to the same worker from
-    // a functor.
+    // effect of synchronizing calls to us from a functor.
     //
     for (;;)
     {

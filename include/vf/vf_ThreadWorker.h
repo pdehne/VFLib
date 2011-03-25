@@ -133,7 +133,7 @@ public:
   // #3 Throws a Thread::Interruption exception.
   //
   // If interruptionPoint returns true or throws, it must
-  // not be called again before the threat has the opportunity to reset.
+  // not be called again before the thread has the opportunity to reset.
   //
   const Thread::Interrupted interruptionPoint ()
   {
