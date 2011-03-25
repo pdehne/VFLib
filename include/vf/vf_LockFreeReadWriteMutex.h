@@ -11,7 +11,7 @@
 namespace LockFree {
 
 // Multiple-reader, single writer, write preferenced
-// recursive mutex with a lock-free fast path.
+// recursive mutex with a wait-free fast path.
 //
 class ReadWriteMutex
 {

@@ -5,10 +5,5 @@
 #ifndef __VF_LOCKFREE_VFHEADER__
 #define __VF_LOCKFREE_VFHEADER__
 
-#include "vf/vf_LockFreeAllocator.h"
-#include "vf/vf_LockFreeDelay.h"
-#include "vf/vf_LockFreeReadWriteMutex.h"
-#include "vf/vf_LockFreeQueue.h"
-#include "vf/vf_LockFreeStack.h"
 
 #endif

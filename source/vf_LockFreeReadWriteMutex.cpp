@@ -37,9 +37,11 @@ void ReadWriteMutex::enter_read ()
   for (;;)
   {
     // attempt the lock optimistically
+    // THIS IS NOT CACHE-FRIENDLY!
     m_readers.addref ();
 
     // is there a writer?
+    // THIS IS NOT CACHE-FRIENDLY!
     if (m_writes.is_signaled ())
     {
       // a writer exists, give up the read lock
@@ -77,9 +79,18 @@ void ReadWriteMutex::enter_write ()
   // but we don't know who, so we have to drain
   // readers no matter what. New readers will be
   // blocked by the mutex.
-  Delay delay; 
-  while (m_readers.is_signaled ())
-    delay.spin ();
+  //
+  // Crafted to sometimes avoid the Delay ctor.
+  //
+  if (m_readers.is_signaled ())
+  {
+    Delay delay; 
+    do
+    {
+      delay.spin ();
+    }
+    while (m_readers.is_signaled ());
+  }
 }
 
 void ReadWriteMutex::exit_write ()

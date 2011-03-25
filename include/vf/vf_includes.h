@@ -21,6 +21,10 @@
 #include "vf/vf_CatchAny.h"
 #endif
 
+#ifndef __VF_CACHELINEPADDING_VFHEADER__
+#include "vf/vf_CacheLinePadding.h"
+#endif
+
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
 #endif
@@ -43,6 +47,30 @@
 
 #ifndef __VF_LIST_VFHEADER__
 #include "vf/vf_List.h"
+#endif
+
+#ifndef __VF_LOCKFREEALLOCATOR_VFHEADER__
+#include "vf/vf_LockFreeAllocator.h"
+#endif
+
+#ifndef __VF_LOCKFREEDELAY_VFHEADER__
+#include "vf/vf_LockFreeDelay.h"
+#endif
+
+#ifndef __VF_LOCKFREELIST_VFHEADER__
+#include "vf/vf_LockFreeList.h"
+#endif
+
+#ifndef __VF_LOCKFREEQUEUE_VFHEADER__
+#include "vf/vf_LockFreeQueue.h"
+#endif
+
+#ifndef __VF_LOCKFREEREADWRITEMUTEX_VFHEADER__
+#include "vf/vf_LockFreeReadWriteMutex.h"
+#endif
+
+#ifndef __VF_LOCKFREESTACK_VFHEADER__
+#include "vf/vf_LockFreeStack.h"
 #endif
 
 #ifndef __VF_MATH_VFHEADER__

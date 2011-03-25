@@ -81,6 +81,8 @@ void Worker::do_signal ()
 {
   const bool first = m_signal.trySet ();
 
+  vfassert (first);
+
   if (first)
     signal ();
 }
@@ -90,6 +92,9 @@ void Worker::do_signal ()
 void Worker::do_reset ()
 {
   const bool last = m_signal.tryClear ();
+
+  //vfassert (last);
+
   if (last)
     reset ();
 }
@@ -104,13 +109,13 @@ bool Worker::do_process ()
 {
   bool did_something;
 
-  Call* call = m_list.pop_front ();
-
   // We must reset here to fulfill requirements. However, due
   // to the implementation of the queue, it is possible that
   // we will get an extra signal but get called with an empty list.
   //
   do_reset ();
+
+  Call* call = m_list.pop_front ();
 
   if (call)
   {
@@ -134,6 +139,8 @@ bool Worker::do_process ()
   {
     did_something = false;
   }
+
+  do_reset ();
 
   return did_something;
 }
@@ -175,14 +182,19 @@ void Worker::do_call (Call* c)
     // Detect recursion into do_process()
     ScopedFlag flag (m_in_process);
 
+    // NOT NEEDED ANYMORE because of the loop in do_process ()
     // Because functors may make additional calls during process(),
     // we loop until there is no work left. This is manual unrolling
     // of the implicit tail recursion.
     //
     // TODO: It could be useful to put a limit on the number of iterations
+    /*
     while (do_process ())
     {
     }
+    */
+
+    do_process ();
   }
 }
 

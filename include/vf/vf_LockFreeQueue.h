@@ -6,12 +6,9 @@
 #define __VF_LOCKFREEQUEUE_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_CacheLinePadding.h"
+#include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
-
-#define QUEUE_USE_MUTEX 0
-#if QUEUE_USE_MUTEX
-#include "vf/vf_Mutex.h"
-#endif
 
 namespace LockFree {
 
@@ -24,25 +21,21 @@ namespace LockFree {
 //
 // - Only one thread may call pop_front() at a time.
 //
-// It is the responsibility of the caller to
-// synchronize access to pop_front().
+// - Caller must synchronize access to pop_front() and try_pop_front().
 //
-
+// - The queue is considered signaled if there are one or more elements.
+//
 template <class Elem,
           class Tag = detail::List_default_tag>
 class Queue
 {
 public:
-#if QUEUE_USE_MUTEX
-  Mutex m_mutex;
-#endif
-
   typedef typename List <Elem, Tag>::Node Node;
 
   Queue ()
-    : m_head (&m_null)
-    , m_tail (&m_null)
-    , m_null (0)
+    : m_head ((Node*)m_null)
+    , m_tail ((Node*)m_null)
+    , m_null ((Node*)0)
   {
   }
 
@@ -50,18 +43,15 @@ public:
   // Caller must synchronize.
   bool empty () const
   {
-    return (m_head.get () == m_tail);
+    return (m_head->get () == m_tail);
   }
 
-  void push_back (Node* node)
+  // Returns true if the queue became signaled from the push.
+  bool push_back (Node* node)
   {
-#if QUEUE_USE_MUTEX
-    ScopedLock lock (m_mutex);
-#endif
-
     node->m_next.set (0);
 
-    Node* prev = m_head.exchange (node);
+    Node* prev = m_head->exchange (node);
 
     // (*) If we get pre-empted here, then
     //     pop_front() might not see this element.
@@ -69,25 +59,45 @@ public:
     // This only happens when the list is empty.
 
     prev->m_next.set (node);
+
+    return prev == m_null;
   }
 
   Elem* pop_front ()
   {
-#if QUEUE_USE_MUTEX
-    ScopedLock lock (m_mutex);
-#endif
+    Elem* elem;
 
+    // Crafted to sometimes avoid the Delay ctor.
+    if (!try_pop_front (&elem))
+    {
+      Delay delay;
+      do
+      {
+        delay.spin ();
+      }
+      while (!try_pop_front (&elem));
+    }
+
+    return elem;
+  }
+
+  // Returns true on success.
+  bool try_pop_front (Elem** pElem)
+  {
     Node* tail = m_tail;
     Node* next = tail->m_next.get ();
 
-    if (tail == &m_null)
+    if (tail == m_null)
     {
       if (next == 0)
       {
         // (*) If push_back() is at the magic
         //     spot, we might not see it's element.
+        //     This situation is detectable, and counts
+        //     as a 'failure'. The caller decides what to do.
 
-        return 0;
+        *pElem = 0;
+        return m_head->get() == tail;
       }
 
       m_tail = next;
@@ -98,35 +108,32 @@ public:
     if (next)
     {
       m_tail = next;
-
-      return static_cast <Elem*> (tail);
+      *pElem = static_cast <Elem*> (tail);
+      return true;
     }
 
-    Node* head = m_head.get ();
-    
-    if (tail != head)
-      return 0;
+    Node* head = m_head->get ();
 
-    push_back (&m_null);
-
-    next = tail->m_next.get();
-
-    if (next)
+    if (tail == head)
     {
-      m_tail = next;
-      
-      return static_cast <Elem*> (tail);
+      push_back (m_null);
+      next = tail->m_next.get();
+      if (next)
+      {
+        m_tail = next;
+        *pElem = static_cast <Elem*> (tail);
+        return true;
+      }
     }
 
-    return 0;
+    return head == m_tail;
   }
 
 private:
-  // Note that items are pushed on to the head
-  // popped from the tail, the reverse of expected.
-  Atomic::Pointer <Node> m_head;
-  Node* m_tail;
-  Node m_null;
+  // Elements are pushed on to the head and popped from the tail.
+  CacheLinePadding <Atomic::Pointer <Node> > m_head;
+  CacheLinePadding <Node*> m_tail;
+  CacheLinePadding <Node> m_null;
 };
 
 }
