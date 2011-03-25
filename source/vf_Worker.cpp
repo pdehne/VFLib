@@ -55,6 +55,13 @@ void Worker::callf (const func_t& f)
   do_call (LockFree::globalAlloc <Call>::New (f));
 }
 
+void Worker::associateWithCurrentThread ()
+{
+  vfassert (m_in_process.isClear ());
+
+  m_id = CurrentThread::getId();
+}
+
 bool Worker::process ()
 {
   bool did_something;
@@ -85,29 +92,6 @@ void Worker::close ()
   m_closed.set ();
 }
 
-// Call the signal function if it hasn't already been called
-// without a matching call to reset.
-//
-void Worker::do_signal ()
-{
-#if 0
-  m_signal.set ();
-
-  signal ();
-#else
-  if (m_signal.trySet ())
-    signal ();
-#endif
-}
-
-// Call the reset function if we are signaled.
-//
-void Worker::do_reset ()
-{
-  if (m_signal.tryClear ())
-    reset ();
-}
-
 // Process everything in the queue. The list of pending calls is
 // acquired atomically. New calls may enter the queue while we are
 // processing.
@@ -122,7 +106,13 @@ bool Worker::do_process ()
   // to the implementation of the queue, it is possible that
   // we will get an extra signal but get called with an empty list.
   //
-  do_reset ();
+#if 1
+  if (m_signal.tryClear ())
+    reset ();
+#else
+  m_signal.clear ();
+  reset ();
+#endif
 
   Call* call = m_list.pop_front ();
 
@@ -149,8 +139,6 @@ bool Worker::do_process ()
     did_something = false;
   }
 
-  do_reset ();
-
   return did_something;
 }
 
@@ -165,7 +153,15 @@ void Worker::do_queue (Call* c)
   const bool first = m_list.push_back (c);
 
   if (first)
-    do_signal ();
+  {
+#if 0
+    m_signal.set ();
+    signal ();
+#else
+    if (m_signal.trySet ())
+      signal ();
+#endif
+  }
 }
 
 // Append the Call to the queue. If this call is made from the same

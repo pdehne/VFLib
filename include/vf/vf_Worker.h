@@ -158,6 +158,9 @@ public:
   { callf (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 protected:
+  // Used by GuiWorker to synchronize calls
+  void associateWithCurrentThread ();
+
   // Derived class calls this when the queue is signaled,
   // or whenever it wants to. It is disallowed to call
   // process() from more than one thread simultaneously.
@@ -192,8 +195,6 @@ private:
     { Call (func_t const& c) : Function (c) { } };
 
 private:
-  void do_reset ();
-  void do_signal ();
   bool do_process ();
   void do_queue (Call* c);
   void do_call (Call* c);

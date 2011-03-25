@@ -44,7 +44,7 @@ GuiWorker::GuiWorker () : Worker ("JuceWorker")
 
   // HACK! trick the Worker into getting the thread
   // id so that calls become synchronous from the beginning.
-  process ();
+  associateWithCurrentThread ();
 }
 
 void GuiWorker::signal ()
