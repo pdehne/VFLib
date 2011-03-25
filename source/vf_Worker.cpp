@@ -57,13 +57,24 @@ void Worker::callf (const func_t& f)
 
 bool Worker::process ()
 {
-  // Detect recursion into do_process()
-  ScopedFlag flag (m_in_process);
+  bool did_something;
 
-  // Remember this thread.
-  m_id = CurrentThread::getId();
+  // Detect recursion into do_process(), and
+  // break ties for concurrent calls atomically.
+  //
+  if (m_in_process.trySet ())
+  {
+    // Remember this thread.
+    m_id = CurrentThread::getId();
 
-  const bool did_something = do_process ();
+    did_something = do_process ();
+
+    m_in_process.clear ();
+  }
+  else
+  {
+    did_something = false;
+  }
 
   return did_something;
 }
@@ -79,23 +90,21 @@ void Worker::close ()
 //
 void Worker::do_signal ()
 {
-  const bool first = m_signal.trySet ();
+#if 0
+  m_signal.set ();
 
-  vfassert (first);
-
-  if (first)
+  signal ();
+#else
+  if (m_signal.trySet ())
     signal ();
+#endif
 }
 
 // Call the reset function if we are signaled.
 //
 void Worker::do_reset ()
 {
-  const bool last = m_signal.tryClear ();
-
-  //vfassert (last);
-
-  if (last)
+  if (m_signal.tryClear ())
     reset ();
 }
 
@@ -153,9 +162,10 @@ void Worker::do_queue (Call* c)
   // process it.
   vfassert (m_closed.isClear());
 
-  m_list.push_back (c);
+  const bool first = m_list.push_back (c);
 
-  do_signal ();
+  if (first)
+    do_signal ();
 }
 
 // Append the Call to the queue. If this call is made from the same
@@ -177,24 +187,12 @@ void Worker::do_call (Call* c)
   // might get an undesired synchronization if new thread
   // calls process() concurrently.
   //
-  if (CurrentThread::getId() == m_id && !in_process())
+  if (CurrentThread::getId() == m_id &&
+      m_in_process.trySet ())
   {
-    // Detect recursion into do_process()
-    ScopedFlag flag (m_in_process);
-
-    // NOT NEEDED ANYMORE because of the loop in do_process ()
-    // Because functors may make additional calls during process(),
-    // we loop until there is no work left. This is manual unrolling
-    // of the implicit tail recursion.
-    //
-    // TODO: It could be useful to put a limit on the number of iterations
-    /*
-    while (do_process ())
-    {
-    }
-    */
-
     do_process ();
+
+    m_in_process.clear ();
   }
 }
 
