@@ -20,16 +20,7 @@ enum
   // This number should be as small as possible
   // without generating compile time assertions.
   //
-  globalAllocatorBlockSize = 96,
-
-  //
-  // If we exceed this limit on hard allocations
-  // then an exception will be thrown.
-  //
-  // Typically this means that consumers cannot keep up
-  // with producers and the app would be non-functional.
-  //
-  maxHardAllocations = 30 * 1024
+  globalAllocatorBlockSize = 96
 };
 
 //
@@ -67,7 +58,17 @@ public:
   //
   enum
   {
-    defaultMegaBytes = 2
+    defaultMegaBytes = 2,
+
+    //
+    // If we exceed this limit on hard allocations
+    // then an exception will be thrown.
+    //
+    // Typically this means that consumers cannot keep up
+    // with producers and the app would be non-functional.
+    //
+    // hardLimitMegaBytes = 16
+    hardLimitMegaBytes = 256
   };
 
   enum
@@ -77,7 +78,7 @@ public:
 
   FixedAllocator (int byteLimit = defaultMegaBytes * 1024 * 1024)
     : m_interval (byteLimit / (2 * (BlockSize + sizeof(Node))))
-    , m_hard (maxHardAllocations)
+    , m_hard ((hardLimitMegaBytes * 1024 * 1024) / (BlockSize + sizeof(Node)))
     , m_count (m_interval)
 #if ALLOCATOR_COUNT_SWAPS
     , m_swaps (0)
@@ -114,11 +115,13 @@ public:
     if (!node)
     {
       p = ::operator new (BlockSize + sizeof (Node)); // implicit global mutex
+      if (!p)
+        Throw (Error().fail (__FILE__, __LINE__, TRANS("the FixedAllocator receivd 0 on ::new")));
 
       const bool exhausted = m_hard.release ();
 
       if (exhausted)
-        Throw (Error().fail (__FILE__, __LINE__, TRANS("FixedAllocator exhausted")));
+        Throw (Error().fail (__FILE__, __LINE__, TRANS("the FixedAllocator exhausted it's allocations")));
 
 #if VF_CHECK_LEAKS
       m_total.addref ();
