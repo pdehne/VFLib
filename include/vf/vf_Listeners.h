@@ -421,25 +421,25 @@ public:
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
-  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
+  void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5), false); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
-  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
+  void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6), false); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
-  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), false); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
-  void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
 
