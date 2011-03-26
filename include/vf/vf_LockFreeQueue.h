@@ -96,8 +96,15 @@ public:
         //     This situation is detectable, and counts
         //     as a 'failure'. The caller decides what to do.
 
-        *pElem = 0;
-        return m_head->get() == tail;
+        if (m_head->get() == tail)
+        {
+          *pElem = 0;
+          return true;
+        }
+        else
+        {
+          return false; // busy
+        }
       }
 
       m_tail = next;
@@ -128,7 +135,15 @@ public:
 
     // (*)
 
-    return head == m_tail;
+    if (head == m_tail)
+    {
+      *pElem = 0;
+      return true;
+    }
+    else
+    {
+      return false; // busy
+    }
   }
 
 private:
