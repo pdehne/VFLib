@@ -8,10 +8,8 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
 #include "vf/vf_Function.h"
-#include "vf/vf_List.h"
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeQueue.h"
-#include "vf/vf_Mutex.h"
 #include "vf/vf_Thread.h"
 
 //
@@ -203,7 +201,6 @@ private:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
   Calls m_list;
-  Atomic::Flag m_signal;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
 };

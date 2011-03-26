@@ -102,17 +102,11 @@ bool Worker::do_process ()
 {
   bool did_something;
 
-  // We must reset here to fulfill requirements. However, due
-  // to the implementation of the queue, it is possible that
-  // we will get an extra signal but get called with an empty list.
+  // Reset since we are emptying the queue. Since we loop
+  // until the queue is empty, it is possible for us to exit
+  // this function with an empty queue and signaled state.
   //
-#if 0
-  if (m_signal.tryClear ())
-    reset ();
-#else
-  m_signal.clear ();
   reset ();
-#endif
 
   Call* call = m_list.pop_front ();
 
@@ -149,18 +143,8 @@ void Worker::do_queue (Call* c)
   // process it.
   vfassert (m_closed.isClear());
 
-  const bool first = m_list.push_back (c);
-
-  if (first)
-  {
-#if 0
-    m_signal.set ();
+  if (m_list.push_back (c))
     signal ();
-#else
-    if (m_signal.trySet ())
-      signal ();
-#endif
-  }
 }
 
 // Append the Call to the queue. If this call is made from the same

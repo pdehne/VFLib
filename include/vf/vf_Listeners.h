@@ -26,14 +26,8 @@ namespace detail {
 
 class Listeners
 {
-private:
+protected:
   typedef unsigned long timestamp_t;
-
-  class Group;
-  typedef List <Group> Groups;
-
-  class Proxy;
-  typedef List <Proxy> Proxies;
 
   //
   // Reference counted polymorphic unary functor of <void (void* listener)>.
@@ -43,31 +37,32 @@ private:
   {
   public:
     typedef SharedObjectPtr <Call> Ptr;
+
     explicit Call (const timestamp_t timestamp)
       : m_timestamp (timestamp) { }
+    
     bool is_newer_than (const timestamp_t when) const
       { return m_timestamp > when; }
+
     static void do_call (Ptr c, void* listener)
       { c->operator()(listener); }
+
     virtual void operator ()(void* listener) = 0;
+  
   private:
-    void destroySharedObject () { LockFree::globalDelete (this); }
+    void destroySharedObject ()
+      { LockFree::globalDelete (this); }
+
+  private:
     const timestamp_t m_timestamp;
   };
 
-  template <class ListenerClass, class Functor>
-  class StoredCall : public Call
-  {
-  public:
-    StoredCall (const timestamp_t timestamp, const Functor& f)
-      : Call (timestamp), m_f (f) {}
-    // without this we get UB
-    ~StoredCall () {}
-    void operator() (void* listener)
-      { m_f.operator() (static_cast <ListenerClass*> (listener)); }
-  private:
-    Functor m_f;
-  };
+private:
+  class Group;
+  typedef List <Group> Groups;
+
+  class Proxy;
+  typedef List <Proxy> Proxies;
 
   //
   // Maintains a list of listeners registered on the same thread queue
@@ -76,18 +71,21 @@ private:
   {
   public:
     typedef SharedObjectPtr <Group> Ptr;
-    explicit Group (Worker* worker);
-    virtual ~Group ();
-    bool empty () const { return m_list.empty(); } // caller syncs
-    void add (void* listener, const unsigned long timestamp);
-    bool remove (void* listener);
-    bool contains (void const* listener);
-    void queue_call (Call::Ptr c, bool sync);
-    void do_call (Call::Ptr c, Group::Ptr);
+
+    explicit Group    (Worker* worker);
+    virtual ~Group    ();
+    void add          (void* listener, const unsigned long timestamp);
+    bool remove       (void* listener);
+    bool contains     (void const* listener);
+    void queue_call   (Call::Ptr c, bool sync);
+    void do_call      (Call::Ptr c, Group::Ptr);
+
+    bool empty        () { return m_list.empty(); }
     Worker* getWorker () { return m_worker; }
 
   private:
-    void destroySharedObject () { LockFree::globalDelete (this); }
+    void destroySharedObject ()
+      { LockFree::globalDelete (this); }
 
   private:
     struct Entry;
@@ -184,16 +182,6 @@ protected:
     Listeners& m_listeners;
   };
 
-  // Caller is responsible for a group read lock.
-  template <class ListenerClass, class Functor>
-  Call::Ptr newCall (const Functor& f)
-  {
-    typedef typename StoredCall <ListenerClass, Functor> call_t;
-
-    // group read lock needed for access to m_timestamp    
-    return LockFree::globalAlloc <call_t>::New (m_timestamp, f);
-  }
-
   // Search for an existing Proxy that matches the pointer to
   // member and replace it's Call, or create a new Proxy for it.
   // Caller must acquire the group read lock.
@@ -245,9 +233,9 @@ protected:
 private:
   Groups m_groups;
   Proxies m_proxies;
-  timestamp_t m_timestamp;
   LockFree::ReadWriteMutex m_proxies_mutex;
 protected:
+  timestamp_t m_timestamp;
   LockFree::ReadWriteMutex m_groups_mutex;
 };
 
@@ -260,11 +248,34 @@ class Listeners : public detail::Listeners
 {
 private:
   template <class Functor>
+  class StoredCall : public Call
+  {
+  public:
+    StoredCall (const timestamp_t timestamp, const Functor& f)
+      : Call (timestamp), m_f (f) { }
+    ~StoredCall ()
+      { } // without this we get UB
+    void operator() (void* listener)
+      { m_f.operator() (static_cast <ListenerClass*> (listener)); }
+
+  private:
+    Functor m_f;
+  };
+
+  // Caller is responsible for a group read lock.
+  template <class Functor>
+  Call::Ptr newCall (const Functor& f)
+  {
+    // group read lock needed for access to m_timestamp    
+    return LockFree::globalAlloc <StoredCall <Functor> >::New (m_timestamp, f);
+  }
+
+  template <class Functor>
   void queue_fn (const Functor& f, bool sync)
   {
     LockFree::ScopedReadLock lock (m_groups_mutex);
 
-    queue_call (newCall <ListenerClass> (f), sync);
+    queue_call (newCall (f), sync);
   }
 
   template <class Member, class Function>
@@ -273,12 +284,12 @@ private:
     LockFree::ScopedReadLock lock (m_groups_mutex);
 
     proxy_call <sizeof (member)> (reinterpret_cast <void*> (&member),
-                                  newCall <ListenerClass> (f));
+                                  newCall (f));
   }
 
 public:
-  Listeners () {}
-  ~Listeners () {}
+  Listeners () { }
+  ~Listeners () { }
 
   //
   // Add a listener to receive call notifications.
@@ -381,6 +392,10 @@ public:
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), true); }
+
+  //
+  // Queue a call without synchronizing
+  //
 
   template <class Mf>
   void queue (Mf mf)

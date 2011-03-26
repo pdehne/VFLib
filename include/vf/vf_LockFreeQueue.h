@@ -126,6 +126,8 @@ public:
       }
     }
 
+    // (*)
+
     return head == m_tail;
   }
 

@@ -37,7 +37,7 @@ Listeners::Group::Group (Worker* worker)
 Listeners::Group::~Group ()
 {
   // If this goes off it means a Listener forgot to remove.
-  vfassert (m_list.empty());
+  vfassert (m_list.empty ());
 
   // shouldn't be deleting group during a call
   vfassert (m_listener == 0);
