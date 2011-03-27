@@ -17,10 +17,10 @@ namespace LockFree {
 
 ReadWriteMutex::ReadWriteMutex () { }
 ReadWriteMutex::~ReadWriteMutex () { }
-void ReadWriteMutex::enter_read () { m_mutex.enter (); }
-void ReadWriteMutex::exit_read () { m_mutex.exit (); }
-void ReadWriteMutex::enter_write () { m_mutex.enter (); }
-void ReadWriteMutex::exit_write () { m_mutex.exit (); }
+void ReadWriteMutex::enter_read () const { m_mutex.enter (); }
+void ReadWriteMutex::exit_read () const { m_mutex.exit (); }
+void ReadWriteMutex::enter_write () const { m_mutex.enter (); }
+void ReadWriteMutex::exit_write () const { m_mutex.exit (); }
 
 #else
 
@@ -32,7 +32,7 @@ ReadWriteMutex::~ReadWriteMutex ()
 {
 }
 
-void ReadWriteMutex::enter_read ()
+void ReadWriteMutex::enter_read () const
 {
   for (;;)
   {
@@ -61,12 +61,12 @@ void ReadWriteMutex::enter_read ()
   }
 }
 
-void ReadWriteMutex::exit_read ()
+void ReadWriteMutex::exit_read () const
 {
   m_readers.release ();
 }
 
-void ReadWriteMutex::enter_write ()
+void ReadWriteMutex::enter_write () const
 {
   // Optimistically acquire the write lock.
   m_writes.addref ();
@@ -93,7 +93,7 @@ void ReadWriteMutex::enter_write ()
   }
 }
 
-void ReadWriteMutex::exit_write ()
+void ReadWriteMutex::exit_write () const
 {
   // Releasing the mutex first and then decrementing the
   // writer count allows another waiting writer to atomically

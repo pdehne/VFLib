@@ -20,36 +20,36 @@ public:
   ~ReadWriteMutex ();
 
   // Recursive.
-  void enter_read ();
-  void exit_read ();
+  void enter_read () const;
+  void exit_read () const;
 
   // Recursive.
   // Cannot hold a read lock when acquiring a write lock.
-  void enter_write ();
-  void exit_write ();
+  void enter_write () const;
+  void exit_write () const;
 
 private:
   Mutex m_mutex;
-  Atomic::Counter m_writes;
-  Atomic::Counter m_readers;
+  mutable Atomic::Counter m_writes;
+  mutable Atomic::Counter m_readers;
 };
 
 struct ScopedReadLock : NonCopyable
 {
-  inline explicit ScopedReadLock (ReadWriteMutex& mutex)
+  inline explicit ScopedReadLock (const ReadWriteMutex& mutex)
     : m_mutex (mutex) { m_mutex.enter_read (); }
   inline ~ScopedReadLock () { m_mutex.exit_read (); }
 private:
-  ReadWriteMutex& m_mutex;
+  const ReadWriteMutex& m_mutex;
 };
 
 struct ScopedWriteLock : NonCopyable
 {
-  inline explicit ScopedWriteLock (ReadWriteMutex& mutex)
+  inline explicit ScopedWriteLock (const ReadWriteMutex& mutex)
     : m_mutex (mutex) { m_mutex.enter_write (); }
   inline ~ScopedWriteLock () { m_mutex.exit_write (); }
 private:
-  ReadWriteMutex& m_mutex;
+  const ReadWriteMutex& m_mutex;
 };
 
 }

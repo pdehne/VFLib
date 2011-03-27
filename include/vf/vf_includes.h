@@ -85,6 +85,10 @@
 #include "vf/vf_Mutex.h"
 #endif
 
+#ifndef __VF_SHAREDSTATE_VFHEADER__
+#include "vf/vf_SharedState.h"
+#endif
+
 #ifndef __VF_SYNCHRONIZEDOBJECT_VFHEADER__
 #include "vf/vf_SynchronizedObject.h"
 #endif

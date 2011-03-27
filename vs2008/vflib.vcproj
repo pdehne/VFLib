@@ -324,6 +324,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_SharedState.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_SynchronizedObject.h"
 				>
 			</File>
