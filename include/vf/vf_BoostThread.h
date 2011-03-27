@@ -17,12 +17,10 @@
 
 namespace Boost {
 
-class Thread
+class Thread : public detail::ThreadBase
 {
 public:
   typedef boost::thread::id id;
-  typedef detail::Thread::Interrupted Interrupted;
-  typedef detail::Thread::Interruption Interruption;
 
 public:
   explicit Thread (const VF_NAMESPACE::String& name);

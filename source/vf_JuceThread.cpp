@@ -183,13 +183,13 @@ Juce::Thread::Interrupted interruptionPoint ()
   
   if (thread)
   {
-    Juce::Thread* vfThread = dynamic_cast <VF_NAMESPACE::Juce::Thread*> (thread);
+    detail::ThreadBase* threadBase = dynamic_cast <detail::ThreadBase*> (thread);
 
-    // Can only use interruption points from a Juce::Thread
-    vfassert (vfThread != 0);
+    // Can only use interruption points from one of our threads
+    vfassert (threadBase != 0);
 
-    if (vfThread)
-      interrupted = vfThread->interruptionPoint ();
+    if (threadBase)
+      interrupted = threadBase->interruptionPoint ();
     else
       interrupted = false;
   }

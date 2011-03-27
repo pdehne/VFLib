@@ -12,13 +12,11 @@
 
 namespace Juce {
 
-// derivation must be public for dynamic_cast to work
-class Thread : public VF_JUCE::Thread
+class Thread : public detail::ThreadBase
+             , private VF_JUCE::Thread
 {
 public:
   typedef VF_JUCE::Thread::ThreadID id;
-  typedef detail::Thread::Interrupted Interrupted;
-  typedef detail::Thread::Interruption Interruption;
 
 public:
   class InterruptionModel

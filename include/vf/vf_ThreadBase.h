@@ -74,6 +74,16 @@ private:
 
 }
 
+class ThreadBase
+{
+public:
+  typedef detail::Thread::Interrupted Interrupted;
+  typedef detail::Thread::Interruption Interruption;
+
+  virtual void interrupt () = 0;
+  virtual Interrupted interruptionPoint () = 0;
+};
+
 }
 
 #endif
