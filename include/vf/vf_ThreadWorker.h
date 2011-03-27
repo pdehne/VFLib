@@ -206,8 +206,8 @@ private:
 //------------------------------------------------------------------------------
 
 #if VF_HAVE_JUCE
-typedef ThreadWorkerType <Juce::ThreadType <Juce::Thread::ExceptionBased> > ExceptionWorker;
-typedef ThreadWorkerType <Juce::ThreadType <Juce::Thread::PollingBased> > PollingWorker;
+typedef ThreadWorkerType <JuceThreadType <JuceThread::ExceptionBased> > ExceptionWorker;
+typedef ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > PollingWorker;
 
 #elif VF_HAVE_BOOST
 typedef ThreadWorkerType <Boost::Thread> ExceptionWorker;

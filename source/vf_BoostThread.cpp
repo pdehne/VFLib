@@ -11,38 +11,36 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_BoostThread.h"
 #include "vf/vf_CatchAny.h"
 
-namespace Boost {
-
-Thread::Thread (const VF_NAMESPACE::String& name)
+BoostThread::BoostThread (const VF_NAMESPACE::String& name)
 {
 }
 
-Thread::~Thread ()
+BoostThread::~BoostThread ()
 {
   join ();
 }
 
-void Thread::start (const Function <void (void)>& f)
+void BoostThread::start (const Function <void (void)>& f)
 {
   m_thread = boost::thread (f);
 }
 
-void Thread::join ()
+void BoostThread::join ()
 {
   m_thread.join ();
 }
 
-Thread::id Thread::getId ()
+BoostThread::id BoostThread::getId ()
 {
   return m_thread.get_id ();
 }
 
-bool Thread::isTheCurrentThread () const
+bool BoostThread::isTheCurrentThread () const
 {
   return m_thread.get_id () == boost::this_thread::get_id ();
 }
 
-void Thread::wait ()
+void BoostThread::wait ()
 {
   try
   {
@@ -57,12 +55,12 @@ void Thread::wait ()
   }
 }
 
-void Thread::interrupt ()
+void BoostThread::interrupt ()
 {
   m_thread.interrupt ();
 }
 
-Thread::Interrupted Thread::interruptionPoint ()
+BoostThread::Interrupted BoostThread::interruptionPoint ()
 {
   vfassert (isTheCurrentThread ());
 
@@ -73,20 +71,22 @@ Thread::Interrupted Thread::interruptionPoint ()
   catch (boost::thread_interrupted&)
   {
     // re-throw it as a boost-independent object
-    throw detail::Thread::Interruption();
+    throw Interruption();
   }
 
-  return Thread::Interrupted (false);
+  return BoostThread::Interrupted (false);
 }
 
-namespace CurrentThread {
+//------------------------------------------------------------------------------
 
-Boost::Thread::id getId ()
+namespace CurrentBoostThread {
+
+BoostThread::id getId ()
 {
   return boost::this_thread::get_id ();
 }
 
-Thread::Interrupted interruptionPoint ()
+BoostThread::Interrupted interruptionPoint ()
 {
   try
   {
@@ -95,12 +95,10 @@ Thread::Interrupted interruptionPoint ()
   catch (boost::thread_interrupted&)
   {
     // re-throw it as a boost-independent object
-    throw detail::Thread::Interruption();
+    throw ThreadBase::Interruption();
   }
 
-  return Thread::Interrupted (false);
-}
-
+  return BoostThread::Interrupted (false);
 }
 
 }

@@ -11,14 +11,12 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_CatchAny.h"
 #include "vf/vf_JuceThread.h"
 
-namespace Juce {
-
-Thread::InterruptionModel::InterruptionModel ()
+JuceThread::InterruptionModel::InterruptionModel ()
   : m_state (stateReset)
 {
 }
 
-bool Thread::InterruptionModel::do_wait ()
+bool JuceThread::InterruptionModel::do_wait ()
 {
   bool should_wait;
 
@@ -47,7 +45,7 @@ bool Thread::InterruptionModel::do_wait ()
   return should_wait;
 }
 
-void Thread::InterruptionModel::interrupt (Thread& thread)
+void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 {
   bool should_signal;
 
@@ -74,7 +72,7 @@ void Thread::InterruptionModel::interrupt (Thread& thread)
     thread.notify ();
 }
 
-bool Thread::InterruptionModel::do_interruptionPoint ()
+bool JuceThread::InterruptionModel::do_interruptionPoint ()
 {
   // How could we possibly be in the wait state and get called?
   vfassert (m_state.get() != stateWaiting);
@@ -88,17 +86,20 @@ bool Thread::InterruptionModel::do_interruptionPoint ()
 
 //------------------------------------------------------------------------------
 
-void Thread::ExceptionBased::wait (Thread& thread)
+void JuceThread::ExceptionBased::wait (JuceThread& thread)
 {
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
   const bool should_wait = do_wait ();
 
   if (should_wait)
-    thread.wait (-1);
+    thread.VF_JUCE::Thread::wait (-1);
   else
-    throw detail::Thread::Interruption();
+    throw Interruption();
 }
 
-Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
+ThreadBase::Interrupted JuceThread::ExceptionBased::interruptionPoint (JuceThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
@@ -106,73 +107,84 @@ Thread::Interrupted Thread::ExceptionBased::interruptionPoint (Thread& thread)
   const bool interrupted = do_interruptionPoint ();
 
   if (interrupted)
-    throw detail::Thread::Interruption();
+    throw Interruption();
 
-  return Thread::Interrupted (false);
+  return ThreadBase::Interrupted (false);
 }
 
 //------------------------------------------------------------------------------
 
-void Thread::PollingBased::wait (Thread& thread)
+void JuceThread::PollingBased::wait (JuceThread& thread)
 {
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
   const bool should_wait = do_wait ();
 
   if (should_wait)
-    thread.wait (-1);
+    thread.VF_JUCE::Thread::wait (-1);
 }
 
-Thread::Interrupted Thread::PollingBased::interruptionPoint (Thread& thread)
+ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
   const bool interrupted = do_interruptionPoint ();
 
-  return Thread::Interrupted (interrupted);
+  return ThreadBase::Interrupted (interrupted);
 }
 
 //------------------------------------------------------------------------------
 
-Thread::Thread (const VF_NAMESPACE::String& name) : VF_JUCE::Thread (name)
+JuceThread::JuceThread (const VF_NAMESPACE::String& name)
+  : JuceThreadWrapper (name, this)
 {
 }
 
-Thread::~Thread ()
+JuceThread::~JuceThread ()
 {
   join ();
 }
 
-void Thread::join ()
+void JuceThread::start (const Function <void (void)>& f)
+{
+  m_function = f;
+  
+  VF_JUCE::Thread::startThread ();
+}
+
+void JuceThread::join ()
 {
   VF_JUCE::Thread::stopThread (-1);
 }
 
-Thread::id Thread::getId () const
+JuceThread::id JuceThread::getId () const
 {
   return VF_JUCE::Thread::getThreadId ();
 }
 
-bool Thread::isTheCurrentThread () const
+bool JuceThread::isTheCurrentThread () const
 {
   return VF_JUCE::Thread::getCurrentThreadId () ==
          VF_JUCE::Thread::getThreadId ();
 }
 
-void Thread::setPriority (int priority)
+void JuceThread::setPriority (int priority)
 {
   VF_JUCE::Thread::setPriority (priority);
 }
 
-void Thread::run ()
+void JuceThread::run ()
 {
   CatchAny (m_function);
 }
 
 //------------------------------------------------------------------------------
 
-namespace CurrentThread {
+namespace CurrentJuceThread {
 
-Juce::Thread::Interrupted interruptionPoint ()
+ThreadBase::Interrupted interruptionPoint ()
 {
   bool interrupted;
 
@@ -183,6 +195,7 @@ Juce::Thread::Interrupted interruptionPoint ()
   
   if (thread)
   {
+#if 0
     detail::ThreadBase* threadBase = dynamic_cast <detail::ThreadBase*> (thread);
 
     // Can only use interruption points from one of our threads
@@ -192,15 +205,23 @@ Juce::Thread::Interrupted interruptionPoint ()
       interrupted = threadBase->interruptionPoint ();
     else
       interrupted = false;
+#else
+    detail::JuceThreadWrapper* threadWrapper = dynamic_cast <detail::JuceThreadWrapper*> (thread);
+
+    vfassert (threadWrapper != 0);
+
+    if (threadWrapper)
+      interrupted = threadWrapper->getThreadBase()->interruptionPoint ();
+    else
+      interrupted = false;
+#endif
   }
   else
   {
     interrupted = false;
   }
 
-  return Thread::Interrupted (interrupted);
-}
-
+  return ThreadBase::Interrupted (interrupted);
 }
 
 }

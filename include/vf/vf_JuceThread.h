@@ -10,10 +10,28 @@
 #include "vf/vf_Function.h"
 #include "vf/vf_ThreadBase.h"
 
-namespace Juce {
+namespace detail {
 
-class Thread : public detail::ThreadBase
-             , private VF_JUCE::Thread
+// Stores a back pointer to our object so we can keep
+// the derivation from juce::Thread private and still use
+// dynamic_cast.
+//
+struct JuceThreadWrapper : public VF_JUCE::Thread
+{
+  JuceThreadWrapper (const String& threadName, ThreadBase* threadBase)
+    : VF_JUCE::Thread (threadName), m_threadBase (threadBase) { }
+  ThreadBase* getThreadBase () const { return m_threadBase; }
+private:
+  ThreadBase* m_threadBase;
+};
+
+}
+
+//
+// Thread based on Juce
+//
+class JuceThread : public ThreadBase
+                 , private detail::JuceThreadWrapper
 {
 public:
   typedef VF_JUCE::Thread::ThreadID id;
@@ -26,7 +44,7 @@ public:
     bool do_wait ();
 
   public:
-    void interrupt (Thread& thread);
+    void interrupt (JuceThread& thread);
 
   protected:
     bool do_interruptionPoint ();
@@ -45,26 +63,22 @@ public:
   class ExceptionBased : public InterruptionModel
   {
   public:
-    void wait (Thread& thread);
-    Interrupted interruptionPoint (Thread& thread);
+    void wait (JuceThread& thread);
+    Interrupted interruptionPoint (JuceThread& thread);
   };
 
   class PollingBased : public InterruptionModel
   {
   public:
-    void wait (Thread& thread);
-    Interrupted interruptionPoint (Thread& thread);
+    void wait (JuceThread& thread);
+    Interrupted interruptionPoint (JuceThread& thread);
   };
 
 public:
-  explicit Thread (const VF_NAMESPACE::String& name);
-  ~Thread ();
+  explicit JuceThread (const VF_NAMESPACE::String& name);
+  ~JuceThread ();
 
-  void start (Function <void (void)> f)
-  {
-    m_function = f;
-    VF_JUCE::Thread::startThread ();
-  }
+  void start (const Function <void (void)>& f);
 
   void join ();
 
@@ -75,8 +89,6 @@ public:
 
   void setPriority (int priority);
 
-  virtual Interrupted interruptionPoint () = 0;
-
 private:
   void run ();
 
@@ -84,10 +96,11 @@ private:
 };
 
 template <class InterruptionType>
-class ThreadType : public Thread
+class JuceThreadType : public JuceThread
 {
 public:
-  ThreadType (const VF_NAMESPACE::String& name) : Thread (name)
+  explicit JuceThreadType (const VF_NAMESPACE::String& name)
+    : JuceThread (name)
   {
   }
 
@@ -110,13 +123,14 @@ private:
   InterruptionType m_model;
 };
 
-namespace CurrentThread {
+namespace CurrentJuceThread {
 
 // Avoid this function because the implementation is slow.
-// Use Juce::Thread::interruptionPoint() instead.
-extern Thread::Interrupted interruptionPoint ();
+// Use JuceThread::interruptionPoint() instead.
+//
+extern ThreadBase::Interrupted interruptionPoint ();
 
-inline Thread::id getId ()
+inline JuceThread::id getId ()
 {
   return VF_JUCE::Thread::getCurrentThreadId ();
 }
@@ -135,8 +149,6 @@ inline void yield ()
 inline void sleep (const int milliseconds)
 {
   VF_JUCE::Thread::sleep (milliseconds);
-}
-
 }
 
 }

@@ -15,16 +15,14 @@
 // Implementation of vf::Thread using Boost
 //
 
-namespace Boost {
-
-class Thread : public detail::ThreadBase
+class BoostThread : public ThreadBase
 {
 public:
   typedef boost::thread::id id;
 
 public:
-  explicit Thread (const VF_NAMESPACE::String& name);
-  ~Thread ();
+  explicit BoostThread (const VF_NAMESPACE::String& name);
+  ~BoostThread ();
 
   void start (const Function <void (void)>& f);
 
@@ -32,10 +30,8 @@ public:
 
   id getId ();
 
-  // only valid if the thread is running
   bool isTheCurrentThread () const;
 
-  // unavailable in boost
   inline void setPriority (int) { }
 
   void wait ();
@@ -48,13 +44,14 @@ private:
   boost::thread m_thread;
 };
 
-namespace CurrentThread {
-
-extern Thread::id getId ();
+namespace CurrentBoostThread {
 
 // Avoid using this routine.
-// Use Boost::Thread::interruptionPoint() instead.
-extern Thread::Interrupted interruptionPoint ();
+// Use BoostThread::interruptionPoint() instead.
+//
+extern ThreadBase::Interrupted interruptionPoint ();
+
+extern BoostThread::id getId ();
 
 // Boost has no equivalent, and pthreads doesn't support it.
 inline void setPriority (int)
@@ -70,8 +67,6 @@ inline void sleep (const int milliseconds)
 {
   // bit of a hack but nice to avoid all the boost ptime/reltime nonsense
   boost::this_thread::interruptible_wait (milliseconds);
-}
-
 }
 
 }

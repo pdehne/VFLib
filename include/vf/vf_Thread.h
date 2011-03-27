@@ -10,8 +10,8 @@
 
 #if VF_HAVE_JUCE
 
-typedef Juce::Thread Thread;
-namespace CurrentThread = Juce::CurrentThread;
+typedef JuceThread Thread;
+namespace CurrentThread = CurrentJuceThread;
 
 #elif VF_HAVE_BOOST
 

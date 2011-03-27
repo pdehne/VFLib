@@ -44,8 +44,7 @@ public:
   juce_DeclareSingleton (SharedObjectDestroyer, false)
 
 private:
-  ThreadWorkerType <Juce::ThreadType <Juce::Thread::PollingBased> >
-    m_worker;
+  PollingWorker m_worker;
 };
 
 juce_ImplementSingleton (SharedObjectDestroyer)
