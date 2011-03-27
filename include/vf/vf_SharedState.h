@@ -90,18 +90,42 @@ public:
 
 /* Usage example:
 
-struct State : vf::SharedAccess <SharedState>
+struct MyWorker
 {
-  int value;
+  struct State
+  {
+    State ()
+    {
+      protectedValue = 0;
+    }
+
+    int64 protectedValue;
+  };
+
+  typedef vf::SharedState <State> SharedState;
+
+  SharedState m_state;
+
+  void addListener (Listener* listener)
+  {
+    SharedState::ReadAccess state (m_state);
+
+    m_listeners.add (listener);
+    m_listeners.queue (&Listener::onUpdateValue, state->protectedValue);
+  }
+
+  void threadFunction ()
+  {
+    SharedState::UnlockedAccess state (m_state);
+
+    if (state->protectedValue == 0)
+    {
+      SharedState::WriteAccess writeState (m_state);
+      writeState->protectedValue = 1;
+      m_listeners.call (&Listener::onUpdateValue, writeState->protectedValue);
+    }
+  }
 };
-
-vf::SharedState <State> m_state;
-
-void mem_func()
-{
-  State::ReadAccess state;
-  state->value;
-}
 
 */
 
