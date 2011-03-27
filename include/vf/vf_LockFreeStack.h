@@ -6,13 +6,10 @@
 #define __VF_LOCKFREESTACK_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
 
-#define STACK_USE_MUTEX 0
-
-#if STACK_USE_MUTEX
-#include "vf/vf_Mutex.h" // debugging
-#endif
+#define STACK_USE_DELAY 0
 
 namespace LockFree {
 
@@ -41,10 +38,6 @@ public:
   // of the other stack. The other stack is cleared.
   explicit Stack (Stack& other)
   {
-#if STACK_USE_MUTEX
-    ScopedLock lock (other.m_mutex);
-#endif
-
     Node* head;
 
     do
@@ -66,47 +59,76 @@ public:
   // returns true if it pushed the first element
   bool push_front (Node* node)
   {
-#if STACK_USE_MUTEX
-    ScopedLock lock (m_mutex);
-#endif
-
     bool first;
     Node* head;
 
+#if STACK_USE_DELAY
+    head = m_head.get();
+    first = head == 0;
+    node->m_next = head;
+
+    if (!m_head.compareAndSet (node, head))
+    {
+      Delay delay;
+      do
+      {
+        head = m_head.get();
+        first = head == 0;
+        node->m_next = head;
+      }
+      while (!m_head.compareAndSet (node, head));
+    }
+
+#else
     do
     {
       head = m_head.get();
-
       first = head == 0;
-
       node->m_next = head;
     }
     while (!m_head.compareAndSet (node, head));
+
+#endif
 
     return first;
   }
 
   Elem* pop_front ()
   {
-#if STACK_USE_MUTEX
-    ScopedLock lock (m_mutex);
-#endif
-
     Node* node;
     Node* head;
 
+#if STACK_USE_DELAY
+    node = m_head.get();
+    if (node != 0)
+    {
+      head = node->m_next.get();
+      if (!m_head.compareAndSet (head, node))
+      {
+        do
+        {
+          node = m_head.get();
+          if (node == 0)
+            break;
+          head = node->m_next.get();
+        }
+        while (!m_head.compareAndSet (head, node));
+      }
+    }
+
+#else
     do
     {
       node = m_head.get();
-
       if (node == 0)
         break;
-
       head = node->m_next.get();
     }
     while (!m_head.compareAndSet (head, node));
 
-    return static_cast <Elem*> (node);
+#endif
+
+    return node ? static_cast <Elem*> (node) : 0;
   }
 
   // Swap contents with another stack.
@@ -138,10 +160,6 @@ public:
 
 private:
   Atomic::Pointer <Node> m_head;
-
-#if STACK_USE_MUTEX
-  Mutex m_mutex;
-#endif
 };
 
 }
