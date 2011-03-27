@@ -9,28 +9,6 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
-namespace {
-
-// Simple scoped object to turn on a flag.
-class ScopedFlag : NonCopyable
-{
-public:
-  explicit ScopedFlag (Atomic::Flag& flag) : m_flag (flag)
-  {
-    m_flag.set ();
-  }
-
-  ~ScopedFlag ()
-  {
-    m_flag.clear ();
-  }
-
-private:
-  Atomic::Flag& m_flag;
-};
-
-}
-
 Worker::Worker (const char* szName)
 : m_szName (szName)
 {
