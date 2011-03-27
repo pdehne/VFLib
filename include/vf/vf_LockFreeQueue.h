@@ -148,9 +148,9 @@ public:
 
 private:
   // Elements are pushed on to the head and popped from the tail.
-  CacheLinePadding <Atomic::Pointer <Node> > m_head;
-  CacheLinePadding <Node*> m_tail;
-  CacheLinePadding <Node> m_null;
+  NoCacheLinePadding <Atomic::Pointer <Node> > m_head;
+  NoCacheLinePadding <Node*> m_tail;
+  NoCacheLinePadding <Node> m_null;
 };
 
 }

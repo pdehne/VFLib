@@ -6,6 +6,7 @@
 #define __VF_LOCKFREEREADWRITEMUTEX_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_CacheLinePadding.h"
 #include "vf/vf_Mutex.h"
 
 namespace LockFree {
@@ -29,9 +30,9 @@ public:
   void exit_write () const;
 
 private:
-  Mutex m_mutex;
-  mutable Atomic::Counter m_writes;
-  mutable Atomic::Counter m_readers;
+  NoCacheLinePadding <Mutex> m_mutex;
+  mutable NoCacheLinePadding <Atomic::Counter> m_writes;
+  mutable NoCacheLinePadding <Atomic::Counter> m_readers;
 };
 
 struct ScopedReadLock : NonCopyable
