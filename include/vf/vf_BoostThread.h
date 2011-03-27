@@ -26,10 +26,7 @@ public:
   explicit Thread (const VF_NAMESPACE::String& name);
   ~Thread ();
 
-  void start (Function <void (void)> f)
-  {
-    m_thread = boost::thread (f);
-  }
+  void start (const Function <void (void)>& f);
 
   void join ();
 

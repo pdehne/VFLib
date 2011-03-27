@@ -22,6 +22,11 @@ Thread::~Thread ()
   join ();
 }
 
+void Thread::start (const Function <void (void)>& f)
+{
+  m_thread = boost::thread (f);
+}
+
 void Thread::join ()
 {
   m_thread.join ();
