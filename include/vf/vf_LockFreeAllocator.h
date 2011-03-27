@@ -67,7 +67,7 @@ public:
     // Typically this means that consumers cannot keep up
     // with producers and the app would be non-functional.
     //
-     hardLimitMegaBytes = 16
+    hardLimitMegaBytes = 16
     //hardLimitMegaBytes = 1024
   };
 

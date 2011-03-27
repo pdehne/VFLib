@@ -8,7 +8,7 @@
 //
 // Strong replacement for boost::function:
 //
-// #1 Bounded memory requirements.
+// #1 Bounded memory requirement, avoids the free store.
 //
 // #2 Always refers to a functor (i.e. is never invalid)
 //
@@ -16,9 +16,6 @@
 //    returns a default object (the result type
 //    constructed with a default constructor).
 //    
-// #4 The return value type must be copyable with
-//    have a default constructor.
-//
 
 template <typename Signature, int Bytes = 64>
 class Function;
