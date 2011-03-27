@@ -161,27 +161,6 @@ protected:
   void add_void (void* const listener, Worker* worker);
   void remove_void (void* const listener);
 
-  struct ScopedAdd : NonCopyable
-  {
-    ScopedAdd (Listeners& listeners,
-               void* const listener,
-               Worker* worker)
-      : m_listeners (listeners)
-    {
-      m_listeners.m_groups_mutex.enter_write ();
-
-      m_listeners.add_void (listener, worker);
-    }
-    
-    ~ScopedAdd ()
-    {
-      m_listeners.m_groups_mutex.exit_write ();
-    }
-
-  private:
-    Listeners& m_listeners;
-  };
-
   // Search for an existing Proxy that matches the pointer to
   // member and replace it's Call, or create a new Proxy for it.
   // Caller must acquire the group read lock.
@@ -304,18 +283,6 @@ public:
   {
     add_void (listener, worker);
   }
-
-  // Adds a listener and allows other operations to
-  // occur atomically within the scope of the add.
-  struct ScopedAdd : private detail::Listeners::ScopedAdd
-  {
-    ScopedAdd (Listeners& listeners,
-               ListenerClass* const listener,
-               Worker* worker)
-      : detail::Listeners::ScopedAdd (listeners, listener, worker)
-    {
-    }
-  };
 
   //
   // Remove a listener from the list
