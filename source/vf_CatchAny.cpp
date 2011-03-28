@@ -143,41 +143,49 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
 {
   bool caughtException = true; // assume the worst
 
-  try
+  if (Debug::isDebuggerAttached ())
   {
-    ScopedPlatformExceptionCatcher platformExceptionCatcher;
-  
     f ();
-
     caughtException = false;
   }
+  else
+  {
+    try
+    {
+      ScopedPlatformExceptionCatcher platformExceptionCatcher;
+    
+      f ();
+
+      caughtException = false;
+    }
 #if VF_HAVE_JUCE
-  catch (Error& e)
-  {
-    if (!returnFromException)
-      JUCEApplication::getInstance()->unhandledException (
-        &e,
-        e.getSourceFilename(),
-        e.getLineNumber());
-  }
-  catch (std::exception& e)
-  {
-    if (!returnFromException)
-      JUCEApplication::getInstance()->unhandledException (
-        &e, __FILE__, __LINE__);
-  }
-  catch (...)
-  {
-    if (!returnFromException)
-      JUCEApplication::getInstance()->unhandledException (
-        0, __FILE__, __LINE__);
-  }
+    catch (Error& e)
+    {
+      if (!returnFromException)
+        JUCEApplication::getInstance()->unhandledException (
+          &e,
+          e.getSourceFilename(),
+          e.getLineNumber());
+    }
+    catch (std::exception& e)
+    {
+      if (!returnFromException)
+        JUCEApplication::getInstance()->unhandledException (
+          &e, __FILE__, __LINE__);
+    }
+    catch (...)
+    {
+      if (!returnFromException)
+        JUCEApplication::getInstance()->unhandledException (
+          0, __FILE__, __LINE__);
+    }
 #else
-  catch (...)
-  {
-    std::unexpected ();
-  }
+    catch (...)
+    {
+      std::unexpected ();
+    }
 #endif
+  }
 
   return caughtException;
 }

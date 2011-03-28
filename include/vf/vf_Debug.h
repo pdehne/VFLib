@@ -11,17 +11,11 @@
 
 namespace Debug {
 
-#if VF_DEBUG
-
-extern void breakPoint ();
+// Returns true if a debugger is attached, for any build.
 extern bool isDebuggerAttached ();
 
-#else
-
-inline void breakPoint () { }
-inline bool isDebuggerAttached () { return false; }
-
-#endif
+// Breaks to the debugger if a debugger is attached.
+extern void breakPoint ();
 
 // VF: IS THIS REALLY THE RIGHT PLACE FOR THESE??
 

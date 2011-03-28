@@ -67,8 +67,7 @@ public:
     // Typically this means that consumers cannot keep up
     // with producers and the app would be non-functional.
     //
-    hardLimitMegaBytes = 16
-    //hardLimitMegaBytes = 1024
+    hardLimitMegaBytes = 256
   };
 
   enum
@@ -100,7 +99,46 @@ public:
 #endif
   }
 
+  template <size_t Bytes>
   void* alloc ()
+  {
+    static_vfassert (Bytes <= BlockSize);
+    return alloc_block ();
+  }
+
+  void free (void* p)
+  {
+    Node* node = toNode (p);
+
+    {
+      ScopedReadLock lock (m_mutex);
+
+      m_junk.push_front (node);
+    }
+
+#if VF_CHECK_LEAKS
+    m_used.release ();
+#endif
+
+    // See if we need to perform garbage collection
+    if (m_count.release ())
+    {
+      ScopedWriteLock lock (m_mutex);
+
+      m_free.swap (m_junk);
+  
+      m_count.set (m_interval);
+
+#if ALLOCATOR_COUNT_SWAPS
+      String s;
+      s << "swap " << String (++m_swaps);
+      Logger::outputDebugString (s);
+#endif
+    }
+  }
+
+private:
+  void* alloc_block ()
   {
     Node* node;
 
@@ -137,37 +175,6 @@ public:
 #endif
 
     return p;
-  }
-
-  void free (void* p)
-  {
-    Node* node = toNode (p);
-
-    {
-      ScopedReadLock lock (m_mutex);
-
-      m_junk.push_front (node);
-    }
-
-#if VF_CHECK_LEAKS
-    m_used.release ();
-#endif
-
-    // See if we need to perform garbage collection
-    if (m_count.release ())
-    {
-      ScopedWriteLock lock (m_mutex);
-
-      m_free.swap (m_junk);
-  
-      m_count.set (m_interval);
-
-#if ALLOCATOR_COUNT_SWAPS
-      String s;
-      s << "swap " << String (++m_swaps);
-      Logger::outputDebugString (s);
-#endif
-    }
   }
 
 private:
@@ -249,42 +256,42 @@ struct globalAlloc
   static C* New ()
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C;
+    return new (globalAllocator.alloc <sizeof (C)> ()) C;
   }
 
   template <class T1>
   static C* New (const T1& t1)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1);
   }
 
   template <class T1, class T2>
   static C* New (const T1& t1, const T2& t2)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2);
   }
 
   template <class T1, class T2, class T3>
   static C* New (const T1& t1, const T2& t2, const T3& t3)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3);
   }
 
   template <class T1, class T2, class T3, class T4>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3, t4);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3, t4);
   }
 
   template <class T1, class T2, class T3, class T4, class T5>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6>
@@ -292,7 +299,7 @@ struct globalAlloc
                  const T5& t5, const T6& t6)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7>
@@ -300,7 +307,7 @@ struct globalAlloc
                  const T5& t5, const T6& t6, const T7& t7)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6, t7);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
@@ -308,7 +315,7 @@ struct globalAlloc
                  const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   {
     static_vfassert (sizeof (C) <= GlobalAllocator::blockSize);
-    return new (globalAllocator.alloc()) C (t1, t2, t3, t4, t5, t6, t7, t8);
+    return new (globalAllocator.alloc <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
   }
 };
 

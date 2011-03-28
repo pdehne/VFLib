@@ -14,40 +14,61 @@ BEGIN_VF_NAMESPACE
 
 namespace Debug {
 
-#if VF_DEBUG
-
-//------------------------------------------------------------------------------
 //
-// Debug::breakPoint
+// isDebuggerAttached
 //
-#if VF_HAVE_JUCE && JUCE_DEBUG && defined (juce_breakDebugger)
-  void breakPoint () { juce_breakDebugger; }
 
-#elif defined (_MSC_VER)
-  #pragma intrinsic (__debugbreak)
-  void breakPoint () { __debugbreak(); }
-
-#else
-  #pragma message(VF_LOC_"Missing Debug::breakPoint()")
-  void breakPoint () { }
-
-#endif
-
-//------------------------------------------------------------------------------
-//
-// Debug::isDebuggerAttached
-//
 #if VF_HAVE_JUCE
-  bool isDebuggerAttached () { return VF_JUCE::juce_isRunningUnderDebugger (); }
+
+bool isDebuggerAttached ()
+{
+  return VF_JUCE::juce_isRunningUnderDebugger ();
+}
 
 #elif defined (_WINDOWS)
-  bool isDebuggerAttached () { return IsDebuggerPresent (); }
+
+bool isDebuggerAttached ()
+{
+  return IsDebuggerPresent ();
+}
 
 #else
-  #pragma message(VF_LOC_"Missing Debug::isDebuggerAttached()")
-  bool isDebuggerAttached () { return false; }
+
+#pragma message(VF_LOC_"Missing Debug::isDebuggerAttached()")
+bool isDebuggerAttached ()
+{
+  return false;
+}
 
 #endif
+
+//
+// breakPoint
+//
+
+#if VF_HAVE_JUCE && JUCE_DEBUG && defined (juce_breakDebugger)
+
+void breakPoint ()
+{
+  if (isDebuggerAttached ())
+    juce_breakDebugger;
+}
+
+#elif defined (_MSC_VER)
+
+#pragma intrinsic (__debugbreak)
+void breakPoint ()
+{
+  if (isDebuggerAttached ())
+    __debugbreak();
+}
+
+#else
+
+#pragma message(VF_LOC_"Missing Debug::breakPoint()")
+void breakPoint ()
+{
+}
 
 #endif
 

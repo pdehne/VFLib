@@ -169,10 +169,10 @@ public:
       v = m_end - (std::numeric_limits <Tv>::is_integer ? 1 :
                    std::numeric_limits <Tv>::epsilon());
 
-    if (value < m_begin)
-      value = m_begin;
+    if (v < m_begin)
+      v = m_begin;
 
-    return value;
+    return v;
   }
 
 private:

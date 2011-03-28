@@ -49,7 +49,7 @@ BEGIN_VF_NAMESPACE
 #endif
 
 // Borrowed from Juce so we are not dependent on it
-template <bool b> struct VfStaticAssert;
+template <bool condition> struct VfStaticAssert;
 template <> struct VfStaticAssert <true>
   { static void static_assert_failed () {} };
 #define static_vfassert(expression) \

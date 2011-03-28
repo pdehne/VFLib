@@ -2,38 +2,22 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_LOCKFREEQUEUE_VFHEADER__
-#define __VF_LOCKFREEQUEUE_VFHEADER__
+#ifndef __VF_QUEUE_VFHEADER__
+#define __VF_QUEUE_VFHEADER__
 
-#include "vf/vf_Allocator.h"
-#include "vf/vf_LockFreeAllocator.h"
-
-#include "vf/vf_Atomic.h"
-#include "vf/vf_CacheLinePadding.h"
-#include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
+#include "vf/vf_Mutex.h"
 
-namespace LockFree {
+//
+// Intrusive singly linked fifo
+//
 
-//
-// Wait-free intrusive queue.
-//
-// Supports Multiple Producer, Single Consumer (MPSC):
-//
-// - Any thread may call push_back() at any time.
-//
-// - Only one thread may call pop_front() at a time.
-//
-// - Caller must synchronize access to pop_front() and try_pop_front().
-//
-// - The queue is considered signaled if there are one or more elements.
-//
 template <class Elem,
-          class Tag = detail::List_default_tag>
+          class Tag = LockFree::detail::List_default_tag>
 class Queue
 {
 public:
-  typedef typename List <Elem, Tag>::Node Node;
+  typedef typename LockFree::List <Elem, Tag>::Node Node;
 
   Queue ()
     : m_head ((Node*)m_null)
@@ -150,7 +134,7 @@ public:
   }
 
 private:
-  // Elements are pushed on to the head and popped from the tail.
+  Mutex m_mutex;
   NoCacheLinePadding <Atomic::Pointer <Node> > m_head;
   NoCacheLinePadding <Node*> m_tail;
   NoCacheLinePadding <Node> m_null;
