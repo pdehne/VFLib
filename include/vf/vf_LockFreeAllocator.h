@@ -58,7 +58,7 @@ public:
   //
   enum
   {
-    defaultMegaBytes = 2,
+    defaultMegaBytes = 4,
 
     //
     // If we exceed this limit on hard allocations
@@ -67,7 +67,7 @@ public:
     // Typically this means that consumers cannot keep up
     // with producers and the app would be non-functional.
     //
-    hardLimitMegaBytes = 256
+    hardLimitMegaBytes = 16 * 256
   };
 
   enum
