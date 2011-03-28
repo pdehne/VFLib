@@ -162,22 +162,53 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
     catch (Error& e)
     {
       if (!returnFromException)
-        JUCEApplication::getInstance()->unhandledException (
-          &e,
-          e.getSourceFilename(),
-          e.getLineNumber());
+      {
+        JUCEApplication* app = JUCEApplication::getInstance();
+
+        if (app)
+        {
+          app->unhandledException (
+            &e,
+            e.getSourceFilename(),
+            e.getLineNumber());
+        }
+        else
+        {
+          std::unexpected ();
+        }
+      }
     }
     catch (std::exception& e)
     {
       if (!returnFromException)
-        JUCEApplication::getInstance()->unhandledException (
-          &e, __FILE__, __LINE__);
+      {
+        JUCEApplication* app = JUCEApplication::getInstance();
+
+        if (app)
+        {
+          app->unhandledException (&e, __FILE__, __LINE__);
+        }
+        else
+        {
+          std::unexpected ();
+        }
+      }
     }
     catch (...)
     {
       if (!returnFromException)
-        JUCEApplication::getInstance()->unhandledException (
-          0, __FILE__, __LINE__);
+      {
+        JUCEApplication* app = JUCEApplication::getInstance();
+
+        if (app)
+        {
+          app->unhandledException (0, __FILE__, __LINE__);
+        }
+        else
+        {
+          std::unexpected ();
+        }
+      }
     }
 #else
     catch (...)
@@ -191,3 +222,11 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
 }
 
 END_VF_NAMESPACE
+
+#pragma intrinsic (_InterlockedExchange)
+
+void test100()
+{
+  long a, b;
+  _InterlockedExchange(&a, b);
+}
