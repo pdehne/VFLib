@@ -222,11 +222,3 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
 }
 
 END_VF_NAMESPACE
-
-#pragma intrinsic (_InterlockedExchange)
-
-void test100()
-{
-  long a, b;
-  _InterlockedExchange(&a, b);
-}
