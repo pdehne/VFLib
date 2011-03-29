@@ -241,6 +241,27 @@ private:
     Functor m_f;
   };
 
+  // Call that only executes for a matching listener.
+  // The timestamp prevents the ABA problem.
+  template <class Functor>
+  class StoredCall1 : public Call
+  {
+  public:
+    StoredCall1 (ListenerClass* listener, const timestamp_t timestamp, const Functor& f)
+      : Call (timestamp), m_listener (listener), m_f (f) { }
+    ~StoredCall1 ()
+      { } // without this we get UB
+    void operator() (void* listener)
+    {
+      if (m_listener == listener)
+        m_f.operator() (static_cast <ListenerClass*> (listener));
+    }
+
+  private:
+    void* m_listener;
+    Functor m_f;
+  };
+
   // Caller is responsible for a group read lock.
   template <class Functor>
   Call::Ptr newCall (const Functor& f)
@@ -250,11 +271,26 @@ private:
   }
 
   template <class Functor>
+  Call::Ptr newCall1 (ListenerClass* listener, const Functor& f)
+  {
+    // group read lock needed for access to m_timestamp    
+    return LockFree::globalAlloc <StoredCall1 <Functor> >::New (listener, m_timestamp, f);
+  }
+
+  template <class Functor>
   void queue_fn (const Functor& f, bool sync)
   {
     LockFree::ScopedReadLock lock (m_groups_mutex);
 
     queue_call (newCall (f), sync);
+  }
+
+  template <class Functor>
+  void queue1_fn (ListenerClass* listener, const Functor& f, bool sync)
+  {
+    LockFree::ScopedReadLock lock (m_groups_mutex);
+
+    queue_call (newCall1 (listener, f), sync);
   }
 
   template <class Member, class Function>
@@ -409,6 +445,55 @@ public:
   void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
+
+  // These are for targeting individual listeners.
+  // Use carefully!
+
+  template <class Mf>
+  void queue1 (Mf mf, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1), false); }
+
+  template <class Mf, typename  T1>
+  void queue1 (Mf mf, const T1& t1, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1), false); }
+
+  template <class Mf, typename  T1, typename  T2>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3), false); }
+
+  template <class Mf, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  void queue1 (Mf mf, const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), false); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8, ListenerClass* listener)
+  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
 
   //
   // call1()
