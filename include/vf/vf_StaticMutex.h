@@ -6,24 +6,72 @@
 #define __VF_STATICMUTEX_VFHEADER__
 
 #include "vf/vf_Atomic.h"
-#include "vf/vf_StaticObject.h"
+#include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_Mutex.h"
+#include "vf/vf_StaticObject.h"
 
-// Mutex that ONLY works with static storage duration!
-// Any other usage is undefined.
+// Mutex with static storage duration.
 //
+template <class Tag>
 class StaticMutex : NonCopyable
 {
 public:
-  typedef detail::ScopedLock <StaticMutex> ScopedLockType;
+  struct ScopedLock : NonCopyable
+  {
+    inline ScopedLock () { s_mutex->enter (); }
+    inline ~ScopedLock () { s_mutex->exit (); }
+  };
 
-  void enter () const;
-  void exit () const;
+  typedef ScopedLock ScopedLockType;
+
+  static void enter ()
+  {
+    // Did we initialize?
+    if (s_inited->isClear ())
+    {
+      // No so try to do it.
+      if (s_initing->trySet ())
+      {
+        // We set the flag, everyone else fails.
+        // Construct the Mutex with placement new.
+        new (s_mutex.getObject()) Mutex;
+
+        // Set flag.
+        s_inited->set ();
+      }
+      else
+      {
+        // Wait until the thread that set the flag initializes.
+        LockFree::Delay delay;
+        do
+        {
+          delay.spin ();
+        }
+        while (s_inited->isClear ());
+      }
+    }
+
+    s_mutex->enter ();
+  }
+
+  void exit ()
+  {
+    s_mutex->exit ();
+  }
 
 private:
-  mutable StaticObject <Atomic::Flag> m_inited;
-  mutable StaticObject <Atomic::Flag> m_initing;
-  mutable StaticObject <Mutex> m_mutex;
+  static StaticObject <Atomic::Flag> s_inited;
+  static StaticObject <Atomic::Flag> s_initing;
+  static StaticObject <Mutex> s_mutex;
 };
+
+template <class Tag>
+StaticObject <Atomic::Flag> StaticMutex <Tag>::s_inited;
+
+template <class Tag>
+StaticObject <Atomic::Flag> StaticMutex <Tag>::s_initing;
+
+template <class Tag>
+StaticObject <Mutex> StaticMutex <Tag>::s_mutex;
 
 #endif

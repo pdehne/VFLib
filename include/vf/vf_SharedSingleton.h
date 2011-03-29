@@ -32,7 +32,7 @@ public:
   {
     Ptr instance;
 
-    StaticMutex::ScopedLockType lock (s_mutex);
+    StaticMutex <Object>::ScopedLockType lock;
 
     if (!s_instance)
       s_instance = Object::createInstance ();
@@ -45,7 +45,7 @@ public:
 private:
   void destroySharedObject ()
   {
-    StaticMutex::ScopedLockType lock (s_mutex);
+    StaticMutex <Object>::ScopedLockType lock;
 
     // See if someone snuck in a reference via getInstance ().
     if (!isBeingReferenced ())
@@ -54,14 +54,13 @@ private:
 
 private:
   static Object* s_instance;
-  static StaticMutex s_mutex;
+  static StaticMutex <Object> s_mutex;
 };
 
 template <class Object>
 Object* SharedSingleton <Object>::s_instance;
 
 template <class Object>
-StaticMutex SharedSingleton <Object>::s_mutex;
-
+StaticMutex <Object> SharedSingleton <Object>::s_mutex;
 
 #endif
