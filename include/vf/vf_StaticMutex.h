@@ -60,9 +60,20 @@ public:
   }
 
 private:
+  class CleanerUpper
+  {
+  public:
+    ~CleanerUpper ()
+    {
+      if (StaticMutex::s_inited->isSet ())
+        StaticMutex::s_mutex->~Mutex ();
+    }
+  };
+
   static StaticObject <Atomic::Flag> s_inited;
   static StaticObject <Atomic::Flag> s_initing;
   static StaticObject <Mutex> s_mutex;
+  static CleanerUpper s_cleanerUpper;
 };
 
 template <class Tag>
@@ -73,5 +84,8 @@ StaticObject <Atomic::Flag> StaticMutex <Tag>::s_initing;
 
 template <class Tag>
 StaticObject <Mutex> StaticMutex <Tag>::s_mutex;
+
+template <class Tag>
+typename StaticMutex <Tag>::CleanerUpper StaticMutex <Tag>::s_cleanerUpper;
 
 #endif
