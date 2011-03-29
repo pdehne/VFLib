@@ -15,8 +15,8 @@ namespace detail {
 class NonCopyable
 {
 protected:
-  NonCopyable() {}
-  ~NonCopyable() {}
+  inline NonCopyable() { }
+  inline ~NonCopyable() { }
 private:
   NonCopyable (const NonCopyable&);
   const NonCopyable& operator= (const NonCopyable&);

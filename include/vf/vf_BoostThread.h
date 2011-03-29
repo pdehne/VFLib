@@ -34,7 +34,7 @@ public:
 
   inline void setPriority (int) { }
 
-  void wait ();
+  bool wait (int milliseconds = -1);
 
   void interrupt ();
 
@@ -65,8 +65,18 @@ inline void yield ()
 
 inline void sleep (const int milliseconds)
 {
-  // bit of a hack but nice to avoid all the boost ptime/reltime nonsense
-  boost::this_thread::interruptible_wait (milliseconds);
+  if (milliseconds >= 0)
+  {
+    // bit of a hack but nice to avoid all the boost ptime/reltime nonsense
+    boost::this_thread::interruptible_wait (milliseconds);
+  }
+  else
+  {
+    // sleep forever or until interruption point
+    boost::this_thread::sleep (
+      boost::posix_time::ptime (
+        boost::date_time::max_date_time));
+  }
 }
 
 }

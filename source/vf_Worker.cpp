@@ -9,12 +9,12 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
-Worker::Worker (const char* szName)
+WorkerBase::WorkerBase (const char* szName)
 : m_szName (szName)
 {
 }
 
-Worker::~Worker ()
+WorkerBase::~WorkerBase ()
 {
   // Someone forget to close the queue.
   vfassert (m_closed.isSet ());
@@ -23,24 +23,14 @@ Worker::~Worker ()
   vfassert (m_list.empty ());
 }
 
-void Worker::queuef (const func_t& f)
-{
-  do_queue (LockFree::globalAlloc <Call>::New (f));
-}
-
-void Worker::callf (const func_t& f)
-{
-  do_call (LockFree::globalAlloc <Call>::New (f));
-}
-
-void Worker::associateWithCurrentThread ()
+void WorkerBase::associateWithCurrentThread ()
 {
   vfassert (m_in_process.isClear ());
 
   m_id = CurrentThread::getId();
 }
 
-bool Worker::process ()
+bool WorkerBase::process ()
 {
   bool did_something;
 
@@ -65,56 +55,13 @@ bool Worker::process ()
 }
 
 // Can still have pending calls, just can't put new ones in.
-void Worker::close ()
+void WorkerBase::close ()
 {
   m_closed.set ();
 }
 
-// Process everything in the queue. The list of pending calls is
-// acquired atomically. New calls may enter the queue while we are
-// processing.
-//
-// Returns true if any functors were called.
-//
-bool Worker::do_process ()
-{
-  bool did_something;
-
-  // Reset since we are emptying the queue. Since we loop
-  // until the queue is empty, it is possible for us to exit
-  // this function with an empty queue and signaled state.
-  //
-  reset ();
-
-  Call* call = m_list.pop_front ();
-
-  if (call)
-  {
-    did_something = true;
-
-    // This method of processing one at a time has the side
-    // effect of synchronizing calls to us from a functor.
-    //
-    for (;;)
-    {
-      call->operator() ();
-      LockFree::globalDelete (call);
-
-      call = m_list.pop_front ();
-      if (call == 0)
-        break;
-    }
-  }
-  else
-  {
-    did_something = false;
-  }
-
-  return did_something;
-}
-
 // Adds a call to the queue of execution.
-void Worker::do_queue (Call* c)
+void WorkerBase::do_queue (Call* c)
 {
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
@@ -129,7 +76,7 @@ void Worker::do_queue (Call* c)
 // thread as the last thread that called process(), then the call
 // will execute synchronously.
 //
-void Worker::do_call (Call* c)
+void WorkerBase::do_call (Call* c)
 {
   do_queue (c);
 

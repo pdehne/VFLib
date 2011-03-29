@@ -72,10 +72,13 @@ public:
   };
 
 public:
-  // Blocks until an interrupt occurs.
+  // Blocks until an interrupt occurs or the timeout expires.
+  // If milliseconds is less than 0, the wait is infinite.
   // May only be called by the thread of execution.
+  // Returns true if the interrupt occurred, or false if
+  // the timeout expired.
   //
-  virtual void wait () = 0;
+  virtual bool wait (int milliseconds = -1) = 0;
 
   // Interrupts the thread.
   //

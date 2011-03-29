@@ -57,8 +57,7 @@ void Listeners::Group::add (void* listener,
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
-  //Entry* entry = LockFree::globalAlloc <Entry>::New ();
-  Entry* entry = Allocator <LockFree::GlobalAllocator, Entry> (LockFree::globalAllocator).New ();
+  Entry* entry = LockFree::globalAlloc <Entry>::New ();
   entry->listener = listener;
   entry->timestamp = timestamp;
   m_list.push_back (entry);

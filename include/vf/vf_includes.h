@@ -89,8 +89,20 @@
 #include "vf/vf_Mutex.h"
 #endif
 
+#ifndef __VF_ONCEPERSECOND_VFHEADER__
+#include "vf/vf_OncePerSecond.h"
+#endif
+
 #ifndef __VF_SHAREDSTATE_VFHEADER__
 #include "vf/vf_SharedState.h"
+#endif
+
+#ifndef __VF_STATICDATA_VFHEADER__
+#include "vf/vf_StaticData.h"
+#endif
+
+#ifndef __VF_STATICMUTEX_VFHEADER__
+#include "vf/vf_StaticMutex.h"
 #endif
 
 #ifndef __VF_SYNCHRONIZEDOBJECT_VFHEADER__

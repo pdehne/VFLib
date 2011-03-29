@@ -46,9 +46,7 @@ public:
   void set (int value) { m_value.set (value); }
 
   // for diagnostics ONLY!
-#if VF_DEBUG
-  int get_value () const { return m_value.get(); }
-#endif
+  int get () const { return m_value.get(); }
 
 private:
   VF_JUCE::Atomic <int> m_value;
@@ -111,16 +109,16 @@ public:
   explicit Pointer (P* p = 0) : m_value (p) { }
 
   P* get () const { return m_value.get(); }
+  operator P* () const { return get(); }
+  operator P& () const { return &get(); }
+  P* operator-> () const { return get(); }
 
   void set (P* p) { m_value.set (p); }
+  void operator= (P* p) { set (p); }
+  void operator= (P& p) { set (&p); }
 
   // returns the previous value
   P* exchange (P* p) { return m_value.exchange (p); }
-
-  // swap with another Pointer
-  void swap (Pointer& other) { m_value.exchange (other.m_value); }
-
-  void operator= (P* p) { set (p); }
 
   bool compareAndSet (P* newValue, P* oldValue)
   {

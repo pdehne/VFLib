@@ -41,7 +41,8 @@ public:
   {
   protected:
     InterruptionModel ();
-    bool do_wait ();
+    bool do_wait ();    // true if interrupted
+    bool do_timeout (); // true if interrupted
 
   public:
     void interrupt (JuceThread& thread);
@@ -52,9 +53,9 @@ public:
   protected:
     enum
     {
-      stateReset = 0,
-      stateSignaled = 1,
-      stateWaiting = 2
+      stateWait,
+      stateReset,
+      stateInterrupt
     };
 
     VF_JUCE::Atomic <int> m_state;
@@ -63,14 +64,14 @@ public:
   class ExceptionBased : public InterruptionModel
   {
   public:
-    void wait (JuceThread& thread);
+    bool wait (int milliseconds, JuceThread& thread);
     Interrupted interruptionPoint (JuceThread& thread);
   };
 
   class PollingBased : public InterruptionModel
   {
   public:
-    void wait (JuceThread& thread);
+    bool wait (int milliseconds, JuceThread& thread);
     Interrupted interruptionPoint (JuceThread& thread);
   };
 
@@ -104,9 +105,9 @@ public:
   {
   }
 
-  void wait ()
+  bool wait (int milliseconds = -1)
   {
-    m_model.wait (*this);
+    return m_model.wait (milliseconds, *this);
   }
 
   void interrupt ()

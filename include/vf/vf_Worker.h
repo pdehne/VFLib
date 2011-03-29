@@ -5,6 +5,7 @@
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
+#include "vf/vf_Allocator.h"
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
 #include "vf/vf_Function.h"
@@ -31,13 +32,13 @@
 // in order to guarantee that the queue's process() function is eventually
 // called.
 //
-class Worker
+class WorkerBase
 {
 public:
   typedef Function <void (void)> func_t;
 
-  explicit Worker (const char* szName = "");
-  ~Worker ();
+  explicit WorkerBase (const char* szName = "");
+  ~WorkerBase ();
 
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }
@@ -45,13 +46,13 @@ public:
   //
   // Add the functor without executing immediately.
   //
-  void queuef (const func_t& f);
+  virtual void queuef (const func_t& f) = 0;
 
   // Add a functor to the queue. It may be executed immediately.
   //
   // Functors MUST NOT cause thread interruptions.
   //
-  void callf (const func_t& f);
+  virtual void callf (const func_t& f) = 0;
 
   // Sugar for calling functions with arguments.
 
@@ -185,24 +186,95 @@ protected:
   virtual void reset () = 0;
   virtual void signal () = 0;
 
-private:
+protected:
   // List of fixed-size functors
   struct Call;
   typedef LockFree::Queue <Call> Calls;
   struct Call : Calls::Node, func_t
     { Call (func_t const& c) : Function (c) { } };
 
-private:
-  bool do_process ();
+protected:
+  virtual bool do_process () = 0;
   void do_queue (Call* c);
   void do_call (Call* c);
 
-private:
+protected:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
   Calls m_list;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
 };
+
+//template <class Allocator = LockFree::GlobalAllocator>
+template <class Allocator = LockFree::GlobalAllocatorOld>
+class WorkerType : public WorkerBase
+{
+public:
+  explicit WorkerType (const char* szName = "") : WorkerBase (szName)
+  {
+  }
+
+  void queuef (const func_t& f)
+  {
+    //do_queue (LockFree::globalAlloc <Call>::New (f));
+    do_queue (m_allocator.New (f));
+  }
+
+  void callf (const func_t& f)
+  {
+    //do_call (LockFree::globalAlloc <Call>::New (f));
+    do_call (m_allocator.New (f));
+  }
+
+protected:
+  // Process everything in the queue. The list of pending calls is
+  // acquired atomically. New calls may enter the queue while we are
+  // processing.
+  //
+  // Returns true if any functors were called.
+  //
+  bool do_process ()
+  {
+    bool did_something;
+
+    // Reset since we are emptying the queue. Since we loop
+    // until the queue is empty, it is possible for us to exit
+    // this function with an empty queue and signaled state.
+    //
+    reset ();
+
+    Call* call = m_list.pop_front ();
+
+    if (call)
+    {
+      did_something = true;
+
+      // This method of processing one at a time has the side
+      // effect of synchronizing calls to us from a functor.
+      //
+      for (;;)
+      {
+        call->operator() ();
+        m_allocator.Delete (call);
+
+        call = m_list.pop_front ();
+        if (call == 0)
+          break;
+      }
+    }
+    else
+    {
+      did_something = false;
+    }
+
+    return did_something;
+  }
+
+private:
+  FixedAllocator <Allocator, Call> m_allocator;
+};
+
+typedef WorkerType<> Worker;
 
 #endif

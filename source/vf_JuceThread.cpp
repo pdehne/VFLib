@@ -18,85 +18,111 @@ JuceThread::InterruptionModel::InterruptionModel ()
 
 bool JuceThread::InterruptionModel::do_wait ()
 {
-  bool should_wait;
+  bool interrupted;
 
   for (;;)
   {
     const int state = m_state.get ();
 
-    vfassert (state != stateWaiting);
+    vfassert (state != stateWait);
 
-    if (state == stateSignaled)
+    if (state == stateInterrupt)
     {
-      should_wait = false;
+      interrupted = true;
 
       m_state.set (stateReset);
 
       break;
     }
-    else if (m_state.compareAndSetBool (stateWaiting, stateReset))
+    else if (m_state.compareAndSetBool (stateWait, stateReset))
     {
-      should_wait = true;
+      interrupted = false;
 
       break;
     }
   }
 
-  return should_wait;
+  return interrupted;
+}
+
+bool JuceThread::InterruptionModel::do_timeout ()
+{
+  bool interrupted;
+
+  if (m_state.compareAndSetBool (stateReset, stateWait))
+  {
+    interrupted = false;
+  }
+  else
+  {
+    vfassert (m_state.get () == stateInterrupt);
+
+    interrupted = true;
+  }
+
+  return interrupted;
 }
 
 void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 {
-  bool should_signal;
-
   for (;;)
   {
     const int state = m_state.get ();
 
-    if (state == stateSignaled ||
-        m_state.compareAndSetBool (stateSignaled, stateReset))
+    // If we are already in the interrupt state, or if
+    // we successfully transition from reset to interrupt,
+    // then there is no need to signal because the thread
+    // will see the new state.
+    //
+    if (state == stateInterrupt ||
+        m_state.compareAndSetBool (stateInterrupt, stateReset))
     {
-      should_signal = false;
-
       break;
     }
-    else if (m_state.compareAndSetBool (stateReset, stateWaiting))
+    // If we are in the waiting state, then try to change to
+    // reset. Whoever is successful will wake the thread up.
+    //
+    else if (m_state.compareAndSetBool (stateReset, stateWait))
     {
-      should_signal = true;
-
+      thread.notify ();
       break;
     }
   }
-
-  if (should_signal)
-    thread.notify ();
 }
 
 bool JuceThread::InterruptionModel::do_interruptionPoint ()
 {
   // How could we possibly be in the wait state and get called?
-  vfassert (m_state.get() != stateWaiting);
+  vfassert (m_state.get() != stateWait);
 
   // If we are in the signaled state, switch to reset, and interrupt.
   // Only one thread will "win" this contest.
-  const bool interrupted = m_state.compareAndSetBool (stateReset, stateSignaled);
+  const bool interrupted = m_state.compareAndSetBool (stateReset, stateInterrupt);
 
   return interrupted;
 }
 
 //------------------------------------------------------------------------------
 
-void JuceThread::ExceptionBased::wait (JuceThread& thread)
+bool JuceThread::ExceptionBased::wait (int milliseconds, JuceThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
-  const bool should_wait = do_wait ();
+  bool interrupted = do_wait ();
 
-  if (should_wait)
-    thread.VF_JUCE::Thread::wait (-1);
-  else
+  if (!interrupted)
+  {
+    interrupted = thread.VF_JUCE::Thread::wait (milliseconds);
+
+    if (!interrupted)
+      interrupted = do_timeout ();
+  }
+
+  if (interrupted)
     throw Interruption();
+
+  return interrupted;
 }
 
 ThreadBase::Interrupted JuceThread::ExceptionBased::interruptionPoint (JuceThread& thread)
@@ -114,15 +140,22 @@ ThreadBase::Interrupted JuceThread::ExceptionBased::interruptionPoint (JuceThrea
 
 //------------------------------------------------------------------------------
 
-void JuceThread::PollingBased::wait (JuceThread& thread)
+bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
-  const bool should_wait = do_wait ();
+  bool interrupted = do_wait ();
 
-  if (should_wait)
-    thread.VF_JUCE::Thread::wait (-1);
+  if (!interrupted)
+  {
+    interrupted = thread.VF_JUCE::Thread::wait (milliseconds);
+
+    if (!interrupted)
+      interrupted = do_timeout ();
+  }
+
+  return interrupted;
 }
 
 ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)

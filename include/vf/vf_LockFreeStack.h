@@ -131,6 +131,24 @@ public:
     return node ? static_cast <Elem*> (node) : 0;
   }
 
+  // Push another stack onto this stack. The
+  // other stack is emptied. This operation is
+  // atomic with respect to the other stack.
+  // Not thread safe for this stack.
+  // Caller must synchronize.
+  void push_front (Stack& other)
+  {
+    Stack copy (other);
+    for(;;)
+    {
+      Elem* elem = copy.pop_front ();
+      if (elem)
+        push_front (elem);
+      else
+        break;
+    }
+  }
+
   // Swap contents with another stack.
   // Not thread safe or atomic.
   // Caller must synchronize.

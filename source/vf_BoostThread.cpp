@@ -27,6 +27,8 @@ void BoostThread::start (const Function <void (void)>& f)
 
 void BoostThread::join ()
 {
+  interrupt ();
+
   m_thread.join ();
 }
 
@@ -40,19 +42,24 @@ bool BoostThread::isTheCurrentThread () const
   return m_thread.get_id () == boost::this_thread::get_id ();
 }
 
-void BoostThread::wait ()
+bool BoostThread::wait (int milliseconds)
 {
+  bool interrupted;
+
   try
   {
-    // sleep until interrupted
-    boost::this_thread::sleep (
-      boost::posix_time::ptime (
-        boost::date_time::max_date_time));
+    // sleep until interrupted or timeout
+    CurrentBoostThread::sleep (milliseconds);
+
+    interrupted = false;
   }
   catch (boost::thread_interrupted&)
   {
     // wake up
+    interrupted = true;
   }
+
+  return interrupted;
 }
 
 void BoostThread::interrupt ()

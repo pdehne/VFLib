@@ -25,6 +25,6 @@
 
 #include "vf/vf.h"
 
-namespace { void dummmy () { } } // stop linker warning
-
 #endif
+
+namespace { void dummmy () { } } // stop linker warning

@@ -155,6 +155,10 @@
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
+			<File
+				RelativePath="..\include\vf\vf_Queue.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="diagnostic"
@@ -281,14 +285,10 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="threads"
+			Name="functional"
 			>
 			<File
-				RelativePath="..\source\vf_ConditionVariable.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_ConditionVariable.h"
+				RelativePath="..\include\vf\vf_Function.h"
 				>
 			</File>
 			<File
@@ -312,7 +312,39 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_ThreadWorker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ThreadWorker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_Worker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Worker.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="threads"
+			>
+			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_OncePerSecond.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_OncePerSecond.h"
 				>
 			</File>
 			<File
@@ -328,6 +360,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_StaticMutex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_StaticMutex.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_SynchronizedObject.h"
 				>
 			</File>
@@ -340,31 +380,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\source\vf_ThreadWorker.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_ThreadWorker.h"
-				>
-			</File>
-			<File
-				RelativePath="..\source\vf_Worker.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_Worker.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="functional"
-			>
-			<File
-				RelativePath="..\include\vf\vf_Function.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_Type.h"
+				RelativePath="..\include\vf\vf_ThreadBase.h"
 				>
 			</File>
 		</Filter>
@@ -4738,14 +4754,6 @@
 			Name="lockfree"
 			>
 			<File
-				RelativePath="..\include\vf\vf_Atomic.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_CacheLinePadding.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_LockFree.h"
 				>
 			</File>
@@ -4837,6 +4845,30 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="memory"
+			>
+			<File
+				RelativePath="..\include\vf\vf_Allocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Atomic.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_CacheLinePadding.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_StandardAllocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_StaticData.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"
