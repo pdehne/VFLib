@@ -2,8 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_STATICDATA_VFHEADER__
-#define __VF_STATICDATA_VFHEADER__
+#ifndef __VF_STATICOBJECT_VFHEADER__
+#define __VF_STATICOBJECT_VFHEADER__
 
 // Wraps an object up so it can exist at file scope with static storage
 // duration. The object is initialized with zeroes as per the C++ spec.
@@ -18,7 +18,7 @@
 //         other initialization takes place.
 //
 template <class Object>
-class StaticData
+class StaticObject
 {
 public:
   Object* operator-> () { return getObject (); }

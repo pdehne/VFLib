@@ -5,7 +5,8 @@
 #ifndef __VF_SHAREDOBJECT_VFHEADER__
 #define __VF_SHAREDOBJECT_VFHEADER__
 
-//
+#include "vf/vf_Atomic.h"
+
 // A copy of juce::ReferenceCountedObject,
 // with the following features:
 //

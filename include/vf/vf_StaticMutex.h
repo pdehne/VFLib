@@ -6,7 +6,7 @@
 #define __VF_STATICMUTEX_VFHEADER__
 
 #include "vf/vf_Atomic.h"
-#include "vf/vf_StaticData.h"
+#include "vf/vf_StaticObject.h"
 #include "vf/vf_Mutex.h"
 
 // Mutex that ONLY works with static storage duration!
@@ -21,9 +21,9 @@ public:
   void exit () const;
 
 private:
-  mutable StaticData <Atomic::Flag> m_inited;
-  mutable StaticData <Atomic::Flag> m_initing;
-  mutable StaticData <Mutex> m_mutex;
+  mutable StaticObject <Atomic::Flag> m_inited;
+  mutable StaticObject <Atomic::Flag> m_initing;
+  mutable StaticObject <Mutex> m_mutex;
 };
 
 #endif

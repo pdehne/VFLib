@@ -336,6 +336,14 @@
 			Name="threads"
 			>
 			<File
+				RelativePath="..\source\vf_ConditionVariable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ConditionVariable.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
@@ -353,6 +361,10 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_SharedObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_SharedSingleton.h"
 				>
 			</File>
 			<File
@@ -4717,6 +4729,10 @@
 				RelativePath="..\include\vf\vf_StaticData.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="__new"
+			>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"

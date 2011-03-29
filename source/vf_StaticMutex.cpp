@@ -14,17 +14,19 @@ void StaticMutex::enter () const
   // Did we initialize?
   if (m_inited->isClear ())
   {
-    // No so try to do it
+    // No so try to do it.
     if (m_initing->trySet ())
     {
-      // Initialize now
+      // We set the flag, everyone else fails.
+      // Construct the Mutex with placement new.
       new (m_mutex.getObject()) Mutex;
 
+      // Set flag.
       m_inited->set ();
     }
     else
     {
-      // Wait for someone else to initialize it.
+      // Wait until the thread that set the flag initializes.
       LockFree::Delay delay;
       do
       {

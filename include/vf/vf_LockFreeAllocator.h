@@ -12,8 +12,12 @@
 #include "vf/vf_Type.h"
 
 #define ALLOCATOR_COUNT_SWAPS 0
-//#define ALLOCATOR_CHECK_LEAKS VF_CHECK_LEAKS
-#define ALLOCATOR_CHECK_LEAKS 0
+
+#if ALLOCATOR_COUNT_SWAPS
+#define ALLOCATOR_CHECK_LEAKS 1
+#else
+#define ALLOCATOR_CHECK_LEAKS VF_CHECK_LEAKS
+#endif
 
 namespace LockFree {
 
@@ -64,10 +68,8 @@ public:
   };
 
   FixedAllocator (int byteLimit = defaultKiloBytes * 1024)
-    : m_interval (byteLimit / (4 * (BlockSize + sizeof(Node))))
-    , m_count (m_interval)
-    , m_hard ((hardLimitMegaBytes * 1024 * 1024) / (BlockSize + sizeof(Node)))
-#if ALLOCATOR_COUNT_SWAPS
+    : m_hard ((hardLimitMegaBytes * 1024 * 1024) / (BlockSize + sizeof(Node)))
+#if ALLOCATOR_LOGGING
     , m_swaps (0)
 #endif
   {
@@ -81,14 +83,14 @@ public:
   {
     endOncePerSecond ();
 
-#if ALLOCATOR_CHECK_LEAKS
+#if ALLOCATOR_LOGGING
     vfassert (m_used.is_reset ());
 #endif
 
     free (m_pool[0]);
     free (m_pool[1]);
 
-#if ALLOCATOR_CHECK_LEAKS
+#if ALLOCATOR_LOGGING
     vfassert (m_total.is_reset ());
 #endif
   }
@@ -106,23 +108,16 @@ public:
 
     m_hot->garbage.push_front (node);
 
-#if ALLOCATOR_CHECK_LEAKS
+#if ALLOCATOR_LOGGING
     m_used.release ();
 #endif
 
-    // See if we need to perform garbage collection
-#if 1
+    // See if we need to perform garbage collection.
     if (m_collect.isSet () && m_collect.tryClear ())
     {
-      // Multiple threads may get here but only one will do the gc.
-#if 0
-      // Append the garbage to the recycle list.
-      m_cold->recycle.push_front (m_cold->garbage);
-#else
       // Perform the deferred swap of reused
       // and garbage in the cold pool.
       m_cold->recycle.swap (m_cold->garbage);
-#endif
 
       // Now swap hot and cold.
       // This is atomic with respect to m_hot.
@@ -130,66 +125,32 @@ public:
       m_hot = m_cold; // atomic
       m_cold = temp;
 
-#if ALLOCATOR_COUNT_SWAPS
+#if ALLOCATOR_LOGGING
       String s;
       s << "swap " << String (++m_swaps);
-#if ALLOCATOR_CHECK_LEAKS
       s << " (" << String (m_used.get()) << "/"
         << String (m_total.get()) << ")";
-#endif
       Logger::outputDebugString (s);
 #endif
     }
-
-#else
-    if (m_count.release ())
-    {
-#if 0
-      // Append the garbage to the recycle list.
-      m_cold->recycle.push_front (m_cold->garbage);
-#else
-      // Perform the deferred swap of reused
-      // and garbage in the cold pool.
-      m_cold->recycle.swap (m_cold->garbage);
-#endif
-
-      // Now swap hot and cold.
-      // This is atomic with respect to m_hot.
-      Pool* temp = m_hot;
-      m_hot = m_cold; // atomic
-      m_cold = temp;
-
-      // Reset the swap countdown.
-      m_count.set (m_interval);
-
-#if ALLOCATOR_COUNT_SWAPS
-      String s;
-      s << "swap " << String (++m_swaps);
-#if ALLOCATOR_CHECK_LEAKS
-      s << " (" << String (m_used.get()) << "/"
-        << String (m_total.get()) << ")";
-#endif
-      Logger::outputDebugString (s);
-#endif
-    }
-#endif
-
   }
 
 private:
   void* hard_alloc ()
   {
+    void* p;
+
     // implicit global mutex
-    void* p = ::operator new (BlockSize + sizeof (Node));
+    p = ::operator new (BlockSize + sizeof (Node), std::nothrow_t());
     if (!p)
-      Throw (Error().fail (__FILE__, __LINE__, TRANS("the FixedAllocator receivd 0 on ::new")));
+      Throw (Error().fail (__FILE__, __LINE__, TRANS("a memory allocation failed")));
 
     const bool exhausted = m_hard.release ();
 
     if (exhausted)
-      Throw (Error().fail (__FILE__, __LINE__, TRANS("the FixedAllocator exhausted it's allocations")));
+      Throw (Error().fail (__FILE__, __LINE__, TRANS("the limit of memory allocations was reached")));
 
-#if ALLOCATOR_CHECK_LEAKS
+#if ALLOCATOR_LOGGING
     m_total.addref ();
 #endif
 
@@ -205,24 +166,13 @@ private:
     if (!node)
     {
       p = hard_alloc ();
-
-#if 0
-      // two for one special
-      void* extra = hard_alloc ();
-
-#if ALLOCATOR_CHECK_LEAKS
-      m_used.addref ();
-#endif
-
-      deallocate (extra); // huh?
-#endif
     }
     else
     {
       p = fromNode (node);
     }
 
-#if ALLOCATOR_CHECK_LEAKS
+#if ALLOCATOR_LOGGING
     m_used.addref ();
 #endif
 
@@ -239,13 +189,14 @@ private:
   // same alignment as what we would get from a straight
   // new, the List::Node is placed just after the allocated
   // storage, rather than before. However this might cause
-  // alignment issues for the List::Node itslf (which contains
+  // alignment issues for the List::Node itself (which contains
   // an Atomic::Pointer that may need more strict alignment)
   //
   struct Node;
   typedef Stack <Node> List;
   struct Node : List::Node
   {
+    //Page* page; // backpointer to the page
   };
 
   // A pool contains the recycle list, from which we allocate,
@@ -305,10 +256,8 @@ private:
   // value of "defaultKiloBytes" for the problem domain.
   //
   Pool m_pool[2];                 // pair of pools
-  Atomic::Pointer <Pool> m_hot;   // pool we are currently using
   Pool* m_cold;                   // pool which is cooling down
-  int m_interval;                 // how often to swap
-  Atomic::Counter m_count;        // countdown to swap
+  Atomic::Pointer <Pool> m_hot;   // pool we are currently using
   Atomic::Flag m_collect;         // flag telling us to do gc
   Atomic::Counter m_hard;         // limit of system allocations
 
@@ -322,8 +271,8 @@ private:
 #endif
 };
 
-typedef FixedAllocator <globalAllocatorBlockSize> GlobalAllocatorOld; 
-extern GlobalAllocatorOld globalAllocator;
+typedef FixedAllocator <globalAllocatorBlockSize> GlobalFixedAllocator;
+extern GlobalFixedAllocator globalAllocator;
 
 class GlobalAllocator
 {
@@ -352,42 +301,42 @@ struct globalAlloc
 {
   static C* New ()
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C;
   }
 
   template <class T1>
   static C* New (const T1& t1)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1);
   }
 
   template <class T1, class T2>
   static C* New (const T1& t1, const T2& t2)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2);
   }
 
   template <class T1, class T2, class T3>
   static C* New (const T1& t1, const T2& t2, const T3& t3)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3);
   }
 
   template <class T1, class T2, class T3, class T4>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4);
   }
 
   template <class T1, class T2, class T3, class T4, class T5>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
   }
 
@@ -395,7 +344,7 @@ struct globalAlloc
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
   }
 
@@ -403,7 +352,7 @@ struct globalAlloc
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
   }
 
@@ -411,7 +360,7 @@ struct globalAlloc
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   {
-    static_vfassert (sizeof (C) <= GlobalAllocatorOld::blockSize);
+    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
     return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
   }
 };

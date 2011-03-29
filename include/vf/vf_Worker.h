@@ -206,12 +206,15 @@ protected:
   Atomic::Flag m_in_process;
 };
 
-//template <class Allocator = LockFree::GlobalAllocator>
-template <class Allocator = LockFree::GlobalAllocatorOld>
+template <class Allocator = LockFree::GlobalFixedAllocator>
 class WorkerType : public WorkerBase
 {
 public:
   explicit WorkerType (const char* szName = "") : WorkerBase (szName)
+  {
+  }
+
+  Allocator& getAllocator ()
   {
   }
 

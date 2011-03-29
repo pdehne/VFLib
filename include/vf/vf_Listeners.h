@@ -19,7 +19,7 @@
 // get deleted while a callback is pending.
 
 //
-// TODO: CONST CORRECTNESS?
+// TODO: CONST CORRECTNESS? List CONST-NESS?
 //
 
 namespace detail {

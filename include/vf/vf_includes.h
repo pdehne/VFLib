@@ -93,16 +93,20 @@
 #include "vf/vf_OncePerSecond.h"
 #endif
 
+#ifndef __VF_SHAREDSINGLETON_VFHEADER__
+#include "vf/vf_SharedSingleton.h"
+#endif
+
 #ifndef __VF_SHAREDSTATE_VFHEADER__
 #include "vf/vf_SharedState.h"
 #endif
 
-#ifndef __VF_STATICDATA_VFHEADER__
-#include "vf/vf_StaticData.h"
-#endif
-
 #ifndef __VF_STATICMUTEX_VFHEADER__
 #include "vf/vf_StaticMutex.h"
+#endif
+
+#ifndef __VF_STATICOBJECT_VFHEADER__
+#include "vf/vf_StaticObject.h"
 #endif
 
 #ifndef __VF_SYNCHRONIZEDOBJECT_VFHEADER__
