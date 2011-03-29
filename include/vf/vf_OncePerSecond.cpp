@@ -64,7 +64,7 @@ private:
 
   void destroySharedObject ()
   {
-    StaticMutex::ScopedLock lock (s_mutex);
+    StaticMutex::ScopedLockType lock (s_mutex);
 
     if (!isBeingReferenced ())
     {
@@ -91,7 +91,7 @@ public:
   {
     TimerPtr instance;
 
-    StaticMutex::ScopedLock lock (s_mutex);
+    StaticMutex::ScopedLockType lock (s_mutex);
 
     instance = const_cast <TimerSingleton*> (s_instance);
 

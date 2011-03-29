@@ -15,17 +15,10 @@
 class StaticMutex : NonCopyable
 {
 public:
-  typedef detail::ScopedLock <StaticMutex> ScopedLock;
+  typedef detail::ScopedLock <StaticMutex> ScopedLockType;
 
   void enter () const;
   void exit () const;
-
-private:
-  // This is the hack
-  const Mutex& getMutex () const
-  {
-    return *m_mutex;
-  }
 
 private:
   mutable StaticData <Atomic::Flag> m_inited;
