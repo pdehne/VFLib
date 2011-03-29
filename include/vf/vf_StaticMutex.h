@@ -18,8 +18,8 @@ class StaticMutex : NonCopyable
 public:
   struct ScopedLock : NonCopyable
   {
-    inline ScopedLock () { s_mutex->enter (); }
-    inline ~ScopedLock () { s_mutex->exit (); }
+    inline ScopedLock () { StaticMutex::enter (); }
+    inline ~ScopedLock () { StaticMutex::exit (); }
   };
 
   typedef ScopedLock ScopedLockType;
@@ -54,7 +54,7 @@ public:
     s_mutex->enter ();
   }
 
-  void exit ()
+  static void exit ()
   {
     s_mutex->exit ();
   }

@@ -372,10 +372,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\source\vf_StaticMutex.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_StaticMutex.h"
 				>
 			</File>
