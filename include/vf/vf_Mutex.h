@@ -5,38 +5,9 @@
 #ifndef __VF_MUTEX_VFHEADER__
 #define __VF_MUTEX_VFHEADER__
 
+#include "vf/vf_MutexBase.h"
 #include "vf/vf_BoostMutex.h"
 #include "vf/vf_JuceMutex.h"
-
-//
-// Simple lightweight recursive mutex
-//
-
-namespace detail {
-
-// Ideas based on Juce
-
-template <class MutexType>
-struct ScopedLock : NonCopyable
-{
-  inline explicit ScopedLock (const MutexType& mutex)
-    : m_mutex (mutex) { m_mutex.enter (); }
-  inline ~ScopedLock () { m_mutex.exit (); }
-private:
-  const MutexType& m_mutex;
-};
-
-template <class MutexType>
-struct ScopedUnlock : NonCopyable
-{
-  inline explicit ScopedUnlock (const MutexType& mutex)
-    : m_mutex (mutex) { m_mutex.exit (); }
-  inline ~ScopedUnlock () { m_mutex.enter (); }
-private:
-  const MutexType& m_mutex;
-};
-
-}
 
 // Lift one implementation
 

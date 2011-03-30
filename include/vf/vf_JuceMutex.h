@@ -5,6 +5,8 @@
 #ifndef __VF_JUCEMUTEX_VFHEADER__
 #define __VF_JUCEMUTEX_VFHEADER__
 
+#include "vf/vf_MutexBase.h"
+
 #if VF_HAVE_JUCE
 
 namespace Juce {
@@ -12,6 +14,9 @@ namespace Juce {
 class Mutex : NonCopyable
 {
 public:
+  typedef detail::ScopedLock <Mutex> ScopedLockType;
+  typedef detail::ScopedUnlock <Mutex> ScopedUnlockType;
+
   inline void enter () const { m_mutex.enter (); }
   inline void exit () const { m_mutex.exit (); }
 

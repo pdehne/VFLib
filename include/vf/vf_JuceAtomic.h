@@ -31,11 +31,21 @@ public:
 
   // Increments the usage count.
   // Returns true if the counter was previously non-signaled.
-  bool addref () { return (++m_value) == 1; }
+  inline bool addref () { return (++m_value) == 1; }
 
   // Decrements the usage count.
   // Returns true if the counter became non-signaled.
-  bool release () { return (--m_value) == 0; }
+  inline bool release () { return (--m_value) == 0; }
+
+  // Decrements the usage count and asserts that it a final release.
+  inline void finalRelease ()
+  {
+#if VF_DEBUG
+    const bool final = release(); vfassert (final);
+#else
+    release ();
+#endif
+  }
 
   // Returns the signaled state of the counter.
   // The caller must synchronize the value.

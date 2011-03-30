@@ -206,8 +206,8 @@ protected:
   Atomic::Flag m_in_process;
 };
 
-template <class Allocator = LockFree::GlobalFixedAllocator>
-//template <class Allocator = LockFree::GlobalBlockAllocator>
+//template <class Allocator = LockFree::GlobalFixedAllocator>
+template <class Allocator = LockFree::GlobalBlockAllocator>
 class WorkerType : public WorkerBase
 {
 public:
@@ -221,13 +221,11 @@ public:
 
   void queuef (const func_t& f)
   {
-    //do_queue (LockFree::globalAlloc <Call>::New (f));
     do_queue (m_allocator.New (f));
   }
 
   void callf (const func_t& f)
   {
-    //do_call (LockFree::globalAlloc <Call>::New (f));
     do_call (m_allocator.New (f));
   }
 

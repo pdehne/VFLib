@@ -209,22 +209,6 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="audio"
-			>
-			<File
-				RelativePath="..\source\vf_AudioBufferPool.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_AudioBufferPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="_include"
 			>
 			<File
@@ -348,11 +332,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_MutexBase.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_OncePerSecond.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_OncePerSecond.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ReadWriteMutexBase.h"
 				>
 			</File>
 			<File
@@ -4595,18 +4587,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="graphics"
-			>
-			<File
-				RelativePath="..\source\vf_RadialImageConvolutionKernel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_RadialImageConvolutionKernel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="lockfree"
 			>
 			<File
@@ -4729,6 +4709,38 @@
 		<Filter
 			Name="__new"
 			>
+		</Filter>
+		<Filter
+			Name="_juce"
+			>
+			<Filter
+				Name="graphics"
+				>
+				<File
+					RelativePath="..\source\vf_RadialImageConvolutionKernel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_RadialImageConvolutionKernel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="audio"
+				>
+				<File
+					RelativePath="..\source\vf_AudioBufferPool.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_AudioBufferPool.h"
+					>
+				</File>
+				<File
+					RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"

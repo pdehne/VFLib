@@ -8,6 +8,7 @@
 #include "vf/vf_Atomic.h"
 #include "vf/vf_CacheLinePadding.h"
 #include "vf/vf_Mutex.h"
+#include "vf/vf_ReadWriteMutexBase.h"
 
 namespace LockFree {
 
@@ -17,6 +18,9 @@ namespace LockFree {
 class ReadWriteMutex
 {
 public:
+  typedef detail::ScopedReadLock <ReadWriteMutex> ScopedReadLockType;
+  typedef detail::ScopedWriteLock <ReadWriteMutex> ScopedWriteLockType;
+
   ReadWriteMutex ();
   ~ReadWriteMutex ();
 
@@ -35,23 +39,8 @@ private:
   mutable NoCacheLinePadding <Atomic::Counter> m_readers;
 };
 
-struct ScopedReadLock : NonCopyable
-{
-  inline explicit ScopedReadLock (const ReadWriteMutex& mutex)
-    : m_mutex (mutex) { m_mutex.enter_read (); }
-  inline ~ScopedReadLock () { m_mutex.exit_read (); }
-private:
-  const ReadWriteMutex& m_mutex;
-};
-
-struct ScopedWriteLock : NonCopyable
-{
-  inline explicit ScopedWriteLock (const ReadWriteMutex& mutex)
-    : m_mutex (mutex) { m_mutex.enter_write (); }
-  inline ~ScopedWriteLock () { m_mutex.exit_write (); }
-private:
-  const ReadWriteMutex& m_mutex;
-};
+typedef ReadWriteMutex::ScopedReadLockType ScopedReadLock;
+typedef ReadWriteMutex::ScopedWriteLockType ScopedWriteLock;
 
 }
 

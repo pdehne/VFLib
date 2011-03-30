@@ -53,6 +53,10 @@
 #include "vf/vf_List.h"
 #endif
 
+#ifndef __VF_LISTENERS_VFHEADER__
+#include "vf/vf_Listeners.h"
+#endif
+
 #ifndef __VF_LOCKFREEALLOCATOR_VFHEADER__
 #include "vf/vf_LockFreeAllocator.h"
 #endif
@@ -85,12 +89,28 @@
 #include "vf/vf_ManualWorker.h"
 #endif
 
+#ifndef __VF_MURMURHASH_VFHEADER__
+#include "vf/vf_MurmurHash.h" // Depends on some Juce declarations and macros
+#endif
+
 #ifndef __VF_MUTEX_VFHEADER__
 #include "vf/vf_Mutex.h"
 #endif
 
+#ifndef __VF_MUTEXBASE_VFHEADER__
+#include "vf/vf_MutexBase.h"
+#endif
+
 #ifndef __VF_ONCEPERSECOND_VFHEADER__
 #include "vf/vf_OncePerSecond.h"
+#endif
+
+#ifndef __VF_READWRITEMUTEXBASE_VFHEADER__
+#include "vf/vf_ReadWriteMutexBase.h"
+#endif
+
+#ifndef __VF_SHAREDOBJECT_VFHEADER__
+#include "vf/vf_SharedObject.h"
 #endif
 
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
@@ -129,40 +149,23 @@
 #include "vf/vf_Worker.h"
 #endif
 
-
-  #ifndef __VF_LOCKFREE_VFHEADER__
-  #include "vf/vf_LockFree.h"
-  #endif
-
-  #ifndef __VF_SHAREDOBJECT_VFHEADER__
-  #include "vf/vf_SharedObject.h"
-  #endif
-
-  #ifndef __VF_LISTENERS_VFHEADER__
-  #include "vf/vf_Listeners.h"
-  #endif
-
-  #ifndef __VF_MURMURHASH_VFHEADER__
-  #include "vf/vf_MurmurHash.h" // Depends on some Juce declarations and macros
-  #endif
-
-  #ifndef __VF_DB_VFHEADER__
-  #include "vf/vf_db.h" // db uses both some Juce and Boost
-  #endif
-
 //
-// Juce-specific
+// db
 //
+
+#ifndef __VF_DB_VFHEADER__
+#include "vf/vf_db.h" // db uses both some Juce and Boost
+#endif
 
 #if VF_HAVE_JUCE
 
-  #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-  #include "vf/vf_AudioBufferPool.h"
-  #endif
+#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+#include "vf/vf_AudioBufferPool.h"
+#endif
 
-  #ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
-  #include "vf/vf_RadialImageConvolutionKernel.h"
-  #endif
+#ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
+#include "vf/vf_RadialImageConvolutionKernel.h"
+#endif
 
 #endif
 
