@@ -11,6 +11,9 @@
 #include "vf/vf_OncePerSecond.h"
 #include "vf/vf_Type.h"
 
+#include "vf/vf_Mutex.h" // REMOVE ASAP
+#include "vf/vf_LockFreeReadWriteMutex.h" // REMOVE ASAP
+
 //#define ALLOCATOR_LOGGING VF_CHECK_LEAKS
 #define ALLOCATOR_LOGGING 0
 
@@ -32,12 +35,8 @@ public:
   explicit BlockAllocator (size_t bytesPerBlock = 0);
   ~BlockAllocator ();
 
-  // DEPRECATED, REMOVE ASAP
-  template <size_t Bytes>
-  inline void* allocate () { return allocate (Bytes); }
-
   void* allocate (const size_t bytes);
-  void deallocate (void* p);
+  void  deallocate (void* p);
 
 private:
   struct Header;
@@ -65,11 +64,10 @@ private:
   Pool* m_cold;                     // pool which is cooling down
   Atomic::Pointer <Pool> m_hot;     // pool we are currently using
   Atomic::Pointer <Block> m_active; // active block
-  Atomic::Flag m_collect;           // flag telling us to do gc
   Atomic::Counter m_hard;           // limit of system allocations
 
   // TEMPORARY REMOVE ASAP
-  Mutex m_lock;
+  ReadWriteMutex m_lock;
   Mutex m_lock0;
   Mutex m_lock1;
 
@@ -327,24 +325,39 @@ enum
   globalAllocatorBlockSize = 96
 };
 
-typedef FixedAllocator <globalAllocatorBlockSize> GlobalFixedAllocator;
-extern GlobalFixedAllocator globalAllocator;
-
-typedef BlockAllocator GlobalBlockAllocator;
-
 class GlobalAllocator
 {
 public:
   template <int Bytes>
   void* allocate ()
   {
-    return globalAllocator.allocate <Bytes> ();
+    return s_allocator.allocate <Bytes> ();
   }
 
   void deallocate (void* p)
   {
-    globalAllocator.deallocate (p);
+    s_allocator.deallocate (p);
   }
+
+private:
+  static FixedAllocator <globalAllocatorBlockSize> s_allocator;
+};
+
+class GlobalBlockAllocator
+{
+public:
+  inline void* allocate (size_t bytes)
+  {
+    return s_allocator.allocate (bytes);
+  }
+
+  inline void deallocate (void* p)
+  {
+    s_allocator.deallocate (p);
+  }
+
+private:
+  static BlockAllocator s_allocator;
 };
 
 // Sugar hack since the compiler cannot infer
@@ -359,67 +372,67 @@ struct globalAlloc
 {
   static C* New ()
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C;
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C;
   }
 
   template <class T1>
   static C* New (const T1& t1)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1);
   }
 
   template <class T1, class T2>
   static C* New (const T1& t1, const T2& t2)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2);
   }
 
   template <class T1, class T2, class T3>
   static C* New (const T1& t1, const T2& t2, const T3& t3)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3);
   }
 
   template <class T1, class T2, class T3, class T4>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4);
   }
 
   template <class T1, class T2, class T3, class T4, class T5>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   {
-    static_vfassert (sizeof (C) <= GlobalFixedAllocator::blockSize);
-    return new (globalAllocator.allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
+    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
+    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
   }
 };
 
@@ -427,7 +440,7 @@ template <class C>
 void globalDelete (C* c)
 {
   c->~C();
-  globalAllocator.deallocate (c);
+  GlobalAllocator().deallocate (c);
 }
 
 }

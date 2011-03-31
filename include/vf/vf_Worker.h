@@ -207,7 +207,8 @@ protected:
 };
 
 //template <class Allocator = LockFree::GlobalFixedAllocator>
-template <class Allocator = LockFree::GlobalBlockAllocator>
+//template <class Allocator = LockFree::GlobalBlockAllocator>
+template <class Allocator = LockFree::BlockAllocator>
 class WorkerType : public WorkerBase
 {
 public:

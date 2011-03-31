@@ -14,7 +14,8 @@ BEGIN_VF_NAMESPACE
 
 //------------------------------------------------------------------------------
 
-class OncePerSecond::TimerSingleton : public SharedSingleton <OncePerSecond::TimerSingleton>
+class OncePerSecond::TimerSingleton
+  : public SharedSingleton <OncePerSecond::TimerSingleton>
 {
 private:
   TimerSingleton () : m_thread (__FILE__)
@@ -33,7 +34,7 @@ private:
   {
     for(;;)
     {
-      const bool interrupted = m_thread.wait (1000);
+      const bool interrupted = m_thread.wait (100);
 
       if (interrupted)
         break;

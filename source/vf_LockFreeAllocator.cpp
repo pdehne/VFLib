@@ -7,14 +7,17 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeAllocator.h"
+#include "vf/vf_LockFreeDelay.h"
 
 #define LOG_BLOCKS 0
 
 namespace LockFree {
 
-FixedAllocator <globalAllocatorBlockSize> globalAllocator;
+FixedAllocator <globalAllocatorBlockSize> GlobalAllocator::s_allocator;
 
-//------------------------------------------------------------------------------
+BlockAllocator GlobalBlockAllocator::s_allocator;
+
+namespace {
 
 /* Implementation notes
 
@@ -32,11 +35,15 @@ takes longer than the garbage collection interval (1 second)? We are safe.
 
 */
 
-namespace {
-
-// if bytesPerBlock is 0 on construction we will use this value.
+// If bytesPerBlock is 0 on construction we will use this value instead.
 //
 static const size_t defaultBytesPerBlock = 8 * 1024;
+
+// This is the upper limit on the amount of physical memory an instance of the
+// allocator will allow. Going over this limit means that consumers cannot keep
+// up with producers, and application logic should be re-examined.
+//
+static const size_t hardLimitMegaBytes = 2 * 4 * 256;
 
 // Allocations are always aligned to this byte value.
 //
@@ -59,16 +66,6 @@ P* aligned (P* p)
 {
   return reinterpret_cast <P*> (reinterpret_cast <char*> (p) + align (p));
 }
-
-//------------------------------------------------------------------------------
-//
-// If we exceed this limit on hard allocations then an exception will be thrown.
-//
-// Typically this means that consumers cannot keep up
-// with producers and the app would be non-functional.
-//
-//
-static const size_t hardLimitMegaBytes = 256;
 
 }
 
@@ -108,116 +105,38 @@ public:
     vfassert (m_refs.get() == 0);
   }
 
-  // One reference is always counted for a Block if it is active.
+  inline bool isReferenced () const
+  {
+    return m_refs.get () > 0;
+  }
+
   inline void addref ()
   {
     m_refs.addref ();
   }
 
-  inline bool consumed () const
+  inline bool release ()
   {
-    return m_free.get () == 0;
+    vfassert (m_refs.get () > 0);
+
+    return m_refs.release ();
   }
 
-  // Possible results for allocate ()
-  //
+  // Reset the free storage pointer.
+  inline void reset ()
+  {
+    m_free = reinterpret_cast <char*> (this+1);
+  }
+
   enum Result
   {
     success,  // successful allocation
-    remove,   // take the block out of active state
-    garbage,  // block got a final release and is garbage
-    ignore    // block should be completely ignored
+    ignore,   // disregard the block
+    consumed  // block is consumed (1 thread see this)
   };
 
   Result allocate (size_t bytes, void* pBlock)
   {
-#if 0
-    /*
-    for (;;)
-    {
-      // Get pointer to free bytes.
-      char* p = m_free.get ();
-
-      // Is the block availble?
-      if (p)
-      {
-        // Is there enough space left?
-        if (p + bytes <= m_end)
-        {
-          // Got uncomitted space. Increment reference
-          // count to prevent a final release elsewhere.
-          m_refs.addref ();
-
-          // Commit the allocation.
-          if (m_free.compareAndSet (p + bytes, p))
-          {
-            // Success, return the block.
-            //
-            *(reinterpret_cast <void**> (pBlock)) = p;
-
-            result = success;
-            break;
-          }
-          else
-          {
-            // Commit failed so roll back the reference. This could
-            // cause a final release from a concurrent deallocate().
-            //
-            if (release())
-            {
-              // We got a final release. The block is already inactive.
-              // Only one caller will see this state, the rest will see 'full'.
-              //
-              result = garbage;
-              break;
-            }
-            else
-            {
-              // Release was not final so retry.
-            }
-          }
-        }
-        else
-        {
-          // No space so try to make this block unavailable
-          //
-          for (;;)
-          {
-            p = m_free.get ();
-
-            if (p == 0)
-            {
-              // Someone else already deactivated it.
-              //
-              result = ignore;
-              break;
-            }
-            else if (m_free.compareAndSet (0, p))
-            {
-              // We set the pointer so caller should remove from active.
-              //
-              result = remove;
-              break;
-            }
-            else
-            {
-              // This happens when a smaller concurrent allocate() is either
-              // successful, or gets a final release on rollback.
-            }
-          }
-
-          break;
-        }
-      }
-      else
-      {
-        // Someone else set the block to unavailable so ignore it.
-        result = ignore;
-        break;
-      }
-    }
-    */
-#endif
     vfassert (bytes > 0);
 
     Result result;
@@ -229,89 +148,48 @@ public:
       if (base)
       {
         char* p = aligned (base);
+        char* free = p + bytes;
 
-        if (p + bytes <= m_end)
+        if (free <= m_end)
         {
-          m_free = p + bytes;
-          m_refs.addref ();
-
-          *(reinterpret_cast <void**> (pBlock)) = p;
-          result = success;
-          break;
+          //ReadWriteMutex::ScopedReadLockType lock (mutex);
+  
+          // Try to commit the allocation
+          if (m_free.compareAndSet (free, base))
+          {
+            *(reinterpret_cast <void**> (pBlock)) = p;
+            result = success;
+            break;
+          }
+          else
+          {
+            // Someone changed m_free so try again
+          }
         }
         else
         {
           // Mark the block consumed.
-          m_free = 0;
-
-          // Only one caller will see this, the rest should see 'ignore'.
-          result = remove;
-          break;
+          if (m_free.compareAndSet (0, base))
+          {
+            // Only one caller sees this, the rest get 'ignore'
+            result = consumed;
+            break;
+          }
+          else
+          {
+            // Happens with another concurrent allocate()
+          }
         }
       }
       else
       {
-        // Block is consumed.
+        // Block already consumed, ignore it.
         result = ignore;
         break;
       }
     }
 
     return result;
-  }
-
-  bool release ()
-  {
-#if 0
-    /*
-    // Mark the free position.
-    char* p = m_free.get ();
-
-    // IS THIS NEEDED?
-    //Atomic::memoryBarrier();
-
-    bool final = m_refs.release ();
-
-    // Was this a final release?
-    if (final)
-    {
-      // Mark the block unavailable to prevent re-use.
-      if (p)
-        final = m_free.compareAndSet (0, p);
-
-      // If we failed it means someone else got a reference.
-      // This can happen if there is still space in the block.
-      if (!final)
-      {
-        p = 0;
-      }
-    }
-
-    return final;
-    */
-#endif
-
-    vfassert (m_refs.get () > 0);
-
-    const bool final = m_refs.release ();
-
-    return final;
-  }
-
-  inline void finalRelease ()
-  {
-#if VF_DEBUG
-    const bool final = release ();
-    vfassert (final);
-#else
-    release ();
-#endif
-  }
-
-  inline void reset ()
-  {
-    // Reset the free pointer
-    m_free = reinterpret_cast <char*> (this+1);
   }
 
 private:
@@ -324,6 +202,17 @@ private:
 //
 //
 //
+
+inline void BlockAllocator::addGarbage (Block* b)
+{
+  // Any block that gets here must have incremented the use count.
+#if LOG_BLOCKS
+  vfassert (m_used.get() > 0);
+  m_used.release ();
+#endif
+
+  m_hot->garbage.push_front (b);
+}
 
 BlockAllocator::BlockAllocator (size_t bytesPerBlock)
   : m_blockBytes (bytesPerBlock == 0 ? defaultBytesPerBlock : bytesPerBlock)
@@ -338,6 +227,8 @@ BlockAllocator::BlockAllocator (size_t bytesPerBlock)
   m_hot = &m_pool[0];
   m_cold = &m_pool[1];
 
+  m_active = newBlock ();
+
   startOncePerSecond ();
 }
 
@@ -345,14 +236,11 @@ BlockAllocator::~BlockAllocator ()
 {
   endOncePerSecond ();
 
-  // Throw the active block in the garbage to get a common code path.
+  // Throw away the active block
   Block* b = m_active;
-  if (b)
-  {
-    b->finalRelease ();
-
-    addGarbage (b);
-  }
+  vfassert (b);
+  b->release ();
+  addGarbage (b);
 
   free (m_pool[0]);
   free (m_pool[1]);
@@ -367,170 +255,114 @@ BlockAllocator::~BlockAllocator ()
 
 void* BlockAllocator::allocate (const size_t bytes)
 {
-#if 0
-  /*
-  for (;;)
-  {
-    // Get the active block if there is one.
-    b = m_hot->active;
-
-    if (b)
-    {
-      // Try to allocate from the active block.
-      const Block::Result result = b->allocate (actual, &h);
-
-      if (result == Block::success)
-      {
-        break;
-      }
-      else if (result == Block::remove)
-      {
-        // (At this point the block might have received a final release)
-
-        // Block has references but should be removed from active.
-        m_hot->active.compareAndSet (0, b);
-      }
-      else if (result == Block::garbage)
-      {
-        // Block got a final release
-        m_hot->active.compareAndSet (0, b);
-
-        // Reset it to full
-        b->reset ();
-
-#if LOG_BLOCKS
-        vfassert (m_used.get() > 0);
-        m_used.release ();
-#endif
-
-        addGarbage (b);
-      }
-      else
-      {
-        // Ignore the block and retry.
-      }
-    }
-    else
-    {
-      // No active block so try to recycle one.
-      b = m_hot->fresh.pop_front ();
-
-      // No fresh blocks? Make a new one.
-      if (!b)
-        b = new_block ();
-
-      // Try to set this new block as the active block.
-      if (m_hot->active.compareAndSet (b, 0))
-      {
-        // Success, new block is active.
-#if LOG_BLOCKS
-        m_used.addref ();
-#endif
-      }
-      else
-      {
-        // Failed, someone else already set a new active block.
-        // Add this block to garbage.
-        addGarbage (b);
-      }
-    }
-  }
-
-  h->block = b;
-  */
-#endif
-
-//  Mutex::ScopedLockType lock0 (m_lock0);
-
   const size_t actual = sizeof (Header) + bytes;
 
   if (actual > m_blockBytes)
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
-  Block* b;
   Header* h;
 
   for (;;)
   {
-    // Get the active block.
-    b = m_active;
-
-    // Is there an active block with some space?
-    if (b && !b->consumed ())
+    // Get an active block
+    Block* b = m_active;
+    if (!b)
     {
+      Delay delay;
+      do
+      {
+        delay.spin ();
+        Atomic::memoryBarrier ();
+        b = m_active;
+      }
+      while (!b);
+    }
+
+    // Acquire a reference
+    vfassert (b->isReferenced ());
+    b->addref ();
+
+    // Is it still active?
+    if (m_active == b)
+    {
+      //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
+  
       // Yes so try to allocate from it.
       Block::Result result;
 
       {
-        Mutex::ScopedLockType lock (m_lock);
+        //ReadWriteMutex::ScopedReadLockType lock (m_lock);
+        //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
         result = b->allocate (actual, &h);
       }
 
       if (result == Block::success)
       {
-        // Guaranteed to have a reference to the block here.
-        b->addref ();
+#if 0
+        m_lock.enter_write ();
+        m_lock.exit_write ();
+#endif
+
+        // Keep the reference and return the allocation.
+        h->block = b;
+        break;
+      }
+      else if (result == Block::consumed)
+      {
+        bool success;
+
+        success = m_active.compareAndSet (0, b);
+        vfassert (success);
+
+        //m_lock.enter_write ();
+
+        // Take away the reference we added
         bool final = b->release ();
         vfassert (!final);
 
-        break;
-      }
-      else if (result == Block::remove)
-      {
-        // Block is consumed.
+        //m_lock.exit_write ();
 
-        // Take away the initial reference.
-        bool final;
-        {
-          Mutex::ScopedLockType lock (m_lock);
-          final = b->release ();
-        }
-
-        // Unset active if it matches.
-        m_active.compareAndSet (0, b);
-
+        // Now take away the active block reference.
+        final = b->release ();
         if (final)
           addGarbage (b);
-      }
-      else if (result == Block::ignore)
-      {
-        // Try again.
+
+        // Get an empty block. It will come with a reference.
+        b = newBlock ();
+
+        // Install it as the active block.
+        success = m_active.compareAndSet (b, 0);
+        vfassert (success);
       }
       else
       {
-        vfassert(0);
+        //m_lock.enter_write ();
+        //m_lock.exit_write ();
+
+        const bool final = b->release ();
+
+        if (final)
+          addGarbage (b);
+
+        // Try again.
       }
     }
     else
     {
-      // Get an empty block. It will come with a reference.
-      Block* empty = newBlock ();
-
-      // Try to install it as the active block.
-      if (m_active.compareAndSet (empty, b))
-      {
-        // It worked, so try the loop again.
-      }
-      else
-      {
+      // Block became inactive, so release our reference.
 #if 0
-        // TODO: CAN WE PUSH IT BACK ONTO fresh ??? OR IS THIS ABA?
-
-        // Failed, someone already set an active block.
-        // Remove the initial reference.
-        empty->finalRelease ();
-
-        // Add this block to garbage.
-        addGarbage (empty);
-#else
-        empty->finalRelease ();
-        m_hot->fresh.push_front (empty);
-#endif
+      if (b->release ())
+      {
+        // It was a final release
+        addGarbage (b);
       }
+#else
+      b->release ();
+#endif
+
+      // Try again.
     }
   }
-
-  h->block = b;
 
   return h + 1;
 }
@@ -539,27 +371,19 @@ void* BlockAllocator::allocate (const size_t bytes)
 
 void BlockAllocator::deallocate (void* p)
 {
-  Mutex::ScopedLockType lock1 (m_lock1);
-
   Block* b = (reinterpret_cast <Header*> (p) - 1)->block;
 
   bool final;
 
   {
-    Mutex::ScopedLockType lock (m_lock);
+    //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
+    //ReadWriteMutex::ScopedReadLockType lock (m_lock);
+    //Mutex::ScopedLockType lock (m_lock0);
     final = b->release ();
   }
 
-  // Is this block final?
   if (final)
-  {
-    // Take this out of action if it's active.
-    m_active.compareAndSet (0, b);
-
-    // Put it in the garbage.
-    // This might trigger a collection.
     addGarbage (b);
-  }
 }
 
 //------------------------------------------------------------------------------
@@ -614,44 +438,26 @@ inline void BlockAllocator::deleteBlock (Block* b)
 #endif
 }
 
-void BlockAllocator::addGarbage (Block* b)
-{
-  // Any block that gets here must have incremented the use count.
-#if LOG_BLOCKS
-  vfassert (m_used.get() > 0);
-  m_used.release ();
-#endif
-
-  m_hot->garbage.push_front (b);
-
-  // Garbage collect if it's time, and we're first.
-  //
-  if (m_collect.isSet () && m_collect.tryClear ())
-  {
-    // Perform the deferred swap of reused
-    // and garbage in the cold pool.
-    m_cold->fresh.swap (m_cold->garbage);
-
-    // Now swap hot and cold.
-    // This is atomic with respect to m_hot.
-    Pool* temp = m_hot;
-    m_hot = m_cold; // atomic
-    m_cold = temp;
-
-#if LOG_BLOCKS
-    String s;
-    s << "swap " << String (++m_swaps);
-    s << " (" << String (m_used.get()) << "/"
-      << String (m_total.get()) << ")";
-    Logger::outputDebugString (s);
-#endif
-  }
-}
-
 void BlockAllocator::doOncePerSecond ()
 {
-  // Signal garbage collection
-  m_collect.trySet ();
+  // Perform the deferred swap of reused
+  // and garbage in the cold pool.
+  m_cold->fresh.swap (m_cold->garbage);
+
+  // Now swap hot and cold.
+  // This is atomic with respect to m_hot.
+  Pool* temp = m_hot;
+  m_hot = m_cold; // atomic
+  m_cold = temp;
+
+#if LOG_BLOCKS
+  String s;
+  s << "swap " << String (++m_swaps);
+  s << " (" << String (m_used.get ()) << "/"
+    << String (m_total.get ()) << " of "
+    << String (m_hard.get ()) << ")";
+  Logger::outputDebugString (s);
+#endif
 }
 
 void BlockAllocator::free (Blocks& list)

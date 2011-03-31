@@ -41,7 +41,8 @@ public:
   inline void finalRelease ()
   {
 #if VF_DEBUG
-    const bool final = release(); vfassert (final);
+    const bool final = release();
+    vfassert (final);
 #else
     release ();
 #endif
@@ -49,14 +50,14 @@ public:
 
   // Returns the signaled state of the counter.
   // The caller must synchronize the value.
-  bool is_reset () const { return m_value.get() == 0; }
-  bool is_signaled () const { return m_value.get() > 0; }
+  inline bool is_reset () const { return m_value.get() == 0; }
+  inline bool is_signaled () const { return m_value.get() > 0; }
 
   // Caller must synchronize.
-  void set (int value) { m_value.set (value); }
+  inline void set (int value) { m_value.set (value); }
 
   // for diagnostics ONLY!
-  int get () const { return m_value.get(); }
+  inline int get () const { return m_value.get(); }
 
 private:
   VF_JUCE::Atomic <int> m_value;
@@ -70,7 +71,7 @@ public:
   // Starts non-signaled
   Flag () : m_value (0) { }
 
-  void set ()
+  inline void set ()
   {
 #if VF_DEBUG
     const bool success = m_value.compareAndSetBool (1, 0);
@@ -80,7 +81,7 @@ public:
 #endif
   }
 
-  void clear ()
+  inline void clear ()
   {
 #if VF_DEBUG
     const bool success = m_value.compareAndSetBool (0, 1);
@@ -91,20 +92,20 @@ public:
   }
 
   // returns true if it was successful at changing the flag
-  bool trySet ()
+  inline bool trySet ()
   {
     return m_value.compareAndSetBool (1, 0);
   }
 
   // returns true if it was successful at changing the flag
-  bool tryClear ()
+  inline bool tryClear ()
   {
     return m_value.compareAndSetBool (0, 1);
   }
 
   // Caller must synchronize
-  bool isSet () const { return m_value.get() == 1; }
-  bool isClear () const { return m_value.get() == 0; }
+  inline bool isSet () const { return m_value.get() == 1; }
+  inline bool isClear () const { return m_value.get() == 0; }
 
 private:
   VF_JUCE::Atomic <int> m_value;
@@ -118,25 +119,54 @@ class Pointer
 public:
   explicit Pointer (P* p = 0) : m_value (p) { }
 
-  P* get () const { return m_value.get(); }
-  operator P* () const { return get(); }
-  operator P& () const { return &get(); }
-  P* operator-> () const { return get(); }
+  inline P* get () const { return m_value.get(); }
+  inline operator P* () const { return get(); }
+  inline operator P& () const { return &get(); }
+  inline P* operator-> () const { return get(); }
 
-  void set (P* p) { m_value.set (p); }
-  void operator= (P* p) { set (p); }
-  void operator= (P& p) { set (&p); }
+  inline void set (P* p) { m_value.set (p); }
+  inline void operator= (P* p) { set (p); }
+  inline void operator= (P& p) { set (&p); }
 
   // returns the previous value
-  P* exchange (P* p) { return m_value.exchange (p); }
+  inline P* exchange (P* p) { return m_value.exchange (p); }
 
-  bool compareAndSet (P* newValue, P* oldValue)
+  inline bool compareAndSet (P* newValue, P* oldValue)
   {
     return m_value.compareAndSetBool (newValue, oldValue);
   }
 
 private:
   VF_JUCE::Atomic <P*> m_value;
+};
+
+//------------------------------------------------------------------------------
+
+class State
+{
+public:
+  explicit State (const int s = 0) : m_value (s) { }
+
+  // Caller must synchronize
+  inline operator int () const { return m_value.get(); }
+
+  inline bool tryChangeState (const int from, const int to)
+  {
+    return m_value.compareAndSetBool (to, from);
+  }
+
+  inline void changeState (const int from, const int to)
+  {
+#if VF_DEBUG
+    const bool success = tryChangeState (from, to);
+    vfassert (success);
+#else
+    tryChangeState (from, to);
+#endif
+  }
+
+private:
+  VF_JUCE::Atomic <int> m_value;
 };
 
 }
