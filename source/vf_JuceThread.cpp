@@ -154,6 +154,10 @@ bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
     if (!interrupted)
       interrupted = do_timeout ();
   }
+  else
+  {
+    return true;
+  }
 
   return interrupted;
 }

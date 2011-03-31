@@ -8,44 +8,41 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_SharedSingleton.h"
-#include "vf/vf_ThreadWorker.h"
 
-class SharedObject::Singleton
-  : public SharedSingleton <SharedObject::Singleton>
+static Thread::Interrupted thread_idle ()
 {
-private:
-  Singleton ()
-    : m_worker (__FILE__)
-    , SharedSingleton (true) // persist
-  {
-    m_worker.start ();
-  }
+  Thread::Interrupted interrupted (false);
 
-  ~Singleton ()
-  {
-    // is this needed?
-    //m_worker.stop_and_wait ();
-  }
+  return interrupted;
+}
 
-public:
-  static Singleton* createInstance ()
-  {
-    return new Singleton;
-  }
+SharedObject::Singleton::Singleton ()
+  : m_worker (__FILE__)
+  , SharedSingleton (true) // persist
+{
+  m_worker.start (bind (&thread_idle));
+}
 
-  static void doDelete (SharedObject* sharedObject)
-  {
-    delete sharedObject;
-  }
+SharedObject::Singleton::~Singleton ()
+{
+  // is this needed?
+  m_worker.stop_and_wait ();
+}
 
-  void Delete (SharedObject* sharedObject)
-  {
-    m_worker.call (&Singleton::doDelete, sharedObject);
-  }
+SharedObject::Singleton* SharedObject::Singleton::createInstance ()
+{
+  return new Singleton;
+}
 
-private:
-  PollingWorker m_worker;
-};
+void SharedObject::Singleton::doDelete (SharedObject* sharedObject)
+{
+  delete sharedObject;
+}
+
+void SharedObject::Singleton::Delete (SharedObject* sharedObject)
+{
+  m_worker.call (&Singleton::doDelete, sharedObject);
+}
 
 void SharedObject::destroySharedObject ()
 {

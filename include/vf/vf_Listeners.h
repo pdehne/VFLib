@@ -9,6 +9,7 @@
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_SharedObject.h"
+#include "vf/vf_SharedSingleton.h"
 #include "vf/vf_Worker.h"
 
 #include "vf/vf_Mutex.h" // REMOVE ASAP!!
@@ -50,6 +51,7 @@ protected:
   private:
     void destroySharedObject ()
       { LockFree::globalDelete (this); }
+      //{ Singleton::getInstance()->getWorker().call (&LockFree::globalDelete <Call>, this); }
 
   public:
     const timestamp_t m_timestamp;

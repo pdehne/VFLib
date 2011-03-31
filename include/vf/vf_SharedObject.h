@@ -62,9 +62,11 @@ protected:
   //
   virtual void destroySharedObject ();
 
-private:
+protected:
+  // declaration in vf_SharedSingleton.h to break #include cycle.
   class Singleton;
 
+private:
   Atomic::Counter m_refs;
 };
 

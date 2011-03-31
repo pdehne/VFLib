@@ -350,13 +350,8 @@ private:
   static Allocator s_allocator;
 };
 
-// Sugar hack since the compiler cannot infer
-// template arguments based on the return type.
-//
-// Usage:
-//
-//  C* c = globalAlloc<C>::New (arg1, arg2,...);
-//
+#if 1
+
 template <class C>
 struct globalAlloc
 {
@@ -432,6 +427,38 @@ void globalDelete (C* c)
   c->~C();
   GlobalFixedAllocator().deallocate (c);
 }
+
+#else
+
+template <class C>
+struct globalAlloc
+{
+  static C* New ()
+  {
+    return new (GlobalAllocator().allocate (sizeof (C))) C;
+  }
+
+  template <class T1>
+  static C* New (const T1& t1)
+  {
+    return new (GlobalAllocator().allocate (sizeof (C))) C (t1);
+  }
+
+  template <class T1, class T2>
+  static C* New (const T1& t1, const T2& t2)
+  {
+    return new (GlobalAllocator().allocate (sizeof (C))) C (t1, t2);
+  }
+};
+
+template <class C>
+void globalDelete (C* c)
+{
+  c->~C();
+  Allocator::deallocate (c);
+}
+
+#endif
 
 }
 
