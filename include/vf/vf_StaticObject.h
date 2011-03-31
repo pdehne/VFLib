@@ -17,28 +17,26 @@
 //         duration (3.7.2) shall be zero-initialized (8.5) before any
 //         other initialization takes place.
 //
-template <class Object>
+template <class Tag, class Object>
 class StaticObject
 {
 public:
   Object* operator-> () { return getObject (); }
   Object& operator* () { return *getObject (); }
 
-  const Object* operator-> () const { return getObject (); }
-  const Object& operator* () const { return *getObject (); }
+  Object const* operator-> () const { return getObject (); }
+  Object const& operator* () const { return *getObject (); }
 
-  Object* getObject ()
+  static Object* getObject ()
   {
-    return reinterpret_cast <Object*> (m_storage);
-  }
-
-  const Object* getObject () const
-  {
-    return reinterpret_cast <Object*> (m_storage);
+    return reinterpret_cast <Object*> (s_storage);
   }
 
 private:
-  char m_storage [sizeof (Object)];
+  static char s_storage [sizeof (Object)];
 };
+
+template <class Tag, class Object>
+char StaticObject <Tag, Object>::s_storage[sizeof (Object)];
 
 #endif
