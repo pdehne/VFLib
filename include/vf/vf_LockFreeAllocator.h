@@ -11,9 +11,6 @@
 #include "vf/vf_OncePerSecond.h"
 #include "vf/vf_Type.h"
 
-#include "vf/vf_Mutex.h" // REMOVE ASAP
-#include "vf/vf_LockFreeReadWriteMutex.h" // REMOVE ASAP
-
 //#define ALLOCATOR_LOGGING VF_CHECK_LEAKS
 #define ALLOCATOR_LOGGING 0
 
@@ -59,17 +56,12 @@ private:
   void free (Pool& pool);
 
 private:
-  const size_t m_blockBytes;        // bytes per block
-  Pool m_pool[2];                   // pair of pools
-  Pool* m_cold;                     // pool which is cooling down
-  Atomic::Pointer <Pool> m_hot;     // pool we are currently using
-  Atomic::Pointer <Block> m_active; // active block
-  Atomic::Counter m_hard;           // limit of system allocations
-
-  // TEMPORARY REMOVE ASAP
-  ReadWriteMutex m_lock;
-  Mutex m_lock0;
-  Mutex m_lock1;
+  const size_t    m_blockBytes;
+  Pool            m_pool[2];
+  Pool*  volatile m_cold;
+  Pool*  volatile m_hot;
+  Block* volatile m_active;
+  Atomic::Counter m_hard;
 
 //#if ALLOCATOR_LOGGING
   int m_swaps;

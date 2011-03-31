@@ -21,17 +21,28 @@ namespace {
 
 /* Implementation notes
 
-There are two pools, one hot and one cold. All alloc and
-free go through the hot pool. Every so often, we will atomically
-swap these two pools. Before the swap takes place, the lists
-in the cold pool are themselves swapped. This operation is deferred
-as long as possible to reduce the effective chance of encountering
-the ABA problem down to zero. This depends on a sufficiently large
-garbage collection interval. As long as no call to allocate() or deallocate()
-takes longer than the garbage collection interval (1 second)? We are safe.
+- A Block is a large allocation from the system that is given
+  out as memory in pieces until it is 'consumed'.
 
-- We always pop from the fresh list of the hot pool
-- We always push to the garbage list of the hot pool
+- A Pool is a set of two lists: 'fresh' and 'garbage'.
+
+- There are two pools, the 'hot' pool and the 'cold' pool.
+
+- When new blocks are needed we pop from the fresh list of the
+  hot pool.
+
+- Every so often, garbage collection is performed on a separate thread.
+  During collection, fresh and garbage are swapped in the cold pool.
+  Then, the hot and cold pools are atomically swapped.
+
+- At any given time, there is always an 'active' block. It is from
+  the active block that allocations are fulfilled.
+  
+- When an allocation causes the active block to fill (become 'consumed'),
+  a new block is put into its place.
+
+- After the last allocation in a consumed block is deallocated, it
+  is pushed on to the garbage list of the hot pool.
 
 */
 
@@ -43,7 +54,7 @@ static const size_t defaultBytesPerBlock = 8 * 1024;
 // allocator will allow. Going over this limit means that consumers cannot keep
 // up with producers, and application logic should be re-examined.
 //
-static const size_t hardLimitMegaBytes = 2 * 4 * 256;
+static const size_t hardLimitMegaBytes = 256;
 
 // Allocations are always aligned to this byte value.
 //
@@ -70,8 +81,9 @@ P* aligned (P* p)
 }
 
 //------------------------------------------------------------------------------
-
+//
 // This precedes every allocation
+//
 struct BlockAllocator::Header
 {
   union
@@ -84,30 +96,18 @@ struct BlockAllocator::Header
 
 //------------------------------------------------------------------------------
 
-// Block is a chunk of allocatable storage.
-//
-// - m_free pointer pointers to the next available byte and gets advanced
-//   on each successful allocation
-//
-//
 class BlockAllocator::Block : public BlockAllocator::Blocks::Node
 {
 public:
   explicit Block (size_t bytes)
   {
     m_end = reinterpret_cast <char*> (this) + bytes;
-    m_free = reinterpret_cast <char*> (this + 1);
-    m_free = aligned (m_free.get());
+    m_free = aligned (reinterpret_cast <char*> (this + 1));
   }
 
   ~Block ()
   {
     vfassert (m_refs.get() == 0);
-  }
-
-  inline bool isReferenced () const
-  {
-    return m_refs.get () > 0;
   }
 
   inline void addref ()
@@ -122,7 +122,6 @@ public:
     return m_refs.release ();
   }
 
-  // Reset the free storage pointer.
   inline void reset ()
   {
     m_free = reinterpret_cast <char*> (this+1);
@@ -132,7 +131,7 @@ public:
   {
     success,  // successful allocation
     ignore,   // disregard the block
-    consumed  // block is consumed (1 thread see this)
+    consumed  // block is consumed (1 thread sees this)
   };
 
   Result allocate (size_t bytes, void* pBlock)
@@ -152,8 +151,6 @@ public:
 
         if (free <= m_end)
         {
-          //ReadWriteMutex::ScopedReadLockType lock (mutex);
-  
           // Try to commit the allocation
           if (m_free.compareAndSet (free, base))
           {
@@ -163,7 +160,7 @@ public:
           }
           else
           {
-            // Someone changed m_free so try again
+            // Someone changed m_free, retry.
           }
         }
         else
@@ -177,13 +174,13 @@ public:
           }
           else
           {
-            // Happens with another concurrent allocate()
+            // Happens with another concurrent allocate(), retry.
           }
         }
       }
       else
       {
-        // Block already consumed, ignore it.
+        // Block is consumed, ignore it.
         result = ignore;
         break;
       }
@@ -199,9 +196,6 @@ private:
 };
 
 //------------------------------------------------------------------------------
-//
-//
-//
 
 inline void BlockAllocator::addGarbage (Block* b)
 {
@@ -264,7 +258,7 @@ void* BlockAllocator::allocate (const size_t bytes)
 
   for (;;)
   {
-    // Get an active block
+    // Get an active block.
     Block* b = m_active;
     if (!b)
     {
@@ -272,95 +266,58 @@ void* BlockAllocator::allocate (const size_t bytes)
       do
       {
         delay.spin ();
-        Atomic::memoryBarrier ();
         b = m_active;
       }
       while (!b);
     }
 
-    // Acquire a reference
-    vfassert (b->isReferenced ());
+    // (*) It is possible for the block to get a final release here
+    //     In this case it will have been put in the garbage, and
+    //     m_active will not match.
+
+    // Acquire a reference.
     b->addref ();
 
     // Is it still active?
     if (m_active == b)
     {
-      //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
-  
       // Yes so try to allocate from it.
-      Block::Result result;
-
-      {
-        //ReadWriteMutex::ScopedReadLockType lock (m_lock);
-        //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
-        result = b->allocate (actual, &h);
-      }
+      const Block::Result result = b->allocate (actual, &h);
 
       if (result == Block::success)
       {
-#if 0
-        m_lock.enter_write ();
-        m_lock.exit_write ();
-#endif
-
         // Keep the reference and return the allocation.
         h->block = b;
         break;
       }
       else if (result == Block::consumed)
       {
-        bool success;
-
-        success = m_active.compareAndSet (0, b);
-        vfassert (success);
-
-        //m_lock.enter_write ();
+        // Remove block from active.
+        m_active = 0;
 
         // Take away the reference we added
-        bool final = b->release ();
-        vfassert (!final);
+        b->release ();
 
-        //m_lock.exit_write ();
-
-        // Now take away the active block reference.
-        final = b->release ();
-        if (final)
+        // Take away the original active reference.
+        if (b->release ())
           addGarbage (b);
 
-        // Get an empty block. It will come with a reference.
-        b = newBlock ();
-
-        // Install it as the active block.
-        success = m_active.compareAndSet (b, 0);
-        vfassert (success);
+        // Install a fresh empty active block.
+        m_active = newBlock ();
       }
-      else
+      else if (b->release ())
       {
-        //m_lock.enter_write ();
-        //m_lock.exit_write ();
-
-        const bool final = b->release ();
-
-        if (final)
-          addGarbage (b);
-
-        // Try again.
+        addGarbage (b);
       }
+
+      // Try again.
     }
     else
     {
       // Block became inactive, so release our reference.
-#if 0
-      if (b->release ())
-      {
-        // It was a final release
-        addGarbage (b);
-      }
-#else
       b->release ();
-#endif
 
-      // Try again.
+      // (*) It is possible for this to be a duplicate final release.
     }
   }
 
@@ -369,20 +326,11 @@ void* BlockAllocator::allocate (const size_t bytes)
 
 //------------------------------------------------------------------------------
 
-void BlockAllocator::deallocate (void* p)
+void BlockAllocator::deallocate (void* const p)
 {
-  Block* b = (reinterpret_cast <Header*> (p) - 1)->block;
+  Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
 
-  bool final;
-
-  {
-    //ReadWriteMutex::ScopedWriteLockType lock (m_lock);
-    //ReadWriteMutex::ScopedReadLockType lock (m_lock);
-    //Mutex::ScopedLockType lock (m_lock0);
-    final = b->release ();
-  }
-
-  if (final)
+  if (b->release ())
     addGarbage (b);
 }
 
