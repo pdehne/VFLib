@@ -5,8 +5,10 @@
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
 #define __VF_SHAREDSINGLETON_VFHEADER__
 
+#include "vf/vf_BoostThread.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_StaticMutex.h"
+#include "vf/vf_ThreadWorker.h"
 
 // Thread-safe singleton which comes into existence on first use.
 // An option controls whether the singleton persists after creation,
@@ -80,5 +82,30 @@ StaticMutex <Object> SharedSingleton <Object>::s_mutex;
 template <class Object>
 typename SharedSingleton <Object>::Ptr
   SharedSingleton <Object>::s_persistantReference;
+
+//------------------------------------------------------------------------------
+
+// This is here to break a cyclic #include.
+
+class SharedObject::Singleton : public SharedSingleton <Singleton>
+{
+private:
+  Singleton ();
+  ~Singleton ();
+
+private:
+  friend class SharedSingleton <Singleton>;
+
+  static Singleton* createInstance ();
+  static void doDelete (SharedObject* sharedObject);
+
+public:
+  inline Worker& getWorker () { return m_worker; }
+
+  void Delete (SharedObject* sharedObject);
+
+private:
+  ThreadWorkerType <BoostThread> m_worker;
+};
 
 #endif
