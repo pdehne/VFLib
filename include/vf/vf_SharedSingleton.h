@@ -47,7 +47,7 @@ public:
       s_instance = Object::createInstance ();
 
       if (s_instance->m_persistAfterCreation)
-        s_persistantReference = s_instance;
+        s_persistantReference.setInstance (s_instance);
     }
 
     instance = s_instance;
@@ -68,9 +68,30 @@ private:
 private:
   const bool m_persistAfterCreation;
 
+  class PersistantReference
+  {
+  public:
+    // Intentionally lacking a constructor.
+    // Inited to zero from static storage duration.
+    ~PersistantReference ()
+    {
+      if (m_instance != 0)
+        m_instance->decReferenceCount ();
+    }
+
+    void setInstance (Object* object)
+    {
+      m_instance = object;
+      m_instance->incReferenceCount ();
+    }
+
+  private:
+    Object* m_instance;
+  };
+
   static Object* s_instance;
   static StaticMutex <Object> s_mutex;
-  static Ptr s_persistantReference;
+  static PersistantReference s_persistantReference;
 };
 
 template <class Object>
@@ -80,7 +101,7 @@ template <class Object>
 StaticMutex <Object> SharedSingleton <Object>::s_mutex;
 
 template <class Object>
-typename SharedSingleton <Object>::Ptr
+typename SharedSingleton <Object>::PersistantReference
   SharedSingleton <Object>::s_persistantReference;
 
 //------------------------------------------------------------------------------
