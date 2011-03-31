@@ -13,9 +13,9 @@ BEGIN_VF_NAMESPACE
 
 namespace LockFree {
 
-FixedAllocator <globalAllocatorBlockSize> GlobalAllocator::s_allocator;
+FixedAllocator <globalFixedAllocatorBlockSize> GlobalFixedAllocator::s_allocator;
 
-BlockAllocator GlobalBlockAllocator::s_allocator;
+Allocator GlobalAllocator::s_allocator;
 
 namespace {
 
@@ -84,11 +84,11 @@ P* aligned (P* p)
 //
 // This precedes every allocation
 //
-struct BlockAllocator::Header
+struct Allocator::Header
 {
   union
   {
-    BlockAllocator::Block* block; // backpointer to the page
+    Allocator::Block* block; // backpointer to the page
 
     char pad [ByteAlignment];
   };
@@ -96,7 +96,7 @@ struct BlockAllocator::Header
 
 //------------------------------------------------------------------------------
 
-class BlockAllocator::Block : public BlockAllocator::Blocks::Node
+class Allocator::Block : public Allocator::Blocks::Node
 {
 public:
   explicit Block (size_t bytes)
@@ -197,7 +197,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-inline void BlockAllocator::addGarbage (Block* b)
+inline void Allocator::addGarbage (Block* b)
 {
   // Any block that gets here must have incremented the use count.
 #if LOG_BLOCKS
@@ -208,7 +208,7 @@ inline void BlockAllocator::addGarbage (Block* b)
   m_hot->garbage.push_front (b);
 }
 
-BlockAllocator::BlockAllocator (size_t bytesPerBlock)
+Allocator::Allocator (size_t bytesPerBlock)
   : m_blockBytes (bytesPerBlock == 0 ? defaultBytesPerBlock : bytesPerBlock)
   , m_hard ((hardLimitMegaBytes * 1024 * 1024) / m_blockBytes)
 #if LOG_BLOCKS
@@ -226,7 +226,7 @@ BlockAllocator::BlockAllocator (size_t bytesPerBlock)
   startOncePerSecond ();
 }
 
-BlockAllocator::~BlockAllocator ()
+Allocator::~Allocator ()
 {
   endOncePerSecond ();
 
@@ -247,7 +247,7 @@ BlockAllocator::~BlockAllocator ()
 
 //------------------------------------------------------------------------------
 
-void* BlockAllocator::allocate (const size_t bytes)
+void* Allocator::allocate (const size_t bytes)
 {
   const size_t actual = sizeof (Header) + bytes;
 
@@ -326,7 +326,7 @@ void* BlockAllocator::allocate (const size_t bytes)
 
 //------------------------------------------------------------------------------
 
-void BlockAllocator::deallocate (void* const p)
+void Allocator::deallocate (void* const p)
 {
   Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
 
@@ -336,7 +336,7 @@ void BlockAllocator::deallocate (void* const p)
 
 //------------------------------------------------------------------------------
 
-BlockAllocator::Block* BlockAllocator::newBlock ()
+Allocator::Block* Allocator::newBlock ()
 {
   Block* b;
 
@@ -376,7 +376,7 @@ BlockAllocator::Block* BlockAllocator::newBlock ()
   return b;
 }
 
-inline void BlockAllocator::deleteBlock (Block* b)
+inline void Allocator::deleteBlock (Block* b)
 {
   b->~Block ();
   ::operator delete (b); // global mutex
@@ -386,7 +386,7 @@ inline void BlockAllocator::deleteBlock (Block* b)
 #endif
 }
 
-void BlockAllocator::doOncePerSecond ()
+void Allocator::doOncePerSecond ()
 {
   // Perform the deferred swap of reused
   // and garbage in the cold pool.
@@ -408,7 +408,7 @@ void BlockAllocator::doOncePerSecond ()
 #endif
 }
 
-void BlockAllocator::free (Blocks& list)
+void Allocator::free (Blocks& list)
 {
   for (;;)
   {
@@ -420,7 +420,7 @@ void BlockAllocator::free (Blocks& list)
   }
 }
 
-void BlockAllocator::free (Pool& pool)
+void Allocator::free (Pool& pool)
 {
   free (pool.fresh);
   free (pool.garbage);

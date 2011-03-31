@@ -5,15 +5,12 @@
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
-#include "vf/vf_Allocator.h"
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
-#include "vf/vf_Function.h"
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeQueue.h"
 #include "vf/vf_Thread.h"
 
-//
 // Queue that executes functors on another thread, with these invariants:
 //
 // #1 Functors can be appended to queues from any thread, using call().
@@ -32,27 +29,34 @@
 // in order to guarantee that the queue's process() function is eventually
 // called.
 //
-class WorkerBase
+class Worker
 {
 public:
-  typedef Function <void (void)> func_t;
-
-  explicit WorkerBase (const char* szName = "");
-  ~WorkerBase ();
+  explicit Worker (const char* szName = "");
+  ~Worker ();
 
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }
 
-  //
   // Add the functor without executing immediately.
   //
-  virtual void queuef (const func_t& f) = 0;
+  template <class Functor>
+  void queuef (Functor const& f)
+  {
+    do_queue (new (m_allocator.allocate (sizeof (CallType <Functor>)))
+      CallType <Functor> (f));
+  }
 
   // Add a functor to the queue. It may be executed immediately.
   //
   // Functors MUST NOT cause thread interruptions.
   //
-  virtual void callf (const func_t& f) = 0;
+  template <class Functor>
+  void callf (Functor const& f)
+  {
+    do_call (new (m_allocator.allocate (sizeof (CallType <Functor>)))
+      CallType <Functor> (f));
+  }
 
   // Sugar for calling functions with arguments.
 
@@ -60,12 +64,8 @@ public:
   void queue (Fn const& f)
   { queuef (bind (f)); }
 
-  template <>
-  void queue (const func_t& f)
-  { queuef (f); }
-
   template <class Fn, typename  T1>
-  void queue (Fn f,    const T1& t1)
+  void queue (Fn f,   const T1& t1)
   { queuef (bind (f, t1)); }
 
   template <class Fn, typename  T1, typename  T2>
@@ -106,13 +106,11 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
+  // Queue a call and process.
+
   template <class Fn>
   void call (Fn const& f)
   { callf (bind (f)); }
-
-  template <>
-  void call (const func_t& f)
-  { callf (f); }
 
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
@@ -186,98 +184,42 @@ protected:
   virtual void reset () = 0;
   virtual void signal () = 0;
 
-protected:
+private:
   // List of fixed-size functors
-  struct Call;
+  class Call;
   typedef LockFree::Queue <Call> Calls;
-  struct Call : Calls::Node, func_t
-    { Call (func_t const& c) : Function (c) { } };
 
-protected:
-  virtual bool do_process () = 0;
+  class Call : public Calls::Node
+  {
+  public:
+    virtual ~Call () { }
+    virtual void operator() () = 0;
+  };
+
+  template <class Functor>
+  class CallType : public Call
+  {
+  public:
+    explicit CallType (Functor const& f) : m_f (f) { }
+    ~CallType () { }
+    void operator() () { m_f (); }
+
+  private:
+    Functor m_f;
+  };
+
+private:
+  bool do_process ();
   void do_queue (Call* c);
   void do_call (Call* c);
 
-protected:
+private:
   const char* m_szName; // for debugging
   volatile Thread::id m_id;
   Calls m_list;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
+  LockFree::Allocator m_allocator;
 };
-
-//template <class Allocator = LockFree::GlobalFixedAllocator>
-//template <class Allocator = LockFree::GlobalBlockAllocator>
-template <class Allocator = LockFree::BlockAllocator>
-class WorkerType : public WorkerBase
-{
-public:
-  explicit WorkerType (const char* szName = "") : WorkerBase (szName)
-  {
-  }
-
-  Allocator& getAllocator ()
-  {
-  }
-
-  void queuef (const func_t& f)
-  {
-    do_queue (m_allocator.New (f));
-  }
-
-  void callf (const func_t& f)
-  {
-    do_call (m_allocator.New (f));
-  }
-
-protected:
-  // Process everything in the queue. The list of pending calls is
-  // acquired atomically. New calls may enter the queue while we are
-  // processing.
-  //
-  // Returns true if any functors were called.
-  //
-  bool do_process ()
-  {
-    bool did_something;
-
-    // Reset since we are emptying the queue. Since we loop
-    // until the queue is empty, it is possible for us to exit
-    // this function with an empty queue and signaled state.
-    //
-    reset ();
-
-    Call* call = m_list.pop_front ();
-
-    if (call)
-    {
-      did_something = true;
-
-      // This method of processing one at a time has the side
-      // effect of synchronizing calls to us from a functor.
-      //
-      for (;;)
-      {
-        call->operator() ();
-        m_allocator.Delete (call);
-
-        call = m_list.pop_front ();
-        if (call == 0)
-          break;
-      }
-    }
-    else
-    {
-      did_something = false;
-    }
-
-    return did_something;
-  }
-
-private:
-  FixedAllocator <Allocator, Call> m_allocator;
-};
-
-typedef WorkerType<> Worker;
 
 #endif

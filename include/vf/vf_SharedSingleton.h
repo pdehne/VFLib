@@ -8,17 +8,22 @@
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_StaticMutex.h"
 
-// Thread-safe singleton which comes into existence on first use, persists
-// while referenced, and gets automatically destroyed when the last reference
-// is removed. The object is re-created as needed.
+// Thread-safe singleton which comes into existence on first use.
+// An option controls whether the singleton persists after creation,
+// or if it is created and destroyed as needed based on reference counts.
+//
+// Object must provide this function:
+//
+//  Object* Object::createInstance()
 //
 template <class Object>
 class SharedSingleton : public SharedObject
 {
-public:
+protected:
   typedef SharedObjectPtr <Object> Ptr;
 
-  SharedSingleton ()
+  explicit SharedSingleton (const bool persistAfterCreation = true)
+    : m_persistAfterCreation (persistAfterCreation)
   {
     vfassert (s_instance == 0);
   }
@@ -28,6 +33,7 @@ public:
     s_instance = 0;
   }
 
+public:
   static Ptr getInstance ()
   {
     Ptr instance;
@@ -35,7 +41,12 @@ public:
     StaticMutex <Object>::ScopedLockType lock;
 
     if (!s_instance)
+    {
       s_instance = Object::createInstance ();
+
+      if (s_instance->m_persistAfterCreation)
+        s_persistantReference = s_instance;
+    }
 
     instance = s_instance;
 
@@ -53,8 +64,11 @@ private:
   }
 
 private:
+  const bool m_persistAfterCreation;
+
   static Object* s_instance;
   static StaticMutex <Object> s_mutex;
+  static Ptr s_persistantReference;
 };
 
 template <class Object>
@@ -62,5 +76,9 @@ Object* SharedSingleton <Object>::s_instance;
 
 template <class Object>
 StaticMutex <Object> SharedSingleton <Object>::s_mutex;
+
+template <class Object>
+typename SharedSingleton <Object>::Ptr
+  SharedSingleton <Object>::s_persistantReference;
 
 #endif

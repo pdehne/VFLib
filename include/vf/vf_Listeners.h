@@ -30,10 +30,10 @@ protected:
   typedef unsigned long timestamp_t;
 
   //
-  // Reference counted polymorphic unary functor of <void (void* listener)>.
+  // Reference counted polymorphic unary functor void (*)(void* listener).
   // A timestamp distinguishes a Call created before a listener is added.
   //
-  class Call : public SharedObject, NonCopyable
+  class Call : public SharedObject
   {
   public:
     typedef SharedObjectPtr <Call> Ptr;
@@ -100,7 +100,7 @@ private:
 
     List m_list;
     void* m_listener;
-    Mutex m_mutex;
+    LockFree::ReadWriteMutex m_mutex;
     Worker* m_worker;
   };
 

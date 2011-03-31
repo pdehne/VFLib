@@ -48,7 +48,7 @@ Listeners::Group::~Group ()
 void Listeners::Group::add (void* listener,
                             const timestamp_t timestamp)
 {
-  VF_NAMESPACE::ScopedLock lock (m_mutex);
+  LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
   vfassert (!contains (listener));
 
@@ -69,7 +69,7 @@ bool Listeners::Group::remove (void* listener)
 {
   bool found = false;
 
-  VF_NAMESPACE::ScopedLock lock (m_mutex);
+  LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
   // Should never be able to get here while in do_call()
   vfassert (m_listener == 0);
@@ -137,7 +137,7 @@ void Listeners::Group::do_call (Call::Ptr c, Group::Ptr)
 {
   if (!empty ())
   {
-    VF_NAMESPACE::ScopedLock lock (m_mutex);
+    LockFree::ReadWriteMutex::ScopedReadLockType lock (m_mutex);
 
     // Recursion not allowed.
     vfassert (m_listener == 0);

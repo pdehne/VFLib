@@ -26,11 +26,11 @@ namespace LockFree {
 // - When there are no free blocks available, the algorithm becomes a blocking
 //   algorithm since we request memory from the standard library.
 //
-class BlockAllocator : private OncePerSecond
+class Allocator : private OncePerSecond
 {
 public:
-  explicit BlockAllocator (size_t bytesPerBlock = 0);
-  ~BlockAllocator ();
+  explicit Allocator (size_t bytesPerBlock = 0);
+  ~Allocator ();
 
   void* allocate (const size_t bytes);
   void  deallocate (void* p);
@@ -314,10 +314,10 @@ enum
   // This number should be as small as possible
   // without generating compile time assertions.
   //
-  globalAllocatorBlockSize = 96
+  globalFixedAllocatorBlockSize = 96
 };
 
-class GlobalAllocator
+class GlobalFixedAllocator
 {
 public:
   template <int Bytes>
@@ -332,10 +332,10 @@ public:
   }
 
 private:
-  static FixedAllocator <globalAllocatorBlockSize> s_allocator;
+  static FixedAllocator <globalFixedAllocatorBlockSize> s_allocator;
 };
 
-class GlobalBlockAllocator
+class GlobalAllocator
 {
 public:
   inline void* allocate (size_t bytes)
@@ -349,7 +349,7 @@ public:
   }
 
 private:
-  static BlockAllocator s_allocator;
+  static Allocator s_allocator;
 };
 
 // Sugar hack since the compiler cannot infer
@@ -364,67 +364,67 @@ struct globalAlloc
 {
   static C* New ()
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C;
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C;
   }
 
   template <class T1>
   static C* New (const T1& t1)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1);
   }
 
   template <class T1, class T2>
   static C* New (const T1& t1, const T2& t2)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2);
   }
 
   template <class T1, class T2, class T3>
   static C* New (const T1& t1, const T2& t2, const T3& t3)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3);
   }
 
   template <class T1, class T2, class T3, class T4>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4);
   }
 
   template <class T1, class T2, class T3, class T4, class T5>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7);
   }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   static C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
                  const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   {
-    static_vfassert (sizeof (C) <= globalAllocatorBlockSize);
-    return new (GlobalAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
+    static_vfassert (sizeof (C) <= globalFixedAllocatorBlockSize);
+    return new (GlobalFixedAllocator().allocate <sizeof (C)> ()) C (t1, t2, t3, t4, t5, t6, t7, t8);
   }
 };
 
@@ -432,7 +432,7 @@ template <class C>
 void globalDelete (C* c)
 {
   c->~C();
-  GlobalAllocator().deallocate (c);
+  GlobalFixedAllocator().deallocate (c);
 }
 
 }

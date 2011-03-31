@@ -6,60 +6,50 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_ThreadWorker.h"
 #include "vf/vf_SharedObject.h"
+#include "vf/vf_SharedSingleton.h"
+#include "vf/vf_ThreadWorker.h"
 
-class SharedObject::Deleter
+class SharedObject::Singleton
+  : public SharedSingleton <SharedObject::Singleton>
 {
-public:
-  static void Delete (SharedObject* sharedObject)
-  {
-    delete sharedObject;
-  }
-};
-
-namespace {
-
-#if VF_HAVE_JUCE
-
-class SharedObjectDestroyer : DeletedAtShutdown
-{
-public:
-  SharedObjectDestroyer () : m_worker (__FILE__)
+private:
+  Singleton ()
+    : m_worker (__FILE__)
+    , SharedSingleton (true) // persist
   {
     m_worker.start ();
   }
 
-  ~SharedObjectDestroyer ()
+  ~Singleton ()
   {
     // is this needed?
     //m_worker.stop_and_wait ();
   }
 
-  void Delete (SharedObject* sharedObject)
+public:
+  static Singleton* createInstance ()
   {
-    m_worker.call (&SharedObject::Deleter::Delete, sharedObject);
+    return new Singleton;
   }
 
-  juce_DeclareSingleton (SharedObjectDestroyer, false)
+  static void doDelete (SharedObject* sharedObject)
+  {
+    delete sharedObject;
+  }
+
+  void Delete (SharedObject* sharedObject)
+  {
+    m_worker.call (&Singleton::doDelete, sharedObject);
+  }
 
 private:
   PollingWorker m_worker;
 };
 
-juce_ImplementSingleton (SharedObjectDestroyer)
-
-#else
-
-#error "Missing Singleton"
-
-#endif
-
-}
-
 void SharedObject::destroySharedObject ()
 {
-  SharedObjectDestroyer::getInstance()->Delete (this);
+  Singleton::getInstance()->Delete (this);
 }
 
 END_VF_NAMESPACE

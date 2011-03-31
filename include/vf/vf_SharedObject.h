@@ -20,7 +20,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject
+class SharedObject : NonCopyable
 {
 public:
   inline void incReferenceCount() throw()
@@ -46,8 +46,6 @@ public:
     return m_refs.is_signaled();
   }
 
-  class Deleter;
-
 protected:
   SharedObject()
   {
@@ -65,6 +63,8 @@ protected:
   virtual void destroySharedObject ();
 
 private:
+  class Singleton;
+
   Atomic::Counter m_refs;
 };
 
