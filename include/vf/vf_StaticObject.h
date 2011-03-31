@@ -17,6 +17,14 @@
 //         duration (3.7.2) shall be zero-initialized (8.5) before any
 //         other initialization takes place.
 //
+// Requirements:
+//
+// [1] The StaticObject must have static storage duration.
+//     Other use is undefined.
+//
+// [2] The Object must function correctly with the implied constructor
+//     which only zero-fills.
+//
 template <class Tag, class Object>
 class StaticObject
 {
@@ -27,16 +35,18 @@ public:
   Object const* operator-> () const { return getObject (); }
   Object const& operator* () const { return *getObject (); }
 
-  static Object* getObject ()
+  Object* getObject ()
   {
-    return reinterpret_cast <Object*> (s_storage);
+    return reinterpret_cast <Object*> (m_storage);
+  }
+
+  Object const* getObject () const
+  {
+    return reinterpret_cast <Object*> (m_storage);
   }
 
 private:
-  static char s_storage [sizeof (Object)];
+  char m_storage [sizeof (Object)];
 };
-
-template <class Tag, class Object>
-char StaticObject <Tag, Object>::s_storage[sizeof (Object)];
 
 #endif
