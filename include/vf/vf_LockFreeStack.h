@@ -23,7 +23,7 @@ namespace LockFree {
 //
 
 template <class Elem,
-          class Tag = detail::List_default_tag>
+  class Tag = detail::LockFree::List_default_tag>
 class Stack
 {
 public:

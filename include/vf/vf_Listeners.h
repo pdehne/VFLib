@@ -22,9 +22,7 @@
 // TODO: CONST CORRECTNESS? List CONST-NESS?
 //
 
-namespace detail {
-
-class Listeners
+class ListenersBase
 {
 protected:
   typedef unsigned long timestamp_t;
@@ -53,7 +51,7 @@ protected:
     void destroySharedObject ()
       { LockFree::globalDelete (this); }
 
-  private:
+  public:
     const timestamp_t m_timestamp;
   };
 
@@ -65,7 +63,7 @@ private:
   typedef List <Proxy> Proxies;
 
   //
-  // Maintains a list of listeners registered on the same thread queue
+  // Maintains a list of listeners registered on the same Worker
   //
   class Group : public Groups::Node, public SharedObject
   {
@@ -78,7 +76,7 @@ private:
     bool remove       (void* listener);
     bool contains     (void const* listener);
     void queue_call   (Call::Ptr c, bool sync);
-    void do_call      (Call::Ptr c, Group::Ptr);
+    void do_call      (Call::Ptr c, const timestamp_t timestamp, Group::Ptr);
 
     bool empty        () { return m_list.empty(); }
     Worker* getWorker () { return m_worker; }
@@ -155,8 +153,8 @@ private:
   Proxy* find_proxy (const void* member, int bytes);
 
 protected:
-  Listeners ();
-  ~Listeners ();
+  ListenersBase ();
+  ~ListenersBase ();
   void queue_call (Call::Ptr c, bool sync);
   void add_void (void* const listener, Worker* worker);
   void remove_void (void* const listener);
@@ -218,12 +216,10 @@ protected:
   LockFree::ReadWriteMutex m_groups_mutex;
 };
 
-}
-
 //------------------------------------------------------------------------------
 
 template <class ListenerClass>
-class Listeners : public detail::Listeners
+class Listeners : public ListenersBase
 {
 private:
   template <class Functor>

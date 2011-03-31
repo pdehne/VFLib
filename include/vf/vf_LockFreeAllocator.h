@@ -6,13 +6,10 @@
 #define __VF_LOCKFREEALLOCATOR_VFHEADER__
 
 #include "vf/vf_Atomic.h"
-#include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_LockFreeStack.h"
 #include "vf/vf_OncePerSecond.h"
-#include "vf/vf_Type.h"
 
-//#define ALLOCATOR_LOGGING VF_CHECK_LEAKS
-#define ALLOCATOR_LOGGING 0
+#define LOCKFREE_ALLOCATOR_LOGGING 0
 
 namespace LockFree {
 
@@ -29,11 +26,11 @@ namespace LockFree {
 class Allocator : private OncePerSecond
 {
 public:
-  explicit Allocator (size_t bytesPerBlock = 0);
+  explicit Allocator (const size_t bytesPerBlock = 0);
   ~Allocator ();
 
   void* allocate (const size_t bytes);
-  void  deallocate (void* p);
+  static void deallocate (void* const p);
 
 private:
   struct Header;
@@ -52,6 +49,7 @@ private:
 
   void addGarbage (Block* b);
   void doOncePerSecond ();
+
   void free (Blocks& list);
   void free (Pool& pool);
 
@@ -63,11 +61,11 @@ private:
   Block* volatile m_active;
   Atomic::Counter m_hard;
 
-//#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
   int m_swaps;
   Atomic::Counter m_total;
   Atomic::Counter m_used;
-//#endif
+#endif
 };
 
 // Wait-free allocator for fixed size memory blocks
@@ -109,7 +107,7 @@ public:
 
   FixedAllocator (int byteLimit = defaultKiloBytes * 1024)
     : m_hard ((hardLimitMegaBytes * 1024 * 1024) / (BlockSize + sizeof(Node)))
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     , m_swaps (0)
 #endif
   {
@@ -123,14 +121,14 @@ public:
   {
     endOncePerSecond ();
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     vfassert (m_used.is_reset ());
 #endif
 
     free (m_pool[0]);
     free (m_pool[1]);
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     vfassert (m_total.is_reset ());
 #endif
   }
@@ -148,7 +146,7 @@ public:
 
     m_hot->garbage.push_front (node);
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     m_used.release ();
 #endif
 
@@ -165,7 +163,7 @@ public:
       m_hot = m_cold; // atomic
       m_cold = temp;
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
       String s;
       s << "swap " << String (++m_swaps);
       s << " (" << String (m_used.get()) << "/"
@@ -190,7 +188,7 @@ private:
     if (exhausted)
       Throw (Error().fail (__FILE__, __LINE__, TRANS("the limit of memory allocations was reached")));
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     m_total.addref ();
 #endif
 
@@ -212,7 +210,7 @@ private:
       p = fromNode (node);
     }
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
     m_used.addref ();
 #endif
 
@@ -269,7 +267,7 @@ private:
       {
         ::operator delete (fromNode (node)); // implicit global mutex
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
         m_total.release ();
 #endif
       }
@@ -301,7 +299,7 @@ private:
   Atomic::Flag m_collect;         // flag telling us to do gc
   Atomic::Counter m_hard;         // limit of system allocations
 
-#if ALLOCATOR_LOGGING
+#if LOCKFREE_ALLOCATOR_LOGGING
   int m_swaps;
   Atomic::Counter m_total;
   Atomic::Counter m_used;
@@ -343,9 +341,9 @@ public:
     return s_allocator.allocate (bytes);
   }
 
-  inline void deallocate (void* p)
+  static inline void deallocate (void* const p)
   {
-    s_allocator.deallocate (p);
+    Allocator::deallocate (p);
   }
 
 private:

@@ -35,6 +35,14 @@ public:
   explicit Worker (const char* szName = "");
   ~Worker ();
 
+  //typedef LockFree::GlobalAllocator AllocatorType;
+  typedef LockFree::Allocator AllocatorType;
+
+  inline AllocatorType& getAllocator ()
+  {
+    return m_allocator;
+  }
+
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }
 
@@ -219,7 +227,7 @@ private:
   Calls m_list;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
-  LockFree::Allocator m_allocator;
+  AllocatorType m_allocator;
 };
 
 #endif

@@ -4686,15 +4686,15 @@
 			Name="memory"
 			>
 			<File
-				RelativePath="..\include\vf\vf_Allocator.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_Atomic.h"
 				>
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_CacheLinePadding.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ObjectAllocator.h"
 				>
 			</File>
 			<File

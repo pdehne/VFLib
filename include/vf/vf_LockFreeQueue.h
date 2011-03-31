@@ -5,9 +5,6 @@
 #ifndef __VF_LOCKFREEQUEUE_VFHEADER__
 #define __VF_LOCKFREEQUEUE_VFHEADER__
 
-#include "vf/vf_Allocator.h"
-#include "vf/vf_LockFreeAllocator.h"
-
 #include "vf/vf_Atomic.h"
 #include "vf/vf_CacheLinePadding.h"
 #include "vf/vf_LockFreeDelay.h"
@@ -29,7 +26,7 @@ namespace LockFree {
 // - The queue is considered signaled if there are one or more elements.
 //
 template <class Elem,
-          class Tag = detail::List_default_tag>
+  class Tag = detail::LockFree::List_default_tag>
 class Queue
 {
 public:

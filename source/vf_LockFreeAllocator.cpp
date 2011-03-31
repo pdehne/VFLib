@@ -9,8 +9,6 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeDelay.h"
 
-#define LOG_BLOCKS 0
-
 namespace LockFree {
 
 FixedAllocator <globalFixedAllocatorBlockSize> GlobalFixedAllocator::s_allocator;
@@ -99,7 +97,8 @@ struct Allocator::Header
 class Allocator::Block : public Allocator::Blocks::Node
 {
 public:
-  explicit Block (size_t bytes)
+  Block (size_t bytes, Allocator* allocator)
+    : m_allocator (*allocator)
   {
     m_end = reinterpret_cast <char*> (this) + bytes;
     m_free = aligned (reinterpret_cast <char*> (this + 1));
@@ -108,6 +107,11 @@ public:
   ~Block ()
   {
     vfassert (m_refs.get() == 0);
+  }
+
+  inline Allocator& getAllocator () const
+  {
+    return m_allocator;
   }
 
   inline void addref ()
@@ -190,9 +194,10 @@ public:
   }
 
 private:
-  char* m_end;                   // last free byte + 1
   Atomic::Counter m_refs;        // reference count
   Atomic::Pointer <char> m_free; // next free byte or 0 if inactive.
+  const char* m_end;                   // last free byte + 1
+  Allocator& m_allocator;
 };
 
 //------------------------------------------------------------------------------
@@ -200,7 +205,7 @@ private:
 inline void Allocator::addGarbage (Block* b)
 {
   // Any block that gets here must have incremented the use count.
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   vfassert (m_used.get() > 0);
   m_used.release ();
 #endif
@@ -208,10 +213,10 @@ inline void Allocator::addGarbage (Block* b)
   m_hot->garbage.push_front (b);
 }
 
-Allocator::Allocator (size_t bytesPerBlock)
+Allocator::Allocator (const size_t bytesPerBlock)
   : m_blockBytes (bytesPerBlock == 0 ? defaultBytesPerBlock : bytesPerBlock)
   , m_hard ((hardLimitMegaBytes * 1024 * 1024) / m_blockBytes)
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   , m_swaps (0)
 #endif
 {
@@ -239,7 +244,7 @@ Allocator::~Allocator ()
   free (m_pool[0]);
   free (m_pool[1]);
 
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   vfassert (m_used.is_reset ());
   vfassert (m_total.is_reset ());
 #endif
@@ -326,12 +331,12 @@ void* Allocator::allocate (const size_t bytes)
 
 //------------------------------------------------------------------------------
 
-void Allocator::deallocate (void* const p)
+void Allocator::deallocate (void* p)
 {
   Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
 
   if (b->release ())
-    addGarbage (b);
+    b->getAllocator().addGarbage (b);
 }
 
 //------------------------------------------------------------------------------
@@ -352,7 +357,7 @@ Allocator::Block* Allocator::newBlock ()
   {
     // Perform hard allocation since we're out of fresh blocks.
 
-    b = new (::operator new (m_blockBytes, std::nothrow_t ())) Block (m_blockBytes);
+    b = new (::operator new (m_blockBytes, std::nothrow_t ())) Block (m_blockBytes, this);
     if (!b)
       Throw (Error().fail (__FILE__, __LINE__, TRANS("a memory allocation failed")));
 
@@ -361,7 +366,7 @@ Allocator::Block* Allocator::newBlock ()
     if (exhausted)
       Throw (Error().fail (__FILE__, __LINE__, TRANS("the limit of memory allocations was reached")));
 
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
     m_total.addref ();
 #endif
   }
@@ -369,7 +374,7 @@ Allocator::Block* Allocator::newBlock ()
   // Give it the active reference.
   b->addref ();
 
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   m_used.addref ();
 #endif
 
@@ -381,7 +386,7 @@ inline void Allocator::deleteBlock (Block* b)
   b->~Block ();
   ::operator delete (b); // global mutex
 
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   m_total.release ();
 #endif
 }
@@ -398,7 +403,7 @@ void Allocator::doOncePerSecond ()
   m_hot = m_cold; // atomic
   m_cold = temp;
 
-#if LOG_BLOCKS
+#if LOCKFREE_ALLOCATOR_LOGGING
   String s;
   s << "swap " << String (++m_swaps);
   s << " (" << String (m_used.get ()) << "/"

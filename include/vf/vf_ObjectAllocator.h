@@ -2,22 +2,20 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_ALLOCATOR_VFHEADER__
-#define __VF_ALLOCATOR_VFHEADER__
+#ifndef __VF_OBJECTALLOCATOR_VFHEADER__
+#define __VF_OBJECTALLOCATOR_VFHEADER__
 
 // Utility to bolt on New/Delete for typed objects with forwarding constructors.
 //
 //  class Allocator
 //  {
 //  public:
-//    template <int Bytes>
-//    void* allocate ();
-//
+//    void* allocate (size_t bytes);
 //    void deallocate (void* p);
 //  };
 //
 template <class Allocator, class C>
-class FixedAllocator
+class ObjectAllocator
 {
 public:
   C* New ()

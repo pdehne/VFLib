@@ -5,10 +5,6 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
-#ifndef __VF_ALLOCATOR_VFHEADER__
-#include "vf/vf_Allocator.h"
-#endif
-
 #ifndef __VF_ATOMIC_VFHEADER__
 #include "vf/vf_Atomic.h"
 #endif
@@ -99,6 +95,10 @@
 
 #ifndef __VF_MUTEXBASE_VFHEADER__
 #include "vf/vf_MutexBase.h"
+#endif
+
+#ifndef __VF_OBJECTALLOCATOR_VFHEADER__
+#include "vf/vf_ObjectAllocator.h"
 #endif
 
 #ifndef __VF_ONCEPERSECOND_VFHEADER__

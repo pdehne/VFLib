@@ -2,8 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_READWRITEMUTEXBASE__
-#define __VF_READWRITEMUTEXBASE__
+#ifndef __VF_READWRITEMUTEXBASE_VFHEADER__
+#define __VF_READWRITEMUTEXBASE_VFHEADER__
 
 namespace detail {
 

@@ -7,20 +7,25 @@
 
 #include "vf/vf_Atomic.h"
 
+namespace detail {
+
+namespace LockFree {
+
+struct List_default_tag { };
+
+}
+
+}
+
 namespace LockFree {
 
 //
 // Lock-free intrusive singly linked list basics
 //
 
-namespace detail {
-
-struct List_default_tag { };
-
-}
 
 template <class Elem,
-          class Tag = detail::List_default_tag>
+  class Tag = detail::LockFree::List_default_tag>
 struct List
 {
   class Node : NonCopyable
