@@ -22,6 +22,12 @@
   #undef free
 #endif
 
+#if ! VF_PUBLIC_INCLUDES
+#  ifndef DONT_SET_USING_JUCE_NAMESPACE
+#  define DONT_SET_USING_JUCE_NAMESPACE
+#  endif
+#endif
+
 // If you want Juce with macros, or with a different
 // configuration, just include it before you include vf.h
 #include "src/juce_WithoutMacros.h"

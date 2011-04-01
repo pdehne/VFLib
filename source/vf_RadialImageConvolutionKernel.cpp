@@ -49,34 +49,42 @@ void RadialImageConvolutionKernel::rescaleAllValues (float multiplier)
     m_kernel[r] *= multiplier;
 }
 
-Image RadialImageConvolutionKernel::createConvolvedImage (const Image& sourceImage) const
+VF_JUCE::Image RadialImageConvolutionKernel::createConvolvedImage (VF_JUCE::Image const& sourceImage) const
 {
-  Image result (sourceImage.getFormat(), sourceImage.getWidth(), sourceImage.getHeight(), true);
-  Image full = createConvolvedImageFull (sourceImage);
+  VF_JUCE::Image result (sourceImage.getFormat(),
+                         sourceImage.getWidth(),
+                         sourceImage.getHeight(),
+                         true);
 
-  Graphics g (result);
+  VF_JUCE::Image full = createConvolvedImageFull (sourceImage);
+
+  VF_JUCE::Graphics g (result);
+
   g.drawImageAt (full, -(m_radius - 1), -(m_radius - 1));
 
   return result;
 }
 
-Image RadialImageConvolutionKernel::createConvolvedImageFull (const Image& sourceImage) const
+VF_JUCE::Image RadialImageConvolutionKernel::createConvolvedImageFull (VF_JUCE::Image const& sourceImage) const
 {
   // calc destination size based on kernel radius
   int dw = sourceImage.getWidth() + 2 * m_radius - 1;
   int dh = sourceImage.getHeight() + 2 * m_radius - 1;
-  Image result (sourceImage.getFormat(), dw, dh, false);
+  VF_JUCE::Image result (sourceImage.getFormat(), dw, dh, false);
 
   // calc size of edge-replicated source dimensions
   int sw = dw + 2 * m_radius - 1;
   int sh = dh + 2 * m_radius - 1;
 
   // temp buffer is big enough for the largest edge-replicated line
-  HeapBlock<uint8> temp;
-  temp.malloc (jmax (sw, sh));
+  VF_JUCE::HeapBlock <uint8> temp;
+  temp.malloc (VF_JUCE::jmax (sw, sh));
 
-  const Image::BitmapData srcData (sourceImage, Image::BitmapData::readOnly);
-  const Image::BitmapData destData (result, 0, 0, dw, dh, Image::BitmapData::readWrite);
+  const VF_JUCE::Image::BitmapData srcData (sourceImage,
+                                            VF_JUCE::Image::BitmapData::readOnly);
+
+  const VF_JUCE::Image::BitmapData destData (result, 0, 0, dw, dh,
+                                             VF_JUCE::Image::BitmapData::readWrite);
 
   int ci[4];
   int nc = srcData.pixelStride;
@@ -84,24 +92,24 @@ Image RadialImageConvolutionKernel::createConvolvedImageFull (const Image& sourc
 
   switch (srcData.pixelFormat)
   {
-  case Image::RGB:
-    ci[0] = PixelRGB::indexR;
-    ci[1] = PixelRGB::indexG;
-    ci[2] = PixelRGB::indexB;
+  case VF_JUCE::Image::RGB:
+    ci[0] = VF_JUCE::PixelRGB::indexR;
+    ci[1] = VF_JUCE::PixelRGB::indexG;
+    ci[2] = VF_JUCE::PixelRGB::indexB;
     nc = 3;
     alpha = false;
     break;
 
-  case Image::ARGB:
-    ci[0] = PixelARGB::indexR;
-    ci[1] = PixelARGB::indexG;
-    ci[2] = PixelARGB::indexB;
-    ci[3] = PixelARGB::indexA;
+  case VF_JUCE::Image::ARGB:
+    ci[0] = VF_JUCE::PixelARGB::indexR;
+    ci[1] = VF_JUCE::PixelARGB::indexG;
+    ci[2] = VF_JUCE::PixelARGB::indexB;
+    ci[3] = VF_JUCE::PixelARGB::indexA;
     nc = 3;
     alpha = true;
     break;
 
-  case Image::SingleChannel:
+  case VF_JUCE::Image::SingleChannel:
     ci[0] = 0;
     nc = 0;
     alpha = true;

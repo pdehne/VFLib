@@ -14,8 +14,12 @@
 #include "vf/vf_Config.h"
 
 #if VF_HAVE_JUCE
-#include "vf/vf_juce_includes.h"
-#define VF_JUCE JUCE_NAMESPACE
+#  include "vf/vf_juce_includes.h"
+#  define VF_JUCE JUCE_NAMESPACE
+using VF_JUCE::int64;
+using VF_JUCE::uint64;
+using VF_JUCE::uint32;
+using VF_JUCE::uint8;
 #endif
 
 #if VF_HAVE_BOOST

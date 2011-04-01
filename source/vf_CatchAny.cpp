@@ -163,7 +163,7 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
     {
       if (!returnFromException)
       {
-        JUCEApplication* app = JUCEApplication::getInstance();
+        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
         if (app)
         {
@@ -182,7 +182,7 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
     {
       if (!returnFromException)
       {
-        JUCEApplication* app = JUCEApplication::getInstance();
+        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
         if (app)
         {
@@ -198,7 +198,7 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
     {
       if (!returnFromException)
       {
-        JUCEApplication* app = JUCEApplication::getInstance();
+        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
         if (app)
         {

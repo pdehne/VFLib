@@ -23,11 +23,11 @@ public:
   void rescaleAllValues (float multiplier);
   
   // creates a convolved image with the same dimensions as the source
-  Image createConvolvedImage (const Image& sourceImage) const;
+  VF_JUCE::Image createConvolvedImage (VF_JUCE::Image const& sourceImage) const;
 
   // creates a larger image that fully contains the result
   // of applying the convolution kernel to the source image.
-  Image createConvolvedImageFull (const Image& sourceImage) const;
+  VF_JUCE::Image createConvolvedImageFull (VF_JUCE::Image const& sourceImage) const;
 
   //
   // copy a line of color components, performing edge
@@ -59,14 +59,14 @@ public:
   static void convolve (int pixels,
                         uint8* dest,
                         int destSkip,
-                        const uint8* src,
+                        uint8 const* src,
                         int srcSkip,
                         int radius,
-                        const float* kernel);
+                        float const* kernel);
 
 private:
   const int m_radius;
-  HeapBlock <float> m_kernel;
+  VF_JUCE::HeapBlock <float> m_kernel;
 };
 
 #endif

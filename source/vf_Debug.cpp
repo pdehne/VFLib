@@ -77,7 +77,7 @@ void breakPoint ()
 const String getFileNameFromPath (const char *sourceFileName)
 {
 #if VF_HAVE_JUCE
-  return File (sourceFileName).getFileName();
+  return VF_JUCE::File (sourceFileName).getFileName();
 #elif VF_HAVE_BOOST
   return String (boost::filesystem::path (sourceFileName).filename().c_str());
 #else
@@ -86,9 +86,9 @@ const String getFileNameFromPath (const char *sourceFileName)
 }
 
 // Returns a String with double quotes escaped
-const String withEscapedQuotes (const String& string)
+const String withEscapedQuotes (String const& string)
 {
-  String escaped;
+  VF_JUCE::String escaped;
 
   int i0 = 0;
   int i;
@@ -112,7 +112,7 @@ const String withEscapedQuotes (const String& string)
 }
 
 // Converts escaped quotes back into regular quotes
-const String withUnescapedQuotes (const String& string)
+const String withUnescapedQuotes (String const& string)
 {
   String unescaped;
 
@@ -150,7 +150,7 @@ const String withUnescapedQuotes (const String& string)
 // Converts a String that may contain newlines, into a
 // command line where each line is delimited with quotes.
 // Any quotes in the actual string will be escaped via \".
-String stringToCommandLine (const String& string)
+String stringToCommandLine (String const& string)
 {
   String commandLine;
 
@@ -158,7 +158,7 @@ String stringToCommandLine (const String& string)
   int i;
   for (i = 0; i < string.length(); i++)
   {
-    juce_wchar c = string[i];
+    VF_JUCE::juce_wchar c = string[i];
 
     if (c == '\n')
     {
@@ -191,7 +191,7 @@ String commandLineToString (const String& commandLine)
   int i;
   for (i = 0; i < commandLine.length(); i++)
   {
-    juce_wchar c = commandLine[i];
+    VF_JUCE::juce_wchar c = commandLine[i];
 
     if (c == '\\')
     {

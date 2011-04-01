@@ -36,20 +36,20 @@ struct type_conversion <VF_JUCE::Time>
   //typedef sqlite3_int64 base_type;
   typedef int64 base_type;
 
-  static void from_base (const base_type v, indicator ind, Time& result)
+  static void from_base (const base_type v, indicator ind, VF_JUCE::Time& result)
   {
     if (ind == i_null)
     {
       // jassertfalse
-      result = Time (0);
+      result = VF_JUCE::Time (0);
     }
     else
     {
-      result = Time (v);
+      result = VF_JUCE::Time (v);
     }
   }
 
-  static void to_base (const Time& v, base_type& result, indicator& ind)
+  static void to_base (const VF_JUCE::Time& v, base_type& result, indicator& ind)
   {
     result = v.toMilliseconds ();
     ind = i_ok;

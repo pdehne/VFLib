@@ -62,22 +62,22 @@ public:
     m_pool.releaseBuffer (m_buffer);
   }
 
-  AudioSampleBuffer* getBuffer ()
+  VF_JUCE::AudioSampleBuffer* getBuffer ()
   {
     return m_buffer;
   }
 
-  AudioSampleBuffer* operator-> ()
+  VF_JUCE::AudioSampleBuffer* operator-> ()
   {
     return getBuffer();
   }
 
-  AudioSampleBuffer& operator* ()
+  VF_JUCE::AudioSampleBuffer& operator* ()
   {
     return *getBuffer();
   }
 
-  operator AudioSampleBuffer* ()
+  operator VF_JUCE::AudioSampleBuffer* ()
   {
     return getBuffer();
   }
@@ -104,22 +104,22 @@ public:
   {
   }
 
-  AudioSampleBuffer* getBuffer ()
+  VF_JUCE::AudioSampleBuffer* getBuffer ()
   {
     return &m_buffer;
   }
 
-  AudioSampleBuffer* operator-> ()
+  VF_JUCE::AudioSampleBuffer* operator-> ()
   {
     return getBuffer();
   }
 
-  AudioSampleBuffer& operator* ()
+  VF_JUCE::AudioSampleBuffer& operator* ()
   {
     return *getBuffer();
   }
 
-  operator AudioSampleBuffer* ()
+  operator VF_JUCE::AudioSampleBuffer* ()
   {
     return getBuffer();
   }

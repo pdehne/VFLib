@@ -22,11 +22,11 @@ void updateAllTopLevelWindows ()
   {
     inUpdate = true;
 
-    int n = TopLevelWindow::getNumTopLevelWindows();
+    int n = VF_JUCE::TopLevelWindow::getNumTopLevelWindows();
     for (int i = 0; i < n; ++i)
     {
-      TopLevelWindow* w = TopLevelWindow::getTopLevelWindow (i);
-      ComponentPeer* peer = w->getPeer ();
+      VF_JUCE::TopLevelWindow* w = VF_JUCE::TopLevelWindow::getTopLevelWindow (i);
+      VF_JUCE::ComponentPeer* peer = w->getPeer ();
       if (peer)
         peer->performAnyPendingRepaintsNow ();
     }

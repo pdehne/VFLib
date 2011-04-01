@@ -93,8 +93,8 @@ private:
   int m_waiters_count;
   int m_release_count;
   int m_wait_generation_count;
-  WaitableEvent m_event;
-  CriticalSection m_mutex;
+  VF_JUCE::WaitableEvent m_event;
+  VF_JUCE::CriticalSection m_mutex;
 };
 
 #endif
