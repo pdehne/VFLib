@@ -32,14 +32,20 @@ private:
 
   void run ()
   {
-    for(;;)
+    try
     {
-      const bool interrupted = m_thread.wait (100);
+      for(;;)
+      {
+        const bool interrupted = m_thread.wait (100);
 
-      if (interrupted)
-        break;
+        if (interrupted)
+          break;
 
-      notify();
+        notify();
+      }
+    }
+    catch (Thread::Interrupted&)
+    {
     }
   }
 
@@ -72,7 +78,7 @@ public:
   }
 
 private:
-  BoostThread m_thread;
+  BoostThreadType <BoostThread::ExceptionBased> m_thread;
   Mutex m_mutex;
   List m_list;
 };

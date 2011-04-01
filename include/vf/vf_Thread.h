@@ -15,8 +15,8 @@ namespace CurrentThread = CurrentJuceThread;
 
 #elif VF_HAVE_BOOST
 
-typedef Boost::Thread Thread;
-namespace CurrentThread = Boost::CurrentThread;
+typedef BoostThread Thread;
+namespace CurrentThread = CurrentBoostThread;
 
 #else
 

@@ -8,7 +8,6 @@
 #if VF_HAVE_BOOST
 
 #include "vf/vf_Function.h"
-#include "vf/vf_String.h"
 #include "vf/vf_ThreadBase.h"
 
 //
@@ -21,8 +20,24 @@ public:
   typedef boost::thread::id id;
 
 public:
-  explicit BoostThread (const VF_NAMESPACE::String& name);
-  ~BoostThread ();
+  class ExceptionBased
+  {
+  public:
+    bool wait (int milliseconds, BoostThread& thread);
+    void interrupt (BoostThread& thread);
+    Interrupted interruptionPoint (BoostThread& thread);
+  };
+
+  class PollingBased
+  {
+  public:
+    bool wait (int milliseconds, BoostThread& thread);
+    void interrupt (BoostThread& thread);
+    Interrupted interruptionPoint (BoostThread& thread);
+  };
+
+public:
+  explicit BoostThread (String const& name);
 
   void start (const Function <void (void)>& f);
 
@@ -34,15 +49,41 @@ public:
 
   inline void setPriority (int) { }
 
-  bool wait (int milliseconds = -1);
-
-  void interrupt ();
-
-  Interrupted interruptionPoint ();
-
 private:
+  String m_name;
   boost::thread m_thread;
 };
+
+//------------------------------------------------------------------------------
+
+template <class InterruptionType>
+class BoostThreadType : public BoostThread
+{
+public:
+  explicit BoostThreadType (String const& name) : BoostThread (name)
+  {
+  }
+
+  bool wait (int milliseconds = -1)
+  {
+    return m_model.wait (milliseconds, *this);
+  }
+
+  void interrupt ()
+  {
+    m_model.interrupt (*this);
+  }
+
+  Interrupted interruptionPoint ()
+  {
+    return m_model.interruptionPoint (*this);
+  }
+
+private:
+  InterruptionType m_model;
+};
+
+//------------------------------------------------------------------------------
 
 namespace CurrentBoostThread {
 

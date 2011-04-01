@@ -174,7 +174,7 @@ ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread&
 
 //------------------------------------------------------------------------------
 
-JuceThread::JuceThread (const VF_NAMESPACE::String& name)
+JuceThread::JuceThread (String const& name)
   : JuceThreadWrapper (name, this)
 {
 }

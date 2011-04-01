@@ -196,7 +196,7 @@ private:
   bool m_calledStart;
   bool m_calledStop;
   bool m_shouldStop;
-  VF_NAMESPACE::Mutex m_mutex;
+  Mutex m_mutex;
   ThreadType m_thread;
   idle_t m_idle;
   init_t m_init;
@@ -210,8 +210,8 @@ typedef ThreadWorkerType <JuceThreadType <JuceThread::ExceptionBased> > Exceptio
 typedef ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > PollingWorker;
 
 #elif VF_HAVE_BOOST
-typedef ThreadWorkerType <Boost::Thread> ExceptionWorker;
-typedef ThreadWorkerType <Boost::Thread> PollingWorker;
+typedef ThreadWorkerType <BoostThreadType <BoostThread::ExceptionBased> > ExceptionWorker;
+typedef ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > PollingWorker;
 
 #endif
 

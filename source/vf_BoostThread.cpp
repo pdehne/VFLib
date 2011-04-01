@@ -11,13 +11,61 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_BoostThread.h"
 #include "vf/vf_CatchAny.h"
 
-BoostThread::BoostThread (const VF_NAMESPACE::String& name)
+//------------------------------------------------------------------------------
+
+bool BoostThread::ExceptionBased::wait (int milliseconds, BoostThread& thread)
+{
+  CurrentBoostThread::sleep (milliseconds);
+
+  return false;
+}
+
+void BoostThread::ExceptionBased::interrupt (BoostThread& thread)
+{
+  thread.m_thread.interrupt ();
+}
+
+ThreadBase::Interrupted BoostThread::ExceptionBased::interruptionPoint (BoostThread& thread)
+{
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  boost::this_thread::interruption_point ();
+
+  return ThreadBase::Interrupted (false);
+}
+
+//------------------------------------------------------------------------------
+
+bool BoostThread::PollingBased::wait (int milliseconds, BoostThread& thread)
+{
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  bool interrupted = false;
+
+  return interrupted;
+}
+
+void BoostThread::PollingBased::interrupt (BoostThread& thread)
 {
 }
 
-BoostThread::~BoostThread ()
+ThreadBase::Interrupted BoostThread::PollingBased::interruptionPoint (BoostThread& thread)
 {
-  join ();
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  bool interrupted = false;
+
+  return ThreadBase::Interrupted (interrupted);
+}
+
+//------------------------------------------------------------------------------
+
+BoostThread::BoostThread (String const& name)
+  : m_name (name)
+{
 }
 
 void BoostThread::start (const Function <void (void)>& f)
@@ -40,48 +88,6 @@ BoostThread::id BoostThread::getId ()
 bool BoostThread::isTheCurrentThread () const
 {
   return m_thread.get_id () == boost::this_thread::get_id ();
-}
-
-bool BoostThread::wait (int milliseconds)
-{
-  bool interrupted;
-
-  try
-  {
-    // sleep until interrupted or timeout
-    CurrentBoostThread::sleep (milliseconds);
-
-    interrupted = false;
-  }
-  catch (boost::thread_interrupted&)
-  {
-    // wake up
-    interrupted = true;
-  }
-
-  return interrupted;
-}
-
-void BoostThread::interrupt ()
-{
-  m_thread.interrupt ();
-}
-
-BoostThread::Interrupted BoostThread::interruptionPoint ()
-{
-  vfassert (isTheCurrentThread ());
-
-  try
-  {
-    boost::this_thread::interruption_point ();
-  }
-  catch (boost::thread_interrupted&)
-  {
-    // re-throw it as a boost-independent object
-    throw Interruption();
-  }
-
-  return BoostThread::Interrupted (false);
 }
 
 //------------------------------------------------------------------------------

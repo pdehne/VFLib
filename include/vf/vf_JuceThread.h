@@ -76,7 +76,7 @@ public:
   };
 
 public:
-  explicit JuceThread (const VF_NAMESPACE::String& name);
+  explicit JuceThread (String const& name);
   ~JuceThread ();
 
   void start (const Function <void (void)>& f);
@@ -96,12 +96,13 @@ private:
   Function <void (void)> m_function;
 };
 
+//------------------------------------------------------------------------------
+
 template <class InterruptionType>
 class JuceThreadType : public JuceThread
 {
 public:
-  explicit JuceThreadType (const VF_NAMESPACE::String& name)
-    : JuceThread (name)
+  explicit JuceThreadType (String const& name) : JuceThread (name)
   {
   }
 
@@ -123,6 +124,8 @@ public:
 private:
   InterruptionType m_model;
 };
+
+//------------------------------------------------------------------------------
 
 namespace CurrentJuceThread {
 

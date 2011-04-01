@@ -126,7 +126,7 @@ public:
   void Delete (SharedObject* sharedObject);
 
 private:
-  ThreadWorkerType <BoostThread> m_worker;
+  ThreadWorkerType <BoostThreadType <BoostThread::ExceptionBased> > m_worker;
 };
 
 #endif

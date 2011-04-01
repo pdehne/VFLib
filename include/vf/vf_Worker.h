@@ -223,7 +223,7 @@ private:
 
 private:
   const char* m_szName; // for debugging
-  volatile Thread::id m_id;
+  Thread::id m_id;
   Calls m_list;
   Atomic::Flag m_closed;
   Atomic::Flag m_in_process;
