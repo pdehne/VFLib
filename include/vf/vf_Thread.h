@@ -13,12 +13,9 @@
 typedef JuceThread Thread;
 namespace CurrentThread = CurrentJuceThread;
 
-#elif VF_HAVE_BOOST
-
-typedef BoostThread Thread;
-namespace CurrentThread = CurrentBoostThread;
-
 #else
+
+// Boost thread implementation doesn't provide full support
 
 #error "Missing Thread"
 

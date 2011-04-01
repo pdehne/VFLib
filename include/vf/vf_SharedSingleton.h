@@ -47,7 +47,7 @@ public:
       s_instance = Object::createInstance ();
 
       if (s_instance->m_persistAfterCreation)
-        s_persistantReference.setInstance (s_instance);
+        s_persistentReference.setInstance (s_instance);
     }
 
     instance = s_instance;
@@ -68,12 +68,12 @@ private:
 private:
   const bool m_persistAfterCreation;
 
-  class PersistantReference
+  class PersistentReference
   {
   public:
     // Intentionally lacking a constructor.
     // Inited to zero from static storage duration.
-    ~PersistantReference ()
+    ~PersistentReference ()
     {
       if (m_instance != 0)
         m_instance->decReferenceCount ();
@@ -91,7 +91,7 @@ private:
 
   static Object* s_instance;
   static StaticMutex <Object> s_mutex;
-  static PersistantReference s_persistantReference;
+  static PersistentReference s_persistentReference;
 };
 
 template <class Object>
@@ -101,8 +101,8 @@ template <class Object>
 StaticMutex <Object> SharedSingleton <Object>::s_mutex;
 
 template <class Object>
-typename SharedSingleton <Object>::PersistantReference
-  SharedSingleton <Object>::s_persistantReference;
+typename SharedSingleton <Object>::PersistentReference
+  SharedSingleton <Object>::s_persistentReference;
 
 //------------------------------------------------------------------------------
 
@@ -126,7 +126,7 @@ public:
   void Delete (SharedObject* sharedObject);
 
 private:
-  ThreadWorkerType <BoostThreadType <BoostThread::ExceptionBased> > m_worker;
+  ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
 };
 
 #endif

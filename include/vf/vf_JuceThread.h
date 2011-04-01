@@ -7,6 +7,7 @@
 
 #if VF_HAVE_JUCE
 
+#include "vf/vf_Atomic.h"
 #include "vf/vf_Function.h"
 #include "vf/vf_ThreadBase.h"
 
@@ -53,12 +54,12 @@ public:
   protected:
     enum
     {
+      stateRun,
       stateWait,
-      stateReset,
       stateInterrupt
     };
 
-    VF_JUCE::Atomic <int> m_state;
+    Atomic::State m_state;
   };
 
   class ExceptionBased : public InterruptionModel

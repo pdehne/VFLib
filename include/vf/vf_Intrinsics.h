@@ -5,7 +5,7 @@
 #ifndef __VF_INTRINSICS_VFHEADER__
 #define __VF_INTRINSICS_VFHEADER__
 
-#include "vf/vf_Thread.h"
+//#include "vf/vf_Thread.h"
 
 namespace Intrinsic {
 

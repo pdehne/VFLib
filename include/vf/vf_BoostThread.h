@@ -7,6 +7,7 @@
 
 #if VF_HAVE_BOOST
 
+#include "vf/vf_Atomic.h"
 #include "vf/vf_Function.h"
 #include "vf/vf_ThreadBase.h"
 
@@ -31,9 +32,22 @@ public:
   class PollingBased
   {
   public:
+    PollingBased ();
     bool wait (int milliseconds, BoostThread& thread);
     void interrupt (BoostThread& thread);
     Interrupted interruptionPoint (BoostThread& thread);
+  
+  private:
+    enum
+    {
+      stateRun,
+      stateWait,
+      stateInterrupt
+    };
+
+    int m_state;
+    boost::mutex m_mutex;
+    boost::condition_variable m_cond;
   };
 
 public:

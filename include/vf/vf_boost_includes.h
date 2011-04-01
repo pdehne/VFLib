@@ -9,6 +9,7 @@
 
 // We actually need these
 #include <boost/bind.hpp>
+#include <boost/thread/condition_variable.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/thread/thread.hpp>
 //#include <boost/spirit/include/phoenix1.hpp> // blows up visual studio

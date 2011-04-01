@@ -37,18 +37,64 @@ ThreadBase::Interrupted BoostThread::ExceptionBased::interruptionPoint (BoostThr
 
 //------------------------------------------------------------------------------
 
+BoostThread::PollingBased::PollingBased ()
+  : m_state (stateRun)
+{
+}
+
 bool BoostThread::PollingBased::wait (int milliseconds, BoostThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
-  bool interrupted = false;
+  bool interrupted;
+
+  {
+    boost::unique_lock <boost::mutex> lock (m_mutex);
+
+    if (m_state == stateRun)
+    {
+      m_state = stateWait;
+
+      if (milliseconds >= 0)
+        interrupted = m_cond.timed_wait (lock,
+          boost::posix_time::milliseconds (milliseconds));
+      else
+        interrupted = m_cond.timed_wait (lock,
+          boost::posix_time::ptime (boost::date_time::max_date_time));
+
+      vfassert (m_state == stateRun || !interrupted);
+
+      if (!interrupted)
+        m_state = stateRun;
+    }
+    else
+    {
+      vfassert (m_state == stateInterrupt);
+
+      m_state = stateRun;
+
+      interrupted = true;
+    }
+  }
 
   return interrupted;
 }
 
 void BoostThread::PollingBased::interrupt (BoostThread& thread)
 {
+  boost::unique_lock <boost::mutex> lock (m_mutex);
+  
+  if (m_state == stateRun)
+  {
+    m_state = stateInterrupt;
+  }
+  else if (m_state == stateWait)
+  {
+    m_state = stateRun;
+
+    m_cond.notify_one ();
+  }
 }
 
 ThreadBase::Interrupted BoostThread::PollingBased::interruptionPoint (BoostThread& thread)
@@ -56,7 +102,22 @@ ThreadBase::Interrupted BoostThread::PollingBased::interruptionPoint (BoostThrea
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
-  bool interrupted = false;
+  bool interrupted;
+
+  boost::unique_lock <boost::mutex> lock (m_mutex);
+  
+  if (m_state == stateRun)
+  {
+    interrupted = false;
+  }
+  else
+  {
+    vfassert (m_state == stateInterrupt);
+
+    m_state = stateRun;
+
+    interrupted = true;
+  }
 
   return ThreadBase::Interrupted (interrupted);
 }
@@ -101,15 +162,7 @@ BoostThread::id getId ()
 
 BoostThread::Interrupted interruptionPoint ()
 {
-  try
-  {
-    boost::this_thread::interruption_point ();
-  }
-  catch (boost::thread_interrupted&)
-  {
-    // re-throw it as a boost-independent object
-    throw ThreadBase::Interruption();
-  }
+  boost::this_thread::interruption_point ();
 
   return BoostThread::Interrupted (false);
 }

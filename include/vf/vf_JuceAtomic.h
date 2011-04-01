@@ -9,7 +9,6 @@
 
 #include "vf/vf_Intrinsics.h"
 #include "vf/vf_Mutex.h"
-#include "vf/vf_Thread.h"
 
 namespace Juce {
 

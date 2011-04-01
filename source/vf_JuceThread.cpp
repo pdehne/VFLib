@@ -12,7 +12,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_JuceThread.h"
 
 JuceThread::InterruptionModel::InterruptionModel ()
-  : m_state (stateReset)
+  : m_state (stateRun)
 {
 }
 
@@ -22,22 +22,16 @@ bool JuceThread::InterruptionModel::do_wait ()
 
   for (;;)
   {
-    const int state = m_state.get ();
+    vfassert (m_state != stateWait);
 
-    vfassert (state != stateWait);
-
-    if (state == stateInterrupt)
+    if (m_state.tryChangeState (stateInterrupt, stateRun))
     {
       interrupted = true;
-
-      m_state.set (stateReset);
-
       break;
     }
-    else if (m_state.compareAndSetBool (stateWait, stateReset))
+    else if (m_state.tryChangeState (stateRun, stateWait))
     {
       interrupted = false;
-
       break;
     }
   }
@@ -49,13 +43,13 @@ bool JuceThread::InterruptionModel::do_timeout ()
 {
   bool interrupted;
 
-  if (m_state.compareAndSetBool (stateReset, stateWait))
+  if (m_state.tryChangeState (stateWait, stateRun))
   {
     interrupted = false;
   }
   else
   {
-    vfassert (m_state.get () == stateInterrupt);
+    vfassert (m_state == stateInterrupt);
 
     interrupted = true;
   }
@@ -67,7 +61,7 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 {
   for (;;)
   {
-    const int state = m_state.get ();
+    const int state = m_state;
 
     // If we are already in the interrupt state, or if
     // we successfully transition from reset to interrupt,
@@ -75,14 +69,14 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
     // will see the new state.
     //
     if (state == stateInterrupt ||
-        m_state.compareAndSetBool (stateInterrupt, stateReset))
+        m_state.tryChangeState (stateRun, stateInterrupt))
     {
       break;
     }
     // If we are in the waiting state, then try to change to
     // reset. Whoever is successful will wake the thread up.
     //
-    else if (m_state.compareAndSetBool (stateReset, stateWait))
+    else if (m_state.tryChangeState (stateWait, stateRun))
     {
       thread.notify ();
       break;
@@ -93,11 +87,11 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 bool JuceThread::InterruptionModel::do_interruptionPoint ()
 {
   // How could we possibly be in the wait state and get called?
-  vfassert (m_state.get() != stateWait);
+  vfassert (m_state != stateWait);
 
-  // If we are in the signaled state, switch to reset, and interrupt.
+  // If we are interrupted, switch to run.
   // Only one thread will "win" this contest.
-  const bool interrupted = m_state.compareAndSetBool (stateReset, stateInterrupt);
+  const bool interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
 
   return interrupted;
 }
