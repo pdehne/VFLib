@@ -235,8 +235,10 @@ Allocator::~Allocator ()
 {
   endOncePerSecond ();
 
-  // Throw away the active block
-  Block* b = m_active;
+  Block* b;
+
+  // trash active
+  b = m_active;
   vfassert (b);
   b->release ();
   addGarbage (b);
@@ -252,6 +254,24 @@ Allocator::~Allocator ()
 
 //------------------------------------------------------------------------------
 
+struct Random
+{
+  Random () : m_x (0), m_a (1664525), m_c (1013904223) { }
+
+  unsigned long next ()
+  {
+    m_x = m_a * m_x + m_c;
+    return m_x;
+  }
+
+private:
+  unsigned long m_x;
+  unsigned long m_a;
+  unsigned long m_c;
+};
+
+static Random s_rand;
+
 void* Allocator::allocate (const size_t bytes)
 {
   const size_t actual = sizeof (Header) + bytes;
@@ -265,15 +285,10 @@ void* Allocator::allocate (const size_t bytes)
   {
     // Get an active block.
     Block* b = m_active;
-    if (!b)
+    while (!b)
     {
-      Delay delay;
-      do
-      {
-        delay.spin ();
-        b = m_active;
-      }
-      while (!b);
+      CurrentThread::yield ();
+      b = m_active;
     }
 
     // (*) It is possible for the block to get a final release here

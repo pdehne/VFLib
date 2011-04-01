@@ -35,6 +35,10 @@ public:
 
   inline void spin ()
   {
+#if 0
+    CurrentThread::yield ();
+    //CurrentThread::sleep (0);
+#else
     if (m_backoff < 10)
     {
       Intrinsic::mm_pause <1> ();
@@ -59,6 +63,7 @@ public:
     {
       CurrentThread::sleep (10);
     }
+#endif
 
     ++m_backoff;
   }

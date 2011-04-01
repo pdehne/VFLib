@@ -47,7 +47,8 @@ protected:
       { c->operator()(listener); }
 
     virtual void operator ()(void* listener) = 0;
-  
+
+
   private:
     void destroySharedObject ()
       { LockFree::globalDelete (this); }
@@ -494,7 +495,7 @@ public:
   { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
 
   //
-  // call1()
+  // update()
   //
   // Like call(), but if there is a previous unprocessed call for
   // the same member f, the previous call is replaced. It is
@@ -502,48 +503,48 @@ public:
   //
 
   template <class Mf>
-  void call1 (Mf mf)
+  void update (Mf mf)
   { proxy_fn (mf, bind (mf, _1)); }
 
   template <class Mf, typename  T1>
-  void call1 (Mf mf,  const T1& t1)
+  void update (Mf mf,  const T1& t1)
   { proxy_fn (mf, bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
-  void call1 (Mf mf,  const T1& t1, const T2& t2)
+  void update (Mf mf,  const T1& t1, const T2& t2)
   { proxy_fn (mf, bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
-  void call1 (Mf mf,  const T1& t1, const T2& t2, const T3& t3)
+  void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
-  void call1 (Mf mf,  const T1& t1, const T2& t2,
+  void update (Mf mf,  const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
-  void call1 (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
+  void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
-  void call1 (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
+  void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
-  void call1 (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
-  void call1 (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+  void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 };

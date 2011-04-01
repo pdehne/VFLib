@@ -257,7 +257,7 @@ void ListenersBase::Proxy::do_calls (Call::Ptr c)
   // adds a listener to a new thread queue in response to a call.
   for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end();)
   {
-    Entry::Ptr entry = *iter++;
+    Entry* entry = *iter++;
 
     // Manually add a reference since we use a raw pointer
     c.getObject()->incReferenceCount ();
@@ -267,9 +267,13 @@ void ListenersBase::Proxy::do_calls (Call::Ptr c)
 
     // If no old call then they need to be queued
     if (!old)
-      entry->group->getWorker()->call (&Proxy::do_call, this, entry);
+    {
+      entry->group->getWorker()->call (&Proxy::do_call, this, Entry::Ptr (entry));
+    }
     else
+    {
       old->decReferenceCount ();
+    }
   }
 }
 

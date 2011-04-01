@@ -54,6 +54,11 @@ private:
   void free (Pool& pool);
 
 private:
+  enum
+  {
+    nActive = 16
+  };
+
   const size_t    m_blockBytes;
   Pool            m_pool[2];
   Pool*  volatile m_cold;
