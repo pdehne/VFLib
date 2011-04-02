@@ -109,6 +109,10 @@
 #include "vf/vf_ReadWriteMutexBase.h"
 #endif
 
+#ifndef __VF_SAFEBOOL_VFHEADER__
+#include "vf/vf_SafeBool.h"
+#endif
+
 #ifndef __VF_SHAREDOBJECT_VFHEADER__
 #include "vf/vf_SharedObject.h"
 #endif

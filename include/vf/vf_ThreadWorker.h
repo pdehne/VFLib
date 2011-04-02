@@ -33,9 +33,7 @@ public:
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
-  ThreadWorker (const char* szName) : Worker (szName)
-  {
-  }
+  ThreadWorker (const char* szName);
 };
 
 template <class ThreadType>

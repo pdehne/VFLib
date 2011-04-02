@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_SafeBool.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf_ThreadLocal.h"
 				>
 			</File>

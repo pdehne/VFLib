@@ -63,8 +63,6 @@ bool BoostThread::PollingBased::wait (int milliseconds, BoostThread& thread)
         interrupted = m_cond.timed_wait (lock,
           boost::posix_time::ptime (boost::date_time::max_date_time));
 
-      vfassert (m_state == stateRun || !interrupted);
-
       if (!interrupted)
         m_state = stateRun;
     }
@@ -85,15 +83,15 @@ void BoostThread::PollingBased::interrupt (BoostThread& thread)
 {
   boost::unique_lock <boost::mutex> lock (m_mutex);
   
-  if (m_state == stateRun)
-  {
-    m_state = stateInterrupt;
-  }
-  else if (m_state == stateWait)
+  if (m_state == stateWait)
   {
     m_state = stateRun;
 
     m_cond.notify_one ();
+  }
+  else
+  {
+    m_state = stateInterrupt;
   }
 }
 

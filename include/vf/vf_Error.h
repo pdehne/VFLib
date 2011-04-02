@@ -5,6 +5,7 @@
 #ifndef __VF_ERROR_VFHEADER__
 #define __VF_ERROR_VFHEADER__
 
+#include "vf/vf_SafeBool.h"
 #include "vf/vf_String.h"
 
 // Yet another error reporting class. This one records the file/line
@@ -12,6 +13,7 @@
 // can be freely copied and passed around as a return value and all that.
 
 class Error : public std::exception
+            , public SafeBool <Error>
 {
 public:
   // These are for when the caller wants to distinguish
@@ -51,7 +53,10 @@ public:
 
   Code code () const;
   bool failed () const;
-  operator bool() const;
+
+  //operator bool() const;
+  //using SafeBool <Error>::operator SafeBool;
+  bool asBoolean () const;
 
   const String getReasonText () const;
   const String getSourceFilename () const;

@@ -8,8 +8,8 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_ThreadWorker.h"
 
-//------------------------------------------------------------------------------
+ThreadWorker::ThreadWorker (const char* szName) : Worker (szName)
+{
+}
 
 END_VF_NAMESPACE
-
-namespace { void dummy() { } } // supress linker warnings

@@ -5,6 +5,8 @@
 #ifndef __VF_THREADBASE_VFHEADER__
 #define __VF_THREADBASE_VFHEADER__
 
+#include "vf/vf_SafeBool.h"
+
 class ThreadBase
 {
 public:
@@ -28,7 +30,7 @@ public:
   //    in order for ThreadWorker that uses a default Callable
   //    for its idle function to work.
   //
-  class Interrupted
+  class Interrupted : public SafeBool <Interrupted>
   {
   public:
     Interrupted ()
@@ -64,7 +66,14 @@ public:
     }
 
     // TODO: safe bool idiom
+    /*
     operator bool () const
+    {
+      m_checked = true;
+      return m_interrupted;
+    }
+    */
+    bool asBoolean () const
     {
       m_checked = true;
       return m_interrupted;
