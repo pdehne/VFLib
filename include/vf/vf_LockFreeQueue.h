@@ -41,12 +41,15 @@ public:
 
   // Not thread safe.
   // Caller must synchronize.
+  //
   bool empty () const
   {
     return (m_head->get () == m_tail);
   }
 
   // Returns true if the queue became signaled from the push.
+  // Wait-free.
+  //
   bool push_back (Node* node)
   {
     node->m_next.set (0);
@@ -63,6 +66,9 @@ public:
     return prev == m_null;
   }
 
+  // Tries to pop an element until it succeeds, or the queue is empty.
+  // Lock-free.
+  //
   Elem* pop_front ()
   {
     Elem* elem;
@@ -82,6 +88,8 @@ public:
   }
 
   // Returns true on success.
+  // Wait-free.
+  //
   bool try_pop_front (Elem** pElem)
   {
     Node* tail = m_tail;

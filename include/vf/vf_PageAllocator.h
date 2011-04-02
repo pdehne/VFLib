@@ -10,7 +10,9 @@
 #include "vf/vf_OncePerSecond.h"
 
 //
-// Wait-free allocator for fixed size pages.
+// Wait-free allocator for fixed size pages with these properties:
+//
+// - Deallocated pages are re-used, after a delay to prevent ABA
 //
 
 class PageAllocator : private OncePerSecond
@@ -22,7 +24,7 @@ public:
   // The available bytes per page is a little bit less
   // than requested in the constructor, due to overhead.
   //
-  inline size_t getPageBytes () const { return m_pageBytes; }
+  inline size_t getPageBytes () const { return m_pageBytesAvailable; }
 
   inline void* allocate (const size_t bytes)
   {
@@ -57,6 +59,7 @@ private:
 
 private:
   const size_t m_pageBytes;
+  const size_t m_pageBytesAvailable;
   Pool m_pool[2];           // pair of pools
   Pool* volatile m_cold;    // pool which is cooling down
   Pool* volatile m_hot;     // pool we are currently using

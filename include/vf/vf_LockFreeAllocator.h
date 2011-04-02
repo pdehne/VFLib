@@ -5,9 +5,9 @@
 #ifndef __VF_LOCKFREEALLOCATOR_VFHEADER__
 #define __VF_LOCKFREEALLOCATOR_VFHEADER__
 
-#include "vf/vf_Atomic.h"
-#include "vf/vf_LockFreeStack.h"
-#include "vf/vf_OncePerSecond.h"
+//#include "vf/vf_Atomic.h"
+//#include "vf/vf_LockFreeStack.h"
+//#include "vf/vf_OncePerSecond.h"
 #include "vf/vf_PageAllocator.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
@@ -24,10 +24,10 @@ namespace LockFree {
 // - When there are no free blocks available, the algorithm becomes a blocking
 //   algorithm since we request memory from the standard library.
 //
-class Allocator : private OncePerSecond
+class Allocator
 {
 public:
-  explicit Allocator (const size_t bytesPerBlock = 0);
+  explicit Allocator (const size_t pageBytes = 0);
   ~Allocator ();
 
   void* allocate (const size_t bytes);
@@ -37,36 +37,13 @@ private:
   struct Header;
 
   class Block;
-  typedef Stack <Block> Blocks;
-
-  struct Pool
-  {
-    Blocks fresh;   // fresh nodes for re-use
-    Blocks garbage; // garbage that needs to cool
-  };
 
   inline Block* newBlock ();
-  inline void deleteBlock (Block* b);
-
-  void addGarbage (Block* b);
-  void doOncePerSecond ();
-
-  void free (Blocks& list);
-  void free (Pool& pool);
+  static inline void deleteBlock (Block* b);
 
 private:
-  const size_t    m_blockBytes;
-  Pool            m_pool[2];
-  Pool*  volatile m_cold;
-  Pool*  volatile m_hot;
   Block* volatile m_active;
-  Atomic::Counter m_hard;
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-  int m_swaps;
-  Atomic::Counter m_total;
-  Atomic::Counter m_used;
-#endif
+  static PageAllocator   m_pages;
 };
 
 enum

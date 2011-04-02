@@ -31,6 +31,13 @@ struct PageAllocator::Page : List::Node
   explicit Page (PageAllocator* allocator)
     : m_allocator (allocator)
   {
+    guard = 0x01020304;
+  }
+
+  ~Page ()
+  {
+    vfassert (guard == 0x01020304);
+    guard = 0xffffffff;
   }
 
   PageAllocator& getAllocator () const
@@ -40,6 +47,7 @@ struct PageAllocator::Page : List::Node
 
 private:
   PageAllocator* const m_allocator;
+  int guard;
 };
 
 inline void* PageAllocator::fromPage (Page* const p)
@@ -58,7 +66,8 @@ inline PageAllocator::Page* PageAllocator::toPage (void* const p)
 //------------------------------------------------------------------------------
 
 PageAllocator::PageAllocator (const size_t pageBytes)
-  : m_pageBytes (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
+  : m_pageBytes (pageBytes)
+  , m_pageBytesAvailable (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
   , m_newPagesLeft ((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes)
 #if LOG_GC
   , m_swaps (0)
@@ -92,8 +101,6 @@ void* PageAllocator::allocate ()
 {
   Page* page = m_hot->fresh.pop_front ();
 
-  void* p;
-
   if (!page)
   {
     const bool exhausted = m_newPagesLeft.release ();
@@ -101,7 +108,7 @@ void* PageAllocator::allocate ()
       Throw (Error().fail (__FILE__, __LINE__,
         TRANS("the limit of memory allocations was reached")));
 
-    page = new (::operator new (m_pageBytes, std::nothrow_t())) Page (this);
+    page = new (::malloc (m_pageBytes)) Page (this);
     if (!page)
       Throw (Error().fail (__FILE__, __LINE__,
         TRANS("a memory allocation failed")));
@@ -111,13 +118,11 @@ void* PageAllocator::allocate ()
 #endif
   }
 
-  p = fromPage (page);
-
 #if LOG_GC
   m_used.addref ();
 #endif
 
-  return p;
+  return fromPage (page);
 }
 
 void PageAllocator::deallocate (void* const p)
@@ -160,7 +165,7 @@ void PageAllocator::free (List& list)
     if (page)
     {
       page->~Page ();
-      ::operator delete (page);
+      ::free (page);
 
 #if LOG_GC
       m_total.release ();

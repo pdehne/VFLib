@@ -4,6 +4,8 @@
 
 #include "vf/vf_StandardHeader.h"
 
+#include <boost/thread/tss.hpp>
+
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeAllocator.h"
@@ -11,6 +13,9 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_MemoryAlignment.h"
 
 namespace LockFree {
+
+// must come first
+PageAllocator Allocator::m_pages (8192);
 
 PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize + 64);
 
@@ -45,15 +50,9 @@ namespace {
 
 */
 
-// If bytesPerBlock is 0 on construction we will use this value instead.
+// If pageBytes is 0 on construction we will use this value instead.
 //
-static const size_t defaultBytesPerBlock = 8 * 1024;
-
-// This is the upper limit on the amount of physical memory an instance of the
-// allocator will allow. Going over this limit means that consumers cannot keep
-// up with producers, and application logic should be re-examined.
-//
-static const size_t hardLimitMegaBytes = 256;
+static const size_t defaultPageBytes = 8 * 1024;
 
 }
 
@@ -73,11 +72,10 @@ struct Allocator::Header
 
 //------------------------------------------------------------------------------
 
-class Allocator::Block : public Allocator::Blocks::Node
+class Allocator::Block : NonCopyable
 {
 public:
-  Block (size_t bytes, Allocator* allocator)
-    : m_allocator (*allocator)
+  explicit Block (const size_t bytes) : m_refs (1)
   {
     m_end = reinterpret_cast <char*> (this) + bytes;
     m_free = reinterpret_cast <char*> (
@@ -87,11 +85,6 @@ public:
   ~Block ()
   {
     vfassert (m_refs.get() == 0);
-  }
-
-  inline Allocator& getAllocator () const
-  {
-    return m_allocator;
   }
 
   inline void addref ()
@@ -104,11 +97,6 @@ public:
     vfassert (m_refs.get () > 0);
 
     return m_refs.release ();
-  }
-
-  inline void reset ()
-  {
-    m_free = reinterpret_cast <char*> (this+1);
   }
 
   enum Result
@@ -176,87 +164,57 @@ public:
 private:
   Atomic::Counter m_refs;        // reference count
   Atomic::Pointer <char> m_free; // next free byte or 0 if inactive.
-  const char* m_end;                   // last free byte + 1
-  Allocator& m_allocator;
+  char* m_end;                   // last free byte + 1
 };
 
 //------------------------------------------------------------------------------
 
-inline void Allocator::addGarbage (Block* b)
+inline Allocator::Block* Allocator::newBlock ()
 {
-  // Any block that gets here must have incremented the use count.
-#if LOCKFREE_ALLOCATOR_LOGGING
-  vfassert (m_used.get() > 0);
-  m_used.release ();
-#endif
-
-  m_hot->garbage.push_front (b);
+  return new (m_pages.allocate ()) Block (m_pages.getPageBytes());
 }
 
-Allocator::Allocator (const size_t bytesPerBlock)
-  : m_blockBytes (bytesPerBlock == 0 ? defaultBytesPerBlock : bytesPerBlock)
-  , m_hard ((hardLimitMegaBytes * 1024 * 1024) / m_blockBytes)
-#if LOCKFREE_ALLOCATOR_LOGGING
-  , m_swaps (0)
-#endif
+inline void Allocator::deleteBlock (Block* b)
 {
-  if (m_blockBytes < sizeof (Block) + 256)
+  // It is critical that we do not call the destructor,
+  // because due to the lock-free implementation, a Block
+  // can be accessed for a short time after it is deleted.
+  /* b->~Block (); */ // DO NOT CALL!!!
+
+  PageAllocator::deallocate (b);
+}
+
+Allocator::Allocator (const size_t pageBytes)
+  //: m_pages (pageBytes == 0 ? defaultPageBytes : pageBytes)
+{
+  if (m_pages.getPageBytes () < sizeof (Block) + 256)
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the block size is too small")));
 
-  m_hot = &m_pool[0];
-  m_cold = &m_pool[1];
-
   m_active = newBlock ();
-
-  startOncePerSecond ();
 }
 
 Allocator::~Allocator ()
 {
-  endOncePerSecond ();
-
-  Block* b;
-
-  // trash active
-  b = m_active;
-  vfassert (b);
-  b->release ();
-  addGarbage (b);
-
-  free (m_pool[0]);
-  free (m_pool[1]);
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-  vfassert (m_used.is_reset ());
-  vfassert (m_total.is_reset ());
-#endif
+  deleteBlock (m_active);
 }
 
 //------------------------------------------------------------------------------
 
-struct Random
+namespace {
+
+struct ThreadData
 {
-  Random () : m_x (0), m_a (1664525), m_c (1013904223) { }
-
-  unsigned long next ()
-  {
-    m_x = m_a * m_x + m_c;
-    return m_x;
-  }
-
-private:
-  unsigned long m_x;
-  unsigned long m_a;
-  unsigned long m_c;
 };
 
-static Random s_rand;
+}
 
 void* Allocator::allocate (const size_t bytes)
 {
+  boost::thread_specific_ptr <ThreadData> tsp;
+
   const size_t actual = sizeof (Header) + bytes;
 
-  if (actual > m_blockBytes)
+  if (actual > m_pages.getPageBytes ())
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
   Header* h;
@@ -300,14 +258,15 @@ void* Allocator::allocate (const size_t bytes)
 
         // Take away the original active reference.
         if (b->release ())
-          addGarbage (b);
+          deleteBlock (b);
 
         // Install a fresh empty active block.
         m_active = newBlock ();
       }
-      else if (b->release ())
+      else
       {
-        addGarbage (b);
+        if (b->release ())
+          deleteBlock (b);
       }
 
       // Try again.
@@ -331,99 +290,7 @@ void Allocator::deallocate (void* p)
   Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
 
   if (b->release ())
-    b->getAllocator().addGarbage (b);
-}
-
-//------------------------------------------------------------------------------
-
-Allocator::Block* Allocator::newBlock ()
-{
-  Block* b;
-
-  // Try to recycle a fresh block.
-  b = m_hot->fresh.pop_front ();
-
-  if (b)
-  {
-    // Reset the storage so it can be re-used.
-    b->reset ();
-  }
-  else
-  {
-    // Perform hard allocation since we're out of fresh blocks.
-
-    b = new (::operator new (m_blockBytes, std::nothrow_t ())) Block (m_blockBytes, this);
-    if (!b)
-      Throw (Error().fail (__FILE__, __LINE__, TRANS("a memory allocation failed")));
-
-    const bool exhausted = m_hard.release ();
-
-    if (exhausted)
-      Throw (Error().fail (__FILE__, __LINE__, TRANS("the limit of memory allocations was reached")));
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-    m_total.addref ();
-#endif
-  }
-
-  // Give it the active reference.
-  b->addref ();
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-  m_used.addref ();
-#endif
-
-  return b;
-}
-
-inline void Allocator::deleteBlock (Block* b)
-{
-  b->~Block ();
-  ::operator delete (b); // global mutex
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-  m_total.release ();
-#endif
-}
-
-void Allocator::doOncePerSecond ()
-{
-  // Perform the deferred swap of reused
-  // and garbage in the cold pool.
-  m_cold->fresh.swap (m_cold->garbage);
-
-  // Now swap hot and cold.
-  // This is atomic with respect to m_hot.
-  Pool* temp = m_hot;
-  m_hot = m_cold; // atomic
-  m_cold = temp;
-
-#if LOCKFREE_ALLOCATOR_LOGGING
-  String s;
-  s << "swap " << String (++m_swaps);
-  s << " (" << String (m_used.get ()) << "/"
-    << String (m_total.get ()) << " of "
-    << String (m_hard.get ()) << ")";
-  VF_JUCE::Logger::outputDebugString (s);
-#endif
-}
-
-void Allocator::free (Blocks& list)
-{
-  for (;;)
-  {
-    Block* b = list.pop_front ();
-    if (b)
-      deleteBlock (b);
-    else
-      break;
-  }
-}
-
-void Allocator::free (Pool& pool)
-{
-  free (pool.fresh);
-  free (pool.garbage);
+    deleteBlock (b);
 }
 
 }
