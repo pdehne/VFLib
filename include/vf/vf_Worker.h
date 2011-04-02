@@ -9,6 +9,7 @@
 #include "vf/vf_Bind.h"
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeQueue.h"
+#include "vf/vf_PageAllocator.h"
 #include "vf/vf_Thread.h"
 
 // Queue that executes functors on another thread, with these invariants:
@@ -37,6 +38,7 @@ public:
 
   //typedef LockFree::GlobalAllocator AllocatorType;
   typedef LockFree::Allocator AllocatorType;
+  //typedef GlobalPageAllocator AllocatorType;
 
   inline AllocatorType& getAllocator ()
   {

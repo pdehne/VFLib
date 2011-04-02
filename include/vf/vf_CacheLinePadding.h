@@ -5,6 +5,8 @@
 #ifndef __VF_CACHELINEPADDING_VFHEADER__
 #define __VF_CACHELINEPADDING_VFHEADER__
 
+#include "vf/vf_MemoryAlignment.h"
+
 //
 // Wraps an object and pads it to completely fill a CPU cache line.
 //
@@ -12,11 +14,6 @@ template <typename T>
 class CacheLinePadding
 {
 public:
-  enum
-  {
-    CACHE_LINE_SIZE = 64
-  };
-
   CacheLinePadding ()
     { }
 
@@ -72,7 +69,7 @@ public:
 
 private:
   T m_t;
-  char pad [CACHE_LINE_SIZE - sizeof(T)];
+  char pad [Memory::cacheLineBytes - sizeof(T)];
 };
 
 //

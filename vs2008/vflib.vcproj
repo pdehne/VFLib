@@ -4698,7 +4698,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\vf\vf_MemoryAlignment.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_ObjectAllocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_PageAllocator.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_PageAllocator.h"
 				>
 			</File>
 			<File

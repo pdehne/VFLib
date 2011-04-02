@@ -136,12 +136,12 @@ const char* Error::what () const
 // The application could not be initialized because sqlite was denied access permission
 // The application unexpectedly quit because the exception 'sqlite was denied access permission at file ' was thrown
     m_what <<
-      m_reasonText <<
-      TRANS("at file '") <<
-      m_sourceFileName <<
-      TRANS("' line ") <<
-      String (m_lineNumber) <<
-      TRANS(" with code=") <<
+      m_reasonText << " " <<
+      TRANS("at file") << " '" <<
+      m_sourceFileName << "' " <<
+      TRANS("line") << " " <<
+      String (m_lineNumber) << " " <<
+      TRANS("with code") << " = " <<
       String (m_code);
 
     m_szWhat = (const char*)m_what.toUTF8();

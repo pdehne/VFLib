@@ -4,6 +4,8 @@
 
 #include "vf/vf_StandardHeader.h"
 
+#include <iostream>
+
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_CatchAny.h"
@@ -174,6 +176,7 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
         }
         else
         {
+          std::cout << e.what ();
           std::unexpected ();
         }
       }
@@ -190,6 +193,7 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
         }
         else
         {
+          std::cout << e.what ();
           std::unexpected ();
         }
       }
@@ -211,9 +215,18 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
       }
     }
 #else
+    catch (std::exception& e)
+    {
+      if (!returnFromException)
+      {
+        std::cout << e.what ();
+        std::unexpected ();
+      }
+    }
     catch (...)
     {
-      std::unexpected ();
+      if (!returnFromException)
+        std::unexpected ();
     }
 #endif
   }

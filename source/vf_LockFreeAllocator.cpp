@@ -8,10 +8,11 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeAllocator.h"
 #include "vf/vf_LockFreeDelay.h"
+#include "vf/vf_MemoryAlignment.h"
 
 namespace LockFree {
 
-FixedAllocator <globalFixedAllocatorBlockSize> GlobalFixedAllocator::s_allocator;
+PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize + 64);
 
 Allocator GlobalAllocator::s_allocator;
 
@@ -54,28 +55,6 @@ static const size_t defaultBytesPerBlock = 8 * 1024;
 //
 static const size_t hardLimitMegaBytes = 256;
 
-// Allocations are always aligned to this byte value.
-//
-static const int ByteAlignment = 8;
-
-// template<typename T> struct A { char x; T t; }; sizeof(A<T>)/-sizeof(T) 
-
-// Returns the number of bytes needed to advance p to the correct alignment
-template <typename P>
-size_t align (P* p)
-{
-  uintptr_t v = reinterpret_cast <uintptr_t> (p);
-  uintptr_t n = ((v + ByteAlignment - 1) / ByteAlignment) * ByteAlignment;
-  return n - v;
-}
-
-// Returns a pointer with alignment added.
-template <typename P>
-P* aligned (P* p)
-{
-  return reinterpret_cast <P*> (reinterpret_cast <char*> (p) + align (p));
-}
-
 }
 
 //------------------------------------------------------------------------------
@@ -88,7 +67,7 @@ struct Allocator::Header
   {
     Allocator::Block* block; // backpointer to the page
 
-    char pad [ByteAlignment];
+    char pad [Memory::alignmentBytes];
   };
 };
 
@@ -101,7 +80,8 @@ public:
     : m_allocator (*allocator)
   {
     m_end = reinterpret_cast <char*> (this) + bytes;
-    m_free = aligned (reinterpret_cast <char*> (this + 1));
+    m_free = reinterpret_cast <char*> (
+      Memory::pointerAdjustedForAlignment (this + 1));
   }
 
   ~Block ()
@@ -150,7 +130,7 @@ public:
 
       if (base)
       {
-        char* p = aligned (base);
+        char* p = Memory::pointerAdjustedForAlignment (base);
         char* free = p + bytes;
 
         if (free <= m_end)
@@ -424,7 +404,7 @@ void Allocator::doOncePerSecond ()
   s << " (" << String (m_used.get ()) << "/"
     << String (m_total.get ()) << " of "
     << String (m_hard.get ()) << ")";
-  Logger::outputDebugString (s);
+  VF_JUCE::Logger::outputDebugString (s);
 #endif
 }
 

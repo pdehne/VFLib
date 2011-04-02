@@ -85,6 +85,10 @@
 #include "vf/vf_ManualWorker.h"
 #endif
 
+#ifndef __VF_MEMORYALIGNMENT_VFHEADER__
+#include "vf/vf_MemoryAlignment.h"
+#endif
+
 #ifndef __VF_MURMURHASH_VFHEADER__
 #include "vf/vf_MurmurHash.h" // Depends on some Juce declarations and macros
 #endif
@@ -103,6 +107,10 @@
 
 #ifndef __VF_ONCEPERSECOND_VFHEADER__
 #include "vf/vf_OncePerSecond.h"
+#endif
+
+#ifndef __VF_PAGEALLOCATOR_VFHEADER__
+#include "vf/vf_PageAllocator.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEXBASE_VFHEADER__

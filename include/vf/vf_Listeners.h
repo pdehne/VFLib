@@ -23,6 +23,8 @@
 // TODO: CONST CORRECTNESS? List CONST-NESS?
 //
 
+#define NEW_ALLOCATOR 0
+
 class ListenersBase
 {
 protected:
@@ -51,8 +53,11 @@ protected:
 
   private:
     void destroySharedObject ()
+#if NEW_ALLOCATOR
+      { this->~Call(); LockFree::Allocator::deallocate (this); }
+#else
       { LockFree::globalDelete (this); }
-      //{ Singleton::getInstance()->getWorker().call (&LockFree::globalDelete <Call>, this); }
+#endif
 
   public:
     const timestamp_t m_timestamp;
@@ -266,14 +271,24 @@ private:
   Call::Ptr newCall (const Functor& f)
   {
     // group read lock needed for access to m_timestamp    
+#if NEW_ALLOCATOR
+    return new (LockFree::GlobalAllocator().allocate (sizeof(StoredCall <Functor>)))
+      StoredCall <Functor> (m_timestamp, f);
+#else
     return LockFree::globalAlloc <StoredCall <Functor> >::New (m_timestamp, f);
+#endif
   }
 
   template <class Functor>
   Call::Ptr newCall1 (ListenerClass* listener, const Functor& f)
   {
-    // group read lock needed for access to m_timestamp    
+    // group read lock needed for access to m_timestamp
+#if NEW_ALLOCATOR
+    return new (LockFree::GlobalAllocator().allocate (sizeof (StoredCall1 <Functor>)))
+      StoredCall1 <Functor> (listener, m_timestamp, f);
+#else
     return LockFree::globalAlloc <StoredCall1 <Functor> >::New (listener, m_timestamp, f);
+#endif
   }
 
   template <class Functor>
