@@ -2,17 +2,13 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_LOCKFREEALLOCATOR_VFHEADER__
-#define __VF_LOCKFREEALLOCATOR_VFHEADER__
+#ifndef __VF_ALLOCATOR_VFHEADER__
+#define __VF_ALLOCATOR_VFHEADER__
 
-//#include "vf/vf_Atomic.h"
-//#include "vf/vf_LockFreeStack.h"
-//#include "vf/vf_OncePerSecond.h"
+#include "vf/vf_List.h"
 #include "vf/vf_PageAllocator.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
-
-namespace LockFree {
 
 // Lock-free allocator for small variably sized memory blocks.
 //
@@ -42,10 +38,38 @@ private:
   static inline void deleteBlock (Block* b);
 
 private:
-  Block* volatile m_active;
-  static PageAllocator   m_pages;
+  class PerThreadData;
+  typedef VF_NAMESPACE::List <PerThreadData> Threads;
+
+  Mutex m_mutex;
+  Threads m_threads;
+  boost::thread_specific_ptr <PerThreadData> m_tsp;
+
+  static PageAllocator s_pages;
 };
 
+class GlobalAllocator
+{
+public:
+  inline void* allocate (size_t bytes)
+  {
+    return s_allocator.allocate (bytes);
+  }
+
+  static inline void deallocate (void* const p)
+  {
+    Allocator::deallocate (p);
+  }
+
+private:
+  static Allocator s_allocator;
+};
+
+
+
+//
+// LEGACY
+//
 enum
 {
   //
@@ -71,23 +95,6 @@ public:
 
 private:
   static PageAllocator s_allocator;
-};
-
-class GlobalAllocator
-{
-public:
-  inline void* allocate (size_t bytes)
-  {
-    return s_allocator.allocate (bytes);
-  }
-
-  static inline void deallocate (void* const p)
-  {
-    Allocator::deallocate (p);
-  }
-
-private:
-  static Allocator s_allocator;
 };
 
 #if 1
@@ -199,7 +206,5 @@ void globalDelete (C* c)
 }
 
 #endif
-
-}
 
 #endif

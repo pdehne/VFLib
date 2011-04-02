@@ -6,7 +6,7 @@
 #define __VF_LISTENERS_VFHEADER__
 
 #include "vf/vf_List.h"
-#include "vf/vf_LockFreeAllocator.h"
+#include "vf/vf_Allocator.h"
 #include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_SharedSingleton.h"
@@ -56,7 +56,7 @@ protected:
 #if NEW_ALLOCATOR
       { this->~Call(); LockFree::Allocator::deallocate (this); }
 #else
-      { LockFree::globalDelete (this); }
+      { globalDelete (this); }
 #endif
 
   public:
@@ -91,7 +91,7 @@ private:
 
   private:
     void destroySharedObject ()
-      { LockFree::globalDelete (this); }
+      { globalDelete (this); }
 
   private:
     struct Entry;
@@ -133,7 +133,7 @@ private:
       typedef SharedObjectPtr <Entry> Ptr;
       explicit Entry (Group::Ptr g) : group (g) {}
       ~Entry () { jassert (call.get () == 0); }
-      void destroySharedObject () { LockFree::globalDelete (this); }
+      void destroySharedObject () { globalDelete (this); }
       Group::Ptr group;
       Atomic::Pointer <Call> call;
     };
@@ -195,7 +195,7 @@ protected:
         if (!proxy)
         {
           // Create a new empty proxy
-          proxy = LockFree::globalAlloc <StoredProxy <Bytes> >::New (member);
+          proxy = globalAlloc <StoredProxy <Bytes> >::New (member);
 
           // Add all current groups to the Proxy.
           // We need the group read lock for this (caller provided).
@@ -272,10 +272,10 @@ private:
   {
     // group read lock needed for access to m_timestamp    
 #if NEW_ALLOCATOR
-    return new (LockFree::GlobalAllocator().allocate (sizeof(StoredCall <Functor>)))
+    return new (GlobalAllocator().allocate (sizeof(StoredCall <Functor>)))
       StoredCall <Functor> (m_timestamp, f);
 #else
-    return LockFree::globalAlloc <StoredCall <Functor> >::New (m_timestamp, f);
+    return globalAlloc <StoredCall <Functor> >::New (m_timestamp, f);
 #endif
   }
 
@@ -284,10 +284,10 @@ private:
   {
     // group read lock needed for access to m_timestamp
 #if NEW_ALLOCATOR
-    return new (LockFree::GlobalAllocator().allocate (sizeof (StoredCall1 <Functor>)))
+    return new (GlobalAllocator().allocate (sizeof (StoredCall1 <Functor>)))
       StoredCall1 <Functor> (listener, m_timestamp, f);
 #else
-    return LockFree::globalAlloc <StoredCall1 <Functor> >::New (listener, m_timestamp, f);
+    return globalAlloc <StoredCall1 <Functor> >::New (listener, m_timestamp, f);
 #endif
   }
 

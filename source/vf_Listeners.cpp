@@ -55,7 +55,7 @@ void ListenersBase::Group::add (void* listener,
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
-  Entry* entry = LockFree::globalAlloc <Entry>::New ();
+  Entry* entry = globalAlloc <Entry>::New ();
   entry->listener = listener;
   entry->timestamp = timestamp;
   m_list.push_back (entry);
@@ -78,7 +78,7 @@ bool ListenersBase::Group::remove (void* listener)
     if (entry->listener == listener)
     {
       m_list.remove (entry);
-      LockFree::globalDelete (entry);
+      globalDelete (entry);
       found = true;
       break;
     }
@@ -217,7 +217,7 @@ ListenersBase::Proxy::~Proxy ()
 // Caller is responsible for preventing duplicates.
 void ListenersBase::Proxy::add (Group::Ptr group)
 {
-  Entry::Ptr entry (LockFree::globalAlloc <Entry>::New (group));
+  Entry::Ptr entry (globalAlloc <Entry>::New (group));
 
   // Manual addref and put raw pointer in list
   entry.getObject()->incReferenceCount ();
@@ -326,7 +326,7 @@ ListenersBase::~ListenersBase ()
   for (Proxies::iterator iter = m_proxies.begin(); iter != m_proxies.end ();)
   {
     Proxy* proxy = *iter++;
-    LockFree::globalDelete (proxy);
+    globalDelete (proxy);
   }
 }
 
@@ -397,7 +397,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
 
   if (!group)
   {
-    group = LockFree::globalAlloc <Group>::New (worker);
+    group = globalAlloc <Group>::New (worker);
 
     // Add it to the list, and give it a manual ref
     // since the list currently uses raw pointers.

@@ -5,6 +5,10 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
+#ifndef __VF_ALLOCATOR_VFHEADER__
+#include "vf/vf_Allocator.h"
+#endif
+
 #ifndef __VF_ATOMIC_VFHEADER__
 #include "vf/vf_Atomic.h"
 #endif
@@ -51,10 +55,6 @@
 
 #ifndef __VF_LISTENERS_VFHEADER__
 #include "vf/vf_Listeners.h"
-#endif
-
-#ifndef __VF_LOCKFREEALLOCATOR_VFHEADER__
-#include "vf/vf_LockFreeAllocator.h"
 #endif
 
 #ifndef __VF_LOCKFREEDELAY_VFHEADER__

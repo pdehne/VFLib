@@ -7,7 +7,7 @@
 
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
-#include "vf/vf_LockFreeAllocator.h"
+#include "vf/vf_Allocator.h"
 #include "vf/vf_LockFreeQueue.h"
 #include "vf/vf_PageAllocator.h"
 #include "vf/vf_Thread.h"
@@ -36,8 +36,8 @@ public:
   explicit Worker (const char* szName = "");
   ~Worker ();
 
-  //typedef LockFree::GlobalAllocator AllocatorType;
-  typedef LockFree::Allocator AllocatorType;
+  //typedef GlobalAllocator AllocatorType;
+  typedef Allocator AllocatorType;
   //typedef GlobalPageAllocator AllocatorType;
 
   inline AllocatorType& getAllocator ()

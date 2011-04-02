@@ -340,7 +340,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_OncePerSecond.cpp"
+				RelativePath="..\source\vf_OncePerSecond.cpp"
 				>
 			</File>
 			<File
@@ -4598,14 +4598,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\source\vf_LockFreeAllocator.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_LockFreeAllocator.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_LockFreeDelay.h"
 				>
 			</File>
@@ -4690,6 +4682,22 @@
 			Name="memory"
 			>
 			<File
+				RelativePath="..\source\vf_Allocator.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Allocator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_AllocatorWithoutTls.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_AllocatorWithoutTls.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Atomic.h"
 				>
 			</File>
@@ -4706,7 +4714,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_PageAllocator.cpp"
+				RelativePath="..\source\vf_PageAllocator.cpp"
 				>
 			</File>
 			<File
