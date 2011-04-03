@@ -5,6 +5,7 @@
 #ifndef __VF_WORKER_VFHEADER__
 #define __VF_WORKER_VFHEADER__
 
+#include "vf/vf_AllocatedBy.h"
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Bind.h"
 #include "vf/vf_Allocator.h"
@@ -41,7 +42,7 @@ private:
 
 public:
   class Call : public Calls::Node,
-               public AllocatorType::Allocated
+               public AllocatedBy <AllocatorType>
   {
   public:
     virtual ~Call () { }

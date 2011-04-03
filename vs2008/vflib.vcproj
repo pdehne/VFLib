@@ -154,6 +154,10 @@
 			Name="containers"
 			>
 			<File
+				RelativePath="..\include\vf\vf_IntrusiveStack.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
@@ -363,6 +367,10 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_SharedState.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_SpinLock.h"
 				>
 			</File>
 			<File
@@ -4687,6 +4695,10 @@
 		<Filter
 			Name="memory"
 			>
+			<File
+				RelativePath="..\include\vf\vf_AllocatedBy.h"
+				>
+			</File>
 			<File
 				RelativePath="..\source\vf_Allocator.cpp"
 				>

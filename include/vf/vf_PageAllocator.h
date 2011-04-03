@@ -79,14 +79,19 @@ private:
 class GlobalPageAllocator
 {
 public:
-  inline void* allocate (size_t bytes)
+  inline void* allocate ()
   {
-    return s_allocator.allocate (bytes);
+    return s_allocator.allocate ();
   }
 
   static inline void deallocate (void* const p)
   {
     PageAllocator::deallocate (p);
+  }
+
+  static inline size_t getPageBytes ()
+  {
+    return s_allocator.getPageBytes ();
   }
 
 private:

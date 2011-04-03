@@ -5,6 +5,10 @@
 #ifndef __VF_INCLUDES_VFHEADER__
 #define __VF_INCLUDES_VFHEADER__
 
+#ifndef __VF_ALLOCATEDBY_VFHEADER__
+#include "vf/vf_AllocatedBy.h"
+#endif
+
 #ifndef __VF_ALLOCATOR_VFHEADER__
 #include "vf/vf_Allocator.h"
 #endif
@@ -47,6 +51,10 @@
 
 #ifndef __VF_INTRINSICS_VFHEADER__
 #include "vf/vf_Intrinsics.h"
+#endif
+
+#ifndef __VF_INTRUSIVESTACK_VFHEADER__
+#include "vf/vf_IntrusiveStack.h"
 #endif
 
 #ifndef __VF_LIST_VFHEADER__
@@ -131,6 +139,10 @@
 
 #ifndef __VF_SHAREDSTATE_VFHEADER__
 #include "vf/vf_SharedState.h"
+#endif
+
+#ifndef __VF_SPINLOCK_VFHEADER__
+#include "vf/vf_SpinLock.h"
 #endif
 
 #ifndef __VF_STATICMUTEX_VFHEADER__

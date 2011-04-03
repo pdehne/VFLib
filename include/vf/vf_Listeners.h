@@ -5,12 +5,14 @@
 #ifndef __VF_LISTENERS_VFHEADER__
 #define __VF_LISTENERS_VFHEADER__
 
-#include "vf/vf_List.h"
+#include "vf/vf_AllocatedBy.h"
 #include "vf/vf_Allocator.h"
+#include "vf/vf_List.h"
 #include "vf/vf_LockFreeReadWriteMutex.h"
 #include "vf/vf_SharedObject.h"
-#include "vf/vf_SharedSingleton.h"
 #include "vf/vf_Worker.h"
+
+#include "vf/vf_StandardAllocator.h" // TEMPORARY
 
 // List where each Listener registers with the desired Worker
 // on which the call is made. Since the list traversal for an associated
@@ -24,12 +26,18 @@
 class ListenersBase
 {
 public:
+  //typedef StandardAllocator AllocatorType;
+  struct ListenersStructureTag { };
+
+  typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
+
   typedef GlobalAllocator <ListenersBase> CallAllocatorType;
+  //typedef Allocator CallAllocatorType;
 
   // Reference counted polymorphic unary functor void (*)(void* listener).
   //
   class Call : public SharedObject,
-               public CallAllocatorType::Allocated
+               public AllocatedBy <CallAllocatorType>
   {
   public:
     typedef SharedObjectPtr <Call> Ptr;
@@ -53,14 +61,17 @@ private:
 
   // Maintains a list of listeners registered on the same Worker
   //
-  class Group : public Groups::Node, public SharedObject
+  class Group : public Groups::Node,
+                public SharedObject,
+                public AllocatedBy <AllocatorType>
   {
   public:
     typedef SharedObjectPtr <Group> Ptr;
 
     explicit Group    (Worker* const worker);
     ~Group            ();
-    void add          (void* listener, const timestamp_t timestamp);
+    void add          (void* listener, const timestamp_t timestamp,
+                       AllocatorType& allocator);
     bool remove       (void* listener);
     bool contains     (void* const listener);
     void call         (Call* const c, const timestamp_t timestamp);
@@ -75,7 +86,7 @@ private:
     Worker* getWorker () const { return m_worker; }
 
   private:
-    void destroySharedObject() { globalDelete (this); }
+    void destroySharedObject() { delete this; }
 
   private:
     struct Entry;
@@ -92,7 +103,8 @@ private:
   // Calls into a single call to prevent excess messaging. It is up
   // to the user of the class to decide when this behavior is appropriate.
   //
-  class Proxy : public Proxies::Node
+  class Proxy : public Proxies::Node,
+                public AllocatedBy <AllocatorType>
   {
   public:
     enum
@@ -103,7 +115,7 @@ private:
     Proxy (void const* const member, const size_t bytes);
     ~Proxy ();
 
-    void add    (Group* group);
+    void add    (Group* group, AllocatorType& allocator);
     void remove (Group* group);
     void update (Call* const c, const timestamp_t timestamp);
 
@@ -146,6 +158,7 @@ private:
   timestamp_t m_timestamp;
   CacheLine::Aligned <LockFree::ReadWriteMutex> m_groups_mutex;
   CacheLine::Aligned <LockFree::ReadWriteMutex> m_proxies_mutex;
+  AllocatorType m_allocator;
   CallAllocatorType m_callAllocator;
 };
 

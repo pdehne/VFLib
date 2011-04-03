@@ -5,65 +5,51 @@
 #ifndef __VF_OBJECTALLOCATOR_VFHEADER__
 #define __VF_OBJECTALLOCATOR_VFHEADER__
 
-// Utility to bolt on New/Delete for typed objects with forwarding constructors.
+#include "vf/vf_SpinLock.h"
+#include "vf/vf_IntrusiveStack.h"
+
+// Thread-safe fixed size object allocator that uses
+// a deleted list for recycling elements.
 //
-//  class Allocator
-//  {
-//  public:
-//    void* allocate (size_t bytes);
-//    void deallocate (void* p);
-//  };
-//
-template <class Allocator, class C>
+template <class Allocator, class Object>
 class ObjectAllocator
 {
 public:
-  C* New ()
-    { return new (m_allocator.allocate (sizeof (C))) C; }
-
-  template <class T1>
-  C* New (const T1& t1)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1); }
-
-  template <class T1, class T2>
-  C* New (const T1& t1, const T2& t2)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2); }
-
-  template <class T1, class T2, class T3>
-  C* New (const T1& t1, const T2& t2, const T3& t3)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3); }
-
-  template <class T1, class T2, class T3, class T4>
-  C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3, t4); }
-
-  template <class T1, class T2, class T3, class T4, class T5>
-  C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, const T5& t5)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3, t4, t5); }
-
-  template <class T1, class T2, class T3, class T4, class T5, class T6>
-  C* New (const T1& t1, const T2& t2, const T3& t3,
-          const T4& t4, const T5& t5, const T6& t6)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3, t4, t5, t6); }
-
-  template <class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-  C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
-          const T5& t5, const T6& t6, const T7& t7)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3, t4, t5, t6, t7); }
-
-  template <class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
-  C* New (const T1& t1, const T2& t2, const T3& t3, const T4& t4, 
-          const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-    { return new (m_allocator.allocate (sizeof (C))) C (t1, t2, t3, t4, t5, t6, t7, t8); }
-
-  void Delete (C* c)
+  ObjectAllocator ()
   {
-    c->~C();
-    m_allocator.deallocate (c);
+    static_vfassert (sizeof (Object) >= sizeof (Node));
+  }
+
+  ~ObjectAllocator ()
+  {
+    for (;;)
+    {
+      void* p = m_free.pop_front ();
+      m_allocator.deallocate (buf);
+    }
+  }
+
+  void* allocate (const size_t bytes)
+  {
+    vfassert (bytes == sizeof (Object));
+
+    void* p = m_free.pop_front ();
+    if (!buf)
+      buf = m_allocator.allocate (bytes);
+
+    return buf;
   }
 
 private:
+  struct Node;
+  typedef Intrusive::Stack <Node, SpinLock> Stack;
+
+  struct Node : Stack::Node
+  {
+  };
+
   Allocator m_allocator;
+  Stack m_free;
 };
 
 #endif

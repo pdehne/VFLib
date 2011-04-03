@@ -102,7 +102,9 @@ private:
 // A Proxy maintains a list of Entry.
 // Each Entry holds a group and the current Call (which can be updated).
 //
-struct ListenersBase::Proxy::Entry : Entries::Node, SharedObject
+struct ListenersBase::Proxy::Entry : Entries::Node,
+                                     SharedObject,
+                                     AllocatedBy <AllocatorType>
 {
   typedef SharedObjectPtr <Entry> Ptr;
 
@@ -118,7 +120,7 @@ struct ListenersBase::Proxy::Entry : Entries::Node, SharedObject
 
   void destroySharedObject ()
   {
-    globalDelete (this);
+    delete this;
   }
 
   Group::Ptr group;
@@ -129,7 +131,8 @@ struct ListenersBase::Proxy::Entry : Entries::Node, SharedObject
 
 // A Group maintains a list of Entry.
 //
-struct ListenersBase::Group::Entry : List::Node
+struct ListenersBase::Group::Entry : List::Node,
+                                     AllocatedBy <AllocatorType>
 {
   Entry (void* const l, const timestamp_t t)
     : listener (l)
@@ -174,7 +177,8 @@ ListenersBase::Group::~Group ()
 // The caller must prevent duplicates.
 //
 void ListenersBase::Group::add (void* listener,
-                                const timestamp_t timestamp)
+                                const timestamp_t timestamp,
+                                AllocatorType& allocator)
 {
   LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
@@ -185,8 +189,7 @@ void ListenersBase::Group::add (void* listener,
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
-  Entry* entry = globalAlloc <Entry>::New (listener, timestamp);
-  m_list.push_back (entry);
+  m_list.push_back (new (allocator) Entry (listener, timestamp));
 }
 
 // Removes the listener from the group if it exists.
@@ -207,7 +210,7 @@ bool ListenersBase::Group::remove (void* listener)
     if (entry->listener == listener)
     {
       m_list.remove (entry);
-      globalDelete (entry);
+      delete entry;
       found = true;
       break;
     }
@@ -404,9 +407,9 @@ ListenersBase::Proxy::~Proxy ()
 // Caller must have the proxies mutex.
 // Caller is responsible for preventing duplicates.
 //
-void ListenersBase::Proxy::add (Group* group)
+void ListenersBase::Proxy::add (Group* group, AllocatorType& allocator)
 {
-  Entry* entry (globalAlloc <Entry>::New (group));
+  Entry* entry (new (allocator) Entry (group));
 
   // Manual addref and put raw pointer in list
   entry->incReferenceCount ();
@@ -497,10 +500,7 @@ ListenersBase::~ListenersBase ()
 
   // Proxies are never deleted until here.
   for (Proxies::iterator iter = m_proxies.begin(); iter != m_proxies.end ();)
-  {
-    Proxy* proxy = *iter++;
-    globalDelete (proxy);
-  }
+    delete (*iter++);
 }
 
 void ListenersBase::add_void (void* const listener, Worker* worker)
@@ -538,7 +538,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
 
   if (!group)
   {
-    group = globalAlloc <Group>::New (worker);
+    group = new (m_allocator) Group (worker);
 
     // Add it to the list, and give it a manual ref
     // since the list currently uses raw pointers.
@@ -548,11 +548,11 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
     // Tell existing proxies to add the group
     LockFree::ScopedReadLock lock (m_proxies_mutex);
     for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
-      (*iter++)->add (group);
+      (*iter++)->add (group, m_allocator);
   }
 
   // Add the listener to the group with the current timestamp
-  group->add (listener, m_timestamp);
+  group->add (listener, m_timestamp, m_allocator);
 
   // Increment the timestamp within the mutex so
   // future calls will be newer than this listener.
@@ -700,14 +700,14 @@ void ListenersBase::updatep (void const* const member,
       if (!proxy)
       {
         // Create a new empty proxy
-        proxy = globalAlloc <Proxy>::New (member, bytes);
+        proxy = new (m_allocator) Proxy (member, bytes);
 
         // Add all current groups to the Proxy.
         // We need the group read lock for this (caller provided).
         for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
         {
           Group* group = *iter++;
-          proxy->add (group);
+          proxy->add (group, m_allocator);
         }
 
         // Add it to the list.

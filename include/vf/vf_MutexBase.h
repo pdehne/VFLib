@@ -12,7 +12,7 @@ namespace detail {
 template <class MutexType>
 struct ScopedLock : NonCopyable
 {
-  inline explicit ScopedLock (const MutexType& mutex) : m_mutex (mutex)
+  inline explicit ScopedLock (MutexType const& mutex) : m_mutex (mutex)
   {
     m_mutex.enter ();
   }
@@ -29,7 +29,7 @@ private:
 template <class MutexType>
 struct ScopedUnlock : NonCopyable
 {
-  inline explicit ScopedUnlock (const MutexType& mutex) : m_mutex (mutex)
+  inline explicit ScopedUnlock (MutexType const& mutex) : m_mutex (mutex)
   {
     m_mutex.exit ();
   }
@@ -40,9 +40,24 @@ struct ScopedUnlock : NonCopyable
   }
 
 private:
-  const MutexType& m_mutex;
+  MutexType const& m_mutex;
 };
 
 }
+
+class NoMutex : NonCopyable
+{
+public:
+  typedef detail::ScopedLock <NoMutex> ScopedLockType;
+  typedef detail::ScopedUnlock <NoMutex> ScopedUnlockType;
+
+  static inline void enter ()
+  {
+  }
+
+  static inline void exit ()
+  {
+  }
+};
 
 #endif

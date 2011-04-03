@@ -43,7 +43,6 @@ private:
   const ReadWriteMutexType& m_mutex;
 };
 
-
 }
 
 #endif

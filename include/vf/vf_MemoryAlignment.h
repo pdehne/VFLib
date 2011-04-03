@@ -13,22 +13,22 @@ const int cacheLineAlignBits  = 6; // 64 bytes
 const int cacheLineAlignBytes = 1 << cacheLineAlignBits;
 const int cacheLineAlignMask  = cacheLineAlignBytes - 1;
 
-const int allocLineAlignBits  = 3; // 8 bytes
-const int allocLineAlignBytes = 1 << allocLineAlignBits;
-const int allocLineAlignMask  = allocLineAlignBytes - 1;
+const int allocAlignBits  = 3; // 8 bytes
+const int allocAlignBytes = 1 << allocAlignBits;
+const int allocAlignMask  = allocAlignBytes - 1;
 
 // Returns the number of bytes needed to advance p to the correct alignment
 template <typename P>
 inline size_t bytesNeededForAlignment (P const* const p)
 {
-  return (allocLineAlignBytes - (uintptr_t (p) & allocLineAlignMask))
-         & allocLineAlignMask;
+  return (allocAlignBytes - (uintptr_t (p) & allocAlignMask))
+         & allocAlignMask;
 }
 
 // Returns the number of bytes to make size an aligned size
 inline size_t sizeAdjustedForAlignment (const size_t bytes)
 {
-  return (bytes + allocLineAlignMask) & ~allocLineAlignMask;
+  return (bytes + allocAlignMask) & ~allocAlignMask;
 }
 
 // Returns a pointer with alignment added.

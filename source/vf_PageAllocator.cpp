@@ -9,9 +9,13 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_MemoryAlignment.h"
 #include "vf/vf_PageAllocator.h"
 
-#define LOG_GC 1
+#define LOG_GC 0
 
 namespace {
+
+// This is the size of a page for GlobalPageAllocator.
+//
+static const size_t globalPageBytes = 8 * 1024;
 
 // This is the upper limit on the amount of physical memory an instance of the
 // allocator will allow. Going over this limit means that consumers cannot keep
@@ -22,7 +26,7 @@ const size_t hardLimitMegaBytes = 4 * 256;
 
 }
 
-//PageAllocator GlobalPageAllocator::s_allocator (128);
+PageAllocator GlobalPageAllocator::s_allocator (globalPageBytes);
 
 //------------------------------------------------------------------------------
 /*

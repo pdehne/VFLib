@@ -10,12 +10,6 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_MemoryAlignment.h"
 
-// must come first due to order of construction issues
-PageAllocator Allocator::s_pages (8192);
-
-PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize + 64);
-
-//
 // Implementation notes
 //
 // - A Page is a large allocation from a global PageAllocator.
@@ -30,10 +24,6 @@ PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize +
 //   but uses a global PageAllocator. This reduces memory consumption without
 //   affecting performance.
 //
-
-// This is the size of a page.
-//
-static const size_t globalPageBytes = 8 * 1024;
 
 // This precedes every allocation
 //
@@ -115,7 +105,7 @@ public:
     const size_t headerBytes = Memory::sizeAdjustedForAlignment (sizeof (Header));
     const size_t bytesNeeded = headerBytes + bytes;
 
-    if (bytesNeeded > Allocator::s_pages.getPageBytes ())
+    if (bytesNeeded > m_allocator.m_pages.getPageBytes ())
       Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
     Header* header;
@@ -146,7 +136,7 @@ private:
 
 inline Allocator::Page* Allocator::newPage ()
 {
-  return new (s_pages.allocate ()) Page (s_pages.getPageBytes());
+  return new (m_pages.allocate ()) Page (m_pages.getPageBytes());
 }
 
 inline void Allocator::deletePage (Page* page)
@@ -158,7 +148,7 @@ inline void Allocator::deletePage (Page* page)
 
 Allocator::Allocator ()
 {
-  //vfassert (s_pages.getPageBytes () >= sizeof (Page) + 256);
+  //vfassert (m_pages.getPageBytes () >= sizeof (Page) + Memory::allocAlignBytes);
 }
 
 Allocator::~Allocator ()
