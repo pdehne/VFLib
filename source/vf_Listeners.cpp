@@ -9,6 +9,140 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Listeners.h"
 
 //------------------------------------------------------------------------------
+
+void ListenersBase::Call::destroySharedObject ()
+{
+  delete this;
+}
+
+//------------------------------------------------------------------------------
+
+// Worker item to process a Call for a particular listener.
+// This is used to avoid bind overhead.
+//
+class ListenersBase::CallWork : public Worker::Call
+{
+public:
+  inline CallWork (ListenersBase::Call* const c, void* const listener)
+    : m_call (c), m_listener (listener)
+  {
+  }
+
+  void operator() ()
+  {
+    m_call->operator() (m_listener);
+  }
+
+private:
+  ListenersBase::Call::Ptr m_call;
+  void* const m_listener;
+};
+
+//------------------------------------------------------------------------------
+
+// Worker item to process a Call for a group.
+// This is used to avoid bind overhead.
+//
+class ListenersBase::GroupWork : public Worker::Call
+{
+public:
+  inline GroupWork (Group* group,
+                    ListenersBase::Call* c,
+                    const timestamp_t timestamp)
+    : m_group (group)
+    , m_call (c)
+    , m_timestamp (timestamp)
+  {
+  }
+
+  void operator() ()
+  {
+    m_group->do_call (m_call, m_timestamp);
+  }
+
+private:
+  Group::Ptr m_group;
+  ListenersBase::Call::Ptr m_call;
+  const timestamp_t m_timestamp;
+};
+
+//------------------------------------------------------------------------------
+
+// Worker item to process a call for a particular listener.
+// This is used to avoid bind overhead.
+//
+class ListenersBase::GroupWork1 : public Worker::Call
+{
+public:
+  inline GroupWork1 (Group* group,
+                     ListenersBase::Call* c,
+                     const timestamp_t timestamp,
+                     void* const listener)
+    : m_group (group)
+    , m_call (c)
+    , m_timestamp (timestamp)
+    , m_listener (listener)
+  {
+  }
+
+  void operator() ()
+  {
+    m_group->do_call1 (m_call, m_timestamp, m_listener);
+  }
+
+private:
+  Group::Ptr m_group;
+  ListenersBase::Call::Ptr m_call;
+  const timestamp_t m_timestamp;
+  void* const m_listener;
+};
+
+//------------------------------------------------------------------------------
+
+// A Proxy maintains a list of Entry.
+// Each Entry holds a group and the current Call (which can be updated).
+//
+struct ListenersBase::Proxy::Entry : Entries::Node, SharedObject
+{
+  typedef SharedObjectPtr <Entry> Ptr;
+
+  explicit Entry (Group* g)
+    : group (g)
+  {
+  }
+
+  ~Entry ()
+  {
+    vfassert (call.get () == 0);
+  }
+
+  void destroySharedObject ()
+  {
+    globalDelete (this);
+  }
+
+  Group::Ptr group;
+  Atomic::Pointer <Call> call;
+};
+
+//------------------------------------------------------------------------------
+
+// A Group maintains a list of Entry.
+//
+struct ListenersBase::Group::Entry : List::Node
+{
+  Entry (void* const l, const timestamp_t t)
+    : listener (l),
+    timestamp (t)
+  {
+  }
+
+  void* const listener;
+  const timestamp_t timestamp;
+};
+
+//------------------------------------------------------------------------------
+
 //
 // Group
 //
@@ -85,37 +219,32 @@ bool ListenersBase::Group::remove (void* listener)
 // Used for assertions.
 // The caller must synchronize.
 //
-bool ListenersBase::Group::contains (void const* listener) /*const*/
+bool ListenersBase::Group::contains (void* const listener) /*const*/
 {
-  bool found = false;
-
   for (List::iterator iter = m_list.begin(); iter != m_list.end(); iter++)
-  {
     if (iter->listener == listener)
-    {
-      found = true;
-      break;
-    }
-  }
-
-  return found;
+      return true;
+  return false;
 }
 
 void ListenersBase::Group::call (Call* const c, const timestamp_t timestamp)
 {
   vfassert (!empty ());
-  m_worker->callp (new (m_worker->getAllocator()) Work (this, c, timestamp));
+  m_worker->callp (new (m_worker->getAllocator()) GroupWork (this, c, timestamp));
 }
 
 void ListenersBase::Group::queue (Call* const c, const timestamp_t timestamp)
 {
   vfassert (!empty ());
-  m_worker->queuep (new (m_worker->getAllocator()) Work (this, c, timestamp));
+  m_worker->queuep (new (m_worker->getAllocator()) GroupWork (this, c, timestamp));
 }
 
-void ListenersBase::Group::queue1 (Call* const c, const timestamp_t timestamp, void* const listener)
+void ListenersBase::Group::queue1 (Call* const c,
+                                   const timestamp_t timestamp,
+                                   void* const listener)
 {
-  m_worker->queuep (new (m_worker->getAllocator()) Work1 (this, c, timestamp, listener));
+  m_worker->queuep (new (m_worker->getAllocator()) GroupWork1 (
+    this, c, timestamp, listener));
 }
 
 // Queues a reference to the Call on the thread queue of each listener
@@ -154,7 +283,7 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
         // thread queue.
         vfassert (m_worker->in_process ());
 
-        m_worker->callp (new (m_worker->getAllocator()) Call::Work (c, m_listener));
+        m_worker->callp (new (m_worker->getAllocator()) CallWork (c, m_listener));
 
         m_listener = 0;
       }
@@ -167,7 +296,8 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
   }
 }
 
-void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp, void* const listener)
+void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
+                                     void* const listener)
 {
   if (!empty ())
   {
@@ -188,7 +318,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 
           vfassert (m_worker->in_process ());
 
-          m_worker->callp (new (m_worker->getAllocator()) Call::Work (c, m_listener));
+          m_worker->callp (new (m_worker->getAllocator()) CallWork (c, m_listener));
 
           m_listener = 0;
         }
@@ -207,18 +337,50 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 //
 //------------------------------------------------------------------------------
 
+// Worker item for processing a an Entry for a Proxy.
+// This is used to avoid bind overhead.
 //
-// Proxy
-//
-// This object acts as a proxy for a contained Call and gets put on Group
-// thread queues. The proxy is kept in a list so if new calls are made
-// for the same member before the existing calls execute, the existing
-// calls can be replaced.
-//
-// Once a Proxy is created it lives for the lifetime of the listeners.
-//
-ListenersBase::Proxy::Proxy ()
+class ListenersBase::Proxy::Work : public Worker::Call
 {
+public:
+  inline Work (Proxy* proxy,
+               Entry* const entry,
+               const timestamp_t timestamp)
+    : m_proxy (proxy)
+    , m_entry (entry)
+    , m_timestamp (timestamp)
+  {
+  }
+
+  void operator() ()
+  {
+    ListenersBase::Call* c = m_entry->call.exchange (0);
+
+    Group* group = m_entry->group;
+
+    if (!group->empty ())
+      group->do_call (c, m_timestamp);
+
+    c->decReferenceCount ();
+  }
+
+private:
+  Proxy* const m_proxy;
+  Entry::Ptr m_entry;
+  const timestamp_t m_timestamp;
+};
+
+// Holds a Call, and gets put in the Worker in place of the Call.
+// The Call may be replaced if it hasn't been processed yet.
+// A Proxy exists for the lifetime of the Listeners.
+//
+ListenersBase::Proxy::Proxy (void const* const member, const size_t bytes)
+  : m_bytes (bytes)
+{
+  if (bytes > maxMemberBytes)
+    Throw (Error().fail (__FILE__, __LINE__, "the Proxy member is too large"));
+
+  memcpy (m_member, member, bytes);
 }
 
 ListenersBase::Proxy::~Proxy ()
@@ -241,6 +403,7 @@ ListenersBase::Proxy::~Proxy ()
 // Adds the group to the Proxy.
 // Caller must have the proxies mutex.
 // Caller is responsible for preventing duplicates.
+//
 void ListenersBase::Proxy::add (Group* group)
 {
   Entry* entry (globalAlloc <Entry>::New (group));
@@ -305,16 +468,9 @@ void ListenersBase::Proxy::update (Call* const c, const timestamp_t timestamp)
   }
 }
 
-void ListenersBase::Proxy::Work::operator() ()
+bool ListenersBase::Proxy::match (void const* const member, const size_t bytes) const
 {
-  ListenersBase::Call* c = m_entry->call.exchange (0);
-
-  Group* group = m_entry->group;
-
-  if (!group->empty ())
-    group->do_call (c, m_timestamp);
-
-  c->decReferenceCount ();
+  return m_bytes == bytes && memcmp (member, m_member, bytes) == 0;
 }
 
 //------------------------------------------------------------------------------
@@ -323,8 +479,7 @@ void ListenersBase::Proxy::Work::operator() ()
 //
 //------------------------------------------------------------------------------
 
-ListenersBase::ListenersBase ()
-  : m_timestamp (0)
+ListenersBase::ListenersBase () : m_timestamp (0)
 {
 }
 
@@ -348,31 +503,13 @@ ListenersBase::~ListenersBase ()
   }
 }
 
-// Searches for a proxy that matches the pointer to member.
-// Caller synchronizes.
-ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
-{
-  Proxy* proxy = 0;
-
-  for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end (); ++iter)
-  {
-    if ((*iter)->match (member, bytes))
-    {
-      proxy = *iter;
-      break;
-    }
-  }
-
-  return proxy;
-}
-
 void ListenersBase::add_void (void* const listener, Worker* worker)
 {
   vfassert (worker != 0);
 
   LockFree::ScopedWriteLock lock (m_groups_mutex);
 
-#ifdef JUCE_DEBUG
+#if VF_DEBUG
   // Make sure the listener has not already been added
   // SHOULD USE const_iterator!
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
@@ -409,15 +546,9 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
     m_groups.push_back (group);
 
     // Tell existing proxies to add the group
-    {
-      LockFree::ScopedReadLock lock (m_proxies_mutex);
-
-      for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
-      {
-        Proxy* proxy = *iter++;
-        proxy->add (group);
-      }
-    }
+    LockFree::ScopedReadLock lock (m_proxies_mutex);
+    for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
+      (*iter++)->add (group);
   }
 
   // Add the listener to the group with the current timestamp
@@ -433,7 +564,7 @@ void ListenersBase::remove_void (void* const listener)
   LockFree::ScopedWriteLock lock (m_groups_mutex);
 
   // Make sure the listener exists
-#ifdef JUCE_DEBUG
+#if VF_DEBUG
   {
     bool exists = false;
 
@@ -518,7 +649,7 @@ void ListenersBase::queuep (Call::Ptr cp)
     (*iter++)->queue (c, m_timestamp);
 }
 
-void ListenersBase::queue1p (void* const listener, Call::Ptr cp)
+void ListenersBase::queue1p_void (void* const listener, Call::Ptr cp)
 {
   Call* c = cp;
 
@@ -535,6 +666,72 @@ void ListenersBase::queue1p (void* const listener, Call::Ptr cp)
       break;
     }
   }
+}
+
+// Search for an existing Proxy that matches the pointer to
+// member and replace it's Call, or create a new Proxy for it.
+//
+void ListenersBase::updatep (void const* const member,
+                             const size_t bytes, Call::Ptr cp)
+{
+  Call* c = cp;
+
+  LockFree::ScopedReadLock lock (m_groups_mutex);
+
+  if (!m_groups.empty ())
+  {
+    Proxy* proxy;
+    
+    {
+      LockFree::ScopedReadLock lock (m_proxies_mutex);
+
+      // See if there's already a proxy
+      proxy = find_proxy (member, bytes);
+    }
+
+    // Possibly create one
+    if (!proxy)
+    {
+      LockFree::ScopedWriteLock lock (m_proxies_mutex);
+
+      // Have to search for it again in case someone else added it
+      proxy = find_proxy (member, bytes);
+
+      if (!proxy)
+      {
+        // Create a new empty proxy
+        proxy = globalAlloc <Proxy>::New (member, bytes);
+
+        // Add all current groups to the Proxy.
+        // We need the group read lock for this (caller provided).
+        for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+        {
+          Group* group = *iter++;
+          proxy->add (group);
+        }
+
+        // Add it to the list.
+        m_proxies.push_front (proxy);
+      }
+    }
+
+    // Requires the group read lock
+    proxy->update (c, m_timestamp);
+  }
+}
+
+// Searches for a proxy that matches the pointer to member.
+// Caller synchronizes.
+//
+ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
+{
+  for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
+  {
+    Proxy* proxy = *iter++;
+    if (proxy->match (member, bytes))
+      return proxy;
+  }
+  return 0;
 }
 
 END_VF_NAMESPACE
