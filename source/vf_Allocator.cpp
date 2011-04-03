@@ -10,32 +10,32 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_MemoryAlignment.h"
 
-// must come first
+// must come first due to order of construction issues
 PageAllocator Allocator::s_pages (8192);
 
 PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize + 64);
 
 Allocator GlobalAllocator::s_allocator;
 
-namespace {
-
-/* Implementation notes
-
-- A Page is a large allocation from the PageAllocator.
-
-- Each thread maintains an 'active' page from which it makes allocations.
-
-- When the active page is full, a new one takes it's place.
-
-- After the last deallocation in a page, the memory is returned to the PageAllocator.
-
-*/
-
-// If pageBytes is 0 on construction we will use this value instead.
 //
-static const size_t defaultPageBytes = 8 * 1024;
+// Implementation notes
+//
+// - A Page is a large allocation from a global PageAllocator.
+//
+// - Each thread maintains an 'active' page from which it makes allocations.
+//
+// - When the active page is full, a new one takes it's place.
+//
+// - Page memory is deallocated when it is not active and no longer referenced.
+//
+// - Each instance of Allocator maintains its own set of per-thread active pages,
+//   but uses a global PageAllocator. This reduces memory consumption without
+//   affecting performance.
+//
 
-}
+// This is the size of a page.
+//
+static const size_t globalPageBytes = 8 * 1024;
 
 // This precedes every allocation
 //
@@ -113,8 +113,8 @@ public:
 
   ~PerThreadData ()
   {
-    m_active->release ();
-    m_allocator.deletePage (m_active);
+    if (m_active->release ())
+      m_allocator.deletePage (m_active);
   }
 
   inline void* allocate (const size_t bytes)
