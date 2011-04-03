@@ -32,10 +32,37 @@
 class Worker
 {
 public:
+  typedef Allocator AllocatorType;
+
+  class Call;
+
+private:
+  typedef LockFree::Queue <Call> Calls;
+
+public:
+  class Call : public Calls::Node,
+               public AllocatorType::Allocated
+  {
+  public:
+    virtual ~Call () { }
+    virtual void operator() () = 0;
+  };
+
+  template <class Functor>
+  class CallType : public Call
+  {
+  public:
+    explicit CallType (Functor const& f) : m_f (f) { }
+    ~CallType () { }
+    void operator() () { m_f (); }
+
+  private:
+    Functor m_f;
+  };
+
+public:
   explicit Worker (const char* szName = "");
   ~Worker ();
-
-  typedef Allocator AllocatorType;
 
   inline AllocatorType& getAllocator ()
   {
@@ -45,30 +72,33 @@ public:
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }
 
-  // Add the functor without executing immediately.
+  // Add the Call without executing immediately.
+  // Calls MUST NOT cause thread interruptions.
+  void queuep (Call* call);
+
+  // Add the Call, and process the queue if we're
+  // on the associated thread.
   //
+  void callp (Call* call);
+
+  // Convenience for caller generated functors.
+
   template <class Functor>
   void queuef (Functor const& f)
   {
-    do_queue (new (m_allocator.allocate (sizeof (CallType <Functor>)))
-      CallType <Functor> (f));
+    queuep (new (m_allocator) CallType <Functor> (f));
   }
 
-  // Add a functor to the queue. It may be executed immediately.
-  //
-  // Functors MUST NOT cause thread interruptions.
-  //
   template <class Functor>
   void callf (Functor const& f)
   {
-    do_call (new (m_allocator.allocate (sizeof (CallType <Functor>)))
-      CallType <Functor> (f));
+    callp (new (m_allocator) CallType <Functor> (f));
   }
 
-  // Sugar for calling functions with arguments.
+  // Sugar for queuef() with automatic binding.
 
   template <class Fn>
-  void queue (Fn const& f)
+  void queue (Fn f)
   { queuef (bind (f)); }
 
   template <class Fn, typename  T1>
@@ -113,10 +143,10 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
-  // Queue a call and process.
+  // Sugar for callf() with automatic binding.
 
   template <class Fn>
-  void call (Fn const& f)
+  void call (Fn f)
   { callf (bind (f)); }
 
   template <class Fn, typename  T1>
@@ -192,33 +222,7 @@ protected:
   virtual void signal () = 0;
 
 private:
-  // List of fixed-size functors
-  class Call;
-  typedef LockFree::Queue <Call> Calls;
-
-  class Call : public Calls::Node
-  {
-  public:
-    virtual ~Call () { }
-    virtual void operator() () = 0;
-  };
-
-  template <class Functor>
-  class CallType : public Call
-  {
-  public:
-    explicit CallType (Functor const& f) : m_f (f) { }
-    ~CallType () { }
-    void operator() () { m_f (); }
-
-  private:
-    Functor m_f;
-  };
-
-private:
   bool do_process ();
-  void do_queue (Call* c);
-  void do_call (Call* c);
 
 private:
   const char* m_szName; // for debugging

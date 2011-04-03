@@ -12,37 +12,33 @@ BEGIN_VF_NAMESPACE
 //
 // Group
 //
-//------------------------------------------------------------------------------
-
+// - A list of listeners associated with the same Worker.
 //
-// Group
+// - The list is only iterated on the Worker's thread.
 //
-// Maintains a protected list of listeners called on the same thread queue.
-//
-// The list of groups is not evaluated until the Group receives its call
-// on the thread queue.
-//
-// It is possible for the group to become empty by the time it executes
-// its call. In this case it will release its last reference and get deleted.
+// - It is safe to add or remove listeners from the group
+//   at any time.
 //
 
-ListenersBase::Group::Group (Worker* worker)
-  : m_listener (0)
-  , m_worker (worker)
+ListenersBase::Group::Group (Worker* const worker)
+  : m_worker (worker)
+  , m_listener (0)
 {
 }
 
 ListenersBase::Group::~Group ()
 {
-  // If this goes off it means a Listener forgot to remove.
+  // If this goes off it means a Listener forgot to remove itself.
   vfassert (m_list.empty ());
 
   // shouldn't be deleting group during a call
   vfassert (m_listener == 0);
 }
 
-// Adds the listener to the group.
+// Add the listener with the given timestamp.
+// The listener will only get calls with higher timestamps.
 // The caller must prevent duplicates.
+//
 void ListenersBase::Group::add (void* listener,
                                 const timestamp_t timestamp)
 {
@@ -50,26 +46,25 @@ void ListenersBase::Group::add (void* listener,
 
   vfassert (!contains (listener));
 
-  // Should never be able to get here while in do_call()
+  // Should never be able to get here while in call()
   vfassert (m_listener == 0);
 
   // Add the listener and remember the time stamp so we don't
   // send it calls that were queued earlier than the add().
-  Entry* entry = globalAlloc <Entry>::New ();
-  entry->listener = listener;
-  entry->timestamp = timestamp;
+  Entry* entry = globalAlloc <Entry>::New (listener, timestamp);
   m_list.push_back (entry);
 }
 
 // Removes the listener from the group if it exists.
 // Returns true if the listener was removed.
+//
 bool ListenersBase::Group::remove (void* listener)
 {
   bool found = false;
 
   LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
-  // Should never be able to get here while in do_call()
+  // Should never be able to get here while in call()
   vfassert (m_listener == 0);
 
   for (List::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
@@ -89,7 +84,8 @@ bool ListenersBase::Group::remove (void* listener)
 
 // Used for assertions.
 // The caller must synchronize.
-bool ListenersBase::Group::contains (void const* listener)
+//
+bool ListenersBase::Group::contains (void const* listener) /*const*/
 {
   bool found = false;
 
@@ -105,22 +101,21 @@ bool ListenersBase::Group::contains (void const* listener)
   return found;
 }
 
-// Add the group to its thread queue with the given Call.
-void ListenersBase::Group::queue_call (Call::Ptr c, bool sync)
+void ListenersBase::Group::call (Call* const c, const timestamp_t timestamp)
 {
-  // Caller shouldn't know about us if we're empty.
   vfassert (!empty ());
+  m_worker->callp (new (m_worker->getAllocator()) Work (this, c, timestamp));
+}
 
-  // The Group::Ptr cast is required to maintain the reference count,
-  // because boost::bind peforms the conversion from Group* to
-  // to Group::Ptr at the point of call instead of bind time.
-  //
-  // NOTE: do_call() may execute synchronously if sync is true.
-  //
-  if (sync)
-    m_worker->call (&Group::do_call, this, c, c->m_timestamp, Group::Ptr (this));
-  else
-    m_worker->queue (&Group::do_call, this, c, c->m_timestamp, Group::Ptr (this));
+void ListenersBase::Group::queue (Call* const c, const timestamp_t timestamp)
+{
+  vfassert (!empty ());
+  m_worker->queuep (new (m_worker->getAllocator()) Work (this, c, timestamp));
+}
+
+void ListenersBase::Group::queue1 (Call* const c, const timestamp_t timestamp, void* const listener)
+{
+  m_worker->queuep (new (m_worker->getAllocator()) Work1 (this, c, timestamp, listener));
 }
 
 // Queues a reference to the Call on the thread queue of each listener
@@ -128,10 +123,7 @@ void ListenersBase::Group::queue_call (Call::Ptr c, bool sync)
 // stack's call chain, either directly from Worker::process(),
 // or from Proxy::do_call() called from Worker::process().
 //
-// The unnamed parameter exists to maintain a reference to the group
-// while it travels through the thread queue.
-//
-void ListenersBase::Group::do_call (Call::Ptr c, const timestamp_t timestamp, Group::Ptr)
+void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
 {
   if (!empty ())
   {
@@ -152,7 +144,7 @@ void ListenersBase::Group::do_call (Call::Ptr c, const timestamp_t timestamp, Gr
       // Call gets queued but before it executes, this prevents listeners
       // from seeing Calls created before they were added.
       //
-      if (entry->came_before (c))
+      if (timestamp > entry->timestamp)
       {
         m_listener = entry->listener;
 
@@ -162,7 +154,7 @@ void ListenersBase::Group::do_call (Call::Ptr c, const timestamp_t timestamp, Gr
         // thread queue.
         vfassert (m_worker->in_process ());
 
-        m_worker->call (&Call::do_call, c, m_listener);
+        m_worker->callp (new (m_worker->getAllocator()) Call::Work (c, m_listener));
 
         m_listener = 0;
       }
@@ -172,6 +164,40 @@ void ListenersBase::Group::do_call (Call::Ptr c, const timestamp_t timestamp, Gr
   {
     // last listener was removed before we got here,
     // and the parent listener list may have been deleted.
+  }
+}
+
+void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp, void* const listener)
+{
+  if (!empty ())
+  {
+    LockFree::ReadWriteMutex::ScopedReadLockType lock (m_mutex);
+
+    // Recursion not allowed.
+    vfassert (m_listener == 0);
+
+    for (List::iterator iter = m_list.begin(); iter != m_list.end();)
+    {
+      Entry* entry = *iter++;
+
+      if (entry->listener == listener)
+      {
+        if (timestamp > entry->timestamp)
+        {
+          m_listener = entry->listener;
+
+          vfassert (m_worker->in_process ());
+
+          m_worker->callp (new (m_worker->getAllocator()) Call::Work (c, m_listener));
+
+          m_listener = 0;
+        }
+      }
+    }
+  }
+  else
+  {
+    // Listener was removed
   }
 }
 
@@ -215,29 +241,29 @@ ListenersBase::Proxy::~Proxy ()
 // Adds the group to the Proxy.
 // Caller must have the proxies mutex.
 // Caller is responsible for preventing duplicates.
-void ListenersBase::Proxy::add (Group::Ptr group)
+void ListenersBase::Proxy::add (Group* group)
 {
-  Entry::Ptr entry (globalAlloc <Entry>::New (group));
+  Entry* entry (globalAlloc <Entry>::New (group));
 
   // Manual addref and put raw pointer in list
-  entry.getObject()->incReferenceCount ();
+  entry->incReferenceCount ();
   m_entries.push_back (entry);
 }
 
 // Removes the group from the Proxy.
 // Caller must have the proxies mutex.
 // Caller is responsible for making sure the group exists.
-void ListenersBase::Proxy::remove (Group::Ptr group)
+void ListenersBase::Proxy::remove (Group* group)
 {
   for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end();)
   {
-    Entry::Ptr entry = *iter++;
+    Entry* entry = *iter++;
 
     if (entry->group == group)
     {
       // remove from list and manual release
-      m_entries.remove (entry.getObject());
-      entry.getObject()->decReferenceCount();
+      m_entries.remove (entry);
+      entry->decReferenceCount();
 
       // Entry might still be in the empty group's thread queue
       break;
@@ -246,10 +272,10 @@ void ListenersBase::Proxy::remove (Group::Ptr group)
 }
 
 // For each group, updates the call.
-// Queues each group for do_call that isn't already queued.
+// Queues each group that isn't already queued.
 // Caller must acquire the group read lock.
 //
-void ListenersBase::Proxy::do_update (Call::Ptr c)
+void ListenersBase::Proxy::update (Call* const c, const timestamp_t timestamp)
 {
   // why would we even want to be called?
   vfassert (!m_entries.empty());
@@ -261,15 +287,16 @@ void ListenersBase::Proxy::do_update (Call::Ptr c)
     Entry* entry = *iter++;
 
     // Manually add a reference since we use a raw pointer
-    c.getObject()->incReferenceCount ();
+    c->incReferenceCount ();
 
     // Atomically exchange the new call for the old one
-    Call* old = entry->call.exchange (c.getObject());
+    Call* old = entry->call.exchange (c);
 
     // If no old call then they need to be queued
     if (!old)
     {
-      entry->group->getWorker()->call (&Proxy::do_call, this, Entry::Ptr (entry));
+      Worker& worker = *entry->group->getWorker();
+      worker.callp (new (worker.getAllocator ()) Work (this, entry, timestamp));
     }
     else
     {
@@ -278,26 +305,16 @@ void ListenersBase::Proxy::do_update (Call::Ptr c)
   }
 }
 
-void ListenersBase::Proxy::do_call (Entry::Ptr entry)
+void ListenersBase::Proxy::Work::operator() ()
 {
-  // Atomically acquire the call, which also serves as the queued flag
-  Call::Ptr c = entry->call.exchange (0);
+  ListenersBase::Call* c = m_entry->call.exchange (0);
 
-  vfassert (c);
-
-  Group::Ptr group = entry->group;
+  Group* group = m_entry->group;
 
   if (!group->empty ())
-  {
-    group->do_call (c, c->m_timestamp, group);
-  }
-  else
-  {
-    // Entry will get a final release
-  }
+    group->do_call (c, m_timestamp);
 
-  // Remove the manual reference that we added because of the raw pointer
-  c.getObject()->decReferenceCount ();
+  c->decReferenceCount ();
 }
 
 //------------------------------------------------------------------------------
@@ -347,20 +364,6 @@ ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
   }
 
   return proxy;
-}
-
-// Puts the Call on each existing group's queue.
-// The caller must acquire the read mutex, but we release it.
-// It is possible that the call will execute immediately if sync is true.
-void ListenersBase::queue_call (Call::Ptr c, bool sync)
-{
-  // can't be const iterator because queue_call might cause called functors
-  // to modify the list.
-  for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
-  {
-    Group::Ptr group = *iter++;
-    group->queue_call (c, sync);
-  }
 }
 
 void ListenersBase::add_void (void* const listener, Worker* worker)
@@ -486,6 +489,49 @@ void ListenersBase::remove_void (void* const listener)
         // do nothing, and release its own final reference.
       }
 
+      break;
+    }
+  }
+}
+
+void ListenersBase::callp (Call::Ptr cp)
+{
+  Call* c = cp;
+
+  LockFree::ScopedReadLock lock (m_groups_mutex);
+
+  // can't be const iterator because queue() might cause called functors
+  // to modify the list.
+  for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+    (*iter++)->call (c, m_timestamp);
+}
+
+void ListenersBase::queuep (Call::Ptr cp)
+{
+  Call* c = cp;
+
+  LockFree::ScopedReadLock lock (m_groups_mutex);
+
+  // can't be const iterator because queue() might cause called functors
+  // to modify the list.
+  for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+    (*iter++)->queue (c, m_timestamp);
+}
+
+void ListenersBase::queue1p (void* const listener, Call::Ptr cp)
+{
+  Call* c = cp;
+
+  LockFree::ScopedReadLock lock (m_groups_mutex);
+
+  // can't be const iterator because queue() might cause called functors
+  // to modify the list.
+  for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+  {
+    Group* group = *iter++;
+    if (group->contains (listener))
+    {
+      group->queue1 (c, m_timestamp, listener);
       break;
     }
   }

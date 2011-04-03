@@ -10,6 +10,26 @@
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
 
+template <class AllocatorType>
+class Allocated
+{
+public:
+  inline void* operator new (size_t bytes, AllocatorType& allocator) throw()
+  {
+    return allocator.allocate (bytes);
+  }
+
+  inline void operator delete (void* p, AllocatorType& allocator) throw()
+  {
+    AllocatorType::deallocate (p);
+  }
+
+  inline void operator delete (void* p) throw()
+  {
+    AllocatorType::deallocate (p);
+  }
+};
+
 // Lock-free allocator for small variably sized memory blocks.
 //
 // - Any thread may allocate and free concurrently.
@@ -23,7 +43,10 @@
 class Allocator
 {
 public:
-  explicit Allocator (const size_t pageBytes = 0);
+  typedef Allocated <Allocator> Allocated;
+
+public:
+  explicit Allocator ();
   ~Allocator ();
 
   void* allocate (const size_t bytes);
@@ -44,9 +67,14 @@ private:
   static PageAllocator s_pages;
 };
 
+
+
+template <class Tag>
 class GlobalAllocator
 {
 public:
+  typedef Allocated <GlobalAllocator> Allocated;
+
   inline void* allocate (size_t bytes)
   {
     return s_allocator.allocate (bytes);
@@ -60,6 +88,9 @@ public:
 private:
   static Allocator s_allocator;
 };
+
+template <class Tag>
+Allocator GlobalAllocator <Tag>::s_allocator;
 
 //
 // LEGACY
@@ -91,7 +122,9 @@ private:
   static PageAllocator s_allocator;
 };
 
-#if 1
+//
+// LEGACY
+//
 
 template <class C>
 struct globalAlloc
@@ -168,37 +201,5 @@ void globalDelete (C* c)
   c->~C();
   GlobalFixedAllocator().deallocate (c);
 }
-
-#else
-
-template <class C>
-struct globalAlloc
-{
-  static C* New ()
-  {
-    return new (GlobalAllocator().allocate (sizeof (C))) C;
-  }
-
-  template <class T1>
-  static C* New (const T1& t1)
-  {
-    return new (GlobalAllocator().allocate (sizeof (C))) C (t1);
-  }
-
-  template <class T1, class T2>
-  static C* New (const T1& t1, const T2& t2)
-  {
-    return new (GlobalAllocator().allocate (sizeof (C))) C (t1, t2);
-  }
-};
-
-template <class C>
-void globalDelete (C* c)
-{
-  c->~C();
-  Allocator::deallocate (c);
-}
-
-#endif
 
 #endif

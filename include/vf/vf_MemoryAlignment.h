@@ -30,7 +30,7 @@ inline size_t sizeAdjustedForAlignment (const size_t bytes)
 
 // Returns a pointer with alignment added.
 template <typename P>
-P* pointerAdjustedForAlignment (P* const p)
+inline P* pointerAdjustedForAlignment (P* const p)
 {
   return reinterpret_cast <P*> (reinterpret_cast <char*> (p) + bytesNeededForAlignment (p));
 }

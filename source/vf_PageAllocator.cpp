@@ -22,7 +22,7 @@ const size_t hardLimitMegaBytes = 4 * 256;
 
 }
 
-PageAllocator GlobalPageAllocator::s_allocator (128);
+//PageAllocator GlobalPageAllocator::s_allocator (128);
 
 //------------------------------------------------------------------------------
 /*

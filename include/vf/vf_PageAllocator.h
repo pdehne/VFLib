@@ -74,7 +74,6 @@ private:
 #endif
 };
 
-
 class GlobalPageAllocator
 {
 public:

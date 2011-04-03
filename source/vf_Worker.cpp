@@ -9,6 +9,8 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
+void operator delete (void* p);
+
 Worker::Worker (const char* szName)
 : m_szName (szName)
 {
@@ -21,6 +23,46 @@ Worker::~Worker ()
 
   // Can't destroy queue with unprocessed calls.
   vfassert (m_list.empty ());
+}
+
+// Adds a call to the queue of execution.
+void Worker::queuep (Call* c)
+{
+  // If this goes off it means calls are being made after the
+  // queue is closed, and probably there is no one around to
+  // process it.
+  vfassert (m_closed.isClear());
+
+  if (m_list.push_back (c))
+    signal ();
+}
+
+// Append the Call to the queue. If this call is made from the same
+// thread as the last thread that called process(), then the call
+// will execute synchronously.
+//
+void Worker::callp (Call* c)
+{
+  queuep (c);
+
+  // If we are called on the process thread and we are not
+  // recursed into do_process, then process the queue. This
+  // makes calls from the process thread synchronous.
+  //
+  // NOTE: The value of in_process is invalid/volatile unless
+  // this thread is the last process thread.
+  //
+  // NOTE: There is a small window of opportunity where we
+  // might get an undesired synchronization if new thread
+  // calls process() concurrently.
+  //
+  if (CurrentThread::getId() == m_id &&
+      m_in_process.trySet ())
+  {
+    do_process ();
+
+    m_in_process.clear ();
+  }
 }
 
 void Worker::associateWithCurrentThread ()
@@ -88,8 +130,12 @@ bool Worker::do_process ()
     for (;;)
     {
       call->operator() ();
+#if 1
+      delete call;
+#else
       call->~Call ();
       m_allocator.deallocate (call);
+#endif
 
       call = m_list.pop_front ();
       if (call == 0)
@@ -102,47 +148,6 @@ bool Worker::do_process ()
   }
 
   return did_something;
-}
-
-
-// Adds a call to the queue of execution.
-void Worker::do_queue (Call* c)
-{
-  // If this goes off it means calls are being made after the
-  // queue is closed, and probably there is no one around to
-  // process it.
-  vfassert (m_closed.isClear());
-
-  if (m_list.push_back (c))
-    signal ();
-}
-
-// Append the Call to the queue. If this call is made from the same
-// thread as the last thread that called process(), then the call
-// will execute synchronously.
-//
-void Worker::do_call (Call* c)
-{
-  do_queue (c);
-
-  // If we are called on the process thread and we are not
-  // recursed into do_process, then process the queue. This
-  // makes calls from the process thread synchronous.
-  //
-  // NOTE: The value of in_process is invalid/volatile unless
-  // this thread is the last process thread.
-  //
-  // NOTE: There is a small window of opportunity where we
-  // might get an undesired synchronization if new thread
-  // calls process() concurrently.
-  //
-  if (CurrentThread::getId() == m_id &&
-      m_in_process.trySet ())
-  {
-    do_process ();
-
-    m_in_process.clear ();
-  }
 }
 
 END_VF_NAMESPACE

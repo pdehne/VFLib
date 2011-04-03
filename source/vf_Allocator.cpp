@@ -15,8 +15,6 @@ PageAllocator Allocator::s_pages (8192);
 
 PageAllocator GlobalFixedAllocator::s_allocator (globalFixedAllocatorBlockSize + 64);
 
-Allocator GlobalAllocator::s_allocator;
-
 //
 // Implementation notes
 //
@@ -41,12 +39,7 @@ static const size_t globalPageBytes = 8 * 1024;
 //
 struct Allocator::Header
 {
-  union
-  {
-    Allocator::Page* page;
-
-    char pad [Memory::alignmentBytes];
-  };
+  Allocator::Page* page;
 };
 
 //------------------------------------------------------------------------------
@@ -119,28 +112,29 @@ public:
 
   inline void* allocate (const size_t bytes)
   {
-    const size_t actual = sizeof (Header) + bytes;
+    const size_t headerBytes = Memory::sizeAdjustedForAlignment (sizeof (Header));
+    const size_t bytesNeeded = headerBytes + bytes;
 
-    if (actual > Allocator::s_pages.getPageBytes ())
+    if (bytesNeeded > Allocator::s_pages.getPageBytes ())
       Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
-    Header* h;
+    Header* header;
 
-    h = reinterpret_cast <Header*> (m_active->allocate (actual));
+    header = reinterpret_cast <Header*> (m_active->allocate (bytesNeeded));
 
-    if (!h)
+    if (!header)
     {
       if (m_active->release ())
         deletePage (m_active);
 
       m_active = m_allocator.newPage ();
 
-      h = reinterpret_cast <Header*> (m_active->allocate (actual));
+      header = reinterpret_cast <Header*> (m_active->allocate (bytesNeeded));
     }
 
-    h->page = m_active;
+    header->page = m_active;
 
-    return h + 1;
+    return reinterpret_cast <char*> (header) + headerBytes;
   }
 
 private:
@@ -162,9 +156,9 @@ inline void Allocator::deletePage (Page* page)
   PageAllocator::deallocate (page);
 }
 
-Allocator::Allocator (const size_t pageBytes)
+Allocator::Allocator ()
 {
-  vfassert (s_pages.getPageBytes () >= sizeof (Page) + 256);
+  //vfassert (s_pages.getPageBytes () >= sizeof (Page) + 256);
 }
 
 Allocator::~Allocator ()
@@ -190,7 +184,9 @@ void* Allocator::allocate (const size_t bytes)
 
 void Allocator::deallocate (void* p)
 {
-  Page* const page = (reinterpret_cast <Header*> (p) - 1)->page;
+  const size_t headerBytes = Memory::sizeAdjustedForAlignment (sizeof (Header));
+  Header* const header = reinterpret_cast <Header*> (reinterpret_cast <char*> (p) - headerBytes);
+  Page* const page = header->page;
 
   if (page->release ())
     deletePage (page);

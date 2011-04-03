@@ -12,8 +12,6 @@
 #include "vf/vf_SharedSingleton.h"
 #include "vf/vf_Worker.h"
 
-#include "vf/vf_Mutex.h" // REMOVE ASAP!!
-
 // List where each Listener registers with the desired Worker
 // on which the call is made. Since the list traversal for an associated
 // Worker is done on its thread, it is impossible for a Listener to
@@ -23,44 +21,40 @@
 // TODO: CONST CORRECTNESS? List CONST-NESS?
 //
 
-#define NEW_ALLOCATOR 0
-
 class ListenersBase
 {
 protected:
   typedef unsigned long timestamp_t;
 
+  typedef GlobalAllocator <ListenersBase> CallAllocatorType;
+
   //
   // Reference counted polymorphic unary functor void (*)(void* listener).
   // A timestamp distinguishes a Call created before a listener is added.
   //
-  class Call : public SharedObject
+  class Call : public SharedObject,
+               public CallAllocatorType::Allocated
   {
   public:
     typedef SharedObjectPtr <Call> Ptr;
 
-    explicit Call (const timestamp_t timestamp)
-      : m_timestamp (timestamp) { }
-    
-    bool is_newer_than (const timestamp_t when) const
-      { return m_timestamp > when; }
-
-    static void do_call (Ptr c, void* listener)
-      { c->operator()(listener); }
-
-    virtual void operator ()(void* listener) = 0;
-
-
-  private:
-    void destroySharedObject ()
-#if NEW_ALLOCATOR
-      { this->~Call(); LockFree::Allocator::deallocate (this); }
-#else
-      { globalDelete (this); }
-#endif
+    class Work : public Worker::Call
+    {
+    public:
+      Work (ListenersBase::Call* const c, void* const listener)
+        : m_call (c), m_listener (listener) { }
+      void operator() ()
+        { m_call->operator() (m_listener); }
+    private:
+      ListenersBase::Call::Ptr m_call;
+      void* const m_listener;
+    };
 
   public:
-    const timestamp_t m_timestamp;
+    virtual void operator () (void* const listener) = 0;
+
+  private:
+    void destroySharedObject () { delete this; }
   };
 
 private:
@@ -78,16 +72,46 @@ private:
   public:
     typedef SharedObjectPtr <Group> Ptr;
 
-    explicit Group    (Worker* worker);
+    explicit Group    (Worker* const worker);
     virtual ~Group    ();
-    void add          (void* listener, const unsigned long timestamp);
+    void add          (void* listener, const timestamp_t timestamp);
     bool remove       (void* listener);
     bool contains     (void const* listener);
-    void queue_call   (Call::Ptr c, bool sync);
-    void do_call      (Call::Ptr c, const timestamp_t timestamp, Group::Ptr);
+    void call         (Call* const c, const timestamp_t timestamp);
+    void queue        (Call* const c, const timestamp_t timestamp);
+    void queue1       (Call* const c, const timestamp_t timestamp, void* const listener);
+    void do_call      (Call* const c, const timestamp_t timestamp);
+    void do_call1     (Call* const c, const timestamp_t timestamp, void* const listener);
 
-    bool empty        () { return m_list.empty(); }
-    Worker* getWorker () { return m_worker; }
+    bool empty        () const { return m_list.empty(); }
+    Worker* getWorker () const { return m_worker; }
+
+    class Work : public Worker::Call
+    {
+    public:
+      Work (Group* group, ListenersBase::Call* c, const timestamp_t timestamp)
+        : m_group (group), m_call (c), m_timestamp (timestamp) { }
+      void operator() ()
+        { m_group->do_call (m_call, m_timestamp); }
+    private:
+      Group::Ptr m_group;
+      ListenersBase::Call::Ptr m_call;
+      const timestamp_t m_timestamp;
+    };
+
+    class Work1 : public Worker::Call
+    {
+    public:
+      Work1 (Group* group, ListenersBase::Call* c, const timestamp_t timestamp, void* const listener)
+        : m_group (group), m_call (c), m_timestamp (timestamp), m_listener (listener) { }
+      void operator() ()
+        { m_group->do_call1 (m_call, m_timestamp, m_listener); }
+    private:
+      Group::Ptr m_group;
+      ListenersBase::Call::Ptr m_call;
+      const timestamp_t m_timestamp;
+      void* const m_listener;
+    };
 
   private:
     void destroySharedObject ()
@@ -98,16 +122,16 @@ private:
     typedef List <Entry> List;
     struct Entry : List::Node
     {
-      void* listener; // the listener
-      timestamp_t timestamp; // timestamp when they were added
-      bool came_before (Call const* c) const
-        { return c->is_newer_than (timestamp); }
+      Entry (void* const l, const timestamp_t t)
+        : listener (l), timestamp (t) { }
+      void* const listener;
+      const timestamp_t timestamp;
     };
 
+    Worker* const m_worker;
     List m_list;
     void* m_listener;
     LockFree::ReadWriteMutex m_mutex;
-    Worker* m_worker;
   };
 
   //
@@ -121,23 +145,42 @@ private:
   public:
     explicit Proxy ();
     ~Proxy ();
-    void add (Group::Ptr group);
-    void remove (Group::Ptr group);
-    void do_update (Call::Ptr c);
+
+    void add    (Group* group);
+    void remove (Group* group);
+    void update (Call* const c, const timestamp_t timestamp);
+
     virtual bool match (const void* member, int bytes) const = 0;
+
   private:
     struct Entry;
     typedef List <Entry> Entries;
     struct Entry : Entries::Node, SharedObject
     {
       typedef SharedObjectPtr <Entry> Ptr;
-      explicit Entry (Group::Ptr g) : group (g) {}
-      ~Entry () { jassert (call.get () == 0); }
-      void destroySharedObject () { globalDelete (this); }
+      explicit Entry (Group* g) : group (g)
+        { }
+      ~Entry ()
+        { vfassert (call.get () == 0); }
+      void destroySharedObject ()
+        { globalDelete (this); }
       Group::Ptr group;
       Atomic::Pointer <Call> call;
     };
-    void do_call (Entry::Ptr entry);
+
+    class Work : public Worker::Call
+    {
+    public:
+      Work (Proxy* proxy, Entry* const entry, const timestamp_t timestamp)
+        : m_proxy (proxy), m_entry (entry), m_timestamp (timestamp) { }
+      void operator() ();
+    private:
+      Proxy* m_proxy;
+      Entry::Ptr m_entry;
+      const timestamp_t m_timestamp;
+    };
+
+    void do_call (Entry* const entry, const timestamp_t timestamp);
 
   private:
     Entries m_entries;
@@ -163,16 +206,23 @@ private:
 protected:
   ListenersBase ();
   ~ListenersBase ();
-  void queue_call (Call::Ptr c, bool sync);
-  void add_void (void* const listener, Worker* worker);
-  void remove_void (void* const listener);
+
+  void add_void     (void* const listener, Worker* worker);
+  void remove_void  (void* const listener);
+  void callp        (Call::Ptr c);
+  void queuep       (Call::Ptr c);
+  void queue1p      (void* const listener, Call::Ptr c);
 
   // Search for an existing Proxy that matches the pointer to
   // member and replace it's Call, or create a new Proxy for it.
-  // Caller must acquire the group read lock.
+  //
   template <int Bytes>
-  void proxy_call (const void *member, Call::Ptr c)
+  void updatep (const void *member, Call::Ptr cp)
   {
+    Call* c = cp;
+
+    LockFree::ScopedReadLock lock (m_groups_mutex);
+
     if (!m_groups.empty ())
     {
       Proxy* proxy;
@@ -211,7 +261,7 @@ protected:
       }
 
       // Requires the group read lock
-      proxy->do_update (c);
+      proxy->update (c, m_timestamp);
     }
   }
 
@@ -220,6 +270,7 @@ private:
   Proxies m_proxies;
   LockFree::ReadWriteMutex m_proxies_mutex;
 protected:
+  CallAllocatorType m_callAllocator;
   timestamp_t m_timestamp;
   LockFree::ReadWriteMutex m_groups_mutex;
 };
@@ -231,89 +282,43 @@ class Listeners : public ListenersBase
 {
 private:
   template <class Functor>
-  class StoredCall : public Call
+  class CallType : public Call
   {
   public:
-    StoredCall (const timestamp_t timestamp, const Functor& f)
-      : Call (timestamp), m_f (f) { }
-    ~StoredCall ()
+    CallType (const Functor& f)
+      : m_f (f) { }
+    ~CallType ()
       { } // without this we get UB
-    void operator() (void* listener)
+    void operator() (void* const listener)
       { m_f.operator() (static_cast <ListenerClass*> (listener)); }
 
   private:
     Functor m_f;
   };
 
-  // Call that only executes for a matching listener.
-  // The timestamp prevents the ABA problem.
   template <class Functor>
-  class StoredCall1 : public Call
+  void callf (const Functor& f)
   {
-  public:
-    StoredCall1 (ListenerClass* listener, const timestamp_t timestamp, const Functor& f)
-      : Call (timestamp), m_listener (listener), m_f (f) { }
-    ~StoredCall1 ()
-      { } // without this we get UB
-    void operator() (void* listener)
-    {
-      if (m_listener == listener)
-        m_f.operator() (static_cast <ListenerClass*> (listener));
-    }
-
-  private:
-    void* m_listener;
-    Functor m_f;
-  };
-
-  // Caller is responsible for a group read lock.
-  template <class Functor>
-  Call::Ptr newCall (const Functor& f)
-  {
-    // group read lock needed for access to m_timestamp    
-#if NEW_ALLOCATOR
-    return new (GlobalAllocator().allocate (sizeof(StoredCall <Functor>)))
-      StoredCall <Functor> (m_timestamp, f);
-#else
-    return globalAlloc <StoredCall <Functor> >::New (m_timestamp, f);
-#endif
+    callp (new (m_callAllocator) CallType <Functor> (f));
   }
 
   template <class Functor>
-  Call::Ptr newCall1 (ListenerClass* listener, const Functor& f)
+  void queuef (const Functor& f)
   {
-    // group read lock needed for access to m_timestamp
-#if NEW_ALLOCATOR
-    return new (GlobalAllocator().allocate (sizeof (StoredCall1 <Functor>)))
-      StoredCall1 <Functor> (listener, m_timestamp, f);
-#else
-    return globalAlloc <StoredCall1 <Functor> >::New (listener, m_timestamp, f);
-#endif
+    queuep (new (m_callAllocator) CallType <Functor> (f));
   }
 
   template <class Functor>
-  void queue_fn (const Functor& f, bool sync)
+  void queue1f (void* const listener, const Functor& f)
   {
-    LockFree::ScopedReadLock lock (m_groups_mutex);
-
-    queue_call (newCall (f), sync);
+    queue1p (listener, new (m_callAllocator) CallType <Functor> (f));
   }
 
-  template <class Functor>
-  void queue1_fn (ListenerClass* listener, const Functor& f, bool sync)
+  template <class Member, class Functor>
+  void updatef (Member member, const Functor& f)
   {
-    LockFree::ScopedReadLock lock (m_groups_mutex);
-
-    queue_call (newCall1 (listener, f), sync);
-  }
-
-  template <class Member, class Function>
-  void proxy_fn (Member member, const Function& f)
-  {
-    LockFree::ScopedReadLock lock (m_groups_mutex);
-
-    proxy_call <sizeof (member)> (reinterpret_cast <void*> (&member),
-                                  newCall (f));
+    updatep <sizeof (member)> (reinterpret_cast <void*> (&member),
+                               new (m_callAllocator) CallType <Functor> (f));
   }
 
 public:
@@ -366,49 +371,49 @@ public:
 
   template <class Mf>
   void call (Mf mf)
-  { queue_fn (bind (mf, _1), true); }
+  { callf (bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   void call (Mf mf,   const T1& t1)
-  { queue_fn (bind (mf, _1, t1), true); }
+  { callf (bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   void call (Mf mf,   const T1& t1, const T2& t2)
-  { queue_fn (bind (mf, _1, t1, t2), true); }
+  { callf (bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3)
-  { queue_fn (bind (mf, _1, t1, t2, t3), true); }
+  { callf (bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void call (Mf mf,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4), true); }
+  { callf (bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5), true); }
+  { callf (bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6), true); }
+  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), true); }
+  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), true); }
+  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   //
   // Queue a call without synchronizing
@@ -416,98 +421,106 @@ public:
 
   template <class Mf>
   void queue (Mf mf)
-  { queue_fn (bind (mf, _1), false); }
+  { queuef (bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   void queue (Mf mf,   const T1& t1)
-  { queue_fn (bind (mf, _1, t1), false); }
+  { queuef (bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   void queue (Mf mf,   const T1& t1, const T2& t2)
-  { queue_fn (bind (mf, _1, t1, t2), false); }
+  { queuef (bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   void queue (Mf mf,   const T1& t1, const T2& t2, const T3& t3)
-  { queue_fn (bind (mf, _1, t1, t2, t3), false); }
+  { queuef (bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void queue (Mf mf,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4), false); }
+  { queuef (bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5), false); }
+  { queuef (bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6), false); }
+  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), false); }
+  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queue_fn (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
+  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   // These are for targeting individual listeners.
   // Use carefully!
 
   template <class Mf>
   void queue1 (Mf mf, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1), false); }
+  { queue1f (listener, bind (mf, _1)); }
 
   template <class Mf, typename  T1>
-  void queue1 (Mf mf, const T1& t1, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1)
+  { queue1f (listener, bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2)
+  { queue1f (listener, bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
-  void queue1 (Mf mf, const T1& t1, const T2& t2,
-                      const T3& t3, const T4& t4, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5, const T6& t6, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
-  void queue1 (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7, const T8& t8, ListenerClass* listener)
-  { queue1_fn (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8), false); }
+  void queue1 (ListenerClass* listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   //
   // update()
@@ -519,49 +532,49 @@ public:
 
   template <class Mf>
   void update (Mf mf)
-  { proxy_fn (mf, bind (mf, _1)); }
+  { updatef (mf, bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   void update (Mf mf,  const T1& t1)
-  { proxy_fn (mf, bind (mf, _1, t1)); }
+  { updatef (mf, bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   void update (Mf mf,  const T1& t1, const T2& t2)
-  { proxy_fn (mf, bind (mf, _1, t1, t2)); }
+  { updatef (mf, bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void update (Mf mf,  const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void update (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { proxy_fn (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 };
 
 #endif
