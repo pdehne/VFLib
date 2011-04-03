@@ -9,7 +9,6 @@
 #include "vf/vf_Bind.h"
 #include "vf/vf_Allocator.h"
 #include "vf/vf_LockFreeQueue.h"
-#include "vf/vf_PageAllocator.h"
 #include "vf/vf_Thread.h"
 
 // Queue that executes functors on another thread, with these invariants:
@@ -36,9 +35,7 @@ public:
   explicit Worker (const char* szName = "");
   ~Worker ();
 
-  //typedef GlobalAllocator AllocatorType;
   typedef Allocator AllocatorType;
-  //typedef GlobalPageAllocator AllocatorType;
 
   inline AllocatorType& getAllocator ()
   {

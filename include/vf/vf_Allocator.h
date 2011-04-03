@@ -32,17 +32,13 @@ public:
 private:
   struct Header;
 
-  class Block;
+  class Page;
 
-  inline Block* newBlock ();
-  static inline void deleteBlock (Block* b);
+  inline Page* newPage ();
+  static inline void deletePage (Page* page);
 
 private:
   class PerThreadData;
-  typedef VF_NAMESPACE::List <PerThreadData> Threads;
-
-  Mutex m_mutex;
-  Threads m_threads;
   boost::thread_specific_ptr <PerThreadData> m_tsp;
 
   static PageAllocator s_pages;
@@ -64,8 +60,6 @@ public:
 private:
   static Allocator s_allocator;
 };
-
-
 
 //
 // LEGACY

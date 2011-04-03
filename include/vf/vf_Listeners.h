@@ -123,7 +123,7 @@ private:
     ~Proxy ();
     void add (Group::Ptr group);
     void remove (Group::Ptr group);
-    void do_calls (Call::Ptr c);
+    void do_update (Call::Ptr c);
     virtual bool match (const void* member, int bytes) const = 0;
   private:
     struct Entry;
@@ -211,7 +211,7 @@ protected:
       }
 
       // Requires the group read lock
-      proxy->do_calls (c);
+      proxy->do_update (c);
     }
   }
 

@@ -21,28 +21,13 @@ namespace {
 
 /* Implementation notes
 
-- A Block is a large allocation from the system that is given
-  out as memory in pieces until it is 'consumed'.
+- A Page is a large allocation from the PageAllocator.
 
-- A Pool is a set of two lists: 'fresh' and 'garbage'.
+- Each thread maintains an 'active' page from which it makes allocations.
 
-- There are two pools, the 'hot' pool and the 'cold' pool.
+- When the active page is full, a new one takes it's place.
 
-- When new blocks are needed we pop from the fresh list of the
-  hot pool.
-
-- Every so often, garbage collection is performed on a separate thread.
-  During collection, fresh and garbage are swapped in the cold pool.
-  Then, the hot and cold pools are atomically swapped.
-
-- At any given time, there is always an 'active' block. It is from
-  the active block that allocations are fulfilled.
-  
-- When an allocation causes the active block to fill (become 'consumed'),
-  a new block is put into its place.
-
-- After the last allocation in a consumed block is deallocated, it
-  is pushed on to the garbage list of the hot pool.
+- After the last deallocation in a page, the memory is returned to the PageAllocator.
 
 */
 
@@ -52,15 +37,13 @@ static const size_t defaultPageBytes = 8 * 1024;
 
 }
 
-//------------------------------------------------------------------------------
-//
 // This precedes every allocation
 //
 struct Allocator::Header
 {
   union
   {
-    Allocator::Block* block; // backpointer to the page
+    Allocator::Page* page;
 
     char pad [Memory::alignmentBytes];
   };
@@ -68,17 +51,17 @@ struct Allocator::Header
 
 //------------------------------------------------------------------------------
 
-class Allocator::Block : NonCopyable
+class Allocator::Page : NonCopyable
 {
 public:
-  explicit Block (const size_t bytes) : m_refs (1)
+  explicit Page (const size_t bytes) : m_refs (1)
   {
     m_end = reinterpret_cast <char*> (this) + bytes;
     m_free = reinterpret_cast <char*> (
       Memory::pointerAdjustedForAlignment (this + 1));
   }
 
-  ~Block ()
+  ~Page ()
   {
     vfassert (m_refs.get() == 0);
   }
@@ -119,52 +102,69 @@ private:
 
 //------------------------------------------------------------------------------
 
-class Allocator::PerThreadData : public Allocator::Threads::Node
+class Allocator::PerThreadData : NonCopyable
 {
 public:
   explicit PerThreadData (Allocator* allocator)
     : m_allocator (*allocator)
-    , active (m_allocator.newBlock ())
+    , m_active (m_allocator.newPage ())
   {
-    //Mutex::ScopedLockType lock (m_allocator.m_mutex);
-    //m_allocator.m_threads.push_back (this);
   }
 
   ~PerThreadData ()
   {
-    //Mutex::ScopedLockType lock (m_allocator.m_mutex);
-    //m_allocator.m_threads.remove (this);
-    m_allocator.deleteBlock (active);
+    m_active->release ();
+    m_allocator.deletePage (m_active);
   }
 
-  Block* active;
+  inline void* allocate (const size_t bytes)
+  {
+    const size_t actual = sizeof (Header) + bytes;
+
+    if (actual > Allocator::s_pages.getPageBytes ())
+      Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
+
+    Header* h;
+
+    h = reinterpret_cast <Header*> (m_active->allocate (actual));
+
+    if (!h)
+    {
+      if (m_active->release ())
+        deletePage (m_active);
+
+      m_active = m_allocator.newPage ();
+
+      h = reinterpret_cast <Header*> (m_active->allocate (actual));
+    }
+
+    h->page = m_active;
+
+    return h + 1;
+  }
 
 private:
   Allocator& m_allocator;
+  Page* m_active;
 };
 
 //------------------------------------------------------------------------------
 
-inline Allocator::Block* Allocator::newBlock ()
+inline Allocator::Page* Allocator::newPage ()
 {
-  return new (s_pages.allocate ()) Block (s_pages.getPageBytes());
+  return new (s_pages.allocate ()) Page (s_pages.getPageBytes());
 }
 
-inline void Allocator::deleteBlock (Block* b)
+inline void Allocator::deletePage (Page* page)
 {
-  // It is critical that we do not call the destructor,
-  // because due to the lock-free implementation, a Block
-  // can be accessed for a short time after it is deleted.
-  b->~Block (); // DO NOT CALL!!!
-
-  PageAllocator::deallocate (b);
+  // Safe, because each thread maintains its own active page.
+  page->~Page ();
+  PageAllocator::deallocate (page);
 }
 
 Allocator::Allocator (const size_t pageBytes)
-  //: s_pages (pageBytes == 0 ? defaultPageBytes : pageBytes)
 {
-  if (s_pages.getPageBytes () < sizeof (Block) + 256)
-    Throw (Error().fail (__FILE__, __LINE__, TRANS("the block size is too small")));
+  vfassert (s_pages.getPageBytes () >= sizeof (Page) + 256);
 }
 
 Allocator::~Allocator ()
@@ -176,50 +176,24 @@ Allocator::~Allocator ()
 void* Allocator::allocate (const size_t bytes)
 {
   PerThreadData* data = m_tsp.get ();
+
   if (!data)
   {
     data = new PerThreadData (this);
     m_tsp.reset (data);
   }
 
-  const size_t actual = sizeof (Header) + bytes;
-
-  if (actual > s_pages.getPageBytes ())
-    Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
-
-  Header* h;
-
-  Block* b = data->active;
-
-  h = reinterpret_cast <Header*> (b->allocate (actual));
-
-  if (!h)
-  {
-    if (b->release ())
-      deleteBlock (b);
-
-    data->active = newBlock ();
-
-    b = data->active;
-
-    h = reinterpret_cast <Header*> (b->allocate (actual));
-
-    vfassert (h);
-  }
-
-  h->block = b;
-
-  return h + 1;
+  return data->allocate (bytes);
 }
 
 //------------------------------------------------------------------------------
 
 void Allocator::deallocate (void* p)
 {
-  Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
+  Page* const page = (reinterpret_cast <Header*> (p) - 1)->page;
 
-  if (b->release ())
-    deleteBlock (b);
+  if (page->release ())
+    deletePage (page);
 }
 
 END_VF_NAMESPACE

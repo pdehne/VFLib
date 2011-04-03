@@ -44,7 +44,7 @@ ListenersBase::Group::~Group ()
 // Adds the listener to the group.
 // The caller must prevent duplicates.
 void ListenersBase::Group::add (void* listener,
-                            const timestamp_t timestamp)
+                                const timestamp_t timestamp)
 {
   LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
@@ -248,7 +248,8 @@ void ListenersBase::Proxy::remove (Group::Ptr group)
 // For each group, updates the call.
 // Queues each group for do_call that isn't already queued.
 // Caller must acquire the group read lock.
-void ListenersBase::Proxy::do_calls (Call::Ptr c)
+//
+void ListenersBase::Proxy::do_update (Call::Ptr c)
 {
   // why would we even want to be called?
   vfassert (!m_entries.empty());

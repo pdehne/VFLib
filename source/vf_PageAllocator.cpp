@@ -25,29 +25,29 @@ const size_t hardLimitMegaBytes = 4 * 256;
 PageAllocator GlobalPageAllocator::s_allocator (128);
 
 //------------------------------------------------------------------------------
+/*
+
+Implementation notes
+
+- There are two pools, the 'hot' pool and the 'cold' pool.
+
+- When a new page is needed we pop from the 'fresh' stack of the hot pool.
+
+- When a page is deallocated it is pushed to the 'garbage' stack of the hot pool.
+
+- Every so often, a garbage collection is performed on a separate thread.
+  During collection, fresh and garbage are swapped in the cold pool.
+  Then, the hot and cold pools are atomically swapped.
+
+*/
+//------------------------------------------------------------------------------
 
 struct PageAllocator::Page : List::Node
 {
-  explicit Page (PageAllocator* allocator)
-    : m_allocator (allocator)
-  {
-    guard = 0x01020304;
-  }
-
-  ~Page ()
-  {
-    vfassert (guard == 0x01020304);
-    guard = 0xffffffff;
-  }
-
-  PageAllocator& getAllocator () const
-  {
-    return *m_allocator;
-  }
-
+  explicit Page (PageAllocator* const allocator) : m_allocator (*allocator) { }
+  PageAllocator& getAllocator () const { return m_allocator; }
 private:
-  PageAllocator* const m_allocator;
-  int guard;
+  PageAllocator& m_allocator;
 };
 
 inline void* PageAllocator::fromPage (Page* const p)
@@ -139,6 +139,14 @@ void PageAllocator::deallocate (void* const p)
 
 void PageAllocator::doOncePerSecond ()
 {
+  // free one garbage page
+  Page* page = m_cold->garbage.pop_front ();
+  if (page)
+  {
+    page->~Page ();
+    ::free (page);
+  }
+
   m_cold->fresh.swap (m_cold->garbage);
 
   // Swap atomically with respect to m_hot
