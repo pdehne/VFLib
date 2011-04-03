@@ -10,7 +10,7 @@
 // Allows turning off of all padding,
 // e.g. for memory-constrained systems or testing.
 //
-#define GLOBAL_PADDING_ENABLED 1
+#define GLOBAL_PADDING_ENABLED 0
 
 namespace CacheLine {
 
@@ -81,18 +81,16 @@ public:
 private:
   inline T* ptr ()
   {
+    return (T*)((uintptr_t (m_storage) + Memory::cacheLineAlignMask)
+                & ~Memory::cacheLineAlignMask);
+    /*
     return reinterpret_cast <T*> (Memory::pointerAdjustedForAlignment (
                                   m_storage, Memory::cacheLineBytes));
+    */
   }
   
-  inline T const* ptr () const
-  {
-    return reinterpret_cast <T*> (Memory::pointerAdjustedForAlignment (
-                                  m_storage, Memory::cacheLineBytes));
-  }
-
-  char m_storage [ ((sizeof(T) + Memory::cacheLineBytes - 1) /
-                   Memory::cacheLineBytes) * Memory::cacheLineBytes];
+  char m_storage [(sizeof(T) + Memory::cacheLineAlignMask)
+                  & ~Memory::cacheLineAlignMask];
 };
 
 // Holds an object padded it to completely fill a CPU cache line.
@@ -158,7 +156,7 @@ public:
 
 private:
   T m_t;
-  char pad [Memory::cacheLineBytes - sizeof(T)];
+  char pad [Memory::cacheLineAlignBytes - sizeof(T)];
 };
 
 #else

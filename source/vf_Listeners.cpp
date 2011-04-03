@@ -132,8 +132,8 @@ struct ListenersBase::Proxy::Entry : Entries::Node, SharedObject
 struct ListenersBase::Group::Entry : List::Node
 {
   Entry (void* const l, const timestamp_t t)
-    : listener (l),
-    timestamp (t)
+    : listener (l)
+    , timestamp (t)
   {
   }
 

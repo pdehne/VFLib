@@ -92,6 +92,22 @@ private:
 template <class Tag>
 Allocator GlobalAllocator <Tag>::s_allocator;
 
+class StdAllocator
+{
+public:
+  typedef Allocated <StdAllocator> Allocated;
+
+  inline void* allocate (size_t bytes)
+  {
+    return malloc (bytes);
+  }
+
+  static inline void deallocate (void* const p)
+  {
+    free (p);
+  }
+};
+
 //
 // LEGACY
 //

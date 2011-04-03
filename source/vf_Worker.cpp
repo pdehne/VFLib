@@ -130,12 +130,7 @@ bool Worker::do_process ()
     for (;;)
     {
       call->operator() ();
-#if 1
       delete call;
-#else
-      call->~Call ();
-      m_allocator.deallocate (call);
-#endif
 
       call = m_list.pop_front ();
       if (call == 0)

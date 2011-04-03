@@ -9,7 +9,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_MemoryAlignment.h"
 #include "vf/vf_PageAllocator.h"
 
-#define LOG_GC 0
+#define LOG_GC 1
 
 namespace {
 
@@ -145,6 +145,10 @@ void PageAllocator::doOncePerSecond ()
   {
     page->~Page ();
     ::free (page);
+    m_newPagesLeft.addref ();
+#ifdef LOG_GC
+    m_total.release ();
+#endif
   }
 
   m_cold->fresh->swap (m_cold->garbage);
