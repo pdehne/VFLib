@@ -25,8 +25,8 @@
 #include "vf/vf_CatchAny.h"
 #endif
 
-#ifndef __VF_CACHELINEPADDING_VFHEADER__
-#include "vf/vf_CacheLinePadding.h"
+#ifndef __VF_CACHELINE_VFHEADER__
+#include "vf/vf_CacheLine.h"
 #endif
 
 #ifndef __VF_FPUFLAGS_VFHEADER__
@@ -147,6 +147,10 @@
 
 #ifndef __VF_THREAD_VFHEADER__
 #include "vf/vf_Thread.h"
+#endif
+
+#ifndef __VF_THREADINDEX_VFHEADER__
+#include "vf/vf_ThreadIndex.h"
 #endif
 
 #ifndef __VF_THREADWORKER_VFHEADER__

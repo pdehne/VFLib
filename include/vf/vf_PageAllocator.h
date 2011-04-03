@@ -6,6 +6,7 @@
 #define __VF_PAGEALLOCATOR_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_CacheLine.h"
 #include "vf/vf_LockFreeStack.h"
 #include "vf/vf_OncePerSecond.h"
 
@@ -47,8 +48,8 @@ private:
 
   struct Pool
   {
-    List fresh;
-    List garbage;
+    CacheLine::Padded <List> fresh;
+    CacheLine::Padded <List> garbage;
   };
 
   static inline void* fromPage (Page* const p);
@@ -60,9 +61,10 @@ private:
 private:
   const size_t m_pageBytes;
   const size_t m_pageBytesAvailable;
-  Pool m_pool[2];           // pair of pools
-  Pool* volatile m_cold;    // pool which is cooling down
-  Pool* volatile m_hot;     // pool we are currently using
+  CacheLine::Aligned <Pool> m_pool1;  // pair of pools
+  CacheLine::Aligned <Pool> m_pool2;
+  Pool* volatile m_cold;            // pool which is cooling down
+  Pool* volatile m_hot;             // pool we are currently using
 
   // TODO: MAKE THIS STATIC SOMEHOW??
   Atomic::Counter m_newPagesLeft; // limit of system allocations

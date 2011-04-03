@@ -19,7 +19,7 @@ struct AllocatorWithoutTls::Header
   {
     AllocatorWithoutTls::Block* block; // backpointer to the page
 
-    char pad [Memory::alignmentBytes];
+    char pad [Memory::allocationAlignmentBytes];
   };
 };
 

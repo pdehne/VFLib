@@ -101,7 +101,7 @@ enum
   // This number should be as small as possible
   // without generating compile time assertions.
   //
-  globalFixedAllocatorBlockSize = 96
+  globalFixedAllocatorBlockSize = 256
 };
 
 class GlobalFixedAllocator

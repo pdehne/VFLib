@@ -84,7 +84,7 @@ private:
     Worker* const m_worker;
     List m_list;
     void* m_listener;
-    LockFree::ReadWriteMutex m_mutex;
+    CacheLine::Aligned <LockFree::ReadWriteMutex> m_mutex;
   };
 
   // A Proxy is keyed to a unique pointer-to-member of a
@@ -144,8 +144,8 @@ private:
   Groups m_groups;
   Proxies m_proxies;
   timestamp_t m_timestamp;
-  LockFree::ReadWriteMutex m_groups_mutex;
-  LockFree::ReadWriteMutex m_proxies_mutex;
+  CacheLine::Aligned <LockFree::ReadWriteMutex> m_groups_mutex;
+  CacheLine::Aligned <LockFree::ReadWriteMutex> m_proxies_mutex;
   CallAllocatorType m_callAllocator;
 };
 

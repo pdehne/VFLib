@@ -157,10 +157,6 @@
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
-			<File
-				RelativePath="..\include\vf\vf_Queue.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="diagnostic"
@@ -387,6 +383,14 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_ThreadBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_ThreadIndex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ThreadIndex.h"
 				>
 			</File>
 		</Filter>
@@ -4704,7 +4708,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_CacheLinePadding.h"
+				RelativePath="..\include\vf\vf_CacheLine.h"
 				>
 			</File>
 			<File

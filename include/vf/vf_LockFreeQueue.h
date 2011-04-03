@@ -6,7 +6,7 @@
 #define __VF_LOCKFREEQUEUE_VFHEADER__
 
 #include "vf/vf_Atomic.h"
-#include "vf/vf_CacheLinePadding.h"
+#include "vf/vf_CacheLine.h"
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
 
@@ -156,9 +156,9 @@ public:
 
 private:
   // Elements are pushed on to the head and popped from the tail.
-  NoCacheLinePadding <Atomic::Pointer <Node> > m_head;
-  NoCacheLinePadding <Node*> m_tail;
-  NoCacheLinePadding <Node> m_null;
+  CacheLine::Unpadded <Atomic::Pointer <Node> > m_head;
+  CacheLine::Unpadded <Node*> m_tail;
+  CacheLine::Unpadded <Node> m_null;
 };
 
 }

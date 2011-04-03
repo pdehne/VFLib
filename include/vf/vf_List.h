@@ -41,15 +41,12 @@ template <class Elem,
 class List : public Features
 {
 public:
-  class Node
+  class Node : NonCopyable
   {
   public:
     Node () { }
 
   private:
-    Node (const Node& other);
-    Node& operator= (const Node& other);
-
     friend class List;
     friend typename Features;
     Node* m_next;

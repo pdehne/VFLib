@@ -73,8 +73,8 @@ PageAllocator::PageAllocator (const size_t pageBytes)
   , m_swaps (0)
 #endif
 {
-  m_hot = &m_pool[0];
-  m_cold = &m_pool[1];
+  m_hot  = m_pool1;
+  m_cold = m_pool2;
 
   startOncePerSecond ();
 }
@@ -87,8 +87,8 @@ PageAllocator::~PageAllocator ()
   vfassert (m_used.is_reset ());
 #endif
 
-  free (m_pool[0]);
-  free (m_pool[1]);
+  free (m_pool1);
+  free (m_pool2);
 
 #if LOG_GC
   vfassert (m_total.is_reset ());
@@ -99,7 +99,7 @@ PageAllocator::~PageAllocator ()
 
 void* PageAllocator::allocate ()
 {
-  Page* page = m_hot->fresh.pop_front ();
+  Page* page = m_hot->fresh->pop_front ();
 
   if (!page)
   {
@@ -130,7 +130,7 @@ void PageAllocator::deallocate (void* const p)
   Page* const page = toPage (p);
   PageAllocator& allocator = page->getAllocator ();
 
-  allocator.m_hot->garbage.push_front (page);
+  allocator.m_hot->garbage->push_front (page);
 
 #if LOG_GC
   allocator.m_used.release ();
@@ -140,14 +140,14 @@ void PageAllocator::deallocate (void* const p)
 void PageAllocator::doOncePerSecond ()
 {
   // free one garbage page
-  Page* page = m_cold->garbage.pop_front ();
+  Page* page = m_cold->garbage->pop_front ();
   if (page)
   {
     page->~Page ();
     ::free (page);
   }
 
-  m_cold->fresh.swap (m_cold->garbage);
+  m_cold->fresh->swap (m_cold->garbage);
 
   // Swap atomically with respect to m_hot
   Pool* temp = m_hot;

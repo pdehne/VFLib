@@ -11,28 +11,31 @@ namespace Memory {
 
 const int cacheLineBytes = 64;
 
-const int alignmentBytes = 8;
+const int allocationAlignmentBytes = 8;
 
 // Returns the number of bytes needed to advance p to the correct alignment
 template <typename P>
-inline size_t bytesNeededForAlignment (P* p)
+inline size_t bytesNeededForAlignment (P const* const p,
+                                       const size_t bytes = allocationAlignmentBytes)
 {
   const uintptr_t v = reinterpret_cast <uintptr_t> (p);
-  const uintptr_t n = ((v + alignmentBytes - 1) / alignmentBytes) * alignmentBytes;
+  const uintptr_t n = ((v + bytes - 1) / bytes) * bytes;
   return n - v;
 }
 
 // Returns the number of bytes to make size an aligned size
-inline size_t sizeAdjustedForAlignment (const size_t bytes)
+inline size_t sizeAdjustedForAlignment (const size_t size,
+                                        const size_t bytes = allocationAlignmentBytes )
 {
-  return ((bytes + (alignmentBytes - 1)) / alignmentBytes) * alignmentBytes;
+  return ((size + (bytes - 1)) / bytes) * bytes;
 }
 
 // Returns a pointer with alignment added.
 template <typename P>
-inline P* pointerAdjustedForAlignment (P* const p)
+inline P* pointerAdjustedForAlignment (P* const p,
+                                       const size_t bytes = allocationAlignmentBytes)
 {
-  return reinterpret_cast <P*> (reinterpret_cast <char*> (p) + bytesNeededForAlignment (p));
+  return reinterpret_cast <P*> (reinterpret_cast <char*> (p) + bytesNeededForAlignment (p, bytes));
 }
 
 }
