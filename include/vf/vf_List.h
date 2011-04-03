@@ -25,12 +25,6 @@ protected:
   void add_size (size_type amount) { m_size += amount; }
   void add_size (const List_all_features& other) { m_size += other.m_size; }
 
-  static void check_null (const void* node)
-  {
-    if (!node)
-      Throw (std::out_of_range ("invalid iterator"));
-  }
-
 private:
   size_type m_size;
 };
@@ -74,58 +68,58 @@ public:
     bool operator == (const iterator& other) const { return m_node == other.m_node; }
     bool operator != (const iterator& other) const { return m_node != other.m_node; }
 
-    Elem* operator* () const
+    inline Elem* operator* () const
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_next);
-      Features::check_null (m_node->m_prev);
+      vfassert (m_node);
+      vfassert (m_node->m_next);
+      vfassert (m_node->m_prev);
       return static_cast <Elem*> (m_node);
     }
 
-    Elem* operator-> () const
+    inline Elem* operator-> () const
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_next);
-      Features::check_null (m_node->m_prev);
+      vfassert (m_node);
+      vfassert (m_node->m_next);
+      vfassert (m_node->m_prev);
       return static_cast <Elem*> (m_node);
     }
 
-    iterator& operator++ ()
+    inline iterator& operator++ ()
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_next);
+      vfassert (m_node);
+      vfassert (m_node->m_next);
       m_node = m_node->m_next;
       return *this;
     }
 
-    iterator operator++ (int) // postfix
+    inline iterator operator++ (int) // postfix
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_next);
+      vfassert (m_node);
+      vfassert (m_node->m_next);
       m_node = m_node->m_next;
       return m_node->m_prev;
     }
 
-    iterator& operator-- ()
+    inline iterator& operator-- ()
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_prev);
-      Features::check_null (m_node->m_prev->m_prev);
+      vfassert (m_node);
+      vfassert (m_node->m_prev);
+      vfassert (m_node->m_prev->m_prev);
       m_node = m_node->m_prev;
       return *this;
     }
 
-    iterator operator-- (int) // postfix
+    inline iterator operator-- (int) // postfix
     {
-      Features::check_null (m_node);
-      Features::check_null (m_node->m_prev);
-      Features::check_null (m_node->m_prev->m_prev);
+      vfassert (m_node);
+      vfassert (m_node->m_prev);
+      vfassert (m_node->m_prev->m_prev);
       m_node = m_node->m_prev;
       return m_node->m_next;
     }
 
     /*@implementation*/
-    Node* node () const { return m_node; }
+    inline Node* node () const { return m_node; }
 
   private:
     Node* m_node;
