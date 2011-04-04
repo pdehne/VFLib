@@ -153,10 +153,6 @@
 #include "vf/vf_StaticObject.h"
 #endif
 
-#ifndef __VF_SYNCHRONIZEDOBJECT_VFHEADER__
-#include "vf/vf_SynchronizedObject.h"
-#endif
-
 #ifndef __VF_THREAD_VFHEADER__
 #include "vf/vf_Thread.h"
 #endif

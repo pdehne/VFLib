@@ -378,10 +378,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_SynchronizedObject.h"
-				>
-			</File>
-			<File
 				RelativePath="..\source\vf_Thread.cpp"
 				>
 			</File>
