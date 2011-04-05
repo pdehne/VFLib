@@ -13,63 +13,46 @@ BEGIN_VF_NAMESPACE
 
 //------------------------------------------------------------------------------
 
-static Thread::Interrupted thread_idle ()
-{
-  Thread::Interrupted interrupted (false);
-
-  return interrupted;
-}
-
 class SharedObject::Singleton : public SharedSingleton <Singleton>
 {
 private:
-  Singleton ();
-  ~Singleton ();
+  Singleton ()
+    : m_worker (__FILE__)
+    , SharedSingleton (persistAfterCreation)
+  {
+    m_worker.start ();
+  }
+
+  ~Singleton ()
+  {
+    // is this needed?
+    m_worker.stop_and_wait ();
+  }
 
 private:
   friend class SharedSingleton <Singleton>;
 
-  static Singleton* createInstance ();
-  static void doDelete (SharedObject* sharedObject);
+  static Singleton* createInstance ()
+  {
+    return new Singleton;
+  }
+
+  static void doDelete (SharedObject* sharedObject)
+  {
+    delete sharedObject;
+  }
 
 public:
   inline Worker& getWorker () { return m_worker; }
 
-  void Delete (SharedObject* sharedObject);
+  void Delete (SharedObject* sharedObject)
+  {
+    m_worker.call (&Singleton::doDelete, sharedObject);
+  }
 
 private:
   ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
 };
-
-//------------------------------------------------------------------------------
-
-SharedObject::Singleton::Singleton ()
-  : m_worker (__FILE__)
-  , SharedSingleton (true) // persist
-{
-  m_worker.start (bind (&thread_idle));
-}
-
-SharedObject::Singleton::~Singleton ()
-{
-  // is this needed?
-  m_worker.stop_and_wait ();
-}
-
-SharedObject::Singleton* SharedObject::Singleton::createInstance ()
-{
-  return new Singleton;
-}
-
-void SharedObject::Singleton::doDelete (SharedObject* sharedObject)
-{
-  delete sharedObject;
-}
-
-void SharedObject::Singleton::Delete (SharedObject* sharedObject)
-{
-  m_worker.call (&Singleton::doDelete, sharedObject);
-}
 
 //------------------------------------------------------------------------------
 

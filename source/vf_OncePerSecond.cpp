@@ -18,7 +18,9 @@ class OncePerSecond::TimerSingleton
   : public SharedSingleton <OncePerSecond::TimerSingleton>
 {
 private:
-  TimerSingleton () : m_thread (__FILE__)
+  TimerSingleton ()
+    : SharedSingleton (persistAfterCreation)
+    , m_thread (__FILE__)
   {
     m_thread.start (bind (&TimerSingleton::run, this));
   }

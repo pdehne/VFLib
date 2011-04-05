@@ -20,10 +20,16 @@ template <class Object>
 class SharedSingleton : public SharedObject
 {
 protected:
+  enum Lifetime
+  {
+    createOnDemand,
+    persistAfterCreation
+  };
+
   typedef StaticMutex <SharedSingleton <Object> > MutexType;
 
-  explicit SharedSingleton (const bool persistAfterCreation = true)
-    : m_persistAfterCreation (persistAfterCreation)
+  explicit SharedSingleton (const Lifetime lifetime)
+    : m_lifetime (lifetime)
   {
     vfassert (s_instance == 0);
   }
@@ -44,7 +50,7 @@ public:
     {
       s_instance = Object::createInstance ();
 
-      if (s_instance->m_persistAfterCreation)
+      if (s_instance->m_lifetime == persistAfterCreation)
         s_persistentReference = s_instance;
     }
 
@@ -62,7 +68,7 @@ private:
   }
 
 private:
-  const bool m_persistAfterCreation;
+  const Lifetime m_lifetime;
 
   class PersistentReference
   {

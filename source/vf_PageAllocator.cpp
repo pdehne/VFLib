@@ -27,7 +27,7 @@ const size_t hardLimitMegaBytes = 4 * 256;
 }
 
 GlobalPageAllocator::GlobalPageAllocator ()
-: SharedSingleton (false)
+: SharedSingleton (persistAfterCreation)
 {
 }
 
