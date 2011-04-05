@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../include"
-				PreprocessorDefinitions="DONT_AUTOLINK_TO_JUCE_LIBRARY;WIN32;_DEBUG;_LIB;SQLITE_THREADSAFE=1"
+				PreprocessorDefinitions="DONT_AUTOLINK_TO_JUCE_LIBRARY;WIN32;_DEBUG;_LIB;SQLITE_THREADSAFE=1;_CRTDBG_MAP_ALLOC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -548,6 +548,22 @@
 			<File
 				RelativePath="..\source\tests\test8.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
