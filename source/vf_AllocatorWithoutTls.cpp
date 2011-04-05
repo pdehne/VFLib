@@ -173,6 +173,8 @@ void* AllocatorWithoutTls::allocate (const size_t bytes)
     // (*) It is possible for the block to get a final release here
     //     In this case it will have been put in the garbage, and
     //     m_active will not match.
+    //
+    // TODO: DIFFERENTIAL REFERENCE COUNTER?
 
     // Acquire a reference.
     b->addref ();
