@@ -29,11 +29,11 @@ public:
   //typedef StandardAllocator AllocatorType;
   struct ListenersStructureTag { };
 
-  //typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
-  typedef StandardAllocator AllocatorType;
+  typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
+  //typedef StandardAllocator AllocatorType;
 
-  //typedef GlobalAllocator <ListenersBase> CallAllocatorType;
-  typedef StandardAllocator CallAllocatorType;
+  typedef GlobalAllocator <ListenersBase> CallAllocatorType;
+  //typedef StandardAllocator CallAllocatorType;
 
   // Reference counted polymorphic unary functor void (*)(void* listener).
   //
@@ -137,7 +137,7 @@ public:
 
   inline CallAllocatorType& getCallAllocator ()
   {
-    return m_callAllocator;
+    return *m_callAllocator;
   }
 
   void callp        (Call::Ptr c);
@@ -159,8 +159,8 @@ private:
   timestamp_t m_timestamp;
   CacheLine::Aligned <LockFree::ReadWriteMutex> m_groups_mutex;
   CacheLine::Aligned <LockFree::ReadWriteMutex> m_proxies_mutex;
-  AllocatorType m_allocator;
-  CallAllocatorType m_callAllocator;
+  AllocatorType::Ptr m_allocator;
+  CallAllocatorType::Ptr m_callAllocator;
 };
 
 //------------------------------------------------------------------------------

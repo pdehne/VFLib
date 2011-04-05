@@ -482,7 +482,10 @@ bool ListenersBase::Proxy::match (void const* const member, const size_t bytes) 
 //
 //------------------------------------------------------------------------------
 
-ListenersBase::ListenersBase () : m_timestamp (0)
+ListenersBase::ListenersBase ()
+  : m_timestamp (0)
+  , m_allocator (AllocatorType::getInstance ())
+  , m_callAllocator (CallAllocatorType::getInstance ())
 {
 }
 
@@ -548,11 +551,11 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
     // Tell existing proxies to add the group
     LockFree::ScopedReadLock lock (m_proxies_mutex);
     for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
-      (*iter++)->add (group, m_allocator);
+      (*iter++)->add (group, *m_allocator);
   }
 
   // Add the listener to the group with the current timestamp
-  group->add (listener, m_timestamp, m_allocator);
+  group->add (listener, m_timestamp, *m_allocator);
 
   // Increment the timestamp within the mutex so
   // future calls will be newer than this listener.
@@ -707,7 +710,7 @@ void ListenersBase::updatep (void const* const member,
         for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
         {
           Group* group = *iter++;
-          proxy->add (group, m_allocator);
+          proxy->add (group, *m_allocator);
         }
 
         // Add it to the list.

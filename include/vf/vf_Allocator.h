@@ -7,6 +7,7 @@
 
 #include "vf/vf_List.h"
 #include "vf/vf_PageAllocator.h"
+#include "vf/vf_SharedSingleton.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
 
@@ -23,7 +24,7 @@
 class Allocator
 {
 public:
-  explicit Allocator ();
+  Allocator ();
   ~Allocator ();
 
   void* allocate (const size_t bytes);
@@ -44,15 +45,18 @@ private:
   GlobalPageAllocator::Ptr m_pages;
 };
 
+//------------------------------------------------------------------------------
 
-
+// Singleton wrapper for a global allocator.
+// Immune to order of construction / initialization problems.
+//
 template <class Tag>
-class GlobalAllocator
+class GlobalAllocator : public SharedSingleton <GlobalAllocator <Tag> >
 {
 public:
   inline void* allocate (size_t bytes)
   {
-    return s_allocator.allocate (bytes);
+    return m_allocator.allocate (bytes);
   }
 
   static inline void deallocate (void* const p)
@@ -61,10 +65,24 @@ public:
   }
 
 private:
-  static Allocator s_allocator;
-};
+  GlobalAllocator () : SharedSingleton (persistAfterCreation)
+  {
+  }
 
-template <class Tag>
-Allocator GlobalAllocator <Tag>::s_allocator;
+  ~GlobalAllocator ()
+  {
+  }
+
+private:
+  friend class SharedSingleton <GlobalAllocator <Tag> >;
+
+  static GlobalAllocator* createInstance ()
+  {
+    return new GlobalAllocator;
+  }
+
+private:
+  Allocator m_allocator;
+};
 
 #endif

@@ -16,7 +16,17 @@ public:
     return allocator.allocate (bytes);
   }
 
-  inline void operator delete (void* p, AllocatorType& allocator) throw()
+  inline void* operator new (size_t bytes, AllocatorType* allocator) throw()
+  {
+    return allocator->allocate (bytes);
+  }
+
+  inline void operator delete (void* p, AllocatorType&) throw()
+  {
+    AllocatorType::deallocate (p);
+  }
+
+  inline void operator delete (void* p, AllocatorType*) throw()
   {
     AllocatorType::deallocate (p);
   }

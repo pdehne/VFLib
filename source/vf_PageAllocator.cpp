@@ -22,12 +22,14 @@ static const size_t globalPageBytes = 8 * 1024;
 // up with producers, and application logic should be re-examined.
 //
 // TODO: ENFORCE THIS GLOBALLY? MEASURE IN KILOBYTES AND FORCE KILOBYTE PAGE SIZES
-const size_t hardLimitMegaBytes = 4 * 256;
+#define HARD_LIMIT 1
+const size_t hardLimitMegaBytes = 256;
 
 }
 
 GlobalPageAllocator::GlobalPageAllocator ()
-: SharedSingleton (persistAfterCreation)
+  : SharedSingleton (persistAfterCreation)
+  , m_allocator (globalPageBytes)
 {
 }
 
@@ -85,6 +87,7 @@ PageAllocator::PageAllocator (const size_t pageBytes)
   : m_pageBytes (pageBytes)
   , m_pageBytesAvailable (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
   , m_newPagesLeft ((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes)
+  , m_deleteCountdown (0)
 #if LOG_GC
   , m_swaps (0)
 #endif
@@ -119,10 +122,12 @@ void* PageAllocator::allocate ()
 
   if (!page)
   {
+#if HARD_LIMIT
     const bool exhausted = m_newPagesLeft.release ();
     if (exhausted)
       Throw (Error().fail (__FILE__, __LINE__,
         TRANS("the limit of memory allocations was reached")));
+#endif
 
     page = new (::malloc (m_pageBytes)) Page (this);
     if (!page)
@@ -153,25 +158,34 @@ void PageAllocator::deallocate (void* const p)
 #endif
 }
 
+//
+// Perform garbage collection.
+//
 void PageAllocator::doOncePerSecond ()
 {
-  // free one garbage page
-  Page* page = m_cold->garbage->pop_front ();
-  if (page)
+  // Every so often, physically free a page.
+  // This will reduce the working set over time after a spike.
+  if (++m_deleteCountdown >= 1)
   {
-    page->~Page ();
-    ::free (page);
-    m_newPagesLeft.addref ();
+    Page* page = m_cold->garbage->pop_front ();
+    if (page)
+    {
+      page->~Page ();
+      ::free (page);
+      m_newPagesLeft.addref ();
 #ifdef LOG_GC
-    m_total.release ();
+      m_total.release ();
 #endif
+    }
+    
+    m_deleteCountdown = 0;
   }
 
   m_cold->fresh->swap (m_cold->garbage);
 
   // Swap atomically with respect to m_hot
   Pool* temp = m_hot;
-  m_hot = m_cold;
+  m_hot = m_cold; // atomic
   m_cold = temp;
 
 #if LOG_GC
