@@ -41,7 +41,7 @@ private:
   class PerThreadData;
   boost::thread_specific_ptr <PerThreadData> m_tsp;
 
-  GlobalPageAllocator m_pages;
+  GlobalPageAllocator::Ptr m_pages;
 };
 
 

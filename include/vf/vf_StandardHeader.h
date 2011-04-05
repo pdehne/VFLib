@@ -66,12 +66,13 @@ template <> struct VfStaticAssert <true>
 #endif
 
 // Stuff here is available without having to include it directly
-#include "vf/vf_String.h"
 #include "vf/vf_Debug.h"
 #include "vf/vf_Error.h"
-#include "vf/vf_Throw.h"
-#include "vf/vf_NonCopyable.h"
 #include "vf/vf_LeakChecked.h"
+#include "vf/vf_NonCopyable.h"
+#include "vf/vf_StaticObject.h"
+#include "vf/vf_String.h"
+#include "vf/vf_Throw.h"
 
 END_VF_NAMESPACE
 

@@ -25,7 +25,7 @@
 // [2] The Object must function correctly with the implied constructor
 //     which only zero-fills.
 //
-template <class Tag, class Object>
+template <class Object>
 class StaticObject
 {
 public:

@@ -6,8 +6,12 @@
 
 BEGIN_VF_NAMESPACE
 
+#include "vf/vf_BoostThread.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_SharedSingleton.h"
+#include "vf/vf_ThreadWorker.h"
+
+//------------------------------------------------------------------------------
 
 static Thread::Interrupted thread_idle ()
 {
@@ -15,6 +19,29 @@ static Thread::Interrupted thread_idle ()
 
   return interrupted;
 }
+
+class SharedObject::Singleton : public SharedSingleton <Singleton>
+{
+private:
+  Singleton ();
+  ~Singleton ();
+
+private:
+  friend class SharedSingleton <Singleton>;
+
+  static Singleton* createInstance ();
+  static void doDelete (SharedObject* sharedObject);
+
+public:
+  inline Worker& getWorker () { return m_worker; }
+
+  void Delete (SharedObject* sharedObject);
+
+private:
+  ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
+};
+
+//------------------------------------------------------------------------------
 
 SharedObject::Singleton::Singleton ()
   : m_worker (__FILE__)
@@ -43,6 +70,8 @@ void SharedObject::Singleton::Delete (SharedObject* sharedObject)
 {
   m_worker.call (&Singleton::doDelete, sharedObject);
 }
+
+//------------------------------------------------------------------------------
 
 void SharedObject::destroySharedObject ()
 {

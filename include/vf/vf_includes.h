@@ -149,10 +149,6 @@
 #include "vf/vf_StaticMutex.h"
 #endif
 
-#ifndef __VF_STATICOBJECT_VFHEADER__
-#include "vf/vf_StaticObject.h"
-#endif
-
 #ifndef __VF_THREAD_VFHEADER__
 #include "vf/vf_Thread.h"
 #endif

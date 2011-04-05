@@ -5,36 +5,98 @@
 #ifndef __VF_LEAKCHECKED_VFHEADER__
 #define __VF_LEAKCHECKED_VFHEADER__
 
+#include "vf/vf_StaticObject.h"
+
 //
 // Derived classes are automatically leak-checked on exit
 //
 
-#if VF_CHECK_LEAKS && VF_HAVE_JUCE && JUCE_CHECK_MEMORY_LEAKS
+#if VF_CHECK_LEAKS
 
-//
-// Juce
-//
-template <class OwnerClass>
-class LeakChecked : private VF_JUCE::LeakedObjectDetector <LeakChecked <OwnerClass> >
+template <class Object>
+class LeakChecked
 {
+public:
+  LeakChecked() throw()
+  {
+    if (++getCounter() == 0)
+    {
+      DBG ("*** Instruction reordering! Class: " << getLeakedObjectClassName());
+      jassertfalse;
+    }
+  }
+
+  LeakChecked (const LeakChecked&) throw()
+  {
+    if (++getCounter() == 0)
+    {
+      DBG ("*** Instruction reordering! Class: " << getLeakedObjectClassName());
+      jassertfalse;
+    }
+  }
+
+  ~LeakChecked()
+  {
+    const int newValue = --getCounter();
+    if (newValue < 0)
+    {
+      DBG ("*** Dangling pointer deletion! Class: " << getLeakedObjectClassName());
+      jassertfalse;
+    }
+  }
+
 private:
-  friend class VF_JUCE::LeakedObjectDetector <LeakChecked>;
-  static const char* getLeakedObjectClassName() throw()
-    { return typeid (OwnerClass).name (); }
+  class Counter
+  {
+  public:
+    ~Counter()
+    {
+      const int count = getCounter().get ();
+      if (count > 0)
+      {
+        DBG ("*** Leaked objects detected: " <<
+             count << " instance(s) of class " <<
+             getLeakedObjectClassName());
+        jassertfalse;
+      }
+    }
+
+    inline VF_JUCE::Atomic <int>& getCounter ()
+    {
+      return *reinterpret_cast <VF_JUCE::Atomic <int>*> (m_storage);
+    }
+
+  private:
+    char m_storage [sizeof (VF_JUCE::Atomic <int>)];
+  };
+
+  static const char* getLeakedObjectClassName()
+  {
+    return typeid (Object).name ();
+  }
+
+  static VF_JUCE::Atomic <int>& getCounter() throw()
+  {
+    return s_counter.getCounter ();
+  }
+
+  static Counter s_counter;
 };
+
+template <class Object>
+typename LeakChecked <Object>::Counter LeakChecked <Object>::s_counter;
 
 #else
 
-#if VF_CHECK_LEAKS
-#pragma message(VF_LOC_"Missing class LeakChecked")
+template <class Object>
+struct LeakChecked
+{
+};
+
 #endif
 
-template <class OwnerClass> struct LeakChecked { };
-
-#endif
-
-template <class OwnerClass>
-class LeakCheckedAndNonCopyable : LeakChecked <OwnerClass>, NonCopyable
+template <class Object>
+class LeakCheckedAndNonCopyable : LeakChecked <Object>, NonCopyable
 {
 };
 

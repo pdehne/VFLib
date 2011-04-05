@@ -31,7 +31,7 @@ private:
 
 private:
   Block* volatile m_active;
-  static PageAllocator s_pages;
+  GlobalPageAllocator::Ptr m_pages;
 };
 
 #endif

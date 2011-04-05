@@ -29,10 +29,11 @@ public:
   //typedef StandardAllocator AllocatorType;
   struct ListenersStructureTag { };
 
-  typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
+  //typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
+  typedef StandardAllocator AllocatorType;
 
-  typedef GlobalAllocator <ListenersBase> CallAllocatorType;
-  //typedef Allocator CallAllocatorType;
+  //typedef GlobalAllocator <ListenersBase> CallAllocatorType;
+  typedef StandardAllocator CallAllocatorType;
 
   // Reference counted polymorphic unary functor void (*)(void* listener).
   //

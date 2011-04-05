@@ -20,7 +20,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject : NonCopyable
+class SharedObject : NonCopyable, LeakChecked <SharedObject>
 {
 public:
   inline void incReferenceCount() throw()

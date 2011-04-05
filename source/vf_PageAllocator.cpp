@@ -26,7 +26,19 @@ const size_t hardLimitMegaBytes = 4 * 256;
 
 }
 
-PageAllocator GlobalPageAllocator::s_allocator (globalPageBytes);
+GlobalPageAllocator::GlobalPageAllocator ()
+: SharedSingleton (false)
+{
+}
+
+GlobalPageAllocator::~GlobalPageAllocator ()
+{
+}
+
+GlobalPageAllocator* GlobalPageAllocator::createInstance ()
+{
+  return new GlobalPageAllocator;
+}
 
 //------------------------------------------------------------------------------
 /*
@@ -91,8 +103,8 @@ PageAllocator::~PageAllocator ()
   vfassert (m_used.is_reset ());
 #endif
 
-  free (m_pool1);
-  free (m_pool2);
+  dispose (m_pool1);
+  dispose (m_pool2);
 
 #if LOG_GC
   vfassert (m_total.is_reset ());
@@ -172,7 +184,7 @@ void PageAllocator::doOncePerSecond ()
 #endif
 }
 
-void PageAllocator::free (List& list)
+void PageAllocator::dispose (List& list)
 {
   for (;;)
   {
@@ -194,10 +206,10 @@ void PageAllocator::free (List& list)
   }
 }
 
-void PageAllocator::free (Pool& pool)
+void PageAllocator::dispose (Pool& pool)
 {
-  free (pool.fresh);
-  free (pool.garbage);
+  dispose (pool.fresh);
+  dispose (pool.garbage);
 }
 
 END_VF_NAMESPACE

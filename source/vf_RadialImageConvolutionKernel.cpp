@@ -13,7 +13,7 @@ RadialImageConvolutionKernel::RadialImageConvolutionKernel (int radiusInSamples)
 {
   jassert (radiusInSamples >= 2);
 
-  m_kernel.malloc (radiusInSamples);
+  m_kernel.allocate (radiusInSamples, false);
 }
 
 RadialImageConvolutionKernel::~RadialImageConvolutionKernel()
@@ -78,7 +78,7 @@ VF_JUCE::Image RadialImageConvolutionKernel::createConvolvedImageFull (VF_JUCE::
 
   // temp buffer is big enough for the largest edge-replicated line
   VF_JUCE::HeapBlock <uint8> temp;
-  temp.malloc (VF_JUCE::jmax (sw, sh));
+  temp.allocate (VF_JUCE::jmax (sw, sh), false);
 
   const VF_JUCE::Image::BitmapData srcData (sourceImage,
                                             VF_JUCE::Image::BitmapData::readOnly);

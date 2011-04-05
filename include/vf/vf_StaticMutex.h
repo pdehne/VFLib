@@ -70,20 +70,20 @@ private:
     }
   };
 
-  static StaticObject <Tag, Atomic::Flag> s_inited;
-  static StaticObject <Tag, Atomic::Flag> s_initing;
-  static StaticObject <Tag, Mutex> s_mutex;
+  static StaticObject <Atomic::Flag> s_inited;
+  static StaticObject <Atomic::Flag> s_initing;
+  static StaticObject <Mutex> s_mutex;
   static CleanerUpper s_cleanerUpper;
 };
 
 template <class Tag>
-StaticObject <Tag, Atomic::Flag> StaticMutex <Tag>::s_inited;
+StaticObject <Atomic::Flag> StaticMutex <Tag>::s_inited;
 
 template <class Tag>
-StaticObject <Tag, Atomic::Flag> StaticMutex <Tag>::s_initing;
+StaticObject <Atomic::Flag> StaticMutex <Tag>::s_initing;
 
 template <class Tag>
-StaticObject <Tag, Mutex> StaticMutex <Tag>::s_mutex;
+StaticObject <Mutex> StaticMutex <Tag>::s_mutex;
 
 template <class Tag>
 typename StaticMutex <Tag>::CleanerUpper StaticMutex <Tag>::s_cleanerUpper;

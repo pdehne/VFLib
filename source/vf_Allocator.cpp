@@ -105,7 +105,7 @@ public:
     const size_t headerBytes = Memory::sizeAdjustedForAlignment (sizeof (Header));
     const size_t bytesNeeded = headerBytes + bytes;
 
-    if (bytesNeeded > m_allocator.m_pages.getPageBytes ())
+    if (bytesNeeded > m_allocator.m_pages->getPageBytes ())
       Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
     Header* header;
@@ -136,7 +136,7 @@ private:
 
 inline Allocator::Page* Allocator::newPage ()
 {
-  return new (m_pages.allocate ()) Page (m_pages.getPageBytes());
+  return new (m_pages->allocate ()) Page (m_pages->getPageBytes());
 }
 
 inline void Allocator::deletePage (Page* page)
@@ -147,12 +147,16 @@ inline void Allocator::deletePage (Page* page)
 }
 
 Allocator::Allocator ()
+  : m_pages (GlobalPageAllocator::getInstance ())
 {
-  //vfassert (m_pages.getPageBytes () >= sizeof (Page) + Memory::allocAlignBytes);
+  //vfassert (m_pages->getPageBytes () >= sizeof (Page) + Memory::allocAlignBytes);
 }
 
 Allocator::~Allocator ()
 {
+  // Clean up this thread's data before we release
+  // the reference to the global page allocator.
+  m_tsp.reset (0);
 }
 
 //------------------------------------------------------------------------------

@@ -5,10 +5,8 @@
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
 #define __VF_SHAREDSINGLETON_VFHEADER__
 
-#include "vf/vf_BoostThread.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_StaticMutex.h"
-#include "vf/vf_ThreadWorker.h"
 
 // Thread-safe singleton which comes into existence on first use.
 // An option controls whether the singleton persists after creation,
@@ -22,7 +20,7 @@ template <class Object>
 class SharedSingleton : public SharedObject
 {
 protected:
-  typedef SharedObjectPtr <Object> Ptr;
+  typedef StaticMutex <SharedSingleton <Object> > MutexType;
 
   explicit SharedSingleton (const bool persistAfterCreation = true)
     : m_persistAfterCreation (persistAfterCreation)
@@ -36,29 +34,27 @@ protected:
   }
 
 public:
+  typedef SharedObjectPtr <Object> Ptr;
+
   static Ptr getInstance ()
   {
-    Ptr instance;
-
-    StaticMutex <Object>::ScopedLockType lock;
+    MutexType::ScopedLockType lock;
 
     if (!s_instance)
     {
       s_instance = Object::createInstance ();
 
       if (s_instance->m_persistAfterCreation)
-        s_persistentReference.setInstance (s_instance);
+        s_persistentReference = s_instance;
     }
 
-    instance = s_instance;
-
-    return instance;
+    return s_instance;
   }
 
 private:
   void destroySharedObject ()
   {
-    StaticMutex <Object>::ScopedLockType lock;
+    MutexType::ScopedLockType lock;
 
     // See if someone snuck in a reference via getInstance ().
     if (!isBeingReferenced ())
@@ -75,14 +71,26 @@ private:
     // Inited to zero from static storage duration.
     ~PersistentReference ()
     {
-      if (m_instance != 0)
-        m_instance->decReferenceCount ();
+      set (0);
     }
 
-    void setInstance (Object* object)
+    inline void set (Object* object)
     {
-      m_instance = object;
-      m_instance->incReferenceCount ();
+      if (m_instance != object)
+      {
+        if (m_instance)
+          m_instance->decReferenceCount ();
+
+        m_instance = object;
+
+        if (m_instance)
+          m_instance->incReferenceCount ();
+      }
+    }
+
+    inline void operator= (Object* object)
+    {
+      set (object);
     }
 
   private:
@@ -90,7 +98,6 @@ private:
   };
 
   static Object* s_instance;
-  static StaticMutex <Object> s_mutex;
   static PersistentReference s_persistentReference;
 };
 
@@ -98,35 +105,7 @@ template <class Object>
 Object* SharedSingleton <Object>::s_instance;
 
 template <class Object>
-StaticMutex <Object> SharedSingleton <Object>::s_mutex;
-
-template <class Object>
 typename SharedSingleton <Object>::PersistentReference
   SharedSingleton <Object>::s_persistentReference;
-
-//------------------------------------------------------------------------------
-
-// This is here to break a cyclic #include.
-
-class SharedObject::Singleton : public SharedSingleton <Singleton>
-{
-private:
-  Singleton ();
-  ~Singleton ();
-
-private:
-  friend class SharedSingleton <Singleton>;
-
-  static Singleton* createInstance ();
-  static void doDelete (SharedObject* sharedObject);
-
-public:
-  inline Worker& getWorker () { return m_worker; }
-
-  void Delete (SharedObject* sharedObject);
-
-private:
-  ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
-};
 
 #endif

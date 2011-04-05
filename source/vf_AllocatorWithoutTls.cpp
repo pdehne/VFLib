@@ -10,8 +10,6 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_MemoryAlignment.h"
 
-PageAllocator AllocatorWithoutTls::s_pages (8192);
-
 // This precedes every allocation
 struct AllocatorWithoutTls::Header
 {
@@ -124,7 +122,7 @@ private:
 
 inline AllocatorWithoutTls::Block* AllocatorWithoutTls::newBlock ()
 {
-  return new (s_pages.allocate ()) Block (s_pages.getPageBytes());
+  return new (m_pages->allocate ()) Block (m_pages->getPageBytes());
 }
 
 inline void AllocatorWithoutTls::deleteBlock (Block* b)
@@ -138,8 +136,9 @@ inline void AllocatorWithoutTls::deleteBlock (Block* b)
 }
 
 AllocatorWithoutTls::AllocatorWithoutTls ()
+  : m_pages (GlobalPageAllocator::getInstance ())
 {
-  if (s_pages.getPageBytes () < sizeof (Block) + 256)
+  if (m_pages->getPageBytes () < sizeof (Block) + 256)
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the block size is too small")));
 
   m_active = newBlock ();
@@ -152,21 +151,11 @@ AllocatorWithoutTls::~AllocatorWithoutTls ()
 
 //------------------------------------------------------------------------------
 
-namespace {
-
-struct ThreadData
-{
-};
-
-}
-
 void* AllocatorWithoutTls::allocate (const size_t bytes)
 {
-  boost::thread_specific_ptr <ThreadData> tsp;
-
   const size_t actual = sizeof (Header) + bytes;
 
-  if (actual > s_pages.getPageBytes ())
+  if (actual > m_pages->getPageBytes ())
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the memory request was too large")));
 
   Header* h;

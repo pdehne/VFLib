@@ -9,6 +9,7 @@
 #include "vf/vf_CacheLine.h"
 #include "vf/vf_LockFreeStack.h"
 #include "vf/vf_OncePerSecond.h"
+#include "vf/vf_SharedSingleton.h"
 
 //
 // Wait-free allocator for fixed size pages with these properties:
@@ -55,8 +56,8 @@ private:
   static inline void* fromPage (Page* const p);
   static inline Page* toPage (void* const p);
 
-  void free (List& list);
-  void free (Pool& pool);
+  void dispose (List& list);
+  void dispose (Pool& pool);
 
 private:
   const size_t m_pageBytes;
@@ -76,12 +77,23 @@ private:
 #endif
 };
 
-class GlobalPageAllocator
+//------------------------------------------------------------------------------
+
+class GlobalPageAllocator : public SharedSingleton <GlobalPageAllocator>
 {
+private:
+  GlobalPageAllocator ();
+  ~GlobalPageAllocator ();
+
 public:
   inline void* allocate ()
   {
-    return s_allocator.allocate ();
+    return m_allocator.allocate ();
+  }
+
+  inline size_t getPageBytes ()
+  {
+    return m_allocator.getPageBytes ();
   }
 
   static inline void deallocate (void* const p)
@@ -89,13 +101,12 @@ public:
     PageAllocator::deallocate (p);
   }
 
-  static inline size_t getPageBytes ()
-  {
-    return s_allocator.getPageBytes ();
-  }
+private:
+  friend class SharedSingleton <GlobalPageAllocator>;
+  static GlobalPageAllocator* createInstance ();
 
 private:
-  static PageAllocator s_allocator;
+  PageAllocator m_allocator;
 };
 
 #endif
