@@ -46,29 +46,20 @@ public:
   {
     Ptr instance;
 
-    {
-      SpinLock::ScopedLockType lock (*s_mutex);
+    SpinLock::ScopedLockType lock (*s_mutex);
 
-      instance = s_instance;
-    }
+    instance = s_instance;
 
     if (!instance)
     {
-      SpinLock::ScopedLockType lock (*s_mutex);
+      s_instance = Object::createInstance ();
+
+      if (s_instance->m_lifetime == persistAfterCreation)
+      {
+        *s_ref = s_instance;
+      }
 
       instance = s_instance;
-
-      if (!instance)
-      {
-        s_instance = Object::createInstance ();
-
-        if (s_instance->m_lifetime == persistAfterCreation)
-        {
-          *s_ref = s_instance;
-        }
-
-        instance = s_instance;
-      }
     }
 
     return instance;
