@@ -145,8 +145,8 @@
 #include "vf/vf_SpinLock.h"
 #endif
 
-#ifndef __VF_STATICMUTEX_VFHEADER__
-#include "vf/vf_StaticMutex.h"
+#ifndef __VF_STATIC_VFHEADER__
+#include "vf/vf_Static.h"
 #endif
 
 #ifndef __VF_THREAD_VFHEADER__

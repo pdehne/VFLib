@@ -5,6 +5,7 @@
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
 #define __VF_AUDIOBUFFERPOOL_VFHEADER__
 
+#include "vf/vf_LeakChecked.h"
 #include "vf/vf_Mutex.h"
 
 // Manages a collection of AudioSampleBuffer that

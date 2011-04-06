@@ -6,7 +6,8 @@
 #define __VF_SHAREDSINGLETON_VFHEADER__
 
 #include "vf/vf_SharedObject.h"
-#include "vf/vf_StaticMutex.h"
+#include "vf/vf_SpinLock.h"
+#include "vf/vf_Static.h"
 
 // Thread-safe singleton which comes into existence on first use.
 // An option controls whether the singleton persists after creation,
@@ -26,8 +27,6 @@ protected:
     persistAfterCreation
   };
 
-  typedef StaticMutex <SharedSingleton <Object> > MutexType;
-
   explicit SharedSingleton (const Lifetime lifetime)
     : m_lifetime (lifetime)
   {
@@ -36,7 +35,8 @@ protected:
 
   ~SharedSingleton ()
   {
-    s_instance = 0;
+    //s_instance = 0;
+    vfassert (s_instance == 0);
   }
 
 public:
@@ -44,74 +44,79 @@ public:
 
   static Ptr getInstance ()
   {
-    MutexType::ScopedLockType lock;
+    Ptr instance;
 
-    if (!s_instance)
     {
-      s_instance = Object::createInstance ();
+      SpinLock::ScopedLockType lock (*s_mutex);
 
-      if (s_instance->m_lifetime == persistAfterCreation)
-        s_persistentReference = s_instance;
+      instance = s_instance;
     }
 
-    return s_instance;
+    if (!instance)
+    {
+      SpinLock::ScopedLockType lock (*s_mutex);
+
+      instance = s_instance;
+
+      if (!instance)
+      {
+        s_instance = Object::createInstance ();
+
+        if (s_instance->m_lifetime == persistAfterCreation)
+        {
+          *s_ref = s_instance;
+        }
+
+        instance = s_instance;
+      }
+    }
+
+    return instance;
   }
 
 private:
   void destroySharedObject ()
   {
-    MutexType::ScopedLockType lock;
+    bool destroy;
 
-    // See if someone snuck in a reference via getInstance ().
-    if (!isBeingReferenced ())
+    {
+      SpinLock::ScopedLockType lock (*s_mutex);
+
+      if (isBeingReferenced ())
+      {
+        destroy = false;
+      }
+      else
+      {
+        destroy = true;
+        s_instance = 0;
+      }
+    }
+
+    if (destroy)
+    {
       delete this;
+    }
   }
 
 private:
   const Lifetime m_lifetime;
 
-  class PersistentReference
-  {
-  public:
-    // Intentionally lacking a constructor.
-    // Inited to zero from static storage duration.
-    ~PersistentReference ()
-    {
-      set (0);
-    }
-
-    inline void set (Object* object)
-    {
-      if (m_instance != object)
-      {
-        if (m_instance)
-          m_instance->decReferenceCount ();
-
-        m_instance = object;
-
-        if (m_instance)
-          m_instance->incReferenceCount ();
-      }
-    }
-
-    inline void operator= (Object* object)
-    {
-      set (object);
-    }
-
-  private:
-    Object* m_instance;
-  };
-
+private:
   static Object* s_instance;
-  static PersistentReference s_persistentReference;
+  static Static::Object <Ptr, SharedSingleton <Object>> s_ref;
+  static Static::Storage <SpinLock, SharedSingleton <Object>> s_mutex;
 };
 
 template <class Object>
 Object* SharedSingleton <Object>::s_instance;
 
 template <class Object>
-typename SharedSingleton <Object>::PersistentReference
-  SharedSingleton <Object>::s_persistentReference;
+Static::Object <typename SharedSingleton <Object>::Ptr, SharedSingleton <Object> >
+  SharedSingleton <Object>::s_ref;
+
+template <class Object>
+Static::Storage <SpinLock, SharedSingleton <Object> >
+  SharedSingleton <Object>::s_mutex;
 
 #endif

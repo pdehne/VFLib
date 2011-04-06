@@ -374,10 +374,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_StaticMutex.h"
-				>
-			</File>
-			<File
 				RelativePath="..\source\vf_Thread.cpp"
 				>
 			</File>
@@ -4756,7 +4752,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_StaticObject.h"
+				RelativePath="..\include\vf\vf_Static.h"
 				>
 			</File>
 		</Filter>

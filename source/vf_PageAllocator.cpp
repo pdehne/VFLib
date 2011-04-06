@@ -87,7 +87,6 @@ PageAllocator::PageAllocator (const size_t pageBytes)
   : m_pageBytes (pageBytes)
   , m_pageBytesAvailable (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
   , m_newPagesLeft ((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes)
-  , m_deleteCountdown (0)
 #if LOG_GC
   , m_swaps (0)
 #endif
@@ -163,9 +162,8 @@ void PageAllocator::deallocate (void* const p)
 //
 void PageAllocator::doOncePerSecond ()
 {
-  // Every so often, physically free a page.
+  // Physically free one page.
   // This will reduce the working set over time after a spike.
-  if (++m_deleteCountdown >= 1)
   {
     Page* page = m_cold->garbage->pop_front ();
     if (page)
@@ -177,8 +175,6 @@ void PageAllocator::doOncePerSecond ()
       m_total.release ();
 #endif
     }
-    
-    m_deleteCountdown = 0;
   }
 
   m_cold->fresh->swap (m_cold->garbage);

@@ -66,9 +66,6 @@ private:
   CacheLine::Aligned <Pool> m_pool2;
   Pool* volatile m_cold;            // pool which is cooling down
   Pool* volatile m_hot;             // pool we are currently using
-  int m_deleteCountdown;
-
-  // TODO: MAKE THIS STATIC SOMEHOW??
   Atomic::Counter m_newPagesLeft; // limit of system allocations
 
 #if 1

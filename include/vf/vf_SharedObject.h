@@ -6,6 +6,7 @@
 #define __VF_SHAREDOBJECT_VFHEADER__
 
 #include "vf/vf_Atomic.h"
+#include "vf/vf_LeakChecked.h"
 
 // A copy of juce::ReferenceCountedObject,
 // with the following features:
