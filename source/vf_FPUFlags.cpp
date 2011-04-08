@@ -45,7 +45,7 @@ FPUFlags FPUFlags::getCurrent ()
   errno_t result = _controlfp_s (&currentControl, newControl, mask);
 
   if (result != 0)
-    throw std::runtime_error ("error in _controlfp_s");
+    Throw (std::runtime_error ("error in _controlfp_s"));
 
   FPUFlags flags;
 
@@ -66,7 +66,7 @@ FPUFlags FPUFlags::getCurrent ()
   case _RC_DOWN: rounding = roundDown; break;
   case _RC_NEAR: rounding = roundNear; break;
   default:
-    throw std::runtime_error ("unknown rounding in _controlfp_s");
+    Throw (std::runtime_error ("unknown rounding in _controlfp_s"));
   };
   flags.setRounding (rounding);
 
@@ -77,7 +77,7 @@ FPUFlags FPUFlags::getCurrent ()
   case _PC_53: precision = bits53; break;
   case _PC_24: precision = bits24; break;
   default:
-    throw std::runtime_error ("unknown precision in _controlfp_s");
+    Throw (std::runtime_error ("unknown precision in _controlfp_s"));
   };
   flags.setPrecision (precision);
 
@@ -139,7 +139,7 @@ void FPUFlags::setCurrent (const FPUFlags& flags)
   errno_t result = _controlfp_s (&currentControl, newControl, mask);
 
   if (result != 0)
-    throw std::runtime_error ("error in _controlfp_s");
+    Throw (std::runtime_error ("error in _controlfp_s"));
 }
 
 //------------------------------------------------------------------------------

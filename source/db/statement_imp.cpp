@@ -127,7 +127,7 @@ void statement_imp::prepare (std::string const& query, bool bRepeatable)
   }
   else
   {
-    throw detail::sqliteError (__FILE__, __LINE__, result);
+    Throw (detail::sqliteError (__FILE__, __LINE__, result));
   }
 }
 
@@ -135,8 +135,8 @@ Error statement_imp::execute()
 {
   Error error;
 
-  if( !m_stmt )
-    throw Error().fail (__FILE__, __LINE__, Error::badParameter);
+  if (!m_stmt)
+    Throw (Error().fail (__FILE__, __LINE__, Error::badParameter));
 
   // ???
   m_bGotData = false;
@@ -206,7 +206,7 @@ bool statement_imp::fetch (Error& error)
   else
   {
     // should never get SQLITE_OK here
-    throw Error().fail (__FILE__, __LINE__, Error::assertFailed);
+    Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
   }
 
   return m_bGotData;
@@ -229,7 +229,7 @@ void statement_imp::do_uses()
     sqlite3_clear_bindings (m_stmt));
  
  if (error)
-   throw error;
+   Throw (error);
 
   BOOST_FOREACH(detail::use_type_base* u, m_uses)
     u->do_use();

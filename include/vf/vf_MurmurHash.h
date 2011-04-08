@@ -67,7 +67,7 @@ inline void Hash (const void* key, int len, uint32 seed, HashType* out)
   case 64:  Hash3_64 (key, len, seed, out); break;
   case 128: Hash3_128 (key, len, seed, out); break;
   default:
-    throw std::runtime_error ("invalid key size in MurmurHash");
+    Throw (std::runtime_error ("invalid key size in MurmurHash"));
     break;
   };
 }

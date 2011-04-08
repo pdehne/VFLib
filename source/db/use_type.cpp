@@ -44,7 +44,7 @@ inline T const& as(void const* v)
   T const& val = *static_cast <T const*> (v);
 
   if (val > T (std::numeric_limits<L>::max()))
-    throw vf::Error().fail (__FILE__, __LINE__);
+    Throw (vf::Error().fail (__FILE__, __LINE__));
 
   return val;
 }
@@ -159,11 +159,11 @@ void standard_use_type::do_use()
   case x_stdtm:
   case x_blob:
   default:
-    throw Error().fail (__FILE__, __LINE__, Error::badParameter);
+    Throw (Error().fail (__FILE__, __LINE__, Error::badParameter));
   }
 
   if (result != SQLITE_OK)
-    throw detail::sqliteError(__FILE__, __LINE__, result);
+    Throw (detail::sqliteError(__FILE__, __LINE__, result));
 }
 
 void standard_use_type::post_use()
