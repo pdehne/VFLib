@@ -242,6 +242,14 @@ void ListenersBase::Group::queue (Call* const c, const timestamp_t timestamp)
   m_worker->queuep (new (m_worker->getAllocator()) GroupWork (this, c, timestamp));
 }
 
+void ListenersBase::Group::call1 (Call* const c,
+                                  const timestamp_t timestamp,
+                                  void* const listener)
+{
+  m_worker->callp (new (m_worker->getAllocator()) GroupWork1 (
+    this, c, timestamp, listener));
+}
+
 void ListenersBase::Group::queue1 (Call* const c,
                                    const timestamp_t timestamp,
                                    void* const listener)
@@ -652,10 +660,25 @@ void ListenersBase::queuep (Call::Ptr cp)
     (*iter++)->queue (c, m_timestamp);
 }
 
-void ListenersBase::queue1p_void (void* const listener, Call::Ptr cp)
+void ListenersBase::call1p_void (void* const listener, Call* c)
 {
-  Call* c = cp;
+  LockFree::ScopedReadLock lock (m_groups_mutex);
 
+  // can't be const iterator because queue() might cause called functors
+  // to modify the list.
+  for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
+  {
+    Group* group = *iter++;
+    if (group->contains (listener))
+    {
+      group->call1 (c, m_timestamp, listener);
+      break;
+    }
+  }
+}
+
+void ListenersBase::queue1p_void (void* const listener, Call* c)
+{
   LockFree::ScopedReadLock lock (m_groups_mutex);
 
   // can't be const iterator because queue() might cause called functors

@@ -77,6 +77,8 @@ private:
     bool contains     (void* const listener);
     void call         (Call* const c, const timestamp_t timestamp);
     void queue        (Call* const c, const timestamp_t timestamp);
+    void call1        (Call* const c, const timestamp_t timestamp,
+                       void* const listener);
     void queue1       (Call* const c, const timestamp_t timestamp,
                        void* const listener);
     void do_call      (Call* const c, const timestamp_t timestamp);
@@ -146,7 +148,8 @@ public:
 protected:
   void add_void     (void* const listener, Worker* worker);
   void remove_void  (void* const listener);
-  void queue1p_void (void* const listener, Call::Ptr c);
+  void call1p_void  (void* const listener, Call* c);
+  void queue1p_void (void* const listener, Call* c);
   void updatep      (void const* const member,
                      const size_t bytes, Call::Ptr cp);
 
@@ -231,22 +234,42 @@ public:
   //  #5 A listener can always remove itself even if there are pending calls.
   //
 
+  // Queue a call to a single listener.
+  // The worker is processed if called on the associated thread.
+  //
+  inline void call1p (ListenerClass* const listener, Call::Ptr c)
+  {
+    call1p_void (listener, c);
+  }
+
+  // Queue a call to a single listener.
+  //
   inline void queue1p (ListenerClass* const listener, Call::Ptr c)
   {
     queue1p_void (listener, c);
   }
 
-  // Queue the functor and process the Worker if called on the same thread.
+  // Queue a call to all listeners.
+  // The worker is processed if called on the associated thread.
+  //
   template <class Functor>
   inline void callf (const Functor& f)
   {
     callp (new (getCallAllocator ()) CallType <Functor> (f));
   }
 
+  // Queue a call to all listeners.
+  //
   template <class Functor>
   inline void queuef (const Functor& f)
   {
     queuep (new (getCallAllocator ()) CallType <Functor> (f));
+  }
+
+  template <class Functor>
+  inline void call1f (ListenerClass* const listener, const Functor& f)
+  {
+    call1p (listener, new (getCallAllocator ()) CallType <Functor> (f));
   }
 
   template <class Functor>
@@ -360,6 +383,60 @@ public:
 
   // These are for targeting individual listeners.
   // Use carefully!
+
+  template <class Mf>
+  inline void call1 (Mf mf, ListenerClass* const listener)
+  { call1f (listener, bind (mf, _1)); }
+
+  template <class Mf, typename  T1>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1)
+  { call1f (listener, bind (mf, _1, t1)); }
+
+  template <class Mf, typename  T1, typename  T2>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2)
+  { call1f (listener, bind (mf, _1, t1, t2)); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3)
+  { call1f (listener, bind (mf, _1, t1, t2, t3)); }
+
+  template <class Mf, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { call1f (listener, bind (mf, _1, t1, t2, t3, t4)); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5)); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+
+  template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  inline void call1 (ListenerClass* const listener,
+               Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   template <class Mf>
   inline void queue1 (Mf mf, ListenerClass* const listener)
