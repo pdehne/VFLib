@@ -67,7 +67,7 @@ into_type_ptr do_into(T& t, basic_type_tag)
 template<typename T>
 into_type_ptr do_into(T& t, indicator& ind, basic_type_tag)
 {
-  return into_type_ptr(new into_type<T>(t,&ind));
+  return into_type_ptr(new into_type<T>(t,ind));
 }
 
 }
