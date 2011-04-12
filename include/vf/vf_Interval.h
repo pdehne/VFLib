@@ -45,9 +45,12 @@ public:
 
   bool operator!= (Interval const& rhs ) const
   {
+    return !this->operator== (rhs);
+    /*
     return empty() ? (!rhs.empty()) :
                      (rhs.empty() || (m_begin != rhs.m_begin ||
-                                      m_end == rhs.m_end));
+                                      m_end != rhs.m_end));
+    */
   }
 
   Ty const& begin () const { return m_begin; }
@@ -59,6 +62,7 @@ public:
   bool notEmpty () const { return m_begin < m_end; }
   void setBegin (Ty const& v) { m_begin = v; }
   void setEnd (Ty const& v) { m_end = v; }
+  void setLength (Ty const& v) { m_end = m_begin + v; }
 
   bool contains (Ty const& v ) const
   {

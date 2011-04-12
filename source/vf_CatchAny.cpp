@@ -145,12 +145,14 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
 {
   bool caughtException = true; // assume the worst
 
+#if 0
   if (Debug::isDebuggerAttached ())
   {
     f ();
     caughtException = false;
   }
   else
+#endif
   {
     try
     {
