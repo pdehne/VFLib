@@ -12,8 +12,6 @@
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
 
-#include "vf/vf_StandardAllocator.h" // TEMPORARY
-
 // List where each Listener registers with the desired Worker
 // on which the call is made. Since the list traversal for an associated
 // Worker is done on its thread, it is impossible for a Listener to
