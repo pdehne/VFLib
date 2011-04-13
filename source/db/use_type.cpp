@@ -10,13 +10,11 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
-
-namespace db {
-
 #include "vf/db/detail/use_type.h"
 #include "vf/db/detail/statement_imp.h"
-
 #include "error_codes.h"
+
+namespace db {
 
 namespace detail {
 

@@ -6,6 +6,8 @@
 #ifndef __VF_DB_BACKEND_VFHEADER__
 #define __VF_DB_BACKEND_VFHEADER__
 
+namespace db {
+
 namespace detail {
 
 // supported standard types for intos and uses
@@ -47,5 +49,7 @@ enum indicator
 
 //typedef sqlite3_int64 rowid;
 typedef VF_JUCE::int64 rowid;
+
+}
 
 #endif

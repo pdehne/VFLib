@@ -6,6 +6,8 @@
 #ifndef __VF_DB_DETAIL_TYPE_PTR_VFHEADER__
 #define __VF_DB_DETAIL_TYPE_PTR_VFHEADER__
 
+namespace db {
+
 namespace detail {
 
 // helper for managing the lifetime of into and use objects
@@ -31,6 +33,8 @@ public:
 private:
   mutable T* m_p;
 };
+
+}
 
 }
 

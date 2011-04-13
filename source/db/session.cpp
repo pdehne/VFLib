@@ -10,17 +10,17 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "vf/vf_SharedSingleton.h"
+#include "error_codes.h"
 
 namespace db {
 
-#include "error_codes.h"
-
-namespace {
-
-class Sqlite
+class session::Sqlite3 : public vf::SharedSingleton <Sqlite3>
 {
 private:
-	Sqlite ()
+  friend class SharedSingleton <Sqlite3>;
+
+  Sqlite3 () : SharedSingleton (persistAfterCreation)
 	{
     int threadSafe = sqlite3_threadsafe();
     if (threadSafe != 1)
@@ -30,31 +30,28 @@ private:
     if (result != SQLITE_OK)
       Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
 
-  	sqlite3_initialize();
+  	sqlite3_initialize ();
 	}
 
-	~Sqlite()
+	~Sqlite3()
 	{
-		sqlite3_shutdown();
+		sqlite3_shutdown ();
 	}
 
-public:
-	static void initialize ()
-	{
-    static Sqlite object;
-	}
+  static Sqlite3* createInstance ()
+  {
+    return new Sqlite3;
+  }
 };
-
-}
 
 //------------------------------------------------------------------------------
 
-session::session()
+session::session ()
   : prepare (this)
+  , m_instance (Sqlite3::getInstance ())
   , m_bInTransaction (false)
   , m_connection (0)
 {
-  Sqlite::initialize();
 }
 
 session::session (const session& deferredClone)
@@ -342,4 +339,3 @@ Error session::hard_exec (std::string const& query)
 }
 
 END_VF_NAMESPACE
-

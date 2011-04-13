@@ -10,6 +10,8 @@
 #include "vf/db/detail/into_type.h"
 #include "vf/db/detail/use_type.h"
 
+namespace db {
+
 namespace detail {
 
 // used to order into and uses that need conversions
@@ -133,6 +135,8 @@ template <typename T>
 use_type_ptr do_use(T const& t, indicator& ind, user_type_tag)
 {
   return use_type_ptr(new conversion_use_type<T>(t, ind));
+}
+
 }
 
 }

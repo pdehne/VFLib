@@ -9,6 +9,8 @@
 #include "vf/db/detail/into_type.h"
 #include "vf/db/detail/use_type.h"
 
+namespace db {
+
 namespace detail {
 
 // statement implementation
@@ -49,6 +51,8 @@ public:
   std::vector<detail::into_type_base*> m_intos;
   std::vector<detail::use_type_base*> m_uses;
 };
+
+}
 
 }
 

@@ -7,6 +7,7 @@
 
 #include "vf/vf_Atomic.h"
 #include "vf/vf_CacheLine.h"
+#include "Vf/vf_Mutex.h"
 #include "vf/vf_ReadWriteMutexBase.h"
 
 namespace LockFree {

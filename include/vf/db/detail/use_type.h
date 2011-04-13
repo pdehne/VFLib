@@ -10,6 +10,8 @@
 #include "vf/db/detail/type_ptr.h"
 #include "vf/db/detail/exchange_traits.h"
 
+namespace db {
+
 namespace detail {
 
 // base class for defining input data
@@ -104,6 +106,8 @@ template<typename T>
 use_type_ptr do_use(T const& t, indicator& ind, basic_type_tag)
 {
   return use_type_ptr(new use_type<T>(t, ind));
+}
+
 }
 
 }

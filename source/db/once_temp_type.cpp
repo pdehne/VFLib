@@ -10,10 +10,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "vf/db/detail/once_temp_type.h"
 
 namespace db {
-
-#include "vf/db/detail/once_temp_type.h"
 
 namespace detail {
 

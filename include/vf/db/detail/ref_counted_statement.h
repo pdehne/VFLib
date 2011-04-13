@@ -8,6 +8,8 @@
 
 #include "vf/db/statement.h"
 
+namespace db {
+
 namespace detail {
 
 // used for "once" and "prepare"
@@ -50,6 +52,8 @@ private:
   Error& m_error;
   statement m_st;
 };
+
+}
 
 }
 

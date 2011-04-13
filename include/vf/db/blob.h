@@ -8,6 +8,8 @@
 
 #include "vf/db/backend.h"
 
+namespace db {
+
 // BLOB interface
 class blob
 {
@@ -30,5 +32,7 @@ private:
   session* m_session;
   sqlite3_blob* m_blob;
 };
+
+}
 
 #endif

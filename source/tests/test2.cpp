@@ -20,7 +20,7 @@ BEGIN_VF_NAMESPACE
 // Change this to the file to check for problems
 //
 
-#include "vf/vf_JuceThread.h"
+#include "vf/vf_SharedSingleton.h"
 
 END_VF_NAMESPACE
 

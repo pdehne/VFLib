@@ -10,10 +10,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "vf/db/transaction.h"
 
 namespace db {
-
-#include "vf/db/transaction.h"
 
 transaction::transaction(session& s)
 : m_session(s), m_bHandled(false)

@@ -24,13 +24,13 @@ class blob;
 class session;
 class statement;
 
+}
+
 #include "vf/db/blob.h"
 #include "vf/db/into.h"
 #include "vf/db/session.h"
 #include "vf/db/statement.h"
 #include "vf/db/transaction.h"
 #include "vf/db/use.h"
-
-}
 
 #endif

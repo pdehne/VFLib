@@ -8,6 +8,8 @@
 
 #include "vf/db/detail/ref_counted_prepare_info.h"
 
+namespace db {
+
 namespace detail {
 
 // lightweight copyable wrapper around the prepare info
@@ -55,6 +57,8 @@ public:
 private:
   session* m_session;
 };
+
+}
 
 }
 

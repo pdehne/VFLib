@@ -9,6 +9,8 @@
 #include "vf/db/backend.h"
 #include "vf/db/type_conversion_traits.h"
 
+namespace db {
+
 namespace detail {
 
 struct basic_type_tag {};
@@ -161,6 +163,8 @@ template<> struct exchange_traits<blob>
   typedef basic_type_tag type_family;
   enum { x_type = x_blob };
 };
+
+}
 
 }
 

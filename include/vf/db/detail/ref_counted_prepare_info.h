@@ -8,6 +8,8 @@
 
 #include "vf/db/detail/ref_counted_statement.h"
 
+namespace db {
+
 namespace detail {
 
 // helper that collects statement text and bindings to create the statement
@@ -25,6 +27,8 @@ public:
   std::vector <into_type_base*> m_intos;
   std::vector <use_type_base*> m_uses;
 };
+
+}
 
 }
 

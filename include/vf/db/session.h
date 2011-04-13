@@ -6,8 +6,11 @@
 #ifndef __VF_DB_SESSION_VFHEADER__
 #define __VF_DB_SESSION_VFHEADER__
 
+#include "vf/vf_SharedObject.h"
 #include "vf/db/detail/once_temp_type.h"
 #include "vf/db/detail/prepare_temp_type.h"
+
+namespace db {
 
 class session : NonCopyable
 {
@@ -60,6 +63,9 @@ private:
   Error hard_exec (std::string const& query);
 
 private:
+  class Sqlite3;
+  SharedObjectPtr <Sqlite3> m_instance;
+
   sqlite3* m_connection;
   String m_fileName;
   std::string m_connectString;
@@ -67,5 +73,7 @@ private:
   std::ostringstream m_query_stream;
   bool m_bGotData;
 };
+
+}
 
 #endif

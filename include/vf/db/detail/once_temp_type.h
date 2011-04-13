@@ -10,6 +10,8 @@
 #include "vf/db/detail/prepare_temp_type.h"
 #include "vf/db/detail/ref_counted_statement.h"
 
+namespace db {
+
 namespace detail {
 
 class once_temp_type
@@ -54,6 +56,8 @@ private:
   session& m_session;
   Error& m_error;
 };
+
+}
 
 }
 

@@ -6,12 +6,16 @@
 #ifndef __VF_DB_DETAIL_ERROR_CODES_VFHEADER__
 #define __VF_DB_DETAIL_ERROR_CODES_VFHEADER__
 
+namespace db {
+
 namespace detail {
 
 // Converts SQLITE error codes into an Error object
 extern const Error sqliteError (const char* sourceFileName,
                                 int lineNumber,
                                 int sqliteErrorCode);
+}
+
 }
 
 #endif

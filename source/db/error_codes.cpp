@@ -9,9 +9,9 @@
 
 BEGIN_VF_NAMESPACE
 
-namespace db {
-
 #include "error_codes.h"
+
+namespace db {
 
 namespace detail {
 

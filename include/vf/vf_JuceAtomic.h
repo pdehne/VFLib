@@ -8,7 +8,6 @@
 #if VF_HAVE_JUCE
 
 #include "vf/vf_Intrinsics.h"
-#include "vf/vf_Mutex.h"
 
 namespace Juce {
 

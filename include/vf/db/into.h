@@ -10,6 +10,8 @@
 #include "vf/db/detail/exchange_traits.h"
 #include "vf/db/detail/type_conversion.h"
 
+namespace db {
+
 template<typename T>
 detail::into_type_ptr into(T& t)
 {
@@ -22,6 +24,8 @@ detail::into_type_ptr into(T& t, indicator& ind)
 {
   return detail::do_into(t, ind,
                          typename detail::exchange_traits<T>::type_family());
+}
+
 }
 
 #endif

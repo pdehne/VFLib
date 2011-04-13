@@ -6,10 +6,12 @@
 #ifndef __VF_DB_TRANSACTION_VFHEADER__
 #define __VF_DB_TRANSACTION_VFHEADER__
 
+namespace db {
+
 class transaction : vf::NonCopyable
 {
 public:
-  explicit transaction(session& s);
+  explicit transaction (session& s);
   ~transaction();
 
   Error commit();
@@ -20,5 +22,6 @@ private:
   bool m_bHandled;
 };
 
-#endif
+}
 
+#endif

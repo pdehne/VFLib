@@ -10,10 +10,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "error_codes.h"
 
 namespace db {
-
-#include "error_codes.h"
 
 blob::blob()
   : m_blob(0)

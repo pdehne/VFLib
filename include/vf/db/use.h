@@ -10,6 +10,8 @@
 #include "vf/db/detail/exchange_traits.h"
 #include "vf/db/detail/type_conversion.h"
 
+namespace db {
+
 inline detail::use_type_ptr use_null()
 {
   return detail::do_use_null();
@@ -34,6 +36,8 @@ detail::use_type_ptr use(T& t, indicator& ind)
 {
   return detail::do_use(t, ind,
                         typename detail::exchange_traits<T>::type_family());
+}
+
 }
 
 #endif

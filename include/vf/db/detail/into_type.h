@@ -10,6 +10,8 @@
 #include "vf/db/detail/type_ptr.h"
 #include "vf/db/detail/exchange_traits.h"
 
+namespace db {
+
 namespace detail {
 
 // base class for defining output data
@@ -17,7 +19,7 @@ class into_type_base
 {
 public:
   virtual ~into_type_base() {}
-  virtual void bind(statement_imp& st, int& iCol)=0;
+  virtual void bind (statement_imp& st, int& iCol)=0;
   virtual void do_into()=0;
 };
 
@@ -68,6 +70,8 @@ template<typename T>
 into_type_ptr do_into(T& t, indicator& ind, basic_type_tag)
 {
   return into_type_ptr(new into_type<T>(t,ind));
+}
+
 }
 
 }

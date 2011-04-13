@@ -10,10 +10,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "vf/db/detail/ref_counted_statement.h"
 
 namespace db {
-
-#include "vf/db/detail/ref_counted_statement.h"
 
 namespace detail {
 

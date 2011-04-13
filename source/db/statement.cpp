@@ -10,10 +10,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
+#include "vf/db/detail/statement_imp.h"
 
 namespace db {
-
-#include "vf/db/detail/statement_imp.h"
 
 statement::statement(session& s)
   : m_imp(new detail::statement_imp(s))

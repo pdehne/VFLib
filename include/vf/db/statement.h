@@ -9,6 +9,8 @@
 #include "vf/db/detail/into_type.h"
 #include "vf/db/detail/use_type.h"
 
+namespace db {
+
 //
 // Lightweight copyable handle to a statement. This
 // is just a wrapper around the actual statement implementation.
@@ -44,5 +46,7 @@ private:
   // STOP USING THIS!
   boost::shared_ptr <detail::statement_imp> m_imp;
 };
+
+}
 
 #endif

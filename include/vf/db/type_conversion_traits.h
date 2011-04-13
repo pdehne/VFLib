@@ -8,6 +8,8 @@
 
 #include "vf/db/backend.h"
 
+namespace db {
+
 // default conversion (copy in to out)
 template<typename T>
 struct type_conversion
@@ -55,5 +57,7 @@ struct type_conversion <VF_JUCE::Time>
     ind = i_ok;
   }
 };
+
+}
 
 #endif
