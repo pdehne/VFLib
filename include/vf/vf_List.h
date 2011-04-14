@@ -91,9 +91,6 @@ private:
     operator ElemType* () const
       { return static_cast <ElemType*> (m_node); }
     
-    operator ElemType const* () const
-      { return static_cast <ElemType*> (m_node); }
-
   private:
     friend class boost::iterator_core_access;
 

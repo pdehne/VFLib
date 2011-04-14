@@ -33,6 +33,14 @@
 #include "vf/vf_CacheLine.h"
 #endif
 
+#ifndef __VF_DRAGANDDROPDATA_VFHEADER__
+#include "vf/vf_DragAndDropData.h"
+#endif
+
+#ifndef __VF_DRAGANDDROPTARGET_VFHEADER__
+#include "vf/vf_DragAndDropTarget.h"
+#endif
+
 #ifndef __VF_FPUFLAGS_VFHEADER__
 #include "vf/vf_FPUFlags.h"
 #endif
