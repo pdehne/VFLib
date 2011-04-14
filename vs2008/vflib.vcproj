@@ -4762,6 +4762,22 @@
 			Name="gui"
 			>
 			<File
+				RelativePath="..\source\vf_DragAndDropData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_DragAndDropData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_DragAndDropTarget.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_DragAndDropTarget.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_ListBoxSelection.h"
 				>
 			</File>
