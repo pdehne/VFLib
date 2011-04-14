@@ -55,6 +55,44 @@ public:
 
 public:
   // WHERE IS THE CONST_ITERATOR ???
+#if 1
+  class iterator
+    : public boost::iterator_facade <
+      iterator,
+      Elem,
+      boost::bidirectional_traversal_tag
+      //,Elem*&
+    >
+  {
+  public:
+    iterator (Node* node = 0) : m_node (node) { }
+    iterator (Elem* e) : m_node (static_cast <Node*> (e)) { }
+    iterator (iterator const& other) : m_node (other.m_node) { }
+    iterator& operator= (iterator const& other) { m_node = other.m_node; return *this; }
+    bool operator == (iterator const& other) const { return m_node == other.m_node; }
+    bool operator != (iterator const& other) const { return m_node != other.m_node; }
+    operator Elem* () const { return static_cast <Elem*> (m_node); }
+    operator Elem const* () const { return static_cast <Elem*> (m_node); }
+
+  private:
+    friend class boost::iterator_core_access;
+    reference dereference () const
+    {
+      return *static_cast <Elem*> (m_node);
+    }
+    bool equal (Node *const *node) const { return m_node == node; }
+    void increment ()
+    {
+      m_node = m_node->m_next;
+    }
+    void decrement ()
+    {
+      m_node = m_node->m_prev;
+    }
+  private:
+    Node* m_node;
+  };
+#else
   class iterator
   {
   public:
@@ -121,6 +159,7 @@ public:
   private:
     Node* m_node;
   };
+#endif
 
 public:
   List ()
@@ -163,7 +202,7 @@ public:
   iterator insert (iterator pos, Elem* e)
   {
     Node* node = static_cast <Node*> (e);
-    node->m_next = pos.node();
+    node->m_next = pos;
     node->m_prev = node->m_next->m_prev;
     node->m_next->m_prev = node;
     node->m_prev->m_next = node;
@@ -175,7 +214,7 @@ public:
   {
     if (!other.empty())
     {
-      Node* before = pos.node();
+      Node* before = pos;
       other.m_head.m_next->m_prev = before->m_prev;
       before->m_prev->m_next = other.m_head.m_next;
       other.m_tail.m_prev->m_next = before;
@@ -187,7 +226,7 @@ public:
 
   iterator remove (iterator pos)
   {
-    Elem* e = *pos++;
+    Elem* e = pos++;
     Node* node = static_cast <Node*> (e);
     node->m_next->m_prev = node->m_prev;
     node->m_prev->m_next = node->m_next;

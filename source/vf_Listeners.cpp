@@ -206,7 +206,7 @@ bool ListenersBase::Group::remove (void* listener)
 
   for (List::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
   {
-    Entry* entry = *iter;
+    Entry* entry = iter;
     if (entry->listener == listener)
     {
       m_list.remove (entry);
@@ -278,7 +278,7 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
     //
     for (List::iterator iter = m_list.begin(); iter != m_list.end();)
     {
-      Entry* entry = *iter++;
+      Entry* entry = iter++;
 
       // Since it is possible for a listener to be added after a
       // Call gets queued but before it executes, this prevents listeners
@@ -319,7 +319,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 
     for (List::iterator iter = m_list.begin(); iter != m_list.end();)
     {
-      Entry* entry = *iter++;
+      Entry* entry = iter++;
 
       if (entry->listener == listener)
       {
@@ -431,7 +431,7 @@ void ListenersBase::Proxy::remove (Group* group)
 {
   for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end();)
   {
-    Entry* entry = *iter++;
+    Entry* entry = iter++;
 
     if (entry->group == group)
     {
@@ -458,7 +458,7 @@ void ListenersBase::Proxy::update (Call* const c, const timestamp_t timestamp)
   // adds a listener to a new thread queue in response to a call.
   for (Entries::iterator iter = m_entries.begin(); iter != m_entries.end();)
   {
-    Entry* entry = *iter++;
+    Entry* entry = iter++;
 
     // Manually add a reference since we use a raw pointer
     c->incReferenceCount ();
@@ -501,7 +501,7 @@ ListenersBase::~ListenersBase ()
 {
   for (Groups::iterator iter = m_groups.begin (); iter != m_groups.end ();)
   {
-    Group* group = *iter++;
+    Group* group = iter++;
 
     // If this goes off it means a Listener forgot to remove.
     vfassert (group->empty ());
@@ -511,7 +511,10 @@ ListenersBase::~ListenersBase ()
 
   // Proxies are never deleted until here.
   for (Proxies::iterator iter = m_proxies.begin(); iter != m_proxies.end ();)
-    delete (*iter++);
+  {
+    Proxy* proxy = iter++;
+    delete proxy;
+  }
 }
 
 void ListenersBase::add_void (void* const listener, Worker* worker)
@@ -525,7 +528,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
   // SHOULD USE const_iterator!
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
-    Group* group = *iter++;
+    Group* group = iter++;
 
     // We can be in do_call() on another thread now, but it
     // doesn't modify the list, and we have the write lock.
@@ -539,7 +542,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
   // SHOULD USE const_iterator
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
-    Group::Ptr cur = *iter++;
+    Group::Ptr cur = iter++;
     if (cur->getWorker() == worker)
     {
       group = cur;
@@ -559,7 +562,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
     // Tell existing proxies to add the group
     LockFree::ScopedReadLock lock (m_proxies_mutex);
     for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
-      (*iter++)->add (group, *m_allocator);
+      (iter++)->add (group, *m_allocator);
   }
 
   // Add the listener to the group with the current timestamp
@@ -581,7 +584,7 @@ void ListenersBase::remove_void (void* const listener)
 
     for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
     {
-      Group* group = *iter++;
+      Group* group = iter++;
 
       // this should never happen while we hold the mutex
       vfassert (!group->empty ());
@@ -602,7 +605,7 @@ void ListenersBase::remove_void (void* const listener)
   // Find the group and remove
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
-    Group::Ptr group = *iter++;
+    Group::Ptr group = iter++;
 
     // If the listener is in there, take it out.
     if (group->remove (listener))
@@ -616,7 +619,7 @@ void ListenersBase::remove_void (void* const listener)
 
           for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
           {
-            Proxy* proxy = *iter++;
+            Proxy* proxy = iter++;
             proxy->remove (group);
           }
         }
@@ -645,7 +648,7 @@ void ListenersBase::callp (Call::Ptr cp)
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
-    (*iter++)->call (c, m_timestamp);
+    (iter++)->call (c, m_timestamp);
 }
 
 void ListenersBase::queuep (Call::Ptr cp)
@@ -657,7 +660,7 @@ void ListenersBase::queuep (Call::Ptr cp)
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
-    (*iter++)->queue (c, m_timestamp);
+    (iter++)->queue (c, m_timestamp);
 }
 
 void ListenersBase::call1p_void (void* const listener, Call* c)
@@ -668,7 +671,7 @@ void ListenersBase::call1p_void (void* const listener, Call* c)
   // to modify the list.
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
-    Group* group = *iter++;
+    Group* group = iter++;
     if (group->contains (listener))
     {
       group->call1 (c, m_timestamp, listener);
@@ -685,7 +688,7 @@ void ListenersBase::queue1p_void (void* const listener, Call* c)
   // to modify the list.
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
-    Group* group = *iter++;
+    Group* group = iter++;
     if (group->contains (listener))
     {
       group->queue1 (c, m_timestamp, listener);
@@ -732,7 +735,7 @@ void ListenersBase::updatep (void const* const member,
         // We need the group read lock for this (caller provided).
         for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
         {
-          Group* group = *iter++;
+          Group* group = iter++;
           proxy->add (group, *m_allocator);
         }
 
@@ -753,7 +756,7 @@ ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
 {
   for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
   {
-    Proxy* proxy = *iter++;
+    Proxy* proxy = iter++;
     if (proxy->match (member, bytes))
       return proxy;
   }
