@@ -67,7 +67,7 @@ private:
   public:
     typedef SharedObjectPtr <Group> Ptr;
 
-    explicit Group    (Worker* const worker);
+    explicit Group    (Worker& worker);
     ~Group            ();
     void add          (void* listener, const timestamp_t timestamp,
                        AllocatorType& allocator);
@@ -84,7 +84,7 @@ private:
                        void* const listener);
 
     bool empty        () const { return m_list.empty(); }
-    Worker* getWorker () const { return m_worker; }
+    Worker& getWorker () const { return m_worker; }
 
   private:
     void destroySharedObject() { delete this; }
@@ -93,7 +93,7 @@ private:
     struct Entry;
     typedef List <Entry> List;
 
-    Worker* const m_worker;
+    Worker& m_worker;
     List m_list;
     void* m_listener;
     CacheLine::Aligned <LockFree::ReadWriteMutex> m_mutex;
@@ -144,7 +144,7 @@ public:
   void queuep       (Call::Ptr c);
 
 protected:
-  void add_void     (void* const listener, Worker* worker);
+  void add_void     (void* const listener, Worker& worker);
   void remove_void  (void* const listener);
   void call1p_void  (void* const listener, Call* c);
   void queue1p_void (void* const listener, Call* c);
@@ -197,9 +197,13 @@ public:
   //  #4 The listener must not already exist in the list.
   //  #5 This can be called from any thread.
   // 
-  void add (ListenerClass* const listener, Worker* worker)
+  void add (ListenerClass* const listener, Worker& worker)
   {
     add_void (listener, worker);
+  }
+  void add (ListenerClass* const listener, Worker* worker)
+  {
+    add (listener, *worker);
   }
 
   //

@@ -157,7 +157,7 @@ struct ListenersBase::Group::Entry : List::Node,
 //   at any time.
 //
 
-ListenersBase::Group::Group (Worker* const worker)
+ListenersBase::Group::Group (Worker& worker)
   : m_worker (worker)
   , m_listener (0)
 {
@@ -233,20 +233,20 @@ bool ListenersBase::Group::contains (void* const listener) /*const*/
 void ListenersBase::Group::call (Call* const c, const timestamp_t timestamp)
 {
   vfassert (!empty ());
-  m_worker->callp (new (m_worker->getAllocator()) GroupWork (this, c, timestamp));
+  m_worker.callp (new (m_worker.getAllocator()) GroupWork (this, c, timestamp));
 }
 
 void ListenersBase::Group::queue (Call* const c, const timestamp_t timestamp)
 {
   vfassert (!empty ());
-  m_worker->queuep (new (m_worker->getAllocator()) GroupWork (this, c, timestamp));
+  m_worker.queuep (new (m_worker.getAllocator()) GroupWork (this, c, timestamp));
 }
 
 void ListenersBase::Group::call1 (Call* const c,
                                   const timestamp_t timestamp,
                                   void* const listener)
 {
-  m_worker->callp (new (m_worker->getAllocator()) GroupWork1 (
+  m_worker.callp (new (m_worker.getAllocator()) GroupWork1 (
     this, c, timestamp, listener));
 }
 
@@ -254,7 +254,7 @@ void ListenersBase::Group::queue1 (Call* const c,
                                    const timestamp_t timestamp,
                                    void* const listener)
 {
-  m_worker->queuep (new (m_worker->getAllocator()) GroupWork1 (
+  m_worker.queuep (new (m_worker.getAllocator()) GroupWork1 (
     this, c, timestamp, listener));
 }
 
@@ -292,9 +292,9 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
         // stack to guarantee that these calls will not execute immediately.
         // They will be handled by the tail recusion unrolling in the
         // thread queue.
-        vfassert (m_worker->in_process ());
+        vfassert (m_worker.in_process ());
 
-        m_worker->callp (new (m_worker->getAllocator()) CallWork (c, m_listener));
+        m_worker.callp (new (m_worker.getAllocator()) CallWork (c, m_listener));
 
         m_listener = 0;
       }
@@ -327,9 +327,9 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
         {
           m_listener = entry->listener;
 
-          vfassert (m_worker->in_process ());
+          vfassert (m_worker.in_process ());
 
-          m_worker->callp (new (m_worker->getAllocator()) CallWork (c, m_listener));
+          m_worker.callp (new (m_worker.getAllocator()) CallWork (c, m_listener));
 
           m_listener = 0;
         }
@@ -469,7 +469,7 @@ void ListenersBase::Proxy::update (Call* const c, const timestamp_t timestamp)
     // If no old call then they need to be queued
     if (!old)
     {
-      Worker& worker = *entry->group->getWorker();
+      Worker& worker = entry->group->getWorker();
       worker.callp (new (worker.getAllocator ()) Work (this, entry, timestamp));
     }
     else
@@ -517,10 +517,8 @@ ListenersBase::~ListenersBase ()
   }
 }
 
-void ListenersBase::add_void (void* const listener, Worker* worker)
+void ListenersBase::add_void (void* const listener, Worker& worker)
 {
-  vfassert (worker != 0);
-
   LockFree::ScopedWriteLock lock (m_groups_mutex);
 
 #if VF_DEBUG
@@ -543,7 +541,7 @@ void ListenersBase::add_void (void* const listener, Worker* worker)
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
     Group::Ptr cur = iter++;
-    if (cur->getWorker() == worker)
+    if (&cur->getWorker() == &worker)
     {
       group = cur;
       break;
