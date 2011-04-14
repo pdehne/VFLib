@@ -4759,8 +4759,12 @@
 			>
 		</Filter>
 		<Filter
-			Name="_juce"
+			Name="gui"
 			>
+			<File
+				RelativePath="..\include\vf\vf_ListBoxSelection.h"
+				>
+			</File>
 			<Filter
 				Name="graphics"
 				>
@@ -4773,22 +4777,22 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="audio"
+		</Filter>
+		<Filter
+			Name="audio"
+			>
+			<File
+				RelativePath="..\source\vf_AudioBufferPool.cpp"
 				>
-				<File
-					RelativePath="..\source\vf_AudioBufferPool.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\include\vf\vf_AudioBufferPool.h"
-					>
-				</File>
-				<File
-					RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
-					>
-				</File>
-			</Filter>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_AudioBufferPool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\license.txt"

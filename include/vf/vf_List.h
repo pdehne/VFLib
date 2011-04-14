@@ -53,113 +53,79 @@ public:
     Node* m_prev;
   };
 
-public:
-  // WHERE IS THE CONST_ITERATOR ???
-#if 1
-  class iterator
+private:
+  template <class ElemType, class NodeType>
+  class iterator_base
     : public boost::iterator_facade <
-      iterator,
-      Elem,
+      iterator_base <ElemType, NodeType>,
+      ElemType,
       boost::bidirectional_traversal_tag
-      //,Elem*&
     >
   {
   public:
-    iterator (Node* node = 0) : m_node (node) { }
-    iterator (Elem* e) : m_node (static_cast <Node*> (e)) { }
-    iterator (iterator const& other) : m_node (other.m_node) { }
-    iterator& operator= (iterator const& other) { m_node = other.m_node; return *this; }
-    bool operator == (iterator const& other) const { return m_node == other.m_node; }
-    bool operator != (iterator const& other) const { return m_node != other.m_node; }
-    operator Elem* () const { return static_cast <Elem*> (m_node); }
-    operator Elem const* () const { return static_cast <Elem*> (m_node); }
+    iterator_base (NodeType* node = 0)
+      : m_node (node)
+      { }
+    
+    iterator_base (ElemType* e)
+      : m_node (static_cast <NodeType*> (e))
+      { }
+ 
+    template <class OtherElemType, class OtherNodeType>
+    iterator_base (iterator_base <OtherElemType, OtherNodeType> const& other)
+      : m_node (other.m_node)
+      { }
+
+    template <class OtherElemType, class OtherNodeType>
+    iterator_base& operator= (iterator_base <OtherElemType, OtherNodeType> const& other)
+      { m_node = other.m_node; return *this; }
+
+    template <class OtherElemType, class OtherNodeType>
+    bool operator == (iterator_base <OtherElemType, OtherNodeType> const& other) const
+      { return m_node == other.m_node; }
+
+    template <class OtherElemType, class OtherNodeType>
+    bool operator != (iterator_base <OtherElemType, OtherNodeType> const& other) const
+      { return m_node != other.m_node; }
+
+    operator ElemType* () const
+      { return static_cast <ElemType*> (m_node); }
+    
+    operator ElemType const* () const
+      { return static_cast <ElemType*> (m_node); }
 
   private:
     friend class boost::iterator_core_access;
+
     reference dereference () const
     {
-      return *static_cast <Elem*> (m_node);
+      return *static_cast <ElemType*> (m_node);
     }
-    bool equal (Node *const *node) const { return m_node == node; }
+
+    bool equal (NodeType *const *node) const
+    {
+      return m_node == node;
+    }
+
     void increment ()
     {
+      vfassert (m_node->m_next);
       m_node = m_node->m_next;
     }
+
     void decrement ()
     {
+      vfassert (m_node->m_prev && m_node->m_prev->m_prev != 0);
       m_node = m_node->m_prev;
     }
-  private:
-    Node* m_node;
-  };
-#else
-  class iterator
-  {
-  public:
-    iterator (Node* node = 0) : m_node (node) { }
-    iterator (Elem* e) : m_node (static_cast <Node*> (e)) { }
-    iterator (const iterator& other) : m_node (other.m_node) { }
-    iterator& operator= (const iterator& other) { m_node = other.m_node; return *this; }
-    bool operator == (const iterator& other) const { return m_node == other.m_node; }
-    bool operator != (const iterator& other) const { return m_node != other.m_node; }
-
-    inline Elem* operator* () const
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_next);
-      vfassert (m_node->m_prev);
-      return static_cast <Elem*> (m_node);
-    }
-
-    inline Elem* operator-> () const
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_next);
-      vfassert (m_node->m_prev);
-      return static_cast <Elem*> (m_node);
-    }
-
-    inline iterator& operator++ ()
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_next);
-      m_node = m_node->m_next;
-      return *this;
-    }
-
-    inline iterator operator++ (int) // postfix
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_next);
-      m_node = m_node->m_next;
-      return m_node->m_prev;
-    }
-
-    inline iterator& operator-- ()
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_prev);
-      vfassert (m_node->m_prev->m_prev);
-      m_node = m_node->m_prev;
-      return *this;
-    }
-
-    inline iterator operator-- (int) // postfix
-    {
-      vfassert (m_node);
-      vfassert (m_node->m_prev);
-      vfassert (m_node->m_prev->m_prev);
-      m_node = m_node->m_prev;
-      return m_node->m_next;
-    }
-
-    /*@implementation*/
-    inline Node* node () const { return m_node; }
 
   private:
-    Node* m_node;
+    NodeType* m_node;
   };
-#endif
+
+public:
+  typedef iterator_base <Elem, Node> iterator;
+  typedef iterator_base <Elem const, Node const> const_iterator;
 
 public:
   List ()
@@ -178,19 +144,23 @@ public:
     append (other);
   }
 
-  bool empty () const       { return m_head.m_next == &m_tail; }
-  iterator begin ()         { return m_head.m_next; }
-  iterator end ()           { return &m_tail; }
-  Elem* front ()            { return empty() ? 0 : static_cast <Elem*> (m_head.m_next); }
-  Elem* back ()             { return empty() ? 0 : static_cast <Elem*> (m_tail.m_prev); }
-  Elem* pop_front ()        { Elem* e = front (); if (e) remove (e); return e; }
-  Elem* pop_back ()         { Elem* e = back ();  if (e) remove (e); return e; }
-  void push_front (Elem* e) { insert (begin(), e); }
-  void push_back (Elem* e)  { insert (end(), e); }
-  void prepend (List& list) { insert (begin(), list); }
-  void append (List& list)  { insert (end(), list); }
-  void to_front (Elem* e)   { remove (e); push_front (e); }
-  void to_back (Elem* e)    { remove (e); push_back (e); }
+  bool empty () const           { return m_head.m_next == &m_tail; }
+  iterator begin ()             { return m_head.m_next; }
+  iterator end ()               { return &m_tail; }
+  const_iterator begin () const { return m_head.m_next; }
+  const_iterator end () const   { return &m_tail; }
+  Elem* front () const          { return empty() ? 0 : static_cast <Elem*> (m_head.m_next); }
+  Elem* back () const           { return empty() ? 0 : static_cast <Elem*> (m_tail.m_prev); }
+  Elem* pop_front ()            { Elem* e = front ();
+                                  if (e) remove (e); return e; }
+  Elem* pop_back ()             { Elem* e = back ();
+                                  if (e) remove (e); return e; }
+  void push_front (Elem* e)     { insert (begin(), e); }
+  void push_back (Elem* e)      { insert (end(), e); }
+  void prepend (List& list)     { insert (begin(), list); }
+  void append (List& list)      { insert (end(), list); }
+  void to_front (Elem* e)       { remove (e); push_front (e); }
+  void to_back (Elem* e)        { remove (e); push_back (e); }
  
   void reset ()
   {
