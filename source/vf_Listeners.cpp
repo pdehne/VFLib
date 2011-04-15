@@ -209,7 +209,7 @@ bool ListenersBase::Group::remove (void* listener)
     Entry* entry = iter;
     if (entry->listener == listener)
     {
-      m_list.remove (entry);
+      m_list.erase (entry);
       delete entry;
       found = true;
       break;
@@ -436,7 +436,7 @@ void ListenersBase::Proxy::remove (Group* group)
     if (entry->group == group)
     {
       // remove from list and manual release
-      m_entries.remove (entry);
+      m_entries.erase (entry);
       entry->decReferenceCount();
 
       // Entry might still be in the empty group's thread queue
@@ -624,7 +624,7 @@ void ListenersBase::remove_void (void* const listener)
 
         // Remove it from the list and manually release
         // the reference since the list uses raw pointers.
-        m_groups.remove (group.getObject());
+        m_groups.erase (group.getObject());
         group->decReferenceCount();
 
         // It is still possible for the group to exist at this

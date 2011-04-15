@@ -149,16 +149,26 @@ public:
   Elem* front () const          { return empty() ? 0 : static_cast <Elem*> (m_head.m_next); }
   Elem* back () const           { return empty() ? 0 : static_cast <Elem*> (m_tail.m_prev); }
   Elem* pop_front ()            { Elem* e = front ();
-                                  if (e) remove (e); return e; }
+                                  if (e) erase (e); return e; }
   Elem* pop_back ()             { Elem* e = back ();
-                                  if (e) remove (e); return e; }
+                                  if (e) erase (e); return e; }
   void push_front (Elem* e)     { insert (begin(), e); }
   void push_back (Elem* e)      { insert (end(), e); }
   void prepend (List& list)     { insert (begin(), list); }
   void append (List& list)      { insert (end(), list); }
-  void to_front (Elem* e)       { remove (e); push_front (e); }
-  void to_back (Elem* e)        { remove (e); push_back (e); }
+  void to_front (Elem* e)       { erase (e); push_front (e); }
+  void to_back (Elem* e)        { erase (e); push_back (e); }
  
+  iterator iterator_to (Elem& elem) const
+  {
+    return static_cast <Node*> (&elem);
+  }
+
+  const_iterator const_iterator_to (Elem& elem) const
+  {
+    return static_cast <Node*> (&elem);
+  }
+
   void reset ()
   {
     m_head.m_next = &m_tail;
@@ -191,7 +201,7 @@ public:
     }
   }
 
-  iterator remove (iterator pos)
+  iterator erase (iterator pos)
   {
     Elem* e = pos++;
     Node* node = static_cast <Node*> (e);

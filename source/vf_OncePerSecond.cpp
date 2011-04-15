@@ -71,7 +71,7 @@ public:
   {
     ScopedLock lock (m_mutex);
 
-    m_list.remove (elem);
+    m_list.erase (elem);
   }
 
   static TimerSingleton* createInstance ()
