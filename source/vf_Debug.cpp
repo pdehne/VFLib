@@ -4,8 +4,12 @@
 
 #include "vf/vf_StandardHeader.h"
 
-#ifdef _MSC_VER
-#include <windows.h>
+//#ifdef _MSC_VER
+//#include <windows.h>
+//#endif
+
+#if JUCE_MSVC && _DEBUG
+#include <crtdbg.h>
 #endif
 
 BEGIN_VF_NAMESPACE
@@ -14,75 +18,70 @@ BEGIN_VF_NAMESPACE
 
 namespace Debug {
 
-//
-// isDebuggerAttached
-//
-
-#if VF_HAVE_JUCE
+//------------------------------------------------------------------------------
 
 bool isDebuggerAttached ()
 {
   return VF_JUCE::juce_isRunningUnderDebugger ();
 }
 
-#elif defined (_WINDOWS)
+//------------------------------------------------------------------------------
 
-bool isDebuggerAttached ()
-{
-  return IsDebuggerPresent ();
-}
-
-#else
-
-#pragma message(VF_LOC_"Missing Debug::isDebuggerAttached()")
-bool isDebuggerAttached ()
-{
-  return false;
-}
-
-#endif
-
-//
-// breakPoint
-//
-
-#if VF_HAVE_JUCE && JUCE_DEBUG && defined (juce_breakDebugger)
-
+#if JUCE_DEBUG && defined (juce_breakDebugger)
 void breakPoint ()
 {
   if (isDebuggerAttached ())
     juce_breakDebugger;
 }
 
-#elif defined (_MSC_VER)
-
-#pragma intrinsic (__debugbreak)
+#else
 void breakPoint ()
 {
-  if (isDebuggerAttached ())
-    __debugbreak();
+  jassertfalse
 }
 
-#else
+#endif
 
-#pragma message(VF_LOC_"Missing Debug::breakPoint()")
-void breakPoint ()
+//----------------------------------------------------------------------------
+
+#if JUCE_MSVC && _DEBUG
+
+void setHeapAlwaysCheck (bool bAlwaysCheck)
 {
+  int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+  if (bAlwaysCheck) flags |= _CRTDBG_CHECK_ALWAYS_DF; // on
+  else flags &= ~_CRTDBG_CHECK_ALWAYS_DF; // off
+  _CrtSetDbgFlag (flags);
+}
+
+void setHeapDelayedFree (bool bDelayedFree)
+{
+  int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+  if (bDelayedFree) flags |= _CRTDBG_DELAY_FREE_MEM_DF; // on
+  else flags &= ~_CRTDBG_DELAY_FREE_MEM_DF; // off
+  _CrtSetDbgFlag (flags);
+}
+
+void setHeapReportLeaks (bool bReportLeaks)
+{
+  int flags = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+  if (bReportLeaks) flags |= _CRTDBG_LEAK_CHECK_DF; // on
+  else flags &= ~_CRTDBG_LEAK_CHECK_DF; // off
+  _CrtSetDbgFlag (flags);
+}
+
+void checkHeap ()
+{
+  _CrtCheckMemory();
 }
 
 #endif
 
 //------------------------------------------------------------------------------
 
-const String getFileNameFromPath (const char *sourceFileName)
+const String getFileNameFromPath (const char* sourceFileName)
 {
-#if VF_HAVE_JUCE
   return VF_JUCE::File (sourceFileName).getFileName();
-#elif VF_HAVE_BOOST
-  return String (boost::filesystem::path (sourceFileName).filename().c_str());
-#else
-  return sourceFileName;
-#endif
 }
 
 // Returns a String with double quotes escaped
@@ -145,7 +144,6 @@ const String withUnescapedQuotes (String const& string)
 
   return unescaped;
 }
-
 
 // Converts a String that may contain newlines, into a
 // command line where each line is delimited with quotes.
