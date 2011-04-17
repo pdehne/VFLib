@@ -154,6 +154,10 @@
 			Name="containers"
 			>
 			<File
+				RelativePath="..\include\vf\vf_Array.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_IntrusiveStack.h"
 				>
 			</File>
