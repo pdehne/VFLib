@@ -24,12 +24,12 @@
 class SharedObject : NonCopyable, LeakChecked <SharedObject>
 {
 public:
-  inline void incReferenceCount() throw()
+  inline void incReferenceCount() noexcept
   {
     m_refs.addref ();
   }
 
-  inline bool decReferenceCount() throw()
+  inline bool decReferenceCount() noexcept
   {
     vfassert (m_refs.is_signaled());
 
@@ -78,19 +78,19 @@ template <class SharedObjectClass>
 class SharedObjectPtr
 {
 public:
-  inline SharedObjectPtr() throw()
+  inline SharedObjectPtr() noexcept
     : referencedObject (0)
   {
   }
 
-  inline SharedObjectPtr (SharedObjectClass* const refCountedObject) throw()
+  inline SharedObjectPtr (SharedObjectClass* const refCountedObject) noexcept
     : referencedObject (refCountedObject)
   {
     if (refCountedObject != 0)
       refCountedObject->incReferenceCount();
   }
 
-  inline SharedObjectPtr (const SharedObjectPtr<SharedObjectClass>& other) throw()
+  inline SharedObjectPtr (const SharedObjectPtr<SharedObjectClass>& other) noexcept
     : referencedObject (other.referencedObject)
   {
     if (referencedObject != 0)
@@ -139,17 +139,17 @@ public:
       referencedObject->decReferenceCount();
   }
 
-  inline operator SharedObjectClass*() const throw()
+  inline operator SharedObjectClass*() const noexcept
   {
     return referencedObject;
   }
 
-  inline SharedObjectClass* operator->() const throw()
+  inline SharedObjectClass* operator->() const noexcept
   {
     return referencedObject;
   }
 
-  inline SharedObjectClass* getObject() const throw()
+  inline SharedObjectClass* getObject() const noexcept
   {
     return referencedObject;
   }
@@ -163,36 +163,36 @@ private:
 //
 
 template <class SharedObjectClass>
-bool operator== (const SharedObjectPtr<SharedObjectClass>& object1, SharedObjectClass* const object2) throw()
+bool operator== (const SharedObjectPtr<SharedObjectClass>& object1, SharedObjectClass* const object2) noexcept
 {
   return object1.getObject() == object2;
 }
 
 template <class SharedObjectClass>
-bool operator== (const SharedObjectPtr<SharedObjectClass>& object1, const SharedObjectPtr<SharedObjectClass>& object2) throw()
+bool operator== (const SharedObjectPtr<SharedObjectClass>& object1, const SharedObjectPtr<SharedObjectClass>& object2) noexcept
 {
   return object1.getObject() == object2.getObject();
 }
 
 template <class SharedObjectClass>
-bool operator== (SharedObjectClass* object1, SharedObjectPtr<SharedObjectClass>& object2) throw()
+bool operator== (SharedObjectClass* object1, SharedObjectPtr<SharedObjectClass>& object2) noexcept
 {
   return object1 == object2.getObject();
 }
 
 template <class SharedObjectClass>
-bool operator!= (const SharedObjectPtr<SharedObjectClass>& object1, const SharedObjectClass* object2) throw()
+bool operator!= (const SharedObjectPtr<SharedObjectClass>& object1, const SharedObjectClass* object2) noexcept
 {
   return object1.getObject() != object2;
 }
 
 template <class SharedObjectClass>
-bool operator!= (const SharedObjectPtr<SharedObjectClass>& object1, SharedObjectPtr<SharedObjectClass>& object2) throw()
+bool operator!= (const SharedObjectPtr<SharedObjectClass>& object1, SharedObjectPtr<SharedObjectClass>& object2) noexcept
 {
   return object1.getObject() != object2.getObject();
 }
 template <class SharedObjectClass>
-bool operator!= (SharedObjectClass* object1, SharedObjectPtr<SharedObjectClass>& object2) throw()
+bool operator!= (SharedObjectClass* object1, SharedObjectPtr<SharedObjectClass>& object2) noexcept
 {
   return object1 != object2.getObject();
 }

@@ -82,7 +82,7 @@ public:
   // for std::exception. This lets you throw an Error that should
   // terminate the application. The what() message will be less
   // descriptive so ideally you should catch the Error object instead.
-  const char* what() const throw();
+  const char* what() const noexcept;
 
   static const String getReasonTextForCode (Code code);
 

@@ -21,7 +21,7 @@ public:
                 char const* zTable,
                 char const* zColumn,
                 rowid id,
-                bool readAndWrite = false) throw();
+                bool readAndWrite = false) noexcept;
 
   std::size_t get_len();
   Error read (std::size_t offset, void* buf, std::size_t toRead);

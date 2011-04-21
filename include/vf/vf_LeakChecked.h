@@ -17,7 +17,7 @@ template <class Object>
 class LeakChecked
 {
 public:
-  LeakChecked() throw()
+  LeakChecked() noexcept
   {
     if (++getCounter() == 0)
     {
@@ -26,7 +26,7 @@ public:
     }
   }
 
-  LeakChecked (const LeakChecked&) throw()
+  LeakChecked (const LeakChecked&) noexcept
   {
     if (++getCounter() == 0)
     {
@@ -75,7 +75,7 @@ private:
     return typeid (Object).name ();
   }
 
-  static VF_JUCE::Atomic <int>& getCounter() throw()
+  static VF_JUCE::Atomic <int>& getCounter() noexcept
   {
     return s_counter.getCounter ();
   }
