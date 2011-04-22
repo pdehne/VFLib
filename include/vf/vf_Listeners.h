@@ -387,7 +387,7 @@ public:
   // Use carefully!
 
   template <class Mf>
-  inline void call1 (Mf mf, ListenerClass* const listener)
+  inline void call1 (ListenerClass* const listener, Mf mf)
   { call1f (listener, bind (mf, _1)); }
 
   template <class Mf, typename  T1>
