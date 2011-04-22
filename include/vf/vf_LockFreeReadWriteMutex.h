@@ -13,7 +13,7 @@
 namespace LockFree {
 
 // Multiple-reader, single writer, write preferenced
-// recursive mutex with a wait-free fast path.
+// partially recursive mutex with a wait-free fast path.
 //
 class ReadWriteMutex
 {
@@ -32,6 +32,14 @@ public:
   // Cannot hold a read lock when acquiring a write lock.
   void enter_write () const;
   void exit_write () const;
+
+  // Non-recursive.
+  // Caller must hold exactly one read lock.
+  // The lock is released with exit_write().
+  void upgrade_write () const;
+
+  // Caller must hold exactly one write lock.
+  void downgrade_read () const;
 
 private:
   CacheLine::Padded <Mutex> m_mutex;

@@ -21,6 +21,8 @@ void ReadWriteMutex::enter_read () const  { m_mutex->enter (); }
 void ReadWriteMutex::exit_read () const   { m_mutex->exit (); }
 void ReadWriteMutex::enter_write () const { m_mutex->enter (); }
 void ReadWriteMutex::exit_write () const  { m_mutex->exit (); }
+void ReadWriteMutex::upgrade_write () const               { }
+void ReadWriteMutex::downgrade_read () const              { }
 
 #else
 
@@ -99,6 +101,39 @@ void ReadWriteMutex::exit_write () const
   // writer count allows another waiting writer to atomically
   // acquire the lock, thus starving readers. This fulfills
   // the write-preferencing requirement.
+
+  m_mutex->exit ();
+
+  m_writes->release ();
+}
+
+void ReadWriteMutex::upgrade_write () const
+{
+  // Caller must have exactly one read lock
+
+  m_writes->addref ();
+
+  m_mutex->enter ();
+
+  // Release our read lock
+  m_readers->release ();
+
+  if (m_readers->is_signaled ())
+  {
+    Delay delay; 
+    do
+    {
+      delay.spin ();
+    }
+    while (m_readers->is_signaled ());
+  }
+}
+
+void ReadWriteMutex::downgrade_read () const
+{
+  // Caller must have exactly one write lock
+
+  m_readers->addref ();
 
   m_mutex->exit ();
 
