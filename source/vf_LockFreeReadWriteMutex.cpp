@@ -142,7 +142,8 @@ void ReadWriteMutex::downgrade_read () const
 }
 #endif
 
+#endif
+
 }
 
 END_VF_NAMESPACE
-
