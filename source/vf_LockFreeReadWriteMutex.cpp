@@ -21,8 +21,8 @@ void ReadWriteMutex::enter_read () const  { m_mutex->enter (); }
 void ReadWriteMutex::exit_read () const   { m_mutex->exit (); }
 void ReadWriteMutex::enter_write () const { m_mutex->enter (); }
 void ReadWriteMutex::exit_write () const  { m_mutex->exit (); }
-void ReadWriteMutex::upgrade_write () const               { }
-void ReadWriteMutex::downgrade_read () const              { }
+void ReadWriteMutex::upgrade_write () const { }
+void ReadWriteMutex::downgrade_read () const { }
 
 #else
 
@@ -107,6 +107,7 @@ void ReadWriteMutex::exit_write () const
   m_writes->release ();
 }
 
+#if 0
 void ReadWriteMutex::upgrade_write () const
 {
   // Caller must have exactly one read lock
@@ -139,7 +140,6 @@ void ReadWriteMutex::downgrade_read () const
 
   m_writes->release ();
 }
-
 #endif
 
 }

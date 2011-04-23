@@ -25,6 +25,8 @@ private:
   const ReadWriteMutexType& m_mutex;
 };
 
+//------------------------------------------------------------------------------
+
 template <class ReadWriteMutexType>
 struct ScopedWriteLock : NonCopyable
 {
@@ -42,6 +44,29 @@ struct ScopedWriteLock : NonCopyable
 private:
   const ReadWriteMutexType& m_mutex;
 };
+
+//------------------------------------------------------------------------------
+
+// CAUSES DEADLOCK
+#if 0
+template <class ReadWriteMutexType>
+struct ScopedUpgradeWriteLock : NonCopyable
+{
+  inline explicit ScopedUpgradeWriteLock (const ReadWriteMutexType& mutex)
+    : m_mutex (mutex)
+  {
+    m_mutex.upgrade_write ();
+  }
+
+  inline ~ScopedUpgradeWriteLock ()
+  {
+    m_mutex.downgrade_read ();
+  }
+
+private:
+  const ReadWriteMutexType& m_mutex;
+};
+#endif
 
 }
 

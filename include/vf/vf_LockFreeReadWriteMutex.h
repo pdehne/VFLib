@@ -21,6 +21,10 @@ public:
   typedef detail::ScopedReadLock <ReadWriteMutex> ScopedReadLockType;
   typedef detail::ScopedWriteLock <ReadWriteMutex> ScopedWriteLockType;
 
+#if 0
+  typedef detail::ScopedUpgradeWriteLock <ReadWriteMutex> ScopedUpgradeWriteLockType;
+#endif
+
   ReadWriteMutex ();
   ~ReadWriteMutex ();
 
@@ -33,6 +37,8 @@ public:
   void enter_write () const;
   void exit_write () const;
 
+  // CAUSES DEADLOCK
+#if 0
   // Non-recursive.
   // Caller must hold exactly one read lock.
   // The lock is released with exit_write().
@@ -40,6 +46,7 @@ public:
 
   // Caller must hold exactly one write lock.
   void downgrade_read () const;
+#endif
 
 private:
   CacheLine::Padded <Mutex> m_mutex;
