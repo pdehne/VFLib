@@ -259,7 +259,8 @@ void session::begin()
   vfassert( !m_bInTransaction );
   m_bInTransaction = true;
   
-  Error error = hard_exec("BEGIN EXCLUSIVE");
+  //Error error = hard_exec("BEGIN EXCLUSIVE");
+  Error error = hard_exec("BEGIN");
   if (error)
     Throw (error);
 }

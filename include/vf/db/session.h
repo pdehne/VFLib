@@ -7,6 +7,7 @@
 #define __VF_DB_SESSION_VFHEADER__
 
 #include "vf/vf_SharedObject.h"
+#include "vf/db/Descriptor.h"
 #include "vf/db/detail/once_temp_type.h"
 #include "vf/db/detail/prepare_temp_type.h"
 
@@ -16,10 +17,13 @@ class session : NonCopyable
 {
 public:
   session ();
-  explicit session (const session& deferredClone);
   ~session ();
 
+  Error open (Descriptor descriptor);
+
+  // DEPRECATED!
   // opens the deferred clone
+  explicit session (session const& deferredClone);
   Error clone ();
 
   //! Connect string parameters
