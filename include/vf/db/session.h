@@ -13,13 +13,11 @@
 
 namespace db {
 
-class session : NonCopyable
+class session
 {
 public:
   session ();
   ~session ();
-
-  Error open (Descriptor descriptor);
 
   // DEPRECATED!
   // opens the deferred clone
@@ -34,14 +32,16 @@ public:
   //!  "threads={single,multi}"      default is serialized
   //!
 
-  Error open (String fileName, std::string const& connectString);
+  Error open (String fileName,
+              std::string options = "timeout=infinite|mode=create|threads=multi");
+  
   void close ();
 
   void begin ();
   Error commit ();
   void rollback ();
 
-  bool in_transaction()
+  bool in_transaction ()
   {
     return m_bInTransaction;
   }

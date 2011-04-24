@@ -5,7 +5,7 @@
 #ifndef __VF_SHAREDSTATE_VFHEADER__
 #define __VF_SHAREDSTATE_VFHEADER__
 
-#include "vf/vf_LockFreeReadWriteMutex.h"
+#include "vf/vf_ReadWriteMutex.h"
 
 //
 // An object intended to be accessed from multiple threads
@@ -20,7 +20,7 @@ template <class Object>
 class SharedState : NonCopyable
 {
 public:
-  typedef LockFree::ReadWriteMutex ReadWriteMutexType;
+  typedef ReadWriteMutex ReadWriteMutexType;
 
   class ReadAccess;
   class WriteAccess;

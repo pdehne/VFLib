@@ -2,15 +2,13 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_LOCKFREEREADWRITEMUTEX_VFHEADER__
-#define __VF_LOCKFREEREADWRITEMUTEX_VFHEADER__
+#ifndef __VF_READWRITEMUTEX_VFHEADER__
+#define __VF_READWRITEMUTEX_VFHEADER__
 
 #include "vf/vf_Atomic.h"
 #include "vf/vf_CacheLine.h"
 #include "Vf/vf_Mutex.h"
 #include "vf/vf_ReadWriteMutexBase.h"
-
-namespace LockFree {
 
 // Multiple-reader, single writer, write preferenced
 // partially recursive mutex with a wait-free fast path.
@@ -56,7 +54,5 @@ private:
 
 typedef ReadWriteMutex::ScopedReadLockType ScopedReadLock;
 typedef ReadWriteMutex::ScopedWriteLockType ScopedWriteLock;
-
-}
 
 #endif

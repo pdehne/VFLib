@@ -85,10 +85,6 @@
 #include "vf/vf_LockFreeQueue.h"
 #endif
 
-#ifndef __VF_LOCKFREEREADWRITEMUTEX_VFHEADER__
-#include "vf/vf_LockFreeReadWriteMutex.h"
-#endif
-
 #ifndef __VF_LOCKFREESTACK_VFHEADER__
 #include "vf/vf_LockFreeStack.h"
 #endif
@@ -127,6 +123,10 @@
 
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
 #include "vf/vf_PageAllocator.h"
+#endif
+
+#ifndef __VF_READWRITEMUTEX_VFHEADER__
+#include "vf/vf_ReadWriteMutex.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEXBASE_VFHEADER__

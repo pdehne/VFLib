@@ -12,6 +12,8 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_SharedSingleton.h"
 #include "vf/vf_Thread.h"
 
+static char const* const threadName = "Once Per Second";
+
 //------------------------------------------------------------------------------
 
 class OncePerSecond::TimerSingleton
@@ -20,7 +22,7 @@ class OncePerSecond::TimerSingleton
 private:
   TimerSingleton ()
     : SharedSingleton (persistAfterCreation)
-    , m_thread (__FILE__)
+    , m_thread (threadName)
   {
     m_thread.start (bind (&TimerSingleton::run, this));
   }
@@ -34,6 +36,8 @@ private:
 
   void run ()
   {
+    VF_JUCE::Thread::setCurrentThreadName (threadName);
+
     try
     {
       for(;;)

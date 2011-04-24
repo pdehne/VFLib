@@ -8,7 +8,7 @@
 #include "vf/vf_AllocatedBy.h"
 #include "vf/vf_Allocator.h"
 #include "vf/vf_List.h"
-#include "vf/vf_LockFreeReadWriteMutex.h"
+#include "vf/vf_ReadWriteMutex.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
 
@@ -96,7 +96,7 @@ private:
     Worker& m_worker;
     List m_list;
     void* m_listener;
-    CacheLine::Aligned <LockFree::ReadWriteMutex> m_mutex;
+    CacheLine::Aligned <ReadWriteMutex> m_mutex;
   };
 
   // A Proxy is keyed to a unique pointer-to-member of a
@@ -158,8 +158,8 @@ private:
   Groups m_groups;
   Proxies m_proxies;
   timestamp_t m_timestamp;
-  CacheLine::Aligned <LockFree::ReadWriteMutex> m_groups_mutex;
-  CacheLine::Aligned <LockFree::ReadWriteMutex> m_proxies_mutex;
+  CacheLine::Aligned <ReadWriteMutex> m_groups_mutex;
+  CacheLine::Aligned <ReadWriteMutex> m_proxies_mutex;
   AllocatorType::Ptr m_allocator;
   CallAllocatorType::Ptr m_callAllocator;
 };

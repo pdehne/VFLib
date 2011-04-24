@@ -22,11 +22,11 @@ private:
 
   Sqlite3 () : SharedSingleton (persistAfterCreation)
 	{
-    int threadSafe = sqlite3_threadsafe();
+    int threadSafe = sqlite3_threadsafe ();
     if (threadSafe != 1)
       Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
 
-		int result = sqlite3_config ( SQLITE_CONFIG_MULTITHREAD );
+		int result = sqlite3_config (SQLITE_CONFIG_MULTITHREAD);
     if (result != SQLITE_OK)
       Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
 
@@ -86,7 +86,7 @@ static int infiniteBusyHandler (void* data, int tries)
 }
 */
 
-Error session::open (String fileName, std::string const& connectString)
+Error session::open (String fileName, std::string options)
 {
   Error err;
 
@@ -98,7 +98,7 @@ Error session::open (String fileName, std::string const& connectString)
   int flags = 0;
   int timeout = 0;
   
-  std::stringstream ssconn (connectString);
+  std::stringstream ssconn (options);
 
   while (!err && !ssconn.eof() && ssconn.str().find('=') >= 0)
   {
@@ -231,7 +231,7 @@ Error session::open (String fileName, std::string const& connectString)
     if (!err)
     {
       m_fileName = fileName;
-      m_connectString = connectString;
+      m_connectString = options;
     }
 
     if (err)

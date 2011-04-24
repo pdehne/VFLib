@@ -7,11 +7,9 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeDelay.h"
-#include "vf/vf_LockFreeReadWriteMutex.h"
+#include "vf/vf_ReadWriteMutex.h"
 
 #define USE_DEBUG_MUTEX 0
-
-namespace LockFree {
 
 #if USE_DEBUG_MUTEX
 
@@ -86,7 +84,7 @@ void ReadWriteMutex::enter_write () const
   //
   if (m_readers->is_signaled ())
   {
-    Delay delay; 
+    LockFree::Delay delay; 
     do
     {
       delay.spin ();
@@ -143,7 +141,5 @@ void ReadWriteMutex::downgrade_read () const
 #endif
 
 #endif
-
-}
 
 END_VF_NAMESPACE

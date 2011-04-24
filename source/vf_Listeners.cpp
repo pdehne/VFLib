@@ -180,7 +180,7 @@ void ListenersBase::Group::add (void* listener,
                                 const timestamp_t timestamp,
                                 AllocatorType& allocator)
 {
-  LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
+  ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
   vfassert (!contains (listener));
 
@@ -199,7 +199,7 @@ bool ListenersBase::Group::remove (void* listener)
 {
   bool found = false;
 
-  LockFree::ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
+  ReadWriteMutex::ScopedWriteLockType lock (m_mutex);
 
   // Should never be able to get here while in call()
   vfassert (m_listener == 0);
@@ -267,7 +267,7 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
 {
   if (!empty ())
   {
-    LockFree::ReadWriteMutex::ScopedReadLockType lock (m_mutex);
+    ReadWriteMutex::ScopedReadLockType lock (m_mutex);
 
     // Recursion not allowed.
     vfassert (m_listener == 0);
@@ -312,7 +312,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 {
   if (!empty ())
   {
-    LockFree::ReadWriteMutex::ScopedReadLockType lock (m_mutex);
+    ReadWriteMutex::ScopedReadLockType lock (m_mutex);
 
     // Recursion not allowed.
     vfassert (m_listener == 0);
@@ -519,7 +519,7 @@ ListenersBase::~ListenersBase ()
 
 void ListenersBase::add_void (void* const listener, Worker& worker)
 {
-  LockFree::ScopedWriteLock lock (m_groups_mutex);
+  ScopedWriteLock lock (m_groups_mutex);
 
 #if VF_DEBUG
   // Make sure the listener has not already been added
@@ -558,7 +558,7 @@ void ListenersBase::add_void (void* const listener, Worker& worker)
     m_groups.push_back (group);
 
     // Tell existing proxies to add the group
-    LockFree::ScopedReadLock lock (m_proxies_mutex);
+    ScopedReadLock lock (m_proxies_mutex);
     for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
       (iter++)->add (group, *m_allocator);
   }
@@ -573,7 +573,7 @@ void ListenersBase::add_void (void* const listener, Worker& worker)
 
 void ListenersBase::remove_void (void* const listener)
 {
-  LockFree::ScopedWriteLock lock (m_groups_mutex);
+  ScopedWriteLock lock (m_groups_mutex);
 
   // Make sure the listener exists
 #if VF_DEBUG
@@ -613,7 +613,7 @@ void ListenersBase::remove_void (void* const listener)
       {
         // Tell proxies to remove the group
         {
-          LockFree::ScopedWriteLock lock (m_proxies_mutex);
+          ScopedWriteLock lock (m_proxies_mutex);
 
           for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
           {
@@ -641,7 +641,7 @@ void ListenersBase::callp (Call::Ptr cp)
 {
   Call* c = cp;
 
-  LockFree::ScopedReadLock lock (m_groups_mutex);
+  ScopedReadLock lock (m_groups_mutex);
 
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
@@ -653,7 +653,7 @@ void ListenersBase::queuep (Call::Ptr cp)
 {
   Call* c = cp;
 
-  LockFree::ScopedReadLock lock (m_groups_mutex);
+  ScopedReadLock lock (m_groups_mutex);
 
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
@@ -663,7 +663,7 @@ void ListenersBase::queuep (Call::Ptr cp)
 
 void ListenersBase::call1p_void (void* const listener, Call* c)
 {
-  LockFree::ScopedReadLock lock (m_groups_mutex);
+  ScopedReadLock lock (m_groups_mutex);
 
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
@@ -680,7 +680,7 @@ void ListenersBase::call1p_void (void* const listener, Call* c)
 
 void ListenersBase::queue1p_void (void* const listener, Call* c)
 {
-  LockFree::ScopedReadLock lock (m_groups_mutex);
+  ScopedReadLock lock (m_groups_mutex);
 
   // can't be const iterator because queue() might cause called functors
   // to modify the list.
@@ -703,14 +703,14 @@ void ListenersBase::updatep (void const* const member,
 {
   Call* c = cp;
 
-  LockFree::ScopedReadLock lock (m_groups_mutex);
+  ScopedReadLock lock (m_groups_mutex);
 
   if (!m_groups.empty ())
   {
     Proxy* proxy;
     
     {
-      LockFree::ScopedReadLock lock (m_proxies_mutex);
+      ScopedReadLock lock (m_proxies_mutex);
 
       // See if there's already a proxy
       proxy = find_proxy (member, bytes);
@@ -719,7 +719,7 @@ void ListenersBase::updatep (void const* const member,
     // Possibly create one
     if (!proxy)
     {
-      LockFree::ScopedWriteLock lock (m_proxies_mutex);
+      ScopedWriteLock lock (m_proxies_mutex);
 
       // Have to search for it again in case someone else added it
       proxy = find_proxy (member, bytes);

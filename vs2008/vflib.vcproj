@@ -354,6 +354,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_ReadWriteMutex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ReadWriteMutex.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_ReadWriteMutexBase.h"
 				>
 			</File>
@@ -4533,6 +4541,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\include\vf\db\descriptor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\include\vf\db\into.h"
 					>
 				</File>
@@ -4562,6 +4574,10 @@
 				>
 				<File
 					RelativePath="..\source\db\blob.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\source\db\Descriptor.cpp"
 					>
 				</File>
 				<File
@@ -4631,14 +4647,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_LockFreeQueue.h"
-				>
-			</File>
-			<File
-				RelativePath="..\source\vf_LockFreeReadWriteMutex.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_LockFreeReadWriteMutex.h"
 				>
 			</File>
 			<File
