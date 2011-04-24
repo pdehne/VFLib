@@ -169,11 +169,17 @@ public:
     return static_cast <Node*> (&elem);
   }
 
-  void reset ()
+  void clear ()
   {
     m_head.m_next = &m_tail;
     m_tail.m_prev = &m_head;
     Features::reset_size ();
+  }
+
+  // DEPRECATED
+  inline void reset ()
+  {
+    clear ();
   }
 
   iterator insert (iterator pos, Elem* e)
