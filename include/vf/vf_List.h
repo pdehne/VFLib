@@ -242,4 +242,320 @@ private:
   Node m_tail;
 };
 
+//------------------------------------------------------------------------------
+
+// intrusive doubly linked list
+
+template <class Elem,
+          class Tag = detail::List_default_tag,
+          class Features = detail::List_all_features>
+class List2
+  : public Features
+  , vf::NonCopyable
+{
+public:
+  class Node : NonCopyable
+  {
+  public:
+    Node () { }
+
+  private:
+    friend class List2;
+    friend typename Features;
+    Node* m_next;
+    Node* m_prev;
+  };
+
+private:
+  template <class ElemType, class NodeType>
+  class iterator_base
+    : public boost::iterator_facade <
+      iterator_base <ElemType, NodeType>,
+      ElemType,
+      boost::bidirectional_traversal_tag
+    >
+  {
+  private:
+    explicit iterator_base (NodeType* node) : m_node (node)
+    {
+    }
+
+  public:
+    iterator_base () : m_node (0)
+    {
+    }
+
+    template <class OtherElemType, class OtherNodeType>
+    iterator_base (iterator_base <OtherElemType, OtherNodeType> const& other)
+      : m_node (other.m_node)
+    {
+    }
+
+    template <class OtherElemType, class OtherNodeType>
+    iterator_base& operator= (iterator_base <OtherElemType, OtherNodeType> const& other)
+    {
+      m_node = other.m_node;
+      return *this;
+    }
+
+    template <class OtherElemType, class OtherNodeType>
+    bool operator == (iterator_base <OtherElemType, OtherNodeType> const& other) const
+    {
+      return m_node == other.m_node;
+    }
+
+    template <class OtherElemType, class OtherNodeType>
+    bool operator != (iterator_base <OtherElemType, OtherNodeType> const& other) const
+    {
+      return ! this->operator== (other);
+    }
+
+    /*
+    operator ElemType* () const
+    {
+      return static_cast <ElemType*> (m_node);
+    }
+    */
+    
+  private:
+    friend class List2;
+    friend class boost::iterator_core_access;
+
+    NodeType* get_node ()
+    {
+      return m_node;
+    }
+
+    NodeType const* get_node () const
+    {
+      return m_node;
+    }
+
+    reference dereference () const
+    {
+      return *static_cast <ElemType*> (m_node);
+    }
+
+    bool equal (NodeType *const *node) const
+    {
+      return m_node == node;
+    }
+
+    void increment ()
+    {
+      vfassert (m_node->m_next);
+      m_node = m_node->m_next;
+    }
+
+    void decrement ()
+    {
+      vfassert (m_node->m_prev && m_node->m_prev->m_prev != 0);
+      m_node = m_node->m_prev;
+    }
+
+  private:
+    NodeType* m_node;
+  };
+
+public:
+  typedef Elem        value_type;
+  typedef Elem&       reference;
+  typedef Elem const& const_reference;
+  typedef Elem*       pointer;
+  typedef Elem const* const_pointer;
+
+  typedef iterator_base <Elem, Node> iterator;
+  typedef iterator_base <Elem const, Node const> const_iterator;
+
+public:
+  List2 ()
+  {
+    m_head.m_prev = 0; // identifies the head
+    m_tail.m_next = 0; // identifies the tail
+    clear ();
+  }
+
+  reference front ()
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    return element_from (m_head.m_next);
+  }
+
+  const_reference front () const
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    return element_from (m_head.m_next);
+  }
+
+  reference back ()
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    return element_from (m_tail.m_prev);
+  }
+
+  const_reference back () const
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    return element_from (m_tail.m_prev);
+  }
+
+  iterator begin ()
+  {
+    return iterator (m_head.m_next);
+  }
+
+  const_iterator begin () const
+  {
+    return const_iterator (m_head.m_next);
+  }
+
+  const_iterator cbegin () const
+  {
+    return const_iterator (m_head.m_next);
+  }
+
+  iterator end ()
+  {
+    return iterator (&m_tail);
+  }
+
+  const_iterator end () const
+  {
+    return const_iterator (&m_tail);
+  }
+
+  const_iterator cend () const
+  {
+    return const_iterator (&m_tail);
+  }
+
+  bool empty () const
+  {
+    return m_head.m_next == &m_tail;
+  }
+
+  void clear ()
+  {
+    m_head.m_next = &m_tail;
+    m_tail.m_prev = &m_head;
+    Features::reset_size ();
+  }
+
+  iterator insert (iterator pos, Elem& elem)
+  {
+    Node* node = node_from (elem);
+    node->m_next = pos.get_node ();
+    node->m_prev = node->m_next->m_prev;
+    node->m_next->m_prev = node;
+    node->m_prev->m_next = node;
+    Features::add_size (1);
+    return iterator (node);
+  }
+
+  void insert (iterator pos, List2& other)
+  {
+    if (!other.empty ())
+    {
+      Node* before = pos.get_node;
+      other.m_head.m_next->m_prev = before->m_prev;
+      before->m_prev->m_next = other.m_head.m_next;
+      other.m_tail.m_prev->m_next = before;
+      before->m_prev = other.m_tail.m_prev;
+      Features::add_size (other);
+      other.clear ();
+    }
+  }
+
+  iterator erase (iterator pos)
+  {
+    Node* node = pos.get_node ();
+    ++pos;
+    node->m_next->m_prev = node->m_prev;
+    node->m_prev->m_next = node->m_next;
+    Features::add_size (-1);
+    return pos;
+  }
+
+  void push_front (Elem& elem)
+  {
+    insert (begin(), elem);
+  }
+
+  void pop_front ()
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    erase (begin ());
+  }
+
+  void push_back (Elem& elem)
+  {
+    insert (end(), elem);
+  }
+
+  void pop_back ()
+  {
+    if (empty ())
+      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+    erase (--end ());
+  }
+
+  void swap (List2& other)
+  {
+    List2 temp;
+    temp.append (other);
+    other.append (*this);
+    append (temp);
+  }
+
+  void prepend (List2& list)
+  {
+    insert (begin (), list);
+  }
+
+  void append (List2& list)
+  {
+    insert (end(), list);
+  }
+
+  iterator iterator_to (Elem& elem) const
+  {
+    return iterator (static_cast <Node*> (&elem));
+  }
+
+  const_iterator const_iterator_to (Elem const& elem) const
+  {
+    return const_iterator (static_cast <Node const*> (&elem));
+  }
+
+private:
+  inline reference element_from (Node* node)
+  {
+    return *(static_cast <pointer> (node));
+  }
+
+  inline const_reference element_from (Node const* node) const
+  {
+    return *(static_cast <const_pointer> (node));
+  }
+
+  inline Node* node_from (Elem& elem)
+  {
+    return static_cast <Node*> (&elem);
+  }
+
+  inline Node const* node_from (Elem const& elem) const
+  {
+    return static_cast <Node const*> (&elem);
+  }
+
+private:
+  Node m_head;
+  Node m_tail;
+};
+
 #endif
