@@ -378,28 +378,28 @@ public:
   reference front ()
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     return element_from (m_head.m_next);
   }
 
   const_reference front () const
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     return element_from (m_head.m_next);
   }
 
   reference back ()
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     return element_from (m_tail.m_prev);
   }
 
   const_reference back () const
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     return element_from (m_tail.m_prev);
   }
 
@@ -488,7 +488,7 @@ public:
   void pop_front ()
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     erase (begin ());
   }
 
@@ -500,7 +500,7 @@ public:
   void pop_back ()
   {
     if (empty ())
-      Throw (Error (__FILE__, __LINE__, Error::noMoreData));
+      Throw (Error.fail (__FILE__, __LINE__, Error::noMoreData));
     erase (--end ());
   }
 
