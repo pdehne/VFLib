@@ -24,18 +24,14 @@ public:
 
   class ReadAccess;
   class WriteAccess;
-
-  //
-  // DEPRECATED
-  // Just use operator-> on the SharedState instead.
-  //
   class UnlockedAccess;
 
-  // Unlocked read access
-  const Object* getObject () const { return &m_obj; }
-  const Object& operator* () const { return *getObject(); }
-  const Object* operator->() const { return getObject(); }
-
+  // Unlocked read access.
+  //
+  Object const* getObject () const { return const_cast <Object*> (&m_obj); }
+  Object const& operator* () const { return *getObject(); }
+  Object const* operator->() const { return getObject(); }
+  
   SharedState () { }
 
   template <class T1>
@@ -76,20 +72,19 @@ private:
 
 //------------------------------------------------------------------------------
 
-// DEPRECATED
 template <class Object>
 class SharedState <Object>::UnlockedAccess : NonCopyable
 {
 public:
-  UnlockedAccess (const SharedState& state) : m_state (state) { }
+  explicit UnlockedAccess (SharedState const& state) : m_state (state) { }
   ~UnlockedAccess () { }
 
-  const Object* getObject () const { return &m_state.m_obj; }
-  const Object& operator* () const { return *getObject(); }
-  const Object* operator->() const { return getObject(); }
+  Object const* getObject () const { return m_state.getObject (); }
+  Object const& operator* () const { return *getObject(); }
+  Object const* operator->() const { return getObject(); }
 
 private:
-  const SharedState& m_state;
+  SharedState const& m_state;
 };
 
 //------------------------------------------------------------------------------
@@ -98,17 +93,18 @@ template <class Object>
 class SharedState <Object>::ReadAccess : NonCopyable
 {
 public:
-  ReadAccess (const SharedState& state)
-    : m_state (state), m_lock (m_state.m_mutex)
+  explicit ReadAccess (SharedState const volatile& state)
+    : m_state (const_cast <SharedState const&> (state))
+    , m_lock (m_state.m_mutex)
   {
   }
 
-  const Object* getObject () const { return &m_state.m_obj; }
-  const Object& operator* () const { return *getObject(); }
-  const Object* operator->() const { return getObject(); }
+  Object const* getObject () const { return m_state.getObject (); }
+  Object const& operator* () const { return *getObject(); }
+  Object const* operator->() const { return getObject(); }
 
 private:
-  const SharedState& m_state;
+  SharedState const& m_state;
   ReadWriteMutexType::ScopedReadLockType m_lock;
 };
 
@@ -118,7 +114,7 @@ template <class Object>
 class SharedState <Object>::WriteAccess : NonCopyable
 {
 public:
-  WriteAccess (SharedState& state)
+  explicit WriteAccess (SharedState& state)
     : m_state (state), m_lock (m_state.m_mutex)
   {
   }
@@ -135,59 +131,5 @@ private:
   SharedState& m_state;
   ReadWriteMutexType::ScopedWriteLockType m_lock;
 };
-
-//------------------------------------------------------------------------------
-
-// ?? What's this for ??
-template <class Object>
-class SharedAccess
-{
-public:
-  using SharedState <Object>::ReadAccess;
-  using SharedState <Object>::WriteAccess;
-};
-
-//------------------------------------------------------------------------------
-
-/* Usage example:
-
-struct MyWorker
-{
-  struct State
-  {
-    State ()
-    {
-      protectedValue = 0;
-    }
-
-    int64 protectedValue;
-  };
-
-  typedef vf::SharedState <State> SharedState;
-
-  SharedState m_state;
-
-  void addListener (Listener* listener)
-  {
-    SharedState::ReadAccess state (m_state);
-
-    m_listeners.add (listener);
-    m_listeners.queue (&Listener::onUpdateValue, state->protectedValue);
-  }
-
-  void threadFunction ()
-  {
-    SharedState::UnlockedAccess state (m_state);
-
-    if (state->protectedValue == 0)
-    {
-      SharedState::WriteAccess writeState (m_state);
-      writeState->protectedValue = 1;
-      m_listeners.call (&Listener::onUpdateValue, writeState->protectedValue);
-    }
-  }
-};
-
-*/
 
 #endif
