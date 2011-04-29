@@ -76,8 +76,10 @@ template <class Object>
 class SharedState <Object>::UnlockedAccess : NonCopyable
 {
 public:
-  explicit UnlockedAccess (SharedState const& state) : m_state (state) { }
-  ~UnlockedAccess () { }
+  explicit UnlockedAccess (SharedState const& state)
+    : m_state (state)
+  {
+  }
 
   Object const* getObject () const { return m_state.getObject (); }
   Object const& operator* () const { return *getObject(); }
@@ -115,13 +117,14 @@ class SharedState <Object>::WriteAccess : NonCopyable
 {
 public:
   explicit WriteAccess (SharedState& state)
-    : m_state (state), m_lock (m_state.m_mutex)
+    : m_state (state)
+    , m_lock (m_state.m_mutex)
   {
   }
 
-  const Object* getObject () const { return &m_state.m_obj; }
-  const Object& operator* () const { return *getObject(); }
-  const Object* operator->() const { return getObject(); }
+  Object const* getObject () const { return m_state.getObject (); }
+  Object const& operator* () const { return *getObject(); }
+  Object const* operator->() const { return getObject(); }
 
   Object* getObject () { return &m_state.m_obj; }
   Object& operator* () { return *getObject(); }
