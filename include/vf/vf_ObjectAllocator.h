@@ -8,6 +8,7 @@
 #include "vf/vf_SpinLock.h"
 #include "vf/vf_IntrusiveStack.h"
 
+#if 0
 // Thread-safe fixed size object allocator that uses
 // a deleted list for recycling elements.
 //
@@ -51,5 +52,6 @@ private:
   Allocator m_allocator;
   Stack m_free;
 };
+#endif
 
 #endif
