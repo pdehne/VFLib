@@ -5,8 +5,6 @@
 #ifndef __VF_LEAKCHECKED_VFHEADER__
 #define __VF_LEAKCHECKED_VFHEADER__
 
-#include "vf/vf_Static.h"
-
 //
 // Derived classes are automatically leak-checked on exit
 //
