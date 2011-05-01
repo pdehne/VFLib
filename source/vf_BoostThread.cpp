@@ -6,8 +6,6 @@
 
 BEGIN_VF_NAMESPACE
 
-#if VF_HAVE_BOOST
-
 #include "vf/vf_BoostThread.h"
 #include "vf/vf_CatchAny.h"
 
@@ -166,8 +164,6 @@ BoostThread::Interrupted interruptionPoint ()
 }
 
 }
-
-#endif
 
 END_VF_NAMESPACE
 

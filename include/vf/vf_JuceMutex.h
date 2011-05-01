@@ -7,8 +7,6 @@
 
 #include "vf/vf_MutexBase.h"
 
-#if VF_HAVE_JUCE
-
 namespace Juce {
 
 class Mutex : NonCopyable
@@ -25,7 +23,5 @@ private:
 };
 
 }
-
-#endif
 
 #endif

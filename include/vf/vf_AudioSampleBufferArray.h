@@ -109,7 +109,6 @@ public:
     return m_numSamples;
   }
 
-#if VF_HAVE_JUCE
 public:
   // if AudioSampleBuffer ever becomes a template, we can
   // move the Sample typedef into the template parameters.
@@ -159,7 +158,6 @@ public:
     setFrom (bufferToFill);
     return *this;
   }
-#endif
 
 private:
   int m_numSamples;

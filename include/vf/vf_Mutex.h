@@ -11,19 +11,8 @@
 
 // Lift one implementation
 
-#if VF_HAVE_JUCE
-
 using Juce::Mutex;
-
-#elif VF_HAVE_BOOST
-
-using Boost::Mutex;
-
-#else
-
-#error "Missing Mutex"
-
-#endif
+//using Boost::Mutex;
 
 typedef detail::ScopedLock <Mutex> ScopedLock;
 typedef detail::ScopedUnlock <Mutex> ScopedUnlock;

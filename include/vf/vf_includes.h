@@ -17,6 +17,10 @@
 #include "vf/vf_Atomic.h"
 #endif
 
+#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+#include "vf/vf_AudioBufferPool.h"
+#endif
+
 #ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
 #include "vf/vf_AudioSampleBufferArray.h"
 #endif
@@ -102,7 +106,7 @@
 #endif
 
 #ifndef __VF_MURMURHASH_VFHEADER__
-#include "vf/vf_MurmurHash.h" // Depends on some Juce declarations and macros
+#include "vf/vf_MurmurHash.h"
 #endif
 
 #ifndef __VF_MUTEX_VFHEADER__
@@ -123,6 +127,10 @@
 
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
 #include "vf/vf_PageAllocator.h"
+#endif
+
+#ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
+#include "vf/vf_RadialImageConvolutionKernel.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEX_VFHEADER__
@@ -177,24 +185,10 @@
 #include "vf/vf_Worker.h"
 #endif
 
-//
 // db
-//
 
 #ifndef __VF_DB_VFHEADER__
 #include "vf/vf_db.h" // db uses both some Juce and Boost
-#endif
-
-#if VF_HAVE_JUCE
-
-#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-#include "vf/vf_AudioBufferPool.h"
-#endif
-
-#ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
-#include "vf/vf_RadialImageConvolutionKernel.h"
-#endif
-
 #endif
 
 #endif

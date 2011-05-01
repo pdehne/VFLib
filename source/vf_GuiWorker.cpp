@@ -8,8 +8,6 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_GuiWorker.h"
 
-#if VF_HAVE_JUCE
-
 namespace {
 
 void updateAllTopLevelWindows ()
@@ -65,10 +63,6 @@ void GuiWorker::handleAsyncUpdate()
   // FIXED in the latest Juce tip
   //updateAllTopLevelWindows ();
 }
-
-#else
-
-#endif
 
 END_VF_NAMESPACE
 

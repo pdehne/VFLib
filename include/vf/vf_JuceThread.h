@@ -5,8 +5,6 @@
 #ifndef __VF_JUCETHREAD_VFHEADER__
 #define __VF_JUCETHREAD_VFHEADER__
 
-#if VF_HAVE_JUCE
-
 #include "vf/vf_Atomic.h"
 #include "vf/vf_Function.h"
 #include "vf/vf_ThreadBase.h"
@@ -157,8 +155,6 @@ inline void sleep (const int milliseconds)
 }
 
 }
-
-#endif
 
 #endif
 

@@ -6,8 +6,6 @@
 
 BEGIN_VF_NAMESPACE
 
-#if VF_HAVE_JUCE
-
 #include "vf/vf_CatchAny.h"
 #include "vf/vf_JuceThread.h"
 
@@ -226,17 +224,6 @@ ThreadBase::Interrupted interruptionPoint ()
   
   if (thread)
   {
-#if 0
-    detail::ThreadBase* threadBase = dynamic_cast <detail::ThreadBase*> (thread);
-
-    // Can only use interruption points from one of our threads
-    vfassert (threadBase != 0);
-
-    if (threadBase)
-      interrupted = threadBase->interruptionPoint ();
-    else
-      interrupted = false;
-#else
     detail::JuceThreadWrapper* threadWrapper = dynamic_cast <detail::JuceThreadWrapper*> (thread);
 
     vfassert (threadWrapper != 0);
@@ -245,7 +232,6 @@ ThreadBase::Interrupted interruptionPoint ()
       interrupted = threadWrapper->getThreadBase()->interruptionPoint ();
     else
       interrupted = false;
-#endif
   }
   else
   {
@@ -256,7 +242,5 @@ ThreadBase::Interrupted interruptionPoint ()
 }
 
 }
-
-#endif
 
 END_VF_NAMESPACE

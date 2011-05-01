@@ -441,7 +441,7 @@ public:
   { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   template <class Mf>
-  inline void queue1 (Mf mf, ListenerClass* const listener)
+  inline void queue1 (ListenerClass* const listener, Mf mf)
   { queue1f (listener, bind (mf, _1)); }
 
   template <class Mf, typename  T1>

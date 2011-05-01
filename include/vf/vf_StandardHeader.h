@@ -13,18 +13,14 @@
 
 #include "vf/vf_Config.h"
 
-#if VF_HAVE_JUCE
-#  include "vf/vf_juce_includes.h"
-#  define VF_JUCE JUCE_NAMESPACE
+#include "vf/vf_juce_includes.h"
+#define VF_JUCE JUCE_NAMESPACE
 using VF_JUCE::int64;
 using VF_JUCE::uint64;
 using VF_JUCE::uint32;
 using VF_JUCE::uint8;
-#endif
 
-#if VF_HAVE_BOOST
 #include "vf/vf_boost_includes.h"
-#endif
 
 #include "vf/vf_stdlib_includes.h"
 
@@ -50,11 +46,7 @@ using VF_JUCE::uint8;
 
 BEGIN_VF_NAMESPACE
 
-#if VF_USE_JUCE
-  #define vfassert jassert
-#else
-  #define vfassert assert
-#endif
+#define vfassert jassert
 
 // Borrowed from Juce so we are not dependent on it
 template <bool condition> struct VfStaticAssert;

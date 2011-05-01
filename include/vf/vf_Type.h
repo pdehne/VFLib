@@ -40,10 +40,8 @@ template <>           struct Param <bool>           { typedef bool t; };
 template <>           struct Param <float>          { typedef float t; };
 template <>           struct Param <double>         { typedef double t; };
 
-#if VF_HAVE_JUCE
 template <>           struct Param <VF_JUCE::int64>  { typedef VF_JUCE::int64 t; };
 template <>           struct Param <VF_JUCE::uint64> { typedef VF_JUCE::uint64 t; };
-#endif
 
 //#define PARAMETER_TYPE(a)    typename T::Param<a>::t
 

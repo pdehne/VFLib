@@ -5,8 +5,6 @@
 #ifndef __VF_JUCEATOMIC_VFHEADER__
 #define __VF_JUCEATOMIC_VFHEADER__
 
-#if VF_HAVE_JUCE
-
 #include "vf/vf_Intrinsics.h"
 
 namespace Juce {
@@ -170,7 +168,5 @@ private:
 }
 
 }
-
-#endif
 
 #endif

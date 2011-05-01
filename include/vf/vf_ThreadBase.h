@@ -12,13 +12,7 @@ class ThreadBase
 public:
   // Used to throw generic thread interruptions
   // when using the exception interruption model.
-#if VF_HAVE_BOOST
   typedef boost::thread_interrupted Interruption;
-#else
-  class Interruption
-  {
-  };
-#endif
 
   // This is the flag used to indicate if an interruption
   // occurred when using the polling model. It is designed

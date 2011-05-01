@@ -5,8 +5,6 @@
 #ifndef __VF_BOOSTMUTEX_VFHEADER__
 #define __VF_BOOSTMUTEX_VFHEADER__
 
-#if VF_HAVE_BOOST
-
 namespace Boost {
 
 class Mutex : NonCopyable
@@ -20,7 +18,5 @@ private:
 };
 
 }
-
-#endif
 
 #endif

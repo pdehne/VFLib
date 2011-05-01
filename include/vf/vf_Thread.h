@@ -8,17 +8,7 @@
 #include "vf/vf_BoostThread.h"
 #include "vf/vf_JuceThread.h"
 
-#if VF_HAVE_JUCE
-
 typedef JuceThread Thread;
 namespace CurrentThread = CurrentJuceThread;
-
-#else
-
-// Boost thread implementation doesn't provide full support
-
-#error "Missing Thread"
-
-#endif
 
 #endif

@@ -162,7 +162,6 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
 
       caughtException = false;
     }
-#if VF_HAVE_JUCE
     catch (Error& e)
     {
       if (!returnFromException)
@@ -216,21 +215,6 @@ bool CatchAny (Function <void (void)> f, bool returnFromException)
         }
       }
     }
-#else
-    catch (std::exception& e)
-    {
-      if (!returnFromException)
-      {
-        std::cout << e.what ();
-        std::unexpected ();
-      }
-    }
-    catch (...)
-    {
-      if (!returnFromException)
-        std::unexpected ();
-    }
-#endif
   }
 
   return caughtException;

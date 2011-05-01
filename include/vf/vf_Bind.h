@@ -5,15 +5,7 @@
 #ifndef __VF_BIND_VFHEADER__
 #define __VF_BIND_VFHEADER__
 
-#ifdef VF_HAVE_BIND
-#error "VF_HAVE_BIND already set"
-#endif
-
-#if VF_HAVE_BOOST
-
-//
 // Boost
-//
 using ::boost::bind;
 using ::boost::ref;
 using ::boost::cref;
@@ -27,32 +19,6 @@ using ::_6;
 using ::_7;
 using ::_8;
 using ::_9; // boost limit as of 1.45
-#define VF_HAVE_BIND 1
-
-#elif defined (_MSC_VER) && defined (_HAS_TR1)
-
-//
-// std::tr1
-//
-using std::tr1::bind;
-using std::tr1::ref;
-using std::tr1::cref;
-using std::tr1::placeholders::_1;
-using std::tr1::placeholders::_2;
-using std::tr1::placeholders::_3;
-using std::tr1::placeholders::_4;
-using std::tr1::placeholders::_5;
-using std::tr1::placeholders::_6;
-using std::tr1::placeholders::_7;
-using std::tr1::placeholders::_8;
-using std::tr1::placeholders::_9;
-#define VF_HAVE_BIND 1
-
-#else
-
-#define VF_HAVE_BIND 0
-
-#endif
 
 //
 // Bind

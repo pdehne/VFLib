@@ -5,21 +5,7 @@
 #ifndef __VF_STRING_VFHEADER__
 #define __VF_STRING_VFHEADER__
 
-#if VF_HAVE_JUCE
-
 using JUCE_NAMESPACE::String;
-
-#else
-
-typedef std::string String;
-
-template <typename S>
-inline S const& TRANS (S const& s)
-{
-  return s;
-}
-
-#endif
 
 #endif
 

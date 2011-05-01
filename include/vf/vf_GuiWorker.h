@@ -7,8 +7,6 @@
 
 #include "vf/vf_Worker.h"
 
-#if VF_HAVE_JUCE
-
 //
 // A thread queue processed by a the Juce Message thread (gui thread)
 //
@@ -27,10 +25,5 @@ private:
   void reset ();
   void handleAsyncUpdate ();
 };
-
-#else
-  #pragma message(VF_LOC_"Missing GuiWorker")
-
-#endif
 
 #endif

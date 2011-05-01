@@ -9,17 +9,8 @@
 
 namespace Atomic {
 
-#if VF_HAVE_JUCE
-
 using namespace Juce::Atomic;
 
-#else
-
-#error "Missing Atomic"
-
-#endif
-
 }
-
 
 #endif
