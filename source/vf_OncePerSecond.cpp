@@ -68,14 +68,14 @@ public:
   {
     ScopedLock lock (m_mutex);
 
-    m_list.push_back (elem);
+    m_list.push_back (*elem);
   }
 
   void remove (Elem* elem)
   {
     ScopedLock lock (m_mutex);
 
-    m_list.erase (elem);
+    m_list.erase (m_list.iterator_to (*elem));
   }
 
   static TimerSingleton* createInstance ()

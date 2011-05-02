@@ -16,7 +16,7 @@ DragAndDropData::~DragAndDropData ()
 {
   for (Items::iterator iter = m_items.begin (); iter != m_items.end ();)
   {
-    Item* item = iter++;
+    Item* item = &(*iter++);
     delete item;
   }
 }

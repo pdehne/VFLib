@@ -22,7 +22,7 @@ public:
   void add (Object const& object)
   {
     vfassert (find <Object> () == nullptr);
-    m_items.push_back (new StoredItem <Object> (object));
+    m_items.push_back (*new StoredItem <Object> (object));
   }
 
   template <class Object>
@@ -32,7 +32,7 @@ public:
 
     for (Items::const_iterator iter = m_items.begin (); iter != m_items.end ();)
     {
-      Item const* item = iter++;
+      Item const* item = &(*iter++);
       StoredItem <Object> const* stored =
         dynamic_cast <StoredItem <Object> const*> (item);
 
@@ -50,7 +50,7 @@ public:
 
 private:
   class Item;
-  typedef vf::List <Item> Items;
+  typedef List <Item> Items;
 
   class Item : public Items::Node
   {
