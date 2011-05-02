@@ -17,28 +17,28 @@ class LeakChecked
 public:
   LeakChecked() noexcept
   {
-    if (++getCounter() == 0)
+    if (++getLeakCheckedCounter() == 0)
     {
-      DBG ("*** Instruction reordering! Class: " << getLeakedObjectClassName());
+      DBG ("[LOGIC] " << getLeakCheckedName());
       jassertfalse;
     }
   }
 
   LeakChecked (const LeakChecked&) noexcept
   {
-    if (++getCounter() == 0)
+    if (++getLeakCheckedCounter() == 0)
     {
-      DBG ("*** Instruction reordering! Class: " << getLeakedObjectClassName());
+      DBG ("[LOGIC] " << getLeakCheckedName());
       jassertfalse;
     }
   }
 
   ~LeakChecked()
   {
-    const int newValue = --getCounter();
+    const int newValue = --getLeakCheckedCounter();
     if (newValue < 0)
     {
-      DBG ("*** Dangling pointer deletion! Class: " << getLeakedObjectClassName());
+      DBG ("[LOGIC] " << getLeakCheckedName());
       jassertfalse;
     }
   }
@@ -52,9 +52,7 @@ private:
       const int count = getCounter().get ();
       if (count > 0)
       {
-        DBG ("*** Leaked objects detected: " <<
-             count << " instance(s) of class " <<
-             getLeakedObjectClassName());
+        DBG ("[LEAK] " << count << " of " << getLeakCheckedName());
         jassertfalse;
       }
     }
@@ -68,12 +66,12 @@ private:
     char m_storage [sizeof (VF_JUCE::Atomic <int>)];
   };
 
-  static const char* getLeakedObjectClassName()
+  static const char* getLeakCheckedName ()
   {
     return typeid (Object).name ();
   }
 
-  static VF_JUCE::Atomic <int>& getCounter() noexcept
+  static VF_JUCE::Atomic <int>& getLeakCheckedCounter() noexcept
   {
     return s_counter.getCounter ();
   }
