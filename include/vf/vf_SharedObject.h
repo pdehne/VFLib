@@ -21,7 +21,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject : NonCopyable, LeakChecked <SharedObject>
+class SharedObject : LeakChecked <SharedObject>, NonCopyable
 {
 public:
   inline void incReferenceCount() noexcept
@@ -86,70 +86,70 @@ public:
   inline SharedObjectPtr (SharedObjectClass* const refCountedObject) noexcept
     : referencedObject (refCountedObject)
   {
-    if (refCountedObject != 0)
+    if (refCountedObject != nullptr)
       refCountedObject->incReferenceCount();
   }
 
   inline SharedObjectPtr (const SharedObjectPtr<SharedObjectClass>& other) noexcept
     : referencedObject (other.referencedObject)
   {
-    if (referencedObject != 0)
+    if (referencedObject != nullptr)
       referencedObject->incReferenceCount();
   }
 
-  SharedObjectPtr<SharedObjectClass>& operator= (const SharedObjectPtr<SharedObjectClass>& other)
+  SharedObjectPtr <SharedObjectClass>& operator= (const SharedObjectPtr<SharedObjectClass>& other)
   {
     SharedObjectClass* const newObject = other.referencedObject;
 
     if (newObject != referencedObject)
     {
-      if (newObject != 0)
+      if (newObject != nullptr)
         newObject->incReferenceCount();
 
       SharedObjectClass* const oldObject = referencedObject;
       referencedObject = newObject;
 
-      if (oldObject != 0)
+      if (oldObject != nullptr)
         oldObject->decReferenceCount();
     }
 
     return *this;
   }
 
-  SharedObjectPtr<SharedObjectClass>& operator= (SharedObjectClass* const newObject)
+  SharedObjectPtr <SharedObjectClass>& operator= (SharedObjectClass* const newObject)
   {
     if (referencedObject != newObject)
     {
-      if (newObject != 0)
+      if (newObject != nullptr)
         newObject->incReferenceCount();
 
       SharedObjectClass* const oldObject = referencedObject;
       referencedObject = newObject;
 
-      if (oldObject != 0)
+      if (oldObject != nullptr)
         oldObject->decReferenceCount();
     }
 
     return *this;
   }
 
-  inline ~SharedObjectPtr()
+  inline ~SharedObjectPtr ()
   {
-    if (referencedObject != 0)
+    if (referencedObject != nullptr)
       referencedObject->decReferenceCount();
   }
 
-  inline operator SharedObjectClass*() const noexcept
+  inline operator SharedObjectClass* () const noexcept
   {
     return referencedObject;
   }
 
-  inline SharedObjectClass* operator->() const noexcept
+  inline SharedObjectClass* operator-> () const noexcept
   {
     return referencedObject;
   }
 
-  inline SharedObjectClass* getObject() const noexcept
+  inline SharedObjectClass* getObject () const noexcept
   {
     return referencedObject;
   }
