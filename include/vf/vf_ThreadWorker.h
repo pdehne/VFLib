@@ -33,16 +33,16 @@ public:
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
-  ThreadWorker (const char* szName);
+  explicit ThreadWorker (String name);
 };
 
 template <class ThreadType>
 class ThreadWorkerType : public ThreadWorker
 {
 public:
-  explicit ThreadWorkerType (const char* szName)
-    : ThreadWorker (szName)
-    , m_thread (szName)
+  explicit ThreadWorkerType (String name)
+    : ThreadWorker (name)
+    , m_thread (name)
     , m_calledStart (false)
     , m_calledStop (false)
     , m_shouldStop (false)
@@ -63,7 +63,7 @@ public:
   {
     {
       // TODO: Atomic for this
-      VF_NAMESPACE::ScopedLock lock (m_mutex);
+      VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
       // start() MUST be called.
       vfassert (!m_calledStart);
       m_calledStart = true;
@@ -87,13 +87,13 @@ public:
   // Any listeners registered on the worker need to be removed
   // before stop is called
   //
-  void stop (const bool wait)
+  void stop (bool const wait)
   {
     // can't call stop(true) from within a thread function
     vfassert (!wait || !m_thread.isTheCurrentThread ());
 
     {
-      VF_NAMESPACE::ScopedLock lock (m_mutex);
+      VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
 
       // start() MUST be called.
       vfassert (m_calledStart);
@@ -104,7 +104,7 @@ public:
         m_calledStop = true;
 
         {
-          VF_NAMESPACE::ScopedUnlock unlock (m_mutex); // getting fancy
+          Mutex::ScopedUnlockType unlock (m_mutex); // getting fancy
 
           call (&ThreadWorkerType::do_stop, this);
 

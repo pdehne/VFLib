@@ -318,11 +318,23 @@
 			Name="threads"
 			>
 			<File
-				RelativePath="..\include\vf\vf_Mutex.h"
+				RelativePath="..\source\vf_BoostThread.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_MutexBase.h"
+				RelativePath="..\include\vf\vf_BoostThread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_JuceThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_JuceThread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
 			<File
@@ -4657,42 +4669,6 @@
 				RelativePath="..\include\vf\vf_String.h"
 				>
 			</File>
-			<Filter
-				Name="boost"
-				>
-				<File
-					RelativePath="..\include\vf\vf_BoostMutex.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\vf_BoostThread.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\include\vf\vf_BoostThread.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="juce"
-				>
-				<File
-					RelativePath="..\include\vf\vf_JuceAtomic.h"
-					>
-				</File>
-				<File
-					RelativePath="..\include\vf\vf_JuceMutex.h"
-					>
-				</File>
-				<File
-					RelativePath="..\source\vf_JuceThread.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\include\vf\vf_JuceThread.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="memory"

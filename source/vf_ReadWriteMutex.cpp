@@ -49,7 +49,7 @@ void ReadWriteMutex::enter_read () const
 
       // block until the writer is done
       {
-        ScopedLock lock (*m_mutex);
+        Mutex::ScopedLockType lock (*m_mutex);
       }
 
       // now try the loop again

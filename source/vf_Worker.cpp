@@ -9,10 +9,10 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
-void operator delete (void* p);
+//void operator delete (void* p);
 
-Worker::Worker (const char* szName)
-: m_szName (szName)
+Worker::Worker (String name)
+: m_name (name)
 {
 }
 

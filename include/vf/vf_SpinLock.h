@@ -7,12 +7,12 @@
 
 #include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeDelay.h"
-#include "vf/vf_MutexBase.h"
+#include "vf/vf_Mutex.h"
 
 class SpinLock
 {
 public:
-  typedef detail::ScopedLock <SpinLock> ScopedLockType;
+  typedef ScopedLock <SpinLock> ScopedLockType;
 
   inline void enter () const
   {

@@ -57,7 +57,7 @@ private:
 
   void notify ()
   {
-    ScopedLock lock (m_mutex);
+    Mutex::ScopedLockType lock (m_mutex);
 
     for (List::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
       iter->object->doOncePerSecond ();
@@ -66,14 +66,14 @@ private:
 public:
   void insert (Elem* elem)
   {
-    ScopedLock lock (m_mutex);
+    Mutex::ScopedLockType lock (m_mutex);
 
     m_list.push_back (*elem);
   }
 
   void remove (Elem* elem)
   {
-    ScopedLock lock (m_mutex);
+    Mutex::ScopedLockType lock (m_mutex);
 
     m_list.erase (m_list.iterator_to (*elem));
   }

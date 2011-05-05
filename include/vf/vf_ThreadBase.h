@@ -59,14 +59,6 @@ public:
       return *this;
     }
 
-    // TODO: safe bool idiom
-    /*
-    operator bool () const
-    {
-      m_checked = true;
-      return m_interrupted;
-    }
-    */
     bool asBoolean () const
     {
       m_checked = true;

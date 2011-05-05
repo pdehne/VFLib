@@ -8,7 +8,8 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_ThreadWorker.h"
 
-ThreadWorker::ThreadWorker (const char* szName) : Worker (szName)
+ThreadWorker::ThreadWorker (String name)
+  : Worker (name)
 {
 }
 

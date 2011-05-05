@@ -5,7 +5,7 @@
 #ifndef __VF_INTRUSIVESTACK_VFHEADER__
 #define __VF_INTRUSIVESTACK_VFHEADER__
 
-#include "vf/vf_MutexBase.h"
+#include "vf/vf_Mutex.h"
 
 namespace Intrusive {
 

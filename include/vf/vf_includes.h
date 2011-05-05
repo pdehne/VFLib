@@ -113,10 +113,6 @@
 #include "vf/vf_Mutex.h"
 #endif
 
-#ifndef __VF_MUTEXBASE_VFHEADER__
-#include "vf/vf_MutexBase.h"
-#endif
-
 #ifndef __VF_OBJECTALLOCATOR_VFHEADER__
 #include "vf/vf_ObjectAllocator.h"
 #endif

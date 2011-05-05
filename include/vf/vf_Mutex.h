@@ -5,16 +5,69 @@
 #ifndef __VF_MUTEX_VFHEADER__
 #define __VF_MUTEX_VFHEADER__
 
-#include "vf/vf_MutexBase.h"
-#include "vf/vf_BoostMutex.h"
-#include "vf/vf_JuceMutex.h"
+// Ideas based on Juce
 
-// Lift one implementation
+template <class MutexType>
+struct ScopedLock : NonCopyable
+{
+  inline explicit ScopedLock (MutexType const& mutex) : m_mutex (mutex)
+  {
+    m_mutex.enter ();
+  }
 
-using Juce::Mutex;
-//using Boost::Mutex;
+  inline ~ScopedLock ()
+  {
+    m_mutex.exit ();
+  }
 
-typedef detail::ScopedLock <Mutex> ScopedLock;
-typedef detail::ScopedUnlock <Mutex> ScopedUnlock;
+private:
+  const MutexType& m_mutex;
+};
+
+//------------------------------------------------------------------------------
+
+template <class MutexType>
+struct ScopedUnlock : NonCopyable
+{
+  inline explicit ScopedUnlock (MutexType const& mutex) : m_mutex (mutex)
+  {
+    m_mutex.exit ();
+  }
+
+  inline ~ScopedUnlock ()
+  {
+    m_mutex.enter ();
+  }
+
+private:
+  MutexType const& m_mutex;
+};
+
+//------------------------------------------------------------------------------
+
+class NoMutex : NonCopyable
+{
+public:
+  typedef ScopedLock <NoMutex> ScopedLockType;
+  typedef ScopedUnlock <NoMutex> ScopedUnlockType;
+
+  static inline void enter () { }
+  static inline void exit () { }
+};
+
+//------------------------------------------------------------------------------
+
+class Mutex : NonCopyable
+{
+public:
+  typedef ScopedLock <Mutex> ScopedLockType;
+  typedef ScopedUnlock <Mutex> ScopedUnlockType;
+
+  inline void enter () const { m_mutex.enter (); }
+  inline void exit () const { m_mutex.exit (); }
+
+private:
+  VF_JUCE::CriticalSection m_mutex;
+};
 
 #endif

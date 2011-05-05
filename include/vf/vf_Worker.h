@@ -62,7 +62,7 @@ public:
   };
 
 public:
-  explicit Worker (const char* szName = "");
+  explicit Worker (String name);
   ~Worker ();
 
   inline AllocatorType& getAllocator ()
@@ -226,7 +226,7 @@ private:
   bool do_process ();
 
 private:
-  const char* m_szName; // for debugging
+  String const m_name;
   Thread::id m_id;
   Calls m_list;
   Atomic::Flag m_closed;
