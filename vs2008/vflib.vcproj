@@ -154,14 +154,6 @@
 			Name="containers"
 			>
 			<File
-				RelativePath="..\include\vf\vf_Array.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_IntrusiveStack.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_List.h"
 				>
 			</File>
@@ -330,14 +322,6 @@
 			Name="threads"
 			>
 			<File
-				RelativePath="..\source\vf_ConditionVariable.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_ConditionVariable.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_Mutex.h"
 				>
 			</File>
@@ -374,7 +358,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf\vf_SharedSingleton.h"
+				RelativePath="..\include\vf\vf_SharedObjectPtr.h"
 				>
 			</File>
 			<File
@@ -395,14 +379,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_ThreadBase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\source\vf_ThreadIndex.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_ThreadIndex.h"
 				>
 			</File>
 		</Filter>
@@ -4638,6 +4614,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\source\vf_LockFreeDelay.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_LockFreeDelay.h"
 				>
 			</File>
@@ -4658,11 +4638,19 @@
 			Name="_native"
 			>
 			<File
+				RelativePath="..\include\vf\vf_Atomic.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\vf\vf_Bind.h"
 				>
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_Intrinsics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_LeakChecked.cpp"
 				>
 			</File>
 			<File
@@ -4731,10 +4719,6 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_AllocatorWithoutTls.h"
-				>
-			</File>
-			<File
-				RelativePath="..\include\vf\vf_Atomic.h"
 				>
 			</File>
 			<File
@@ -4819,6 +4803,54 @@
 			</File>
 			<File
 				RelativePath="..\include\vf\vf_AudioSampleBufferArray.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="core"
+			>
+			<File
+				RelativePath="..\source\vf_SharedSingleton.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_SharedSingleton.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="_unfinished"
+			>
+			<File
+				RelativePath="..\include\vf\vf_Array.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_ConditionVariable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ConditionVariable.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_IntrusiveStack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_PagePool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_PagePool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\source\vf_ThreadIndex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_ThreadIndex.h"
 				>
 			</File>
 		</Filter>

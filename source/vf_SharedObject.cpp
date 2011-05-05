@@ -132,7 +132,11 @@ SharedObject::~SharedObject ()
 
 void SharedObject::destroySharedObject ()
 {
+#if 0
   Deleter::getInstance()->Delete (this);
+#else
+  delete this;
+#endif
 }
 
 END_VF_NAMESPACE
