@@ -27,22 +27,6 @@ const size_t hardLimitMegaBytes = 256;
 
 }
 
-GlobalPageAllocator::GlobalPageAllocator ()
-  : SharedSingleton (persistAfterCreation)
-  , m_allocator (globalPageBytes)
-{
-}
-
-GlobalPageAllocator::~GlobalPageAllocator ()
-{
-}
-
-GlobalPageAllocator* GlobalPageAllocator::createInstance ()
-{
-  return new GlobalPageAllocator;
-}
-
-//------------------------------------------------------------------------------
 /*
 
 Implementation notes
@@ -60,10 +44,18 @@ Implementation notes
 */
 //------------------------------------------------------------------------------
 
-struct PageAllocator::Page : List::Node
+struct PageAllocator::Page : Pages::Node, LeakChecked <Page>
 {
-  explicit Page (PageAllocator* const allocator) : m_allocator (*allocator) { }
-  PageAllocator& getAllocator () const { return m_allocator; }
+  explicit Page (PageAllocator* const allocator)
+    : m_allocator (*allocator)
+  {
+  }
+
+  PageAllocator& getAllocator () const
+  {
+    return m_allocator;
+  }
+
 private:
   PageAllocator& m_allocator;
 };
@@ -194,11 +186,11 @@ void PageAllocator::doOncePerSecond ()
 #endif
 }
 
-void PageAllocator::dispose (List& list)
+void PageAllocator::dispose (Pages& pages)
 {
   for (;;)
   {
-    Page* const page = list.pop_front ();
+    Page* const page = pages.pop_front ();
 
     if (page)
     {
@@ -220,6 +212,23 @@ void PageAllocator::dispose (Pool& pool)
 {
   dispose (pool.fresh);
   dispose (pool.garbage);
+}
+
+//------------------------------------------------------------------------------
+
+GlobalPageAllocator::GlobalPageAllocator ()
+  : SharedSingleton (persistAfterCreation)
+  , m_allocator (globalPageBytes)
+{
+}
+
+GlobalPageAllocator::~GlobalPageAllocator ()
+{
+}
+
+GlobalPageAllocator* GlobalPageAllocator::createInstance ()
+{
+  return new GlobalPageAllocator;
 }
 
 END_VF_NAMESPACE

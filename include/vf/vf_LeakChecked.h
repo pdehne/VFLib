@@ -5,51 +5,93 @@
 #ifndef __VF_LEAKCHECKED_VFHEADER__
 #define __VF_LEAKCHECKED_VFHEADER__
 
+#include "vf/vf_Error.h"
+#include "vf/vf_Static.h"
+#include "vf/vf_Throw.h"
+
 //
 // Derived classes are automatically leak-checked on exit
 //
 
 #if VF_CHECK_LEAKS
 
-template <class Object>
-class LeakChecked
+class LeakCheckedBase
 {
 public:
-  LeakChecked() noexcept
+  static void detectLeaks ();
+
+protected:
+  class CounterBase
   {
-    if (++getLeakCheckedCounter() == 0)
+  public:
+    CounterBase ();
+
+    static void detectLeaks ();
+
+  private:
+    virtual void detectLeak () = 0;
+
+  private:
+    class Singleton;
+
+    CounterBase* m_next;
+  };
+};
+
+//------------------------------------------------------------------------------
+
+template <class Object>
+class LeakChecked : private LeakCheckedBase
+{
+protected:
+  LeakChecked () noexcept
+  {
+    if (getLeakCheckedCounter().increment () == 0)
     {
-      DBG ("[LOGIC] " << getLeakCheckedName());
-      jassertfalse;
+      DBG ("[LOGIC] " << getLeakCheckedName ());
+      vf::Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 
   LeakChecked (const LeakChecked&) noexcept
   {
-    if (++getLeakCheckedCounter() == 0)
+    if (getLeakCheckedCounter().increment() == 0)
     {
-      DBG ("[LOGIC] " << getLeakCheckedName());
-      jassertfalse;
+      DBG ("[LOGIC] " << getLeakCheckedName ());
+      vf::Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 
   ~LeakChecked()
   {
-    const int newValue = --getLeakCheckedCounter();
-    if (newValue < 0)
+    if (getLeakCheckedCounter().decrement () < 0)
     {
-      DBG ("[LOGIC] " << getLeakCheckedName());
-      jassertfalse;
+      DBG ("[LOGIC] " << getLeakCheckedName ());
+      vf::Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 
 private:
-  class Counter
+  class Counter : private CounterBase
   {
   public:
-    ~Counter()
+    Counter ()
     {
-      const int count = getCounter().get ();
+    }
+
+    inline int increment ()
+    {
+      return ++m_count;
+    }
+
+    inline int decrement ()
+    {
+      return --m_count;
+    }
+    
+    void detectLeak ()
+    {
+      const int count = m_count.get ();
       if (count > 0)
       {
         DBG ("[LEAK] " << count << " of " << getLeakCheckedName());
@@ -57,13 +99,8 @@ private:
       }
     }
 
-    inline VF_JUCE::Atomic <int>& getCounter ()
-    {
-      return *reinterpret_cast <VF_JUCE::Atomic <int>*> (m_storage);
-    }
-
   private:
-    char m_storage [sizeof (VF_JUCE::Atomic <int>)];
+    VF_JUCE::Atomic <int> m_count;
   };
 
   static const char* getLeakCheckedName ()
@@ -71,16 +108,27 @@ private:
     return typeid (Object).name ();
   }
 
-  static VF_JUCE::Atomic <int>& getLeakCheckedCounter() noexcept
+  static Counter& getLeakCheckedCounter() noexcept
   {
-    return s_counter.getCounter ();
+    if (s_initializer.begin ())
+    {
+      s_counter.construct ();
+      s_initializer.end ();
+    }
+
+    return *s_counter;
   }
 
-  static Counter s_counter;
+  static Static::Initializer <LeakChecked <Object> > s_initializer;
+  static Static::Storage <Counter, LeakChecked <Object> > s_counter;
 };
 
 template <class Object>
-typename LeakChecked <Object>::Counter LeakChecked <Object>::s_counter;
+Static::Initializer <LeakChecked <Object> > LeakChecked <Object>::s_initializer;
+
+template <class Object>
+Static::Storage <typename LeakChecked <Object>::Counter,
+                 LeakChecked <Object> > LeakChecked <Object>::s_counter;
 
 #else
 

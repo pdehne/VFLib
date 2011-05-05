@@ -26,7 +26,10 @@ public:
   // The available bytes per page is a little bit less
   // than requested in the constructor, due to overhead.
   //
-  inline size_t getPageBytes () const { return m_pageBytesAvailable; }
+  inline size_t getPageBytes () const
+  {
+    return m_pageBytesAvailable;
+  }
 
   inline void* allocate (const size_t bytes)
   {
@@ -45,18 +48,18 @@ private:
 
 private:
   struct Page;
-  typedef LockFree::Stack <Page> List;
+  typedef LockFree::Stack <Page> Pages;
 
   struct Pool
   {
-    CacheLine::Padded <List> fresh;
-    CacheLine::Padded <List> garbage;
+    CacheLine::Padded <Pages> fresh;
+    CacheLine::Padded <Pages> garbage;
   };
 
   static inline void* fromPage (Page* const p);
   static inline Page* toPage (void* const p);
 
-  void dispose (List& list);
+  void dispose (Pages& pages);
   void dispose (Pool& pool);
 
 private:
@@ -77,21 +80,23 @@ private:
 
 //------------------------------------------------------------------------------
 
-class GlobalPageAllocator : public SharedSingleton <GlobalPageAllocator>
+class GlobalPageAllocator
+  : public SharedSingleton <GlobalPageAllocator>
+  , LeakChecked <GlobalPageAllocator>
 {
 private:
   GlobalPageAllocator ();
   ~GlobalPageAllocator ();
 
 public:
-  inline void* allocate ()
-  {
-    return m_allocator.allocate ();
-  }
-
   inline size_t getPageBytes ()
   {
     return m_allocator.getPageBytes ();
+  }
+
+  inline void* allocate ()
+  {
+    return m_allocator.allocate ();
   }
 
   static inline void deallocate (void* const p)
@@ -101,6 +106,7 @@ public:
 
 private:
   friend class SharedSingleton <GlobalPageAllocator>;
+
   static GlobalPageAllocator* createInstance ();
 
 private:

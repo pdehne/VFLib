@@ -49,9 +49,9 @@ public:
   };
 
 public:
-  explicit BoostThread (String const& name);
+  explicit BoostThread (String name);
 
-  void start (const Function <void (void)>& f);
+  void start (Function <void (void)> const& f);
 
   void join ();
 
@@ -62,7 +62,10 @@ public:
   inline void setPriority (int) { }
 
 private:
-  String m_name;
+  void run (Function <void (void)> f);
+
+private:
+  String const m_name;
   boost::thread m_thread;
 };
 
@@ -72,21 +75,21 @@ template <class InterruptionType>
 class BoostThreadType : public BoostThread
 {
 public:
-  explicit BoostThreadType (String const& name) : BoostThread (name)
+  explicit BoostThreadType (String name) : BoostThread (name)
   {
   }
 
-  bool wait (int milliseconds = -1)
+  inline bool wait (int milliseconds = -1)
   {
     return m_model.wait (milliseconds, *this);
   }
 
-  void interrupt ()
+  inline void interrupt ()
   {
     m_model.interrupt (*this);
   }
 
-  Interrupted interruptionPoint ()
+  inline Interrupted interruptionPoint ()
   {
     return m_model.interruptionPoint (*this);
   }

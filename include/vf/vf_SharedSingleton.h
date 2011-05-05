@@ -17,26 +17,55 @@
 //
 //  Object* Object::createInstance()
 //
+
+class SharedSingletonBase : NonCopyable
+{
+protected:
+  void addPersistentReference ();
+
+private:
+  virtual void removePersistentReference () = 0;
+
+private:
+  class PersistentReferences;
+
+  SharedSingletonBase* m_next;
+};
+
+//------------------------------------------------------------------------------
+
 template <class Object>
-class SharedSingleton : public SharedObject
+class SharedSingleton : private SharedSingletonBase
 {
 protected:
   enum Lifetime
   {
     createOnDemand,
+    createOnDemandOnce, // IMPLEMENT ME!
     persistAfterCreation
   };
 
-  explicit SharedSingleton (const Lifetime lifetime)
+  explicit SharedSingleton (Lifetime const lifetime)
     : m_lifetime (lifetime)
   {
-    vfassert (s_instance == 0);
+    vfassert (s_instance == nullptr);
+
+    if (m_lifetime == persistAfterCreation)
+    {
+      incReferenceCount ();
+      addPersistentReference ();
+    }
+    else if (m_lifetime == createOnDemandOnce && *s_created)
+    {
+      vf::Throw (Error().fail (__FILE__, __LINE__));
+    }
+
+    *s_created = true;
   }
 
-  ~SharedSingleton ()
+  virtual ~SharedSingleton ()
   {
-    //s_instance = 0;
-    vfassert (s_instance == 0);
+    vfassert (s_instance == nullptr);
   }
 
 public:
@@ -46,27 +75,51 @@ public:
   {
     Ptr instance;
 
-    SpinLock::ScopedLockType lock (*s_mutex);
-
     instance = s_instance;
 
-    if (!instance)
+    if (instance == nullptr)
     {
-      s_instance = Object::createInstance ();
-
-      if (s_instance->m_lifetime == persistAfterCreation)
-      {
-        *s_ref = s_instance;
-      }
+      SpinLock::ScopedLockType lock (*s_mutex);
 
       instance = s_instance;
+  
+      if (instance == nullptr)
+      {
+        s_instance = Object::createInstance ();
+
+        instance = s_instance;
+      }
     }
 
     return instance;
   }
 
+  inline void incReferenceCount() noexcept
+  {
+    m_refs.addref ();
+  }
+
+  inline void decReferenceCount() noexcept
+  {
+    vfassert (m_refs.is_signaled ());
+
+    if (m_refs.release ())
+      destroySingleton ();
+  }
+
+  // Caller must synchronize.
+  inline bool isBeingReferenced () const
+  {
+    return m_refs.is_signaled ();
+  }
+
 private:
-  void destroySharedObject ()
+  void removePersistentReference ()
+  {
+    decReferenceCount ();
+  }
+
+  void destroySingleton ()
   {
     bool destroy;
 
@@ -91,12 +144,14 @@ private:
   }
 
 private:
-  const Lifetime m_lifetime;
+  Lifetime const m_lifetime;
+  Atomic::Counter m_refs;
 
 private:
   static Object* s_instance;
-  static Static::Object <Ptr, SharedSingleton <Object>> s_ref;
-  static Static::Storage <SpinLock, SharedSingleton <Object>> s_mutex;
+  static Static::Object <Ptr, SharedSingleton <Object> > s_ref;
+  static Static::Storage <SpinLock, SharedSingleton <Object> > s_mutex;
+  static Static::Storage <bool, SharedSingleton <Object> > s_created;
 };
 
 template <class Object>
@@ -109,5 +164,9 @@ Static::Object <typename SharedSingleton <Object>::Ptr, SharedSingleton <Object>
 template <class Object>
 Static::Storage <SpinLock, SharedSingleton <Object> >
   SharedSingleton <Object>::s_mutex;
+
+template <class Object>
+Static::Storage <bool, SharedSingleton <Object> >
+  SharedSingleton <Object>::s_created;
 
 #endif

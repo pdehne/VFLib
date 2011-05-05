@@ -149,6 +149,10 @@
 #include "vf/vf_SharedObject.h"
 #endif
 
+#ifndef __VF_SHAREDOBJECTPtr_VFHEADER__
+#include "vf/vf_SharedObjectPtr.h"
+#endif
+
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
 #include "vf/vf_SharedSingleton.h"
 #endif

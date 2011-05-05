@@ -13,52 +13,127 @@ BEGIN_VF_NAMESPACE
 
 //------------------------------------------------------------------------------
 
-class SharedObject::Singleton : public SharedSingleton <Singleton>
+class SharedObject::Deleter : LeakChecked <Deleter>
 {
 private:
-  Singleton ()
-    : m_worker (__FILE__)
-    , SharedSingleton (persistAfterCreation)
+  typedef SpinLock LockType;
+
+  Deleter () : m_worker ("Deleter")
+  {
+  }
+
+  ~Deleter ()
+  {
+    m_worker.stop_and_wait ();
+  }
+
+  void construct ()
   {
     m_worker.start ();
   }
 
-  ~Singleton ()
-  {
-    // is this needed?
-    m_worker.stop_and_wait ();
-  }
-
 private:
-  friend class SharedSingleton <Singleton>;
-
-  static Singleton* createInstance ()
-  {
-    return new Singleton;
-  }
-
   static void doDelete (SharedObject* sharedObject)
   {
     delete sharedObject;
   }
 
 public:
-  inline Worker& getWorker () { return m_worker; }
+  typedef vf::SharedObjectPtr <Deleter> Ptr;
+
+  Worker& getWorker ()
+  {
+    return m_worker;
+  }
+
+  void incReferenceCount ()
+  {
+    m_refs.addref ();
+  }
+
+  void decReferenceCount ()
+  {
+    if (m_refs.release ())
+    {
+      bool destroy;
+
+      {
+        LockType::ScopedLockType lock (*s_mutex);
+      
+        if (m_refs.is_signaled ())
+        {
+          destroy = false;
+        }
+        else
+        {
+          destroy = true;
+          s_instance = 0;
+        }
+      }
+
+      if (destroy)
+        delete this;
+    }
+  }
 
   void Delete (SharedObject* sharedObject)
   {
-    m_worker.call (&Singleton::doDelete, sharedObject);
+    //m_worker.call (&Deleter::doDelete, sharedObject);
+    delete sharedObject;
+  }
+
+  static Ptr getInstance ()
+  {
+    Ptr instance;
+
+    instance = s_instance;
+
+    if (instance == nullptr)
+    {
+      LockType::ScopedLockType lock (*s_mutex);
+
+      instance = s_instance;
+
+      if (instance == nullptr)
+      {
+        s_instance = new Deleter;
+
+        instance = s_instance;
+
+        instance->construct ();
+      }
+    }
+
+    return instance;
   }
 
 private:
+  Atomic::Counter m_refs;
   ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
+
+  static Deleter* s_instance;
+  static Static::Storage <SpinLock, Deleter> s_mutex;
 };
+
+SharedObject::Deleter* SharedObject::Deleter::s_instance;
+Static::Storage <SpinLock, SharedObject::Deleter> SharedObject::Deleter::s_mutex;
 
 //------------------------------------------------------------------------------
 
+SharedObject::SharedObject ()
+{
+  //Deleter::getInstance()->incReferenceCount();
+}
+
+SharedObject::~SharedObject ()
+{
+  vfassert (m_refs.is_reset ());
+  //Deleter::getInstance()->decReferenceCount();
+}
+
 void SharedObject::destroySharedObject ()
 {
-  Singleton::getInstance()->Delete (this);
+  Deleter::getInstance()->Delete (this);
 }
 
 END_VF_NAMESPACE

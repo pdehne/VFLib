@@ -5,9 +5,6 @@
 #ifndef __VF_LOCKFREEDELAY_VFHEADER__
 #define __VF_LOCKFREEDELAY_VFHEADER__
 
-#include "vf/vf_Intrinsics.h"
-#include "vf/vf_Thread.h"
-
 namespace LockFree {
 
 //
@@ -17,56 +14,9 @@ namespace LockFree {
 class Delay
 {
 public:
-  Delay () : m_backoff (0)
-  {
-  }
+  Delay ();
 
-#if 0
-  ~Delay ()
-  {
-    if (m_backoff > 1)
-    {
-      String s;
-      s << "m_backoff = " << String (m_backoff);
-      Logger::outputDebugString (s);
-    }
-  }
-#endif
-
-  inline void spin ()
-  {
-#if 0
-    CurrentThread::yield ();
-    //CurrentThread::sleep (0);
-#else
-    if (m_backoff < 10)
-    {
-      Intrinsic::mm_pause <1> ();
-    }
-    else if (m_backoff < 20)
-    {
-      Intrinsic::mm_pause <50> ();
-    }
-    else if (m_backoff < 22)
-    {
-      CurrentThread::yield();
-    }
-    else if (m_backoff < 24)
-    {
-      CurrentThread::sleep (0);
-    }
-    else if (m_backoff < 26)
-    {
-      CurrentThread::sleep (1);
-    }
-    else
-    {
-      CurrentThread::sleep (10);
-    }
-#endif
-
-    ++m_backoff;
-  }
+  void spin ();
 
 private:
   int m_backoff;

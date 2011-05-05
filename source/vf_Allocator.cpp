@@ -34,7 +34,7 @@ struct Allocator::Header
 
 //------------------------------------------------------------------------------
 
-class Allocator::Page : NonCopyable
+class Allocator::Page : LeakChecked <Page>, NonCopyable
 {
 public:
   explicit Page (const size_t bytes) : m_refs (1)
@@ -85,7 +85,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-class Allocator::PerThreadData : NonCopyable
+class Allocator::PerThreadData : LeakChecked <PerThreadData>, NonCopyable
 {
 public:
   explicit PerThreadData (Allocator* allocator)

@@ -5,7 +5,6 @@
 #ifndef __VF_STATIC_VFHEADER__
 #define __VF_STATIC_VFHEADER__
 
-#include "vf/vf_Atomic.h"
 #include "vf/vf_LockFreeDelay.h"
 
 //
@@ -88,9 +87,9 @@ public:
   {
     bool shouldInitialize;
 
-    if (*m_state == stateUninitialized)
+    if (m_state.get () == stateUninitialized)
     {
-      if (m_state->tryChangeState (stateUninitialized, stateInitializing))
+      if (m_state.compareAndSetBool (stateInitializing, stateUninitialized))
       {
         shouldInitialize = true;
       }
@@ -102,7 +101,7 @@ public:
         {
           delay.spin ();
         }
-        while (*m_state != stateInitialized);
+        while (m_state.get () != stateInitialized);
 
         shouldInitialize = false;
       }
@@ -119,7 +118,7 @@ public:
   //
   void end ()
   {
-    m_state->changeState (stateInitializing, stateInitialized);
+    m_state.set (stateInitialized);
   }
 
 private:
@@ -130,7 +129,7 @@ private:
     stateInitialized
   };
 
-  Storage <Atomic::State, Tag> m_state;
+  VF_JUCE::Atomic <int> m_state;
 };
 
 //------------------------------------------------------------------------------

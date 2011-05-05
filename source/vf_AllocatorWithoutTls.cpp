@@ -9,6 +9,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_AllocatorWithoutTls.h"
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_MemoryAlignment.h"
+#include "vf/vf_Thread.h"
 
 // This precedes every allocation
 struct AllocatorWithoutTls::Header

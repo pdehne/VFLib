@@ -120,14 +120,21 @@ ThreadBase::Interrupted BoostThread::PollingBased::interruptionPoint (BoostThrea
 
 //------------------------------------------------------------------------------
 
-BoostThread::BoostThread (String const& name)
+BoostThread::BoostThread (String name)
   : m_name (name)
 {
 }
 
-void BoostThread::start (const Function <void (void)>& f)
+void BoostThread::start (Function <void (void)> const& f)
 {
-  m_thread = boost::thread (f);
+  m_thread = boost::thread (boost::bind (&BoostThread::run, this, f));
+}
+
+void BoostThread::run (Function <void (void)> f)
+{
+  VF_JUCE::Thread::setCurrentThreadName (m_name);
+
+  f ();
 }
 
 void BoostThread::join ()
