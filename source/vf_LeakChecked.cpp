@@ -39,17 +39,17 @@ public:
 
   static Singleton& getInstance ()
   {
-    static Singleton* volatile instance;
-    static Static::Initializer <Singleton> initializer;
+    static Singleton* volatile s_instance;
+    static Static::Initializer s_initializer;
 
-    if (initializer.begin ())
+    if (s_initializer.begin ())
     {
-      static Singleton s_instance;
-      instance = &s_instance;
-      initializer.end ();
+      static Singleton s_object;
+      s_instance = &s_object;
+      s_initializer.end ();
     }
 
-    return *instance;
+    return *s_instance;
   }
 
 private:

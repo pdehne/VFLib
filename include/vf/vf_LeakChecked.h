@@ -75,10 +75,6 @@ private:
   class Counter : private CounterBase
   {
   public:
-    Counter ()
-    {
-    }
-
     inline int increment ()
     {
       return ++m_count;
@@ -92,10 +88,10 @@ private:
     void detectLeak ()
     {
       const int count = m_count.get ();
+
       if (count > 0)
       {
         DBG ("[LEAK] " << count << " of " << getLeakCheckedName());
-        jassertfalse;
       }
     }
 
@@ -110,30 +106,29 @@ private:
 
   static Counter& getLeakCheckedCounter() noexcept
   {
+    static Counter* volatile s_instance;
+    static Static::Initializer s_initializer;
+
     if (s_initializer.begin ())
     {
-      s_counter.construct ();
+      static Counter s_object;
+      s_instance = &s_object;
       s_initializer.end ();
     }
 
-    return *s_counter;
+    return *s_instance;
   }
-
-  static Static::Initializer <LeakChecked <Object> > s_initializer;
-  static Static::Storage <Counter, LeakChecked <Object> > s_counter;
 };
-
-template <class Object>
-Static::Initializer <LeakChecked <Object> > LeakChecked <Object>::s_initializer;
-
-template <class Object>
-Static::Storage <typename LeakChecked <Object>::Counter,
-                 LeakChecked <Object> > LeakChecked <Object>::s_counter;
 
 #else
 
+struct LeakCheckedBase
+{
+  static inline void detectLeaks () { }
+};
+
 template <class Object>
-struct LeakChecked
+struct LeakChecked : LeakCheckedBase
 {
 };
 

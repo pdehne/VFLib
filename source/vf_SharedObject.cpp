@@ -78,8 +78,7 @@ public:
 
   void Delete (SharedObject* sharedObject)
   {
-    //m_worker.call (&Deleter::doDelete, sharedObject);
-    delete sharedObject;
+    m_worker.call (&Deleter::doDelete, sharedObject);
   }
 
   static Ptr getInstance ()

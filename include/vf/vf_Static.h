@@ -70,14 +70,15 @@ char Storage <ObjectType, Tag>::s_storage [sizeof (ObjectType)];
 // Provides a thread safe flag for indicating if and when
 // initialization is required for an object with static storage duration.
 // 
-template <class Tag>
 class Initializer
 {
 public:
+  /*
   bool inited () const
   {
-    return *m_state == stateInitialized;
+    return m_state.get () == stateInitialized;
   }
+  */
 
   // If the condition is not initialized, the first caller will
   // receive true, while concurrent callers get blocked until
@@ -166,7 +167,7 @@ private:
 // }
 //
 template <class ObjectType, class Tag>
-class Object : private Static::Initializer <Tag>
+class Object : private Static::Initializer
 {
 public:
   // A constructor is not required, and would have no effect.

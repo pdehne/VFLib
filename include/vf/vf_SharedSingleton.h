@@ -10,14 +10,19 @@
 #include "vf/vf_Static.h"
 
 // Thread-safe singleton which comes into existence on first use.
-// An option controls whether the singleton persists after creation,
-// or if it is created and destroyed as needed based on reference counts.
+// All objects with static storage duration should, in general, be singletons,
+// or else they may not be leak-checked correctly.
 //
-// Object must provide this function:
+// class Object must provide this function:
 //
 //  Object* Object::createInstance()
 //
 
+//------------------------------------------------------------------------------
+
+// Common base class is used to track the list of singletons
+// that have persistent references.
+//
 class SharedSingletonBase : NonCopyable
 {
 protected:
@@ -27,6 +32,10 @@ private:
   virtual void removePersistentReference () = 0;
 
 private:
+  // This tracks all persistent references and releases them together at exit.
+  // After the references are released, leak checking is performed. At that
+  // point, there should be no singletons left.
+  //
   class PersistentReferences;
 
   SharedSingletonBase* m_next;
@@ -40,8 +49,18 @@ class SharedSingleton : private SharedSingletonBase
 protected:
   enum Lifetime
   {
+    // Singleton is created on first use and destroyed when
+    // the last reference is removed.
+    //
     createOnDemand,
-    createOnDemandOnce, // IMPLEMENT ME!
+
+    // Like createOnDemand, but after the Singleton is destroyed an
+    // exception will be thrown if an attempt is made to create it again.
+    //
+    createOnDemandOnce,
+
+    // The singleton is created on first use and persists until program exit.
+    //
     persistAfterCreation
   };
 
@@ -149,17 +168,12 @@ private:
 
 private:
   static Object* s_instance;
-  static Static::Object <Ptr, SharedSingleton <Object> > s_ref;
   static Static::Storage <SpinLock, SharedSingleton <Object> > s_mutex;
   static Static::Storage <bool, SharedSingleton <Object> > s_created;
 };
 
 template <class Object>
 Object* SharedSingleton <Object>::s_instance;
-
-template <class Object>
-Static::Object <typename SharedSingleton <Object>::Ptr, SharedSingleton <Object> >
-  SharedSingleton <Object>::s_ref;
 
 template <class Object>
 Static::Storage <SpinLock, SharedSingleton <Object> >
