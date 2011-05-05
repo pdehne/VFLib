@@ -14,6 +14,9 @@ JuceThread::InterruptionModel::InterruptionModel ()
 {
 }
 
+// Attempt to transition into the wait state.
+// Returns true if we should interrupt instead.
+//
 bool JuceThread::InterruptionModel::do_wait ()
 {
   bool interrupted;
@@ -22,13 +25,18 @@ bool JuceThread::InterruptionModel::do_wait ()
   {
     vfassert (m_state != stateWait);
 
+    // See if we are interrupted
     if (m_state.tryChangeState (stateInterrupt, stateRun))
     {
+      // We were interrupted, state is changed to Run.
+      // Caller must run now.
       interrupted = true;
       break;
     }
     else if (m_state.tryChangeState (stateRun, stateWait))
     {
+      // Transitioned from run to wait.
+      // Caller must wait now.
       interrupted = false;
       break;
     }
@@ -37,6 +45,7 @@ bool JuceThread::InterruptionModel::do_wait ()
   return interrupted;
 }
 
+//
 bool JuceThread::InterruptionModel::do_timeout ()
 {
   bool interrupted;
@@ -96,6 +105,36 @@ bool JuceThread::InterruptionModel::do_interruptionPoint ()
 
 //------------------------------------------------------------------------------
 
+bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
+{
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  bool interrupted = do_wait ();
+
+  if (!interrupted)
+  {
+    interrupted = thread.Thread::wait (milliseconds);
+
+    if (!interrupted)
+      interrupted = do_timeout ();
+  }
+
+  return interrupted;
+}
+
+ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
+{
+  // Can only be called from the current thread
+  vfassert (thread.isTheCurrentThread ());
+
+  const bool interrupted = do_interruptionPoint ();
+
+  return ThreadBase::Interrupted (interrupted);
+}
+
+//------------------------------------------------------------------------------
+
 bool JuceThread::ExceptionBased::wait (int milliseconds, JuceThread& thread)
 {
   // Can only be called from the current thread
@@ -132,42 +171,8 @@ ThreadBase::Interrupted JuceThread::ExceptionBased::interruptionPoint (JuceThrea
 
 //------------------------------------------------------------------------------
 
-bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
-{
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
-
-  bool interrupted = do_wait ();
-
-  if (!interrupted)
-  {
-    interrupted = thread.VF_JUCE::Thread::wait (milliseconds);
-
-    if (!interrupted)
-      interrupted = do_timeout ();
-  }
-  else
-  {
-    return true;
-  }
-
-  return interrupted;
-}
-
-ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
-{
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
-
-  const bool interrupted = do_interruptionPoint ();
-
-  return ThreadBase::Interrupted (interrupted);
-}
-
-//------------------------------------------------------------------------------
-
-JuceThread::JuceThread (String const& name)
-  : JuceThreadWrapper (name, this)
+JuceThread::JuceThread (String name)
+  : JuceThreadWrapper (name, *this)
 {
 }
 
@@ -229,7 +234,7 @@ ThreadBase::Interrupted interruptionPoint ()
     vfassert (threadWrapper != 0);
 
     if (threadWrapper)
-      interrupted = threadWrapper->getThreadBase()->interruptionPoint ();
+      interrupted = threadWrapper->getThreadBase().interruptionPoint ();
     else
       interrupted = false;
   }

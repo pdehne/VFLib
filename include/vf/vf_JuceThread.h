@@ -15,13 +15,22 @@ namespace detail {
 // the derivation from juce::Thread private and still use
 // dynamic_cast.
 //
-struct JuceThreadWrapper : public VF_JUCE::Thread
+class JuceThreadWrapper : public VF_JUCE::Thread
 {
-  JuceThreadWrapper (const String& threadName, ThreadBase* threadBase)
-    : VF_JUCE::Thread (threadName), m_threadBase (threadBase) { }
-  ThreadBase* getThreadBase () const { return m_threadBase; }
+public:
+  JuceThreadWrapper (String name, ThreadBase& threadBase)
+    : VF_JUCE::Thread (name)
+    , m_threadBase (threadBase)
+  {
+  }
+
+  ThreadBase& getThreadBase () const
+  {
+    return m_threadBase;
+  }
+
 private:
-  ThreadBase* m_threadBase;
+  ThreadBase& m_threadBase;
 };
 
 }
@@ -75,10 +84,10 @@ public:
   };
 
 public:
-  explicit JuceThread (String const& name);
+  explicit JuceThread (String name);
   ~JuceThread ();
 
-  void start (const Function <void (void)>& f);
+  void start (Function <void (void)> const& f);
 
   void join ();
 
