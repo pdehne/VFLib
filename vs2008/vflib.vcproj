@@ -202,10 +202,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\include\vf_ThreadLocal.h"
-				>
-			</File>
-			<File
 				RelativePath="..\include\vf\vf_Throw.h"
 				>
 			</File>
