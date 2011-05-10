@@ -4782,6 +4782,14 @@
 			Name="core"
 			>
 			<File
+				RelativePath="..\source\vf_PerformedAtExit.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\vf\vf_PerformedAtExit.h"
+				>
+			</File>
+			<File
 				RelativePath="..\source\vf_SharedSingleton.cpp"
 				>
 			</File>

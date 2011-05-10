@@ -125,6 +125,10 @@
 #include "vf/vf_PageAllocator.h"
 #endif
 
+#ifndef __VF_PERFORMEDATEXIT_VFHEADER__
+#include "vf/vf_PerformedAtExit.h"
+#endif
+
 #ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
 #include "vf/vf_RadialImageConvolutionKernel.h"
 #endif

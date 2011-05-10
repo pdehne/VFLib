@@ -20,16 +20,12 @@ private:
 
   Deleter () : m_worker ("Deleter")
   {
+    m_worker.start ();
   }
 
   ~Deleter ()
   {
     m_worker.stop_and_wait ();
-  }
-
-  void construct ()
-  {
-    m_worker.start ();
   }
 
 private:
@@ -46,64 +42,33 @@ public:
     return m_worker;
   }
 
-  void incReferenceCount ()
-  {
-    m_refs.addref ();
-  }
-
-  void decReferenceCount ()
-  {
-    if (m_refs.release ())
-    {
-      bool destroy;
-
-      {
-        LockType::ScopedLockType lock (*s_mutex);
-      
-        if (m_refs.is_signaled ())
-        {
-          destroy = false;
-        }
-        else
-        {
-          destroy = true;
-          s_instance = 0;
-        }
-      }
-
-      if (destroy)
-        delete this;
-    }
-  }
-
   void Delete (SharedObject* sharedObject)
   {
     m_worker.call (&Deleter::doDelete, sharedObject);
   }
 
-  static Ptr getInstance ()
+  static Deleter& getInstance ()
   {
-    Ptr instance;
-
-    instance = s_instance;
-
-    if (instance == nullptr)
+    if (s_instance == nullptr)
     {
       LockType::ScopedLockType lock (*s_mutex);
 
-      instance = s_instance;
-
-      if (instance == nullptr)
+      if (s_instance == nullptr)
       {
         s_instance = new Deleter;
-
-        instance = s_instance;
-
-        instance->construct ();
       }
     }
 
-    return instance;
+    return *s_instance;
+  }
+
+  static void performAtExit ()
+  {
+    if (s_instance != nullptr)
+    {
+      delete s_instance;
+      s_instance = nullptr;
+    }
   }
 
 private:
@@ -119,24 +84,14 @@ Static::Storage <SpinLock, SharedObject::Deleter> SharedObject::Deleter::s_mutex
 
 //------------------------------------------------------------------------------
 
-SharedObject::SharedObject ()
-{
-  //Deleter::getInstance()->incReferenceCount();
-}
-
-SharedObject::~SharedObject ()
-{
-  vfassert (m_refs.is_reset ());
-  //Deleter::getInstance()->decReferenceCount();
-}
-
 void SharedObject::destroySharedObject ()
 {
-#if 0
-  Deleter::getInstance()->Delete (this);
-#else
-  delete this;
-#endif
+  Deleter::getInstance().Delete (this);
+}
+
+void SharedObject::performLibraryAtExit ()
+{
+  Deleter::performAtExit ();
 }
 
 END_VF_NAMESPACE

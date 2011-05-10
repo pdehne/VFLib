@@ -5,6 +5,7 @@
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
 #define __VF_SHAREDSINGLETON_VFHEADER__
 
+#include "vf/vf_PerformedAtExit.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_SpinLock.h"
 #include "vf/vf_Static.h"
@@ -20,31 +21,8 @@
 
 //------------------------------------------------------------------------------
 
-// Common base class is used to track the list of singletons
-// that have persistent references.
-//
-class SharedSingletonBase : NonCopyable
-{
-protected:
-  void addPersistentReference ();
-
-private:
-  virtual void removePersistentReference () = 0;
-
-private:
-  // This tracks all persistent references and releases them together at exit.
-  // After the references are released, leak checking is performed. At that
-  // point, there should be no singletons left.
-  //
-  class PersistentReferences;
-
-  SharedSingletonBase* m_next;
-};
-
-//------------------------------------------------------------------------------
-
 template <class Object>
-class SharedSingleton : private SharedSingletonBase
+class SharedSingleton : private PerformedAtExit
 {
 protected:
   enum Lifetime
@@ -65,14 +43,14 @@ protected:
   };
 
   explicit SharedSingleton (Lifetime const lifetime)
-    : m_lifetime (lifetime)
+    : PerformedAtExit (lifetime == persistAfterCreation)
+    , m_lifetime (lifetime)
   {
     vfassert (s_instance == nullptr);
 
     if (m_lifetime == persistAfterCreation)
     {
       incReferenceCount ();
-      addPersistentReference ();
     }
     else if (m_lifetime == createOnDemandOnce && *s_created)
     {
@@ -133,7 +111,7 @@ public:
   }
 
 private:
-  void removePersistentReference ()
+  void performAtExit ()
   {
     decReferenceCount ();
   }

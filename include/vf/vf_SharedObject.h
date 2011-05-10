@@ -19,9 +19,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject :
-  //LeakChecked <SharedObject>,
-  NonCopyable
+class SharedObject : NonCopyable
 {
 public:
   inline void incReferenceCount() noexcept
@@ -44,9 +42,9 @@ public:
   }
 
 protected:
-  SharedObject();
+  SharedObject() { }
 
-  virtual ~SharedObject();
+  virtual ~SharedObject() { }
 
   // default implementation performs the delete
   // on a separate, provided thread that cleans up
@@ -56,6 +54,11 @@ protected:
 
 protected:
   class Deleter;
+
+private:
+  friend class PerformedAtExit;
+
+  static void performLibraryAtExit ();
 
 private:
   Atomic::Counter m_refs;

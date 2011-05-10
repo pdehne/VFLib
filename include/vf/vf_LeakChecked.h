@@ -17,9 +17,6 @@
 
 class LeakCheckedBase
 {
-public:
-  static void detectLeaks ();
-
 protected:
   class CounterBase
   {
@@ -36,6 +33,11 @@ protected:
 
     CounterBase* m_next;
   };
+
+private:
+  friend class PerformedAtExit;
+
+  static void performLibraryAtExit ();
 };
 
 //------------------------------------------------------------------------------

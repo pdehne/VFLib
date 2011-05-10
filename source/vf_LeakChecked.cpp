@@ -70,7 +70,7 @@ void LeakCheckedBase::CounterBase::detectLeaks()
 
 //------------------------------------------------------------------------------
 
-void LeakCheckedBase::detectLeaks ()
+void LeakCheckedBase::performLibraryAtExit ()
 {
   CounterBase::detectLeaks ();
 }
