@@ -129,7 +129,7 @@ class LeakCheckedBase
 private:
   friend class PerformedAtExit;
 
-  static void performLibraryAtExit ();
+  static void performLibraryAtExit () { }
 };
 
 template <class Object>
