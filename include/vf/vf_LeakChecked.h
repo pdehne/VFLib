@@ -124,9 +124,12 @@ private:
 
 #else
 
-struct LeakCheckedBase
+class LeakCheckedBase
 {
-  static inline void detectLeaks () { }
+private:
+  friend class PerformedAtExit;
+
+  static void performLibraryAtExit ();
 };
 
 template <class Object>
