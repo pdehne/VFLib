@@ -17,7 +17,7 @@
 //    constructed with a default constructor).
 //    
 
-template <typename Signature, int Bytes = 64>
+template <typename Signature, int Bytes = 128>
 class Function;
 
 //

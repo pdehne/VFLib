@@ -28,12 +28,12 @@ inline void Hash3_32 ( const void * key, int len, uint32 seed, void * out )
   Hash3_x64_32 (key, len, seed, out);
 }
 
-inline void Hash3_64 ( const void * key, int len, uint32 seed, void * out );
+inline void Hash3_64 ( const void * key, int len, uint32 seed, void * out )
 {
   Hash3_x64_64 (key, len, seed, out);
 }
 
-inline void Hash3_128 ( const void * key, int len, uint32 seed, void * out );
+inline void Hash3_128 ( const void * key, int len, uint32 seed, void * out )
 {
   Hash3_x64_64 (key, len, seed, out);
 }
