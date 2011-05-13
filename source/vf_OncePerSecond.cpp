@@ -36,7 +36,7 @@ private:
 
   void run ()
   {
-    VF_JUCE::Thread::setCurrentThreadName (threadName);
+    // VF_JUCE::Thread::setCurrentThreadName (threadName);
 
     try
     {
