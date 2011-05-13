@@ -289,49 +289,49 @@ public:
 
   template <class Mf>
   inline void call (Mf mf)
-  { callf (bind (mf, _1)); }
+  { callf (boost::bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   inline void call (Mf mf,   const T1& t1)
-  { callf (bind (mf, _1, t1)); }
+  { callf (boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void call (Mf mf,   const T1& t1, const T2& t2)
-  { callf (bind (mf, _1, t1, t2)); }
+  { callf (boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3)
-  { callf (bind (mf, _1, t1, t2, t3)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   inline void call (Mf mf,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { callf (bind (mf, _1, t1, t2, t3, t4)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   inline void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { callf (bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   inline void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   inline void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   inline void call (Mf mf,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { callf (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { callf (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   //
   // Queue a call without synchronizing
@@ -339,160 +339,160 @@ public:
 
   template <class Mf>
   inline void queue (Mf mf)
-  { queuef (bind (mf, _1)); }
+  { queuef (boost::bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   inline void queue (Mf mf,  const T1& t1)
-  { queuef (bind (mf, _1, t1)); }
+  { queuef (boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void queue (Mf mf,  const T1& t1, const T2& t2)
-  { queuef (bind (mf, _1, t1, t2)); }
+  { queuef (boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3)
-  { queuef (bind (mf, _1, t1, t2, t3)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   inline void queue (Mf mf,  const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queuef (bind (mf, _1, t1, t2, t3, t4)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queuef (bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queuef (bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   // These are for targeting individual listeners.
   // Use carefully!
 
   template <class Mf>
   inline void call1 (ListenerClass* const listener, Mf mf)
-  { call1f (listener, bind (mf, _1)); }
+  { call1f (listener, boost::bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1)
-  { call1f (listener, bind (mf, _1, t1)); }
+  { call1f (listener, boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2)
-  { call1f (listener, bind (mf, _1, t1, t2)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3)
-  { call1f (listener, bind (mf, _1, t1, t2, t3)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { call1f (listener, bind (mf, _1, t1, t2, t3, t4)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   inline void call1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { call1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { call1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   template <class Mf>
   inline void queue1 (ListenerClass* const listener, Mf mf)
-  { queue1f (listener, bind (mf, _1)); }
+  { queue1f (listener, boost::bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1)
-  { queue1f (listener, bind (mf, _1, t1)); }
+  { queue1f (listener, boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2)
-  { queue1f (listener, bind (mf, _1, t1, t2)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   //
   // update()
@@ -504,49 +504,49 @@ public:
 
   template <class Mf>
   inline void update (Mf mf)
-  { updatef (mf, bind (mf, _1)); }
+  { updatef (mf, boost::bind (mf, _1)); }
 
   template <class Mf, typename  T1>
   inline void update (Mf mf,  const T1& t1)
-  { updatef (mf, bind (mf, _1, t1)); }
+  { updatef (mf, boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void update (Mf mf, const T1& t1, const T2& t2)
-  { updatef (mf, bind (mf, _1, t1, t2)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3)
-  { updatef (mf, bind (mf, _1, t1, t2, t3)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   inline void update (Mf mf, const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { updatef (mf, bind (mf, _1, t1, t2, t3, t4)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3, t4)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3, t4, t5)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { updatef (mf, bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { updatef (mf, boost::bind (mf, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 };
 
 #endif

@@ -24,7 +24,7 @@ private:
     : SharedSingleton (persistAfterCreation)
     , m_thread (threadName)
   {
-    m_thread.start (bind (&TimerSingleton::run, this));
+    m_thread.start (boost::bind (&TimerSingleton::run, this));
   }
 
   ~TimerSingleton ()

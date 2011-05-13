@@ -100,97 +100,97 @@ public:
 
   template <class Fn>
   void queue (Fn f)
-  { queuef (bind (f)); }
+  { queuef (boost::bind (f)); }
 
   template <class Fn, typename  T1>
   void queue (Fn f,   const T1& t1)
-  { queuef (bind (f, t1)); }
+  { queuef (boost::bind (f, t1)); }
 
   template <class Fn, typename  T1, typename  T2>
   void queue (Fn f,   const T1& t1, const T2& t2)
-  { queuef (bind (f, t1, t2)); }
+  { queuef (boost::bind (f, t1, t2)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3)
-  { queuef (bind (f, t1, t2, t3)); }
+  { queuef (boost::bind (f, t1, t2, t3)); }
 
   template <class Fn, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void queue (Fn f,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { queuef (bind (f, t1, t2, t3, t4)); }
+  { queuef (boost::bind (f, t1, t2, t3, t4)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { queuef (bind (f, t1, t2, t3, t4, t5)); }
+  { queuef (boost::bind (f, t1, t2, t3, t4, t5)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { queuef (bind (f, t1, t2, t3, t4, t5, t6)); }
+  { queuef (boost::bind (f, t1, t2, t3, t4, t5, t6)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7)); }
+  { queuef (boost::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queuef (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { queuef (boost::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
   // Sugar for callf() with automatic binding.
 
   template <class Fn>
   void call (Fn f)
-  { callf (bind (f)); }
+  { callf (boost::bind (f)); }
 
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
-  { callf (bind (f, t1)); }
+  { callf (boost::bind (f, t1)); }
 
   template <class Fn, typename  T1, typename  T2>
   void call (Fn f,    const T1& t1, const T2& t2)
-  { callf (bind (f, t1, t2)); }
+  { callf (boost::bind (f, t1, t2)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3)
-  { callf (bind (f, t1, t2, t3)); }
+  { callf (boost::bind (f, t1, t2, t3)); }
 
   template <class Fn, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void call (Fn f,    const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
-  { callf (bind (f, t1, t2, t3, t4)); }
+  { callf (boost::bind (f, t1, t2, t3, t4)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
-  { callf (bind (f, t1, t2, t3, t4, t5)); }
+  { callf (boost::bind (f, t1, t2, t3, t4, t5)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
-  { callf (bind (f, t1, t2, t3, t4, t5, t6)); }
+  { callf (boost::bind (f, t1, t2, t3, t4, t5, t6)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
-  { callf (bind (f, t1, t2, t3, t4, t5, t6, t7)); }
+  { callf (boost::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { callf (bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { callf (boost::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 protected:
   // Used by GuiWorker to synchronize calls

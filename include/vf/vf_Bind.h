@@ -5,21 +5,6 @@
 #ifndef __VF_BIND_VFHEADER__
 #define __VF_BIND_VFHEADER__
 
-// Boost
-using ::boost::bind;
-using ::boost::ref;
-using ::boost::cref;
-//using   ::boost::protect;
-using ::_1;
-using ::_2;
-using ::_3;
-using ::_4;
-using ::_5;
-using ::_6;
-using ::_7;
-using ::_8;
-using ::_9; // boost limit as of 1.45
-
 //
 // Bind
 //
