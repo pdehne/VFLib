@@ -81,7 +81,7 @@ void checkHeap ()
 
 const String getFileNameFromPath (const char* sourceFileName)
 {
-  return VF_JUCE::File (sourceFileName).getFileName();
+  return VF_JUCE::File::createFileWithoutCheckingPath (sourceFileName).getFileName();
 }
 
 // Returns a String with double quotes escaped
