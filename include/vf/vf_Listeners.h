@@ -343,15 +343,15 @@ public:
 
   template <class Mf, typename  T1>
   inline void queue (Mf mf,  const T1& t1)
-  { queuef (bind (mf, _1, t1)); }
+  { queuef (boost::bind (mf, _1, t1)); }
 
   template <class Mf, typename  T1, typename  T2>
   inline void queue (Mf mf,  const T1& t1, const T2& t2)
-  { queuef (bind (mf, _1, t1, t2)); }
+  { queuef (boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3)
-  { queuef (bind (mf, _1, t1, t2, t3)); }
+  { queuef (boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
@@ -452,12 +452,12 @@ public:
   template <class Mf, typename  T1, typename  T2>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2)
-  { queue1f (listener, bind (mf, _1, t1, t2)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2)); }
 
   template <class Mf, typename  T1, typename  T2, typename  T3>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1, const T2& t2, const T3& t3)
-  { queue1f (listener, bind (mf, _1, t1, t2, t3)); }
+  { queue1f (listener, boost::bind (mf, _1, t1, t2, t3)); }
 
   template <class Mf, typename  T1, typename  T2,
                       typename  T3, typename  T4>
