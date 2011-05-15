@@ -51,7 +51,7 @@ protected:
     if (getLeakCheckedCounter().increment () == 0)
     {
       DBG ("[LOGIC] " << getLeakCheckedName ());
-      vf::Throw (Error().fail (__FILE__, __LINE__));
+      Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 
@@ -60,7 +60,7 @@ protected:
     if (getLeakCheckedCounter().increment() == 0)
     {
       DBG ("[LOGIC] " << getLeakCheckedName ());
-      vf::Throw (Error().fail (__FILE__, __LINE__));
+      Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 
@@ -69,7 +69,7 @@ protected:
     if (getLeakCheckedCounter().decrement () < 0)
     {
       DBG ("[LOGIC] " << getLeakCheckedName ());
-      vf::Throw (Error().fail (__FILE__, __LINE__));
+      Throw (Error().fail (__FILE__, __LINE__));
     }
   }
 

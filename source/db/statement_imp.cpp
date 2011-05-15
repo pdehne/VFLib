@@ -224,7 +224,7 @@ void statement_imp::do_intos()
 
 void statement_imp::do_uses()
 {
-  vf::Error error = detail::sqliteError(__FILE__, __LINE__,
+  Error error = detail::sqliteError(__FILE__, __LINE__,
     sqlite3_clear_bindings (m_stmt));
  
  if (error)

@@ -8,7 +8,7 @@
 #include "vf/vf_DragAndDropData.h"
 
 // Puts a front-end on the juce DragAndDropTarget to make it work with
-// vf::DragAndDropData.
+// DragAndDropData.
 //
 
 class DragAndDropTarget : public VF_JUCE::DragAndDropTarget

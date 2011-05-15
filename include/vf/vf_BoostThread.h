@@ -10,7 +10,7 @@
 #include "vf/vf_ThreadBase.h"
 
 //
-// Implementation of vf::Thread using Boost
+// Implementation of Thread using Boost
 //
 
 class BoostThread : public ThreadBase

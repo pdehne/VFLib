@@ -54,7 +54,7 @@ protected:
     }
     else if (m_lifetime == createOnDemandOnce && *s_created)
     {
-      vf::Throw (Error().fail (__FILE__, __LINE__));
+      Throw (Error().fail (__FILE__, __LINE__));
     }
 
     *s_created = true;

@@ -15,7 +15,7 @@ BEGIN_VF_NAMESPACE
 
 namespace db {
 
-class session::Sqlite3 : public vf::SharedSingleton <Sqlite3>
+class session::Sqlite3 : public SharedSingleton <Sqlite3>
 {
 private:
   friend class SharedSingleton <Sqlite3>;

@@ -8,7 +8,7 @@
 
 namespace db {
 
-class transaction : vf::NonCopyable
+class transaction : NonCopyable
 {
 public:
   explicit transaction (session& s);

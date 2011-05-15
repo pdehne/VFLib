@@ -11,7 +11,7 @@
 // Class derived from OncePerSecond have their override
 // called once per second
 //
-class OncePerSecond : vf::NonCopyable
+class OncePerSecond : NonCopyable
 {
 public:
   OncePerSecond ();

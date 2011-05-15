@@ -14,7 +14,7 @@ namespace db {
 namespace detail {
 
 // statement implementation
-class statement_imp : vf::NonCopyable
+class statement_imp : NonCopyable
 {
 public:
   explicit statement_imp (session& s);

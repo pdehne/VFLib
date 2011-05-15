@@ -64,8 +64,11 @@ template <> struct VfStaticAssert <true>
 // Stuff here is available without having to include it directly
 #include "vf/vf_Debug.h"
 #include "vf/vf_Error.h"
+#include "vf/vf_LockFreeDelay.h"
+#include "vf/vf_LeakChecked.h"
 #include "vf/vf_NonCopyable.h"
 #include "vf/vf_SafeBool.h"
+#include "vf/vf_Static.h"
 #include "vf/vf_String.h"
 #include "vf/vf_Throw.h"
 

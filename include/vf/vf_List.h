@@ -40,7 +40,7 @@ template <class Elem,
           class Features = detail::List_all_features>
 class List
   : public Features
-  , vf::NonCopyable
+  , NonCopyable
 {
 public:
   class Node : NonCopyable

@@ -42,7 +42,7 @@ inline T const& as(void const* v)
   T const& val = *static_cast <T const*> (v);
 
   if (val > T (std::numeric_limits<L>::max()))
-    Throw (vf::Error().fail (__FILE__, __LINE__));
+    Throw (Error().fail (__FILE__, __LINE__));
 
   return val;
 }

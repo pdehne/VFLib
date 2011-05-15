@@ -35,7 +35,7 @@ private:
   }
 
 public:
-  typedef vf::SharedObjectPtr <Deleter> Ptr;
+  typedef SharedObjectPtr <Deleter> Ptr;
 
   Worker& getWorker ()
   {

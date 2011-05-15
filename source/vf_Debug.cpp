@@ -4,10 +4,6 @@
 
 #include "vf/vf_StandardHeader.h"
 
-//#ifdef _MSC_VER
-//#include <windows.h>
-//#endif
-
 #if JUCE_MSVC && _DEBUG
 #include <crtdbg.h>
 #endif

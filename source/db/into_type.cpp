@@ -51,7 +51,7 @@ void standard_into_type::do_into()
   {
     // null encountered with no indicator
     if (!m_ind)
-      Throw (vf::Error().fail (__FILE__, __LINE__));
+      Throw (Error().fail (__FILE__, __LINE__));
 
     *m_ind = i_null;
   }
@@ -88,7 +88,7 @@ void standard_into_type::do_into()
           break;
 
         default:
-          Throw (vf::Error().fail (__FILE__, __LINE__));
+          Throw (Error().fail (__FILE__, __LINE__));
         }
       }
       break;
@@ -112,7 +112,7 @@ void standard_into_type::do_into()
           break;
 
         default:
-          Throw (vf::Error().fail (__FILE__, __LINE__));
+          Throw (Error().fail (__FILE__, __LINE__));
         };
       }
       break;

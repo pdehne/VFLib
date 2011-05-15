@@ -195,4 +195,10 @@
 #include "vf/vf_db.h" // db uses both some Juce and Boost
 #endif
 
+// ui
+
+#ifndef __VF_UI_VFHEADER__
+#include "vf/vf_ui.h"
+#endif
+
 #endif

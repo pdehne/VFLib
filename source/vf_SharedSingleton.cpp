@@ -9,3 +9,4 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_SharedSingleton.h"
 
 END_VF_NAMESPACE
+
