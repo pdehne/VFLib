@@ -149,7 +149,7 @@
 #include "vf/vf_SharedObject.h"
 #endif
 
-#ifndef __VF_SHAREDOBJECTPtr_VFHEADER__
+#ifndef __VF_SHAREDOBJECTPTR_VFHEADER__
 #include "vf/vf_SharedObjectPtr.h"
 #endif
 

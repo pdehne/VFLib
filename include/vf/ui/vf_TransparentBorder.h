@@ -46,6 +46,7 @@ private:
   {
   public:
     OpaqueComponent ();
+    ~OpaqueComponent ();
     void paint (Graphics& g);
   };
 

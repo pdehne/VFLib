@@ -8,6 +8,8 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/ui/vf_TransparentBorder.h"
 
+#define SHOW_BORDER 0
+
 namespace ui {
 
 const BorderSize <int> TransparentBorder::fullyOpaque =
@@ -24,8 +26,16 @@ TransparentBorder::OpaqueComponent::OpaqueComponent ()
   setPaintingIsUnclipped (true);
 }
 
+TransparentBorder::OpaqueComponent::~OpaqueComponent ()
+{
+}
+
 void TransparentBorder::OpaqueComponent::paint (Graphics& g)
 {
+#if SHOW_BORDER
+  g.setColour (Colours::red);
+  g.fillRect (getLocalBounds ());
+#endif
 }
 
 //------------------------------------------------------------------------------
@@ -98,7 +108,11 @@ void TransparentBorder::updateBounds()
 {
   jassert (isAttached());
 
+#if SHOW_BORDER
+  m_opaque->setBounds (m_component->getBounds());
+#else
   m_opaque->setBounds (m_borderSize.subtractedFrom (m_component->getBounds()));
+#endif
 }
 
 void TransparentBorder::updateZOrder ()
@@ -195,7 +209,8 @@ void TransparentBorder::componentBeingDeleted (Component& component)
       m_parent = 0;
     }
 
-    m_opaque = 0;
+    // causes a crash
+    //m_opaque = 0;
   }
 }
 
