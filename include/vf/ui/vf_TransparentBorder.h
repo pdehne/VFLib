@@ -2,10 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_UI_TRANSPARENTBORDER_VFHEADER__
-#define __VF_UI_TRANSPARENTBORDER_VFHEADER__
-
-namespace ui {
+#ifndef __VF_TRANSPARENTBORDER_VFHEADER__
+#define __VF_TRANSPARENTBORDER_VFHEADER__
 
 // Allows a Component to draw with setOpaque in a rectangular
 // subsection of its client area, with the border being transparent.
@@ -55,7 +53,5 @@ private:
   ScopedPointer <OpaqueComponent> m_opaque;
   BorderSize <int> m_borderSize;
 };
-
-}
 
 #endif

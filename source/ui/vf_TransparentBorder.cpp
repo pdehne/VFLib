@@ -8,9 +8,8 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/ui/vf_TransparentBorder.h"
 
-#define SHOW_BORDER 0
-
-namespace ui {
+#define SHOW_BORDER 1
+#define DISABLE_BORDER 1
 
 const BorderSize <int> TransparentBorder::fullyOpaque =
   BorderSize <int> (0, 0, 0, 0);
@@ -61,6 +60,10 @@ TransparentBorder::~TransparentBorder()
 void TransparentBorder::setComponent (Component *component,
                                       BorderSize <int> borderSize)
 {
+#if DISABLE_BORDER
+  borderSize = fullyTransparent;
+#endif
+
   // can only call this once
   jassert (m_component == 0 && component != 0);
 
@@ -212,8 +215,6 @@ void TransparentBorder::componentBeingDeleted (Component& component)
     // causes a crash
     //m_opaque = 0;
   }
-}
-
 }
 
 END_VF_NAMESPACE
