@@ -40,12 +40,12 @@ void Model::Base::destroySharedObject ()
   delete this;
 }
 
-void Base::addListener (Listener* const listener)
+void Base::addListener (ListenerBase* const listener)
 {
   m_listeners.add (listener);
 }
 
-void Base::removeListener (Listener* const listener)
+void Base::removeListener (ListenerBase* const listener)
 {
   m_listeners.remove (listener);
 }
@@ -85,13 +85,17 @@ void Model::Base::updateAllViews ()
   }
 }
 
+void Model::Base::modelChanged ()
+{
+  m_listeners.call (&Listener::onModelChanged, (Model::Base*)this);
+}
+
 void Model::Base::setEnabled (bool enabled)
 {
   if (m_enabled != enabled)
   {
     m_enabled = enabled;
 
-    m_listeners.call (&Listener::onModelChanged, (Model::Base*)this);
     m_listeners.call (&Listener::onModelEnablement, this);
   }
 }

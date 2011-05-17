@@ -9,8 +9,8 @@ namespace Ui {
 
 // A control is a Component that combines a Facade with an optional Model
 // that displays the Model and allows the user to interact. Derived classes
-// provide the actual Component, this one just places a non-drawing opaque
-// Component underneath if the Facade requests a transparent border.
+// provide the actual Component
+//
 
 namespace Control {
 
@@ -22,8 +22,10 @@ public:
 
 //------------------------------------------------------------------------------
 
-class Base : public View
-           , NonCopyable
+class Base
+  : public View
+  , public Model::Base::Listener
+  , NonCopyable
 {
 public:
   Base (Component* component,
@@ -35,10 +37,10 @@ public:
   Facade::Base& getFacade ();
   Component& getComponent ();
 
-  //bool isEnabled (); //??
-
 protected:
   void updateView ();
+
+  void onModelEnablement (Model::Base* model);
 
 private:
   Component& m_component;

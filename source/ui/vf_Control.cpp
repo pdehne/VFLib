@@ -21,10 +21,12 @@ Base::Base (Component* component,
 {
   m_facade->attach (model, this);
   m_model->addView (this);
+  m_model->addListener (this);
 }
 
 Base::~Base ()
 {
+  m_model->removeListener (this);
   m_model->removeView (this);
 }
 
@@ -43,17 +45,14 @@ Component& Base::getComponent ()
   return m_component;
 }
 
-/*
-bool Base::isEnabled ()
-{
-  return getModel().isEnabled() &&
-         getComponent().isEnabled();
-}
-*/
-
 void Base::updateView ()
 {
   m_component.repaint ();
+}
+
+void Base::onModelEnablement (Model::Base* model)
+{
+  m_component.setEnabled (model->isEnabled ());
 }
 
 }

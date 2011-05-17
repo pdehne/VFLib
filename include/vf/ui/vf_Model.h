@@ -98,50 +98,68 @@ private:
   Array <ListenerClass*> m_array;
 };
 
+//------------------------------------------------------------------------------
+
+class ListenerBase
+{
+public:
+  virtual ~ListenerBase () { }
+};
+
 // Model::Base abstracts a domain-specific object.
 //
 class Base : public SharedObject
 {
 public:
-  class Listener
+  class Listener : public ListenerBase
   {
   public:
-    virtual void onModelChanged (Base* model) { }
-    virtual void onModelEnablement (Base* model) { }
+    // Sent when any aspect of the model changes.
+    //
+    virtual void onModelChanged (Model::Base* model) { }
+
+    // Sent when the enablement of the model changes.
+    //
+    virtual void onModelEnablement (Model::Base* model) { }
   };
 
 public:
   Base();
   virtual ~Base();
+  void destroySharedObject ();
 
-  void addListener (Listener* const listener);
-  void removeListener (Listener* const listener);
+  void addListener (ListenerBase* const listener);
+  void removeListener (ListenerBase* const listener);
 
-  bool isEnabled();
-  
+  bool isEnabled ();
+
+
+
   // LEGACY
   virtual const String getName (); // default: empty
-
-  // LEGACY
   void addView (Control::View* view);
   void removeView (Control::View* view);
-
-  // LEGACY
-protected:
-  /* @internal */
   void updateAllViews ();
+  Array <Control::View*> m_views;
+
+
+
+protected:
+  Listeners <Listener> const& getListeners();
+
+  // Call this to tell listeners that the model changed.
+  // The default Facade behavior is to invalide the entire Component.
+  //
+  void modelChanged ();
 
 public: // public because of DeckGridLockedEnabler
   void setEnabled (bool enabled);
-protected:
-  void destroySharedObject ();
 
 protected:
-  Listeners <Listener> m_listeners;
+  Listeners <ListenerBase> m_listeners;
 
 private:
   bool m_enabled;
-  Array <Control::View*> m_views;
 };
 
 }

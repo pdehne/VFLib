@@ -28,6 +28,10 @@ Base::Base()
 
 Base::~Base()
 {
+  if (m_model != nullptr)
+  {
+    m_model->removeListener (this);
+  }
 }
 
 Model::Base& Base::getModel ()
@@ -50,6 +54,12 @@ Component& Base::getComponent ()
 Rectangle <int> Base::getLocalBounds ()
 {
   return getComponent().getLocalBounds();
+}
+
+void Base::setAlpha (float alpha)
+{
+  getComponent().setAlpha (alpha);
+  m_transparentBorder.setAlpha (alpha);
 }
 
 void Base::paintFacade (Graphics& g)
@@ -97,6 +107,8 @@ void Base::attach (Model::Base* model, Control::Base* control)
   m_model = model;
   m_control = control;
 
+  m_model->addListener (this);
+
   onAttach ();
 }
 
@@ -105,6 +117,13 @@ void Base::onAttach ()
   m_transparentBorder.setComponent (&getComponent(),
                                     getTransparency());
 }
+
+void Base::onModelChanged (Model::Base* model)
+{
+  getComponent().repaint();
+}
+
+//------------------------------------------------------------------------------
 
 Path Base::createFittedRoundRect (const Rectangle<int>& bounds,
                                       float frameThickness,
@@ -122,6 +141,7 @@ Path Base::createFittedRoundRect (const Rectangle<int>& bounds,
 
 //------------------------------------------------------------------------------
 
+#if 0
 Empty::Empty()
 {
 }
@@ -135,6 +155,7 @@ void Empty::paint (Graphics& g, const Rectangle<int>& bounds)
 {
   // nothing
 }
+#endif
 
 }
 

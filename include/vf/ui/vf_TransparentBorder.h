@@ -27,6 +27,8 @@ public:
   void setComponent (Component *component,
                      BorderSize <int> borderSize = BorderSize<int>());
 
+  void setAlpha (float alpha);
+
 private:
   bool isAttached ();
   void updateBounds ();
@@ -52,6 +54,7 @@ private:
   Component* m_parent;
   ScopedPointer <OpaqueComponent> m_opaque;
   BorderSize <int> m_borderSize;
+  bool m_visible;
 };
 
 #endif

@@ -24,6 +24,7 @@ namespace Facade {
 
 class Base
   : public ConnectedEdges
+  , public Model::Base::Listener
   , LeakChecked <Base>
   , NonCopyable
 {
@@ -40,6 +41,8 @@ public:
   Control::Base& getControl ();
   Component& getComponent ();
   Rectangle <int> getLocalBounds ();
+
+  void setAlpha (float alpha);
 
   // Controls call this.
   // Default behavior is to just call paint().
@@ -67,9 +70,14 @@ public:
                                      float cornerRadius);
 
 protected:
+
+protected:
   friend class Control::Base;
+  
   void attach (Model::Base* model, Control::Base* control);
+  
   virtual void onAttach ();
+  virtual void onModelChanged (Model::Base* model);
 
 private:
   SharedObjectPtr <Model::Base> m_model;
@@ -80,6 +88,7 @@ private:
 
 //------------------------------------------------------------------------------
 
+#if 0
 // An empty Facade for a container-type Component. Fully transparent.
 class Empty : public Base
 {
@@ -89,6 +98,7 @@ public:
   BorderSize<int> getTransparency();
   void paint (Graphics& g, const Rectangle<int>& bounds);
 };
+#endif
 
 }
 

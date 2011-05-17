@@ -8,8 +8,8 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/ui/vf_TransparentBorder.h"
 
-#define SHOW_BORDER 1
-#define DISABLE_BORDER 1
+#define SHOW_BORDER 0
+#define DISABLE_BORDER 0
 
 const BorderSize <int> TransparentBorder::fullyOpaque =
   BorderSize <int> (0, 0, 0, 0);
@@ -40,8 +40,9 @@ void TransparentBorder::OpaqueComponent::paint (Graphics& g)
 //------------------------------------------------------------------------------
 
 TransparentBorder::TransparentBorder()
-  : m_component (0)
-  , m_parent (0)
+  : m_component (nullptr)
+  , m_parent (nullptr)
+  , m_visible (true)
 {
 }
 
@@ -102,6 +103,16 @@ void TransparentBorder::setComponent (Component *component,
   m_borderSize = borderSize;
 }
 
+void TransparentBorder::setAlpha (float alpha)
+{
+  if (m_component != nullptr &&
+      m_opaque != nullptr)
+  {
+    m_visible = alpha == 1.f;
+    m_opaque->setVisible (m_visible);
+  }
+}
+
 bool TransparentBorder::isAttached ()
 {
   return m_component && m_opaque && !m_borderSize.isEmpty();
@@ -148,7 +159,7 @@ void TransparentBorder::componentVisibilityChanged (Component& component)
   {
     jassert (isAttached());
 
-    m_opaque->setVisible (m_component->isVisible ());
+    m_opaque->setVisible (m_visible && m_component->isVisible ());
   }
 }
 void TransparentBorder::componentChildrenChanged (Component& component)
