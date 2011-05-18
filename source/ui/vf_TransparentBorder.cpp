@@ -9,7 +9,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/ui/vf_TransparentBorder.h"
 
 #define SHOW_BORDER 0
-#define DISABLE_BORDER 1
+#define DISABLE_BORDER 0
 
 const BorderSize <int> TransparentBorder::fullyOpaque =
   BorderSize <int> (0, 0, 0, 0);
@@ -105,11 +105,17 @@ void TransparentBorder::setComponent (Component *component,
 
 void TransparentBorder::setAlpha (float alpha)
 {
-  if (m_component != nullptr &&
-      m_opaque != nullptr)
+  if (m_component != nullptr)
   {
-    m_visible = alpha == 1.f;
-    m_opaque->setVisible (m_visible);
+    if (m_opaque != nullptr)
+    {
+      m_visible = alpha == 1.f;
+      m_opaque->setVisible (m_visible);
+    }
+    else
+    {
+      m_component->setOpaque (alpha == 1);
+    }
   }
 }
 
