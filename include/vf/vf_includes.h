@@ -201,4 +201,10 @@
 #include "vf/vf_ui.h"
 #endif
 
+// audio
+
+#ifndef __VF_NOISEAUDIOSOURCE_VFHEADER__
+#include "vf/audio/vf_NoiseAudioSource.h"
+#endif
+
 #endif
