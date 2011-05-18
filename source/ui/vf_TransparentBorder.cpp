@@ -9,7 +9,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/ui/vf_TransparentBorder.h"
 
 #define SHOW_BORDER 0
-#define DISABLE_BORDER 0
+#define DISABLE_BORDER 1
 
 const BorderSize <int> TransparentBorder::fullyOpaque =
   BorderSize <int> (0, 0, 0, 0);
