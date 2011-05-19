@@ -5,7 +5,7 @@
 #ifndef __VF_DRAGANDDROPTARGET_VFHEADER__
 #define __VF_DRAGANDDROPTARGET_VFHEADER__
 
-#include "vf/vf_DragAndDropData.h"
+#include "vf/ui/vf_DragAndDropData.h"
 
 // Puts a front-end on the juce DragAndDropTarget to make it work with
 // DragAndDropData.

@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_DragAndDropTarget.h"
+#include "vf/ui/vf_DragAndDropTarget.h"
 
 bool DragAndDropTarget::isInterestedInDragSource (const SourceDetails& dragSourceDetails)
 {

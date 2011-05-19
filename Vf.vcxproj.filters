@@ -2,1367 +2,1427 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="_include">
-      <UniqueIdentifier>{318cfe4d-58dd-49d0-99b0-dd2c33ffc884}</UniqueIdentifier>
+      <UniqueIdentifier>{73c2dfe4-b881-4e0c-bccb-1adebabde238}</UniqueIdentifier>
     </Filter>
     <Filter Include="containers">
-      <UniqueIdentifier>{8acdf3fe-55f3-4880-8d92-f3159790d585}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="diagnostic">
-      <UniqueIdentifier>{90bbb907-55fe-429a-8ce2-ee07b9707eab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="functional">
-      <UniqueIdentifier>{26990569-c01b-4504-b7c2-c6793da57302}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="math">
-      <UniqueIdentifier>{700fa8a4-7748-4436-96cd-14090b12c58a}</UniqueIdentifier>
+      <UniqueIdentifier>{4180ca86-d72e-4f45-b9a9-8699da41ab1a}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external">
-      <UniqueIdentifier>{54e57524-5068-4f79-94dd-875cc7bbff6b}</UniqueIdentifier>
+      <UniqueIdentifier>{227ae2a3-0ea4-4e60-98d2-a5df3ee34300}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\bzip2">
-      <UniqueIdentifier>{9fbd0fba-17c6-4256-94b7-16ed1a9f38b6}</UniqueIdentifier>
+      <UniqueIdentifier>{2674be2e-9d04-4ab4-a65e-56a9a01b8625}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\bzip2\source">
-      <UniqueIdentifier>{66ff085c-de50-45e5-a22a-911ef869713b}</UniqueIdentifier>
+      <UniqueIdentifier>{8edcb993-f358-4ba4-9e97-3de83bb0567a}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\sqlite">
-      <UniqueIdentifier>{827aad96-6f39-4c15-aeec-50e938f090aa}</UniqueIdentifier>
+      <UniqueIdentifier>{ca9340f1-2660-45f3-984a-66d1943db32e}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\sqlite\source">
-      <UniqueIdentifier>{af1359cf-e7d5-4a6e-bb2f-34d889d2cdeb}</UniqueIdentifier>
+      <UniqueIdentifier>{ac7a33cb-a1fb-4d89-acab-8ad5528e0474}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\zlib">
-      <UniqueIdentifier>{b302466b-2960-4e31-a806-4d6f63a9cd5c}</UniqueIdentifier>
+      <UniqueIdentifier>{5cfecc7b-d4f3-48c6-8fb8-3f9ffa773626}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\zlib\source">
-      <UniqueIdentifier>{9e6e5e31-f1de-4cdf-89ed-c779677e2cb7}</UniqueIdentifier>
+      <UniqueIdentifier>{e77e640c-8196-4242-bba2-c91e7aee6abb}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\zlib\source\headers">
-      <UniqueIdentifier>{437958e2-6c31-4d8a-8a96-83b6dec5a155}</UniqueIdentifier>
+      <UniqueIdentifier>{b93f4358-e1d6-46f9-a831-f88894739852}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\lua">
-      <UniqueIdentifier>{200ac470-4f08-40ab-9053-d6a6345cf389}</UniqueIdentifier>
+      <UniqueIdentifier>{653871a3-4b52-4034-a6bf-ecde6d8a4c32}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\lua\source">
-      <UniqueIdentifier>{257f41df-8ddf-4a72-882c-342c5b76b7d2}</UniqueIdentifier>
+      <UniqueIdentifier>{a0ba337f-6501-4f9a-9838-86055a736c24}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\lua\source\headers">
-      <UniqueIdentifier>{d692666c-58cc-49f6-8d13-fbc7c31f9284}</UniqueIdentifier>
+      <UniqueIdentifier>{940ecff3-4293-4dab-b5c1-bcce0c9281b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\luabridge">
-      <UniqueIdentifier>{c3a7500a-d0ab-485b-8d11-8047aa857b88}</UniqueIdentifier>
+      <UniqueIdentifier>{0f94a175-6c94-4f7f-8ac2-05af06e8c14a}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\luabridge\source">
-      <UniqueIdentifier>{0eefa33e-2ee2-4e4a-b3ed-0e647a6516a3}</UniqueIdentifier>
+      <UniqueIdentifier>{d01e6f8f-0199-4c75-a00b-4a18c1a17ff2}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\luabridge\impl">
-      <UniqueIdentifier>{60823609-11d1-4d0e-bd83-55afc66963a3}</UniqueIdentifier>
+      <UniqueIdentifier>{0867bf44-72b3-4487-98ac-e418f433367d}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\taglib">
-      <UniqueIdentifier>{8a7d4a16-6e2e-4cb8-bcc1-f8d6fb4c4609}</UniqueIdentifier>
+      <UniqueIdentifier>{3b44f663-9bd7-4f38-8a24-4fa82f10efdd}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\taglib\source">
-      <UniqueIdentifier>{c94175f9-02d8-4746-a2a3-1d8bdb4b91e3}</UniqueIdentifier>
+      <UniqueIdentifier>{b3476a7c-f604-40bf-96e5-8c8079147ed3}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\taglib\headers">
-      <UniqueIdentifier>{9b4f8a2c-74e5-4ec1-aa14-257402605431}</UniqueIdentifier>
+      <UniqueIdentifier>{20afbfb4-eb56-49c5-abf6-3c6f539a9022}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\taglib\headers\frames">
-      <UniqueIdentifier>{015ccd6e-282b-4f55-84a6-bb984df4b6b3}</UniqueIdentifier>
+      <UniqueIdentifier>{096b4953-8619-445b-a373-fbdc649e859d}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\asiosdk2">
-      <UniqueIdentifier>{d860a0f8-385b-48f0-8d2b-0ab16820e2b3}</UniqueIdentifier>
+      <UniqueIdentifier>{4a4b949c-9eb2-4b8a-9d03-e43ef76e28d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\asiosdk2\source">
-      <UniqueIdentifier>{2f85929e-e3bc-4672-8788-ce92cd34d6e0}</UniqueIdentifier>
+      <UniqueIdentifier>{05631688-d1ea-4068-ac82-b5925f10a39d}</UniqueIdentifier>
     </Filter>
     <Filter Include="_external\vstsdk2.4">
-      <UniqueIdentifier>{f867e8fe-cfa3-4fcb-b16d-88d8f5a29124}</UniqueIdentifier>
+      <UniqueIdentifier>{1b94bb6a-aff1-4224-9706-20315b723f98}</UniqueIdentifier>
     </Filter>
     <Filter Include="database">
-      <UniqueIdentifier>{977d933e-5b79-4409-ac6e-a9beb4734dbc}</UniqueIdentifier>
+      <UniqueIdentifier>{1d2e20a7-74db-4a2c-a5b3-06f37cfbfea4}</UniqueIdentifier>
     </Filter>
     <Filter Include="database\detail">
-      <UniqueIdentifier>{517aca77-e777-477b-a52c-24e7252a3e4a}</UniqueIdentifier>
+      <UniqueIdentifier>{fdab5d30-9667-4366-a20b-254c8a546fae}</UniqueIdentifier>
     </Filter>
     <Filter Include="database\include">
-      <UniqueIdentifier>{6aa9aea5-3768-4bb8-911f-d2c7fd9739d0}</UniqueIdentifier>
+      <UniqueIdentifier>{d46c67f5-db53-46c9-b053-a0216036dbfb}</UniqueIdentifier>
     </Filter>
     <Filter Include="database\source">
-      <UniqueIdentifier>{d8c617a0-c45f-4560-a6fc-b9340e51300e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lockfree">
-      <UniqueIdentifier>{305ce8de-5c94-41aa-8e3f-fc0a2fb64a85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="memory">
-      <UniqueIdentifier>{9bfa93a6-077c-4fe6-98b8-d70bc144f595}</UniqueIdentifier>
+      <UniqueIdentifier>{3c8b4ca2-2b71-497a-8700-67fda63ab1e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="__new">
-      <UniqueIdentifier>{9494e38d-666f-4e96-bd94-027ab60d4cc9}</UniqueIdentifier>
+      <UniqueIdentifier>{04e79c4e-001c-40b0-9a20-4200bb8f9b05}</UniqueIdentifier>
     </Filter>
     <Filter Include="_native">
-      <UniqueIdentifier>{014d9742-d0e6-4880-ad31-89d0d8f07812}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gui">
-      <UniqueIdentifier>{765f5fd1-e901-49b0-b2f9-bea590f6b66c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gui\graphics">
-      <UniqueIdentifier>{9e592752-6bc5-405f-bc74-816a74be81c6}</UniqueIdentifier>
+      <UniqueIdentifier>{bf5fa6b9-a5c9-45ad-afb3-5d75693cb32e}</UniqueIdentifier>
     </Filter>
     <Filter Include="audio">
-      <UniqueIdentifier>{0fa0302b-19c9-4804-8bd8-3a1e2cd8aec4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="threads">
-      <UniqueIdentifier>{d5bd3294-d002-46b6-8157-db00ce598fea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core">
-      <UniqueIdentifier>{d6c99a8f-25f5-43fb-bb35-e925e098c532}</UniqueIdentifier>
+      <UniqueIdentifier>{14a327bd-5e36-4900-b475-6d649e664f6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="_unfinished">
-      <UniqueIdentifier>{df0c3f49-e6a2-4baf-8278-8171fbc33c9d}</UniqueIdentifier>
+      <UniqueIdentifier>{70e52552-0701-48a7-a13f-6e75d5b49856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{62978029-550a-406e-810b-be51264f5c71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{a26fc6f8-8137-4d27-9c83-1872e6cd9889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\controls">
+      <UniqueIdentifier>{dfa9a34b-9b09-492b-b2f4-b4f21104078b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\utilities">
+      <UniqueIdentifier>{4542c8b8-5d89-4b63-9692-bb0f1f5ddacb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\diagnostic">
+      <UniqueIdentifier>{10e51756-0797-4b7a-9ed3-318e01d20e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\functional">
+      <UniqueIdentifier>{dfb887e4-7793-4464-8622-184aa6ca5de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\lockfree">
+      <UniqueIdentifier>{41e7adb7-fda7-4496-8f4a-efcf7cf0f9e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\math">
+      <UniqueIdentifier>{0ace9db6-9f13-49be-86f8-ce8f917106c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\memory">
+      <UniqueIdentifier>{dfec7e19-b79f-4559-92fd-02016c607e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\threads">
+      <UniqueIdentifier>{dba90e16-70c7-4060-8525-028abfc975fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\utilities">
+      <UniqueIdentifier>{e58bbdd4-620b-4faf-8b49-a859fb368501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\base">
+      <UniqueIdentifier>{f5b0479d-f147-420d-93c9-55e770a7eaab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\mouse">
+      <UniqueIdentifier>{1ede2059-a0f6-41ff-888f-438bc52ac6a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\patrick\vflib\source\pch.cpp">
+    <ClCompile Include="..\vflib\source\pch.cpp">
       <Filter>_include</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_CatchAny.cpp">
-      <Filter>diagnostic</Filter>
+    <ClCompile Include="..\vflib\source\vf_CatchAny.cpp">
+      <Filter>core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Debug.cpp">
-      <Filter>diagnostic</Filter>
+    <ClCompile Include="..\vflib\source\vf_Debug.cpp">
+      <Filter>core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Error.cpp">
-      <Filter>diagnostic</Filter>
+    <ClCompile Include="..\vflib\source\vf_Error.cpp">
+      <Filter>core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_FPUFlags.cpp">
-      <Filter>diagnostic</Filter>
+    <ClCompile Include="..\vflib\source\vf_FPUFlags.cpp">
+      <Filter>core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_GuiWorker.cpp">
-      <Filter>functional</Filter>
+    <ClCompile Include="..\vflib\source\vf_GuiWorker.cpp">
+      <Filter>core\functional</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Listeners.cpp">
-      <Filter>functional</Filter>
+    <ClCompile Include="..\vflib\source\vf_Listeners.cpp">
+      <Filter>core\functional</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_ThreadWorker.cpp">
-      <Filter>functional</Filter>
+    <ClCompile Include="..\vflib\source\vf_ThreadWorker.cpp">
+      <Filter>core\functional</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Worker.cpp">
-      <Filter>functional</Filter>
+    <ClCompile Include="..\vflib\source\vf_Worker.cpp">
+      <Filter>core\functional</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_MurmurHash.cpp">
-      <Filter>math</Filter>
+    <ClCompile Include="..\vflib\source\vf_MurmurHash.cpp">
+      <Filter>core\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\blocksort.c">
+    <ClCompile Include="..\vflib\external\bzip2\blocksort.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\bzlib.c">
+    <ClCompile Include="..\vflib\external\bzip2\bzlib.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\compress_bzip2.c">
+    <ClCompile Include="..\vflib\external\bzip2\compress_bzip2.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\crctable.c">
+    <ClCompile Include="..\vflib\external\bzip2\crctable.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\decompress.c">
+    <ClCompile Include="..\vflib\external\bzip2\decompress.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\huffman.c">
+    <ClCompile Include="..\vflib\external\bzip2\huffman.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\bzip2\randtable.c">
+    <ClCompile Include="..\vflib\external\bzip2\randtable.c">
       <Filter>_external\bzip2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\sqlite\sqlite3.c">
+    <ClCompile Include="..\vflib\external\sqlite\sqlite3.c">
       <Filter>_external\sqlite\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\sqlite\sqlite3async.c">
+    <ClCompile Include="..\vflib\external\sqlite\sqlite3async.c">
       <Filter>_external\sqlite\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\adler32.c">
+    <ClCompile Include="..\vflib\external\zlib\adler32.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\compress_zlib.c">
+    <ClCompile Include="..\vflib\external\zlib\compress_zlib.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\crc32.c">
+    <ClCompile Include="..\vflib\external\zlib\crc32.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\deflate.c">
+    <ClCompile Include="..\vflib\external\zlib\deflate.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\infback.c">
+    <ClCompile Include="..\vflib\external\zlib\infback.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\inffast.c">
+    <ClCompile Include="..\vflib\external\zlib\inffast.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\inflate.c">
+    <ClCompile Include="..\vflib\external\zlib\inflate.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\inftrees.c">
+    <ClCompile Include="..\vflib\external\zlib\inftrees.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\trees.c">
+    <ClCompile Include="..\vflib\external\zlib\trees.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\uncompr.c">
+    <ClCompile Include="..\vflib\external\zlib\uncompr.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\zlib\zutil.c">
+    <ClCompile Include="..\vflib\external\zlib\zutil.c">
       <Filter>_external\zlib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lapi.c">
+    <ClCompile Include="..\vflib\external\lua\lapi.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lauxlib.c">
+    <ClCompile Include="..\vflib\external\lua\lauxlib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lbaselib.c">
+    <ClCompile Include="..\vflib\external\lua\lbaselib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lbitlib.c">
+    <ClCompile Include="..\vflib\external\lua\lbitlib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lcode.c">
+    <ClCompile Include="..\vflib\external\lua\lcode.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lcorolib.c">
+    <ClCompile Include="..\vflib\external\lua\lcorolib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lctype.c">
+    <ClCompile Include="..\vflib\external\lua\lctype.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ldblib.c">
+    <ClCompile Include="..\vflib\external\lua\ldblib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ldebug.c">
+    <ClCompile Include="..\vflib\external\lua\ldebug.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ldo.c">
+    <ClCompile Include="..\vflib\external\lua\ldo.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ldump.c">
+    <ClCompile Include="..\vflib\external\lua\ldump.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lfunc.c">
+    <ClCompile Include="..\vflib\external\lua\lfunc.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lgc.c">
+    <ClCompile Include="..\vflib\external\lua\lgc.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\linit.c">
+    <ClCompile Include="..\vflib\external\lua\linit.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\liolib.c">
+    <ClCompile Include="..\vflib\external\lua\liolib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\llex.c">
+    <ClCompile Include="..\vflib\external\lua\llex.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lmathlib.c">
+    <ClCompile Include="..\vflib\external\lua\lmathlib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lmem.c">
+    <ClCompile Include="..\vflib\external\lua\lmem.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\loadlib.c">
+    <ClCompile Include="..\vflib\external\lua\loadlib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lobject.c">
+    <ClCompile Include="..\vflib\external\lua\lobject.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lopcodes.c">
+    <ClCompile Include="..\vflib\external\lua\lopcodes.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\loslib.c">
+    <ClCompile Include="..\vflib\external\lua\loslib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lparser.c">
+    <ClCompile Include="..\vflib\external\lua\lparser.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lstate.c">
+    <ClCompile Include="..\vflib\external\lua\lstate.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lstring.c">
+    <ClCompile Include="..\vflib\external\lua\lstring.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lstrlib.c">
+    <ClCompile Include="..\vflib\external\lua\lstrlib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ltable.c">
+    <ClCompile Include="..\vflib\external\lua\ltable.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ltablib.c">
+    <ClCompile Include="..\vflib\external\lua\ltablib.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\ltm.c">
+    <ClCompile Include="..\vflib\external\lua\ltm.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lua.c">
+    <ClCompile Include="..\vflib\external\lua\lua.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\luac.c">
+    <ClCompile Include="..\vflib\external\lua\luac.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lundump.c">
+    <ClCompile Include="..\vflib\external\lua\lundump.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lvm.c">
+    <ClCompile Include="..\vflib\external\lua\lvm.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\lua\lzio.c">
+    <ClCompile Include="..\vflib\external\lua\lzio.c">
       <Filter>_external\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\luabridge\luabridge.cpp">
+    <ClCompile Include="..\vflib\external\luabridge\luabridge.cpp">
       <Filter>_external\luabridge\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\external\luabridge\shared_ptr.cpp">
+    <ClCompile Include="..\vflib\external\luabridge\shared_ptr.cpp">
       <Filter>_external\luabridge\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\aifffile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\aifffile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\aiffproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\aiffproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\apefile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\apefile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\apefooter.cpp">
+    <ClCompile Include="..\vflib\include\taglib\apefooter.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\apeitem.cpp">
+    <ClCompile Include="..\vflib\include\taglib\apeitem.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\apeproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\apeproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\apetag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\apetag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\asfattribute.cpp">
+    <ClCompile Include="..\vflib\include\taglib\asfattribute.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\asffile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\asffile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\asfpicture.cpp">
+    <ClCompile Include="..\vflib\include\taglib\asfpicture.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\asfproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\asfproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\asftag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\asftag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\attachedpictureframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\attachedpictureframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\audioproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\audioproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\commentsframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\commentsframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\fileref.cpp">
+    <ClCompile Include="..\vflib\include\taglib\fileref.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\flacfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\flacfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\flacmetadatablock.cpp">
+    <ClCompile Include="..\vflib\include\taglib\flacmetadatablock.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\flacpicture.cpp">
+    <ClCompile Include="..\vflib\include\taglib\flacpicture.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\flacproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\flacproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\flacunknownmetadatablock.cpp">
+    <ClCompile Include="..\vflib\include\taglib\flacunknownmetadatablock.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\generalencapsulatedobjectframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\generalencapsulatedobjectframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v1genres.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v1genres.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v1tag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v1tag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2extendedheader.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2extendedheader.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2footer.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2footer.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2frame.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2frame.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2framefactory.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2framefactory.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2header.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2header.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2synchdata.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2synchdata.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\id3v2tag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\id3v2tag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4atom.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4atom.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4coverart.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4coverart.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4file.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4file.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4item.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4item.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4properties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4properties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mp4tag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mp4tag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mpcfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mpcfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mpcproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mpcproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mpegfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mpegfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mpegheader.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mpegheader.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\mpegproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\mpegproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\oggfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\oggfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\oggflacfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\oggflacfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\oggpage.cpp">
+    <ClCompile Include="..\vflib\include\taglib\oggpage.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\oggpageheader.cpp">
+    <ClCompile Include="..\vflib\include\taglib\oggpageheader.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\popularimeterframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\popularimeterframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\privateframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\privateframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\relativevolumeframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\relativevolumeframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\rifffile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\rifffile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\speexfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\speexfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\speexproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\speexproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tag.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tag.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tagunion.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tagunion.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tbytevector.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tbytevector.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tbytevectorlist.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tbytevectorlist.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tdebug.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tdebug.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\textidentificationframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\textidentificationframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\trueaudiofile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\trueaudiofile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\trueaudioproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\trueaudioproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tstring.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tstring.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\tstringlist.cpp">
+    <ClCompile Include="..\vflib\include\taglib\tstringlist.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\unicode.cpp">
+    <ClCompile Include="..\vflib\include\taglib\unicode.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\uniquefileidentifierframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\uniquefileidentifierframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\unknownframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\unknownframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\unsynchronizedlyricsframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\unsynchronizedlyricsframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\urllinkframe.cpp">
+    <ClCompile Include="..\vflib\include\taglib\urllinkframe.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\vorbisfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\vorbisfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\vorbisproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\vorbisproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\wavfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\wavfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\wavpackfile.cpp">
+    <ClCompile Include="..\vflib\include\taglib\wavpackfile.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\wavpackproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\wavpackproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\wavproperties.cpp">
+    <ClCompile Include="..\vflib\include\taglib\wavproperties.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\xingheader.cpp">
+    <ClCompile Include="..\vflib\include\taglib\xingheader.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\taglib\xiphcomment.cpp">
+    <ClCompile Include="..\vflib\include\taglib\xiphcomment.cpp">
       <Filter>_external\taglib\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\asio.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\asio.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\asiodrvr.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\asiodrvr.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\combase.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\combase.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\debugmessage.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\debugmessage.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\dllentry.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\dllentry.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\include\asiosdk2\register.cpp">
+    <ClCompile Include="..\vflib\include\asiosdk2\register.cpp">
       <Filter>_external\asiosdk2\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\blob.cpp">
+    <ClCompile Include="..\vflib\source\db\blob.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\Descriptor.cpp">
+    <ClCompile Include="..\vflib\source\db\Descriptor.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\error_codes.cpp">
+    <ClCompile Include="..\vflib\source\db\error_codes.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\into_type.cpp">
+    <ClCompile Include="..\vflib\source\db\into_type.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\once_temp_type.cpp">
+    <ClCompile Include="..\vflib\source\db\once_temp_type.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\prepare_temp_type.cpp">
+    <ClCompile Include="..\vflib\source\db\prepare_temp_type.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\ref_counted_prepare_info.cpp">
+    <ClCompile Include="..\vflib\source\db\ref_counted_prepare_info.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\ref_counted_statement.cpp">
+    <ClCompile Include="..\vflib\source\db\ref_counted_statement.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\session.cpp">
+    <ClCompile Include="..\vflib\source\db\session.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\statement.cpp">
+    <ClCompile Include="..\vflib\source\db\statement.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\statement_imp.cpp">
+    <ClCompile Include="..\vflib\source\db\statement_imp.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\transaction.cpp">
+    <ClCompile Include="..\vflib\source\db\transaction.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\db\use_type.cpp">
+    <ClCompile Include="..\vflib\source\db\use_type.cpp">
       <Filter>database\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Allocator.cpp">
-      <Filter>memory</Filter>
+    <ClCompile Include="..\vflib\source\vf_LockFreeDelay.cpp">
+      <Filter>core\lockfree</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_AllocatorWithoutTls.cpp">
-      <Filter>memory</Filter>
+    <ClCompile Include="..\vflib\source\vf_Allocator.cpp">
+      <Filter>core\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_PageAllocator.cpp">
-      <Filter>memory</Filter>
+    <ClCompile Include="..\vflib\source\vf_AllocatorWithoutTls.cpp">
+      <Filter>core\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_DragAndDropData.cpp">
-      <Filter>gui</Filter>
+    <ClCompile Include="..\vflib\source\vf_PageAllocator.cpp">
+      <Filter>core\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_DragAndDropTarget.cpp">
-      <Filter>gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_RadialImageConvolutionKernel.cpp">
-      <Filter>gui\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_AudioBufferPool.cpp">
-      <Filter>audio</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_OncePerSecond.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_ReadWriteMutex.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_Thread.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_ConditionVariable.cpp">
-      <Filter>_unfinished</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_ThreadIndex.cpp">
-      <Filter>_unfinished</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_SharedObject.cpp">
-      <Filter>threads</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_SharedSingleton.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_LeakChecked.cpp">
+    <ClCompile Include="..\vflib\source\vf_LeakChecked.cpp">
       <Filter>_native</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_LockFreeDelay.cpp">
-      <Filter>lockfree</Filter>
+    <ClCompile Include="..\vflib\source\vf_AudioBufferPool.cpp">
+      <Filter>audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_PagePool.cpp">
+    <ClCompile Include="..\vflib\source\vf_BoostThread.cpp">
+      <Filter>core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_JuceThread.cpp">
+      <Filter>core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_ReadWriteMutex.cpp">
+      <Filter>core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_SharedObject.cpp">
+      <Filter>core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_Thread.cpp">
+      <Filter>core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_ConditionVariable.cpp">
       <Filter>_unfinished</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_PerformedAtExit.cpp">
-      <Filter>core</Filter>
+    <ClCompile Include="..\vflib\source\vf_PagePool.cpp">
+      <Filter>_unfinished</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_BoostThread.cpp">
-      <Filter>threads</Filter>
+    <ClCompile Include="..\vflib\source\vf_ThreadIndex.cpp">
+      <Filter>_unfinished</Filter>
     </ClCompile>
-    <ClCompile Include="..\patrick\vflib\source\vf_JuceThread.cpp">
-      <Filter>threads</Filter>
+    <ClCompile Include="..\vflib\source\ui\vf_Button.cpp">
+      <Filter>ui\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_OncePerSecond.cpp">
+      <Filter>core\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_PerformedAtExit.cpp">
+      <Filter>core\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\vf_SharedSingleton.cpp">
+      <Filter>core\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_Control.cpp">
+      <Filter>ui\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_Facade.cpp">
+      <Filter>ui\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_Model.cpp">
+      <Filter>ui\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\audio\vf_NoiseAudioSource.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_DragAndDropData.cpp">
+      <Filter>ui\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_DragAndDropTarget.cpp">
+      <Filter>ui\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_MouseEnterEditable.cpp">
+      <Filter>ui\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_TransparentBorder.cpp">
+      <Filter>ui\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_RadialImageConvolutionKernel.cpp">
+      <Filter>ui\utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf.h">
+    <ClInclude Include="..\vflib\include\vf\vf.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_boost_includes.h">
+    <ClInclude Include="..\vflib\include\vf\vf_boost_includes.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Config.h">
+    <ClInclude Include="..\vflib\include\vf\vf_Config.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ext_includes.h">
+    <ClInclude Include="..\vflib\include\vf\vf_ext_includes.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_HeaderTemplate.h">
+    <ClInclude Include="..\vflib\include\vf\vf_HeaderTemplate.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_includes.h">
+    <ClInclude Include="..\vflib\include\vf\vf_includes.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_juce_includes.h">
+    <ClInclude Include="..\vflib\include\vf\vf_juce_includes.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_StandardHeader.h">
+    <ClInclude Include="..\vflib\include\vf\vf_StandardHeader.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_stdlib_includes.h">
+    <ClInclude Include="..\vflib\include\vf\vf_stdlib_includes.h">
       <Filter>_include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_List.h">
+    <ClInclude Include="..\vflib\include\vf\vf_List.h">
       <Filter>containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_CatchAny.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_CatchAny.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Debug.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Debug.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Error.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Error.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_FPUFlags.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_FPUFlags.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_NonCopyable.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_NonCopyable.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SafeBool.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_SafeBool.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Throw.h">
-      <Filter>diagnostic</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Throw.h">
+      <Filter>core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Function.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Function.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_GuiWorker.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_GuiWorker.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Listeners.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Listeners.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ManualWorker.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ManualWorker.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ThreadWorker.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ThreadWorker.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Type.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Type.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Worker.h">
-      <Filter>functional</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Worker.h">
+      <Filter>core\functional</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Interval.h">
-      <Filter>math</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Interval.h">
+      <Filter>core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Math.h">
-      <Filter>math</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Math.h">
+      <Filter>core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_MurmurHash.h">
-      <Filter>math</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_MurmurHash.h">
+      <Filter>core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\bzip2\bzlib.h">
+    <ClInclude Include="..\vflib\include\bzip2\bzlib.h">
       <Filter>_external\bzip2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\bzip2\bzlib_private.h">
+    <ClInclude Include="..\vflib\external\bzip2\bzlib_private.h">
       <Filter>_external\bzip2\source</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\sqlite\sqlite3.h">
+    <ClInclude Include="..\vflib\include\sqlite\sqlite3.h">
       <Filter>_external\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\sqlite\sqlite3async.h">
+    <ClInclude Include="..\vflib\include\sqlite\sqlite3async.h">
       <Filter>_external\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\sqlite\sqlite3ext.h">
+    <ClInclude Include="..\vflib\include\sqlite\sqlite3ext.h">
       <Filter>_external\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\zlib\zconf.h">
+    <ClInclude Include="..\vflib\include\zlib\zconf.h">
       <Filter>_external\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\zlib\zlib.h">
+    <ClInclude Include="..\vflib\include\zlib\zlib.h">
       <Filter>_external\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\crc32.h">
+    <ClInclude Include="..\vflib\external\zlib\crc32.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\deflate.h">
+    <ClInclude Include="..\vflib\external\zlib\deflate.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\inffast.h">
+    <ClInclude Include="..\vflib\external\zlib\inffast.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\inffixed.h">
+    <ClInclude Include="..\vflib\external\zlib\inffixed.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\inflate.h">
+    <ClInclude Include="..\vflib\external\zlib\inflate.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\inftrees.h">
+    <ClInclude Include="..\vflib\external\zlib\inftrees.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\trees.h">
+    <ClInclude Include="..\vflib\external\zlib\trees.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\zlib\zutil.h">
+    <ClInclude Include="..\vflib\external\zlib\zutil.h">
       <Filter>_external\zlib\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\lua\lauxlib.h">
+    <ClInclude Include="..\vflib\include\lua\lauxlib.h">
       <Filter>_external\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\lua\lua.h">
+    <ClInclude Include="..\vflib\include\lua\lua.h">
       <Filter>_external\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\lua\lua.hpp">
+    <ClInclude Include="..\vflib\include\lua\lua.hpp">
       <Filter>_external\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\lua\luaconf.h">
+    <ClInclude Include="..\vflib\include\lua\luaconf.h">
       <Filter>_external\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\lua\lualib.h">
+    <ClInclude Include="..\vflib\include\lua\lualib.h">
       <Filter>_external\lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lapi.h">
+    <ClInclude Include="..\vflib\external\lua\lapi.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lcode.h">
+    <ClInclude Include="..\vflib\external\lua\lcode.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lctype.h">
+    <ClInclude Include="..\vflib\external\lua\lctype.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\ldebug.h">
+    <ClInclude Include="..\vflib\external\lua\ldebug.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\ldo.h">
+    <ClInclude Include="..\vflib\external\lua\ldo.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lfunc.h">
+    <ClInclude Include="..\vflib\external\lua\lfunc.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lgc.h">
+    <ClInclude Include="..\vflib\external\lua\lgc.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\llex.h">
+    <ClInclude Include="..\vflib\external\lua\llex.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\llimits.h">
+    <ClInclude Include="..\vflib\external\lua\llimits.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lmem.h">
+    <ClInclude Include="..\vflib\external\lua\lmem.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lobject.h">
+    <ClInclude Include="..\vflib\external\lua\lobject.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lopcodes.h">
+    <ClInclude Include="..\vflib\external\lua\lopcodes.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lparser.h">
+    <ClInclude Include="..\vflib\external\lua\lparser.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lstate.h">
+    <ClInclude Include="..\vflib\external\lua\lstate.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lstring.h">
+    <ClInclude Include="..\vflib\external\lua\lstring.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\ltable.h">
+    <ClInclude Include="..\vflib\external\lua\ltable.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\ltm.h">
+    <ClInclude Include="..\vflib\external\lua\ltm.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lundump.h">
+    <ClInclude Include="..\vflib\external\lua\lundump.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lvm.h">
+    <ClInclude Include="..\vflib\external\lua\lvm.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\external\lua\lzio.h">
+    <ClInclude Include="..\vflib\external\lua\lzio.h">
       <Filter>_external\lua\source\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\luabridge.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\luabridge.hpp">
       <Filter>_external\luabridge</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\shared_ptr.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\shared_ptr.hpp">
       <Filter>_external\luabridge</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\impl\class.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\impl\class.hpp">
       <Filter>_external\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\impl\module.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\impl\module.hpp">
       <Filter>_external\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\impl\shared_ptr.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\impl\shared_ptr.hpp">
       <Filter>_external\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\impl\stack.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\impl\stack.hpp">
       <Filter>_external\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\luabridge\impl\typelist.hpp">
+    <ClInclude Include="..\vflib\include\luabridge\impl\typelist.hpp">
       <Filter>_external\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\aifffile.h">
+    <ClInclude Include="..\vflib\include\taglib\aifffile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\aiffproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\aiffproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\apefile.h">
+    <ClInclude Include="..\vflib\include\taglib\apefile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\apefooter.h">
+    <ClInclude Include="..\vflib\include\taglib\apefooter.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\apeitem.h">
+    <ClInclude Include="..\vflib\include\taglib\apeitem.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\apeproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\apeproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\apetag.h">
+    <ClInclude Include="..\vflib\include\taglib\apetag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\asfattribute.h">
+    <ClInclude Include="..\vflib\include\taglib\asfattribute.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\asffile.h">
+    <ClInclude Include="..\vflib\include\taglib\asffile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\asfpicture.h">
+    <ClInclude Include="..\vflib\include\taglib\asfpicture.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\asfproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\asfproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\asftag.h">
+    <ClInclude Include="..\vflib\include\taglib\asftag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\audioproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\audioproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\fileref.h">
+    <ClInclude Include="..\vflib\include\taglib\fileref.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\flacfile.h">
+    <ClInclude Include="..\vflib\include\taglib\flacfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\flacmetadatablock.h">
+    <ClInclude Include="..\vflib\include\taglib\flacmetadatablock.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\flacpicture.h">
+    <ClInclude Include="..\vflib\include\taglib\flacpicture.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\flacproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\flacproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\flacunknownmetadatablock.h">
+    <ClInclude Include="..\vflib\include\taglib\flacunknownmetadatablock.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v1genres.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v1genres.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v1tag.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v1tag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2extendedheader.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2extendedheader.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2footer.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2footer.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2frame.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2frame.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2framefactory.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2framefactory.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2header.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2header.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2synchdata.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2synchdata.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\id3v2tag.h">
+    <ClInclude Include="..\vflib\include\taglib\id3v2tag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4atom.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4atom.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4coverart.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4coverart.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4file.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4file.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4item.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4item.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4properties.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4properties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mp4tag.h">
+    <ClInclude Include="..\vflib\include\taglib\mp4tag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mpcfile.h">
+    <ClInclude Include="..\vflib\include\taglib\mpcfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mpcproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\mpcproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mpegfile.h">
+    <ClInclude Include="..\vflib\include\taglib\mpegfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mpegheader.h">
+    <ClInclude Include="..\vflib\include\taglib\mpegheader.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\mpegproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\mpegproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\oggfile.h">
+    <ClInclude Include="..\vflib\include\taglib\oggfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\oggflacfile.h">
+    <ClInclude Include="..\vflib\include\taglib\oggflacfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\oggpage.h">
+    <ClInclude Include="..\vflib\include\taglib\oggpage.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\oggpageheader.h">
+    <ClInclude Include="..\vflib\include\taglib\oggpageheader.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\rifffile.h">
+    <ClInclude Include="..\vflib\include\taglib\rifffile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\speexfile.h">
+    <ClInclude Include="..\vflib\include\taglib\speexfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\speexproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\speexproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tag.h">
+    <ClInclude Include="..\vflib\include\taglib\tag.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\taglib.h">
+    <ClInclude Include="..\vflib\include\taglib\taglib.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\taglib_config.h">
+    <ClInclude Include="..\vflib\include\taglib\taglib_config.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\taglib_export.h">
+    <ClInclude Include="..\vflib\include\taglib\taglib_export.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tagunion.h">
+    <ClInclude Include="..\vflib\include\taglib\tagunion.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tbytevector.h">
+    <ClInclude Include="..\vflib\include\taglib\tbytevector.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tbytevectorlist.h">
+    <ClInclude Include="..\vflib\include\taglib\tbytevectorlist.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tdebug.h">
+    <ClInclude Include="..\vflib\include\taglib\tdebug.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tfile.h">
+    <ClInclude Include="..\vflib\include\taglib\tfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tlist.h">
+    <ClInclude Include="..\vflib\include\taglib\tlist.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tmap.h">
+    <ClInclude Include="..\vflib\include\taglib\tmap.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\trueaudiofile.h">
+    <ClInclude Include="..\vflib\include\taglib\trueaudiofile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\trueaudioproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\trueaudioproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tstring.h">
+    <ClInclude Include="..\vflib\include\taglib\tstring.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\tstringlist.h">
+    <ClInclude Include="..\vflib\include\taglib\tstringlist.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\unicode.h">
+    <ClInclude Include="..\vflib\include\taglib\unicode.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\vorbisfile.h">
+    <ClInclude Include="..\vflib\include\taglib\vorbisfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\vorbisproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\vorbisproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\wavfile.h">
+    <ClInclude Include="..\vflib\include\taglib\wavfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\wavpackfile.h">
+    <ClInclude Include="..\vflib\include\taglib\wavpackfile.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\wavpackproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\wavpackproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\wavproperties.h">
+    <ClInclude Include="..\vflib\include\taglib\wavproperties.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\xingheader.h">
+    <ClInclude Include="..\vflib\include\taglib\xingheader.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\xiphcomment.h">
+    <ClInclude Include="..\vflib\include\taglib\xiphcomment.h">
       <Filter>_external\taglib\headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\attachedpictureframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\attachedpictureframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\commentsframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\commentsframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\generalencapsulatedobjectframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\generalencapsulatedobjectframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\popularimeterframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\popularimeterframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\privateframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\privateframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\relativevolumeframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\relativevolumeframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\textidentificationframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\textidentificationframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\uniquefileidentifierframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\uniquefileidentifierframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\unknownframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\unknownframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\unsynchronizedlyricsframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\unsynchronizedlyricsframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\taglib\frames\urllinkframe.h">
+    <ClInclude Include="..\vflib\include\taglib\frames\urllinkframe.h">
       <Filter>_external\taglib\headers\frames</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\asio.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\asio.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\asiodrvr.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\asiodrvr.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\asiosys.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\asiosys.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\combase.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\combase.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\iasiodrv.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\iasiodrv.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\asiosdk2\wxdebug.h">
+    <ClInclude Include="..\vflib\include\asiosdk2\wxdebug.h">
       <Filter>_external\asiosdk2</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\aeffect.h">
+    <ClInclude Include="..\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\aeffect.h">
       <Filter>_external\vstsdk2.4</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\aeffectx.h">
+    <ClInclude Include="..\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\aeffectx.h">
       <Filter>_external\vstsdk2.4</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\vstfxstore.h">
+    <ClInclude Include="..\vflib\include\vstsdk2.4\pluginterfaces\vst2.x\vstfxstore.h">
       <Filter>_external\vstsdk2.4</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_db.h">
+    <ClInclude Include="..\vflib\include\vf\vf_db.h">
       <Filter>database</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\exchange_traits.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\exchange_traits.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\into_type.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\into_type.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\once_temp_type.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\once_temp_type.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\prepare_temp_type.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\prepare_temp_type.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\ref_counted_prepare_info.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\ref_counted_prepare_info.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\ref_counted_statement.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\ref_counted_statement.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\statement_imp.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\statement_imp.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\type_conversion.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\type_conversion.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\type_ptr.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\type_ptr.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\detail\use_type.h">
+    <ClInclude Include="..\vflib\include\vf\db\detail\use_type.h">
       <Filter>database\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\backend.h">
+    <ClInclude Include="..\vflib\include\vf\db\backend.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\blob.h">
+    <ClInclude Include="..\vflib\include\vf\db\blob.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\descriptor.h">
+    <ClInclude Include="..\vflib\include\vf\db\descriptor.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\into.h">
+    <ClInclude Include="..\vflib\include\vf\db\into.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\session.h">
+    <ClInclude Include="..\vflib\include\vf\db\session.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\statement.h">
+    <ClInclude Include="..\vflib\include\vf\db\statement.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\transaction.h">
+    <ClInclude Include="..\vflib\include\vf\db\transaction.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\type_conversion_traits.h">
+    <ClInclude Include="..\vflib\include\vf\db\type_conversion_traits.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\db\use.h">
+    <ClInclude Include="..\vflib\include\vf\db\use.h">
       <Filter>database\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\source\db\error_codes.h">
+    <ClInclude Include="..\vflib\source\db\error_codes.h">
       <Filter>database\source</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LockFree.h">
-      <Filter>lockfree</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_LockFree.h">
+      <Filter>core\lockfree</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LockFreeList.h">
-      <Filter>lockfree</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_LockFreeDelay.h">
+      <Filter>core\lockfree</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LockFreeQueue.h">
-      <Filter>lockfree</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_LockFreeList.h">
+      <Filter>core\lockfree</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LockFreeStack.h">
-      <Filter>lockfree</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_LockFreeQueue.h">
+      <Filter>core\lockfree</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_AllocatedBy.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_LockFreeStack.h">
+      <Filter>core\lockfree</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Allocator.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_AllocatedBy.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_AllocatorWithoutTls.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Allocator.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_CacheLine.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_AllocatorWithoutTls.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_MemoryAlignment.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_CacheLine.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ObjectAllocator.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_MemoryAlignment.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_PageAllocator.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ObjectAllocator.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_StandardAllocator.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_PageAllocator.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Static.h">
-      <Filter>memory</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_StandardAllocator.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Atomic.h">
+    <ClInclude Include="..\vflib\include\vf\vf_Static.h">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_Atomic.h">
       <Filter>_native</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Bind.h">
+    <ClInclude Include="..\vflib\include\vf\vf_Bind.h">
       <Filter>_native</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Intrinsics.h">
+    <ClInclude Include="..\vflib\include\vf\vf_Intrinsics.h">
       <Filter>_native</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LeakChecked.h">
+    <ClInclude Include="..\vflib\include\vf\vf_LeakChecked.h">
       <Filter>_native</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_String.h">
+    <ClInclude Include="..\vflib\include\vf\vf_String.h">
       <Filter>_native</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_DragAndDropData.h">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_DragAndDropTarget.h">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ListBoxSelection.h">
-      <Filter>gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_RadialImageConvolutionKernel.h">
-      <Filter>gui\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_AudioBufferPool.h">
+    <ClInclude Include="..\vflib\include\vf\vf_AudioBufferPool.h">
       <Filter>audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_AudioSampleBufferArray.h">
+    <ClInclude Include="..\vflib\include\vf\vf_AudioSampleBufferArray.h">
       <Filter>audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Mutex.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_BoostThread.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_OncePerSecond.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_JuceThread.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ReadWriteMutex.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_Mutex.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ReadWriteMutexBase.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ReadWriteMutex.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SpinLock.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ReadWriteMutexBase.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Thread.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_SharedObject.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ThreadBase.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_SharedObjectPtr.h">
+      <Filter>core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ConditionVariable.h">
+    <ClInclude Include="..\vflib\include\vf\vf_SharedState.h">
+      <Filter>core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_SpinLock.h">
+      <Filter>core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_Thread.h">
+      <Filter>core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_ThreadBase.h">
+      <Filter>core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_Array.h">
       <Filter>_unfinished</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_ThreadIndex.h">
+    <ClInclude Include="..\vflib\include\vf\vf_ConditionVariable.h">
       <Filter>_unfinished</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_IntrusiveStack.h">
+    <ClInclude Include="..\vflib\include\vf\vf_IntrusiveStack.h">
       <Filter>_unfinished</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_Array.h">
+    <ClInclude Include="..\vflib\include\vf\vf_PagePool.h">
       <Filter>_unfinished</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SharedSingleton.h">
-      <Filter>core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SharedState.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SharedObject.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_LockFreeDelay.h">
-      <Filter>lockfree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_SharedObjectPtr.h">
-      <Filter>threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_PagePool.h">
+    <ClInclude Include="..\vflib\include\vf\vf_ThreadIndex.h">
       <Filter>_unfinished</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_PerformedAtExit.h">
-      <Filter>core</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_ui.h">
+      <Filter>ui</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_BoostThread.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Button.h">
+      <Filter>ui\controls</Filter>
     </ClInclude>
-    <ClInclude Include="..\patrick\vflib\include\vf\vf_JuceThread.h">
-      <Filter>threads</Filter>
+    <ClInclude Include="..\vflib\include\vf\vf_OncePerSecond.h">
+      <Filter>core\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_PerformedAtExit.h">
+      <Filter>core\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_SharedSingleton.h">
+      <Filter>core\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Model.h">
+      <Filter>ui\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Control.h">
+      <Filter>ui\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Facade.h">
+      <Filter>ui\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ConnectedEdges.h">
+      <Filter>ui\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\audio\vf_NoiseAudioSource.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_DragAndDropTarget.h">
+      <Filter>ui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_DragAndDropData.h">
+      <Filter>ui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_MouseEnterEditable.h">
+      <Filter>ui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_TransparentBorder.h">
+      <Filter>ui\controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ListBoxSelection.h">
+      <Filter>ui\controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_RadialImageConvolutionKernel.h">
+      <Filter>ui\utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\patrick\vflib\include\taglib\tlist.tcc">
+    <None Include="..\vflib\include\taglib\tlist.tcc">
       <Filter>_external\taglib\headers</Filter>
     </None>
-    <None Include="..\patrick\vflib\include\taglib\tmap.tcc">
+    <None Include="..\vflib\include\taglib\tmap.tcc">
       <Filter>_external\taglib\headers</Filter>
     </None>
-    <None Include="..\patrick\vflib\license.txt" />
+    <None Include="..\vflib\license.txt" />
   </ItemGroup>
 </Project>

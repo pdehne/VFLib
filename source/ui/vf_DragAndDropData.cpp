@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_DragAndDropData.h"
+#include "vf/ui/vf_DragAndDropData.h"
 
 DragAndDropData::DragAndDropData ()
 {

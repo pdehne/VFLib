@@ -17,12 +17,28 @@
 #include "vf/ui/vf_Control.h"
 #endif
 
+#ifndef __VF_DRAGANDDROPDATA_VFHEADER__
+#include "vf/ui/vf_DragAndDropData.h"
+#endif
+
+#ifndef __VF_DRAGANDDROPTARGET_VFHEADER__
+#include "vf/ui/vf_DragAndDropTarget.h"
+#endif
+
 #ifndef __VF_FACADE_VFHEADER__
 #include "vf/ui/vf_Facade.h"
 #endif
 
 #ifndef __VF_MODEL_VFHEADER__
 #include "vf/ui/vf_Model.h"
+#endif
+
+#ifndef __VF_MOUSEENTEREDITABLE_VFHEADER__
+#include "vf/ui/vf_MouseEnterEditable.h"
+#endif
+
+#ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
+#include "vf/ui/vf_RadialImageConvolutionKernel.h"
 #endif
 
 #ifndef __VF_TRANSPARENTBORDER_VFHEADER__

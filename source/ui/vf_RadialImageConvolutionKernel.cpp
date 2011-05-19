@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_RadialImageConvolutionKernel.h"
+#include "vf/ui/vf_RadialImageConvolutionKernel.h"
 
 RadialImageConvolutionKernel::RadialImageConvolutionKernel (int radiusInSamples)
   : m_radius (radiusInSamples)
