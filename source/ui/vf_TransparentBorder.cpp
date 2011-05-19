@@ -110,7 +110,7 @@ void TransparentBorder::setAlpha (float alpha)
     if (m_opaque != nullptr)
     {
       m_visible = alpha == 1.f;
-      m_opaque->setVisible (m_visible);
+      m_opaque->setVisible (m_visible && m_component->isVisible ());
     }
     else
     {
