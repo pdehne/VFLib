@@ -13,8 +13,14 @@ class StackedLayout
   , private ComponentListener
 {
 public:
-  struct Band
+  class Band
   {
+  public:
+    Band ();
+
+  private:
+    friend class StackedLayout;
+
     bool m_resizable;
     Component* m_component;
   };

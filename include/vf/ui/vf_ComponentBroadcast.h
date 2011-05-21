@@ -89,4 +89,70 @@ private:
   }
 };
 
+// Like componentBroadcast, but sends the message to the first
+// parent it finds that exposes the interface (then stops).
+//
+class componentBroadcastParent
+{
+public:
+  template <class C>
+  componentBroadcastParent (Component* c, void (C::*f)())
+  { call <C> (c, boost::bind (f, _1)); }
+
+  template <class C, class T1>
+  componentBroadcastParent (Component* c, void (C::*f)(T1), T1 t1)
+  { call <C> (c, boost::bind (f, _1, t1)); }
+
+  template <class C, class T1, class T2>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2), T1 t1, T2 t2)
+  { call <C> (c, boost::bind (f, _1, t1, t2)); }
+
+  template <class C, class T1, class T2, class T3>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3)); }
+
+  template <class C, class T1, class T2, class T3, class T4>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3, t4)); }
+
+  template <class C, class T1, class T2, class T3, class T4, class T5>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3, t4, t5)); }
+
+  template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6),
+             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3, t4, t5, t6)); }
+
+  template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
+             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3, t4, t5, t6, t7)); }
+
+  template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
+  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
+             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
+  { call <C> (c, boost::bind (f, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+
+private:
+  template <class Interface, class Functor>
+  void call (Component* component, Functor const& f)
+  {
+    component = component->getParentComponent();
+    
+    while (component != nullptr)
+    {
+      Interface* const object = dynamic_cast <Interface*> (component);
+
+      if (object != nullptr)
+      {
+        f (object);
+        break;
+      }
+
+      component = component->getParentComponent();
+    }
+  }
+};
+
 #endif

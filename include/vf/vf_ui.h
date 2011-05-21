@@ -9,6 +9,10 @@
 #include "vf/ui/vf_Button.h"
 #endif
 
+#ifndef __VF_COMPONENTBROADCAST_VFHEADER__
+#include "vf/ui/vf_ComponentBroadcast.h"
+#endif
+
 #ifndef __VF_CONNECTEDEDGES_VFHEADER__
 #include "vf/ui/vf_ConnectedEdges.h"
 #endif
