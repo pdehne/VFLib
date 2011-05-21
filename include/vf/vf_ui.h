@@ -41,6 +41,14 @@
 #include "vf/ui/vf_RadialImageConvolutionKernel.h"
 #endif
 
+#ifndef __VF_RESIZABLELAYOUT_VFHEADER__
+#include "vf/ui/vf_ResizableLayout.h"
+#endif
+
+#ifndef __VF_STACKEDLAYOUT_VFHEADER__
+#include "vf/ui/vf_StackedLayout.h"
+#endif
+
 #ifndef __VF_TRANSPARENTBORDER_VFHEADER__
 #include "vf/ui/vf_TransparentBorder.h"
 #endif
