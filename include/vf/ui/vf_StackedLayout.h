@@ -11,6 +11,7 @@ class StackedLayout
   : public Component
   , public ResizableChild
   , private ComponentListener
+  , private AsyncUpdater
 {
 public:
   class Band
@@ -26,7 +27,9 @@ public:
   };
 
 public:
-  StackedLayout (BorderSize <int> borderSize, int gapSize);
+  StackedLayout (bool vertical,
+                 BorderSize <int> borderSize,
+                 int gapSize);
   ~StackedLayout ();
 
   void addBand (Component* component);
@@ -50,6 +53,8 @@ private:
 
   void componentBeingDeleted (Component& component);
 
+  void handleAsyncUpdate ();
+
 private:
   struct Item
   {
@@ -57,6 +62,7 @@ private:
     ResizableChild* resizableChild;
   };
 
+  bool const m_vertical;
   bool m_active;
   const BorderSize<int> m_borderSize;
   const int m_gapSize;

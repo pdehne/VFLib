@@ -8,9 +8,11 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/ui/vf_StackedLayout.h"
 
-StackedLayout::StackedLayout (BorderSize<int> borderSize,
+StackedLayout::StackedLayout (bool vertical,
+                              BorderSize<int> borderSize,
                               int gapSize)
-  : m_active (false)
+  : m_vertical (vertical)
+  , m_active (false)
   , m_borderSize (borderSize)
   , m_gapSize (gapSize)
 {
@@ -43,59 +45,114 @@ void StackedLayout::recalculateLayout ()
 {
   if (m_active)
   {
-    const Rectangle<int> bounds = getLocalBounds ();
-
-    int totalSize = m_borderSize.getTop();
-    int lastSize = 0;
-
-    for (size_t i = 0; i < m_bands.size(); ++i)
+    if (m_vertical)
     {
-      Component* c = m_bands[i].component;
-      if (c->isVisible ())
+      const Rectangle <int> bounds = getLocalBounds ();
+
+      int totalSize = m_borderSize.getTop();
+      int lastSize = 0;
+
+      for (size_t i = 0; i < m_bands.size(); ++i)
       {
-        lastSize = c->getHeight ();
-        totalSize += lastSize;
-      }
-    }
-
-    totalSize += m_borderSize.getBottom ();
-
-    Component* lastComponent = 0;
-    Rectangle<int> lastBounds;
-    lastBounds.setX (bounds.getX() + m_borderSize.getLeft());
-    lastBounds.setRight (bounds.getRight() - m_borderSize.getRight());
-    lastBounds.setY (bounds.getY() + m_borderSize.getTop());
-
-    for (size_t i = 0; i < m_bands.size(); ++i)
-    {
-      Component* c = m_bands[i].component;
-      if (c->isVisible ())
-      {
-        if (lastComponent)
+        Component* c = m_bands[i].component;
+        if (c->isVisible ())
         {
-          lastBounds.setHeight (lastComponent->getHeight());
-          lastComponent->setBounds (lastBounds);
-          
-          lastBounds.setY (lastBounds.getBottom() + m_gapSize);
+          lastSize = c->getHeight ();
+          totalSize += lastSize;
         }
+      }
 
-        lastComponent = c;
+      totalSize += m_borderSize.getBottom ();
+
+      Component* lastComponent = 0;
+      Rectangle<int> lastBounds;
+      lastBounds.setX (bounds.getX() + m_borderSize.getLeft());
+      lastBounds.setRight (bounds.getRight() - m_borderSize.getRight());
+      lastBounds.setY (bounds.getY() + m_borderSize.getTop());
+
+      for (size_t i = 0; i < m_bands.size(); ++i)
+      {
+        Component* c = m_bands[i].component;
+        if (c->isVisible ())
+        {
+          if (lastComponent)
+          {
+            lastBounds.setHeight (lastComponent->getHeight());
+            lastComponent->setBounds (lastBounds);
+          
+            lastBounds.setY (lastBounds.getBottom() + m_gapSize);
+          }
+
+          lastComponent = c;
+        }
+      }
+
+      if (lastComponent)
+      {
+        lastBounds.setBottom (bounds.getBottom() - m_borderSize.getBottom());
+        lastComponent->setBounds (lastBounds);
       }
     }
-
-    if (lastComponent)
+    else
     {
-      lastBounds.setBottom (bounds.getBottom() - m_borderSize.getBottom());
-      lastComponent->setBounds (lastBounds);
-    }
+      const Rectangle <int> bounds = getLocalBounds ();
+
+      int totalSize = m_borderSize.getLeft ();
+      int lastSize = 0;
+
+      for (size_t i = 0; i < m_bands.size (); ++i)
+      {
+        Component* c = m_bands[i].component;
+        if (c->isVisible ())
+        {
+          lastSize = c->getWidth ();
+          totalSize += lastSize;
+        }
+      }
+
+      totalSize += m_borderSize.getBottom ();
+
+      Component* lastComponent = 0;
+      Rectangle <int> lastBounds;
+      lastBounds.setY (bounds.getY () + m_borderSize.getTop ());
+      lastBounds.setBottom (bounds.getBottom () - m_borderSize.getBottom ());
+      lastBounds.setX (bounds.getX() + m_borderSize.getLeft ());
+
+      for (size_t i = 0; i < m_bands.size(); ++i)
+      {
+        Component* c = m_bands[i].component;
+        
+        if (c->isVisible ())
+        {
+          if (lastComponent)
+          {
+            lastBounds.setWidth (lastComponent->getWidth ());
+            lastComponent->setBounds (lastBounds);
+          
+            lastBounds.setX (lastBounds.getRight() + m_gapSize);
+          }
+
+          lastComponent = c;
+        }
+      }
+
+      if (lastComponent)
+      {
+        lastBounds.setRight (bounds.getRight() - m_borderSize.getRight ());
+        lastComponent->setBounds (lastBounds);
+      }
+     }
   }
 }
 
 void StackedLayout::activateStackedLayout ()
 {
+#if 1
+//  triggerAsyncUpdate ();
+#else
   m_active = true;
-
   recalculateLayout ();
+#endif
 }
 
 void StackedLayout::resized ()
@@ -105,53 +162,104 @@ void StackedLayout::resized ()
 
 void StackedLayout::resizeStart ()
 {
-  for (size_t i = 0; i < m_bands.size(); ++i)
-  {
-    ResizableChild* c = m_bands[i].resizableChild;
-    if (c)
-      c->resizeStart ();
-  }
-
-  for (size_t i = 0; i < m_bands.size(); ++i)
-  {
-    ResizableChild* c = m_bands[i].resizableChild;
-    if (c)
-      c->resizeStart ();
-  }
-
   int minW = 0;
   int minH = 0;
 
-  minH = m_borderSize.getTop();
-  int lastH = -1;
-
-  for (size_t i = 0; i < m_bands.size(); ++i)
+  if (m_vertical)
   {
-    Component* c = m_bands[i].component;
-    if (c->isVisible ())
+    for (size_t i = 0; i < m_bands.size(); ++i)
     {
-      if (lastH != -1)
-      {
-        minH += m_gapSize + lastH;
-      }
+      ResizableChild* c = m_bands[i].resizableChild;
+      if (c)
+        c->resizeStart ();
+    }
 
-      ResizableChild* rc = m_bands[i].resizableChild;
-      if (rc)
-      {
-        lastH = rc->getMinimumHeight ();
+    for (size_t i = 0; i < m_bands.size(); ++i)
+    {
+      ResizableChild* c = m_bands[i].resizableChild;
+      if (c)
+        c->resizeStart ();
+    }
 
-        minW = jmax (minW, rc->getMinimumWidth ());
-      }
-      else
+    minH = m_borderSize.getTop();
+    int lastH = -1;
+
+    for (size_t i = 0; i < m_bands.size(); ++i)
+    {
+      Component* c = m_bands[i].component;
+      if (c->isVisible ())
       {
-        lastH = m_bands[i].component->getHeight ();
+        if (lastH != -1)
+        {
+          minH += m_gapSize + lastH;
+        }
+
+        ResizableChild* rc = m_bands[i].resizableChild;
+        if (rc)
+        {
+          lastH = rc->getMinimumHeight ();
+
+          minW = jmax (minW, rc->getMinimumWidth ());
+        }
+        else
+        {
+          lastH = m_bands[i].component->getHeight ();
+        }
       }
     }
-  }
 
-  if (lastH != -1)
+    if (lastH != -1)
+    {
+      minH += lastH + m_borderSize.getBottom ();
+    }
+  }
+  else
   {
-    minH += lastH + m_borderSize.getBottom ();
+    for (size_t i = 0; i < m_bands.size(); ++i)
+    {
+      ResizableChild* c = m_bands[i].resizableChild;
+      if (c)
+        c->resizeStart ();
+    }
+
+    for (size_t i = 0; i < m_bands.size(); ++i)
+    {
+      ResizableChild* c = m_bands[i].resizableChild;
+      if (c)
+        c->resizeStart ();
+    }
+
+    minW = m_borderSize.getLeft ();
+    int lastH = -1;
+
+    for (size_t i = 0; i < m_bands.size(); ++i)
+    {
+      Component* c = m_bands[i].component;
+      if (c->isVisible ())
+      {
+        if (lastH != -1)
+        {
+          minH += m_gapSize + lastH;
+        }
+
+        ResizableChild* rc = m_bands[i].resizableChild;
+        if (rc)
+        {
+          lastH = rc->getMinimumWidth ();
+
+          minH = jmax (minW, rc->getMinimumHeight ());
+        }
+        else
+        {
+          lastH = m_bands[i].component->getWidth ();
+        }
+      }
+    }
+
+    if (lastH != -1)
+    {
+      minW += lastH + m_borderSize.getRight ();
+    }
   }
 
   setMinimumWidth (minW);
@@ -162,15 +270,23 @@ void StackedLayout::componentMovedOrResized (Component& component,
                                              bool wasMoved,
                                              bool wasResized)
 {
+  triggerAsyncUpdate ();
 }
 
 void StackedLayout::componentVisibilityChanged (Component& component)
 {
-  recalculateLayout ();
+  triggerAsyncUpdate ();
 }
 
 void StackedLayout::componentBeingDeleted (Component& component)
 {
+  triggerAsyncUpdate ();
+}
+
+void StackedLayout::handleAsyncUpdate ()
+{
+  m_active = true;
+  recalculateLayout ();
 }
 
 END_VF_NAMESPACE
