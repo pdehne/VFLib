@@ -9,6 +9,10 @@
 #include "vf/ui/vf_Button.h"
 #endif
 
+#ifndef __VF_COLOUR_VFHEADER__
+#include "vf/ui/vf_Colour.h"
+#endif
+
 #ifndef __VF_COMPONENTBROADCAST_VFHEADER__
 #include "vf/ui/vf_ComponentBroadcast.h"
 #endif
@@ -55,6 +59,14 @@
 
 #ifndef __VF_TRANSPARENTBORDER_VFHEADER__
 #include "vf/ui/vf_TransparentBorder.h"
+#endif
+
+#ifndef __VF_UIBASE_VFHEADER__
+#include "vf/ui/vf_UiBase.h"
+#endif
+
+#ifndef __VF_VERTICALGRADIENT_VFHEADER__
+#include "vf/ui/vf_VerticalGradient.h"
 #endif
 
 #endif

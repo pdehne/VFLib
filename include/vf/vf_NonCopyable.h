@@ -12,18 +12,20 @@ namespace detail {
 
 // Ideas based on boost
 
-class NonCopyable
+class Uncopyable
 {
 protected:
-  inline NonCopyable() { }
-  inline ~NonCopyable() { }
+  inline Uncopyable() { }
+  inline ~Uncopyable() { }
+
 private:
-  NonCopyable (const NonCopyable&);
-  const NonCopyable& operator= (const NonCopyable&);
+  Uncopyable (Uncopyable const&);
+  Uncopyable const& operator= (Uncopyable const&);
 };
 
 }
 
-typedef detail::NonCopyable NonCopyable;
+typedef detail::Uncopyable NonCopyable;
+typedef detail::Uncopyable Uncopyable;
 
 #endif
