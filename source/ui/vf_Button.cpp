@@ -48,6 +48,20 @@ void Button::released ()
 {
 }
 
+//------------------------------------------------------------------------------
+
+DummyButton::DummyButton (bool enabled, bool checkButton)
+  : m_checkButton (checkButton)
+{
+  setEnabled (enabled);
+}
+
+void DummyButton::clicked (ModifierKeys const& modifiers)
+{
+  if (m_checkButton)
+    setChecked (!isChecked ());
+}
+
 }
 
 //------------------------------------------------------------------------------

@@ -38,6 +38,20 @@ private:
   bool m_checked;
 };
 
+//------------------------------------------------------------------------------
+
+// Simple button model as a placeholder to get things up and running
+//
+class DummyButton : public Button
+{
+public:
+  DummyButton (bool enabled, bool checkButton = false);
+  void clicked (ModifierKeys const& modifiers);
+
+private:
+  bool const m_checkButton;
+};
+
 }
 
 //------------------------------------------------------------------------------
