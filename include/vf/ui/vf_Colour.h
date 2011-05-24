@@ -55,6 +55,7 @@ public:
 
   LabColour const withLuminance (float L) const; // L [0,1]
   LabColour const withAddedLuminance (float amount) const; // amount [0,1]
+  LabColour const withMultipliedColour (float amount) const;
 
 private:
   static LabColour const from (XYZColour const& xyz);

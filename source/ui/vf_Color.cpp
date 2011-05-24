@@ -207,6 +207,15 @@ LabColour const LabColour::withAddedLuminance (float amount) const
     getAlpha ());
 }
 
+LabColour const LabColour::withMultipliedColour (float amount) const
+{
+  return LabColour (
+    getL (),
+    getA () * amount,
+    getB () * amount,
+    getAlpha ());
+}
+
 //------------------------------------------------------------------------------
 
 END_VF_NAMESPACE
