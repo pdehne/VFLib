@@ -188,7 +188,7 @@ class Base
   , public Uncopyable
 {
 public:
-  explicit Base (Model::Base::Ptr model = nullptr);
+  Base (Model::Base::Ptr model = nullptr);
   ~Base ();
 
   Model::Base* getModel ();
