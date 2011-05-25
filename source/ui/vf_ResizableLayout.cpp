@@ -244,6 +244,8 @@ Rectangle<int> ResizableLayout::calcBoundsOfChildren (Component* parent)
 
 void ResizableLayout::resizeStart()
 {
+  handleUpdateNowIfNeeded ();
+
   bool haveChildren = false;
 
   // first recursively call resizeStart() on all children
