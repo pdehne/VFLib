@@ -142,6 +142,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\vflib\source\ui\vf_Button.cpp" />
+    <ClCompile Include="..\vflib\source\ui\vf_Color.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_Control.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_DragAndDropData.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_DragAndDropTarget.cpp" />
@@ -149,7 +150,11 @@
     <ClCompile Include="..\vflib\source\ui\vf_Model.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_MouseEnterEditable.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_RadialImageConvolutionKernel.cpp" />
+    <ClCompile Include="..\vflib\source\ui\vf_ResizableLayout.cpp" />
+    <ClCompile Include="..\vflib\source\ui\vf_StackedLayout.cpp" />
+    <ClCompile Include="..\vflib\source\ui\vf_Static.cpp" />
     <ClCompile Include="..\vflib\source\ui\vf_TransparentBorder.cpp" />
+    <ClCompile Include="..\vflib\source\ui\vf_UiBase.cpp" />
     <ClCompile Include="..\vflib\source\vf_CatchAny.cpp" />
     <ClCompile Include="..\vflib\source\vf_Debug.cpp" />
     <ClCompile Include="..\vflib\source\vf_Error.cpp" />
@@ -2618,6 +2623,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\vflib\include\vf\audio\vf_NoiseAudioSource.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Colour.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_Button.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_ConnectedEdges.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_Control.h" />
@@ -2628,7 +2635,12 @@
     <ClInclude Include="..\vflib\include\vf\ui\vf_Model.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_RadialImageConvolutionKernel.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ResizableLayout.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_StackedLayout.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Static.h" />
     <ClInclude Include="..\vflib\include\vf\ui\vf_TransparentBorder.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_UiBase.h" />
+    <ClInclude Include="..\vflib\include\vf\ui\vf_VerticalGradient.h" />
     <ClInclude Include="..\vflib\include\vf\vf.h" />
     <ClInclude Include="..\vflib\include\vf\vf_boost_includes.h" />
     <ClInclude Include="..\vflib\include\vf\vf_Config.h" />
@@ -2828,7 +2840,7 @@
     <ClInclude Include="..\vflib\include\vf\vf_ObjectAllocator.h" />
     <ClInclude Include="..\vflib\include\vf\vf_PageAllocator.h" />
     <ClInclude Include="..\vflib\include\vf\vf_StandardAllocator.h" />
-    <ClInclude Include="..\vflib\include\vf\vf_Static.h" />
+    <ClInclude Include="..\vflib\include\vf\vf_StaticObject.h" />
     <ClInclude Include="..\vflib\include\vf\vf_Atomic.h" />
     <ClInclude Include="..\vflib\include\vf\vf_Bind.h" />
     <ClInclude Include="..\vflib\include\vf\vf_Intrinsics.h" />

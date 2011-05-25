@@ -133,6 +133,12 @@
     <Filter Include="ui\mouse">
       <UniqueIdentifier>{1ede2059-a0f6-41ff-888f-438bc52ac6a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui\layout">
+      <UniqueIdentifier>{f1b7a946-e913-4f47-87fe-7ef9736c4c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\graphics">
+      <UniqueIdentifier>{a7149e76-746a-4e2d-b377-f9266c9b4783}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\vflib\source\pch.cpp">
@@ -696,8 +702,23 @@
     <ClCompile Include="..\vflib\source\ui\vf_TransparentBorder.cpp">
       <Filter>ui\controls</Filter>
     </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_StackedLayout.cpp">
+      <Filter>ui\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_ResizableLayout.cpp">
+      <Filter>ui\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_UiBase.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
     <ClCompile Include="..\vflib\source\ui\vf_RadialImageConvolutionKernel.cpp">
-      <Filter>ui\utilities</Filter>
+      <Filter>ui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_Color.cpp">
+      <Filter>ui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vflib\source\ui\vf_Static.cpp">
+      <Filter>ui\controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1295,9 +1316,6 @@
     <ClInclude Include="..\vflib\include\vf\vf_StandardAllocator.h">
       <Filter>core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\vflib\include\vf\vf_Static.h">
-      <Filter>core\memory</Filter>
-    </ClInclude>
     <ClInclude Include="..\vflib\include\vf\vf_Atomic.h">
       <Filter>_native</Filter>
     </ClInclude>
@@ -1412,8 +1430,32 @@
     <ClInclude Include="..\vflib\include\vf\ui\vf_ListBoxSelection.h">
       <Filter>ui\controls</Filter>
     </ClInclude>
-    <ClInclude Include="..\vflib\include\vf\ui\vf_RadialImageConvolutionKernel.h">
+    <ClInclude Include="..\vflib\include\vf\ui\vf_StackedLayout.h">
+      <Filter>ui\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ResizableLayout.h">
+      <Filter>ui\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_ComponentBroadcast.h">
       <Filter>ui\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_UiBase.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_VerticalGradient.h">
+      <Filter>ui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_RadialImageConvolutionKernel.h">
+      <Filter>ui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Colour.h">
+      <Filter>ui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\ui\vf_Static.h">
+      <Filter>ui\controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vflib\include\vf\vf_StaticObject.h">
+      <Filter>core\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
