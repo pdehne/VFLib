@@ -10,7 +10,7 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_LeakChecked.h"
 #include "vf/vf_PerformedAtExit.h"
 #include "vf/vf_SharedObject.h"
-#include "vf/vf_Static.h"
+#include "vf/vf_StaticObject.h"
 
 typedef Static::Storage <Atomic::Pointer <PerformedAtExit>, PerformedAtExit> Head;
 

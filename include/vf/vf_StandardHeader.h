@@ -68,7 +68,7 @@ template <> struct VfStaticAssert <true>
 #include "vf/vf_LeakChecked.h"
 #include "vf/vf_NonCopyable.h"
 #include "vf/vf_SafeBool.h"
-#include "vf/vf_Static.h"
+#include "vf/vf_StaticObject.h"
 #include "vf/vf_String.h"
 #include "vf/vf_Throw.h"
 

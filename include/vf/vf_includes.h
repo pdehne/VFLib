@@ -153,8 +153,8 @@
 #include "vf/vf_SpinLock.h"
 #endif
 
-#ifndef __VF_STATIC_VFHEADER__
-#include "vf/vf_Static.h"
+#ifndef __VF_STATICOBJECT_VFHEADER__
+#include "vf/vf_StaticObject.h"
 #endif
 
 #ifndef __VF_THREAD_VFHEADER__

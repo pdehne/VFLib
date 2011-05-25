@@ -61,6 +61,8 @@ ResizableLayout::ResizableLayout (Component* owner)
 	m_isActive = false;
 
   m_owner->addComponentListener (this);
+
+  triggerAsyncUpdate ();
 }
 
 
@@ -106,6 +108,11 @@ void ResizableLayout::activateLayout (bool isActive)
 
 		m_isActive=isActive;
 	}
+}
+
+void ResizableLayout::handleAsyncUpdate ()
+{
+  activateLayout ();
 }
 
 void ResizableLayout::updateLayout ()

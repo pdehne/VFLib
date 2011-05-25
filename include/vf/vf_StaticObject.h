@@ -2,8 +2,8 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifndef __VF_STATIC_VFHEADER__
-#define __VF_STATIC_VFHEADER__
+#ifndef __VF_STATICOBJECT_VFHEADER__
+#define __VF_STATICOBJECT_VFHEADER__
 
 #include "vf/vf_LockFreeDelay.h"
 

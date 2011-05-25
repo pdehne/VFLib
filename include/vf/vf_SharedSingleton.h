@@ -8,7 +8,7 @@
 #include "vf/vf_PerformedAtExit.h"
 #include "vf/vf_SharedObject.h"
 #include "vf/vf_SpinLock.h"
-#include "vf/vf_Static.h"
+#include "vf/vf_StaticObject.h"
 
 // Thread-safe singleton which comes into existence on first use.
 // All objects with static storage duration should, in general, be singletons,

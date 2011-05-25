@@ -63,6 +63,7 @@ private:
 class ResizableLayout
   : public ResizableChild
   , private ComponentListener
+  , private AsyncUpdater
 {
 public:
 	enum
@@ -121,6 +122,8 @@ public:
   static Rectangle <int> calcBoundsOfChildren (Component* parent);
 
 private:
+  void handleAsyncUpdate ();
+
   // Update the state information for all items. This is used on the first Activate(),
 	// and can also be used if multiple controls are moved or resized from elsewhere.
   // UNFINISHED API
@@ -129,8 +132,6 @@ private:
   void resizeStart ();
 
 private:
-  friend class TopLevelResizableLayout;
-
   struct Rect
   {
 	  Rect() {}

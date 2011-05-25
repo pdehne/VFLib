@@ -6,7 +6,7 @@
 #define __VF_LEAKCHECKED_VFHEADER__
 
 #include "vf/vf_Error.h"
-#include "vf/vf_Static.h"
+#include "vf/vf_StaticObject.h"
 #include "vf/vf_Throw.h"
 
 //

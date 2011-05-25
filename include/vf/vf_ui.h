@@ -57,6 +57,10 @@
 #include "vf/ui/vf_StackedLayout.h"
 #endif
 
+#ifndef __VF_STATIC_VFHEADER__
+#include "vf/ui/vf_Static.h"
+#endif
+
 #ifndef __VF_TRANSPARENTBORDER_VFHEADER__
 #include "vf/ui/vf_TransparentBorder.h"
 #endif
