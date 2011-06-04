@@ -39,8 +39,9 @@ public:
     enum
     {
       stateRun,
-      stateWait,
-      stateInterrupt
+      stateInterrupt,
+      stateReturn,
+      stateWait
     };
 
     int m_state;

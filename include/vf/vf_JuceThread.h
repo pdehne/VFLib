@@ -62,8 +62,9 @@ public:
     enum
     {
       stateRun,
-      stateWait,
-      stateInterrupt
+      stateInterrupt,
+      stateReturn,
+      stateWait
     };
 
     Atomic::State m_state;

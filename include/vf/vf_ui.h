@@ -41,6 +41,10 @@
 #include "vf/ui/vf_Model.h"
 #endif
 
+#ifndef __VF_MOUSEENTERGROUP_VFHEADER__
+#include "vf/ui/vf_MouseEnterGroup.h"
+#endif
+
 #ifndef __VF_MOUSEENTEREDITABLE_VFHEADER__
 #include "vf/ui/vf_MouseEnterEditable.h"
 #endif

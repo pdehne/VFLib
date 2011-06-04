@@ -33,9 +33,10 @@ bool JuceThread::InterruptionModel::do_wait ()
       interrupted = true;
       break;
     }
-    else if (m_state.tryChangeState (stateRun, stateWait))
+    else if (m_state.tryChangeState (stateRun, stateWait) ||
+             m_state.tryChangeState (stateReturn, stateWait))
     {
-      // Transitioned from run to wait.
+      // Transitioned to wait.
       // Caller must wait now.
       interrupted = false;
       break;
@@ -45,6 +46,7 @@ bool JuceThread::InterruptionModel::do_wait ()
   return interrupted;
 }
 
+// Called when the event times out
 //
 bool JuceThread::InterruptionModel::do_timeout ()
 {
@@ -68,21 +70,15 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 {
   for (;;)
   {
-    const int state = m_state;
+    int const state = m_state;
 
-    // If we are already in the interrupt state, or if
-    // we successfully transition from reset to interrupt,
-    // then there is no need to signal because the thread
-    // will see the new state.
-    //
     if (state == stateInterrupt ||
+        state == stateReturn ||
         m_state.tryChangeState (stateRun, stateInterrupt))
     {
+      // Thread will see this at next interruption point.
       break;
     }
-    // If we are in the waiting state, then try to change to
-    // reset. Whoever is successful will wake the thread up.
-    //
     else if (m_state.tryChangeState (stateWait, stateRun))
     {
       thread.notify ();
@@ -93,12 +89,22 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
 
 bool JuceThread::InterruptionModel::do_interruptionPoint ()
 {
-  // How could we possibly be in the wait state and get called?
-  vfassert (m_state != stateWait);
+  if (m_state == stateWait)
+  {
+    // It is impossible for this function
+    // to be called while in the wait state.
+    Throw (Error().fail (__FILE__, __LINE__));
+  }
+  else if (m_state == stateReturn)
+  {
+    // If this goes off it means the thread called the
+    // interruption a second time after already getting interrupted.
+    Throw (Error().fail (__FILE__, __LINE__));
+  }
 
-  // If we are interrupted, switch to run.
-  // Only one thread will "win" this contest.
-  const bool interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
+  // Switch to Return state if we are interrupted
+  //bool const interrupted = m_state.tryChangeState (stateInterrupt, stateReturn);
+  bool const interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
 
   return interrupted;
 }

@@ -67,7 +67,7 @@ public:
 
   private:
     bool m_interrupted;
-    mutable bool m_checked;
+    bool mutable m_checked;
   };
 
 public:
