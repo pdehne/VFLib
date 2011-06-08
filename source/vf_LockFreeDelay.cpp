@@ -31,7 +31,7 @@ Delay::~Delay ()
 
 void Delay::spin ()
 {
-#if 0
+#if 1
   CurrentThread::yield ();
   //CurrentThread::sleep (0);
 #else

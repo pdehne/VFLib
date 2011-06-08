@@ -25,6 +25,11 @@ Worker::~Worker ()
   vfassert (m_list.empty ());
 }
 
+bool Worker::isAssociateWithCurrentThread () const
+{
+  return CurrentThread::getId() == m_id;
+}
+
 // Adds a call to the queue of execution.
 void Worker::queuep (Call* c)
 {
@@ -56,7 +61,7 @@ void Worker::callp (Call* c)
   // might get an undesired synchronization if new thread
   // calls process() concurrently.
   //
-  if (CurrentThread::getId() == m_id &&
+  if (isAssociateWithCurrentThread () &&
       m_in_process.trySet ())
   {
     do_process ();
