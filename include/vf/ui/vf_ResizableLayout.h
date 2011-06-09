@@ -157,8 +157,9 @@ private:
 		Point<int> bottomRight;
 
     Anchor (Component* component=0);
-    bool operator== (const Anchor& rhs) const;
-    bool operator>= (const Anchor& rhs) const;
+    bool operator== (Anchor const& rhs) const;
+    bool operator>= (Anchor const& rhs) const;
+    bool operator<  (Anchor const& rhs) const;
 	};
 
   struct State
@@ -170,6 +171,7 @@ private:
     State (Component* component=0);
     bool operator== (const State& rhs) const;
     bool operator>= (const State& rhs) const;
+    bool operator<  (const State& rhs) const;
 	};
 
   void addStateFor (const Anchor& anchor);

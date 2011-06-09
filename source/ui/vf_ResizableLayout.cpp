@@ -19,6 +19,8 @@ const Point <int> ResizableLayout::anchorBottomLeft	( 0, anchorUnit );
 const Point <int> ResizableLayout::anchorBottomCenter( anchorUnit/2, anchorUnit );
 const Point <int> ResizableLayout::anchorBottomRight	( anchorUnit, anchorUnit );
 
+//------------------------------------------------------------------------------
+
 ResizableLayout::Anchor::Anchor (Component* component_)
 : component (component_)
 , child (dynamic_cast <ResizableChild*>(component_))
@@ -26,15 +28,22 @@ ResizableLayout::Anchor::Anchor (Component* component_)
   jassert (component);
 }
 
-bool ResizableLayout::Anchor::operator== (const Anchor& rhs) const
+bool ResizableLayout::Anchor::operator== (Anchor const& rhs) const
 {
   return component == rhs.component;
 }
 
-bool ResizableLayout::Anchor::operator>= (const Anchor& rhs) const
+bool ResizableLayout::Anchor::operator>= (Anchor const& rhs) const
 {
   return component >= rhs.component;
 }
+
+bool ResizableLayout::Anchor::operator< (Anchor const& rhs) const
+{
+  return component < rhs.component;
+}
+
+//------------------------------------------------------------------------------
 
 ResizableLayout::State::State (Component* component_)
 : component (component_)
@@ -50,6 +59,11 @@ bool ResizableLayout::State::operator== (const State& rhs) const
 bool ResizableLayout::State::operator>= (const State& rhs) const
 {
   return component >= rhs.component;
+}
+
+bool ResizableLayout::State::operator< (const State& rhs) const
+{
+  return component < rhs.component;
 }
 
 //------------------------------------------------------------------------------
