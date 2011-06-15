@@ -100,6 +100,34 @@ private:
   };
 
 private:
+  struct SavedMouseEvent
+  {
+    SavedMouseEvent (MouseEvent const& e)
+    {
+      source = &e.source;
+      position = Point <int> (e.x, e.y);
+      modifiers = e.mods;
+      eventComponent = e.eventComponent;
+      originator = e.originalComponent;
+      eventTime = e.eventTime;
+      mouseDownPos = e.getMouseDownPosition ();
+      mouseDownTime = Time (0); // ???
+      numberOfClicks = e.getNumberOfClicks();
+      mouseWasDragged = !e.mouseWasClicked ();
+    }
+
+    MouseInputSource* source;
+    Point <int>       position;
+    ModifierKeys      modifiers;
+    Component*        eventComponent;
+    Component*        originator;
+    Time              eventTime;
+    Point <int>       mouseDownPos;
+    Time              mouseDownTime;
+    int               numberOfClicks;
+    bool              mouseWasDragged;
+  };
+
   Component* const m_parentComponent;
   Helper m_helper;
   bool m_mouseInside;
