@@ -139,9 +139,11 @@ struct LeakChecked : LeakCheckedBase
 
 #endif
 
+#if 0
 template <class Object>
-class LeakCheckedAndNonCopyable : LeakChecked <Object>, NonCopyable
+class LeakCheckedAndNonCopyable : LeakChecked <Object>, Uncopyable
 {
 };
+#endif
 
 #endif
