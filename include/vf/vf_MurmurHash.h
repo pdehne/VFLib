@@ -4,8 +4,6 @@
 
 // Original source code links in .cpp file
 
-#ifdef _MSC_VER
-
 #ifndef __VF_MURMURHASH_VFHEADER__
 #define __VF_MURMURHASH_VFHEADER__
 
@@ -13,52 +11,11 @@
 
 namespace Murmur {
 
-// Murmur Hash
-extern void Hash3_x86_32  ( const void * key, int len, uint32 seed, void * out );
-extern void Hash3_x86_64  ( const void * key, int len, uint32 seed, void * out );
-extern void Hash3_x86_128 ( const void * key, int len, uint32 seed, void * out );
-
-extern void Hash3_x64_32  ( const void * key, int len, uint32 seed, void * out );
-extern void Hash3_x64_64  ( const void * key, int len, uint32 seed, void * out );
-extern void Hash3_x64_128 ( const void * key, int len, uint32 seed, void * out );
+extern void MurmurHash3_x86_32  (const void *key, int len, uint32 seed, void* out);
+extern void MurmurHash3_x86_128 (const void *key, int len, uint32 seed, void* out);
+extern void MurmurHash3_x64_128 (const void *key, int len, uint32 seed, void* out);
 
 // Uses Juce to choose an appropriate routine
-
-#if JUCE_64BIT
-
-inline void Hash3_32 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x64_32 (key, len, seed, out);
-}
-
-inline void Hash3_64 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x64_64 (key, len, seed, out);
-}
-
-inline void Hash3_128 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x64_64 (key, len, seed, out);
-}
-
-#else
-
-inline void Hash3_32 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x86_32 (key, len, seed, out);
-}
-
-inline void Hash3_64 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x86_64 (key, len, seed, out);
-}
-
-inline void Hash3_128 ( const void * key, int len, uint32 seed, void * out )
-{
-  Hash3_x86_64 (key, len, seed, out);
-}
-
-#endif
 
 // This handy template deduces which size hash is desired
 template <typename HashType>
@@ -66,9 +23,14 @@ inline void Hash (const void* key, int len, uint32 seed, HashType* out)
 {
   switch (8*sizeof(HashType))
   {
-  case 32:  Hash3_32 (key, len, seed, out); break;
-  case 64:  Hash3_64 (key, len, seed, out); break;
-  case 128: Hash3_128 (key, len, seed, out); break;
+  case 32:  MurmurHash3_x86_32 (key, len, seed, out); break;
+
+#if JUCE_64BIT
+  case 128: MurmurHash3_x64_128 (key, len, seed, out); break;
+#else
+  case 128: MurmurHash3_x86_128 (key, len, seed, out); break;
+#endif
+
   default:
     Throw (std::runtime_error ("invalid key size in MurmurHash"));
     break;
@@ -76,7 +38,5 @@ inline void Hash (const void* key, int len, uint32 seed, HashType* out)
 }
 
 }
-
-#endif
 
 #endif
