@@ -166,6 +166,7 @@ private:
 //   return instance->getObject ();
 // }
 //
+#if 0
 template <class ObjectType, class Tag>
 class Object : private Static::Initializer
 {
@@ -211,6 +212,7 @@ private:
 
 template <class ObjectType, class Tag>
 Storage <ObjectType, Tag> Object <ObjectType, Tag>::s_object;
+#endif
 
 }
 
