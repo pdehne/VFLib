@@ -27,7 +27,7 @@ Error::Error (const Error& other)
   other.m_needsToBeChecked = false;
 }
 
-Error::~Error()
+Error::~Error() noexcept
 {
   /* If this goes off it means an error object was created but never tested */
   jassert (!m_needsToBeChecked);
@@ -129,7 +129,7 @@ void Error::willBeReported () const
   m_needsToBeChecked = false;
 }
 
-const char* Error::what () const
+const char* Error::what () const noexcept
 {
   if (!m_szWhat)
   {
