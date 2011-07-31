@@ -49,7 +49,7 @@ public:
   Error (const Error& other);
   Error& operator= (const Error& other);
 
-  ~Error();
+  virtual ~Error() noexcept;
 
   Code code () const;
   bool failed () const;
