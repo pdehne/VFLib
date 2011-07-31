@@ -12,6 +12,8 @@
 // remove the dependence on boost or tr1.
 //
 
+#if 0
+
 namespace detail {
 
 template <class R>
@@ -112,5 +114,7 @@ template <class R, class P, class T1>
 detail::BindMfc1 <R,P,T1> Bind (R (P::*f)(T1) const, P const* p,
   T1 t1) { return
   detail::BindMfc1 <R,P,T1> (f,p,t1); }
+
+#endif
 
 #endif
