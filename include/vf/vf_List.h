@@ -13,22 +13,6 @@ struct List_default_tag
 {
 };
 
-class List_all_features
-{
-public:
-  typedef int size_type;
-
-  size_type size () const { return m_size; }
-
-protected:
-  void reset_size () { m_size = 0; }
-  void add_size (size_type amount) { m_size += amount; }
-  void add_size (const List_all_features& other) { m_size += other.m_size; }
-
-private:
-  size_type m_size;
-};
-
 }
 
 //------------------------------------------------------------------------------
@@ -36,11 +20,8 @@ private:
 // intrusive doubly linked list
 
 template <class Elem,
-          class Tag = detail::List_default_tag,
-          class Features = detail::List_all_features>
-class List
-  : public Features
-  , NonCopyable
+          class Tag = detail::List_default_tag>
+class List : NonCopyable
 {
 public:
   class Node : NonCopyable
@@ -50,7 +31,6 @@ public:
 
   private:
     friend class List;
-    friend typename Features;
     Node* m_next;
     Node* m_prev;
   };
@@ -147,6 +127,8 @@ private:
   };
 
 public:
+  typedef int size_type;
+
   typedef Elem        value_type;
   typedef Elem&       reference;
   typedef Elem const& const_reference;
@@ -158,11 +140,14 @@ public:
 
 public:
   List ()
+    : m_size (0)
   {
     m_head.m_prev = 0; // identifies the head
     m_tail.m_next = 0; // identifies the tail
     clear ();
   }
+
+  size_type size () const { return m_size; }
 
   reference front ()
   {
@@ -231,7 +216,7 @@ public:
   {
     m_head.m_next = &m_tail;
     m_tail.m_prev = &m_head;
-    Features::reset_size ();
+    m_size = 0;
   }
 
   iterator insert (iterator pos, Elem& elem)
@@ -241,7 +226,7 @@ public:
     node->m_prev = node->m_next->m_prev;
     node->m_next->m_prev = node;
     node->m_prev->m_next = node;
-    Features::add_size (1);
+    ++m_size;
     return iterator (node);
   }
 
@@ -254,7 +239,7 @@ public:
       before->m_prev->m_next = other.m_head.m_next;
       other.m_tail.m_prev->m_next = before;
       before->m_prev = other.m_tail.m_prev;
-      Features::add_size (other);
+      m_size += other.m_size;
       other.clear ();
     }
   }
@@ -265,7 +250,7 @@ public:
     ++pos;
     node->m_next->m_prev = node->m_prev;
     node->m_prev->m_next = node->m_next;
-    Features::add_size (-1);
+    --m_size;
     return pos;
   }
 
@@ -343,6 +328,7 @@ private:
   }
 
 private:
+  size_type m_size;
   Node m_head;
   Node m_tail;
 };
@@ -352,9 +338,8 @@ private:
 // intrusive doubly linked list
 
 template <class Elem,
-          class Tag = detail::List_default_tag,
-          class Features = detail::List_all_features>
-class ListOld : public Features
+          class Tag = detail::List_default_tag>
+class ListOld
 {
 public:
   class Node : NonCopyable
@@ -364,7 +349,6 @@ public:
 
   private:
     friend class ListOld;
-    friend typename Features;
     Node* m_next;
     Node* m_prev;
   };
@@ -441,7 +425,10 @@ public:
   typedef iterator_base <Elem const, Node const> const_iterator;
 
 public:
+  typedef int size_type;
+
   ListOld ()
+    : m_size (0)
   {
     m_head.m_prev = 0; // identifies the head
     m_tail.m_next = 0; // identifies the tail
@@ -457,6 +444,7 @@ public:
     append (other);
   }
 
+  size_type size () const       { return m_size; }
   bool empty () const           { return m_head.m_next == &m_tail; }
   iterator begin ()             { return m_head.m_next; }
   iterator end ()               { return &m_tail; }
@@ -489,7 +477,7 @@ public:
   {
     m_head.m_next = &m_tail;
     m_tail.m_prev = &m_head;
-    Features::reset_size ();
+    m_size = 0;
   }
 
   // DEPRECATED
@@ -505,7 +493,7 @@ public:
     node->m_prev = node->m_next->m_prev;
     node->m_next->m_prev = node;
     node->m_prev->m_next = node;
-    Features::add_size (1);
+    ++m_size;
     return node;
   }
 
@@ -518,7 +506,7 @@ public:
       before->m_prev->m_next = other.m_head.m_next;
       other.m_tail.m_prev->m_next = before;
       before->m_prev = other.m_tail.m_prev;
-      Features::add_size (other);
+      m_size += other.m_size;
       other.reset ();
     }
   }
@@ -529,7 +517,7 @@ public:
     Node* node = static_cast <Node*> (e);
     node->m_next->m_prev = node->m_prev;
     node->m_prev->m_next = node->m_next;
-    Features::add_size (-1);
+    --m_size;
     return pos;
   }
 
@@ -554,6 +542,7 @@ public:
 private:
   ListOld& operator= (const ListOld& other);
 
+  size_type m_size;
   Node m_head;
   Node m_tail;
 };
