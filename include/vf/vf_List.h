@@ -337,6 +337,8 @@ private:
 
 // intrusive doubly linked list
 
+#if 0
+
 template <class Elem,
           class Tag = detail::List_default_tag>
 class ListOld
@@ -546,5 +548,7 @@ private:
   Node m_head;
   Node m_tail;
 };
+
+#endif
 
 #endif
