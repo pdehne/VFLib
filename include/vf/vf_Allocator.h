@@ -65,7 +65,7 @@ public:
   }
 
 private:
-  GlobalAllocator () : SharedSingleton (persistAfterCreation)
+  GlobalAllocator () : SharedSingleton <GlobalAllocator <Tag> > (persistAfterCreation)
   {
   }
 
