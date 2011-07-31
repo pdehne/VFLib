@@ -1,7 +1,8 @@
 // Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
-// From http://code.google.com/p/smhasher/
+
+// Original source code links in .cpp file
 
 #ifdef _MSC_VER
 
@@ -11,9 +12,6 @@
 // This file depends on some Juce declarations and defines
 
 namespace Murmur {
-
-// http://code.google.com/p/smhasher/
-// http://sites.google.com/site/murmurhash/
 
 // Murmur Hash
 extern void Hash3_x86_32  ( const void * key, int len, uint32 seed, void * out );

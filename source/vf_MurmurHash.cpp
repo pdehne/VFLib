@@ -2,18 +2,18 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
-#ifdef _MSC_VER
+// http://code.google.com/p/smhasher/
+// http://sites.google.com/site/murmurhash/
 
 #include "vf/vf_StandardHeader.h"
 
 BEGIN_VF_NAMESPACE
 
+#ifdef _MSC_VER
+
 #include "vf/vf_MurmurHash.h"
 
 namespace Murmur {
-
-// http://code.google.com/p/smhasher/
-// http://sites.google.com/site/murmurhash/
 
 //-----------------------------------------------------------------------------
 // Block read - if your platform needs to do endian-swapping or can only
@@ -472,6 +472,7 @@ void Hash3_x64_64 ( const void * key, int len, uint32 seed, void * out )
 
 }
 
+#endif
+
 END_VF_NAMESPACE
 
-#endif
