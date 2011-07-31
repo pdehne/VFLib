@@ -21,25 +21,35 @@
 
 //------------------------------------------------------------------------------
 
-enum Lifetime
+namespace detail {
+
+// Factored out the enum
+class SharedSingletonLifetimes
 {
-  // Singleton is created on first use and destroyed when
-  // the last reference is removed.
-  //
-  createOnDemand,
+public:
+  enum Lifetime
+  {
+    // Singleton is created on first use and destroyed when
+    // the last reference is removed.
+    //
+    createOnDemand,
 
-  // Like createOnDemand, but after the Singleton is destroyed an
-  // exception will be thrown if an attempt is made to create it again.
-  //
-  createOnDemandOnce,
+    // Like createOnDemand, but after the Singleton is destroyed an
+    // exception will be thrown if an attempt is made to create it again.
+    //
+    createOnDemandOnce,
 
-  // The singleton is created on first use and persists until program exit.
-  //
-  persistAfterCreation
+    // The singleton is created on first use and persists until program exit.
+    //
+    persistAfterCreation
+  };
 };
 
+}
+
 template <class Object>
-class SharedSingleton : private PerformedAtExit
+class SharedSingleton : public detail::SharedSingletonLifetimes,
+                        private PerformedAtExit
 {
 protected:
   /*
