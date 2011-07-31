@@ -24,6 +24,14 @@ template <class Elem,
 class List : NonCopyable
 {
 public:
+  typedef int size_type;
+
+  typedef Elem        value_type;
+  typedef Elem&       reference;
+  typedef Elem const& const_reference;
+  typedef Elem*       pointer;
+  typedef Elem const* const_pointer;
+
   class Node : NonCopyable
   {
   public:
@@ -127,14 +135,6 @@ private:
   };
 
 public:
-  typedef int size_type;
-
-  typedef Elem        value_type;
-  typedef Elem&       reference;
-  typedef Elem const& const_reference;
-  typedef Elem*       pointer;
-  typedef Elem const* const_pointer;
-
   typedef iterator_base <Elem, Node> iterator;
   typedef iterator_base <Elem const, Node const> const_iterator;
 
