@@ -3,6 +3,8 @@
 // http://www.opensource.org/licenses/mit-license.php
 // From http://code.google.com/p/smhasher/
 
+#ifdef _MSC_VER
+
 #include "vf/vf_StandardHeader.h"
 
 BEGIN_VF_NAMESPACE
@@ -470,3 +472,4 @@ void Hash3_x64_64 ( const void * key, int len, uint32 seed, void * out )
 
 END_VF_NAMESPACE
 
+#endif
