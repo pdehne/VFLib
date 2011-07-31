@@ -38,14 +38,13 @@ public:
   {
     Node* const node = static_cast <Node*> (elem);
     
-    LockType::ScopedLockType lock (LockType& (*this));
+    typename LockType::ScopedLockType lock (*this);
   }
 
   Elem* pop_front ()
   {
     Elem* elem;
-
-    LockType::ScopedLockType lock (LockType& (*this));
+    typename LockType::ScopedLockType lock (*this);
 
     if (m_head != 0)
     {
