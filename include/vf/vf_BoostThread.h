@@ -125,7 +125,7 @@ inline void sleep (const int milliseconds)
   if (milliseconds >= 0)
   {
     // bit of a hack but nice to avoid all the boost ptime/reltime nonsense
-    boost::this_thread::interruptible_wait (milliseconds);
+      boost::this_thread::sleep (boost::posix_time::milliseconds(milliseconds));
   }
   else
   {
