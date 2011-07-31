@@ -28,12 +28,12 @@ template <typename R, int Bytes>
 class Function <R (void), Bytes>
 {
 public:
-  typedef typename R result_type;
+  typedef R result_type;
   typedef Function self_type;
 
   struct None
   {
-    typedef typename R result_type;
+    typedef R result_type;
     result_type operator() () const
     {
       return result_type();
@@ -137,12 +137,12 @@ template <typename R, typename T1, int Bytes>
 class Function <R (T1 t1), Bytes>
 {
 public:
-  typedef typename R result_type;
+  typedef R result_type;
   typedef Function self_type;
 
   struct None
   {
-    typedef typename R result_type;
+    typedef R result_type;
     result_type operator() (T1) const
     {
       return result_type();
