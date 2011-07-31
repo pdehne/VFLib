@@ -5,6 +5,8 @@
 #ifndef __VF_INTRINSICS_VFHEADER__
 #define __VF_INTRINSICS_VFHEADER__
 
+#if 0
+
 //#include "vf/vf_Thread.h"
 
 namespace Intrinsic {
@@ -58,5 +60,7 @@ inline void mm_pause()
 #endif
 
 }
+
+#endif
 
 #endif
