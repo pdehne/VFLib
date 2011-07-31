@@ -21,10 +21,29 @@
 
 //------------------------------------------------------------------------------
 
+enum Lifetime
+{
+  // Singleton is created on first use and destroyed when
+  // the last reference is removed.
+  //
+  createOnDemand,
+
+  // Like createOnDemand, but after the Singleton is destroyed an
+  // exception will be thrown if an attempt is made to create it again.
+  //
+  createOnDemandOnce,
+
+  // The singleton is created on first use and persists until program exit.
+  //
+  persistAfterCreation
+};
+
 template <class Object>
 class SharedSingleton : private PerformedAtExit
 {
 protected:
+  /*
+  // THIS SUCKS BECAUSE IT IS NOT FACTORED OUT OF THE TEMPLATE PARAMETERS!!!
   enum Lifetime
   {
     // Singleton is created on first use and destroyed when
@@ -41,6 +60,7 @@ protected:
     //
     persistAfterCreation
   };
+  */
 
   explicit SharedSingleton (Lifetime const lifetime)
     : PerformedAtExit (lifetime == persistAfterCreation)
