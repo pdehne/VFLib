@@ -21,7 +21,7 @@ class OncePerSecond::TimerSingleton
 {
 private:
   TimerSingleton ()
-    : SharedSingleton (persistAfterCreation)
+    : SharedSingleton <OncePerSecond::TimerSingleton> (persistAfterCreation)
     , m_thread (threadName)
   {
     m_thread.start (boost::bind (&TimerSingleton::run, this));
