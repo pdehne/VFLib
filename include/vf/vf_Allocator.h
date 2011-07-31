@@ -65,7 +65,7 @@ public:
   }
 
 private:
-  GlobalAllocator () : SharedSingleton (SharedSingleton::persistAfterCreation)
+  GlobalAllocator () : SharedSingleton (persistAfterCreation)
   {
   }
 
