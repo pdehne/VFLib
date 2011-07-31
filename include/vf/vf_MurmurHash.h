@@ -3,6 +3,8 @@
 // http://www.opensource.org/licenses/mit-license.php
 // From http://code.google.com/p/smhasher/
 
+#ifdef _MSC_VER
+
 #ifndef __VF_MURMURHASH_VFHEADER__
 #define __VF_MURMURHASH_VFHEADER__
 
@@ -73,5 +75,7 @@ inline void Hash (const void* key, int len, uint32 seed, HashType* out)
 }
 
 }
+
+#endif
 
 #endif
