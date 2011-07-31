@@ -81,7 +81,7 @@ const String getFileNameFromPath (const char* sourceFileName)
 }
 
 // Returns a String with double quotes escaped
-const String withEscapedQuotes (String const& string)
+static const String withEscapedQuotes (String const& string)
 {
   VF_JUCE::String escaped;
 
@@ -107,7 +107,7 @@ const String withEscapedQuotes (String const& string)
 }
 
 // Converts escaped quotes back into regular quotes
-const String withUnescapedQuotes (String const& string)
+static const String withUnescapedQuotes (String const& string)
 {
   String unescaped;
 
