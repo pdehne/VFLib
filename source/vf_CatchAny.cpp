@@ -129,7 +129,7 @@ class ScopedPlatformExceptionCatcher
 {
 public:
   // Missing
-}
+};
 
 }
 
