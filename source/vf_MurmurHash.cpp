@@ -1,7 +1,6 @@
 // Copyright (C) 2008-2011 by Vincent Falco, All rights reserved worldwide.
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
-// From http://code.google.com/p/smhasher/
 
 #ifdef _MSC_VER
 
@@ -12,6 +11,9 @@ BEGIN_VF_NAMESPACE
 #include "vf/vf_MurmurHash.h"
 
 namespace Murmur {
+
+// http://code.google.com/p/smhasher/
+// http://sites.google.com/site/murmurhash/
 
 //-----------------------------------------------------------------------------
 // Block read - if your platform needs to do endian-swapping or can only

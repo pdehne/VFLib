@@ -217,7 +217,7 @@ void PageAllocator::dispose (Pool& pool)
 //------------------------------------------------------------------------------
 
 GlobalPageAllocator::GlobalPageAllocator ()
-  : SharedSingleton <GlobalPageAllocator> (persistAfterCreation)
+  : SharedSingleton <GlobalPageAllocator> (SingletonLifetime::persistAfterCreation)
   , m_allocator (globalPageBytes)
 {
 }

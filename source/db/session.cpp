@@ -20,7 +20,7 @@ class session::Sqlite3 : public SharedSingleton <Sqlite3>
 private:
   friend class SharedSingleton <Sqlite3>;
 
-  Sqlite3 () : SharedSingleton (persistAfterCreation)
+  Sqlite3 () : SharedSingleton (SingletonLifetime::persistAfterCreation)
 	{
     int threadSafe = sqlite3_threadsafe ();
     if (threadSafe != 1)

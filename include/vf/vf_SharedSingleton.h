@@ -21,10 +21,9 @@
 
 //------------------------------------------------------------------------------
 
-namespace detail {
+// "base classes dependent on a template parameter aren't part of lookup." - ville
 
-// Factored out the enum
-class SharedSingletonLifetimes
+class SingletonLifetime
 {
 public:
   enum Lifetime
@@ -45,44 +44,21 @@ public:
   };
 };
 
-}
-
 template <class Object>
-class SharedSingleton : public detail::SharedSingletonLifetimes,
-                        private PerformedAtExit
+class SharedSingleton : private PerformedAtExit
 {
 protected:
-  /*
-  // THIS SUCKS BECAUSE IT IS NOT FACTORED OUT OF THE TEMPLATE PARAMETERS!!!
-  enum Lifetime
-  {
-    // Singleton is created on first use and destroyed when
-    // the last reference is removed.
-    //
-    createOnDemand,
-
-    // Like createOnDemand, but after the Singleton is destroyed an
-    // exception will be thrown if an attempt is made to create it again.
-    //
-    createOnDemandOnce,
-
-    // The singleton is created on first use and persists until program exit.
-    //
-    persistAfterCreation
-  };
-  */
-
-  explicit SharedSingleton (Lifetime const lifetime)
-    : PerformedAtExit (lifetime == persistAfterCreation)
+  explicit SharedSingleton (SingletonLifetime::Lifetime const lifetime)
+    : PerformedAtExit (lifetime == SingletonLifetime::persistAfterCreation)
     , m_lifetime (lifetime)
   {
     vfassert (s_instance == nullptr);
 
-    if (m_lifetime == persistAfterCreation)
+    if (m_lifetime == SingletonLifetime::persistAfterCreation)
     {
       incReferenceCount ();
     }
-    else if (m_lifetime == createOnDemandOnce && *s_created)
+    else if (m_lifetime == SingletonLifetime::createOnDemandOnce && *s_created)
     {
       Throw (Error().fail (__FILE__, __LINE__));
     }
@@ -171,7 +147,7 @@ private:
   }
 
 private:
-  Lifetime const m_lifetime;
+  SingletonLifetime::Lifetime const m_lifetime;
   Atomic::Counter m_refs;
 
 private:

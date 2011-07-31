@@ -12,6 +12,9 @@
 
 namespace Murmur {
 
+// http://code.google.com/p/smhasher/
+// http://sites.google.com/site/murmurhash/
+
 // Murmur Hash
 extern void Hash3_x86_32  ( const void * key, int len, uint32 seed, void * out );
 extern void Hash3_x86_64  ( const void * key, int len, uint32 seed, void * out );
