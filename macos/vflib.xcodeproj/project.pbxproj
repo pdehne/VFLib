@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD0FA0A613FB1AB9004DEE4F /* vf_Allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA08C13FB1AB9004DEE4F /* vf_Allocator.cpp */; };
+		CD0FA0A713FB1AB9004DEE4F /* vf_AllocatorWithoutTls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA08D13FB1AB9004DEE4F /* vf_AllocatorWithoutTls.cpp */; };
+		CD0FA0A813FB1AB9004DEE4F /* vf_AudioBufferPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA08E13FB1AB9004DEE4F /* vf_AudioBufferPool.cpp */; };
+		CD0FA0A913FB1AB9004DEE4F /* vf_BoostThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA08F13FB1AB9004DEE4F /* vf_BoostThread.cpp */; };
+		CD0FA0AA13FB1AB9004DEE4F /* vf_CatchAny.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09013FB1AB9004DEE4F /* vf_CatchAny.cpp */; };
+		CD0FA0AB13FB1AB9004DEE4F /* vf_ConditionVariable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09113FB1AB9004DEE4F /* vf_ConditionVariable.cpp */; };
+		CD0FA0AC13FB1AB9004DEE4F /* vf_Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09213FB1AB9004DEE4F /* vf_Debug.cpp */; };
+		CD0FA0AD13FB1AB9004DEE4F /* vf_Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09313FB1AB9004DEE4F /* vf_Error.cpp */; };
+		CD0FA0AE13FB1AB9004DEE4F /* vf_FPUFlags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09413FB1AB9004DEE4F /* vf_FPUFlags.cpp */; };
+		CD0FA0AF13FB1AB9004DEE4F /* vf_GuiWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09513FB1AB9004DEE4F /* vf_GuiWorker.cpp */; };
+		CD0FA0B013FB1AB9004DEE4F /* vf_JuceThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09613FB1AB9004DEE4F /* vf_JuceThread.cpp */; };
+		CD0FA0B113FB1AB9004DEE4F /* vf_LeakChecked.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09713FB1AB9004DEE4F /* vf_LeakChecked.cpp */; };
+		CD0FA0B213FB1AB9004DEE4F /* vf_Listeners.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09813FB1AB9004DEE4F /* vf_Listeners.cpp */; };
+		CD0FA0B313FB1AB9004DEE4F /* vf_LockFreeDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09913FB1AB9004DEE4F /* vf_LockFreeDelay.cpp */; };
+		CD0FA0B413FB1AB9004DEE4F /* vf_MurmurHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09A13FB1AB9004DEE4F /* vf_MurmurHash.cpp */; };
+		CD0FA0B513FB1AB9004DEE4F /* vf_OncePerSecond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09B13FB1AB9004DEE4F /* vf_OncePerSecond.cpp */; };
+		CD0FA0B613FB1AB9004DEE4F /* vf_PageAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09C13FB1AB9004DEE4F /* vf_PageAllocator.cpp */; };
+		CD0FA0B713FB1AB9004DEE4F /* vf_PagePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09D13FB1AB9004DEE4F /* vf_PagePool.cpp */; };
+		CD0FA0B813FB1AB9004DEE4F /* vf_PerformedAtExit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09E13FB1AB9004DEE4F /* vf_PerformedAtExit.cpp */; };
+		CD0FA0B913FB1AB9004DEE4F /* vf_ReadWriteMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA09F13FB1AB9004DEE4F /* vf_ReadWriteMutex.cpp */; };
+		CD0FA0BA13FB1AB9004DEE4F /* vf_SharedObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A013FB1AB9004DEE4F /* vf_SharedObject.cpp */; };
+		CD0FA0BB13FB1AB9004DEE4F /* vf_SharedSingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A113FB1AB9004DEE4F /* vf_SharedSingleton.cpp */; };
+		CD0FA0BC13FB1AB9004DEE4F /* vf_Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A213FB1AB9004DEE4F /* vf_Thread.cpp */; };
+		CD0FA0BD13FB1AB9004DEE4F /* vf_ThreadIndex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A313FB1AB9004DEE4F /* vf_ThreadIndex.cpp */; };
+		CD0FA0BE13FB1AB9004DEE4F /* vf_ThreadWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A413FB1AB9004DEE4F /* vf_ThreadWorker.cpp */; };
+		CD0FA0BF13FB1AB9004DEE4F /* vf_Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD0FA0A513FB1AB9004DEE4F /* vf_Worker.cpp */; };
+		CD0FA10E13FB1B2E004DEE4F /* vf_AllocatedBy.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0C913FB1B2E004DEE4F /* vf_AllocatedBy.h */; };
+		CD0FA10F13FB1B2E004DEE4F /* vf_Allocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CA13FB1B2E004DEE4F /* vf_Allocator.h */; };
+		CD0FA11013FB1B2E004DEE4F /* vf_AllocatorWithoutTls.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CB13FB1B2E004DEE4F /* vf_AllocatorWithoutTls.h */; };
+		CD0FA11113FB1B2E004DEE4F /* vf_Array.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CC13FB1B2E004DEE4F /* vf_Array.h */; };
+		CD0FA11213FB1B2E004DEE4F /* vf_Atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CD13FB1B2E004DEE4F /* vf_Atomic.h */; };
+		CD0FA11313FB1B2E004DEE4F /* vf_AudioBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CE13FB1B2E004DEE4F /* vf_AudioBufferPool.h */; };
+		CD0FA11413FB1B2E004DEE4F /* vf_AudioSampleBufferArray.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0CF13FB1B2E004DEE4F /* vf_AudioSampleBufferArray.h */; };
+		CD0FA11513FB1B2E004DEE4F /* vf_Bind.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D013FB1B2E004DEE4F /* vf_Bind.h */; };
+		CD0FA11613FB1B2E004DEE4F /* vf_boost_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D113FB1B2E004DEE4F /* vf_boost_includes.h */; };
+		CD0FA11713FB1B2E004DEE4F /* vf_BoostThread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D213FB1B2E004DEE4F /* vf_BoostThread.h */; };
+		CD0FA11813FB1B2E004DEE4F /* vf_CacheLine.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D313FB1B2E004DEE4F /* vf_CacheLine.h */; };
+		CD0FA11913FB1B2E004DEE4F /* vf_CatchAny.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D413FB1B2E004DEE4F /* vf_CatchAny.h */; };
+		CD0FA11A13FB1B2E004DEE4F /* vf_ConditionVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D513FB1B2E004DEE4F /* vf_ConditionVariable.h */; };
+		CD0FA11B13FB1B2E004DEE4F /* vf_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D613FB1B2E004DEE4F /* vf_Config.h */; };
+		CD0FA11C13FB1B2E004DEE4F /* vf_db.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D713FB1B2E004DEE4F /* vf_db.h */; };
+		CD0FA11D13FB1B2E004DEE4F /* vf_Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D813FB1B2E004DEE4F /* vf_Debug.h */; };
+		CD0FA11E13FB1B2E004DEE4F /* vf_Error.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0D913FB1B2E004DEE4F /* vf_Error.h */; };
+		CD0FA11F13FB1B2E004DEE4F /* vf_ext_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DA13FB1B2E004DEE4F /* vf_ext_includes.h */; };
+		CD0FA12013FB1B2E004DEE4F /* vf_FPUFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DB13FB1B2E004DEE4F /* vf_FPUFlags.h */; };
+		CD0FA12113FB1B2E004DEE4F /* vf_Function.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DC13FB1B2E004DEE4F /* vf_Function.h */; };
+		CD0FA12213FB1B2E004DEE4F /* vf_GuiWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DD13FB1B2E004DEE4F /* vf_GuiWorker.h */; };
+		CD0FA12313FB1B2E004DEE4F /* vf_HeaderTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DE13FB1B2E004DEE4F /* vf_HeaderTemplate.h */; };
+		CD0FA12413FB1B2E004DEE4F /* vf_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0DF13FB1B2E004DEE4F /* vf_includes.h */; };
+		CD0FA12513FB1B2E004DEE4F /* vf_Interval.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E013FB1B2E004DEE4F /* vf_Interval.h */; };
+		CD0FA12613FB1B2E004DEE4F /* vf_Intrinsics.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E113FB1B2E004DEE4F /* vf_Intrinsics.h */; };
+		CD0FA12713FB1B2E004DEE4F /* vf_IntrusiveStack.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E213FB1B2E004DEE4F /* vf_IntrusiveStack.h */; };
+		CD0FA12813FB1B2E004DEE4F /* vf_juce_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E313FB1B2E004DEE4F /* vf_juce_includes.h */; };
+		CD0FA12913FB1B2E004DEE4F /* vf_JuceThread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E413FB1B2E004DEE4F /* vf_JuceThread.h */; };
+		CD0FA12A13FB1B2E004DEE4F /* vf_LeakChecked.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E513FB1B2E004DEE4F /* vf_LeakChecked.h */; };
+		CD0FA12B13FB1B2E004DEE4F /* vf_List.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E613FB1B2E004DEE4F /* vf_List.h */; };
+		CD0FA12C13FB1B2E004DEE4F /* vf_Listeners.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E713FB1B2E004DEE4F /* vf_Listeners.h */; };
+		CD0FA12D13FB1B2E004DEE4F /* vf_LockFree.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E813FB1B2E004DEE4F /* vf_LockFree.h */; };
+		CD0FA12E13FB1B2E004DEE4F /* vf_LockFreeDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0E913FB1B2E004DEE4F /* vf_LockFreeDelay.h */; };
+		CD0FA12F13FB1B2E004DEE4F /* vf_LockFreeList.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0EA13FB1B2E004DEE4F /* vf_LockFreeList.h */; };
+		CD0FA13013FB1B2E004DEE4F /* vf_LockFreeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0EB13FB1B2E004DEE4F /* vf_LockFreeQueue.h */; };
+		CD0FA13113FB1B2E004DEE4F /* vf_LockFreeStack.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0EC13FB1B2E004DEE4F /* vf_LockFreeStack.h */; };
+		CD0FA13213FB1B2E004DEE4F /* vf_ManualWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0ED13FB1B2E004DEE4F /* vf_ManualWorker.h */; };
+		CD0FA13313FB1B2E004DEE4F /* vf_Math.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0EE13FB1B2E004DEE4F /* vf_Math.h */; };
+		CD0FA13413FB1B2E004DEE4F /* vf_MemoryAlignment.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0EF13FB1B2E004DEE4F /* vf_MemoryAlignment.h */; };
+		CD0FA13513FB1B2E004DEE4F /* vf_MurmurHash.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F013FB1B2E004DEE4F /* vf_MurmurHash.h */; };
+		CD0FA13613FB1B2E004DEE4F /* vf_Mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F113FB1B2E004DEE4F /* vf_Mutex.h */; };
+		CD0FA13713FB1B2E004DEE4F /* vf_NonCopyable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F213FB1B2E004DEE4F /* vf_NonCopyable.h */; };
+		CD0FA13813FB1B2E004DEE4F /* vf_ObjectAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F313FB1B2E004DEE4F /* vf_ObjectAllocator.h */; };
+		CD0FA13913FB1B2E004DEE4F /* vf_OncePerSecond.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F413FB1B2E004DEE4F /* vf_OncePerSecond.h */; };
+		CD0FA13A13FB1B2E004DEE4F /* vf_PageAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F513FB1B2E004DEE4F /* vf_PageAllocator.h */; };
+		CD0FA13B13FB1B2E004DEE4F /* vf_PagePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F613FB1B2E004DEE4F /* vf_PagePool.h */; };
+		CD0FA13C13FB1B2E004DEE4F /* vf_PerformedAtExit.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F713FB1B2E004DEE4F /* vf_PerformedAtExit.h */; };
+		CD0FA13D13FB1B2E004DEE4F /* vf_ReadWriteMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F813FB1B2E004DEE4F /* vf_ReadWriteMutex.h */; };
+		CD0FA13E13FB1B2E004DEE4F /* vf_ReadWriteMutexBase.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0F913FB1B2E004DEE4F /* vf_ReadWriteMutexBase.h */; };
+		CD0FA13F13FB1B2E004DEE4F /* vf_SafeBool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FA13FB1B2E004DEE4F /* vf_SafeBool.h */; };
+		CD0FA14013FB1B2E004DEE4F /* vf_SharedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FB13FB1B2E004DEE4F /* vf_SharedObject.h */; };
+		CD0FA14113FB1B2E004DEE4F /* vf_SharedObjectPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FC13FB1B2E004DEE4F /* vf_SharedObjectPtr.h */; };
+		CD0FA14213FB1B2E004DEE4F /* vf_SharedSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FD13FB1B2E004DEE4F /* vf_SharedSingleton.h */; };
+		CD0FA14313FB1B2E004DEE4F /* vf_SharedState.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FE13FB1B2E004DEE4F /* vf_SharedState.h */; };
+		CD0FA14413FB1B2E004DEE4F /* vf_SpinLock.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA0FF13FB1B2E004DEE4F /* vf_SpinLock.h */; };
+		CD0FA14513FB1B2E004DEE4F /* vf_StandardAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10013FB1B2E004DEE4F /* vf_StandardAllocator.h */; };
+		CD0FA14613FB1B2E004DEE4F /* vf_StandardHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10113FB1B2E004DEE4F /* vf_StandardHeader.h */; };
+		CD0FA14713FB1B2E004DEE4F /* vf_StaticObject.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10213FB1B2E004DEE4F /* vf_StaticObject.h */; };
+		CD0FA14813FB1B2E004DEE4F /* vf_stdlib_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10313FB1B2E004DEE4F /* vf_stdlib_includes.h */; };
+		CD0FA14913FB1B2E004DEE4F /* vf_String.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10413FB1B2E004DEE4F /* vf_String.h */; };
+		CD0FA14A13FB1B2E004DEE4F /* vf_Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10513FB1B2E004DEE4F /* vf_Thread.h */; };
+		CD0FA14B13FB1B2E004DEE4F /* vf_ThreadBase.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10613FB1B2E004DEE4F /* vf_ThreadBase.h */; };
+		CD0FA14C13FB1B2E004DEE4F /* vf_ThreadIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10713FB1B2E004DEE4F /* vf_ThreadIndex.h */; };
+		CD0FA14D13FB1B2E004DEE4F /* vf_ThreadWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10813FB1B2E004DEE4F /* vf_ThreadWorker.h */; };
+		CD0FA14E13FB1B2E004DEE4F /* vf_Throw.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10913FB1B2E004DEE4F /* vf_Throw.h */; };
+		CD0FA14F13FB1B2E004DEE4F /* vf_Type.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10A13FB1B2E004DEE4F /* vf_Type.h */; };
+		CD0FA15013FB1B2E004DEE4F /* vf_ui.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10B13FB1B2E004DEE4F /* vf_ui.h */; };
+		CD0FA15113FB1B2E004DEE4F /* vf_Worker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10C13FB1B2E004DEE4F /* vf_Worker.h */; };
+		CD0FA15213FB1B2E004DEE4F /* vf.h in Headers */ = {isa = PBXBuildFile; fileRef = CD0FA10D13FB1B2E004DEE4F /* vf.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CD0FA07F13FB19B9004DEE4F /* libvflib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvflib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0FA08C13FB1AB9004DEE4F /* vf_Allocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Allocator.cpp; path = ../source/vf_Allocator.cpp; sourceTree = "<group>"; };
+		CD0FA08D13FB1AB9004DEE4F /* vf_AllocatorWithoutTls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_AllocatorWithoutTls.cpp; path = ../source/vf_AllocatorWithoutTls.cpp; sourceTree = "<group>"; };
+		CD0FA08E13FB1AB9004DEE4F /* vf_AudioBufferPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_AudioBufferPool.cpp; path = ../source/vf_AudioBufferPool.cpp; sourceTree = "<group>"; };
+		CD0FA08F13FB1AB9004DEE4F /* vf_BoostThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_BoostThread.cpp; path = ../source/vf_BoostThread.cpp; sourceTree = "<group>"; };
+		CD0FA09013FB1AB9004DEE4F /* vf_CatchAny.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_CatchAny.cpp; path = ../source/vf_CatchAny.cpp; sourceTree = "<group>"; };
+		CD0FA09113FB1AB9004DEE4F /* vf_ConditionVariable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_ConditionVariable.cpp; path = ../source/vf_ConditionVariable.cpp; sourceTree = "<group>"; };
+		CD0FA09213FB1AB9004DEE4F /* vf_Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Debug.cpp; path = ../source/vf_Debug.cpp; sourceTree = "<group>"; };
+		CD0FA09313FB1AB9004DEE4F /* vf_Error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Error.cpp; path = ../source/vf_Error.cpp; sourceTree = "<group>"; };
+		CD0FA09413FB1AB9004DEE4F /* vf_FPUFlags.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_FPUFlags.cpp; path = ../source/vf_FPUFlags.cpp; sourceTree = "<group>"; };
+		CD0FA09513FB1AB9004DEE4F /* vf_GuiWorker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_GuiWorker.cpp; path = ../source/vf_GuiWorker.cpp; sourceTree = "<group>"; };
+		CD0FA09613FB1AB9004DEE4F /* vf_JuceThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_JuceThread.cpp; path = ../source/vf_JuceThread.cpp; sourceTree = "<group>"; };
+		CD0FA09713FB1AB9004DEE4F /* vf_LeakChecked.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_LeakChecked.cpp; path = ../source/vf_LeakChecked.cpp; sourceTree = "<group>"; };
+		CD0FA09813FB1AB9004DEE4F /* vf_Listeners.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Listeners.cpp; path = ../source/vf_Listeners.cpp; sourceTree = "<group>"; };
+		CD0FA09913FB1AB9004DEE4F /* vf_LockFreeDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_LockFreeDelay.cpp; path = ../source/vf_LockFreeDelay.cpp; sourceTree = "<group>"; };
+		CD0FA09A13FB1AB9004DEE4F /* vf_MurmurHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_MurmurHash.cpp; path = ../source/vf_MurmurHash.cpp; sourceTree = "<group>"; };
+		CD0FA09B13FB1AB9004DEE4F /* vf_OncePerSecond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_OncePerSecond.cpp; path = ../source/vf_OncePerSecond.cpp; sourceTree = "<group>"; };
+		CD0FA09C13FB1AB9004DEE4F /* vf_PageAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_PageAllocator.cpp; path = ../source/vf_PageAllocator.cpp; sourceTree = "<group>"; };
+		CD0FA09D13FB1AB9004DEE4F /* vf_PagePool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_PagePool.cpp; path = ../source/vf_PagePool.cpp; sourceTree = "<group>"; };
+		CD0FA09E13FB1AB9004DEE4F /* vf_PerformedAtExit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_PerformedAtExit.cpp; path = ../source/vf_PerformedAtExit.cpp; sourceTree = "<group>"; };
+		CD0FA09F13FB1AB9004DEE4F /* vf_ReadWriteMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_ReadWriteMutex.cpp; path = ../source/vf_ReadWriteMutex.cpp; sourceTree = "<group>"; };
+		CD0FA0A013FB1AB9004DEE4F /* vf_SharedObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_SharedObject.cpp; path = ../source/vf_SharedObject.cpp; sourceTree = "<group>"; };
+		CD0FA0A113FB1AB9004DEE4F /* vf_SharedSingleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_SharedSingleton.cpp; path = ../source/vf_SharedSingleton.cpp; sourceTree = "<group>"; };
+		CD0FA0A213FB1AB9004DEE4F /* vf_Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Thread.cpp; path = ../source/vf_Thread.cpp; sourceTree = "<group>"; };
+		CD0FA0A313FB1AB9004DEE4F /* vf_ThreadIndex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_ThreadIndex.cpp; path = ../source/vf_ThreadIndex.cpp; sourceTree = "<group>"; };
+		CD0FA0A413FB1AB9004DEE4F /* vf_ThreadWorker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_ThreadWorker.cpp; path = ../source/vf_ThreadWorker.cpp; sourceTree = "<group>"; };
+		CD0FA0A513FB1AB9004DEE4F /* vf_Worker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Worker.cpp; path = ../source/vf_Worker.cpp; sourceTree = "<group>"; };
+		CD0FA0C213FB1AE2004DEE4F /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../source/audio; sourceTree = "<group>"; };
+		CD0FA0C313FB1AEC004DEE4F /* db */ = {isa = PBXFileReference; lastKnownFileType = folder; name = db; path = ../source/db; sourceTree = "<group>"; };
+		CD0FA0C413FB1AF7004DEE4F /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ui; path = ../source/ui; sourceTree = "<group>"; };
+		CD0FA0C613FB1B2E004DEE4F /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../include/vf/audio; sourceTree = "<group>"; };
+		CD0FA0C713FB1B2E004DEE4F /* db */ = {isa = PBXFileReference; lastKnownFileType = folder; name = db; path = ../include/vf/db; sourceTree = "<group>"; };
+		CD0FA0C813FB1B2E004DEE4F /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ui; path = ../include/vf/ui; sourceTree = "<group>"; };
+		CD0FA0C913FB1B2E004DEE4F /* vf_AllocatedBy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_AllocatedBy.h; path = ../include/vf/vf_AllocatedBy.h; sourceTree = "<group>"; };
+		CD0FA0CA13FB1B2E004DEE4F /* vf_Allocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Allocator.h; path = ../include/vf/vf_Allocator.h; sourceTree = "<group>"; };
+		CD0FA0CB13FB1B2E004DEE4F /* vf_AllocatorWithoutTls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_AllocatorWithoutTls.h; path = ../include/vf/vf_AllocatorWithoutTls.h; sourceTree = "<group>"; };
+		CD0FA0CC13FB1B2E004DEE4F /* vf_Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Array.h; path = ../include/vf/vf_Array.h; sourceTree = "<group>"; };
+		CD0FA0CD13FB1B2E004DEE4F /* vf_Atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Atomic.h; path = ../include/vf/vf_Atomic.h; sourceTree = "<group>"; };
+		CD0FA0CE13FB1B2E004DEE4F /* vf_AudioBufferPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_AudioBufferPool.h; path = ../include/vf/vf_AudioBufferPool.h; sourceTree = "<group>"; };
+		CD0FA0CF13FB1B2E004DEE4F /* vf_AudioSampleBufferArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_AudioSampleBufferArray.h; path = ../include/vf/vf_AudioSampleBufferArray.h; sourceTree = "<group>"; };
+		CD0FA0D013FB1B2E004DEE4F /* vf_Bind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Bind.h; path = ../include/vf/vf_Bind.h; sourceTree = "<group>"; };
+		CD0FA0D113FB1B2E004DEE4F /* vf_boost_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_boost_includes.h; path = ../include/vf/vf_boost_includes.h; sourceTree = "<group>"; };
+		CD0FA0D213FB1B2E004DEE4F /* vf_BoostThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_BoostThread.h; path = ../include/vf/vf_BoostThread.h; sourceTree = "<group>"; };
+		CD0FA0D313FB1B2E004DEE4F /* vf_CacheLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_CacheLine.h; path = ../include/vf/vf_CacheLine.h; sourceTree = "<group>"; };
+		CD0FA0D413FB1B2E004DEE4F /* vf_CatchAny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_CatchAny.h; path = ../include/vf/vf_CatchAny.h; sourceTree = "<group>"; };
+		CD0FA0D513FB1B2E004DEE4F /* vf_ConditionVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ConditionVariable.h; path = ../include/vf/vf_ConditionVariable.h; sourceTree = "<group>"; };
+		CD0FA0D613FB1B2E004DEE4F /* vf_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Config.h; path = ../include/vf/vf_Config.h; sourceTree = "<group>"; };
+		CD0FA0D713FB1B2E004DEE4F /* vf_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_db.h; path = ../include/vf/vf_db.h; sourceTree = "<group>"; };
+		CD0FA0D813FB1B2E004DEE4F /* vf_Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Debug.h; path = ../include/vf/vf_Debug.h; sourceTree = "<group>"; };
+		CD0FA0D913FB1B2E004DEE4F /* vf_Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Error.h; path = ../include/vf/vf_Error.h; sourceTree = "<group>"; };
+		CD0FA0DA13FB1B2E004DEE4F /* vf_ext_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ext_includes.h; path = ../include/vf/vf_ext_includes.h; sourceTree = "<group>"; };
+		CD0FA0DB13FB1B2E004DEE4F /* vf_FPUFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_FPUFlags.h; path = ../include/vf/vf_FPUFlags.h; sourceTree = "<group>"; };
+		CD0FA0DC13FB1B2E004DEE4F /* vf_Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Function.h; path = ../include/vf/vf_Function.h; sourceTree = "<group>"; };
+		CD0FA0DD13FB1B2E004DEE4F /* vf_GuiWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_GuiWorker.h; path = ../include/vf/vf_GuiWorker.h; sourceTree = "<group>"; };
+		CD0FA0DE13FB1B2E004DEE4F /* vf_HeaderTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_HeaderTemplate.h; path = ../include/vf/vf_HeaderTemplate.h; sourceTree = "<group>"; };
+		CD0FA0DF13FB1B2E004DEE4F /* vf_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_includes.h; path = ../include/vf/vf_includes.h; sourceTree = "<group>"; };
+		CD0FA0E013FB1B2E004DEE4F /* vf_Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Interval.h; path = ../include/vf/vf_Interval.h; sourceTree = "<group>"; };
+		CD0FA0E113FB1B2E004DEE4F /* vf_Intrinsics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Intrinsics.h; path = ../include/vf/vf_Intrinsics.h; sourceTree = "<group>"; };
+		CD0FA0E213FB1B2E004DEE4F /* vf_IntrusiveStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_IntrusiveStack.h; path = ../include/vf/vf_IntrusiveStack.h; sourceTree = "<group>"; };
+		CD0FA0E313FB1B2E004DEE4F /* vf_juce_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_juce_includes.h; path = ../include/vf/vf_juce_includes.h; sourceTree = "<group>"; };
+		CD0FA0E413FB1B2E004DEE4F /* vf_JuceThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_JuceThread.h; path = ../include/vf/vf_JuceThread.h; sourceTree = "<group>"; };
+		CD0FA0E513FB1B2E004DEE4F /* vf_LeakChecked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LeakChecked.h; path = ../include/vf/vf_LeakChecked.h; sourceTree = "<group>"; };
+		CD0FA0E613FB1B2E004DEE4F /* vf_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_List.h; path = ../include/vf/vf_List.h; sourceTree = "<group>"; };
+		CD0FA0E713FB1B2E004DEE4F /* vf_Listeners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Listeners.h; path = ../include/vf/vf_Listeners.h; sourceTree = "<group>"; };
+		CD0FA0E813FB1B2E004DEE4F /* vf_LockFree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LockFree.h; path = ../include/vf/vf_LockFree.h; sourceTree = "<group>"; };
+		CD0FA0E913FB1B2E004DEE4F /* vf_LockFreeDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LockFreeDelay.h; path = ../include/vf/vf_LockFreeDelay.h; sourceTree = "<group>"; };
+		CD0FA0EA13FB1B2E004DEE4F /* vf_LockFreeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LockFreeList.h; path = ../include/vf/vf_LockFreeList.h; sourceTree = "<group>"; };
+		CD0FA0EB13FB1B2E004DEE4F /* vf_LockFreeQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LockFreeQueue.h; path = ../include/vf/vf_LockFreeQueue.h; sourceTree = "<group>"; };
+		CD0FA0EC13FB1B2E004DEE4F /* vf_LockFreeStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_LockFreeStack.h; path = ../include/vf/vf_LockFreeStack.h; sourceTree = "<group>"; };
+		CD0FA0ED13FB1B2E004DEE4F /* vf_ManualWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ManualWorker.h; path = ../include/vf/vf_ManualWorker.h; sourceTree = "<group>"; };
+		CD0FA0EE13FB1B2E004DEE4F /* vf_Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Math.h; path = ../include/vf/vf_Math.h; sourceTree = "<group>"; };
+		CD0FA0EF13FB1B2E004DEE4F /* vf_MemoryAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_MemoryAlignment.h; path = ../include/vf/vf_MemoryAlignment.h; sourceTree = "<group>"; };
+		CD0FA0F013FB1B2E004DEE4F /* vf_MurmurHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_MurmurHash.h; path = ../include/vf/vf_MurmurHash.h; sourceTree = "<group>"; };
+		CD0FA0F113FB1B2E004DEE4F /* vf_Mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Mutex.h; path = ../include/vf/vf_Mutex.h; sourceTree = "<group>"; };
+		CD0FA0F213FB1B2E004DEE4F /* vf_NonCopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_NonCopyable.h; path = ../include/vf/vf_NonCopyable.h; sourceTree = "<group>"; };
+		CD0FA0F313FB1B2E004DEE4F /* vf_ObjectAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ObjectAllocator.h; path = ../include/vf/vf_ObjectAllocator.h; sourceTree = "<group>"; };
+		CD0FA0F413FB1B2E004DEE4F /* vf_OncePerSecond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_OncePerSecond.h; path = ../include/vf/vf_OncePerSecond.h; sourceTree = "<group>"; };
+		CD0FA0F513FB1B2E004DEE4F /* vf_PageAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_PageAllocator.h; path = ../include/vf/vf_PageAllocator.h; sourceTree = "<group>"; };
+		CD0FA0F613FB1B2E004DEE4F /* vf_PagePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_PagePool.h; path = ../include/vf/vf_PagePool.h; sourceTree = "<group>"; };
+		CD0FA0F713FB1B2E004DEE4F /* vf_PerformedAtExit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_PerformedAtExit.h; path = ../include/vf/vf_PerformedAtExit.h; sourceTree = "<group>"; };
+		CD0FA0F813FB1B2E004DEE4F /* vf_ReadWriteMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ReadWriteMutex.h; path = ../include/vf/vf_ReadWriteMutex.h; sourceTree = "<group>"; };
+		CD0FA0F913FB1B2E004DEE4F /* vf_ReadWriteMutexBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ReadWriteMutexBase.h; path = ../include/vf/vf_ReadWriteMutexBase.h; sourceTree = "<group>"; };
+		CD0FA0FA13FB1B2E004DEE4F /* vf_SafeBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SafeBool.h; path = ../include/vf/vf_SafeBool.h; sourceTree = "<group>"; };
+		CD0FA0FB13FB1B2E004DEE4F /* vf_SharedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SharedObject.h; path = ../include/vf/vf_SharedObject.h; sourceTree = "<group>"; };
+		CD0FA0FC13FB1B2E004DEE4F /* vf_SharedObjectPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SharedObjectPtr.h; path = ../include/vf/vf_SharedObjectPtr.h; sourceTree = "<group>"; };
+		CD0FA0FD13FB1B2E004DEE4F /* vf_SharedSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SharedSingleton.h; path = ../include/vf/vf_SharedSingleton.h; sourceTree = "<group>"; };
+		CD0FA0FE13FB1B2E004DEE4F /* vf_SharedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SharedState.h; path = ../include/vf/vf_SharedState.h; sourceTree = "<group>"; };
+		CD0FA0FF13FB1B2E004DEE4F /* vf_SpinLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_SpinLock.h; path = ../include/vf/vf_SpinLock.h; sourceTree = "<group>"; };
+		CD0FA10013FB1B2E004DEE4F /* vf_StandardAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_StandardAllocator.h; path = ../include/vf/vf_StandardAllocator.h; sourceTree = "<group>"; };
+		CD0FA10113FB1B2E004DEE4F /* vf_StandardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_StandardHeader.h; path = ../include/vf/vf_StandardHeader.h; sourceTree = "<group>"; };
+		CD0FA10213FB1B2E004DEE4F /* vf_StaticObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_StaticObject.h; path = ../include/vf/vf_StaticObject.h; sourceTree = "<group>"; };
+		CD0FA10313FB1B2E004DEE4F /* vf_stdlib_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_stdlib_includes.h; path = ../include/vf/vf_stdlib_includes.h; sourceTree = "<group>"; };
+		CD0FA10413FB1B2E004DEE4F /* vf_String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_String.h; path = ../include/vf/vf_String.h; sourceTree = "<group>"; };
+		CD0FA10513FB1B2E004DEE4F /* vf_Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Thread.h; path = ../include/vf/vf_Thread.h; sourceTree = "<group>"; };
+		CD0FA10613FB1B2E004DEE4F /* vf_ThreadBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ThreadBase.h; path = ../include/vf/vf_ThreadBase.h; sourceTree = "<group>"; };
+		CD0FA10713FB1B2E004DEE4F /* vf_ThreadIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ThreadIndex.h; path = ../include/vf/vf_ThreadIndex.h; sourceTree = "<group>"; };
+		CD0FA10813FB1B2E004DEE4F /* vf_ThreadWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ThreadWorker.h; path = ../include/vf/vf_ThreadWorker.h; sourceTree = "<group>"; };
+		CD0FA10913FB1B2E004DEE4F /* vf_Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Throw.h; path = ../include/vf/vf_Throw.h; sourceTree = "<group>"; };
+		CD0FA10A13FB1B2E004DEE4F /* vf_Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Type.h; path = ../include/vf/vf_Type.h; sourceTree = "<group>"; };
+		CD0FA10B13FB1B2E004DEE4F /* vf_ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ui.h; path = ../include/vf/vf_ui.h; sourceTree = "<group>"; };
+		CD0FA10C13FB1B2E004DEE4F /* vf_Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Worker.h; path = ../include/vf/vf_Worker.h; sourceTree = "<group>"; };
+		CD0FA10D13FB1B2E004DEE4F /* vf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf.h; path = ../include/vf/vf.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD0FA07C13FB19B9004DEE4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD0FA07413FB19B9004DEE4F = {
+			isa = PBXGroup;
+			children = (
+				CD0FA0C513FB1B01004DEE4F /* include */,
+				CD0FA0C113FB1ABE004DEE4F /* source */,
+				CD0FA08013FB19B9004DEE4F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD0FA08013FB19B9004DEE4F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FA07F13FB19B9004DEE4F /* libvflib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD0FA0C113FB1ABE004DEE4F /* source */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FA0C413FB1AF7004DEE4F /* ui */,
+				CD0FA0C313FB1AEC004DEE4F /* db */,
+				CD0FA0C213FB1AE2004DEE4F /* audio */,
+				CD0FA08C13FB1AB9004DEE4F /* vf_Allocator.cpp */,
+				CD0FA08D13FB1AB9004DEE4F /* vf_AllocatorWithoutTls.cpp */,
+				CD0FA08E13FB1AB9004DEE4F /* vf_AudioBufferPool.cpp */,
+				CD0FA08F13FB1AB9004DEE4F /* vf_BoostThread.cpp */,
+				CD0FA09013FB1AB9004DEE4F /* vf_CatchAny.cpp */,
+				CD0FA09113FB1AB9004DEE4F /* vf_ConditionVariable.cpp */,
+				CD0FA09213FB1AB9004DEE4F /* vf_Debug.cpp */,
+				CD0FA09313FB1AB9004DEE4F /* vf_Error.cpp */,
+				CD0FA09413FB1AB9004DEE4F /* vf_FPUFlags.cpp */,
+				CD0FA09513FB1AB9004DEE4F /* vf_GuiWorker.cpp */,
+				CD0FA09613FB1AB9004DEE4F /* vf_JuceThread.cpp */,
+				CD0FA09713FB1AB9004DEE4F /* vf_LeakChecked.cpp */,
+				CD0FA09813FB1AB9004DEE4F /* vf_Listeners.cpp */,
+				CD0FA09913FB1AB9004DEE4F /* vf_LockFreeDelay.cpp */,
+				CD0FA09A13FB1AB9004DEE4F /* vf_MurmurHash.cpp */,
+				CD0FA09B13FB1AB9004DEE4F /* vf_OncePerSecond.cpp */,
+				CD0FA09C13FB1AB9004DEE4F /* vf_PageAllocator.cpp */,
+				CD0FA09D13FB1AB9004DEE4F /* vf_PagePool.cpp */,
+				CD0FA09E13FB1AB9004DEE4F /* vf_PerformedAtExit.cpp */,
+				CD0FA09F13FB1AB9004DEE4F /* vf_ReadWriteMutex.cpp */,
+				CD0FA0A013FB1AB9004DEE4F /* vf_SharedObject.cpp */,
+				CD0FA0A113FB1AB9004DEE4F /* vf_SharedSingleton.cpp */,
+				CD0FA0A213FB1AB9004DEE4F /* vf_Thread.cpp */,
+				CD0FA0A313FB1AB9004DEE4F /* vf_ThreadIndex.cpp */,
+				CD0FA0A413FB1AB9004DEE4F /* vf_ThreadWorker.cpp */,
+				CD0FA0A513FB1AB9004DEE4F /* vf_Worker.cpp */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+		CD0FA0C513FB1B01004DEE4F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CD0FA0C613FB1B2E004DEE4F /* audio */,
+				CD0FA0C713FB1B2E004DEE4F /* db */,
+				CD0FA0C813FB1B2E004DEE4F /* ui */,
+				CD0FA0C913FB1B2E004DEE4F /* vf_AllocatedBy.h */,
+				CD0FA0CA13FB1B2E004DEE4F /* vf_Allocator.h */,
+				CD0FA0CB13FB1B2E004DEE4F /* vf_AllocatorWithoutTls.h */,
+				CD0FA0CC13FB1B2E004DEE4F /* vf_Array.h */,
+				CD0FA0CD13FB1B2E004DEE4F /* vf_Atomic.h */,
+				CD0FA0CE13FB1B2E004DEE4F /* vf_AudioBufferPool.h */,
+				CD0FA0CF13FB1B2E004DEE4F /* vf_AudioSampleBufferArray.h */,
+				CD0FA0D013FB1B2E004DEE4F /* vf_Bind.h */,
+				CD0FA0D113FB1B2E004DEE4F /* vf_boost_includes.h */,
+				CD0FA0D213FB1B2E004DEE4F /* vf_BoostThread.h */,
+				CD0FA0D313FB1B2E004DEE4F /* vf_CacheLine.h */,
+				CD0FA0D413FB1B2E004DEE4F /* vf_CatchAny.h */,
+				CD0FA0D513FB1B2E004DEE4F /* vf_ConditionVariable.h */,
+				CD0FA0D613FB1B2E004DEE4F /* vf_Config.h */,
+				CD0FA0D713FB1B2E004DEE4F /* vf_db.h */,
+				CD0FA0D813FB1B2E004DEE4F /* vf_Debug.h */,
+				CD0FA0D913FB1B2E004DEE4F /* vf_Error.h */,
+				CD0FA0DA13FB1B2E004DEE4F /* vf_ext_includes.h */,
+				CD0FA0DB13FB1B2E004DEE4F /* vf_FPUFlags.h */,
+				CD0FA0DC13FB1B2E004DEE4F /* vf_Function.h */,
+				CD0FA0DD13FB1B2E004DEE4F /* vf_GuiWorker.h */,
+				CD0FA0DE13FB1B2E004DEE4F /* vf_HeaderTemplate.h */,
+				CD0FA0DF13FB1B2E004DEE4F /* vf_includes.h */,
+				CD0FA0E013FB1B2E004DEE4F /* vf_Interval.h */,
+				CD0FA0E113FB1B2E004DEE4F /* vf_Intrinsics.h */,
+				CD0FA0E213FB1B2E004DEE4F /* vf_IntrusiveStack.h */,
+				CD0FA0E313FB1B2E004DEE4F /* vf_juce_includes.h */,
+				CD0FA0E413FB1B2E004DEE4F /* vf_JuceThread.h */,
+				CD0FA0E513FB1B2E004DEE4F /* vf_LeakChecked.h */,
+				CD0FA0E613FB1B2E004DEE4F /* vf_List.h */,
+				CD0FA0E713FB1B2E004DEE4F /* vf_Listeners.h */,
+				CD0FA0E813FB1B2E004DEE4F /* vf_LockFree.h */,
+				CD0FA0E913FB1B2E004DEE4F /* vf_LockFreeDelay.h */,
+				CD0FA0EA13FB1B2E004DEE4F /* vf_LockFreeList.h */,
+				CD0FA0EB13FB1B2E004DEE4F /* vf_LockFreeQueue.h */,
+				CD0FA0EC13FB1B2E004DEE4F /* vf_LockFreeStack.h */,
+				CD0FA0ED13FB1B2E004DEE4F /* vf_ManualWorker.h */,
+				CD0FA0EE13FB1B2E004DEE4F /* vf_Math.h */,
+				CD0FA0EF13FB1B2E004DEE4F /* vf_MemoryAlignment.h */,
+				CD0FA0F013FB1B2E004DEE4F /* vf_MurmurHash.h */,
+				CD0FA0F113FB1B2E004DEE4F /* vf_Mutex.h */,
+				CD0FA0F213FB1B2E004DEE4F /* vf_NonCopyable.h */,
+				CD0FA0F313FB1B2E004DEE4F /* vf_ObjectAllocator.h */,
+				CD0FA0F413FB1B2E004DEE4F /* vf_OncePerSecond.h */,
+				CD0FA0F513FB1B2E004DEE4F /* vf_PageAllocator.h */,
+				CD0FA0F613FB1B2E004DEE4F /* vf_PagePool.h */,
+				CD0FA0F713FB1B2E004DEE4F /* vf_PerformedAtExit.h */,
+				CD0FA0F813FB1B2E004DEE4F /* vf_ReadWriteMutex.h */,
+				CD0FA0F913FB1B2E004DEE4F /* vf_ReadWriteMutexBase.h */,
+				CD0FA0FA13FB1B2E004DEE4F /* vf_SafeBool.h */,
+				CD0FA0FB13FB1B2E004DEE4F /* vf_SharedObject.h */,
+				CD0FA0FC13FB1B2E004DEE4F /* vf_SharedObjectPtr.h */,
+				CD0FA0FD13FB1B2E004DEE4F /* vf_SharedSingleton.h */,
+				CD0FA0FE13FB1B2E004DEE4F /* vf_SharedState.h */,
+				CD0FA0FF13FB1B2E004DEE4F /* vf_SpinLock.h */,
+				CD0FA10013FB1B2E004DEE4F /* vf_StandardAllocator.h */,
+				CD0FA10113FB1B2E004DEE4F /* vf_StandardHeader.h */,
+				CD0FA10213FB1B2E004DEE4F /* vf_StaticObject.h */,
+				CD0FA10313FB1B2E004DEE4F /* vf_stdlib_includes.h */,
+				CD0FA10413FB1B2E004DEE4F /* vf_String.h */,
+				CD0FA10513FB1B2E004DEE4F /* vf_Thread.h */,
+				CD0FA10613FB1B2E004DEE4F /* vf_ThreadBase.h */,
+				CD0FA10713FB1B2E004DEE4F /* vf_ThreadIndex.h */,
+				CD0FA10813FB1B2E004DEE4F /* vf_ThreadWorker.h */,
+				CD0FA10913FB1B2E004DEE4F /* vf_Throw.h */,
+				CD0FA10A13FB1B2E004DEE4F /* vf_Type.h */,
+				CD0FA10B13FB1B2E004DEE4F /* vf_ui.h */,
+				CD0FA10C13FB1B2E004DEE4F /* vf_Worker.h */,
+				CD0FA10D13FB1B2E004DEE4F /* vf.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CD0FA07D13FB19B9004DEE4F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD0FA10E13FB1B2E004DEE4F /* vf_AllocatedBy.h in Headers */,
+				CD0FA10F13FB1B2E004DEE4F /* vf_Allocator.h in Headers */,
+				CD0FA11013FB1B2E004DEE4F /* vf_AllocatorWithoutTls.h in Headers */,
+				CD0FA11113FB1B2E004DEE4F /* vf_Array.h in Headers */,
+				CD0FA11213FB1B2E004DEE4F /* vf_Atomic.h in Headers */,
+				CD0FA11313FB1B2E004DEE4F /* vf_AudioBufferPool.h in Headers */,
+				CD0FA11413FB1B2E004DEE4F /* vf_AudioSampleBufferArray.h in Headers */,
+				CD0FA11513FB1B2E004DEE4F /* vf_Bind.h in Headers */,
+				CD0FA11613FB1B2E004DEE4F /* vf_boost_includes.h in Headers */,
+				CD0FA11713FB1B2E004DEE4F /* vf_BoostThread.h in Headers */,
+				CD0FA11813FB1B2E004DEE4F /* vf_CacheLine.h in Headers */,
+				CD0FA11913FB1B2E004DEE4F /* vf_CatchAny.h in Headers */,
+				CD0FA11A13FB1B2E004DEE4F /* vf_ConditionVariable.h in Headers */,
+				CD0FA11B13FB1B2E004DEE4F /* vf_Config.h in Headers */,
+				CD0FA11C13FB1B2E004DEE4F /* vf_db.h in Headers */,
+				CD0FA11D13FB1B2E004DEE4F /* vf_Debug.h in Headers */,
+				CD0FA11E13FB1B2E004DEE4F /* vf_Error.h in Headers */,
+				CD0FA11F13FB1B2E004DEE4F /* vf_ext_includes.h in Headers */,
+				CD0FA12013FB1B2E004DEE4F /* vf_FPUFlags.h in Headers */,
+				CD0FA12113FB1B2E004DEE4F /* vf_Function.h in Headers */,
+				CD0FA12213FB1B2E004DEE4F /* vf_GuiWorker.h in Headers */,
+				CD0FA12313FB1B2E004DEE4F /* vf_HeaderTemplate.h in Headers */,
+				CD0FA12413FB1B2E004DEE4F /* vf_includes.h in Headers */,
+				CD0FA12513FB1B2E004DEE4F /* vf_Interval.h in Headers */,
+				CD0FA12613FB1B2E004DEE4F /* vf_Intrinsics.h in Headers */,
+				CD0FA12713FB1B2E004DEE4F /* vf_IntrusiveStack.h in Headers */,
+				CD0FA12813FB1B2E004DEE4F /* vf_juce_includes.h in Headers */,
+				CD0FA12913FB1B2E004DEE4F /* vf_JuceThread.h in Headers */,
+				CD0FA12A13FB1B2E004DEE4F /* vf_LeakChecked.h in Headers */,
+				CD0FA12B13FB1B2E004DEE4F /* vf_List.h in Headers */,
+				CD0FA12C13FB1B2E004DEE4F /* vf_Listeners.h in Headers */,
+				CD0FA12D13FB1B2E004DEE4F /* vf_LockFree.h in Headers */,
+				CD0FA12E13FB1B2E004DEE4F /* vf_LockFreeDelay.h in Headers */,
+				CD0FA12F13FB1B2E004DEE4F /* vf_LockFreeList.h in Headers */,
+				CD0FA13013FB1B2E004DEE4F /* vf_LockFreeQueue.h in Headers */,
+				CD0FA13113FB1B2E004DEE4F /* vf_LockFreeStack.h in Headers */,
+				CD0FA13213FB1B2E004DEE4F /* vf_ManualWorker.h in Headers */,
+				CD0FA13313FB1B2E004DEE4F /* vf_Math.h in Headers */,
+				CD0FA13413FB1B2E004DEE4F /* vf_MemoryAlignment.h in Headers */,
+				CD0FA13513FB1B2E004DEE4F /* vf_MurmurHash.h in Headers */,
+				CD0FA13613FB1B2E004DEE4F /* vf_Mutex.h in Headers */,
+				CD0FA13713FB1B2E004DEE4F /* vf_NonCopyable.h in Headers */,
+				CD0FA13813FB1B2E004DEE4F /* vf_ObjectAllocator.h in Headers */,
+				CD0FA13913FB1B2E004DEE4F /* vf_OncePerSecond.h in Headers */,
+				CD0FA13A13FB1B2E004DEE4F /* vf_PageAllocator.h in Headers */,
+				CD0FA13B13FB1B2E004DEE4F /* vf_PagePool.h in Headers */,
+				CD0FA13C13FB1B2E004DEE4F /* vf_PerformedAtExit.h in Headers */,
+				CD0FA13D13FB1B2E004DEE4F /* vf_ReadWriteMutex.h in Headers */,
+				CD0FA13E13FB1B2E004DEE4F /* vf_ReadWriteMutexBase.h in Headers */,
+				CD0FA13F13FB1B2E004DEE4F /* vf_SafeBool.h in Headers */,
+				CD0FA14013FB1B2E004DEE4F /* vf_SharedObject.h in Headers */,
+				CD0FA14113FB1B2E004DEE4F /* vf_SharedObjectPtr.h in Headers */,
+				CD0FA14213FB1B2E004DEE4F /* vf_SharedSingleton.h in Headers */,
+				CD0FA14313FB1B2E004DEE4F /* vf_SharedState.h in Headers */,
+				CD0FA14413FB1B2E004DEE4F /* vf_SpinLock.h in Headers */,
+				CD0FA14513FB1B2E004DEE4F /* vf_StandardAllocator.h in Headers */,
+				CD0FA14613FB1B2E004DEE4F /* vf_StandardHeader.h in Headers */,
+				CD0FA14713FB1B2E004DEE4F /* vf_StaticObject.h in Headers */,
+				CD0FA14813FB1B2E004DEE4F /* vf_stdlib_includes.h in Headers */,
+				CD0FA14913FB1B2E004DEE4F /* vf_String.h in Headers */,
+				CD0FA14A13FB1B2E004DEE4F /* vf_Thread.h in Headers */,
+				CD0FA14B13FB1B2E004DEE4F /* vf_ThreadBase.h in Headers */,
+				CD0FA14C13FB1B2E004DEE4F /* vf_ThreadIndex.h in Headers */,
+				CD0FA14D13FB1B2E004DEE4F /* vf_ThreadWorker.h in Headers */,
+				CD0FA14E13FB1B2E004DEE4F /* vf_Throw.h in Headers */,
+				CD0FA14F13FB1B2E004DEE4F /* vf_Type.h in Headers */,
+				CD0FA15013FB1B2E004DEE4F /* vf_ui.h in Headers */,
+				CD0FA15113FB1B2E004DEE4F /* vf_Worker.h in Headers */,
+				CD0FA15213FB1B2E004DEE4F /* vf.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CD0FA07E13FB19B9004DEE4F /* vflib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD0FA08313FB19BA004DEE4F /* Build configuration list for PBXNativeTarget "vflib" */;
+			buildPhases = (
+				CD0FA07B13FB19B9004DEE4F /* Sources */,
+				CD0FA07C13FB19B9004DEE4F /* Frameworks */,
+				CD0FA07D13FB19B9004DEE4F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vflib;
+			productName = vflib;
+			productReference = CD0FA07F13FB19B9004DEE4F /* libvflib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD0FA07613FB19B9004DEE4F /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = CD0FA07913FB19B9004DEE4F /* Build configuration list for PBXProject "vflib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD0FA07413FB19B9004DEE4F;
+			productRefGroup = CD0FA08013FB19B9004DEE4F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD0FA07E13FB19B9004DEE4F /* vflib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD0FA07B13FB19B9004DEE4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD0FA0A613FB1AB9004DEE4F /* vf_Allocator.cpp in Sources */,
+				CD0FA0A713FB1AB9004DEE4F /* vf_AllocatorWithoutTls.cpp in Sources */,
+				CD0FA0A813FB1AB9004DEE4F /* vf_AudioBufferPool.cpp in Sources */,
+				CD0FA0A913FB1AB9004DEE4F /* vf_BoostThread.cpp in Sources */,
+				CD0FA0AA13FB1AB9004DEE4F /* vf_CatchAny.cpp in Sources */,
+				CD0FA0AB13FB1AB9004DEE4F /* vf_ConditionVariable.cpp in Sources */,
+				CD0FA0AC13FB1AB9004DEE4F /* vf_Debug.cpp in Sources */,
+				CD0FA0AD13FB1AB9004DEE4F /* vf_Error.cpp in Sources */,
+				CD0FA0AE13FB1AB9004DEE4F /* vf_FPUFlags.cpp in Sources */,
+				CD0FA0AF13FB1AB9004DEE4F /* vf_GuiWorker.cpp in Sources */,
+				CD0FA0B013FB1AB9004DEE4F /* vf_JuceThread.cpp in Sources */,
+				CD0FA0B113FB1AB9004DEE4F /* vf_LeakChecked.cpp in Sources */,
+				CD0FA0B213FB1AB9004DEE4F /* vf_Listeners.cpp in Sources */,
+				CD0FA0B313FB1AB9004DEE4F /* vf_LockFreeDelay.cpp in Sources */,
+				CD0FA0B413FB1AB9004DEE4F /* vf_MurmurHash.cpp in Sources */,
+				CD0FA0B513FB1AB9004DEE4F /* vf_OncePerSecond.cpp in Sources */,
+				CD0FA0B613FB1AB9004DEE4F /* vf_PageAllocator.cpp in Sources */,
+				CD0FA0B713FB1AB9004DEE4F /* vf_PagePool.cpp in Sources */,
+				CD0FA0B813FB1AB9004DEE4F /* vf_PerformedAtExit.cpp in Sources */,
+				CD0FA0B913FB1AB9004DEE4F /* vf_ReadWriteMutex.cpp in Sources */,
+				CD0FA0BA13FB1AB9004DEE4F /* vf_SharedObject.cpp in Sources */,
+				CD0FA0BB13FB1AB9004DEE4F /* vf_SharedSingleton.cpp in Sources */,
+				CD0FA0BC13FB1AB9004DEE4F /* vf_Thread.cpp in Sources */,
+				CD0FA0BD13FB1AB9004DEE4F /* vf_ThreadIndex.cpp in Sources */,
+				CD0FA0BE13FB1AB9004DEE4F /* vf_ThreadWorker.cpp in Sources */,
+				CD0FA0BF13FB1AB9004DEE4F /* vf_Worker.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CD0FA08113FB19BA004DEE4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${JUCE}",
+					"${VFLIB}",
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CD0FA08213FB19BA004DEE4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${JUCE}",
+					"${VFLIB}",
+					/opt/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CD0FA08413FB19BA004DEE4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CD0FA08513FB19BA004DEE4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD0FA07913FB19B9004DEE4F /* Build configuration list for PBXProject "vflib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD0FA08113FB19BA004DEE4F /* Debug */,
+				CD0FA08213FB19BA004DEE4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD0FA08313FB19BA004DEE4F /* Build configuration list for PBXNativeTarget "vflib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD0FA08413FB19BA004DEE4F /* Debug */,
+				CD0FA08513FB19BA004DEE4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD0FA07613FB19B9004DEE4F /* Project object */;
+}
