@@ -55,11 +55,20 @@ bool BoostThread::PollingBased::wait (int milliseconds, BoostThread& thread)
       m_state = stateWait;
 
       if (milliseconds >= 0)
-        interrupted = m_cond.timed_wait (lock,
-          boost::posix_time::milliseconds (milliseconds));
+      {
+        boost::system_time timeout = boost::get_system_time() + boost::posix_time::milliseconds(milliseconds);
+        
+        do
+        {
+          interrupted = m_cond.timed_wait (lock, timeout);
+        } while (m_state == stateWait && interrupted);
+      }
       else
-        interrupted = m_cond.timed_wait (lock,
-          boost::posix_time::ptime (boost::date_time::max_date_time));
+      {
+        while(m_state == stateWait)
+          m_cond.wait (lock);
+        interrupted = true;
+      }
 
       if (!interrupted)
         m_state = stateRun;

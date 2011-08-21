@@ -533,9 +533,9 @@
 				HEADER_SEARCH_PATHS = (
 					"${JUCE}",
 					"${VFLIB}",
-					/opt/local/include,
+					"${BOOSTMACOS}/include",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -559,9 +559,9 @@
 				HEADER_SEARCH_PATHS = (
 					"${JUCE}",
 					"${VFLIB}",
-					/opt/local/include,
+					"${BOOSTMACOS}/include",
 				);
-				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
