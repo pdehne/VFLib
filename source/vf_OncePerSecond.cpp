@@ -91,7 +91,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-OncePerSecond::OncePerSecond ()/tmp/App Store.jpg
+OncePerSecond::OncePerSecond ()
 {
   m_elem.instance = TimerSingleton::getInstance ();
   m_elem.object = this;
