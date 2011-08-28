@@ -28,7 +28,7 @@ Error blob::select (session& s,
                     char const* zTable,
                     char const* zColumn,
                     rowid id,
-                    bool readAndWrite)
+                    bool readAndWrite) noexcept
 {
   close();
 
