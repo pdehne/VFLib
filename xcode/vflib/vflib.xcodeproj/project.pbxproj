@@ -137,6 +137,7 @@
 		CD693C2D140A3164009EC712 /* vf_ui.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE8140A3163009EC712 /* vf_ui.h */; };
 		CD693C2E140A3164009EC712 /* vf_Worker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE9140A3163009EC712 /* vf_Worker.h */; };
 		CD693C2F140A3164009EC712 /* vf.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BEA140A3163009EC712 /* vf.h */; };
+		CDC10736140CD90A00C7BC36 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC10735140CD8EC00C7BC36 /* boost.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -271,6 +272,7 @@
 		CD693BE8140A3163009EC712 /* vf_ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_ui.h; path = ../../include/vf/vf_ui.h; sourceTree = "<group>"; };
 		CD693BE9140A3163009EC712 /* vf_Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf_Worker.h; path = ../../include/vf/vf_Worker.h; sourceTree = "<group>"; };
 		CD693BEA140A3163009EC712 /* vf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vf.h; path = ../../include/vf/vf.h; sourceTree = "<group>"; };
+		CDC10735140CD8EC00C7BC36 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../../../../libs/boost.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC10736140CD90A00C7BC36 /* boost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +290,7 @@
 		CD693ABC140A2EBC009EC712 = {
 			isa = PBXGroup;
 			children = (
+				CDC10735140CD8EC00C7BC36 /* boost.framework */,
 				CD693AE2140A2FEA009EC712 /* source */,
 				CD693AE1140A2FE3009EC712 /* include */,
 				CD693AC8140A2EBC009EC712 /* Products */,
@@ -731,6 +735,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/vflib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../libs\"",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -746,6 +754,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/vflib.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../libs\"",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
