@@ -60,14 +60,14 @@ template <typename T, typename U>
 void operator== (SafeBool <T> const& lhs, SafeBool <U> const& rhs)
 {
   lhs.disallowed ();
-  return false;
+  // return false;
 }
 
 template <typename T,typename U> 
 void operator!= (SafeBool <T> const& lhs, SafeBool <U> const& rhs)
 {
   lhs.disallowed ();
-  return false;	
+  // return false;	
 }
 
 #endif
