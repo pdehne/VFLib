@@ -107,6 +107,12 @@ ThreadBase::Interrupted BoostThread::PollingBased::interruptionPoint (BoostThrea
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
+  if(!thread.isTheCurrentThread())
+  {
+      int x=0;
+      x++;
+  }
+
   bool interrupted;
 
   boost::unique_lock <boost::mutex> lock (m_mutex);
