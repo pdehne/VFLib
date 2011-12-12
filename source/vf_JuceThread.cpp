@@ -184,14 +184,18 @@ JuceThread::JuceThread (String name)
 
 JuceThread::~JuceThread ()
 {
+  m_runEvent.signal ();
   join ();
 }
 
 void JuceThread::start (const Function <void (void)>& f)
 {
   m_function = f;
-  
+
   VF_JUCE::Thread::startThread ();
+
+  // prevent data race with member variables
+  m_runEvent.signal ();
 }
 
 void JuceThread::join ()
@@ -201,13 +205,12 @@ void JuceThread::join ()
 
 JuceThread::id JuceThread::getId () const
 {
-  return VF_JUCE::Thread::getThreadId ();
+  return m_threadId;
 }
 
 bool JuceThread::isTheCurrentThread () const
 {
-  return VF_JUCE::Thread::getCurrentThreadId () ==
-         VF_JUCE::Thread::getThreadId ();
+  return VF_JUCE::Thread::getCurrentThreadId () == m_threadId;
 }
 
 void JuceThread::setPriority (int priority)
@@ -217,6 +220,10 @@ void JuceThread::setPriority (int priority)
 
 void JuceThread::run ()
 {
+  m_threadId = VF_JUCE::Thread::getThreadId ();
+
+  m_runEvent.wait ();
+
   CatchAny (m_function);
 }
 

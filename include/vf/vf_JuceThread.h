@@ -103,6 +103,8 @@ private:
   void run ();
 
   Function <void (void)> m_function;
+  VF_JUCE::WaitableEvent m_runEvent;
+  id m_threadId;
 };
 
 //------------------------------------------------------------------------------
