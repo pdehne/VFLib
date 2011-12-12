@@ -143,11 +143,16 @@ BoostThread::BoostThread (String name)
 void BoostThread::start (Function <void (void)> const& f)
 {
   m_thread = boost::thread (boost::bind (&BoostThread::run, this, f));
+
+  // kick the thread into gear, AFTER we assign data members, to prevent a data race.
+  m_runEvent.signal ();
 }
 
 void BoostThread::run (Function <void (void)> f)
 {
   VF_JUCE::Thread::setCurrentThreadName (m_name);
+
+  m_runEvent.wait ();
 
   f ();
 }
@@ -155,6 +160,9 @@ void BoostThread::run (Function <void (void)> f)
 void BoostThread::join ()
 {
   interrupt ();
+
+  // signal just in case
+  m_runEvent.signal ();
 
   m_thread.join ();
 }

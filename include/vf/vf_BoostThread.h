@@ -68,6 +68,7 @@ private:
 private:
   String const m_name;
   boost::thread m_thread;
+  VF_JUCE::WaitableEvent m_runEvent;
 };
 
 //------------------------------------------------------------------------------
