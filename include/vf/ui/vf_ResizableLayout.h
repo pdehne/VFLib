@@ -1,4 +1,4 @@
-// Copyright (C) 2008-2011 by One Guy Group, Inc., All rights reserved worldwide.
+// Copyright (C) 2008 by One Guy Group, Inc., All rights reserved worldwide.
 
 #ifndef __VF_RESIZABLELAYOUT_VFHEADER__
 #define __VF_RESIZABLELAYOUT_VFHEADER__
