@@ -14,7 +14,13 @@ namespace LockFree {
 class Delay
 {
 public:
-  Delay ();
+  void spin ();
+};
+
+class DelayWithBackoff
+{
+public:
+  DelayWithBackoff ();
 
   void spin ();
 

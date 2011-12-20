@@ -12,8 +12,9 @@
 // where the error occurred along with some human readable text. It
 // can be freely copied and passed around as a return value and all that.
 
-class Error : public std::exception
-            , public SafeBool <Error>
+class Error
+  : public std::exception
+  , public SafeBool <Error>
 {
 public:
   // These are for when the caller wants to distinguish
@@ -54,8 +55,6 @@ public:
   Code code () const;
   bool failed () const;
 
-  //operator bool() const;
-  //using SafeBool <Error>::operator SafeBool;
   bool asBoolean () const;
 
   const String getReasonText () const;
