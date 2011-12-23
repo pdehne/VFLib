@@ -25,7 +25,7 @@ inline size_t bytesNeededForAlignment (P const* const p)
          & allocAlignMask;
 }
 
-// Returns the number of bytes to make size an aligned size
+// Returns the number of bytes to make "bytes" an aligned size
 inline size_t sizeAdjustedForAlignment (const size_t bytes)
 {
   return (bytes + allocAlignMask) & ~allocAlignMask;

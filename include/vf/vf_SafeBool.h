@@ -12,6 +12,10 @@
 // without the usual harmful side effects.
 //
 
+//------------------------------------------------------------------------------
+
+namespace detail {
+
 class SafeBoolBase
 {
 private:
@@ -29,14 +33,18 @@ protected:
   ~SafeBoolBase () { }
 };
 
+}
+
+//------------------------------------------------------------------------------
+
 template <typename T = void>
-class SafeBool : public SafeBoolBase
+class SafeBool : public detail::SafeBoolBase
 {
 public:
   operator boolean_t () const
   {
     return (static_cast <const T*> (this))->asBoolean ()
-      ? &SafeBoolBase::allowed : 0;
+      ? &detail::SafeBoolBase::allowed : 0;
   }
 
 protected:

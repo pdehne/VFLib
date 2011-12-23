@@ -59,8 +59,12 @@ private:
   {
     Mutex::ScopedLockType lock (m_mutex);
 
-    for (List::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
-      iter->object->doOncePerSecond ();
+    for (List::iterator iter = m_list.begin(); iter != m_list.end();)
+    {
+      OncePerSecond* object = iter->object;
+      ++iter;
+      object->doOncePerSecond ();
+    }
   }
 
 public:

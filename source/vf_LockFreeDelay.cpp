@@ -8,7 +8,6 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeDelay.h"
 
-#include "vf/vf_Intrinsics.h"
 #include "vf/vf_Thread.h"
 
 namespace LockFree {
@@ -24,9 +23,9 @@ DelayWithBackoff::DelayWithBackoff () : m_backoff (0)
 {
 }
 
-#if 0
 void DelayWithBackoff::spin ()
 {
+#if 0
   if (m_backoff < 10)
   {
     Intrinsic::mm_pause <1> ();
@@ -53,8 +52,12 @@ void DelayWithBackoff::spin ()
   }
 
   ++m_backoff;
-}
+
+#else
+  CurrentThread::yield ();
+
 #endif
+}
 
 }
 

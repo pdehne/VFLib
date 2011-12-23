@@ -13,7 +13,7 @@
 //
 
 template <class Exception>
-inline void Throw (const Exception& e)
+inline void Throw (Exception const& e)
 {
   Debug::breakPoint ();
 

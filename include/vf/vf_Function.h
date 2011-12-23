@@ -45,13 +45,13 @@ public:
     constructCopyOf (None ());
   }
 
-  Function (const Function& f)
+  Function (Function const& f)
   {
     f.getCall().constructCopyInto (m_storage);
   }
 
   template <class Functor>
-  Function (const Functor& f)
+  Function (Functor const& f)
   {
     constructCopyOf (f);
   }
@@ -61,7 +61,7 @@ public:
     getCall().~Call();
   }
 
-  Function& operator= (const Function& f)
+  Function& operator= (Function const& f)
   {
     getCall().~Call();
     f.getCall().constructCopyInto (m_storage);
@@ -69,7 +69,7 @@ public:
   }
 
   template <class Functor>
-  Function& operator= (const Functor& f)
+  Function& operator= (Functor const& f)
   {
     getCall().~Call();
     constructCopyOf (f);
@@ -83,7 +83,7 @@ public:
 
 private:
   template <class Functor>
-  void constructCopyOf (const Functor& f)
+  void constructCopyOf (Functor const& f)
   {
     // If this generates a compile error it means that
     // the functor is too large for the static buffer.
@@ -106,7 +106,7 @@ private:
   template <class Functor>
   struct StoredCall : Call
   {
-    explicit StoredCall (const Functor& f) : m_f (f) { }
+    explicit StoredCall (Functor const& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
     result_type operator() () { return m_f (); }
@@ -119,9 +119,9 @@ private:
     return *reinterpret_cast <Call*> (&m_storage[0]);
   }
 
-  const Call& getCall () const
+  Call const& getCall () const
   {
-    return *reinterpret_cast <const Call*> (&m_storage[0]);
+    return *reinterpret_cast <Call const*> (&m_storage[0]);
   }
 
   char m_storage [Bytes]; // should be enough
@@ -160,7 +160,7 @@ public:
   }
 
   template <class Functor>
-  Function (const Functor& f)
+  Function (Functor const& f)
   {
     constructCopyOf (f);
   }
@@ -178,7 +178,7 @@ public:
   }
 
   template <class Functor>
-  Function& operator= (const Functor& f)
+  Function& operator= (Functor const& f)
   {
     getCall().~Call();
     constructCopyOf (f);
@@ -192,7 +192,7 @@ public:
 
 private:
   template <class Functor>
-  void constructCopyOf (const Functor& f)
+  void constructCopyOf (Functor const& f)
   {
     // If this generates a compile error it means that
     // the functor is too large for the static buffer.
@@ -215,7 +215,7 @@ private:
   template <class Functor>
   struct StoredCall : Call
   {
-    explicit StoredCall (const Functor& f) : m_f (f) { }
+    explicit StoredCall (Functor const& f) : m_f (f) { }
     StoredCall (const StoredCall& c) : m_f (c.m_f) { }
     void constructCopyInto (void* p) const { new (p) StoredCall (m_f); }
     result_type operator() (T1 t1) { return m_f (t1); }
@@ -228,9 +228,9 @@ private:
     return *reinterpret_cast <Call*> (&m_storage[0]);
   }
 
-  const Call& getCall () const
+  Call const& getCall () const
   {
-    return *reinterpret_cast <const Call*> (&m_storage[0]);
+    return *reinterpret_cast <Call const*> (&m_storage[0]);
   }
 
   char m_storage [Bytes]; // should be enough

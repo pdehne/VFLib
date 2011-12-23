@@ -53,14 +53,6 @@
 #include "vf/vf_Interval.h"
 #endif
 
-#ifndef __VF_INTRINSICS_VFHEADER__
-#include "vf/vf_Intrinsics.h"
-#endif
-
-#ifndef __VF_INTRUSIVESTACK_VFHEADER__
-#include "vf/vf_IntrusiveStack.h"
-#endif
-
 #ifndef __VF_LIST_VFHEADER__
 #include "vf/vf_List.h"
 #endif

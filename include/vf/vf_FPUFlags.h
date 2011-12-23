@@ -15,8 +15,8 @@ public:
   struct Flag
   {
     Flag () : m_set (false) { }
-    Flag (const Flag& flag) : m_set (flag.m_set), m_value (flag.m_value) { }
-    Flag& operator= (const Flag& flag)
+    Flag (Flag const& flag) : m_set (flag.m_set), m_value (flag.m_value) { }
+    Flag& operator= (Flag const& flag)
       { m_set = flag.m_set; m_value = flag.m_value; return *this; }
     bool is_set () const { return m_set; }
     bool value () const { assert (m_set); return m_value; }
@@ -32,8 +32,8 @@ public:
   struct Enum
   {
     Enum () : m_set (false) { }
-    Enum (const Enum& value) : m_set (value.m_set), m_value (value.m_value) { }
-    Enum& operator= (const Enum& value)
+    Enum (Enum const& value) : m_set (value.m_set), m_value (value.m_value) { }
+    Enum& operator= (Enum const& value)
       { m_set = value.m_set; m_value = value.m_value; return *this; }
     bool is_set () const { return m_set; }
     Constants value () const { return m_value; }
@@ -133,13 +133,13 @@ public:
   Enum <Precision>& getPrecision ()             { return m_precision; }
 
   // Clears our flags if they are not set in another object
-  void clearUnsetFlagsFrom (const FPUFlags& flags);
+  void clearUnsetFlagsFrom (FPUFlags const& flags);
 
   // Retrieve the current flags fron the FPU
   static FPUFlags getCurrent ();
 
   // Change the current FPU flags based on what is set in flags
-  static void setCurrent (const FPUFlags& flags);
+  static void setCurrent (FPUFlags const& flags);
 
 private:
   Flag m_maskNaNs;
@@ -162,7 +162,7 @@ private:
 class ScopedFPUFlags
 {
 public:
-  ScopedFPUFlags (const FPUFlags& flagsToSet)
+  ScopedFPUFlags (FPUFlags const& flagsToSet)
   {
     m_savedFlags = FPUFlags::getCurrent ();
     m_savedFlags.clearUnsetFlagsFrom (flagsToSet);
