@@ -456,6 +456,9 @@
 /* Begin PBXProject section */
 		CD0FA07613FB19B9004DEE4F /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = CD0FA07913FB19B9004DEE4F /* Build configuration list for PBXProject "vflib" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;

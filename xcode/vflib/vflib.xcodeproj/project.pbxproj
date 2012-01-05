@@ -7,6 +7,121 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD61BFE014B497EB0075D8A8 /* vf_Allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B20140A30A8009EC712 /* vf_Allocator.cpp */; };
+		CD61BFE114B497EB0075D8A8 /* vf_AllocatorWithoutTls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B21140A30A8009EC712 /* vf_AllocatorWithoutTls.cpp */; };
+		CD61BFE214B497EB0075D8A8 /* vf_AudioBufferPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B22140A30A8009EC712 /* vf_AudioBufferPool.cpp */; };
+		CD61BFE314B497EB0075D8A8 /* vf_BoostThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B23140A30A8009EC712 /* vf_BoostThread.cpp */; };
+		CD61BFE414B497EB0075D8A8 /* vf_CatchAny.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B24140A30A8009EC712 /* vf_CatchAny.cpp */; };
+		CD61BFE514B497EB0075D8A8 /* vf_ConditionVariable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B25140A30A8009EC712 /* vf_ConditionVariable.cpp */; };
+		CD61BFE614B497EB0075D8A8 /* vf_Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B26140A30A8009EC712 /* vf_Debug.cpp */; };
+		CD61BFE714B497EB0075D8A8 /* vf_Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B27140A30A8009EC712 /* vf_Error.cpp */; };
+		CD61BFE814B497EB0075D8A8 /* vf_FPUFlags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B28140A30A8009EC712 /* vf_FPUFlags.cpp */; };
+		CD61BFE914B497EB0075D8A8 /* vf_GuiWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B29140A30A8009EC712 /* vf_GuiWorker.cpp */; };
+		CD61BFEA14B497EB0075D8A8 /* vf_JuceThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2A140A30A8009EC712 /* vf_JuceThread.cpp */; };
+		CD61BFEB14B497EB0075D8A8 /* vf_LeakChecked.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2B140A30A8009EC712 /* vf_LeakChecked.cpp */; };
+		CD61BFEC14B497EB0075D8A8 /* vf_Listeners.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2C140A30A8009EC712 /* vf_Listeners.cpp */; };
+		CD61BFED14B497EB0075D8A8 /* vf_LockFreeDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2D140A30A8009EC712 /* vf_LockFreeDelay.cpp */; };
+		CD61BFEE14B497EB0075D8A8 /* vf_MurmurHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2E140A30A8009EC712 /* vf_MurmurHash.cpp */; };
+		CD61BFEF14B497EB0075D8A8 /* vf_OncePerSecond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B2F140A30A8009EC712 /* vf_OncePerSecond.cpp */; };
+		CD61BFF014B497EB0075D8A8 /* vf_PageAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B30140A30A8009EC712 /* vf_PageAllocator.cpp */; };
+		CD61BFF114B497EB0075D8A8 /* vf_PagePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B31140A30A8009EC712 /* vf_PagePool.cpp */; };
+		CD61BFF214B497EB0075D8A8 /* vf_PerformedAtExit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B32140A30A8009EC712 /* vf_PerformedAtExit.cpp */; };
+		CD61BFF314B497EB0075D8A8 /* vf_ReadWriteMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B33140A30A8009EC712 /* vf_ReadWriteMutex.cpp */; };
+		CD61BFF414B497EB0075D8A8 /* vf_SharedObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B34140A30A8009EC712 /* vf_SharedObject.cpp */; };
+		CD61BFF514B497EB0075D8A8 /* vf_SharedSingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B35140A30A8009EC712 /* vf_SharedSingleton.cpp */; };
+		CD61BFF614B497EB0075D8A8 /* vf_Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B36140A30A8009EC712 /* vf_Thread.cpp */; };
+		CD61BFF714B497EB0075D8A8 /* vf_ThreadIndex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B37140A30A8009EC712 /* vf_ThreadIndex.cpp */; };
+		CD61BFF814B497EB0075D8A8 /* vf_ThreadWorker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B38140A30A8009EC712 /* vf_ThreadWorker.cpp */; };
+		CD61BFF914B497EB0075D8A8 /* vf_Worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B39140A30A8009EC712 /* vf_Worker.cpp */; };
+		CD61BFFE14B499100075D8A8 /* vf_Interval.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBD140A3163009EC712 /* vf_Interval.h */; };
+		CD61BFFF14B499DB0075D8A8 /* vf_ThreadIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE4140A3163009EC712 /* vf_ThreadIndex.h */; };
+		CD61C00014B499E10075D8A8 /* vf_ThreadWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE5140A3163009EC712 /* vf_ThreadWorker.h */; };
+		CD61C00114B499E10075D8A8 /* vf_Throw.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE6140A3163009EC712 /* vf_Throw.h */; };
+		CD61C00214B499E10075D8A8 /* vf_Type.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE7140A3163009EC712 /* vf_Type.h */; };
+		CD61C00314B499E10075D8A8 /* vf_ui.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE8140A3163009EC712 /* vf_ui.h */; };
+		CD61C00414B499E10075D8A8 /* vf_Worker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE9140A3163009EC712 /* vf_Worker.h */; };
+		CD61C00514B499E10075D8A8 /* vf.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BEA140A3163009EC712 /* vf.h */; };
+		CD61C00614B499F10075D8A8 /* vf_StandardAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDD140A3163009EC712 /* vf_StandardAllocator.h */; };
+		CD61C00714B499F10075D8A8 /* vf_StandardHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDE140A3163009EC712 /* vf_StandardHeader.h */; };
+		CD61C00814B499F10075D8A8 /* vf_StaticObject.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDF140A3163009EC712 /* vf_StaticObject.h */; };
+		CD61C00914B499F10075D8A8 /* vf_stdlib_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE0140A3163009EC712 /* vf_stdlib_includes.h */; };
+		CD61C00A14B499F10075D8A8 /* vf_String.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE1140A3163009EC712 /* vf_String.h */; };
+		CD61C00B14B499F10075D8A8 /* vf_Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE2140A3163009EC712 /* vf_Thread.h */; };
+		CD61C00C14B499F10075D8A8 /* vf_ThreadBase.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BE3140A3163009EC712 /* vf_ThreadBase.h */; };
+		CD61C00D14B49A010075D8A8 /* vf_MurmurHash.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCD140A3163009EC712 /* vf_MurmurHash.h */; };
+		CD61C00E14B49A010075D8A8 /* vf_Mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCE140A3163009EC712 /* vf_Mutex.h */; };
+		CD61C00F14B49A010075D8A8 /* vf_NonCopyable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCF140A3163009EC712 /* vf_NonCopyable.h */; };
+		CD61C01014B49A010075D8A8 /* vf_ObjectAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD0140A3163009EC712 /* vf_ObjectAllocator.h */; };
+		CD61C01114B49A010075D8A8 /* vf_OncePerSecond.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD1140A3163009EC712 /* vf_OncePerSecond.h */; };
+		CD61C01214B49A010075D8A8 /* vf_PageAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD2140A3163009EC712 /* vf_PageAllocator.h */; };
+		CD61C01314B49A010075D8A8 /* vf_PagePool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD3140A3163009EC712 /* vf_PagePool.h */; };
+		CD61C01414B49A010075D8A8 /* vf_PerformedAtExit.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD4140A3163009EC712 /* vf_PerformedAtExit.h */; };
+		CD61C01514B49A010075D8A8 /* vf_ReadWriteMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD5140A3163009EC712 /* vf_ReadWriteMutex.h */; };
+		CD61C01614B49A010075D8A8 /* vf_ReadWriteMutexBase.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD6140A3163009EC712 /* vf_ReadWriteMutexBase.h */; };
+		CD61C01714B49A010075D8A8 /* vf_SafeBool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD7140A3163009EC712 /* vf_SafeBool.h */; };
+		CD61C01814B49A010075D8A8 /* vf_SharedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD8140A3163009EC712 /* vf_SharedObject.h */; };
+		CD61C01914B49A010075D8A8 /* vf_SharedObjectPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BD9140A3163009EC712 /* vf_SharedObjectPtr.h */; };
+		CD61C01A14B49A010075D8A8 /* vf_SharedSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDA140A3163009EC712 /* vf_SharedSingleton.h */; };
+		CD61C01B14B49A010075D8A8 /* vf_SharedState.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDB140A3163009EC712 /* vf_SharedState.h */; };
+		CD61C01C14B49A010075D8A8 /* vf_SpinLock.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BDC140A3163009EC712 /* vf_SpinLock.h */; };
+		CD61C01D14B49A0A0075D8A8 /* vf_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBC140A3163009EC712 /* vf_includes.h */; };
+		CD61C01E14B49A0A0075D8A8 /* vf_Interval.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBD140A3163009EC712 /* vf_Interval.h */; };
+		CD61C01F14B49A0A0075D8A8 /* vf_Intrinsics.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBE140A3163009EC712 /* vf_Intrinsics.h */; };
+		CD61C02014B49A0A0075D8A8 /* vf_IntrusiveStack.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBF140A3163009EC712 /* vf_IntrusiveStack.h */; };
+		CD61C02114B49A0A0075D8A8 /* vf_juce_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC0140A3163009EC712 /* vf_juce_includes.h */; };
+		CD61C02214B49A0A0075D8A8 /* vf_JuceThread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC1140A3163009EC712 /* vf_JuceThread.h */; };
+		CD61C02314B49A0A0075D8A8 /* vf_LeakChecked.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC2140A3163009EC712 /* vf_LeakChecked.h */; };
+		CD61C02414B49A0A0075D8A8 /* vf_List.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC3140A3163009EC712 /* vf_List.h */; };
+		CD61C02514B49A0A0075D8A8 /* vf_Listeners.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC4140A3163009EC712 /* vf_Listeners.h */; };
+		CD61C02614B49A0A0075D8A8 /* vf_LockFree.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC5140A3163009EC712 /* vf_LockFree.h */; };
+		CD61C02714B49A0A0075D8A8 /* vf_LockFreeDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC6140A3163009EC712 /* vf_LockFreeDelay.h */; };
+		CD61C02814B49A0A0075D8A8 /* vf_LockFreeList.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC7140A3163009EC712 /* vf_LockFreeList.h */; };
+		CD61C02914B49A0A0075D8A8 /* vf_LockFreeQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC8140A3163009EC712 /* vf_LockFreeQueue.h */; };
+		CD61C02A14B49A0A0075D8A8 /* vf_LockFreeStack.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC9140A3163009EC712 /* vf_LockFreeStack.h */; };
+		CD61C02B14B49A0A0075D8A8 /* vf_ManualWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCA140A3163009EC712 /* vf_ManualWorker.h */; };
+		CD61C02C14B49A0A0075D8A8 /* vf_Math.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCB140A3163009EC712 /* vf_Math.h */; };
+		CD61C02D14B49A0A0075D8A8 /* vf_MemoryAlignment.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BCC140A3163009EC712 /* vf_MemoryAlignment.h */; };
+		CD61C04414B49A700075D8A8 /* vf_AllocatedBy.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BA6140A3163009EC712 /* vf_AllocatedBy.h */; };
+		CD61C04514B49A700075D8A8 /* vf_Allocator.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BA7140A3163009EC712 /* vf_Allocator.h */; };
+		CD61C04614B49A700075D8A8 /* vf_AllocatorWithoutTls.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BA8140A3163009EC712 /* vf_AllocatorWithoutTls.h */; };
+		CD61C04714B49A700075D8A8 /* vf_Array.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BA9140A3163009EC712 /* vf_Array.h */; };
+		CD61C04814B49A700075D8A8 /* vf_Atomic.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAA140A3163009EC712 /* vf_Atomic.h */; };
+		CD61C04914B49A700075D8A8 /* vf_AudioBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAB140A3163009EC712 /* vf_AudioBufferPool.h */; };
+		CD61C04A14B49A700075D8A8 /* vf_AudioSampleBufferArray.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAC140A3163009EC712 /* vf_AudioSampleBufferArray.h */; };
+		CD61C04B14B49A700075D8A8 /* vf_Bind.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAD140A3163009EC712 /* vf_Bind.h */; };
+		CD61C04C14B49A700075D8A8 /* vf_boost_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAE140A3163009EC712 /* vf_boost_includes.h */; };
+		CD61C04D14B49A700075D8A8 /* vf_BoostThread.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BAF140A3163009EC712 /* vf_BoostThread.h */; };
+		CD61C04E14B49A700075D8A8 /* vf_CacheLine.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB0140A3163009EC712 /* vf_CacheLine.h */; };
+		CD61C04F14B49A700075D8A8 /* vf_CatchAny.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB1140A3163009EC712 /* vf_CatchAny.h */; };
+		CD61C05014B49A700075D8A8 /* vf_ConditionVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB2140A3163009EC712 /* vf_ConditionVariable.h */; };
+		CD61C05114B49A700075D8A8 /* vf_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB3140A3163009EC712 /* vf_Config.h */; };
+		CD61C05214B49A700075D8A8 /* vf_db.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB4140A3163009EC712 /* vf_db.h */; };
+		CD61C05314B49A700075D8A8 /* vf_Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB5140A3163009EC712 /* vf_Debug.h */; };
+		CD61C05414B49A700075D8A8 /* vf_Error.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB6140A3163009EC712 /* vf_Error.h */; };
+		CD61C05514B49A700075D8A8 /* vf_ext_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB7140A3163009EC712 /* vf_ext_includes.h */; };
+		CD61C05614B49A700075D8A8 /* vf_FPUFlags.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB8140A3163009EC712 /* vf_FPUFlags.h */; };
+		CD61C05714B49A700075D8A8 /* vf_Function.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BB9140A3163009EC712 /* vf_Function.h */; };
+		CD61C05814B49A700075D8A8 /* vf_GuiWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBA140A3163009EC712 /* vf_GuiWorker.h */; };
+		CD61C05914B49A7D0075D8A8 /* vf_NoiseAudioSource.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B57140A30F6009EC712 /* vf_NoiseAudioSource.h */; };
+		CD61C05A14B49A890075D8A8 /* vf_Button.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B80140A314C009EC712 /* vf_Button.h */; };
+		CD61C05B14B49A890075D8A8 /* vf_Colour.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B81140A314C009EC712 /* vf_Colour.h */; };
+		CD61C05C14B49A890075D8A8 /* vf_ComponentBroadcast.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B82140A314C009EC712 /* vf_ComponentBroadcast.h */; };
+		CD61C05D14B49A890075D8A8 /* vf_ConnectedEdges.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B83140A314C009EC712 /* vf_ConnectedEdges.h */; };
+		CD61C05E14B49A890075D8A8 /* vf_Control.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B84140A314C009EC712 /* vf_Control.h */; };
+		CD61C05F14B49A890075D8A8 /* vf_DragAndDropData.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B85140A314C009EC712 /* vf_DragAndDropData.h */; };
+		CD61C06014B49A890075D8A8 /* vf_DragAndDropTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B86140A314C009EC712 /* vf_DragAndDropTarget.h */; };
+		CD61C06114B49A890075D8A8 /* vf_Facade.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B87140A314C009EC712 /* vf_Facade.h */; };
+		CD61C06214B49A890075D8A8 /* vf_ListBoxSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B88140A314C009EC712 /* vf_ListBoxSelection.h */; };
+		CD61C06314B49A890075D8A8 /* vf_Model.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B89140A314C009EC712 /* vf_Model.h */; };
+		CD61C06414B49A890075D8A8 /* vf_MouseEnterEditable.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8A140A314C009EC712 /* vf_MouseEnterEditable.h */; };
+		CD61C06514B49A890075D8A8 /* vf_MouseEnterGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8B140A314C009EC712 /* vf_MouseEnterGroup.h */; };
+		CD61C06614B49A890075D8A8 /* vf_RadialImageConvolutionKernel.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8C140A314C009EC712 /* vf_RadialImageConvolutionKernel.h */; };
+		CD61C06714B49A890075D8A8 /* vf_ResizableLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8D140A314C009EC712 /* vf_ResizableLayout.h */; };
+		CD61C06814B49A890075D8A8 /* vf_StackedLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8E140A314C009EC712 /* vf_StackedLayout.h */; };
+		CD61C06914B49A890075D8A8 /* vf_Static.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B8F140A314C009EC712 /* vf_Static.h */; };
+		CD61C06A14B49A890075D8A8 /* vf_TransparentBorder.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B90140A314C009EC712 /* vf_TransparentBorder.h */; };
+		CD61C06B14B49A890075D8A8 /* vf_UiBase.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B91140A314C009EC712 /* vf_UiBase.h */; };
+		CD61C06C14B49A890075D8A8 /* vf_VerticalGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693B92140A314C009EC712 /* vf_VerticalGradient.h */; };
 		CD693AE7140A3048009EC712 /* vf_NoiseAudioSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693AE6140A3048009EC712 /* vf_NoiseAudioSource.cpp */; };
 		CD693B12140A307D009EC712 /* vf_Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B04140A307D009EC712 /* vf_Button.cpp */; };
 		CD693B13140A307D009EC712 /* vf_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD693B05140A307D009EC712 /* vf_Color.cpp */; };
@@ -91,7 +206,6 @@
 		CD693BFF140A3164009EC712 /* vf_GuiWorker.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBA140A3163009EC712 /* vf_GuiWorker.h */; };
 		CD693C00140A3164009EC712 /* vf_HeaderTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBB140A3163009EC712 /* vf_HeaderTemplate.h */; };
 		CD693C01140A3164009EC712 /* vf_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBC140A3163009EC712 /* vf_includes.h */; };
-		CD693C02140A3164009EC712 /* vf_Interval.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBD140A3163009EC712 /* vf_Interval.h */; };
 		CD693C03140A3164009EC712 /* vf_Intrinsics.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBE140A3163009EC712 /* vf_Intrinsics.h */; };
 		CD693C04140A3164009EC712 /* vf_IntrusiveStack.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BBF140A3163009EC712 /* vf_IntrusiveStack.h */; };
 		CD693C05140A3164009EC712 /* vf_juce_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = CD693BC0140A3163009EC712 /* vf_juce_includes.h */; };
@@ -141,6 +255,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD61BFDB14B497C90075D8A8 /* libvflib-macos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libvflib-macos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD693AC7140A2EBC009EC712 /* libvflib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvflib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD693AE6140A3048009EC712 /* vf_NoiseAudioSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_NoiseAudioSource.cpp; path = ../../source/audio/vf_NoiseAudioSource.cpp; sourceTree = "<group>"; };
 		CD693B04140A307D009EC712 /* vf_Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Button.cpp; path = ../../source/ui/vf_Button.cpp; sourceTree = "<group>"; };
@@ -276,6 +391,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD61BFD814B497C90075D8A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD693AC4140A2EBC009EC712 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -287,13 +409,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CD693ABC140A2EBC009EC712 = {
+		CD61C08E14B4A9B50075D8A8 /* ios */ = {
 			isa = PBXGroup;
 			children = (
 				CDC10735140CD8EC00C7BC36 /* boost.framework */,
-				CD693AE2140A2FEA009EC712 /* source */,
+			);
+			name = ios;
+			sourceTree = "<group>";
+		};
+		CD693ABC140A2EBC009EC712 = {
+			isa = PBXGroup;
+			children = (
 				CD693AE1140A2FE3009EC712 /* include */,
+				CD693AE2140A2FEA009EC712 /* source */,
 				CD693AC8140A2EBC009EC712 /* Products */,
+				CD61C08E14B4A9B50075D8A8 /* ios */,
 			);
 			sourceTree = "<group>";
 		};
@@ -301,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				CD693AC7140A2EBC009EC712 /* libvflib.a */,
+				CD61BFDB14B497C90075D8A8 /* libvflib-macos.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -484,6 +615,101 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		CD61BFD914B497C90075D8A8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD61BFFF14B499DB0075D8A8 /* vf_ThreadIndex.h in Headers */,
+				CD61C00014B499E10075D8A8 /* vf_ThreadWorker.h in Headers */,
+				CD61C00114B499E10075D8A8 /* vf_Throw.h in Headers */,
+				CD61C00214B499E10075D8A8 /* vf_Type.h in Headers */,
+				CD61C00314B499E10075D8A8 /* vf_ui.h in Headers */,
+				CD61C00414B499E10075D8A8 /* vf_Worker.h in Headers */,
+				CD61C00514B499E10075D8A8 /* vf.h in Headers */,
+				CD61C00614B499F10075D8A8 /* vf_StandardAllocator.h in Headers */,
+				CD61C00714B499F10075D8A8 /* vf_StandardHeader.h in Headers */,
+				CD61C00814B499F10075D8A8 /* vf_StaticObject.h in Headers */,
+				CD61C00914B499F10075D8A8 /* vf_stdlib_includes.h in Headers */,
+				CD61C00A14B499F10075D8A8 /* vf_String.h in Headers */,
+				CD61C00B14B499F10075D8A8 /* vf_Thread.h in Headers */,
+				CD61C00C14B499F10075D8A8 /* vf_ThreadBase.h in Headers */,
+				CD61C00D14B49A010075D8A8 /* vf_MurmurHash.h in Headers */,
+				CD61C00E14B49A010075D8A8 /* vf_Mutex.h in Headers */,
+				CD61C00F14B49A010075D8A8 /* vf_NonCopyable.h in Headers */,
+				CD61C01014B49A010075D8A8 /* vf_ObjectAllocator.h in Headers */,
+				CD61C01114B49A010075D8A8 /* vf_OncePerSecond.h in Headers */,
+				CD61C01214B49A010075D8A8 /* vf_PageAllocator.h in Headers */,
+				CD61C01314B49A010075D8A8 /* vf_PagePool.h in Headers */,
+				CD61C01414B49A010075D8A8 /* vf_PerformedAtExit.h in Headers */,
+				CD61C01514B49A010075D8A8 /* vf_ReadWriteMutex.h in Headers */,
+				CD61C01614B49A010075D8A8 /* vf_ReadWriteMutexBase.h in Headers */,
+				CD61C01714B49A010075D8A8 /* vf_SafeBool.h in Headers */,
+				CD61C01814B49A010075D8A8 /* vf_SharedObject.h in Headers */,
+				CD61C01914B49A010075D8A8 /* vf_SharedObjectPtr.h in Headers */,
+				CD61C01A14B49A010075D8A8 /* vf_SharedSingleton.h in Headers */,
+				CD61C01B14B49A010075D8A8 /* vf_SharedState.h in Headers */,
+				CD61C01C14B49A010075D8A8 /* vf_SpinLock.h in Headers */,
+				CD61C01D14B49A0A0075D8A8 /* vf_includes.h in Headers */,
+				CD61C01E14B49A0A0075D8A8 /* vf_Interval.h in Headers */,
+				CD61C01F14B49A0A0075D8A8 /* vf_Intrinsics.h in Headers */,
+				CD61C02014B49A0A0075D8A8 /* vf_IntrusiveStack.h in Headers */,
+				CD61C02114B49A0A0075D8A8 /* vf_juce_includes.h in Headers */,
+				CD61C02214B49A0A0075D8A8 /* vf_JuceThread.h in Headers */,
+				CD61C02314B49A0A0075D8A8 /* vf_LeakChecked.h in Headers */,
+				CD61C02414B49A0A0075D8A8 /* vf_List.h in Headers */,
+				CD61C02514B49A0A0075D8A8 /* vf_Listeners.h in Headers */,
+				CD61C02614B49A0A0075D8A8 /* vf_LockFree.h in Headers */,
+				CD61C02714B49A0A0075D8A8 /* vf_LockFreeDelay.h in Headers */,
+				CD61C02814B49A0A0075D8A8 /* vf_LockFreeList.h in Headers */,
+				CD61C02914B49A0A0075D8A8 /* vf_LockFreeQueue.h in Headers */,
+				CD61C02A14B49A0A0075D8A8 /* vf_LockFreeStack.h in Headers */,
+				CD61C02B14B49A0A0075D8A8 /* vf_ManualWorker.h in Headers */,
+				CD61C02C14B49A0A0075D8A8 /* vf_Math.h in Headers */,
+				CD61C02D14B49A0A0075D8A8 /* vf_MemoryAlignment.h in Headers */,
+				CD61C04414B49A700075D8A8 /* vf_AllocatedBy.h in Headers */,
+				CD61C04514B49A700075D8A8 /* vf_Allocator.h in Headers */,
+				CD61C04614B49A700075D8A8 /* vf_AllocatorWithoutTls.h in Headers */,
+				CD61C04714B49A700075D8A8 /* vf_Array.h in Headers */,
+				CD61C04814B49A700075D8A8 /* vf_Atomic.h in Headers */,
+				CD61C04914B49A700075D8A8 /* vf_AudioBufferPool.h in Headers */,
+				CD61C04A14B49A700075D8A8 /* vf_AudioSampleBufferArray.h in Headers */,
+				CD61C04B14B49A700075D8A8 /* vf_Bind.h in Headers */,
+				CD61C04C14B49A700075D8A8 /* vf_boost_includes.h in Headers */,
+				CD61C04D14B49A700075D8A8 /* vf_BoostThread.h in Headers */,
+				CD61C04E14B49A700075D8A8 /* vf_CacheLine.h in Headers */,
+				CD61C04F14B49A700075D8A8 /* vf_CatchAny.h in Headers */,
+				CD61C05014B49A700075D8A8 /* vf_ConditionVariable.h in Headers */,
+				CD61C05114B49A700075D8A8 /* vf_Config.h in Headers */,
+				CD61C05214B49A700075D8A8 /* vf_db.h in Headers */,
+				CD61C05314B49A700075D8A8 /* vf_Debug.h in Headers */,
+				CD61C05414B49A700075D8A8 /* vf_Error.h in Headers */,
+				CD61C05514B49A700075D8A8 /* vf_ext_includes.h in Headers */,
+				CD61C05614B49A700075D8A8 /* vf_FPUFlags.h in Headers */,
+				CD61C05714B49A700075D8A8 /* vf_Function.h in Headers */,
+				CD61C05814B49A700075D8A8 /* vf_GuiWorker.h in Headers */,
+				CD61C05914B49A7D0075D8A8 /* vf_NoiseAudioSource.h in Headers */,
+				CD61C05A14B49A890075D8A8 /* vf_Button.h in Headers */,
+				CD61C05B14B49A890075D8A8 /* vf_Colour.h in Headers */,
+				CD61C05C14B49A890075D8A8 /* vf_ComponentBroadcast.h in Headers */,
+				CD61C05D14B49A890075D8A8 /* vf_ConnectedEdges.h in Headers */,
+				CD61C05E14B49A890075D8A8 /* vf_Control.h in Headers */,
+				CD61C05F14B49A890075D8A8 /* vf_DragAndDropData.h in Headers */,
+				CD61C06014B49A890075D8A8 /* vf_DragAndDropTarget.h in Headers */,
+				CD61C06114B49A890075D8A8 /* vf_Facade.h in Headers */,
+				CD61C06214B49A890075D8A8 /* vf_ListBoxSelection.h in Headers */,
+				CD61C06314B49A890075D8A8 /* vf_Model.h in Headers */,
+				CD61C06414B49A890075D8A8 /* vf_MouseEnterEditable.h in Headers */,
+				CD61C06514B49A890075D8A8 /* vf_MouseEnterGroup.h in Headers */,
+				CD61C06614B49A890075D8A8 /* vf_RadialImageConvolutionKernel.h in Headers */,
+				CD61C06714B49A890075D8A8 /* vf_ResizableLayout.h in Headers */,
+				CD61C06814B49A890075D8A8 /* vf_StackedLayout.h in Headers */,
+				CD61C06914B49A890075D8A8 /* vf_Static.h in Headers */,
+				CD61C06A14B49A890075D8A8 /* vf_TransparentBorder.h in Headers */,
+				CD61C06B14B49A890075D8A8 /* vf_UiBase.h in Headers */,
+				CD61C06C14B49A890075D8A8 /* vf_VerticalGradient.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD693AC5140A2EBC009EC712 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -531,7 +757,6 @@
 				CD693BFF140A3164009EC712 /* vf_GuiWorker.h in Headers */,
 				CD693C00140A3164009EC712 /* vf_HeaderTemplate.h in Headers */,
 				CD693C01140A3164009EC712 /* vf_includes.h in Headers */,
-				CD693C02140A3164009EC712 /* vf_Interval.h in Headers */,
 				CD693C03140A3164009EC712 /* vf_Intrinsics.h in Headers */,
 				CD693C04140A3164009EC712 /* vf_IntrusiveStack.h in Headers */,
 				CD693C05140A3164009EC712 /* vf_juce_includes.h in Headers */,
@@ -577,15 +802,33 @@
 				CD693C2D140A3164009EC712 /* vf_ui.h in Headers */,
 				CD693C2E140A3164009EC712 /* vf_Worker.h in Headers */,
 				CD693C2F140A3164009EC712 /* vf.h in Headers */,
+				CD61BFFE14B499100075D8A8 /* vf_Interval.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		CD693AC6140A2EBC009EC712 /* vflib */ = {
+		CD61BFDA14B497C90075D8A8 /* vflib-macos */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD693AD4140A2EBC009EC712 /* Build configuration list for PBXNativeTarget "vflib" */;
+			buildConfigurationList = CD61BFDE14B497C90075D8A8 /* Build configuration list for PBXNativeTarget "vflib-macos" */;
+			buildPhases = (
+				CD61BFD714B497C90075D8A8 /* Sources */,
+				CD61BFD814B497C90075D8A8 /* Frameworks */,
+				CD61BFD914B497C90075D8A8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "vflib-macos";
+			productName = "vflib-macos";
+			productReference = CD61BFDB14B497C90075D8A8 /* libvflib-macos.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CD693AC6140A2EBC009EC712 /* vflib-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD693AD4140A2EBC009EC712 /* Build configuration list for PBXNativeTarget "vflib-ios" */;
 			buildPhases = (
 				CD693AC3140A2EBC009EC712 /* Sources */,
 				CD693AC4140A2EBC009EC712 /* Frameworks */,
@@ -595,7 +838,7 @@
 			);
 			dependencies = (
 			);
-			name = vflib;
+			name = "vflib-ios";
 			productName = vflib;
 			productReference = CD693AC7140A2EBC009EC712 /* libvflib.a */;
 			productType = "com.apple.product-type.library.static";
@@ -620,12 +863,46 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD693AC6140A2EBC009EC712 /* vflib */,
+				CD693AC6140A2EBC009EC712 /* vflib-ios */,
+				CD61BFDA14B497C90075D8A8 /* vflib-macos */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD61BFD714B497C90075D8A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD61BFE014B497EB0075D8A8 /* vf_Allocator.cpp in Sources */,
+				CD61BFE114B497EB0075D8A8 /* vf_AllocatorWithoutTls.cpp in Sources */,
+				CD61BFE214B497EB0075D8A8 /* vf_AudioBufferPool.cpp in Sources */,
+				CD61BFE314B497EB0075D8A8 /* vf_BoostThread.cpp in Sources */,
+				CD61BFE414B497EB0075D8A8 /* vf_CatchAny.cpp in Sources */,
+				CD61BFE514B497EB0075D8A8 /* vf_ConditionVariable.cpp in Sources */,
+				CD61BFE614B497EB0075D8A8 /* vf_Debug.cpp in Sources */,
+				CD61BFE714B497EB0075D8A8 /* vf_Error.cpp in Sources */,
+				CD61BFE814B497EB0075D8A8 /* vf_FPUFlags.cpp in Sources */,
+				CD61BFE914B497EB0075D8A8 /* vf_GuiWorker.cpp in Sources */,
+				CD61BFEA14B497EB0075D8A8 /* vf_JuceThread.cpp in Sources */,
+				CD61BFEB14B497EB0075D8A8 /* vf_LeakChecked.cpp in Sources */,
+				CD61BFEC14B497EB0075D8A8 /* vf_Listeners.cpp in Sources */,
+				CD61BFED14B497EB0075D8A8 /* vf_LockFreeDelay.cpp in Sources */,
+				CD61BFEE14B497EB0075D8A8 /* vf_MurmurHash.cpp in Sources */,
+				CD61BFEF14B497EB0075D8A8 /* vf_OncePerSecond.cpp in Sources */,
+				CD61BFF014B497EB0075D8A8 /* vf_PageAllocator.cpp in Sources */,
+				CD61BFF114B497EB0075D8A8 /* vf_PagePool.cpp in Sources */,
+				CD61BFF214B497EB0075D8A8 /* vf_PerformedAtExit.cpp in Sources */,
+				CD61BFF314B497EB0075D8A8 /* vf_ReadWriteMutex.cpp in Sources */,
+				CD61BFF414B497EB0075D8A8 /* vf_SharedObject.cpp in Sources */,
+				CD61BFF514B497EB0075D8A8 /* vf_SharedSingleton.cpp in Sources */,
+				CD61BFF614B497EB0075D8A8 /* vf_Thread.cpp in Sources */,
+				CD61BFF714B497EB0075D8A8 /* vf_ThreadIndex.cpp in Sources */,
+				CD61BFF814B497EB0075D8A8 /* vf_ThreadWorker.cpp in Sources */,
+				CD61BFF914B497EB0075D8A8 /* vf_Worker.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD693AC3140A2EBC009EC712 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -677,6 +954,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		CD61BFDC14B497C90075D8A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CD61BFDD14B497C90075D8A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		CD693AD2140A2EBC009EC712 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -686,13 +993,13 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -718,9 +1025,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Druck und Verlagshaus Hermann Daniel GmbH & Co. KG";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -780,6 +1087,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD61BFDE14B497C90075D8A8 /* Build configuration list for PBXNativeTarget "vflib-macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD61BFDC14B497C90075D8A8 /* Debug */,
+				CD61BFDD14B497C90075D8A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CD693AC1140A2EBC009EC712 /* Build configuration list for PBXProject "vflib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -789,7 +1104,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD693AD4140A2EBC009EC712 /* Build configuration list for PBXNativeTarget "vflib" */ = {
+		CD693AD4140A2EBC009EC712 /* Build configuration list for PBXNativeTarget "vflib-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD693AD5140A2EBC009EC712 /* Debug */,
