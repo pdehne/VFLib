@@ -256,7 +256,7 @@
 
 /* Begin PBXFileReference section */
 		CD61BFDB14B497C90075D8A8 /* libvflib-macos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libvflib-macos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD693AC7140A2EBC009EC712 /* libvflib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvflib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD693AC7140A2EBC009EC712 /* libvflib-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libvflib-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD693AE6140A3048009EC712 /* vf_NoiseAudioSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_NoiseAudioSource.cpp; path = ../../source/audio/vf_NoiseAudioSource.cpp; sourceTree = "<group>"; };
 		CD693B04140A307D009EC712 /* vf_Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Button.cpp; path = ../../source/ui/vf_Button.cpp; sourceTree = "<group>"; };
 		CD693B05140A307D009EC712 /* vf_Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_Color.cpp; path = ../../source/ui/vf_Color.cpp; sourceTree = "<group>"; };
@@ -430,7 +430,7 @@
 		CD693AC8140A2EBC009EC712 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD693AC7140A2EBC009EC712 /* libvflib.a */,
+				CD693AC7140A2EBC009EC712 /* libvflib-ios.a */,
 				CD61BFDB14B497C90075D8A8 /* libvflib-macos.a */,
 			);
 			name = Products;
@@ -840,7 +840,7 @@
 			);
 			name = "vflib-ios";
 			productName = vflib;
-			productReference = CD693AC7140A2EBC009EC712 /* libvflib.a */;
+			productReference = CD693AC7140A2EBC009EC712 /* libvflib-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -993,13 +993,13 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1025,9 +1025,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Druck und Verlagshaus Hermann Daniel GmbH & Co. KG";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1054,10 +1054,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../libs\"",
 				);
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1073,10 +1071,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../libs\"",
 				);
-				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1094,6 +1090,7 @@
 				CD61BFDD14B497C90075D8A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD693AC1140A2EBC009EC712 /* Build configuration list for PBXProject "vflib" */ = {
 			isa = XCConfigurationList;
