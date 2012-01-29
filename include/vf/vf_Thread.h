@@ -8,7 +8,7 @@
 #include "vf/vf_BoostThread.h"
 #include "vf/vf_JuceThread.h"
 
-#if 0
+#if 1
 typedef JuceThread Thread;
 namespace CurrentThread = CurrentJuceThread;
 #else

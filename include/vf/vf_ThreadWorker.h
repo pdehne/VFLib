@@ -203,7 +203,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-#if 1
+#if 0
 typedef ThreadWorkerType <BoostThreadType <BoostThread::ExceptionBased> > ExceptionWorker;
 typedef ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > PollingWorker;
 #else
