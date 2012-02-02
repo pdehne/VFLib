@@ -5,8 +5,6 @@
 #ifndef __VF_DEBUG_VFHEADER__
 #define __VF_DEBUG_VFHEADER__
 
-#include "vf/vf_String.h"
-
 // Routines for debugging
 
 namespace Debug {

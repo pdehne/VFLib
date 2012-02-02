@@ -6,7 +6,6 @@
 #define __VF_ERROR_VFHEADER__
 
 #include "vf/vf_SafeBool.h"
-#include "vf/vf_String.h"
 
 // Yet another error reporting class. This one records the file/line
 // where the error occurred along with some human readable text. It
