@@ -87,11 +87,7 @@ Colour const XYZColour::toRGB () const
   if (g > 0.0031308) g = 1.055 * pow (double (g), 1/2.4) - 0.055; else g = 12.92 * g;
   if (b > 0.0031308) b = 1.055 * pow (double (b), 1/2.4) - 0.055; else b = 12.92 * b;
 
-  return Colour::fromRGBAFloat (
-    jlimit (0, 255, int (r * 255 + .5f)),
-    jlimit (0, 255, int (g * 255 + .5f)),
-    jlimit (0, 255, int (b * 255 + .5f)),
-    m_alpha);
+  return Colour::fromFloatRGBA  (r, g, b, m_alpha);
 }
 
 //------------------------------------------------------------------------------

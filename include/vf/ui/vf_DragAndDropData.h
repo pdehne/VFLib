@@ -21,7 +21,7 @@ public:
   template <class Object>
   void add (Object const& object)
   {
-    vfassert (find <Object> () == nullptr);
+    vfassert (! find <Object> ());
     m_items.push_back (*new StoredItem <Object> (object));
   }
 

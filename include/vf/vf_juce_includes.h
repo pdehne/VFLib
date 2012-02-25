@@ -57,7 +57,7 @@
 
 // If you want Juce with macros, or with a different
 // configuration, just include it before you include vf.h
-#include "src/juce_WithoutMacros.h"
+#include "juce.h"
 
 #ifdef _CRTDBG_MAP_ALLOC
   #pragma pop_macro("_aligned_msize")
