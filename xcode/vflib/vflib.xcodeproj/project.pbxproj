@@ -1001,6 +1001,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					/Users/patrick/Documents/development/libs/juce_tip/extras/static,
+					library/JuceLibraryCode,
 					"${JUCE}",
 					"${VFLIB}",
 					"${BOOSTMACOS}/include",
@@ -1026,6 +1028,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					/Users/patrick/Documents/development/libs/juce_tip/extras/static,
+					library/JuceLibraryCode,
 					"${JUCE}",
 					"${VFLIB}",
 					"${BOOSTMACOS}/include",
@@ -1049,6 +1053,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/patrick/Documents/development/libs/juce_tip/extras/static library/JuceLibraryCode\"",
+					"${JUCE}",
+					"${VFLIB}",
+					"${BOOSTMACOS}/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1066,6 +1076,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/patrick/Documents/development/libs/juce_tip/extras/static library/JuceLibraryCode\"",
+					"${JUCE}",
+					"${VFLIB}",
+					"${BOOSTMACOS}/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
