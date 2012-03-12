@@ -17,14 +17,6 @@
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
 #endif
 
-#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-#include "vf/modules/vf_audio/buffers/vf_AudioBufferPool.h"
-#endif
-
-#ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
-#include "vf/modules/vf_audio/buffers/vf_AudioSampleBufferArray.h"
-#endif
-
 #ifndef __VF_BIND_VFHEADER__
 #include "vf/modules/vf_core/functor/vf_Bind.h"
 #endif
@@ -167,12 +159,6 @@
 
 #ifndef __VF_WORKER_VFHEADER__
 #include "vf/modules/vf_concurrent/queue/vf_Worker.h"
-#endif
-
-// audio
-
-#ifndef __VF_NOISEAUDIOSOURCE_VFHEADER__
-#include "vf/modules/vf_audio/sources/vf_NoiseAudioSource.h"
 #endif
 
 // db

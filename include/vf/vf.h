@@ -22,4 +22,7 @@ BEGIN_VF_NAMESPACE
 
 END_VF_NAMESPACE
 
+// modules
+#include "modules/vf_audio/vf_audio.h"
+
 #endif

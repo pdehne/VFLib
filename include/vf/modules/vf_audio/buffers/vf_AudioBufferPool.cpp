@@ -1,12 +1,6 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_audio/buffers/vf_AudioBufferPool.h"
+// This file is part of VFLib
+// Copyright (C) 2008 by Vinnie Falco.
+// See the file LICENSE.txt for licensing information.
 
 AudioBufferPoolBase::Buffer::Buffer (int numChannels,
                                  int numSamples)
@@ -29,5 +23,3 @@ int AudioBufferPoolBase::Buffer::getNumSamplesAllocated () const
 {
   return m_samplesAllocated;
 }
-
-END_VF_NAMESPACE

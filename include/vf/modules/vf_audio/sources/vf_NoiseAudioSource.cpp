@@ -1,12 +1,6 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_audio/sources/vf_NoiseAudioSource.h"
+// This file is part of VFLib
+// Copyright (C) 2008 by Vinnie Falco.
+// See the file LICENSE.txt for licensing information.
 
 NoiseAudioSource::NoiseAudioSource (bool pink)
   : m_pink (pink)
@@ -58,5 +52,3 @@ void NoiseAudioSource::pink_noise (int numSamples, float* dest)
     *dest++ = m_filter.process ((m_random.nextFloat()*2)-1);
   }
 }
-
-END_VF_NAMESPACE
