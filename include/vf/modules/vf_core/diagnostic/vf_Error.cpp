@@ -1,12 +1,5 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/diagnostic/vf_Error.h"
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 Error::Error()
   : m_code (success)
@@ -185,5 +178,3 @@ const String Error::getReasonTextForCode (Code code)
 
   return s;
 }
-
-END_VF_NAMESPACE

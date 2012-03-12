@@ -8,4 +8,8 @@
 namespace vf
 {
 
+//#include "diagnostic/vf_CatchAny.cpp"
+//#include "diagnostic/vf_Debug.cpp"
+
+#include "diagnostic/vf_Error.cpp"
 }
