@@ -149,10 +149,4 @@
 #include "vf/modules/vf_concurrent/queue/vf_Worker.h"
 #endif
 
-// db
-
-#ifndef __VF_DB_VFHEADER__
-#include "vf/modules/vf_db/vf_db_old.h" // db uses both some Juce and Boost
-#endif
-
 #endif

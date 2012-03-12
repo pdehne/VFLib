@@ -1,16 +1,6 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-// Based on ideas from the soci wrapper sqlite back-end
-
-#include "vf/vf_StandardHeader.h"
-
-#include "sqlite/sqlite3.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_db/vf_db_old.h"
-#include "vf/modules/vf_db/transaction.h"
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
+// Based on ideas from the soci wrapper sqlite back-end.
 
 namespace db {
 
@@ -55,5 +45,3 @@ void transaction::rollback()
 }
 
 }
-
-END_VF_NAMESPACE

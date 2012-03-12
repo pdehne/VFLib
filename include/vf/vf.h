@@ -25,5 +25,6 @@ END_VF_NAMESPACE
 // modules
 #include "modules/vf_audio/vf_audio.h"
 #include "modules/vf_concurrent/vf_concurrent.h"
+#include "modules/vf_db/vf_db.h"
 
 #endif

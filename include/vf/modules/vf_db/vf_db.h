@@ -1,5 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
+// Based on ideas from the soci wrapper sqlite back-end.
 
 #ifndef VF_DB_VFHEADER
 #define VF_DB_VFHEADER
@@ -26,7 +27,6 @@ namespace vf
 {
 
 #include "backend.h"
-#include "error_codes.h"
 #include "detail/type_ptr.h"
 #include "transaction.h"
 
@@ -39,7 +39,7 @@ namespace vf
 #include "detail/use_type.h"
 
 #include "statement.h"
-#include "detail/statement_imp.h"
+//#include "detail/statement_imp.h"
 #include "detail/type_conversion.h"
 
 #include "detail/ref_counted_statement.h"
