@@ -67,7 +67,7 @@ template <> struct VfStaticAssert <true>
 #include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
 #include "vf/modules/vf_core/memory/vf_NonCopyable.h"
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
-#include "vf/modules/vf_concurrent/memory/vf_StaticObject.h"
+#include "vf/modules/vf_core/memory/vf_StaticObject.h"
 #include "vf/modules/vf_core/diagnostic/vf_Throw.h"
 
 END_VF_NAMESPACE

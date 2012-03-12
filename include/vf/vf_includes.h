@@ -134,7 +134,7 @@
 #endif
 
 #ifndef __VF_STATICOBJECT_VFHEADER__
-#include "vf/modules/vf_concurrent/memory/vf_StaticObject.h"
+#include "vf/modules/vf_core/memory/vf_StaticObject.h"
 #endif
 
 #ifndef __VF_THREAD_VFHEADER__
