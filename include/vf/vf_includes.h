@@ -18,11 +18,11 @@
 #endif
 
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
-#include "vf/vf_AudioBufferPool.h"
+#include "vf/modules/vf_audio/buffers/vf_AudioBufferPool.h"
 #endif
 
 #ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
-#include "vf/vf_AudioSampleBufferArray.h"
+#include "vf/modules/vf_audio/buffers/vf_AudioSampleBufferArray.h"
 #endif
 
 #ifndef __VF_BIND_VFHEADER__
@@ -172,7 +172,7 @@
 // audio
 
 #ifndef __VF_NOISEAUDIOSOURCE_VFHEADER__
-#include "vf/audio/vf_NoiseAudioSource.h"
+#include "vf/modules/vf_audio/sources/vf_NoiseAudioSource.h"
 #endif
 
 // db
