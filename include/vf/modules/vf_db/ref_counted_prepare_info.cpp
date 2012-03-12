@@ -9,7 +9,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_db.h"
+#include "vf/modules/vf_db/vf_db.h"
 #include "vf/modules/vf_db/detail/ref_counted_prepare_info.h"
 
 namespace db {

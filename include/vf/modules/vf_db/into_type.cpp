@@ -9,7 +9,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_db.h"
+#include "vf/modules/vf_db/vf_db.h"
 #include "vf/modules/vf_db/detail/into_type.h"
 #include "vf/modules/vf_db/detail/statement_imp.h"
 

@@ -152,7 +152,7 @@
 // db
 
 #ifndef __VF_DB_VFHEADER__
-#include "vf/vf_db.h" // db uses both some Juce and Boost
+#include "vf/modules/vf_db/vf_db.h" // db uses both some Juce and Boost
 #endif
 
 #endif
