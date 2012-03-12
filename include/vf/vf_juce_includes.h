@@ -45,19 +45,22 @@
   #undef _aligned_msize
 #endif
 
-// Had to comment this out because developing UI classes
-// would be very cumbersome having to repeat the namespace
-/*
-#if ! VF_PUBLIC_INCLUDES
-#  ifndef DONT_SET_USING_JUCE_NAMESPACE
-#  define DONT_SET_USING_JUCE_NAMESPACE
-#  endif
-#endif
-*/
+#include "modules/juce_core/juce_core.h"
+#include "modules/juce_gui_basics/juce_gui_basics.h"
+#include "modules/juce_data_structures/juce_data_structures.h"
+#include "modules/juce_events/juce_events.h"
+#include "modules/juce_graphics/juce_graphics.h"
+#include "modules/juce_video/juce_video.h"
+#include "modules/juce_opengl/juce_opengl.h"
+#include "modules/juce_audio_basics/juce_audio_basics.h"
+#include "modules/juce_audio_formats/juce_audio_formats.h"
+#include "modules/juce_audio_processors/juce_audio_processors.h"
+#include "modules/juce_audio_devices/juce_audio_devices.h"
+#include "modules/juce_cryptography/juce_cryptography.h"
+#include "modules/juce_gui_extra/juce_gui_extra.h"
+#include "modules/juce_audio_utils/juce_audio_utils.h"
 
-// If you want Juce with macros, or with a different
-// configuration, just include it before you include vf.h
-#include "juce.h"
+using namespace juce;
 
 #ifdef _CRTDBG_MAP_ALLOC
   #pragma pop_macro("_aligned_msize")
