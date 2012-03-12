@@ -6,11 +6,11 @@
 #define __VF_INCLUDES_VFHEADER__
 
 #ifndef __VF_ALLOCATEDBY_VFHEADER__
-#include "vf/vf_AllocatedBy.h"
+#include "vf/modules/vf_concurrent/memory/vf_AllocatedBy.h"
 #endif
 
 #ifndef __VF_ALLOCATOR_VFHEADER__
-#include "vf/vf_Allocator.h"
+#include "vf/modules/vf_concurrent/memory/vf_Allocator.h"
 #endif
 
 #ifndef __VF_ATOMIC_VFHEADER__
@@ -46,7 +46,7 @@
 #endif
 
 #ifndef __VF_GUIWORKER_VFHEADER__
-#include "vf/vf_GuiWorker.h"
+#include "vf/modules/vf_concurrent/queue/vf_GuiWorker.h"
 #endif
 
 #ifndef __VF_INTERVAL_VFHEADER__
@@ -58,23 +58,23 @@
 #endif
 
 #ifndef __VF_LISTENERS_VFHEADER__
-#include "vf/vf_Listeners.h"
+#include "vf/modules/vf_concurrent/queue/vf_Listeners.h"
 #endif
 
 #ifndef __VF_LOCKFREEDELAY_VFHEADER__
-#include "vf/vf_LockFreeDelay.h"
+#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
 #endif
 
 #ifndef __VF_LOCKFREELIST_VFHEADER__
-#include "vf/vf_LockFreeList.h"
+#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 #endif
 
 #ifndef __VF_LOCKFREEQUEUE_VFHEADER__
-#include "vf/vf_LockFreeQueue.h"
+#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeQueue.h"
 #endif
 
 #ifndef __VF_LOCKFREESTACK_VFHEADER__
-#include "vf/vf_LockFreeStack.h"
+#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeStack.h"
 #endif
 
 #ifndef __VF_MATH_VFHEADER__
@@ -82,7 +82,7 @@
 #endif
 
 #ifndef __VF_MANUALWORKER_VFHEADER__
-#include "vf/vf_ManualWorker.h"
+#include "vf/modules/vf_concurrent/queue/vf_ManualWorker.h"
 #endif
 
 #ifndef __VF_MEMORYALIGNMENT_VFHEADER__
@@ -98,7 +98,7 @@
 #endif
 
 #ifndef __VF_OBJECTALLOCATOR_VFHEADER__
-#include "vf/vf_ObjectAllocator.h"
+#include "vf/modules/vf_concurrent/memory/vf_ObjectAllocator.h"
 #endif
 
 #ifndef __VF_ONCEPERSECOND_VFHEADER__
@@ -106,7 +106,7 @@
 #endif
 
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
-#include "vf/vf_PageAllocator.h"
+#include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
 #endif
 
 #ifndef __VF_PERFORMEDATEXIT_VFHEADER__
@@ -146,7 +146,7 @@
 #endif
 
 #ifndef __VF_STATICOBJECT_VFHEADER__
-#include "vf/vf_StaticObject.h"
+#include "vf/modules/vf_concurrent/memory/vf_StaticObject.h"
 #endif
 
 #ifndef __VF_THREAD_VFHEADER__
@@ -158,7 +158,7 @@
 #endif
 
 #ifndef __VF_THREADWORKER_VFHEADER__
-#include "vf/vf_ThreadWorker.h"
+#include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
 #endif
 
 #ifndef __VF_TYPE_VFHEADER__
@@ -166,7 +166,7 @@
 #endif
 
 #ifndef __VF_WORKER_VFHEADER__
-#include "vf/vf_Worker.h"
+#include "vf/modules/vf_concurrent/queue/vf_Worker.h"
 #endif
 
 // audio
