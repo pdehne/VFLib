@@ -4,7 +4,6 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
-// deps
 #include "../vf_core/vf_core.h"
 
 namespace vf
