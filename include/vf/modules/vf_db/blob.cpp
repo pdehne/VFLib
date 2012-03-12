@@ -9,7 +9,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/modules/vf_db/vf_db.h"
+#include "vf/modules/vf_db/vf_db_old.h"
 #include "error_codes.h"
 
 namespace db {
