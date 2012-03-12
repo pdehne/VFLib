@@ -85,10 +85,6 @@
 #include "vf/modules/vf_core/threads/vf_Mutex.h"
 #endif
 
-#ifndef __VF_OBJECTALLOCATOR_VFHEADER__
-#include "vf/modules/vf_concurrent/memory/vf_ObjectAllocator.h"
-#endif
-
 #ifndef __VF_ONCEPERSECOND_VFHEADER__
 #include "vf/modules/vf_core/system/vf_OncePerSecond.h"
 #endif
