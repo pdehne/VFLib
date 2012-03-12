@@ -1,4 +1,5 @@
 VFLib Copyright (C) 2008 by Vinnie Falco.
+http://github.com/vinniefalco/VFLib
 
 VFLib can be redistributed and/or modified under the terms of the GNU General
 Public License (Version 2), as published by the Free Software Foundation.
@@ -8,3 +9,8 @@ online at www.gnu.org/licenses.
 VFLib is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+VFLib uses or contains portions of the following external projects:
+Juce, SQLite, FreeType
+These external projects are licensed separately, see the corresponding project's
+documentation for information on licensing.
