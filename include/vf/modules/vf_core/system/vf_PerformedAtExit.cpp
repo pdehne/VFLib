@@ -1,16 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
-#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
-#include "vf/modules/vf_core/system/vf_PerformedAtExit.h"
-#include "vf/modules/vf_core/threads/vf_SharedObject.h"
-#include "vf/modules/vf_core/memory/vf_StaticObject.h"
-
 typedef Static::Storage <Atomic::Pointer <PerformedAtExit>, PerformedAtExit> Head;
 
 class PerformedAtExit::Performer
@@ -64,4 +54,3 @@ void PerformedAtExit::performLibraryAtExit ()
   LeakCheckedBase::performLibraryAtExit ();
 }
 
-END_VF_NAMESPACE

@@ -1,16 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/functor/vf_Bind.h"
-#include "vf/modules/vf_core/threads/vf_Mutex.h"
-#include "vf/modules/vf_core/system/vf_OncePerSecond.h"
-#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
-#include "vf/modules/vf_core/threads/vf_Thread.h"
-
 static char const* const threadName = "Once Per Second";
 
 //------------------------------------------------------------------------------
@@ -113,7 +103,3 @@ void OncePerSecond::endOncePerSecond ()
 {
   m_elem.instance->remove (&m_elem);
 }
-
-//------------------------------------------------------------------------------
-
-END_VF_NAMESPACE

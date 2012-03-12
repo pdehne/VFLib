@@ -13,6 +13,9 @@ namespace vf
 
 #include "diagnostic/vf_Error.cpp"
 #include "diagnostic/vf_FPUFlags.cpp"
+#include "diagnostic/vf_LeakChecked.cpp"
+#include "system/vf_OncePerSecond.cpp"
+#include "system/vf_PerformedAtExit.cpp"
 
 #if JUCE_WINDOWS
 #include "native/vf_win32_FPUFlags.cpp"
