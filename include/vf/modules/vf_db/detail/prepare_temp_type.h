@@ -5,8 +5,6 @@
 #ifndef __VF_DB_DETAIL_PREPARE_TEMP_TYPE_VFHEADER__
 #define __VF_DB_DETAIL_PREPARE_TEMP_TYPE_VFHEADER__
 
-#include "vf/modules/vf_db/detail/ref_counted_prepare_info.h"
-
 namespace db {
 
 namespace detail {

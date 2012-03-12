@@ -5,10 +5,6 @@
 #ifndef __VF_DB_DETAIL_USE_TYPE_VFHEADER__
 #define __VF_DB_DETAIL_USE_TYPE_VFHEADER__
 
-#include "vf/modules/vf_db/backend.h"
-#include "vf/modules/vf_db/detail/type_ptr.h"
-#include "vf/modules/vf_db/detail/exchange_traits.h"
-
 namespace db {
 
 namespace detail {

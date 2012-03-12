@@ -5,8 +5,6 @@
 #ifndef __VF_DB_TYPE_CONVERSION_TRAITS_VFHEADER__
 #define __VF_DB_TYPE_CONVERSION_TRAITS_VFHEADER__
 
-#include "vf/modules/vf_db/backend.h"
-
 namespace db {
 
 // default conversion (copy in to out)

@@ -5,10 +5,6 @@
 #ifndef __VF_DB_DETAIL_TYPE_CONVERSION_VFHEADER__
 #define __VF_DB_DETAIL_TYPE_CONVERSION_VFHEADER__
 
-#include "vf/modules/vf_db/type_conversion_traits.h"
-#include "vf/modules/vf_db/detail/into_type.h"
-#include "vf/modules/vf_db/detail/use_type.h"
-
 namespace db {
 
 namespace detail {

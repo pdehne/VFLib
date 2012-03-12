@@ -5,8 +5,6 @@
 #ifndef __VF_DB_BLOB_VFHEADER__
 #define __VF_DB_BLOB_VFHEADER__
 
-#include "vf/modules/vf_db/backend.h"
-
 namespace db {
 
 // BLOB interface

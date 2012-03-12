@@ -5,10 +5,6 @@
 #ifndef __VF_DB_USE_VFHEADER__
 #define __VF_DB_USE_VFHEADER__
 
-#include "vf/modules/vf_db/detail/use_type.h"
-#include "vf/modules/vf_db/detail/exchange_traits.h"
-#include "vf/modules/vf_db/detail/type_conversion.h"
-
 namespace db {
 
 inline detail::use_type_ptr use_null()

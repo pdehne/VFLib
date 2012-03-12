@@ -5,9 +5,6 @@
 #ifndef __VF_DB_DETAIL_STATEMENT_IMP_VFHEADER__
 #define __VF_DB_DETAIL_STATEMENT_IMP_VFHEADER__
 
-#include "vf/modules/vf_db/detail/into_type.h"
-#include "vf/modules/vf_db/detail/use_type.h"
-
 namespace db {
 
 namespace detail {

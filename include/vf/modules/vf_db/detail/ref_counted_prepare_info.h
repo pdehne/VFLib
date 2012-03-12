@@ -5,8 +5,6 @@
 #ifndef __VF_DB_DETAIL_REF_COUNTED_PREPARE_INFO_VFHEADER__
 #define __VF_DB_DETAIL_REF_COUNTED_PREPARE_INFO_VFHEADER__
 
-#include "vf/modules/vf_db/detail/ref_counted_statement.h"
-
 namespace db {
 
 namespace detail {

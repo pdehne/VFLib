@@ -5,10 +5,6 @@
 #ifndef __VF_DB_INTO_VFHEADER__
 #define __VF_DB_INTO_VFHEADER__
 
-#include "vf/modules/vf_db/detail/into_type.h"
-#include "vf/modules/vf_db/detail/exchange_traits.h"
-#include "vf/modules/vf_db/detail/type_conversion.h"
-
 namespace db {
 
 template<typename T>

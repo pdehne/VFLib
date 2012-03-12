@@ -5,10 +5,6 @@
 #ifndef __VF_DB_DETAIL_ONCE_TEMP_TYPE_VFHEADER__
 #define __VF_DB_DETAIL_ONCE_TEMP_TYPE_VFHEADER__
 
-#include "vf/modules/vf_db/detail/into_type.h"
-#include "vf/modules/vf_db/detail/prepare_temp_type.h"
-#include "vf/modules/vf_db/detail/ref_counted_statement.h"
-
 namespace db {
 
 namespace detail {

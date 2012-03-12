@@ -5,10 +5,6 @@
 #ifndef __VF_DB_SESSION_VFHEADER__
 #define __VF_DB_SESSION_VFHEADER__
 
-#include "vf/modules/vf_core/threads/vf_SharedObject.h"
-#include "vf/modules/vf_db/detail/once_temp_type.h"
-#include "vf/modules/vf_db/detail/prepare_temp_type.h"
-
 namespace db {
 
 class session

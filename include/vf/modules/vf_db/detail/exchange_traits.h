@@ -5,9 +5,6 @@
 #ifndef __VF_DB_DETAIL_EXCHANGE_TRAITS_VFHEADER__
 #define __VF_DB_DETAIL_EXCHANGE_TRAITS_VFHEADER__
 
-#include "vf/modules/vf_db/backend.h"
-#include "vf/modules/vf_db/type_conversion_traits.h"
-
 namespace db {
 
 namespace detail {
