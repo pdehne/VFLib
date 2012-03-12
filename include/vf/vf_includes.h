@@ -141,10 +141,6 @@
 #include "vf/modules/vf_core/threads/vf_Thread.h"
 #endif
 
-#ifndef __VF_THREADINDEX_VFHEADER__
-#include "vf/vf_ThreadIndex.h"
-#endif
-
 #ifndef __VF_THREADWORKER_VFHEADER__
 #include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
 #endif
