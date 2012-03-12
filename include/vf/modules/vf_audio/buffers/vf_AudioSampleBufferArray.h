@@ -1,9 +1,9 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
+// This file is part of VFLib
+// Copyright (C) 2008 by Vinnie Falco.
+// See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
-#define __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
+#ifndef VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
+#define VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
 
 // lightweight object to track an adjustable array of pointers to audio data.
 template <int Channels = 2>

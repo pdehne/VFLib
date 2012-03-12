@@ -1,6 +1,6 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
+// This file is part of VFLib
+// Copyright (C) 2008 by Vinnie Falco.
+// See the file LICENSE.txt for licensing information.
 
 #ifndef __VF_LOCKFREEDELAY_VFHEADER__
 #define __VF_LOCKFREEDELAY_VFHEADER__

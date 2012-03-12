@@ -64,7 +64,6 @@ template <> struct VfStaticAssert <true>
 // Stuff here is available without having to include it directly
 #include "vf/modules/vf_core/diagnostic/vf_Debug.h"
 #include "vf/modules/vf_core/diagnostic/vf_Error.h"
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
 #include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
 #include "vf/modules/vf_core/memory/vf_NonCopyable.h"
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"

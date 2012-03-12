@@ -53,10 +53,6 @@
 #include "vf/modules/vf_concurrent/queue/vf_Listeners.h"
 #endif
 
-#ifndef __VF_LOCKFREEDELAY_VFHEADER__
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
-#endif
-
 #ifndef __VF_LOCKFREELIST_VFHEADER__
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 #endif

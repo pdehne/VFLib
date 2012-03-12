@@ -5,20 +5,18 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
-//#include "vf/modules/vf_core/vf_core.h"
-
 namespace vf
 {
 
-#ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
+#ifndef VF_AUDIOBUFFERPOOL_VFHEADER
 #include "buffers/vf_AudioBufferPool.h"
 #endif
 
-#ifndef __VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER__
+#ifndef VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
 #include "buffers/vf_AudioSampleBufferArray.h"
 #endif
 
-#ifndef __VF_NOISEAUDIOSOURCE_VFHEADER__
+#ifndef VF_NOISEAUDIOSOURCE_VFHEADER
 #include "sources/vf_NoiseAudioSource.h"
 #endif
 
