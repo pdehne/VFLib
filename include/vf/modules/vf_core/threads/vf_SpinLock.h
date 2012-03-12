@@ -6,8 +6,8 @@
 #define __VF_SPINLOCK_VFHEADER__
 
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
 #include "vf/modules/vf_core/threads/vf_Mutex.h"
+#include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 
 class SpinLock
 {
@@ -18,10 +18,10 @@ public:
   {
     if (!m_lock.trySet ())
     {
-      LockFree::Delay delay;
+      SpinDelay delay;
       for (;;)
       {
-        delay.spin ();
+        delay.pause ();
         if (m_lock.trySet ())
           break;
       }

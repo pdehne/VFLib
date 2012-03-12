@@ -13,10 +13,6 @@ namespace vf {
 namespace vf
 {
 
-#ifndef __VF_LOCKFREEDELAY_VFHEADER__
-#include "lockfree/vf_LockFreeDelay.h"
-#endif
-
 }
 
 #endif

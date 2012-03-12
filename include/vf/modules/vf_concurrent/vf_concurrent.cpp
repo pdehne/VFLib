@@ -8,5 +8,5 @@
 
 namespace vf
 {
-#include "lockfree/vf_LockFreeDelay.cpp"
+
 }

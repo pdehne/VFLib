@@ -5,7 +5,7 @@
 #ifndef __VF_STATICOBJECT_VFHEADER__
 #define __VF_STATICOBJECT_VFHEADER__
 
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
+#include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 
 //
 // A full suite of thread-safe objects designed for static storage duration.
@@ -96,11 +96,11 @@ public:
       }
       else
       {
-        LockFree::Delay delay;
+        SpinDelay delay;
 
         do
         {
-          delay.spin ();
+          delay.pause ();
         }
         while (m_state.get () != stateInitialized);
 

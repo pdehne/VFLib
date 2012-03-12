@@ -7,7 +7,6 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/modules/vf_concurrent/memory/vf_Allocator.h"
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
 #include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
 
 // Implementation notes

@@ -6,7 +6,6 @@
 #define __VF_LOCKFREESTACK_VFHEADER__
 
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 
 #define STACK_USE_DELAY 0

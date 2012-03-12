@@ -7,7 +7,7 @@
 
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/memory/vf_CacheLine.h"
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
+#include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 
 namespace LockFree {
@@ -76,10 +76,10 @@ public:
     // Crafted to sometimes avoid the Delay ctor.
     if (!try_pop_front (&elem))
     {
-      Delay delay;
+      SpinDelay delay;
       do
       {
-        delay.spin ();
+        delay.pause ();
       }
       while (!try_pop_front (&elem));
     }

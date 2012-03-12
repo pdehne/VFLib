@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeDelay.h"
+#include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 #include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
 
 #define USE_DEBUG_MUTEX 0
@@ -84,10 +84,10 @@ void ReadWriteMutex::enter_write () const
   //
   if (m_readers->is_signaled ())
   {
-    LockFree::Delay delay; 
+    SpinDelay delay; 
     do
     {
-      delay.spin ();
+      delay.pause ();
     }
     while (m_readers->is_signaled ());
   }
