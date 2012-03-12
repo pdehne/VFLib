@@ -145,10 +145,6 @@
 #include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
 #endif
 
-#ifndef __VF_TYPE_VFHEADER__
-#include "vf/vf_Type.h"
-#endif
-
 #ifndef __VF_WORKER_VFHEADER__
 #include "vf/modules/vf_concurrent/queue/vf_Worker.h"
 #endif
@@ -157,14 +153,6 @@
 
 #ifndef __VF_DB_VFHEADER__
 #include "vf/vf_db.h" // db uses both some Juce and Boost
-#endif
-
-// ui
-
-#if 0 /* for Patrick */
-#ifndef __VF_UI_VFHEADER__
-#include "vf/vf_ui.h"
-#endif
 #endif
 
 #endif
