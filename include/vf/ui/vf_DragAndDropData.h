@@ -5,7 +5,7 @@
 #ifndef __VF_DRAGANDDROPDATA_VFHEADER__
 #define __VF_DRAGANDDROPDATA_VFHEADER__
 
-#include "vf/vf_List.h"
+#include "vf/modules/vf_core/containers/vf_List.h"
 
 // A useful container that encapsulates data suitable for Drag and Drop
 //

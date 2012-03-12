@@ -5,11 +5,11 @@
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
 #define __VF_PAGEALLOCATOR_VFHEADER__
 
-#include "vf/vf_Atomic.h"
-#include "vf/vf_CacheLine.h"
+#include "vf/modules/vf_core/memory/vf_Atomic.h"
+#include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "vf/vf_LockFreeStack.h"
-#include "vf/vf_OncePerSecond.h"
-#include "vf/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/system/vf_OncePerSecond.h"
+#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
 
 //
 // Wait-free allocator for fixed size pages with these properties:

@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_Mutex.h"
+#include "vf/modules/vf_core/threads/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
 //void operator delete (void* p);

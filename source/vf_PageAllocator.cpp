@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_MemoryAlignment.h"
+#include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
 #include "vf/vf_PageAllocator.h"
 
 #define LOG_GC 0

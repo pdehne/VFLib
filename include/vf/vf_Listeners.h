@@ -7,9 +7,9 @@
 
 #include "vf/vf_AllocatedBy.h"
 #include "vf/vf_Allocator.h"
-#include "vf/vf_List.h"
-#include "vf/vf_ReadWriteMutex.h"
-#include "vf/vf_SharedObject.h"
+#include "vf/modules/vf_core/containers/vf_List.h"
+#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #include "vf/vf_Worker.h"
 
 // List where each Listener registers with the desired Worker

@@ -14,7 +14,7 @@
 #endif
 
 #ifndef __VF_ATOMIC_VFHEADER__
-#include "vf/vf_Atomic.h"
+#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #endif
 
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
@@ -26,23 +26,23 @@
 #endif
 
 #ifndef __VF_BIND_VFHEADER__
-#include "vf/vf_Bind.h"
+#include "vf/modules/vf_core/functor/vf_Bind.h"
 #endif
 
 #ifndef __VF_CATCHANY_VFHEADER__
-#include "vf/vf_CatchAny.h"
+#include "vf/modules/vf_core/diagnostic/vf_CatchAny.h"
 #endif
 
 #ifndef __VF_CACHELINE_VFHEADER__
-#include "vf/vf_CacheLine.h"
+#include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #endif
 
 #ifndef __VF_FPUFLAGS_VFHEADER__
-#include "vf/vf_FPUFlags.h"
+#include "vf/modules/vf_core/diagnostic/vf_FPUFlags.h"
 #endif
 
 #ifndef __VF_FUNCTION_VFHEADER__
-#include "vf/vf_Function.h"
+#include "vf/modules/vf_core/functor/vf_Function.h"
 #endif
 
 #ifndef __VF_GUIWORKER_VFHEADER__
@@ -50,11 +50,11 @@
 #endif
 
 #ifndef __VF_INTERVAL_VFHEADER__
-#include "vf/vf_Interval.h"
+#include "vf/modules/vf_core/math/vf_Interval.h"
 #endif
 
 #ifndef __VF_LIST_VFHEADER__
-#include "vf/vf_List.h"
+#include "vf/modules/vf_core/containers/vf_List.h"
 #endif
 
 #ifndef __VF_LISTENERS_VFHEADER__
@@ -78,7 +78,7 @@
 #endif
 
 #ifndef __VF_MATH_VFHEADER__
-#include "vf/vf_Math.h"
+#include "vf/modules/vf_core/math/vf_Math.h"
 #endif
 
 #ifndef __VF_MANUALWORKER_VFHEADER__
@@ -86,15 +86,15 @@
 #endif
 
 #ifndef __VF_MEMORYALIGNMENT_VFHEADER__
-#include "vf/vf_MemoryAlignment.h"
+#include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
 #endif
 
 #ifndef __VF_MURMURHASH_VFHEADER__
-#include "vf/vf_MurmurHash.h"
+#include "vf/modules/vf_core/math/vf_MurmurHash.h"
 #endif
 
 #ifndef __VF_MUTEX_VFHEADER__
-#include "vf/vf_Mutex.h"
+#include "vf/modules/vf_core/threads/vf_Mutex.h"
 #endif
 
 #ifndef __VF_OBJECTALLOCATOR_VFHEADER__
@@ -102,7 +102,7 @@
 #endif
 
 #ifndef __VF_ONCEPERSECOND_VFHEADER__
-#include "vf/vf_OncePerSecond.h"
+#include "vf/modules/vf_core/system/vf_OncePerSecond.h"
 #endif
 
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
@@ -110,39 +110,39 @@
 #endif
 
 #ifndef __VF_PERFORMEDATEXIT_VFHEADER__
-#include "vf/vf_PerformedAtExit.h"
+#include "vf/modules/vf_core/system/vf_PerformedAtExit.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEX_VFHEADER__
-#include "vf/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEXBASE_VFHEADER__
-#include "vf/vf_ReadWriteMutexBase.h"
+#include "vf/modules/vf_core/threads/vf_ReadWriteMutexBase.h"
 #endif
 
 #ifndef __VF_SAFEBOOL_VFHEADER__
-#include "vf/vf_SafeBool.h"
+#include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
 #endif
 
 #ifndef __VF_SHAREDOBJECT_VFHEADER__
-#include "vf/vf_SharedObject.h"
+#include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #endif
 
 #ifndef __VF_SHAREDOBJECTPTR_VFHEADER__
-#include "vf/vf_SharedObjectPtr.h"
+#include "vf/modules/vf_core/threads/vf_SharedObjectPtr.h"
 #endif
 
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
-#include "vf/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
 #endif
 
 #ifndef __VF_SHAREDSTATE_VFHEADER__
-#include "vf/vf_SharedState.h"
+#include "vf/modules/vf_core/threads/vf_SharedState.h"
 #endif
 
 #ifndef __VF_SPINLOCK_VFHEADER__
-#include "vf/vf_SpinLock.h"
+#include "vf/modules/vf_core/threads/vf_SpinLock.h"
 #endif
 
 #ifndef __VF_STATICOBJECT_VFHEADER__
@@ -150,7 +150,7 @@
 #endif
 
 #ifndef __VF_THREAD_VFHEADER__
-#include "vf/vf_Thread.h"
+#include "vf/modules/vf_core/threads/vf_Thread.h"
 #endif
 
 #ifndef __VF_THREADINDEX_VFHEADER__

@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_List.h"
+#include "vf/modules/vf_core/containers/vf_List.h"
 #include "vf/vf_ThreadIndex.h"
 
 namespace ThreadIndex {

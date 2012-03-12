@@ -5,7 +5,7 @@
 #ifndef __VF_MODEL_VFHEADER__
 #define __VF_MODEL_VFHEADER__
 
-#include "vf/vf_SharedObject.h"
+#include "vf/modules/vf_core/threads/vf_SharedObject.h"
 
 namespace Ui {
 

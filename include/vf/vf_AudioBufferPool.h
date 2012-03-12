@@ -5,8 +5,8 @@
 #ifndef __VF_AUDIOBUFFERPOOL_VFHEADER__
 #define __VF_AUDIOBUFFERPOOL_VFHEADER__
 
-#include "vf/vf_LeakChecked.h"
-#include "vf/vf_Mutex.h"
+#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
+#include "vf/modules/vf_core/threads/vf_Mutex.h"
 
 class AudioBufferPoolBase
 {

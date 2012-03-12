@@ -5,7 +5,7 @@
 #ifndef __VF_OBJECTALLOCATOR_VFHEADER__
 #define __VF_OBJECTALLOCATOR_VFHEADER__
 
-#include "vf/vf_SpinLock.h"
+#include "vf/modules/vf_core/threads/vf_SpinLock.h"
 #include "vf/vf_IntrusiveStack.h"
 
 #if 0

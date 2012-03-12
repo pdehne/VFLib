@@ -10,7 +10,7 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/vf_db.h"
-#include "vf/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
 #include "error_codes.h"
 
 namespace db {

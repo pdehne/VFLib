@@ -5,13 +5,13 @@
 #ifndef __VF_THREADWORKER_VFHEADER__
 #define __VF_THREADWORKER_VFHEADER__
 
-#include "vf/vf_Bind.h"
-#include "vf/vf_CatchAny.h"
-#include "vf/vf_Function.h"
-#include "vf/vf_Mutex.h"
+#include "vf/modules/vf_core/functor/vf_Bind.h"
+#include "vf/modules/vf_core/diagnostic/vf_CatchAny.h"
+#include "vf/modules/vf_core/functor/vf_Function.h"
+#include "vf/modules/vf_core/threads/vf_Mutex.h"
 #include "vf/vf_Worker.h"
 
-#include "vf/vf_Thread.h" // is this needed?
+#include "vf/modules/vf_core/threads/vf_Thread.h" // is this needed?
 
 //
 // Worker that comes with its own thread of execution used

@@ -6,7 +6,7 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/vf_MemoryAlignment.h"
+#include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
 #include "vf/vf_PagePool.h"
 
 PagePool::PagePool (int bytesPerPage)

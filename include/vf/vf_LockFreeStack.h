@@ -5,7 +5,7 @@
 #ifndef __VF_LOCKFREESTACK_VFHEADER__
 #define __VF_LOCKFREESTACK_VFHEADER__
 
-#include "vf/vf_Atomic.h"
+#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
 

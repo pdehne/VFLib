@@ -5,9 +5,9 @@
 #ifndef __VF_ALLOCATOR_VFHEADER__
 #define __VF_ALLOCATOR_VFHEADER__
 
-#include "vf/vf_List.h"
+#include "vf/modules/vf_core/containers/vf_List.h"
 #include "vf/vf_PageAllocator.h"
-#include "vf/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
 

@@ -5,7 +5,7 @@
 #ifndef __VF_FACADE_VFHEADER__
 #define __VF_FACADE_VFHEADER__
 
-#include "vf/vf_SharedObjectPtr.h"
+#include "vf/modules/vf_core/threads/vf_SharedObjectPtr.h"
 #include "vf/ui/vf_ConnectedEdges.h"
 #include "vf/ui/vf_Model.h"
 #include "vf/ui/vf_TransparentBorder.h"

@@ -5,8 +5,8 @@
 #ifndef __VF_LOCKFREEQUEUE_VFHEADER__
 #define __VF_LOCKFREEQUEUE_VFHEADER__
 
-#include "vf/vf_Atomic.h"
-#include "vf/vf_CacheLine.h"
+#include "vf/modules/vf_core/memory/vf_Atomic.h"
+#include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "vf/vf_LockFreeDelay.h"
 #include "vf/vf_LockFreeList.h"
 

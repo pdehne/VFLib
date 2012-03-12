@@ -6,11 +6,11 @@
 #define __VF_WORKER_VFHEADER__
 
 #include "vf/vf_AllocatedBy.h"
-#include "vf/vf_Atomic.h"
-#include "vf/vf_Bind.h"
+#include "vf/modules/vf_core/memory/vf_Atomic.h"
+#include "vf/modules/vf_core/functor/vf_Bind.h"
 #include "vf/vf_Allocator.h"
 #include "vf/vf_LockFreeQueue.h"
-#include "vf/vf_Thread.h"
+#include "vf/modules/vf_core/threads/vf_Thread.h"
 
 // Queue that executes functors on another thread, with these invariants:
 //

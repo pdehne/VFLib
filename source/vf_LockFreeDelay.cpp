@@ -8,7 +8,7 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/vf_LockFreeDelay.h"
 
-#include "vf/vf_Thread.h"
+#include "vf/modules/vf_core/threads/vf_Thread.h"
 
 namespace LockFree {
 
