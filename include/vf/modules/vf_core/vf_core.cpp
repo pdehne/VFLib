@@ -12,4 +12,14 @@ namespace vf
 //#include "diagnostic/vf_Debug.cpp"
 
 #include "diagnostic/vf_Error.cpp"
+#include "diagnostic/vf_FPUFlags.cpp"
+
+#if JUCE_WINDOWS
+#include "native/vf_win32_FPUFlags.cpp"
+
+#else
+#include "native/vf_posix_FPUFlags.cpp"
+
+#endif
+
 }
