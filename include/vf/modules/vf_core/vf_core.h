@@ -4,11 +4,10 @@
 #ifndef VF_CORE_VFHEADER
 #define VF_CORE_VFHEADER
 
-// deps
-
 namespace vf
 {
-#include "containers/vf_List.h"
+#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
+#include "vf/modules/vf_core/threads/vf_Mutex.h"
 }
 
 #endif

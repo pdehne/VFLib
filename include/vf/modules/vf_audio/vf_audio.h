@@ -5,11 +5,7 @@
 #define VF_AUDIO_VFHEADER
 
 // deps
-namespace vf
-{
-#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
-#include "vf/modules/vf_core/threads/vf_Mutex.h"
-}
+#include "../vf_core/vf_core.h"
 
 namespace vf
 {
