@@ -25,7 +25,7 @@ Worker::~Worker ()
   vfassert (m_list.empty ());
 }
 
-bool Worker::isAssociateWithCurrentThread () const
+bool Worker::isAssociatedWithCurrentThread () const
 {
   return CurrentThread::getId() == m_id;
 }
@@ -61,7 +61,7 @@ void Worker::callp (Call* c)
   // might get an undesired synchronization if new thread
   // calls process() concurrently.
   //
-  if (isAssociateWithCurrentThread () &&
+  if (isAssociatedWithCurrentThread () &&
       m_in_process.trySet ())
   {
     do_process ();

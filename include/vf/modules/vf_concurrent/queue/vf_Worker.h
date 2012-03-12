@@ -72,7 +72,7 @@ public:
 
   // returns true if the current thread of execution is
   // the last one used to process this queue
-  bool isAssociateWithCurrentThread () const;
+  bool isAssociatedWithCurrentThread () const;
 
   // used for diagnostics in Listener
   bool in_process () const { return m_in_process.isSet(); }

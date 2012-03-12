@@ -43,7 +43,7 @@ public:
 
   void Delete (SharedObject* sharedObject)
   {
-    if (m_worker.isAssociateWithCurrentThread ())
+    if (m_worker.isAssociatedWithCurrentThread ())
       delete sharedObject;
     else
       m_worker.call (&Deleter::doDelete, sharedObject);
