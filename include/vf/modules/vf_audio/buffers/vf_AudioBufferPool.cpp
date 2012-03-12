@@ -1,5 +1,4 @@
-// This file is part of VFLib
-// Copyright (C) 2008 by Vinnie Falco.
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
 AudioBufferPoolBase::Buffer::Buffer (int numChannels,

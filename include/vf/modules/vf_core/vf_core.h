@@ -1,12 +1,15 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
+#ifndef VF_CORE_VFHEADER
+#define VF_CORE_VFHEADER
 
-#include "vf_audio.h"
+// deps
 
 namespace vf
 {
-#include "buffers/vf_AudioBufferPool.cpp"
-#include "sources/vf_NoiseAudiosource.cpp"
+#include "containers/vf_List.h"
 }
+
+#endif
+

@@ -1,12 +1,8 @@
-// This file is part of VFLib
-// Copyright (C) 2008 by Vinnie Falco.
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
 #ifndef VF_AUDIOBUFFERPOOL_VFHEADER
 #define VF_AUDIOBUFFERPOOL_VFHEADER
-
-#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
-#include "vf/modules/vf_core/threads/vf_Mutex.h"
 
 class AudioBufferPoolBase
 {

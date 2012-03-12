@@ -3,10 +3,9 @@
 
 #include "vf/vf_StandardHeader.h"
 
-#include "vf_audio.h"
+#include "vf_core.h"
 
 namespace vf
 {
-#include "buffers/vf_AudioBufferPool.cpp"
-#include "sources/vf_NoiseAudiosource.cpp"
+
 }
