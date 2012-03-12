@@ -6,6 +6,7 @@
 
 namespace vf
 {
+#include "vf/modules/vf_core/diagnostic/vf_Error.h"
 #include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
 #include "vf/modules/vf_core/threads/vf_Mutex.h"
 }

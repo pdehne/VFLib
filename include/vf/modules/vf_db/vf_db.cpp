@@ -3,7 +3,9 @@
 
 #include "vf/vf_StandardHeader.h"
 
-//#include ...
+#include "sqlite/sqlite3.h"
+
+#include "vf_db.h"
 
 namespace vf
 {
