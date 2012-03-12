@@ -98,11 +98,11 @@
 #endif
 
 #ifndef __VF_READWRITEMUTEX_VFHEADER__
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 #endif
 
 #ifndef __VF_READWRITEMUTEXBASE_VFHEADER__
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutexBase.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutexBase.h"
 #endif
 
 #ifndef __VF_SAFEBOOL_VFHEADER__
@@ -122,7 +122,7 @@
 #endif
 
 #ifndef __VF_SHAREDSTATE_VFHEADER__
-#include "vf/modules/vf_core/threads/vf_SharedState.h"
+#include "vf/modules/vf_concurrent/threads/vf_SharedState.h"
 #endif
 
 #ifndef __VF_SPINLOCK_VFHEADER__

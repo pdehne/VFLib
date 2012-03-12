@@ -5,7 +5,7 @@
 #ifndef __VF_SHAREDSTATE_VFHEADER__
 #define __VF_SHAREDSTATE_VFHEADER__
 
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 
 //
 // An object intended to be accessed from multiple threads

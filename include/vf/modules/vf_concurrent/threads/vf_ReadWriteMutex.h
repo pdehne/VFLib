@@ -8,7 +8,7 @@
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "Vf/modules/vf_core/threads/vf_Mutex.h"
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutexBase.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutexBase.h"
 
 // Multiple-reader, single writer, write preferenced
 // partially recursive mutex with a wait-free fast path.

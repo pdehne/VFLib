@@ -7,7 +7,7 @@
 BEGIN_VF_NAMESPACE
 
 #include "vf/modules/vf_core/threads/vf_SpinDelay.h"
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 
 #define USE_DEBUG_MUTEX 0
 

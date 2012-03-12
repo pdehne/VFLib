@@ -8,7 +8,7 @@
 #include "vf/modules/vf_concurrent/memory/vf_AllocatedBy.h"
 #include "vf/modules/vf_concurrent/memory/vf_Allocator.h"
 #include "vf/modules/vf_core/containers/vf_List.h"
-#include "vf/modules/vf_core/threads/vf_ReadWriteMutex.h"
+#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #include "vf/modules/vf_concurrent/queue/vf_Worker.h"
 
