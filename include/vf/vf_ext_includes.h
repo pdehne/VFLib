@@ -7,11 +7,13 @@
 
 // These are included outside of our namespace.
 
+#if 1
 // forward declare
 // not the best place for this but convenient.
 struct sqlite3;
 struct sqlite3_blob;
 struct sqlite3_stmt;
+#endif
 
 // all the includes for external libraries bundled with vf lib
 // But maybe not...this isn't a good idea.
