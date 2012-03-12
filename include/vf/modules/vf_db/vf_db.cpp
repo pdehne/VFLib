@@ -11,22 +11,22 @@
 namespace vf
 {
 // implementation headers
-#include "error_codes.h"
+#include "detail/error_codes.h"
 #include "detail/statement_imp.h"
 }
 
 namespace vf
 {
-#include "blob.cpp"
-#include "error_codes.cpp"
-#include "into_type.cpp"
-#include "once_temp_type.cpp"
-#include "prepare_temp_type.cpp"
-#include "ref_counted_prepare_info.cpp"
-#include "ref_counted_statement.cpp"
-#include "session.cpp"
-#include "statement.cpp"
-#include "statement_imp.cpp"
-#include "transaction.cpp"
-#include "use_type.cpp"
+#include "source/blob.cpp"
+#include "source/error_codes.cpp"
+#include "source/into_type.cpp"
+#include "source/once_temp_type.cpp"
+#include "source/prepare_temp_type.cpp"
+#include "source/ref_counted_prepare_info.cpp"
+#include "source/ref_counted_statement.cpp"
+#include "source/session.cpp"
+#include "source/statement.cpp"
+#include "source/statement_imp.cpp"
+#include "source/transaction.cpp"
+#include "source/use_type.cpp"
 }

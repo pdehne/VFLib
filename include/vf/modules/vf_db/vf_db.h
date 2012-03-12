@@ -26,33 +26,32 @@ class session;						// statement.h
 namespace vf
 {
 
-#include "backend.h"
+#include "api/backend.h"
+#include "api/transaction.h"
 #include "detail/type_ptr.h"
-#include "transaction.h"
 
-#include "blob.h"
-#include "type_conversion_traits.h"
+#include "api/blob.h"
+#include "api/type_conversion_traits.h"
 
 #include "detail/exchange_traits.h"
 
 #include "detail/into_type.h"
 #include "detail/use_type.h"
 
-#include "statement.h"
-//#include "detail/statement_imp.h"
+#include "api/statement.h"
 #include "detail/type_conversion.h"
 
 #include "detail/ref_counted_statement.h"
 
-#include "into.h"
-#include "use.h"
+#include "api/into.h"
+#include "api/use.h"
 #include "detail/ref_counted_prepare_info.h"
 
 #include "detail/prepare_temp_type.h"
 
 #include "detail/once_temp_type.h"
 
-#include "session.h"
+#include "api/session.h"
 
 }
 
