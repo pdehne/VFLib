@@ -34,22 +34,22 @@ class ScopedPlatformExceptionCatcher : NonCopyable
 public:
   ScopedPlatformExceptionCatcher ()
   {
-    s_mutex.enter ();
+    //s_mutex.enter ();
 
     if (++s_count == 1)
       s_sehPrev = ::SetUnhandledExceptionFilter (sehFilter);
 
-    s_mutex.exit ();
+    //s_mutex.exit ();
   }
 
   ~ScopedPlatformExceptionCatcher ()
   {
-    s_mutex.enter ();
+    //s_mutex.enter ();
 
     if (--s_count == 0)
       SetUnhandledExceptionFilter (s_sehPrev);
 
-    s_mutex.exit ();
+    //s_mutex.exit ();
   }
 
   static LONG WINAPI sehFilter (_EXCEPTION_POINTERS* ei)

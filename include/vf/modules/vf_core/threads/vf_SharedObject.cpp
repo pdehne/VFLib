@@ -10,6 +10,8 @@ BEGIN_VF_NAMESPACE
 #include "vf/modules/vf_core/system/vf_SharedSingleton.h"
 #include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
 
+#define USE_JUCE_THREAD 0
+
 //------------------------------------------------------------------------------
 
 class SharedObject::Deleter : LeakChecked <Deleter>
@@ -19,8 +21,9 @@ private:
 
   Deleter () : m_worker ("Deleter")
   {
-    m_worker.start ();
-  }
+    m_worker.start (ThreadWorker::idle_t(),
+					boost::bind (&Deleter::removeFromRunningThreadList));
+	  }
 
   ~Deleter ()
   {
@@ -28,6 +31,15 @@ private:
   }
 
 private:
+  static void removeFromRunningThreadList ()
+  {
+#if USE_JUCE_THREAD
+	juce::Thread* thread = juce::Thread::getCurrentThread ();
+	jassert (thread != nullptr);
+	thread->removeFromRunningThreadsList ();
+#endif
+  }
+
   static void doDelete (SharedObject* sharedObject)
   {
     delete sharedObject;
@@ -75,7 +87,12 @@ public:
 
 private:
   Atomic::Counter m_refs;
+
+#if USE_JUCE_THREAD
+  ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > m_worker;
+#else
   ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
+#endif
 
   static Deleter* s_instance;
   static Static::Storage <SpinLock, Deleter> s_mutex;
