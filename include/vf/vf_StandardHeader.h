@@ -23,8 +23,6 @@ using VF_JUCE::uint8;
 
 #include "vf/vf_stdlib_includes.h"
 
-#include "vf/vf_ext_includes.h"     // Outside our namespace
-
 #ifdef _MSC_VER
 #  pragma warning (disable: 4100) // Unused parameters
 #endif
