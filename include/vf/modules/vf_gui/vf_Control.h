@@ -2,6 +2,9 @@
 // This file is released under the MIT License:
 // http://www.opensource.org/licenses/mit-license.php
 
+#ifndef VF_CONTROL_VFHEADER
+#define VF_CONTROL_VFHEADER
+
 #include "vf/modules/vf_gui/vf_Facade.h"
 #include "vf/modules/vf_gui/vf_Model.h"
 
@@ -51,3 +54,5 @@ private:
 }
 
 }
+
+#endif

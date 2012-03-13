@@ -5,10 +5,7 @@
 #ifndef VF_CONCURRENT_VFHEADER
 #define VF_CONCURRENT_VFHEADER
 
-// deps
-namespace vf {
-#include "vf/modules/vf_core/threads/vf_Thread.h"
-}
+#include "../vf_core/vf_core.h"
 
 namespace vf
 {
