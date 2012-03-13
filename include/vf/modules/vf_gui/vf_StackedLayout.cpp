@@ -1,12 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_StackedLayout.h"
-
 StackedLayout::StackedLayout (bool vertical,
                               BorderSize<int> borderSize,
                               int gapSize)
@@ -287,5 +281,3 @@ void StackedLayout::handleAsyncUpdate ()
   m_active = true;
   recalculateLayout ();
 }
-
-END_VF_NAMESPACE

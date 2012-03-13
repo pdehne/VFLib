@@ -1,12 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_TransparentBorder.h"
-
 #define SHOW_BORDER 0
 #define DISABLE_BORDER 0
 
@@ -232,5 +226,3 @@ void TransparentBorder::componentBeingDeleted (Component& component)
     //m_opaque = 0;
   }
 }
-
-END_VF_NAMESPACE

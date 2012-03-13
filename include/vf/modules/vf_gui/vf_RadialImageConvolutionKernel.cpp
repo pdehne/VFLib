@@ -1,12 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_RadialImageConvolutionKernel.h"
-
 RadialImageConvolutionKernel::RadialImageConvolutionKernel (int radiusInSamples)
   : m_radius (radiusInSamples)
 {
@@ -287,5 +281,3 @@ void RadialImageConvolutionKernel::convolve (int pixels,
     src += srcSkip;
   }
 }
-
-END_VF_NAMESPACE

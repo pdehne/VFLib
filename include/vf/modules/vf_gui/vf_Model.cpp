@@ -1,13 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_Control.h"
-#include "vf/modules/vf_gui/vf_Model.h"
-
 namespace Ui {
 
 namespace Model {
@@ -102,5 +95,3 @@ void Model::Base::setEnabled (bool enabled)
 }
 
 }
-
-END_VF_NAMESPACE

@@ -1,12 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_ResizableLayout.h"
-
 const Point <int> ResizableLayout::anchorNone			  ( -1, -1 );
 const Point <int> ResizableLayout::anchorTopLeft		  ( 0, 0 );
 const Point <int> ResizableLayout::anchorTopCenter		( anchorUnit/2, 0 );
@@ -348,5 +342,3 @@ void TopLevelConstrainer::setAsConstrainerFor(ResizableWindow *window)
 {
   window->setConstrainer (&m_constrainer);
 }
-
-END_VF_NAMESPACE

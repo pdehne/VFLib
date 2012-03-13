@@ -1,12 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_gui/vf_Colour.h"
-
 XYZColour::XYZColour ()
   : m_x (0)
   , m_y (0)
@@ -210,7 +204,3 @@ LabColour const LabColour::withMultipliedColour (float amount) const
     getB () * amount,
     getAlpha ());
 }
-
-//------------------------------------------------------------------------------
-
-END_VF_NAMESPACE
