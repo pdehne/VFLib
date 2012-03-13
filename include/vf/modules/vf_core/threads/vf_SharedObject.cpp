@@ -5,12 +5,9 @@
 
 BEGIN_VF_NAMESPACE
 
-#include "vf/modules/vf_core/threads/vf_BoostThread.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #include "vf/modules/vf_core/utility/vf_SharedSingleton.h"
 #include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
-
-#define USE_JUCE_THREAD 1
 
 //------------------------------------------------------------------------------
 
@@ -78,11 +75,7 @@ public:
 private:
   Atomic::Counter m_refs;
 
-#if USE_JUCE_THREAD
   ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > m_worker;
-#else
-  ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > m_worker;
-#endif
 
   static Deleter* s_instance;
   static Static::Storage <SpinLock, Deleter> s_mutex;

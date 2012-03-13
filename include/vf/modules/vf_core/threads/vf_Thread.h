@@ -7,12 +7,7 @@
 #include "vf/modules/vf_core/threads/vf_BoostThread.h"
 #include "vf/modules/vf_core/threads/vf_JuceThread.h"
 
-#if 1
 typedef JuceThread Thread;
 namespace CurrentThread = CurrentJuceThread;
-#else
-typedef BoostThread Thread;
-namespace CurrentThread = CurrentBoostThread;
-#endif
 
 #endif
