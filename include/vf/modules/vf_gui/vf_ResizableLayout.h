@@ -1,4 +1,5 @@
-// Copyright (C) 2008 by One Guy Group, Inc., All rights reserved worldwide.
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 #ifndef __VF_RESIZABLELAYOUT_VFHEADER__
 #define __VF_RESIZABLELAYOUT_VFHEADER__
