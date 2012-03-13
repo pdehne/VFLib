@@ -5,17 +5,23 @@
 
 #include "vf_core.h"
 
+#if JUCE_MSVC && _DEBUG
+#include <crtdbg.h>
+#endif
+
 namespace vf
 {
 
 //#include "diagnostic/vf_CatchAny.cpp"
 //#include "diagnostic/vf_Debug.cpp"
 
+#include "diagnostic/vf_Debug.cpp"
 #include "diagnostic/vf_Error.cpp"
 #include "diagnostic/vf_FPUFlags.cpp"
 #include "diagnostic/vf_LeakChecked.cpp"
-#include "system/vf_OncePerSecond.cpp"
-#include "system/vf_PerformedAtExit.cpp"
+#include "math/vf_MurmurHash.cpp"
+#include "utility/vf_OncePerSecond.cpp"
+#include "utility/vf_PerformedAtExit.cpp"
 #include "threads/vf_BoostThread.cpp"
 #include "threads/vf_JuceThread.cpp"
 

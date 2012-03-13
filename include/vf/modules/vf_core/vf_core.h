@@ -29,9 +29,9 @@ namespace vf
 #include "memory/vf_NonCopyable.h"
 #include "memory/vf_StaticObject.h"
 
-#include "system/vf_OncePerSecond.h"
-#include "system/vf_PerformedAtExit.h"
-#include "system/vf_SharedSingleton.h"
+#include "utility/vf_OncePerSecond.h"
+#include "utility/vf_PerformedAtExit.h"
+#include "utility/vf_SharedSingleton.h"
 
 #include "threads/vf_BoostThread.h"
 #include "threads/vf_JuceThread.h"

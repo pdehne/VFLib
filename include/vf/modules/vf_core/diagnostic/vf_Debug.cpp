@@ -3,14 +3,6 @@
 
 #include "vf/vf_StandardHeader.h"
 
-#if JUCE_MSVC && _DEBUG
-#include <crtdbg.h>
-#endif
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/diagnostic/vf_Debug.h"
-
 namespace Debug {
 
 //------------------------------------------------------------------------------
@@ -68,6 +60,24 @@ void setHeapReportLeaks (bool bReportLeaks)
 void checkHeap ()
 {
   _CrtCheckMemory();
+}
+
+#else
+
+void setHeapAlwaysCheck (bool)
+{
+}
+
+void setHeapDelayedFree (bool)
+{
+}
+
+void setHeapReportLeaks (bool)
+{
+}
+
+void checkHeap ()
+{
 }
 
 #endif
@@ -215,5 +225,3 @@ String commandLineToString (const String& commandLine)
 }
 
 }
-
-END_VF_NAMESPACE

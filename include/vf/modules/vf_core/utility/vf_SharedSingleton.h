@@ -4,7 +4,7 @@
 #ifndef __VF_SHAREDSINGLETON_VFHEADER__
 #define __VF_SHAREDSINGLETON_VFHEADER__
 
-#include "vf/modules/vf_core/system/vf_PerformedAtExit.h"
+#include "vf/modules/vf_core/utility/vf_PerformedAtExit.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #include "vf/modules/vf_core/threads/vf_SpinLock.h"
 #include "vf/modules/vf_core/memory/vf_StaticObject.h"

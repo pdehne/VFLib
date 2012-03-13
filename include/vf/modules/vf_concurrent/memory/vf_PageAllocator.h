@@ -7,8 +7,8 @@
 #include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeStack.h"
-#include "vf/modules/vf_core/system/vf_OncePerSecond.h"
-#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/utility/vf_OncePerSecond.h"
+#include "vf/modules/vf_core/utility/vf_SharedSingleton.h"
 
 //
 // Wait-free allocator for fixed size pages with these properties:

@@ -7,7 +7,7 @@ BEGIN_VF_NAMESPACE
 
 #include "vf/modules/vf_core/threads/vf_BoostThread.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"
-#include "vf/modules/vf_core/system/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/utility/vf_SharedSingleton.h"
 #include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
 
 #define USE_JUCE_THREAD 1

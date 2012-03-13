@@ -9,6 +9,37 @@
 //
 // A full suite of thread-safe objects designed for static storage duration.
 //
+// Wraps an object with a thread-safe initialization preamble so that it can
+// properly exist with static storage duration.
+//
+// Implementation notes:
+//
+//   This is accomplished by omitting the constructor and relying on the C++
+//   specification that plain data types with static storage duration are filled
+//   with zeroes before any other initialization code executes.
+//
+// Spec: N2914=09-0104
+//
+// [3.6.2] Initialization of non-local objects
+//
+//         Objects with static storage duration (3.7.1) or thread storage
+//         duration (3.7.2) shall be zero-initialized (8.5) before any
+//         other initialization takes place.
+//
+// Requirements:
+//
+//  Object must be constructible without parameters.
+//  The StaticObject must be declared with static storage duration or
+//    the behavior is undefined.
+//
+// Usage example:
+//
+// Object* getInstance ()
+// {
+//   static StaticObject <Object> instance;
+//   return instance->getObject ();
+// }
+//
 
 namespace Static {
 
@@ -131,87 +162,6 @@ private:
 
   VF_JUCE::Atomic <int> m_state;
 };
-
-//------------------------------------------------------------------------------
-
-// Wraps an object with a thread-safe initialization preamble so that it can
-// properly exist with static storage duration.
-//
-// Implementation notes:
-//
-//   This is accomplished by omitting the constructor and relying on the C++
-//   specification that plain data types with static storage duration are filled
-//   with zeroes before any other initialization code executes.
-//
-// Spec: N2914=09-0104
-//
-// [3.6.2] Initialization of non-local objects
-//
-//         Objects with static storage duration (3.7.1) or thread storage
-//         duration (3.7.2) shall be zero-initialized (8.5) before any
-//         other initialization takes place.
-//
-// Requirements:
-//
-//  Object must be constructible without parameters.
-//  The StaticObject must be declared with static storage duration or
-//    the behavior is undefined.
-//
-// Usage example:
-//
-// Object* getInstance ()
-// {
-//   static StaticObject <Object> instance;
-//   return instance->getObject ();
-// }
-//
-#if 0
-template <class ObjectType, class Tag>
-class Object : private Static::Initializer
-{
-public:
-  // A constructor is not required, and would have no effect.
-
-  ~Object ()
-  {
-    if (inited ())
-      getObject()->~ObjectType();
-  }
-
-  operator ObjectType& ()
-  {
-    return *getObject();
-  }
-
-  ObjectType* getObject ()
-  {
-    if (begin ())
-    {
-      new (s_object.getObjectPtr ()) ObjectType;
-
-      end ();
-    }
-
-    return s_object;
-  }
-
-  inline ObjectType* operator-> ()
-  {
-    return getObject();
-  }
-
-  inline ObjectType& operator* ()
-  {
-    return *getObject();
-  }
-
-private:
-  static Storage <ObjectType, Tag> s_object;
-};
-
-template <class ObjectType, class Tag>
-Storage <ObjectType, Tag> Object <ObjectType, Tag>::s_object;
-#endif
 
 }
 

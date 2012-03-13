@@ -3,16 +3,6 @@
 
 // http://code.google.com/p/smhasher/
 
-#include "vf/vf_StandardHeader.h"
-
-#if defined(_MSC_VER)
-#include <stdlib.h>
-#endif
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/math/vf_MurmurHash.h"
-
 namespace Murmur {
 
 //-----------------------------------------------------------------------------
@@ -336,6 +326,3 @@ void MurmurHash3_x64_128 ( const void * key, const int len,
 }
 
 }
-
-END_VF_NAMESPACE
-

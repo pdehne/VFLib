@@ -4,7 +4,7 @@
 #ifndef __VF_DEBUG_VFHEADER__
 #define __VF_DEBUG_VFHEADER__
 
-// Routines for debugging
+// Auxiliary outines for debugging
 
 namespace Debug {
 
@@ -29,17 +29,10 @@ String stringToCommandLine (const String& s);
 // that can contain newlines and double quotes.
 String commandLineToString (const String& commandLine);
 
-#if JUCE_MSVC && _DEBUG
 extern void setHeapAlwaysCheck (bool bAlwaysCheck);
 extern void setHeapDelayedFree (bool bDelayedFree);
 extern void setHeapReportLeaks (bool bReportLeaks);
 extern void checkHeap ();
-#else
-inline void setHeapAlwaysCheck (bool) { }
-inline void setHeapDelayedFree (bool) { }
-inline void setHeapReportLeaks (bool) { }
-inline void checkHeap () { }
-#endif
 
 }
 
