@@ -1,6 +1,5 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 #ifndef __VF_STANDARDHEADER_VFHEADER__
 #define __VF_STANDARDHEADER_VFHEADER__
@@ -62,6 +61,7 @@ template <> struct VfStaticAssert <true>
 #endif
 
 // Stuff here is available without having to include it directly
+
 #include "vf/modules/vf_core/diagnostic/vf_Debug.h"
 #include "vf/modules/vf_core/diagnostic/vf_Error.h"
 #include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"

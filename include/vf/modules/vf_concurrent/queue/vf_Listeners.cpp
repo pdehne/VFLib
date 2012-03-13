@@ -1,14 +1,5 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_concurrent/queue/vf_Listeners.h"
-
-//------------------------------------------------------------------------------
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 void ListenersBase::Call::destroySharedObject ()
 {
@@ -757,5 +748,3 @@ ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
   }
   return 0;
 }
-
-END_VF_NAMESPACE

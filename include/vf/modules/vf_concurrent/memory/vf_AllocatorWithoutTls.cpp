@@ -1,14 +1,5 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
-
-#include "vf/vf_StandardHeader.h"
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_concurrent/memory/vf_AllocatorWithoutTls.h"
-#include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
-#include "vf/modules/vf_core/threads/vf_Thread.h"
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 // This precedes every allocation
 struct AllocatorWithoutTls::Header
@@ -235,6 +226,3 @@ void AllocatorWithoutTls::deallocate (void* p)
   if (b->release ())
     deleteBlock (b);
 }
-
-END_VF_NAMESPACE
-

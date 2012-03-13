@@ -1,6 +1,5 @@
-// Copyright (C) 2008 by Vincent Falco, All rights reserved worldwide.
-// This file is released under the MIT License:
-// http://www.opensource.org/licenses/mit-license.php
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+// See the file LICENSE.txt for licensing information.
 
 #ifndef __VF_VFHEADER__
 #define __VF_VFHEADER__
@@ -15,12 +14,6 @@ namespace vf_DummyNamespace {}      // To catch unbalanced braces before here
 
 #define VF_PUBLIC_INCLUDES 1        // Flag to know when we're compiling the lib
 #include "vf/vf_StandardHeader.h"   // Minimum requirements
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/vf_includes.h"         // All public headers
-
-END_VF_NAMESPACE
 
 // modules
 #include "modules/vf_audio/vf_audio.h"

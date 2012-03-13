@@ -1,5 +1,4 @@
-// This file is part of VFLib
-// Copyright (C) 2008 by Vinnie Falco.
+// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
 #ifndef VF_CONCURRENT_VFHEADER
@@ -9,7 +8,25 @@
 
 namespace vf
 {
+#include "lockfree/vf_LockFreeList.h"
+#include "lockfree/vf_LockFreeQueue.h"
+#include "lockfree/vf_LockFreeStack.h"
 
+#include "memory/vf_AllocatedBy.h"
+#include "memory/vf_Allocator.h"
+#include "memory/vf_AllocatorWithoutTls.h"
+#include "memory/vf_PageAllocator.h"
+#include "memory/vf_StandardAllocator.h"
+
+#include "queue/vf_GuiWorker.h"
+#include "queue/vf_Listeners.h"
+#include "queue/vf_ManualWorker.h"
+#include "queue/vf_ThreadWorker.h"
+#include "queue/vf_Worker.h"
+
+#include "threads/vf_ReadWriteMutex.h"
+#include "threads/vf_ReadWriteMutexBase.h"
+#include "threads/vf_SharedState.h"
 }
 
 #endif
