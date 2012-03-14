@@ -13,7 +13,7 @@ private:
     : SharedSingleton <OncePerSecond::TimerSingleton> (SingletonLifetime::persistAfterCreation)
     , m_thread (threadName)
   {
-    m_thread.start (boost::bind (&TimerSingleton::run, this));
+    m_thread.start (vf::bind (&TimerSingleton::run, this));
   }
 
   ~TimerSingleton ()

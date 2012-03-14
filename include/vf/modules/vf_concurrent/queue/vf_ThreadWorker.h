@@ -72,7 +72,7 @@ public:
     m_idle = worker_idle;
     m_exit = worker_exit;
 
-    m_thread.start (boost::bind (&ThreadWorkerType::run, this));
+    m_thread.start (vf::bind (&ThreadWorkerType::run, this));
   }
 
   //

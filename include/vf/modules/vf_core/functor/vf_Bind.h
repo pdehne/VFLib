@@ -4,6 +4,11 @@
 #ifndef __VF_BIND_VFHEADER__
 #define __VF_BIND_VFHEADER__
 
+#ifdef _MSC_VER
+using std::bind;
+using std::placeholders::_1;
+#endif
+
 //
 // Bind
 //

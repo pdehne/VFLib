@@ -35,42 +35,42 @@ public:
 
   template <class C>
   void call (void (C::*f)()) const
-  { callf <C> (boost::bind (f, _1)); }
+  { callf <C> (vf::bind (f, vf::_1)); }
 
   template <class C, class T1>
   void call (void (C::*f)(T1), T1 t1) const
-  { callf <C> (boost::bind (f, _1, t1)); }
+  { callf <C> (vf::bind (f, vf::_1, t1)); }
 
   template <class C, class T1, class T2>
   void call (void (C::*f)(T1, T2), T1 t1, T2 t2) const
-  { callf <C> (boost::bind (f, _1, t1, t2)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2)); }
 
   template <class C, class T1, class T2, class T3>
   void call (void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3)); }
 
   template <class C, class T1, class T2, class T3, class T4>
   void call (void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3, t4)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3, t4)); }
 
   template <class C, class T1, class T2, class T3, class T4, class T5>
   void call (void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3, t4, t5)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
 
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
   void call (void (C::*f)(T1, T2, T3, T4, T5, T6),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3, t4, t5, t6)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
 
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   void call (void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3, t4, t5, t6, t7)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
 
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   void call (void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) const
-  { callf <C> (boost::bind (f, _1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  { callf <C> (vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 private:
   template <class ListenerSubClass, class Functor>

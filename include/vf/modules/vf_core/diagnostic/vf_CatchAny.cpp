@@ -1,15 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#include "vf/vf_StandardHeader.h"
-
+#if 0
 #include <iostream>
-
-BEGIN_VF_NAMESPACE
-
-#include "vf/modules/vf_core/diagnostic/vf_CatchAny.h"
-
-END_VF_NAMESPACE
 
 //------------------------------------------------------------------------------
 //
@@ -136,87 +129,75 @@ END_VF_NAMESPACE
 
 #endif
 
-//------------------------------------------------------------------------------
+#endif
 
-BEGIN_VF_NAMESPACE
+//------------------------------------------------------------------------------
 
 bool CatchAny (Function <void (void)> f, bool returnFromException)
 {
   bool caughtException = true; // assume the worst
 
-#if 0
-  if (Debug::isDebuggerAttached ())
+  try
   {
+    //ScopedPlatformExceptionCatcher platformExceptionCatcher;
+    
     f ();
+
     caughtException = false;
   }
-  else
-#endif
+  catch (Error& e)
   {
-    try
+    if (!returnFromException)
     {
-      ScopedPlatformExceptionCatcher platformExceptionCatcher;
-    
-      f ();
+      VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
-      caughtException = false;
-    }
-    catch (Error& e)
-    {
-      if (!returnFromException)
+      if (app)
       {
-        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
-
-        if (app)
-        {
-          app->unhandledException (
-            &e,
-            e.getSourceFilename(),
-            e.getLineNumber());
-        }
-        else
-        {
-          std::cout << e.what ();
-          std::unexpected ();
-        }
+        app->unhandledException (
+          &e,
+          e.getSourceFilename(),
+          e.getLineNumber());
+      }
+      else
+      {
+        std::cout << e.what ();
+        std::unexpected ();
       }
     }
-    catch (std::exception& e)
+  }
+  catch (std::exception& e)
+  {
+    if (!returnFromException)
     {
-      if (!returnFromException)
-      {
-        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
+      VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
-        if (app)
-        {
-          app->unhandledException (&e, __FILE__, __LINE__);
-        }
-        else
-        {
-          std::cout << e.what ();
-          std::unexpected ();
-        }
+      if (app)
+      {
+        app->unhandledException (&e, __FILE__, __LINE__);
+      }
+      else
+      {
+        std::cout << e.what ();
+        std::unexpected ();
       }
     }
-    catch (...)
+  }
+  catch (...)
+  {
+    if (!returnFromException)
     {
-      if (!returnFromException)
-      {
-        VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
+      VF_JUCE::JUCEApplication* app = VF_JUCE::JUCEApplication::getInstance();
 
-        if (app)
-        {
-          app->unhandledException (0, __FILE__, __LINE__);
-        }
-        else
-        {
-          std::unexpected ();
-        }
+      if (app)
+      {
+        app->unhandledException (0, __FILE__, __LINE__);
+      }
+      else
+      {
+        std::unexpected ();
       }
     }
   }
 
   return caughtException;
 }
-
-END_VF_NAMESPACE

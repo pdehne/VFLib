@@ -126,7 +126,7 @@ BoostThread::BoostThread (String name)
 
 void BoostThread::start (Function <void (void)> const& f)
 {
-  m_thread = boost::thread (boost::bind (&BoostThread::run, this, f));
+  m_thread = boost::thread (vf::bind (&BoostThread::run, this, f));
 
   // kick the thread into gear, AFTER we assign data members, to prevent a data race.
   m_runEvent.signal ();
