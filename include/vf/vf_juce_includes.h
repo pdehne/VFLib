@@ -8,6 +8,10 @@
 
 #ifndef __JUCE_JUCEHEADER__
 
+#ifdef _CRTDBG_MAP_ALLOC
+#error "MSVC C Runtime Debug Macros not supported"
+#endif
+
 // If the MSVC debug heap headers were included, disable
 // the macros during the juce include since they conflict.
 #ifdef _CRTDBG_MAP_ALLOC
