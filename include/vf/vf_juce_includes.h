@@ -12,6 +12,8 @@
 #error "MSVC C Runtime Debug Macros not supported"
 #endif
 
+#include "AppConfig.h"
+
 // If the MSVC debug heap headers were included, disable
 // the macros during the juce include since they conflict.
 #ifdef _CRTDBG_MAP_ALLOC
