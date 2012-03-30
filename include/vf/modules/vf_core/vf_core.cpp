@@ -26,7 +26,6 @@ namespace vf
 #include "math/vf_MurmurHash.cpp"
 #include "utility/vf_OncePerSecond.cpp"
 #include "utility/vf_PerformedAtExit.cpp"
-#include "threads/vf_BoostThread.cpp"
 #include "threads/vf_JuceThread.cpp"
 
 #include "threads/vf_SharedObject.cpp" // PROBLEM WITH DEPENDENCY ON vf_concurrent!!

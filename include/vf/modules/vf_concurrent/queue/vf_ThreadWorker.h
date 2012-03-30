@@ -202,12 +202,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-#if 0
-typedef ThreadWorkerType <BoostThreadType <BoostThread::ExceptionBased> > ExceptionWorker;
-typedef ThreadWorkerType <BoostThreadType <BoostThread::PollingBased> > PollingWorker;
-#else
 typedef ThreadWorkerType <JuceThreadType <JuceThread::ExceptionBased> > ExceptionWorker;
 typedef ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > PollingWorker;
-#endif
 
 #endif

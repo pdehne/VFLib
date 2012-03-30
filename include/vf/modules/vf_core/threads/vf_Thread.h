@@ -4,7 +4,6 @@
 #ifndef __VF_THREAD_VFHEADER__
 #define __VF_THREAD_VFHEADER__
 
-#include "vf/modules/vf_core/threads/vf_BoostThread.h"
 #include "vf/modules/vf_core/threads/vf_JuceThread.h"
 
 typedef JuceThread Thread;
