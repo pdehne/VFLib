@@ -169,21 +169,14 @@ private:
       if (m_shouldStop)
         break;
 
-      try
-      {
-        // idle_t::None() must return a non signaled Thread::Interrupted.
-        Thread::Interrupted interrupted = m_idle ();
+      // idle_t::None() must return a non signaled Thread::Interrupted.
+      Thread::Interrupted interrupted = m_idle ();
 
-        if (!interrupted)
-          interrupted = interruptionPoint ();
+      if (!interrupted)
+        interrupted = interruptionPoint ();
 
-        if (!interrupted)
-          m_thread.wait ();
-      }
-      catch (VF_NAMESPACE::Thread::Interruption&)
-      {
-        // loop
-      }
+      if (!interrupted)
+        m_thread.wait ();
     }
 
     m_exit ();

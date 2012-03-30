@@ -12,10 +12,6 @@
 class ThreadBase
 {
 public:
-  // Used to throw generic thread interruptions
-  // when using the exception interruption model.
-  typedef boost::thread_interrupted Interruption;
-
   // This is the flag used to indicate if an interruption
   // occurred when using the polling model. It is designed
   // to detect improper usage (specifically, not checking

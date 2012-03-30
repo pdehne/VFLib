@@ -10,7 +10,6 @@
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/recursive_mutex.hpp>
-#include <boost/thread/thread.hpp>
 #include <boost/thread/tss.hpp>
 //#include <boost/spirit/include/phoenix1.hpp> // blows up visual studio
 
