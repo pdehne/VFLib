@@ -202,7 +202,6 @@ private:
 
 //------------------------------------------------------------------------------
 
-typedef ThreadWorkerType <JuceThreadType <JuceThread::ExceptionBased> > ExceptionWorker;
 typedef ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > PollingWorker;
 
 #endif

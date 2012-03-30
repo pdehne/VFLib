@@ -69,13 +69,6 @@ public:
     Atomic::State m_state;
   };
 
-  class ExceptionBased : public InterruptionModel
-  {
-  public:
-    bool wait (int milliseconds, JuceThread& thread);
-    Interrupted interruptionPoint (JuceThread& thread);
-  };
-
   class PollingBased : public InterruptionModel
   {
   public:

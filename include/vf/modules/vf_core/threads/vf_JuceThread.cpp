@@ -133,42 +133,6 @@ ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread&
 
 //------------------------------------------------------------------------------
 
-bool JuceThread::ExceptionBased::wait (int milliseconds, JuceThread& thread)
-{
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
-
-  bool interrupted = do_wait ();
-
-  if (!interrupted)
-  {
-    interrupted = thread.VF_JUCE::Thread::wait (milliseconds);
-
-    if (!interrupted)
-      interrupted = do_timeout ();
-  }
-
-  if (interrupted)
-    throw Interruption();
-
-  return interrupted;
-}
-
-ThreadBase::Interrupted JuceThread::ExceptionBased::interruptionPoint (JuceThread& thread)
-{
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
-
-  const bool interrupted = do_interruptionPoint ();
-
-  if (interrupted)
-    throw Interruption();
-
-  return ThreadBase::Interrupted (false);
-}
-
-//------------------------------------------------------------------------------
-
 JuceThread::JuceThread (String name)
   : JuceThreadWrapper (name, *this)
 {
