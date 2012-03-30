@@ -195,6 +195,6 @@ private:
 
 //------------------------------------------------------------------------------
 
-typedef ThreadWorkerType <JuceThreadType <JuceThread::PollingBased> > PollingWorker;
+typedef ThreadWorkerType <JuceThread> PollingWorker;
 
 #endif

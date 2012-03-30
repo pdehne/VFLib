@@ -205,17 +205,6 @@ private:
 
 //------------------------------------------------------------------------------
 
-template <class InterruptionType>
-class JuceThreadType : public JuceThread
-{
-public:
-  explicit JuceThreadType (String const& name) : JuceThread (name)
-  {
-  }
-};
-
-//------------------------------------------------------------------------------
-
 namespace CurrentJuceThread {
 
 // Avoid this function because the implementation is slow.
