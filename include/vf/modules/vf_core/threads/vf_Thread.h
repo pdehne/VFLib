@@ -9,6 +9,35 @@
 
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
 
+class ThreadBase;
+
+namespace detail
+{
+
+// Stores a back pointer to our object so we can keep
+// the derivation from juce::Thread private and still use
+// dynamic_cast.
+//
+class JuceThreadWrapper : public VF_JUCE::Thread
+{
+public:
+  JuceThreadWrapper (String name, ThreadBase& threadBase)
+    : VF_JUCE::Thread (name)
+    , m_threadBase (threadBase)
+  {
+  }
+
+  ThreadBase& getThreadBase () const
+  {
+    return m_threadBase;
+  }
+
+private:
+  ThreadBase& m_threadBase;
+};
+
+}
+
 class ThreadBase
 {
 public:
@@ -97,32 +126,6 @@ public:
   //
   virtual void setPriority (int priority) = 0;
 };
-
-namespace detail {
-
-// Stores a back pointer to our object so we can keep
-// the derivation from juce::Thread private and still use
-// dynamic_cast.
-//
-class JuceThreadWrapper : public VF_JUCE::Thread
-{
-public:
-  JuceThreadWrapper (String name, ThreadBase& threadBase)
-    : VF_JUCE::Thread (name)
-    , m_threadBase (threadBase)
-  {
-  }
-
-  ThreadBase& getThreadBase () const
-  {
-    return m_threadBase;
-  }
-
-private:
-  ThreadBase& m_threadBase;
-};
-
-}
 
 //
 // Thread based on Juce

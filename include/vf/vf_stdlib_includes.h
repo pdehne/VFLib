@@ -26,6 +26,7 @@
 #include <iterator>
 #include <limits>
 #include <list>
+#include <map>
 #include <new>
 #include <numeric>
 #include <ostream>
