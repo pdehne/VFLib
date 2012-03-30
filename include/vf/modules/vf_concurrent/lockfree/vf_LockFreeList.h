@@ -33,7 +33,7 @@ struct List
     Node () { }
     explicit Node (Node* next) : m_next (next) { }
 
-    Atomic::Pointer <Node> m_next;
+    AtomicPointer <Node> m_next;
   };
 };
 

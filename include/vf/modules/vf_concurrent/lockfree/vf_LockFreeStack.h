@@ -175,7 +175,7 @@ public:
   }
 
 private:
-  Atomic::Pointer <Node> m_head;
+  AtomicPointer <Node> m_head;
 };
 
 }

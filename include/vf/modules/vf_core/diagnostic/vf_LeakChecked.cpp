@@ -44,7 +44,7 @@ public:
   }
 
 private:
-  Atomic::Pointer <CounterBase> m_head;
+  AtomicPointer <CounterBase> m_head;
 };
 
 //------------------------------------------------------------------------------

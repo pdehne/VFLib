@@ -160,7 +160,7 @@ public:
       stateWait
     };
 
-    Atomic::State m_state;
+    AtomicState m_state;
   };
 
 public:

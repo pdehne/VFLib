@@ -155,7 +155,7 @@ public:
 
 private:
   // Elements are pushed on to the head and popped from the tail.
-  CacheLine::Unpadded <Atomic::Pointer <Node> > m_head;
+  CacheLine::Unpadded <AtomicPointer <Node> > m_head;
   CacheLine::Unpadded <Node*> m_tail;
   CacheLine::Unpadded <Node> m_null;
 };

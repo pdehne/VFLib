@@ -115,7 +115,7 @@ struct ListenersBase::Proxy::Entry : Entries::Node,
   }
 
   Group::Ptr group;
-  Atomic::Pointer <Call> call;
+  AtomicPointer <Call> call;
 };
 
 //------------------------------------------------------------------------------

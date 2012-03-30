@@ -1,7 +1,7 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-typedef Static::Storage <Atomic::Pointer <PerformedAtExit>, PerformedAtExit> Head;
+typedef Static::Storage <AtomicPointer <PerformedAtExit>, PerformedAtExit> Head;
 
 class PerformedAtExit::Performer
 {

@@ -8,12 +8,12 @@ class AtomicFlag
 {
 public:
   // Starts non-signaled
-  AtomicFlag ()
+  AtomicFlag () noexcept
 	: m_value (0)
   {
   }
 
-  inline void set ()
+  inline void set () noexcept
   {
 #if VF_DEBUG
     const bool success = m_value.compareAndSetBool (1, 0);
@@ -23,7 +23,7 @@ public:
 #endif
   }
 
-  inline void clear ()
+  inline void clear () noexcept
   {
 #if VF_DEBUG
     const bool success = m_value.compareAndSetBool (0, 1);
@@ -34,25 +34,25 @@ public:
   }
 
   // returns true if it was successful at changing the flag
-  inline bool trySet ()
+  inline bool trySet () noexcept
   {
     return m_value.compareAndSetBool (1, 0);
   }
 
   // returns true if it was successful at changing the flag
-  inline bool tryClear ()
+  inline bool tryClear () noexcept
   {
     return m_value.compareAndSetBool (0, 1);
   }
 
   // Caller must synchronize
-  inline bool isSet () const
+  inline bool isSet () const noexcept
   {
 	return m_value.get() == 1;
   }
 
   // Caller must synchronize
-  inline bool isClear () const
+  inline bool isClear () const noexcept
   {
 	return m_value.get() == 0;
   }

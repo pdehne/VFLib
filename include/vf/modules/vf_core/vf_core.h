@@ -26,6 +26,8 @@ namespace vf
 #include "memory/vf_Atomic.h"
 #include "memory/vf_AtomicCounter.h"
 #include "memory/vf_AtomicFlag.h"
+#include "memory/vf_AtomicPointer.h"
+#include "memory/vf_AtomicState.h"
 #include "memory/vf_CacheLine.h"
 #include "memory/vf_MemoryAlignment.h"
 #include "memory/vf_NonCopyable.h"
