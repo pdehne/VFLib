@@ -68,12 +68,12 @@ private:
   CacheLine::Aligned <Pool> m_pool2;
   Pool* volatile m_cold;            // pool which is cooling down
   Pool* volatile m_hot;             // pool we are currently using
-  Atomic::Counter m_newPagesLeft; // limit of system allocations
+  AtomicCounter m_newPagesLeft; // limit of system allocations
 
 #if 1
   int m_swaps;
-  Atomic::Counter m_total;
-  Atomic::Counter m_used;
+  AtomicCounter m_total;
+  AtomicCounter m_used;
 #endif
 };
 

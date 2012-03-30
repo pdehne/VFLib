@@ -232,8 +232,8 @@ private:
   String const m_name;
   Thread::id m_id;
   Calls m_list;
-  Atomic::Flag m_closed;
-  Atomic::Flag m_in_process;
+  AtomicFlag m_closed;
+  AtomicFlag m_in_process;
   AllocatorType m_allocator;
 };
 

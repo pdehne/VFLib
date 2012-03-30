@@ -104,7 +104,7 @@ public:
   }
 
 private:
-  Atomic::Counter m_refs;        // reference count
+  AtomicCounter m_refs;        // reference count
   Atomic::Pointer <char> m_free; // next free byte or 0 if inactive.
   char* m_end;                   // last free byte + 1
 };

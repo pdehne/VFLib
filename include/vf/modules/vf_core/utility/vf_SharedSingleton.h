@@ -6,7 +6,6 @@
 
 #include "vf/modules/vf_core/utility/vf_PerformedAtExit.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"
-#include "vf/modules/vf_core/threads/vf_SpinLock.h"
 #include "vf/modules/vf_core/memory/vf_StaticObject.h"
 
 // Thread-safe singleton which comes into existence on first use.
@@ -47,6 +46,8 @@ template <class Object>
 class SharedSingleton : private PerformedAtExit
 {
 protected:
+  typedef VF_JUCE::SpinLock LockType;
+
   explicit SharedSingleton (SingletonLifetime::Lifetime const lifetime)
     : PerformedAtExit (lifetime == SingletonLifetime::persistAfterCreation)
     , m_lifetime (lifetime)
@@ -81,7 +82,7 @@ public:
 
     if (instance == nullptr)
     {
-      SpinLock::ScopedLockType lock (*s_mutex);
+      LockType::ScopedLockType lock (*s_mutex);
 
       instance = s_instance;
   
@@ -126,7 +127,7 @@ private:
     bool destroy;
 
     {
-      SpinLock::ScopedLockType lock (*s_mutex);
+      LockType::ScopedLockType lock (*s_mutex);
 
       if (isBeingReferenced ())
       {
@@ -147,11 +148,11 @@ private:
 
 private:
   SingletonLifetime::Lifetime const m_lifetime;
-  Atomic::Counter m_refs;
+  AtomicCounter m_refs;
 
 private:
   static Object* s_instance;
-  static Static::Storage <SpinLock, SharedSingleton <Object> > s_mutex;
+  static Static::Storage <LockType, SharedSingleton <Object> > s_mutex;
   static Static::Storage <bool, SharedSingleton <Object> > s_created;
 };
 
@@ -159,7 +160,7 @@ template <class Object>
 Object* SharedSingleton <Object>::s_instance;
 
 template <class Object>
-Static::Storage <SpinLock, SharedSingleton <Object> >
+Static::Storage <typename SharedSingleton <Object>::LockType, SharedSingleton <Object> >
   SharedSingleton <Object>::s_mutex;
 
 template <class Object>

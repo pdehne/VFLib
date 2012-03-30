@@ -60,7 +60,7 @@ private:
   static void performLibraryAtExit ();
 
 private:
-  Atomic::Counter m_refs;
+  AtomicCounter m_refs;
 };
 
 #endif

@@ -24,6 +24,8 @@ namespace vf
 #include "math/vf_MurmurHash.h"
 
 #include "memory/vf_Atomic.h"
+#include "memory/vf_AtomicCounter.h"
+#include "memory/vf_AtomicFlag.h"
 #include "memory/vf_CacheLine.h"
 #include "memory/vf_MemoryAlignment.h"
 #include "memory/vf_NonCopyable.h"
@@ -37,7 +39,6 @@ namespace vf
 #include "threads/vf_SharedObject.h"
 #include "threads/vf_SharedObjectPtr.h"
 #include "threads/vf_SpinDelay.h"
-#include "threads/vf_SpinLock.h"
 #include "threads/vf_Thread.h"
 
 }

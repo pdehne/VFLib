@@ -4,7 +4,7 @@
 class SharedObject::Deleter : LeakChecked <Deleter>
 {
 private:
-  typedef SpinLock LockType;
+  typedef VF_JUCE::SpinLock LockType;
 
   Deleter () : m_worker ("Deleter")
   {
@@ -63,16 +63,16 @@ public:
   }
 
 private:
-  Atomic::Counter m_refs;
+  AtomicCounter m_refs;
 
   ThreadWorkerType <JuceThread> m_worker;
 
   static Deleter* s_instance;
-  static Static::Storage <SpinLock, Deleter> s_mutex;
+  static Static::Storage <LockType, Deleter> s_mutex;
 };
 
 SharedObject::Deleter* SharedObject::Deleter::s_instance;
-Static::Storage <SpinLock, SharedObject::Deleter> SharedObject::Deleter::s_mutex;
+Static::Storage <SharedObject::Deleter::LockType, SharedObject::Deleter> SharedObject::Deleter::s_mutex;
 
 //------------------------------------------------------------------------------
 

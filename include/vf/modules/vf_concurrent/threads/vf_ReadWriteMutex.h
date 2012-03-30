@@ -47,8 +47,8 @@ public:
 
 private:
   CacheLine::Padded <Mutex> m_mutex;
-  mutable CacheLine::Padded <Atomic::Counter> m_writes;
-  mutable CacheLine::Padded <Atomic::Counter> m_readers;
+  mutable CacheLine::Padded <AtomicCounter> m_writes;
+  mutable CacheLine::Padded <AtomicCounter> m_readers;
 };
 
 typedef ReadWriteMutex::ScopedReadLockType ScopedReadLock;

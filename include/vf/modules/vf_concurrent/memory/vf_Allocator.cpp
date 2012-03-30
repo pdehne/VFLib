@@ -69,7 +69,7 @@ public:
   }
 
 private:
-  Atomic::Counter m_refs; // reference count
+  AtomicCounter m_refs; // reference count
   char* m_free;           // next free byte 
   char* m_end;            // last free byte + 1
 };
