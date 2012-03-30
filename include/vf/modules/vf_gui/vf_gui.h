@@ -19,7 +19,8 @@ namespace vf
 #include "vf_Facade.h"
 #include "vf_Model.h"
 
-#include "vf_Colour.h"
+#include "vf_LabColour.h"
+#include "vf_XYZColour.h"
 #include "vf_RadialImageConvolutionKernel.h"
 #include "vf_VerticalGradient.h"
 

@@ -157,7 +157,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Colour.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -207,6 +207,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_UiBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -288,7 +292,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Button.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Colour.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ConnectedEdges.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Control.h" />
@@ -307,6 +311,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_UiBase.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h" />
     <ClInclude Include="..\..\include\vf\vf_boost_includes.h" />
     <ClInclude Include="..\..\include\vf\vf_Config.h" />
     <ClInclude Include="..\..\include\vf\vf_juce_includes.h" />

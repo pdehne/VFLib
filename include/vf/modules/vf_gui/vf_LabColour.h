@@ -1,38 +1,10 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_COLOUR_VFHEADER__
-#define __VF_COLOUR_VFHEADER__
+#ifndef VF_LABCOLOUR_VFHEADER
+#define VF_LABCOLOUR_VFHEADER
 
-class XYZColour
-{
-public:
-  XYZColour ();
-  XYZColour (float x, float y, float z);
-  XYZColour (float x, float y, float z, float alpha);
-  XYZColour (XYZColour const& xyz);
-  XYZColour (Colour const& sRGB);
-
-  XYZColour& operator= (XYZColour const& other);
-
-  float getX () const { return m_x; }
-  float getY () const { return m_y; }
-  float getZ () const { return m_z; }
-  float getAlpha () const { return m_alpha; }
-
-  Colour const toRGB () const;
-
-private:
-  static XYZColour const from (Colour const& sRGB);
-
-private:
-  float m_x;
-  float m_y;
-  float m_z;
-  float m_alpha;
-};
-
-//------------------------------------------------------------------------------
+#include "vf_XYZColour.h"
 
 class LabColour
 {
@@ -41,7 +13,7 @@ public:
   LabColour (float L, float a, float b);
   LabColour (float L, float a, float b, float alpha);
   LabColour (LabColour const& lab);
-  LabColour (Colour const& sRGB);
+  LabColour (VF_JUCE::Colour const& sRGB);
   LabColour (XYZColour const& xyz);
 
   float getL () const { return m_L; }
@@ -50,7 +22,7 @@ public:
   float getAlpha () const { return m_alpha; }
 
   XYZColour const toXYZ () const;
-  Colour const toRGB () const;
+  VF_JUCE::Colour const toRGB () const;
 
   LabColour const withLuminance (float L) const; // L [0,1]
   LabColour const withAddedLuminance (float amount) const; // amount [0,1]

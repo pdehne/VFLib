@@ -16,7 +16,8 @@ namespace vf
 #include "vf_Facade.cpp"
 #include "vf_Model.cpp"
 
-#include "vf_Colour.cpp"
+#include "vf_LabColour.cpp"
+#include "vf_XYZColour.cpp"
 #include "vf_RadialImageConvolutionKernel.cpp"
 
 #include "vf_ResizableLayout.cpp"

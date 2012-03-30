@@ -43,9 +43,6 @@
     <Filter Include="VF Modules\vf_core\threads">
       <UniqueIdentifier>{7aeefed8-8146-4380-86b3-33f678264353}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_core\utility">
-      <UniqueIdentifier>{90588999-4e1a-4801-ad9f-024985ed227b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_audio">
       <UniqueIdentifier>{3a812ec5-e563-4c01-a743-3facd63767a3}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,9 @@
     </Filter>
     <Filter Include="VF Modules\vf_core\native">
       <UniqueIdentifier>{57dc91b0-d6b1-4eeb-bcf0-c410536b35c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_core\events">
+      <UniqueIdentifier>{90588999-4e1a-4801-ad9f-024985ed227b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -187,10 +187,10 @@
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.cpp">
-      <Filter>VF Modules\vf_core\utility</Filter>
+      <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.cpp">
-      <Filter>VF Modules\vf_core\utility</Filter>
+      <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <Filter>VF Modules\vf_audio\buffers</Filter>
@@ -249,9 +249,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.cpp">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Colour.cpp">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
@@ -266,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\pch.cpp">
       <Filter>Junk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,13 +423,10 @@
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.h">
-      <Filter>VF Modules\vf_core\utility</Filter>
+      <Filter>VF Modules\vf_core\events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.h">
-      <Filter>VF Modules\vf_core\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_SharedSingleton.h">
-      <Filter>VF Modules\vf_core\utility</Filter>
+      <Filter>VF Modules\vf_core\events</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
       <Filter>VF Modules\vf_audio</Filter>
@@ -533,9 +533,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Colour.h">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
@@ -565,6 +562,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\vf_stdlib_includes.h">
       <Filter>Junk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_SharedSingleton.h">
+      <Filter>VF Modules\vf_core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
