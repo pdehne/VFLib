@@ -1,7 +1,7 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-JuceThread::InterruptionModel::InterruptionModel ()
+JuceThread::PollingBased::PollingBased ()
   : m_state (stateRun)
 {
 }
@@ -9,7 +9,7 @@ JuceThread::InterruptionModel::InterruptionModel ()
 // Attempt to transition into the wait state.
 // Returns true if we should interrupt instead.
 //
-bool JuceThread::InterruptionModel::do_wait ()
+bool JuceThread::PollingBased::do_wait ()
 {
   bool interrupted;
 
@@ -40,7 +40,7 @@ bool JuceThread::InterruptionModel::do_wait ()
 
 // Called when the event times out
 //
-bool JuceThread::InterruptionModel::do_timeout ()
+bool JuceThread::PollingBased::do_timeout ()
 {
   bool interrupted;
 
@@ -58,7 +58,7 @@ bool JuceThread::InterruptionModel::do_timeout ()
   return interrupted;
 }
 
-void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
+void JuceThread::PollingBased::interrupt (JuceThread& thread)
 {
   for (;;)
   {
@@ -78,30 +78,6 @@ void JuceThread::InterruptionModel::interrupt (JuceThread& thread)
     }
   }
 }
-
-bool JuceThread::InterruptionModel::do_interruptionPoint ()
-{
-  if (m_state == stateWait)
-  {
-    // It is impossible for this function
-    // to be called while in the wait state.
-    Throw (Error().fail (__FILE__, __LINE__));
-  }
-  else if (m_state == stateReturn)
-  {
-    // If this goes off it means the thread called the
-    // interruption a second time after already getting interrupted.
-    Throw (Error().fail (__FILE__, __LINE__));
-  }
-
-  // Switch to Return state if we are interrupted
-  //bool const interrupted = m_state.tryChangeState (stateInterrupt, stateReturn);
-  bool const interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
-
-  return interrupted;
-}
-
-//------------------------------------------------------------------------------
 
 bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
 {
@@ -129,6 +105,28 @@ ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread&
   const bool interrupted = do_interruptionPoint ();
 
   return ThreadBase::Interrupted (interrupted);
+}
+
+bool JuceThread::PollingBased::do_interruptionPoint ()
+{
+  if (m_state == stateWait)
+  {
+    // It is impossible for this function
+    // to be called while in the wait state.
+    Throw (Error().fail (__FILE__, __LINE__));
+  }
+  else if (m_state == stateReturn)
+  {
+    // If this goes off it means the thread called the
+    // interruption a second time after already getting interrupted.
+    Throw (Error().fail (__FILE__, __LINE__));
+  }
+
+  // Switch to Return state if we are interrupted
+  //bool const interrupted = m_state.tryChangeState (stateInterrupt, stateReturn);
+  bool const interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
+
+  return interrupted;
 }
 
 //------------------------------------------------------------------------------

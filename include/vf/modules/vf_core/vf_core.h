@@ -33,7 +33,6 @@ namespace vf
 #include "utility/vf_PerformedAtExit.h"
 #include "utility/vf_SharedSingleton.h"
 
-#include "threads/vf_JuceThread.h"
 #include "threads/vf_Mutex.h"
 #include "threads/vf_SharedObject.h"
 #include "threads/vf_SharedObjectPtr.h"
