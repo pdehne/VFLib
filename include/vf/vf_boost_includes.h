@@ -6,8 +6,6 @@
 
 // Includes essential boost headers
 
-//#include <boost/bind.hpp>
-
 // We actually need these
 #include <boost/iterator/iterator_facade.hpp>
 #include <boost/thread/condition_variable.hpp>

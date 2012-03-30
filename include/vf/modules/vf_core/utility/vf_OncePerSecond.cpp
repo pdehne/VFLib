@@ -77,7 +77,7 @@ public:
   }
 
 private:
-  BoostThreadType <BoostThread::PollingBased> m_thread;
+  JuceThreadType <JuceThread::PollingBased> m_thread;
   Mutex m_mutex;
   List m_list;
 };
