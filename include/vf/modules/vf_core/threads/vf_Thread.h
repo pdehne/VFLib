@@ -169,33 +169,6 @@ public:
 
   void start (Function <void (void)> const& f);
 
-  void join ();
-
-  id getId () const;
-
-  // only valid if the thread is running
-  bool isTheCurrentThread () const;
-
-  void setPriority (int priority);
-
-private:
-  void run ();
-
-  Function <void (void)> m_function;
-  VF_JUCE::WaitableEvent m_runEvent;
-  id m_threadId;
-};
-
-//------------------------------------------------------------------------------
-
-template <class InterruptionType>
-class JuceThreadType : public JuceThread
-{
-public:
-  explicit JuceThreadType (String const& name) : JuceThread (name)
-  {
-  }
-
   bool wait (int milliseconds = -1)
   {
     return m_model.wait (milliseconds, *this);
@@ -211,8 +184,34 @@ public:
     return m_model.interruptionPoint (*this);
   }
 
+  void join ();
+
+  id getId () const;
+
+  // only valid if the thread is running
+  bool isTheCurrentThread () const;
+
+  void setPriority (int priority);
+
 private:
-  InterruptionType m_model;
+  void run ();
+
+  Function <void (void)> m_function;
+  VF_JUCE::WaitableEvent m_runEvent;
+  id m_threadId;
+
+  PollingBased m_model;
+};
+
+//------------------------------------------------------------------------------
+
+template <class InterruptionType>
+class JuceThreadType : public JuceThread
+{
+public:
+  explicit JuceThreadType (String const& name) : JuceThread (name)
+  {
+  }
 };
 
 //------------------------------------------------------------------------------
