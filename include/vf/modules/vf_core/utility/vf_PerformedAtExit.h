@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_PERFORMEDATEXIT_VFHEADER__
-#define __VF_PERFORMEDATEXIT_VFHEADER__
+#ifndef VF_PERFORMEDATEXIT_VFHEADER
+#define VF_PERFORMEDATEXIT_VFHEADER
 
 class PerformedAtExit : NonCopyable
 {

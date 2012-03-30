@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_CACHELINE_VFHEADER__
-#define __VF_CACHELINE_VFHEADER__
+#ifndef VF_CACHELINE_VFHEADER
+#define VF_CACHELINE_VFHEADER
 
 #include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
 

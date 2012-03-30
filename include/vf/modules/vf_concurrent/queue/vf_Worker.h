@@ -5,7 +5,6 @@
 #define __VF_WORKER_VFHEADER__
 
 #include "vf/modules/vf_concurrent/memory/vf_AllocatedBy.h"
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/functor/vf_Bind.h"
 #include "vf/modules/vf_concurrent/memory/vf_Allocator.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeQueue.h"

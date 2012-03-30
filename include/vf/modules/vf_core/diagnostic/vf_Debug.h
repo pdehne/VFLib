@@ -1,12 +1,13 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_DEBUG_VFHEADER__
-#define __VF_DEBUG_VFHEADER__
+#ifndef VF_DEBUG_VFHEADER
+#define VF_DEBUG_VFHEADER
 
 // Auxiliary outines for debugging
 
-namespace Debug {
+namespace Debug
+{
 
 // Returns true if a debugger is attached, for any build.
 extern bool isDebuggerAttached ();

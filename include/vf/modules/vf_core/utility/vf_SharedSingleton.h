@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_SHAREDSINGLETON_VFHEADER__
-#define __VF_SHAREDSINGLETON_VFHEADER__
+#ifndef VF_SHAREDSINGLETON_VFHEADER
+#define VF_SHAREDSINGLETON_VFHEADER
 
 #include "vf/modules/vf_core/utility/vf_PerformedAtExit.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"

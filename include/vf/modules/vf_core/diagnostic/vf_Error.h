@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_ERROR_VFHEADER__
-#define __VF_ERROR_VFHEADER__
+#ifndef VF_ERROR_VFHEADER
+#define VF_ERROR_VFHEADER
 
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
 
@@ -21,26 +21,26 @@ public:
   {
     success,        // "the operation was successful"
 
-    general,			  // "a general error occurred"
+    general,		// "a general error occurred"
 
-    canceled,			  // "the operation was canceled"
-    exception,		  // "an exception was thrown"
+    canceled,		// "the operation was canceled"
+    exception,		// "an exception was thrown"
     unexpected,     // "an unexpected result was encountered"
     platform,       // "a system exception was signaled"
 
     noMemory,       // "there was not enough memory"
-    noMoreData,			// "the end of data was reached"
-    invalidData,		// "the data is corrupt or invalid"
-    bufferSpace,		// "the buffer is too small"
-    badParameter,		// "one or more parameters were invalid"
-    assertFailed,		// "an assertion failed"
+    noMoreData,		// "the end of data was reached"
+    invalidData,	// "the data is corrupt or invalid"
+    bufferSpace,	// "the buffer is too small"
+    badParameter,	// "one or more parameters were invalid"
+    assertFailed,	// "an assertion failed"
 
-    fileInUse,			// "the file is in use"
-    fileExists,			// "the file exists"
-    fileNoPerm,			// "permission was denied" (file attributes conflict)
-    fileIOError,		// "an I/O or device error occurred"
-    fileNoSpace,		// "there is no space left on the device"
-    fileNotFound,		// "the file was not found"
+    fileInUse,		// "the file is in use"
+    fileExists,		// "the file exists"
+    fileNoPerm,		// "permission was denied" (file attributes conflict)
+    fileIOError,	// "an I/O or device error occurred"
+    fileNoSpace,	// "there is no space left on the device"
+    fileNotFound,	// "the file was not found"
     fileNameInvalid	// "the file name was illegal or malformed"
   };
 

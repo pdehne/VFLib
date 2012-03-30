@@ -3,8 +3,8 @@
 
 // Original source code links in .cpp file
 
-#ifndef __VF_MURMURHASH_VFHEADER__
-#define __VF_MURMURHASH_VFHEADER__
+#ifndef VF_MURMURHASH_VFHEADER
+#define VF_MURMURHASH_VFHEADER
 
 // This file depends on some Juce declarations and defines
 

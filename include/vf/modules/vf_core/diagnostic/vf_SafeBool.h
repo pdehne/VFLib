@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_SAFEBOOL_VFHEADER__
-#define __VF_SAFEBOOL_VFHEADER__
+#ifndef VF_SAFEBOOL_VFHEADER
+#define VF_SAFEBOOL_VFHEADER
 
 //
 // From http://www.artima.com/cppsource/safebool.html

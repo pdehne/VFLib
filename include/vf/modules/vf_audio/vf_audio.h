@@ -9,17 +9,9 @@
 namespace vf
 {
 
-#ifndef VF_AUDIOBUFFERPOOL_VFHEADER
 #include "buffers/vf_AudioBufferPool.h"
-#endif
-
-#ifndef VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
 #include "buffers/vf_AudioSampleBufferArray.h"
-#endif
-
-#ifndef VF_NOISEAUDIOSOURCE_VFHEADER
 #include "sources/vf_NoiseAudioSource.h"
-#endif
 
 }
 

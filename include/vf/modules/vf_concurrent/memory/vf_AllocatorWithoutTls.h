@@ -4,7 +4,6 @@
 #ifndef __VF_ALLOCATORWITHOUTTLS_VFHEADER__
 #define __VF_ALLOCATORWITHOUTTLS_VFHEADER__
 
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
 
 // Lock-free Allocator that doesn't use thread local storage.

@@ -1,10 +1,9 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_THREAD_VFHEADER__
-#define __VF_THREAD_VFHEADER__
+#ifndef VF_THREAD_VFHEADER
+#define VF_THREAD_VFHEADER
 
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/functor/vf_Function.h"
 
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"

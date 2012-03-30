@@ -4,8 +4,6 @@
 #ifndef __VF_LOCKFREELIST_VFHEADER__
 #define __VF_LOCKFREELIST_VFHEADER__
 
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
-
 namespace detail {
 
 namespace LockFree {

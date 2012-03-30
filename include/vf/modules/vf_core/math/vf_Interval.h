@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_INTERVAL_VFHEADER__
-#define __VF_INTERVAL_VFHEADER__
+#ifndef VF_INTERVAL_VFHEADER
+#define VF_INTERVAL_VFHEADER
 
 // Represents the half-open interval [m_begin, m_end)
 template <class Ty>

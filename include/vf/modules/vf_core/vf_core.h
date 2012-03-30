@@ -23,7 +23,6 @@ namespace vf
 #include "math/vf_Math.h"
 #include "math/vf_MurmurHash.h"
 
-#include "memory/vf_Atomic.h"
 #include "memory/vf_AtomicCounter.h"
 #include "memory/vf_AtomicFlag.h"
 #include "memory/vf_AtomicPointer.h"

@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_THROW_VFHEADER__
-#define __VF_THROW_VFHEADER__
+#ifndef VF_THROW_VFHEADER
+#define VF_THROW_VFHEADER
 
 #include "vf/modules/vf_core/diagnostic/vf_Debug.h"
 
@@ -16,11 +16,7 @@ inline void Throw (Exception const& e)
 {
   Debug::breakPoint ();
 
-#if 1
-  boost::throw_exception (e);
-#else
   throw e;
-#endif
 }
 
 #endif

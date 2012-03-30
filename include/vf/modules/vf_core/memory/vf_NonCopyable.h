@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_NONCOPYABLE_VFHEADER__
-#define __VF_NONCOPYABLE_VFHEADER__
+#ifndef VF_NONCOPYABLE_VFHEADER
+#define VF_NONCOPYABLE_VFHEADER
 
 // Prevents warnings about missing copy
 // constructors and assignment operators.

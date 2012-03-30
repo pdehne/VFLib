@@ -1,10 +1,9 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_SHAREDOBJECT_VFHEADER__
-#define __VF_SHAREDOBJECT_VFHEADER__
+#ifndef VF_SHAREDOBJECT_VFHEADER
+#define VF_SHAREDOBJECT_VFHEADER
 
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
 #include "vf/modules/vf_core/threads/vf_SharedObjectPtr.h"
 

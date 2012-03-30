@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_ONCEPERSECOND_VFHEADER__
-#define __VF_ONCEPERSECOND_VFHEADER__
+#ifndef VF_ONCEPERSECOND_VFHEADER
+#define VF_ONCEPERSECOND_VFHEADER
 
 #include "vf/modules/vf_core/containers/vf_List.h"
 #include "vf/modules/vf_core/threads/vf_SharedObject.h"

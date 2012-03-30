@@ -247,7 +247,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_Interval.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_Math.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_MurmurHash.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_Atomic.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicCounter.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicFlag.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicPointer.h" />

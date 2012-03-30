@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_NOISEAUDIOSOURCE_VFHEADER__
-#define __VF_NOISEAUDIOSOURCE_VFHEADER__
+#ifndef VF_NOISEAUDIOSOURCE_VFHEADER
+#define VF_NOISEAUDIOSOURCE_VFHEADER
 
 /*
  * Juce AudioSource that produces various types of noise

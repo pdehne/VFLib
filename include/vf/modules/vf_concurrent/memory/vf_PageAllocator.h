@@ -4,7 +4,6 @@
 #ifndef __VF_PAGEALLOCATOR_VFHEADER__
 #define __VF_PAGEALLOCATOR_VFHEADER__
 
-#include "vf/modules/vf_core/memory/vf_Atomic.h"
 #include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeStack.h"
 #include "vf/modules/vf_core/utility/vf_OncePerSecond.h"

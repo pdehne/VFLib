@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_STATICOBJECT_VFHEADER__
-#define __VF_STATICOBJECT_VFHEADER__
+#ifndef VF_STATICOBJECT_VFHEADER
+#define VF_STATICOBJECT_VFHEADER
 
 #include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 
