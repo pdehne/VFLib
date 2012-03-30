@@ -67,18 +67,18 @@ public:
 
   void operator= (T const& other) { *ptr () = other; }
 
-  inline T& operator*  () { return *ptr (); }
-  inline T* operator-> () { return  ptr (); }
-  inline operator T&   () { return *ptr (); }
-  inline operator T*   () { return  ptr (); }
+  inline T& operator*  () noexcept { return *ptr (); }
+  inline T* operator-> () noexcept { return  ptr (); }
+  inline operator T&   () noexcept { return *ptr (); }
+  inline operator T*   () noexcept { return  ptr (); }
 
-  inline const T& operator*  () const { return *ptr (); }
-  inline const T* operator-> () const { return  ptr (); }
-  inline operator const T&   () const { return *ptr (); }
-  inline operator const T*   () const { return  ptr (); }
+  inline const T& operator*  () const noexcept { return *ptr (); }
+  inline const T* operator-> () const noexcept { return  ptr (); }
+  inline operator const T&   () const noexcept { return *ptr (); }
+  inline operator const T*   () const noexcept { return  ptr (); }
 
 private:
-  inline T* ptr ()
+  inline T* ptr () noexcept 
   {
     return (T*)((uintptr_t (m_storage) + Memory::cacheLineAlignMask)
                 & ~Memory::cacheLineAlignMask);
@@ -143,15 +143,15 @@ public:
 
   void operator= (const T& other) { m_t = other; }
 
-  T& operator* () { return m_t; }
-  T* operator-> () { return &m_t; }
-  operator T& () { return m_t; }
-  operator T* () { return &m_t; }
+  T& operator* ()  noexcept { return m_t; }
+  T* operator-> () noexcept { return &m_t; }
+  operator T& ()   noexcept { return m_t; }
+  operator T* ()   noexcept { return &m_t; }
 
-  const T& operator* () const { return m_t; }
-  const T* operator-> () const { return &m_t; }
-  operator const T& () const { return m_t; }
-  operator const T* () const { return &m_t; }
+  const T& operator*  () const noexcept { return m_t; }
+  const T* operator-> () const noexcept { return &m_t; }
+  operator const T&   () const noexcept { return m_t; }
+  operator const T*   () const noexcept { return &m_t; }
 
 private:
   T m_t;
@@ -207,15 +207,15 @@ public:
 
   void operator= (const T& other) { m_t = other; }
 
-  T& operator*  () { return  m_t; }
-  T* operator-> () { return &m_t; }
-  operator T&   () { return  m_t; }
-  operator T*   () { return &m_t; }
+  T& operator*  () noexcept { return  m_t; }
+  T* operator-> () noexcept { return &m_t; }
+  operator T&   () noexcept { return  m_t; }
+  operator T*   () noexcept { return &m_t; }
 
-  const T& operator*  () const { return  m_t; }
-  const T* operator-> () const { return &m_t; }
-  operator const T&   () const { return  m_t; }
-  operator const T*   () const { return &m_t; }
+  const T& operator*  () const noexcept { return  m_t; }
+  const T* operator-> () const noexcept { return &m_t; }
+  operator const T&   () const noexcept { return  m_t; }
+  operator const T*   () const noexcept { return &m_t; }
 
 private:
   T m_t;
@@ -268,15 +268,15 @@ public:
 
   void operator= (const T& other) { m_t = other; }
 
-  T& operator*  () { return  m_t; }
-  T* operator-> () { return &m_t; }
-  operator T&   () { return  m_t; }
-  operator T*   () { return &m_t; }
+  T& operator*  () noexcept { return  m_t; }
+  T* operator-> () noexcept { return &m_t; }
+  operator T&   () noexcept { return  m_t; }
+  operator T*   () noexcept { return &m_t; }
 
-  const T& operator*  () const { return  m_t; }
-  const T* operator-> () const { return &m_t; }
-  operator const T&   () const { return  m_t; }
-  operator const T*   () const { return &m_t; }
+  const T& operator*  () const noexcept { return  m_t; }
+  const T* operator-> () const noexcept { return &m_t; }
+  operator const T&   () const noexcept { return  m_t; }
+  operator const T*   () const noexcept { return &m_t; }
 
 private:
   T m_t;
