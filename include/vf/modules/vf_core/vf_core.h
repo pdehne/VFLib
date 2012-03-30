@@ -39,7 +39,6 @@ namespace vf
 #include "threads/vf_SpinDelay.h"
 #include "threads/vf_SpinLock.h"
 #include "threads/vf_Thread.h"
-#include "threads/vf_ThreadBase.h"
 
 }
 
