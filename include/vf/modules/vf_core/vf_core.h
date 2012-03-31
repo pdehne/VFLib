@@ -39,7 +39,6 @@ namespace vf
 
 #include "threads/vf_Mutex.h"
 #include "threads/vf_SharedObject.h"
-#include "threads/vf_SharedObjectPtr.h"
 #include "threads/vf_SpinDelay.h"
 #include "threads/vf_Thread.h"
 

@@ -115,7 +115,7 @@ public:
 class Base : public SharedObject
 {
 public:
-  typedef SharedObjectPtr <Base> Ptr;
+  typedef ReferenceCountedObjectPtr <Base> Ptr;
 
   Base ();
 

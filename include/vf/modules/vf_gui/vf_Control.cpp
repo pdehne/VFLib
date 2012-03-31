@@ -7,7 +7,7 @@ namespace Control {
 
 Base::Base (Component* component,
             Facade::Base* facade,
-            SharedObjectPtr <Model::Base> model)
+            ReferenceCountedObjectPtr <Model::Base> model)
   : m_component (*component)
   , m_facade (facade)
   , m_model (model)

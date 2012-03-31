@@ -4,7 +4,6 @@
 #ifndef __VF_FACADE_VFHEADER__
 #define __VF_FACADE_VFHEADER__
 
-#include "vf/modules/vf_core/threads/vf_SharedObjectPtr.h"
 #include "vf/modules/vf_gui/vf_ConnectedEdges.h"
 #include "vf/modules/vf_gui/vf_Model.h"
 #include "vf/modules/vf_gui/vf_TransparentBorder.h"
@@ -79,7 +78,7 @@ protected:
   virtual void onModelChanged (Model::Base* model);
 
 private:
-  SharedObjectPtr <Model::Base> m_model;
+  ReferenceCountedObjectPtr <Model::Base> m_model;
   Control::Base* m_control;
   bool m_isEnabled;
   TransparentBorder m_transparentBorder;

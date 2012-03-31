@@ -62,7 +62,7 @@ private:
 
 private:
   class Sqlite3;
-  SharedObjectPtr <Sqlite3> m_instance;
+  ReferenceCountedObjectPtr <Sqlite3> m_instance;
 
   sqlite3* m_connection;
   String m_fileName;

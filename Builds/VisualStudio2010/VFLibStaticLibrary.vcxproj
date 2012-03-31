@@ -264,7 +264,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObjectPtr.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />

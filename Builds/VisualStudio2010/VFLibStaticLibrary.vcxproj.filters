@@ -413,9 +413,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObjectPtr.h">
-      <Filter>VF Modules\vf_core\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>

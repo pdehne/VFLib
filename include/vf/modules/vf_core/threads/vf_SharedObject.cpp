@@ -23,7 +23,7 @@ private:
   }
 
 public:
-  typedef SharedObjectPtr <Deleter> Ptr;
+  typedef ReferenceCountedObjectPtr <Deleter> Ptr;
 
   Worker& getWorker ()
   {

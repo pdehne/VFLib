@@ -32,7 +32,7 @@ class Base
 public:
   Base (Component* component,
         Facade::Base* facade,
-        SharedObjectPtr <Model::Base> model);
+        ReferenceCountedObjectPtr <Model::Base> model);
   ~Base ();
 
   Model::Base& getModel ();
@@ -47,7 +47,7 @@ protected:
 private:
   Component& m_component;
   ScopedPointer <Facade::Base> m_facade;
-  SharedObjectPtr <Model::Base> m_model;
+  ReferenceCountedObjectPtr <Model::Base> m_model;
 };
 
 }

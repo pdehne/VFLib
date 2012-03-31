@@ -38,7 +38,7 @@ public:
                public AllocatedBy <CallAllocatorType>
   {
   public:
-    typedef SharedObjectPtr <Call> Ptr;
+    typedef ReferenceCountedObjectPtr <Call> Ptr;
     virtual void operator () (void* const listener) = 0;
   private:
     void destroySharedObject ();
@@ -64,7 +64,7 @@ private:
                 public AllocatedBy <AllocatorType>
   {
   public:
-    typedef SharedObjectPtr <Group> Ptr;
+    typedef ReferenceCountedObjectPtr <Group> Ptr;
 
     explicit Group    (Worker& worker);
     ~Group            ();
