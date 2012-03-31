@@ -4,8 +4,7 @@
 #ifndef VF_ONCEPERSECOND_VFHEADER
 #define VF_ONCEPERSECOND_VFHEADER
 
-#include "vf/modules/vf_core/containers/vf_List.h"
-#include "vf/modules/vf_core/threads/vf_SharedObject.h"
+#include "../containers/vf_List.h"
 
 // Class derived from OncePerSecond have their override
 // called once per second
@@ -28,7 +27,7 @@ protected:
 
 private:
   class TimerSingleton;
-  typedef SharedObjectPtr <TimerSingleton> TimerPtr;
+  typedef ReferenceCountedObjectPtr <TimerSingleton> TimerPtr;
 
   struct Elem;
   typedef List <Elem> List;
