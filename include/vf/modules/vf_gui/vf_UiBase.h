@@ -112,7 +112,7 @@ public:
 
 //------------------------------------------------------------------------------
 
-class Base : public SharedObject
+class Base : public ReferenceCountedObject, public Uncopyable
 {
 public:
   typedef ReferenceCountedObjectPtr <Base> Ptr;
