@@ -7,7 +7,7 @@
 #include "vf/modules/vf_core/memory/vf_CacheLine.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeStack.h"
 #include "vf/modules/vf_core/utility/vf_OncePerSecond.h"
-#include "vf/modules/vf_core/utility/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/utility/vf_ReferenceCountedSingleton.h"
 
 //
 // Wait-free allocator for fixed size pages with these properties:
@@ -79,7 +79,7 @@ private:
 //------------------------------------------------------------------------------
 
 class GlobalPageAllocator
-  : public SharedSingleton <GlobalPageAllocator>
+  : public ReferenceCountedSingleton <GlobalPageAllocator>
   , LeakChecked <GlobalPageAllocator>
 {
 private:
@@ -103,7 +103,8 @@ public:
   }
 
 private:
-  friend class SharedSingleton <GlobalPageAllocator>;
+  // WTF?
+  friend class ReferenceCountedSingleton <GlobalPageAllocator>;
 
   static GlobalPageAllocator* createInstance ();
 

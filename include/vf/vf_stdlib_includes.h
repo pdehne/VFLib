@@ -10,11 +10,18 @@
 #  include <crtdbg.h>
 #endif
 
+//#if defined(_MSC_VER)
+//typedef unsigned char uint8_t;
+//typedef unsigned long uint32_t;
+//typedef unsigned __int64 uint64_t;
+//#else
+#include <stdint.h>
+//#endif
+
 //
 // Standard C++ headers
 //
 
-// TRY TO REMOVE AS MANY OF THESE AS POSSIBLE TO REDUCE DEPENDENCIES
 #include <algorithm>
 #include <cfloat>
 #include <cmath>
@@ -40,7 +47,6 @@
 // Standard C headers
 //
 
-// TRY TO REMOVE AS MANY OF THESE AS POSSIBLE TO REDUCE DEPENDENCIES
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>

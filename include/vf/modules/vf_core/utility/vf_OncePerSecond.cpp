@@ -6,11 +6,12 @@ static char const* const threadName = "Once Per Second";
 //------------------------------------------------------------------------------
 
 class OncePerSecond::TimerSingleton
-  : public SharedSingleton <OncePerSecond::TimerSingleton>
+  : public ReferenceCountedSingleton <OncePerSecond::TimerSingleton>
 {
 private:
   TimerSingleton ()
-    : SharedSingleton <OncePerSecond::TimerSingleton> (SingletonLifetime::persistAfterCreation)
+    : ReferenceCountedSingleton <OncePerSecond::TimerSingleton> (
+		SingletonLifetime::persistAfterCreation)
     , m_thread (threadName)
   {
     m_thread.start (vf::bind (&TimerSingleton::run, this));

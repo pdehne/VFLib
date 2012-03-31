@@ -1,26 +1,17 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_SHAREDSINGLETON_VFHEADER
-#define VF_SHAREDSINGLETON_VFHEADER
+#ifndef VF_REFERENCECOUNTEDSINGLETON_VFHEADER
+#define VF_REFERENCECOUNTEDSINGLETON_VFHEADER
 
 #include "vf/modules/vf_core/utility/vf_PerformedAtExit.h"
-#include "vf/modules/vf_core/threads/vf_SharedObject.h"
 #include "vf/modules/vf_core/memory/vf_StaticObject.h"
 
-// Thread-safe singleton which comes into existence on first use.
-// All objects with static storage duration should, in general, be singletons,
-// or else they may not be leak-checked correctly.
-//
-// class Object must provide this function:
-//
-//  Object* Object::createInstance()
-//
-
-//------------------------------------------------------------------------------
+/**
+	Construction options for ReferenceCountedSingleton
+*/
 
 // "base classes dependent on a template parameter aren't part of lookup." - ville
-
 class SingletonLifetime
 {
 public:
@@ -42,13 +33,26 @@ public:
   };
 };
 
+//------------------------------------------------------------------------------
+
+/**
+	Thread-safe singleton which comes into existence on first use. Use this
+	instead of creating objects with static storage duration. These singletons
+	are automatically reference counted, so if you hold a pointer to it in every
+	object that depends on it, the order of destruction of objects is assured
+	to be correct.
+
+	class Object must provide this function:
+	  Object* Object::createInstance()
+*/
+
 template <class Object>
-class SharedSingleton : private PerformedAtExit
+class ReferenceCountedSingleton : private PerformedAtExit
 {
 protected:
   typedef VF_JUCE::SpinLock LockType;
 
-  explicit SharedSingleton (SingletonLifetime::Lifetime const lifetime)
+  explicit ReferenceCountedSingleton (SingletonLifetime::Lifetime const lifetime)
     : PerformedAtExit (lifetime == SingletonLifetime::persistAfterCreation)
     , m_lifetime (lifetime)
   {
@@ -66,13 +70,13 @@ protected:
     *s_created = true;
   }
 
-  virtual ~SharedSingleton ()
+  virtual ~ReferenceCountedSingleton ()
   {
     vfassert (s_instance == nullptr);
   }
 
 public:
-  typedef SharedObjectPtr <Object> Ptr;
+  typedef VF_JUCE::ReferenceCountedObjectPtr <Object> Ptr;
 
   static Ptr getInstance ()
   {
@@ -152,19 +156,19 @@ private:
 
 private:
   static Object* s_instance;
-  static Static::Storage <LockType, SharedSingleton <Object> > s_mutex;
-  static Static::Storage <bool, SharedSingleton <Object> > s_created;
+  static Static::Storage <LockType, ReferenceCountedSingleton <Object> > s_mutex;
+  static Static::Storage <bool, ReferenceCountedSingleton <Object> > s_created;
 };
 
 template <class Object>
-Object* SharedSingleton <Object>::s_instance;
+Object* ReferenceCountedSingleton <Object>::s_instance;
 
 template <class Object>
-Static::Storage <typename SharedSingleton <Object>::LockType, SharedSingleton <Object> >
-  SharedSingleton <Object>::s_mutex;
+Static::Storage <typename ReferenceCountedSingleton <Object>::LockType, ReferenceCountedSingleton <Object> >
+  ReferenceCountedSingleton <Object>::s_mutex;
 
 template <class Object>
-Static::Storage <bool, SharedSingleton <Object> >
-  SharedSingleton <Object>::s_created;
+Static::Storage <bool, ReferenceCountedSingleton <Object> >
+  ReferenceCountedSingleton <Object>::s_created;
 
 #endif

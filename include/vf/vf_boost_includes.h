@@ -14,6 +14,5 @@
 // THESE ARE NOT STRICTLY NEEDED
 #include <boost/foreach.hpp>          // various places
 #include <boost/shared_ptr.hpp>       // because of db
-#include <boost/intrusive/list.hpp>   // because of Ui::Event
 
 #endif

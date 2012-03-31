@@ -266,7 +266,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_SharedSingleton.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h" />

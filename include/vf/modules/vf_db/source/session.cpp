@@ -4,12 +4,12 @@
 
 namespace db {
 
-class session::Sqlite3 : public SharedSingleton <Sqlite3>
+class session::Sqlite3 : public ReferenceCountedSingleton <Sqlite3>
 {
 private:
-  friend class SharedSingleton <Sqlite3>;
+  friend class ReferenceCountedSingleton <Sqlite3>;
 
-  Sqlite3 () : SharedSingleton (SingletonLifetime::persistAfterCreation)
+  Sqlite3 () : ReferenceCountedSingleton (SingletonLifetime::persistAfterCreation)
 	{
     int threadSafe = sqlite3_threadsafe ();
     if (threadSafe != 1)

@@ -6,7 +6,7 @@
 
 #include "vf/modules/vf_core/containers/vf_List.h"
 #include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
-#include "vf/modules/vf_core/utility/vf_SharedSingleton.h"
+#include "vf/modules/vf_core/utility/vf_ReferenceCountedSingleton.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
 
@@ -50,7 +50,7 @@ private:
 // Immune to order of construction / initialization problems.
 //
 template <class Tag>
-class GlobalAllocator : public SharedSingleton <GlobalAllocator <Tag> >
+class GlobalAllocator : public ReferenceCountedSingleton <GlobalAllocator <Tag> >
 {
 public:
   inline void* allocate (size_t bytes)
@@ -64,7 +64,7 @@ public:
   }
 
 private:
-  GlobalAllocator () : SharedSingleton <GlobalAllocator <Tag> >
+  GlobalAllocator () : ReferenceCountedSingleton <GlobalAllocator <Tag> >
                         (SingletonLifetime::persistAfterCreation)
   {
   }
@@ -74,7 +74,8 @@ private:
   }
 
 private:
-  friend class SharedSingleton <GlobalAllocator <Tag> >;
+  // WTF?
+  friend class ReferenceCountedSingleton <GlobalAllocator <Tag> >;
 
   static GlobalAllocator* createInstance ()
   {

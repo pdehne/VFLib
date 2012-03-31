@@ -563,14 +563,14 @@
     <ClInclude Include="..\..\include\vf\vf_stdlib_includes.h">
       <Filter>Junk</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_SharedSingleton.h">
-      <Filter>VF Modules\vf_core\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_ReferenceCountedSingleton.h">
+      <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
