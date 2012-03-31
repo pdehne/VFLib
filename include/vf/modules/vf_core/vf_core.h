@@ -16,6 +16,9 @@ namespace vf
 #include "diagnostic/vf_SafeBool.h"
 #include "diagnostic/vf_Throw.h"
 
+#include "events/vf_OncePerSecond.h"
+#include "events/vf_PerformedAtExit.h"
+
 #include "functor/vf_Bind.h"
 #include "functor/vf_Function.h"
 
@@ -30,11 +33,9 @@ namespace vf
 #include "memory/vf_CacheLine.h"
 #include "memory/vf_MemoryAlignment.h"
 #include "memory/vf_NonCopyable.h"
+#include "memory/vf_ReferenceCountedSingleton.h"
 #include "memory/vf_StaticObject.h"
 
-#include "utility/vf_OncePerSecond.h"
-#include "utility/vf_PerformedAtExit.h"
-#include "utility/vf_ReferenceCountedSingleton.h"
 
 #include "threads/vf_Mutex.h"
 #include "threads/vf_SharedObject.h"

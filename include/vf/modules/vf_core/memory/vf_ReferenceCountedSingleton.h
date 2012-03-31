@@ -4,8 +4,8 @@
 #ifndef VF_REFERENCECOUNTEDSINGLETON_VFHEADER
 #define VF_REFERENCECOUNTEDSINGLETON_VFHEADER
 
-#include "vf/modules/vf_core/utility/vf_PerformedAtExit.h"
-#include "vf/modules/vf_core/memory/vf_StaticObject.h"
+#include "../events/vf_PerformedAtExit.h"
+#include "../memory/vf_StaticObject.h"
 
 /**
 	Construction options for ReferenceCountedSingleton

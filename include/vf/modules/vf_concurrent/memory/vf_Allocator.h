@@ -4,9 +4,7 @@
 #ifndef __VF_ALLOCATOR_VFHEADER__
 #define __VF_ALLOCATOR_VFHEADER__
 
-#include "vf/modules/vf_core/containers/vf_List.h"
 #include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
-#include "vf/modules/vf_core/utility/vf_ReferenceCountedSingleton.h"
 
 #define LOCKFREE_ALLOCATOR_LOGGING 0
 

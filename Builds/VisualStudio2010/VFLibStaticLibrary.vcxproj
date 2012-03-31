@@ -73,6 +73,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\math\vf_MurmurHash.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -90,14 +98,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -246,6 +246,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_LeakChecked.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_SafeBool.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Throw.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\functor\vf_Bind.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\functor\vf_Function.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_Interval.h" />
@@ -258,15 +260,13 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_CacheLine.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_MemoryAlignment.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_NonCopyable.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObjectPtr.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h" />

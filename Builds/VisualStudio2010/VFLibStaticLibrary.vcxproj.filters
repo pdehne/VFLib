@@ -186,12 +186,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.cpp">
-      <Filter>VF Modules\vf_core\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.cpp">
-      <Filter>VF Modules\vf_core\events</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClCompile>
@@ -269,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.cpp">
+      <Filter>VF Modules\vf_core\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.cpp">
+      <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,12 +422,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_OncePerSecond.h">
-      <Filter>VF Modules\vf_core\events</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_PerformedAtExit.h">
-      <Filter>VF Modules\vf_core\events</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
       <Filter>VF Modules\vf_audio</Filter>
     </ClInclude>
@@ -569,8 +563,14 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\utility\vf_ReferenceCountedSingleton.h">
-      <Filter>VF Modules\vf_core\threads</Filter>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.h">
+      <Filter>VF Modules\vf_core\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.h">
+      <Filter>VF Modules\vf_core\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h">
+      <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

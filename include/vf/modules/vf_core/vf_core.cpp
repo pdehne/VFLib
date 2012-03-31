@@ -23,9 +23,9 @@ namespace vf
 #include "diagnostic/vf_Error.cpp"
 #include "diagnostic/vf_FPUFlags.cpp"
 #include "diagnostic/vf_LeakChecked.cpp"
+#include "events/vf_OncePerSecond.cpp"
+#include "events/vf_PerformedAtExit.cpp"
 #include "math/vf_MurmurHash.cpp"
-#include "utility/vf_OncePerSecond.cpp"
-#include "utility/vf_PerformedAtExit.cpp"
 #include "threads/vf_JuceThread.cpp"
 
 #include "threads/vf_SharedObject.cpp" // PROBLEM WITH DEPENDENCY ON vf_concurrent!!

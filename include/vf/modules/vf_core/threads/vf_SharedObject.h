@@ -4,8 +4,9 @@
 #ifndef VF_SHAREDOBJECT_VFHEADER
 #define VF_SHAREDOBJECT_VFHEADER
 
-#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
-#include "vf/modules/vf_core/threads/vf_SharedObjectPtr.h"
+#include "../diagnostic/vf_LeakChecked.h"
+#include "../memory/vf_AtomicCounter.h"
+#include "../threads/vf_SharedObjectPtr.h"
 
 // A copy of juce::ReferenceCountedObject,
 // with the following features:
