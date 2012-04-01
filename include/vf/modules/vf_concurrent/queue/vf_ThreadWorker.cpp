@@ -21,7 +21,8 @@ void ThreadWorker::start (idle_t worker_idle,
 {
   {
     // TODO: Atomic for this
-    VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
+	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
+
     // start() MUST be called.
     vfassert (!m_calledStart);
     m_calledStart = true;
@@ -40,7 +41,7 @@ void ThreadWorker::stop (bool const wait)
   vfassert (!wait || !m_thread.isTheCurrentThread ());
 
   {
-    VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
+	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
 
     // start() MUST be called.
     vfassert (m_calledStart);
@@ -51,7 +52,7 @@ void ThreadWorker::stop (bool const wait)
       m_calledStop = true;
 
       {
-        Mutex::ScopedUnlockType unlock (m_mutex); // getting fancy
+		VF_JUCE::CriticalSection::ScopedUnlockType unlock (m_mutex); // getting fancy
 
         call (&ThreadWorker::do_stop, this);
 

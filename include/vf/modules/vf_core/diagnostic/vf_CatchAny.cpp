@@ -93,11 +93,11 @@ public:
 
 private:
   static int s_count;
-  static Mutex s_mutex;
+  static VF_JUCE::CriticalSection s_mutex;
   static LPTOP_LEVEL_EXCEPTION_FILTER s_sehPrev;
 };
 
-Mutex ScopedPlatformExceptionCatcher::s_mutex;
+VF_JUCE::CriticalSection ScopedPlatformExceptionCatcher::s_mutex;
 int ScopedPlatformExceptionCatcher::s_count = 0;
 LPTOP_LEVEL_EXCEPTION_FILTER ScopedPlatformExceptionCatcher::s_sehPrev = 0;
 

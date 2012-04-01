@@ -45,7 +45,8 @@ public:
 #endif
 
 private:
-  CacheLine::Padded <Mutex> m_mutex;
+  VF_JUCE::CriticalSection m_mutex;
+
   mutable CacheLine::Padded <AtomicCounter> m_writes;
   mutable CacheLine::Padded <AtomicCounter> m_readers;
 };

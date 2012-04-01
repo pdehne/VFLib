@@ -49,7 +49,7 @@ public:
 	int index = -1;
 
 	{
-	  m_mutex.enter ();
+	  CriticalSection::ScopedLockType lock (m_mutex);
 
 	  for (int i = 0; i < m_buffers.size(); ++i)
 	  {
@@ -80,8 +80,6 @@ public:
 
 	  if (buffer)
 		m_buffers.remove (index);
-
-	  m_mutex.exit();
 	}
 
 	if (buffer)
@@ -105,7 +103,7 @@ public:
   }    
 
 private:
-  Mutex m_mutex;
+  VF_JUCE::CriticalSection m_mutex;
   VF_JUCE::Array <BufferClass*> m_buffers;
 };
 

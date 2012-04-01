@@ -1,20 +1,20 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-JuceThread::JuceThread (String name)
+InterruptibleThread::InterruptibleThread (String name)
   : JuceThreadWrapper (name, *this)
   , m_state (stateRun)
 {
 }
 
-JuceThread::~JuceThread ()
+InterruptibleThread::~InterruptibleThread ()
 {
   m_runEvent.signal ();
 
   join ();
 }
 
-void JuceThread::start (const Function <void (void)>& f)
+void InterruptibleThread::start (const Function <void (void)>& f)
 {
   m_function = f;
 
@@ -24,12 +24,12 @@ void JuceThread::start (const Function <void (void)>& f)
   m_runEvent.signal ();
 }
 
-void JuceThread::join ()
+void InterruptibleThread::join ()
 {
   VF_JUCE::Thread::stopThread (-1);
 }
 
-bool JuceThread::wait (int milliSeconds)
+bool InterruptibleThread::wait (int milliSeconds)
 {
   // Can only be called from the current thread
   vfassert (isTheCurrentThread ());
@@ -80,7 +80,7 @@ bool JuceThread::wait (int milliSeconds)
   return interrupted;
 }
 
-void JuceThread::interrupt ()
+void InterruptibleThread::interrupt ()
 {
   for (;;)
   {
@@ -101,7 +101,7 @@ void JuceThread::interrupt ()
   }
 }
 
-JuceThread::Interrupted JuceThread::interruptionPoint ()
+InterruptibleThread::Interrupted InterruptibleThread::interruptionPoint ()
 {
   // Can only be called from the current thread
   vfassert (isTheCurrentThread ());
@@ -123,25 +123,25 @@ JuceThread::Interrupted JuceThread::interruptionPoint ()
   //bool const interrupted = m_state.tryChangeState (stateInterrupt, stateReturn);
   bool const interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
 
-  return JuceThread::Interrupted (interrupted);
+  return InterruptibleThread::Interrupted (interrupted);
 }
 
-JuceThread::id JuceThread::getId () const
+InterruptibleThread::id InterruptibleThread::getId () const
 {
   return m_threadId;
 }
 
-bool JuceThread::isTheCurrentThread () const
+bool InterruptibleThread::isTheCurrentThread () const
 {
   return VF_JUCE::Thread::getCurrentThreadId () == m_threadId;
 }
 
-void JuceThread::setPriority (int priority)
+void InterruptibleThread::setPriority (int priority)
 {
   VF_JUCE::Thread::setPriority (priority);
 }
 
-void JuceThread::run ()
+void InterruptibleThread::run ()
 {
   m_threadId = VF_JUCE::Thread::getThreadId ();
 
@@ -154,7 +154,7 @@ void JuceThread::run ()
 
 namespace CurrentJuceThread {
 
-JuceThread::Interrupted interruptionPoint ()
+InterruptibleThread::Interrupted interruptionPoint ()
 {
   bool interrupted;
 
@@ -179,7 +179,7 @@ JuceThread::Interrupted interruptionPoint ()
     interrupted = false;
   }
 
-  return JuceThread::Interrupted (interrupted);
+  return InterruptibleThread::Interrupted (interrupted);
 }
 
 }

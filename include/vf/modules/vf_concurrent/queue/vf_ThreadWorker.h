@@ -4,13 +4,7 @@
 #ifndef __VF_THREADWORKER_VFHEADER__
 #define __VF_THREADWORKER_VFHEADER__
 
-#include "vf/modules/vf_core/functor/vf_Bind.h"
-#include "vf/modules/vf_core/diagnostic/vf_CatchAny.h"
-#include "vf/modules/vf_core/functor/vf_Function.h"
-#include "vf/modules/vf_core/threads/vf_Mutex.h"
 #include "vf/modules/vf_concurrent/queue/vf_Worker.h"
-
-#include "vf/modules/vf_core/threads/vf_Thread.h" // is this needed?
 
 //
 // Worker that comes with its own thread of execution used
@@ -86,8 +80,8 @@ private:
   bool m_calledStart;
   bool m_calledStop;
   bool m_shouldStop;
-  Mutex m_mutex;
-  JuceThread m_thread;
+  VF_JUCE::CriticalSection m_mutex;
+  InterruptibleThread m_thread;
   idle_t m_idle;
   init_t m_init;
   exit_t m_exit;

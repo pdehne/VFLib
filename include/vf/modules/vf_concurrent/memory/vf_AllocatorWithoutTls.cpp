@@ -157,7 +157,7 @@ void* AllocatorWithoutTls::allocate (const size_t bytes)
     Block* b = m_active;
     while (!b)
     {
-      CurrentThread::yield ();
+	  VF_JUCE::Thread::yield ();
       b = m_active;
     }
 

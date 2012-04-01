@@ -41,7 +41,7 @@ void ReadWriteMutex::enter_read () const
 
       // block until the writer is done
       {
-        Mutex::ScopedLockType lock (*m_mutex);
+		VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
       }
 
       // now try the loop again
@@ -65,7 +65,7 @@ void ReadWriteMutex::enter_write () const
 
   // Go for the mutex.
   // Another writer might block us here.
-  m_mutex->enter ();
+  m_mutex.enter ();
 
   // Only one competing writer will get here,
   // but we don't know who, so we have to drain
@@ -92,7 +92,7 @@ void ReadWriteMutex::exit_write () const
   // acquire the lock, thus starving readers. This fulfills
   // the write-preferencing requirement.
 
-  m_mutex->exit ();
+  m_mutex.exit ();
 
   m_writes->release ();
 }

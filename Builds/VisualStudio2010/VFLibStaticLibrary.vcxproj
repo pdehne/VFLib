@@ -97,7 +97,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_JuceThread.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -265,7 +265,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h" />

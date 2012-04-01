@@ -1,14 +1,14 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_THREAD_VFHEADER
-#define VF_THREAD_VFHEADER
+#ifndef VF_INTERRUPTIBLETHREAD_VFHEADER
+#define VF_INTERRUPTIBLETHREAD_VFHEADER
 
 #include "vf/modules/vf_core/functor/vf_Function.h"
 
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
 
-class JuceThread;
+class InterruptibleThread;
 
 namespace detail
 {
@@ -20,25 +20,25 @@ namespace detail
 class JuceThreadWrapper : public VF_JUCE::Thread
 {
 public:
-  JuceThreadWrapper (String name, JuceThread& juceThread)
+  JuceThreadWrapper (String name, InterruptibleThread& juceThread)
     : VF_JUCE::Thread (name)
     , m_juceThread (juceThread)
   {
   }
 
-  JuceThread& getJuceThread () const
+  InterruptibleThread& getJuceThread () const
   {
     return m_juceThread;
   }
 
 private:
-  JuceThread& m_juceThread;
+  InterruptibleThread& m_juceThread;
 };
 
 }
 
 // InterruptibleThread
-class JuceThread : public detail::JuceThreadWrapper
+class InterruptibleThread : public detail::JuceThreadWrapper
 {
 public:
   // This is the flag used to indicate if an interruption
@@ -100,8 +100,8 @@ public:
   typedef VF_JUCE::Thread::ThreadID id;
 
 public:
-  explicit JuceThread (String name);
-  ~JuceThread ();
+  explicit InterruptibleThread (String name);
+  ~InterruptibleThread ();
 
   void start (Function <void (void)> const& f);
 
@@ -159,11 +159,11 @@ private:
 namespace CurrentJuceThread {
 
 // Avoid this function because the implementation is slow.
-// Use JuceThread::interruptionPoint() instead.
+// Use InterruptibleThread::interruptionPoint() instead.
 //
-extern JuceThread::Interrupted interruptionPoint ();
+extern InterruptibleThread::Interrupted interruptionPoint ();
 
-inline JuceThread::id getId ()
+inline InterruptibleThread::id getId ()
 {
   return VF_JUCE::Thread::getCurrentThreadId ();
 }
@@ -186,7 +186,7 @@ inline void sleep (const int milliseconds)
 
 }
 
-typedef JuceThread Thread;
+typedef InterruptibleThread Thread;
 namespace CurrentThread = CurrentJuceThread;
 
 #endif

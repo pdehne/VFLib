@@ -24,10 +24,13 @@ namespace vf
 #include "diagnostic/vf_Error.cpp"
 #include "diagnostic/vf_FPUFlags.cpp"
 #include "diagnostic/vf_LeakChecked.cpp"
+
 #include "events/vf_OncePerSecond.cpp"
 #include "events/vf_PerformedAtExit.cpp"
+
 #include "math/vf_MurmurHash.cpp"
-#include "threads/vf_JuceThread.cpp"
+
+#include "threads/vf_InterruptibleThread.cpp"
 
 #if JUCE_WINDOWS
 #include "native/vf_win32_FPUFlags.cpp"

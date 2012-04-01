@@ -1,10 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-static char const* const threadName = "Once Per Second";
-
-//------------------------------------------------------------------------------
-
 class OncePerSecond::TimerSingleton
   : public ReferenceCountedSingleton <OncePerSecond::TimerSingleton>
 {
@@ -12,7 +8,7 @@ private:
   TimerSingleton ()
     : ReferenceCountedSingleton <OncePerSecond::TimerSingleton> (
 		SingletonLifetime::persistAfterCreation)
-    , m_thread (threadName)
+    , m_thread ("Once Per Second")
   {
     m_thread.start (vf::bind (&TimerSingleton::run, this));
   }
@@ -26,8 +22,6 @@ private:
 
   void run ()
   {
-    VF_JUCE::Thread::setCurrentThreadName (threadName);
-
     try
     {
       for(;;)
@@ -47,7 +41,7 @@ private:
 
   void notify ()
   {
-    Mutex::ScopedLockType lock (m_mutex);
+	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
 
     for (List::iterator iter = m_list.begin(); iter != m_list.end();)
     {
@@ -60,14 +54,14 @@ private:
 public:
   void insert (Elem* elem)
   {
-    Mutex::ScopedLockType lock (m_mutex);
+	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
 
     m_list.push_back (*elem);
   }
 
   void remove (Elem* elem)
   {
-    Mutex::ScopedLockType lock (m_mutex);
+	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
 
     m_list.erase (m_list.iterator_to (*elem));
   }
@@ -78,8 +72,8 @@ public:
   }
 
 private:
-  JuceThread m_thread;
-  Mutex m_mutex;
+  InterruptibleThread m_thread;
+  VF_JUCE::CriticalSection m_mutex;
   List m_list;
 };
 
