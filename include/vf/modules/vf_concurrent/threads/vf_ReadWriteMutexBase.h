@@ -7,7 +7,7 @@
 namespace detail {
 
 template <class ReadWriteMutexType>
-struct ScopedReadLock : NonCopyable
+struct ScopedReadLock : Uncopyable
 {
   inline explicit ScopedReadLock (const ReadWriteMutexType& mutex)
     : m_mutex (mutex)
@@ -27,7 +27,7 @@ private:
 //------------------------------------------------------------------------------
 
 template <class ReadWriteMutexType>
-struct ScopedWriteLock : NonCopyable
+struct ScopedWriteLock : Uncopyable
 {
   inline explicit ScopedWriteLock (const ReadWriteMutexType& mutex)
     : m_mutex (mutex)
@@ -49,7 +49,7 @@ private:
 // CAUSES DEADLOCK
 #if 0
 template <class ReadWriteMutexType>
-struct ScopedUpgradeWriteLock : NonCopyable
+struct ScopedUpgradeWriteLock : Uncopyable
 {
   inline explicit ScopedUpgradeWriteLock (const ReadWriteMutexType& mutex)
     : m_mutex (mutex)

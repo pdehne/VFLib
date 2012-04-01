@@ -14,7 +14,7 @@ struct AllocatorWithoutTls::Header
 
 //------------------------------------------------------------------------------
 
-class AllocatorWithoutTls::Block : NonCopyable
+class AllocatorWithoutTls::Block : Uncopyable
 {
 public:
   explicit Block (const size_t bytes) : m_refs (1)

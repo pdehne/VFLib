@@ -16,7 +16,7 @@
 //
 
 template <class Object>
-class SharedState : NonCopyable
+class SharedState : Uncopyable
 {
 public:
   typedef ReadWriteMutex ReadWriteMutexType;
@@ -72,7 +72,7 @@ private:
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::UnlockedAccess : NonCopyable
+class SharedState <Object>::UnlockedAccess : Uncopyable
 {
 public:
   explicit UnlockedAccess (SharedState const& state)
@@ -91,7 +91,7 @@ private:
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::ReadAccess : NonCopyable
+class SharedState <Object>::ReadAccess : Uncopyable
 {
 public:
   explicit ReadAccess (SharedState const volatile& state)
@@ -112,7 +112,7 @@ private:
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::WriteAccess : NonCopyable
+class SharedState <Object>::WriteAccess : Uncopyable
 {
 public:
   explicit WriteAccess (SharedState& state)

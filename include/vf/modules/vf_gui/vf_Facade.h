@@ -24,7 +24,7 @@ class Base
   : public ConnectedEdges
   , public Model::Base::Listener
   , LeakChecked <Base>
-  , NonCopyable
+  , Uncopyable
 {
 public:
   static const BorderSize <int> fullyOpaque;

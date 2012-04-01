@@ -4,7 +4,7 @@
 #ifndef VF_PERFORMEDATEXIT_VFHEADER
 #define VF_PERFORMEDATEXIT_VFHEADER
 
-class PerformedAtExit : NonCopyable
+class PerformedAtExit : Uncopyable
 {
 protected:
   explicit PerformedAtExit (bool perform);

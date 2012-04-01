@@ -7,7 +7,7 @@
 
 namespace db {
 
-class transaction : NonCopyable
+class transaction : Uncopyable
 {
 public:
   explicit transaction (session& s);

@@ -10,7 +10,7 @@ namespace db {
 namespace detail {
 
 // used for "once" and "prepare"
-class ref_counted_statement_base : NonCopyable
+class ref_counted_statement_base : Uncopyable
 {
 public:
   ref_counted_statement_base (session& s);

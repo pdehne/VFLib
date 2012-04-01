@@ -117,7 +117,7 @@ typedef AudioBufferPoolTemplate<AudioBufferPoolBase::Buffer> AudioBufferPool;
 #if 1
 class ScopedAudioSampleBuffer
   // NO IDEA why the leak checking fails
-  // : LeakChecked <ScopedAudioSampleBuffer>, NonCopyable
+  // : LeakChecked <ScopedAudioSampleBuffer>, Uncopyable
 {
 public:
   ScopedAudioSampleBuffer (AudioBufferPool& pool,

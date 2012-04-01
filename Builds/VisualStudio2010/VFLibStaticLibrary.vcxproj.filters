@@ -353,9 +353,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_MemoryAlignment.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_NonCopyable.h">
-      <Filter>VF Modules\vf_core\memory</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
@@ -568,6 +565,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_Uncopyable.h">
+      <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

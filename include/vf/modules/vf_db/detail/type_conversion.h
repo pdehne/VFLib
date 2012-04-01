@@ -21,7 +21,7 @@ template <typename T>
 class conversion_into_type
   : private base_value_holder<T>
   , public into_type<typename type_conversion<T>::base_type>
-  , VF_NAMESPACE::NonCopyable
+  , VF_NAMESPACE::Uncopyable
 {
 public:
   typedef typename type_conversion<T>::base_type BASE_TYPE;

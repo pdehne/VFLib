@@ -22,7 +22,7 @@ namespace {
 // While this object is in scope, any Windows SEH
 // exceptions will be caught and re-thrown as an Error object.
 //
-class ScopedPlatformExceptionCatcher : NonCopyable
+class ScopedPlatformExceptionCatcher : Uncopyable
 {
 public:
   ScopedPlatformExceptionCatcher ()

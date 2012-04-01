@@ -9,7 +9,7 @@
 // Class derived from OncePerSecond have their override
 // called once per second
 //
-class OncePerSecond : NonCopyable
+class OncePerSecond : Uncopyable
 {
 public:
   OncePerSecond ();

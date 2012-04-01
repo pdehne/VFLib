@@ -32,7 +32,7 @@ namespace vf
 #include "memory/vf_AtomicState.h"
 #include "memory/vf_CacheLine.h"
 #include "memory/vf_MemoryAlignment.h"
-#include "memory/vf_NonCopyable.h"
+#include "memory/vf_Uncopyable.h"
 #include "memory/vf_ReferenceCountedSingleton.h"
 #include "memory/vf_StaticObject.h"
 

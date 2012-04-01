@@ -25,7 +25,7 @@ template <class Elem,
   class Tag = detail::LockFree::List_default_tag>
 struct List
 {
-  class Node : NonCopyable
+  class Node : Uncopyable
   {
   public:
     Node () { }

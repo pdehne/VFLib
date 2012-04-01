@@ -8,7 +8,7 @@
 // the mouse enters. For example, zoom in/out buttons can appear when the mouse
 // enters, and disappear when the mouse leaves.
 //
-class MouseEnterEditable : NonCopyable
+class MouseEnterEditable : Uncopyable
 {
 private:
   class Helper;
@@ -56,7 +56,7 @@ protected:
 private:
   class Helper
     : private MouseListener
-    , NonCopyable
+    , Uncopyable
   {
   public:
     Helper (Component* component, MouseEnterEditable* editable);

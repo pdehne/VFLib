@@ -7,7 +7,7 @@
 // Ideas based on Juce
 
 template <class MutexType>
-struct ScopedLock : NonCopyable
+struct ScopedLock : Uncopyable
 {
   inline explicit ScopedLock (MutexType const& mutex) : m_mutex (mutex)
   {
@@ -26,7 +26,7 @@ private:
 //------------------------------------------------------------------------------
 
 template <class MutexType>
-struct ScopedUnlock : NonCopyable
+struct ScopedUnlock : Uncopyable
 {
   inline explicit ScopedUnlock (MutexType const& mutex) : m_mutex (mutex)
   {
@@ -44,7 +44,7 @@ private:
 
 //------------------------------------------------------------------------------
 
-class NoMutex : NonCopyable
+class NoMutex : Uncopyable
 {
 public:
   typedef ScopedLock <NoMutex> ScopedLockType;
@@ -56,7 +56,7 @@ public:
 
 //------------------------------------------------------------------------------
 
-class Mutex : NonCopyable
+class Mutex : Uncopyable
 {
 public:
   typedef ScopedLock <Mutex> ScopedLockType;

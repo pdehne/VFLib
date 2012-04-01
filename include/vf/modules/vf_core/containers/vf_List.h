@@ -20,7 +20,7 @@ struct List_default_tag
 
 template <class Elem,
           class Tag = detail::List_default_tag>
-class List : NonCopyable
+class List : Uncopyable
 {
 public:
   typedef int size_type;
@@ -31,7 +31,7 @@ public:
   typedef Elem*       pointer;
   typedef Elem const* const_pointer;
 
-  class Node : NonCopyable
+  class Node : Uncopyable
   {
   public:
     Node () { }
@@ -343,7 +343,7 @@ template <class Elem,
 class ListOld
 {
 public:
-  class Node : NonCopyable
+  class Node : Uncopyable
   {
   public:
     Node () { }

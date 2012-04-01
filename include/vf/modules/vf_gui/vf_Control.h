@@ -27,7 +27,7 @@ public:
 class Base
   : public View
   , public Model::Base::Listener
-  , NonCopyable
+  , Uncopyable
 {
 public:
   Base (Component* component,

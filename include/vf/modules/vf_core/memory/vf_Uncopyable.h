@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_NONCOPYABLE_VFHEADER
-#define VF_NONCOPYABLE_VFHEADER
+#ifndef VF_UNCOPYABLE_VFHEADER
+#define VF_UNCOPYABLE_VFHEADER
 
 // Prevents warnings about missing copy
 // constructors and assignment operators.
@@ -14,8 +14,8 @@ namespace detail {
 class Uncopyable
 {
 protected:
-  inline Uncopyable() { }
-  inline ~Uncopyable() { }
+  inline Uncopyable () { }
+  inline ~Uncopyable () { }
 
 private:
   Uncopyable (Uncopyable const&);
@@ -24,7 +24,6 @@ private:
 
 }
 
-typedef detail::Uncopyable NonCopyable;
 typedef detail::Uncopyable Uncopyable;
 
 #endif

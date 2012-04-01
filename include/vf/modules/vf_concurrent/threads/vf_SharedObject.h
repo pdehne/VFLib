@@ -14,7 +14,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject : NonCopyable
+class SharedObject : Uncopyable
 {
 public:
   inline void incReferenceCount() noexcept
