@@ -46,8 +46,11 @@ public:
   bool m_bFirstTime;
   rowid m_last_insert_rowid;
 
-  std::vector<detail::into_type_base*> m_intos;
-  std::vector<detail::use_type_base*> m_uses;
+  typedef std::vector <detail::into_type_base*> intos_t;
+  typedef std::vector <detail::use_type_base*> uses_t;
+
+  intos_t m_intos;
+  uses_t m_uses;
 };
 
 }

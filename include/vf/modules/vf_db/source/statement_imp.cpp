@@ -133,12 +133,12 @@ Error statement_imp::execute()
   // binds
 
   int iCol = 0;
-  BOOST_FOREACH(detail::into_type_base* i, m_intos)
-    i->bind(*this, iCol);
+  for (intos_t::iterator iter = m_intos.begin (); iter != m_intos.end (); ++iter)
+    (*iter)->bind(*this, iCol);
 
   int iParam = 1;
-  BOOST_FOREACH(detail::use_type_base* u, m_uses)
-    u->bind(*this, iParam);
+  for (uses_t::iterator iter = m_uses.begin (); iter != m_uses.end (); ++iter)
+    (*iter)->bind(*this, iParam);
 
   // reset
   error = detail::sqliteError (__FILE__, __LINE__, sqlite3_reset (m_stmt));
@@ -207,8 +207,8 @@ bool statement_imp::got_data() const
 
 void statement_imp::do_intos()
 {
-  BOOST_FOREACH( into_type_base* i, m_intos )
-    i->do_into();
+  for (intos_t::iterator iter = m_intos.begin (); iter != m_intos.end (); ++iter)
+    (*iter)->do_into();
 }
 
 void statement_imp::do_uses()
@@ -219,8 +219,8 @@ void statement_imp::do_uses()
  if (error)
    Throw (error);
 
-  BOOST_FOREACH(detail::use_type_base* u, m_uses)
-    u->do_use();
+  for (uses_t::iterator iter = m_uses.begin (); iter != m_uses.end (); ++iter)
+    (*iter)->do_use();
 }
 
 void statement_imp::post_use()
