@@ -34,7 +34,7 @@ public:
 
   // Reference counted polymorphic unary functor void (*)(void* listener).
   //
-  class Call : public SharedObject,
+  class Call : public ReferenceCountedObject,
                public AllocatedBy <CallAllocatorType>
   {
   public:
@@ -60,7 +60,7 @@ private:
   // Maintains a list of listeners registered on the same Worker
   //
   class Group : public Groups::Node,
-                public SharedObject,
+                public ReferenceCountedObject,
                 public AllocatedBy <AllocatorType>
   {
   public:
