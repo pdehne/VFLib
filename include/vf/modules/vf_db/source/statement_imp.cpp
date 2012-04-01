@@ -226,8 +226,8 @@ void statement_imp::do_uses()
 void statement_imp::post_use()
 {
   // reverse order
-  BOOST_REVERSE_FOREACH(detail::use_type_base* u, m_uses)
-    u->post_use();
+  for (uses_t::reverse_iterator iter = m_uses.rbegin (); iter != m_uses.rend (); ++iter)
+    (*iter)->post_use();
 }
 
 void statement_imp::release_resources()

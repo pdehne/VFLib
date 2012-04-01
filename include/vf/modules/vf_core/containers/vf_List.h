@@ -157,7 +157,6 @@ private:
     
   private:
     friend class List;
-    friend class boost::iterator_core_access;
 
     NodeType* get_node ()
     {

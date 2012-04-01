@@ -6,6 +6,5 @@
 
 // REMOVE ASAP
 #include <boost/thread/tss.hpp>
-#include <boost/foreach.hpp>
 
 #endif
