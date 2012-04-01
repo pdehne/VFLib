@@ -4,12 +4,10 @@
 #ifndef __VF_LISTENERS_VFHEADER__
 #define __VF_LISTENERS_VFHEADER__
 
-#include "vf/modules/vf_concurrent/memory/vf_AllocatedBy.h"
-#include "vf/modules/vf_concurrent/memory/vf_Allocator.h"
-#include "vf/modules/vf_core/containers/vf_List.h"
-#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
-#include "vf/modules/vf_core/threads/vf_SharedObject.h"
-#include "vf/modules/vf_concurrent/queue/vf_Worker.h"
+#include "../memory/vf_AllocatedBy.h"
+#include "../memory/vf_Allocator.h"
+#include "../threads/vf_ReadWriteMutex.h"
+#include "../queue/vf_Worker.h"
 
 // List where each Listener registers with the desired Worker
 // on which the call is made. Since the list traversal for an associated

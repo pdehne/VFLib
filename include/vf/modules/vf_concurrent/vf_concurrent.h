@@ -26,6 +26,7 @@ namespace vf
 
 #include "threads/vf_ReadWriteMutex.h"
 #include "threads/vf_ReadWriteMutexBase.h"
+#include "threads/vf_SharedObject.h"
 #include "threads/vf_SharedState.h"
 }
 

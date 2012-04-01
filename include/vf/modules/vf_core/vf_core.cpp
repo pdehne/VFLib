@@ -5,15 +5,16 @@
 
 #include "vf_core.h"
 
-// THIS IS A DEPENDENCY PROBLEM!
-namespace vf
-{
-#include "vf/modules/vf_concurrent/queue/vf_ThreadWorker.h"
-}
-
 #if JUCE_MSVC && _DEBUG
 #include <crtdbg.h>
 #endif
+
+// PROBLEM!
+namespace vf
+{
+// PROBLEM!
+#include "vf/modules/vf_concurrent/threads/vf_SharedObject.h"
+}
 
 namespace vf
 {
@@ -27,8 +28,6 @@ namespace vf
 #include "events/vf_PerformedAtExit.cpp"
 #include "math/vf_MurmurHash.cpp"
 #include "threads/vf_JuceThread.cpp"
-
-#include "threads/vf_SharedObject.cpp" // PROBLEM WITH DEPENDENCY ON vf_concurrent!!
 
 #if JUCE_WINDOWS
 #include "native/vf_win32_FPUFlags.cpp"

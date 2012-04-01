@@ -52,6 +52,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.cpp" />
     <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_CatchAny.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -94,10 +98,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_JuceThread.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -236,6 +236,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Worker.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutexBase.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedState.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_List.h" />
@@ -263,7 +264,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Thread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />

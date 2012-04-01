@@ -183,9 +183,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_JuceThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.cpp">
-      <Filter>VF Modules\vf_core\threads</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.cpp">
       <Filter>VF Modules\vf_core\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -408,9 +408,6 @@
       <Filter>VF Modules\vf_core\math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h">
-      <Filter>VF Modules\vf_core\threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SharedObject.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h">
@@ -568,6 +565,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h">
       <Filter>VF Modules\vf_core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,4 +17,5 @@ namespace vf
 #include "queue/vf_Worker.cpp"
 
 #include "threads/vf_ReadWriteMutex.cpp"
+#include "threads/vf_SharedObject.cpp"
 }

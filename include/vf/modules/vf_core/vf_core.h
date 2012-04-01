@@ -36,9 +36,7 @@ namespace vf
 #include "memory/vf_ReferenceCountedSingleton.h"
 #include "memory/vf_StaticObject.h"
 
-
 #include "threads/vf_Mutex.h"
-#include "threads/vf_SharedObject.h"
 #include "threads/vf_SpinDelay.h"
 #include "threads/vf_Thread.h"
 
