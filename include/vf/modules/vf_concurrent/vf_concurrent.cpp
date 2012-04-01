@@ -14,6 +14,7 @@ namespace vf
 #include "queue/vf_CallQueue.cpp"
 #include "queue/vf_GuiCallQueue.cpp"
 #include "queue/vf_Listeners.cpp"
+#include "queue/vf_ManualCallQueue.cpp"
 #include "queue/vf_ThreadWorker.cpp"
 
 #include "threads/vf_ReadWriteMutex.cpp"

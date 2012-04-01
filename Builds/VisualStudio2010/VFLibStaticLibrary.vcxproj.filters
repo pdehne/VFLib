@@ -270,6 +270,9 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\queue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
@@ -425,9 +428,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.h">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualWorker.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
@@ -564,6 +564,9 @@
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.h">
+      <Filter>VF Modules\vf_concurrent\queue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.h">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
   </ItemGroup>
