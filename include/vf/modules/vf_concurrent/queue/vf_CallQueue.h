@@ -46,7 +46,7 @@ public:
   class Call;
 
 private:
-  typedef LockFree::Queue <Call> Calls;
+  typedef LockFreeQueue <Call> Calls;
 
 public:
   class Call : public Calls::Node,

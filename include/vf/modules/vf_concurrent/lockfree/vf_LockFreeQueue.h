@@ -8,32 +8,41 @@
 #include "vf/modules/vf_core/threads/vf_SpinDelay.h"
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 
-namespace LockFree {
+struct LockFreeQueueDefaultTag { };
 
-//
-// Wait-free intrusive queue.
-//
-// Supports Multiple Producer, Single Consumer (MPSC):
-//
-// - Any thread may call push_back() at any time.
-//
-// - Only one thread may call pop_front() at a time.
-//
-// - Caller must synchronize access to pop_front() and try_pop_front().
-//
-// - The queue is considered signaled if there are one or more elements.
-//
-template <class Elem,
-  class Tag = detail::LockFree::List_default_tag>
-class Queue
+/***
+  Mostly wait-free MPSC (Multiple Producer, Single Consumer) intrusive FIFO.
+
+  Invariants:
+	#1 Any thread may call push_back() at any time (Multiple Producer).
+
+	#2 Only one thread may call try_pop_front() at a time (Single Consumer)
+
+	#3 The queue is signaled if there are one or more elements.
+*/
+template <class Element, class Tag = LockFreeQueueDefaultTag>
+class LockFreeQueue
 {
 public:
-  typedef typename List <Elem, Tag>::Node Node;
+  class Node : Uncopyable
+  {
+  public:
+    Node ()
+	{
+	}
 
-  Queue ()
+	explicit Node (Node* next) : m_next (next)
+	{
+	}
+
+    AtomicPointer <Node> m_next;
+  };
+
+public:
+  LockFreeQueue ()
     : m_head ((Node*)m_null)
     , m_tail ((Node*)m_null)
-    , m_null ((Node*)0)
+    , m_null (nullptr)
   {
   }
 
@@ -67,9 +76,9 @@ public:
   // Tries to pop an element until it succeeds, or the queue is empty.
   // Lock-free.
   //
-  Elem* pop_front ()
+  Element* pop_front ()
   {
-    Elem* elem;
+    Element* elem;
 
     // Crafted to sometimes avoid the Delay ctor.
     if (!try_pop_front (&elem))
@@ -88,7 +97,7 @@ public:
   // Returns true on success.
   // Wait-free.
   //
-  bool try_pop_front (Elem** pElem)
+  bool try_pop_front (Element** pElem)
   {
     Node* tail = m_tail;
     Node* next = tail->m_next.get ();
@@ -121,7 +130,7 @@ public:
     if (next)
     {
       m_tail = next;
-      *pElem = static_cast <Elem*> (tail);
+      *pElem = static_cast <Element*> (tail);
       return true;
     }
 
@@ -134,7 +143,7 @@ public:
       if (next)
       {
         m_tail = next;
-        *pElem = static_cast <Elem*> (tail);
+        *pElem = static_cast <Element*> (tail);
         return true;
       }
     }
@@ -158,7 +167,5 @@ private:
   CacheLine::Unpadded <Node*> m_tail;
   CacheLine::Unpadded <Node> m_null;
 };
-
-}
 
 #endif
