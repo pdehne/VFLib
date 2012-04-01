@@ -50,13 +50,69 @@ public:
 
 private:
   template <class ElemType, class NodeType>
-  class iterator_base
+  class iterator_base : public std::iterator <
+	std::bidirectional_iterator_tag, int>
+#if 0
     : public boost::iterator_facade <
       iterator_base <ElemType, NodeType>,
       ElemType,
       boost::bidirectional_traversal_tag
     >
+#endif
   {
+  public:
+#if 1
+    //typedef std::bidirectional_iterator_tag iterator_category;
+    //typedef boost::remove_const<Value>::type value_type;
+	typedef Value value_type;
+    typedef ElemType* pointer;
+	typedef ElemType& reference;
+	
+    //typedef Difference difference_type;
+
+    reference operator*() const
+	{
+	  return dereference ();
+	}
+
+    pointer operator->() const
+	{
+	  return &dereference ();
+	}
+
+    //operator[](difference_type n) const;
+
+	iterator_base& operator++()
+	{
+	  increment ();
+	  return *this;
+	}
+
+	iterator_base operator++(int)
+	{
+	  iterator_base result (*this);
+	  increment ();
+	  return result;
+	}
+
+	iterator_base& operator--()
+	{
+	  decrement ();
+	  return *this;
+	}
+
+    iterator_base operator--(int)
+	{
+	  iterator_base result (*this);
+	  decrement ();
+	  return result;
+	}
+
+    //iterator_base& operator+=(difference_type n);
+    //iterator_base& operator-=(difference_type n);
+    //iterator_base operator-(difference_type n) const;
+#endif
+
   private:
     explicit iterator_base (NodeType* node) : m_node (node)
     {

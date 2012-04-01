@@ -5,7 +5,6 @@
 #define __VF_BOOST_INCLUDES_VFHEADER__
 
 // REMOVE ASAP
-#include <boost/iterator/iterator_facade.hpp>
 #include <boost/thread/tss.hpp>
 #include <boost/foreach.hpp>
 
