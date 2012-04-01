@@ -33,47 +33,15 @@ public:
   typedef Function <void (void)> exit_t;
 
   explicit ThreadWorker (String name);
-};
 
-template <class ThreadType>
-class ThreadWorkerType : public ThreadWorker
-{
-public:
-  explicit ThreadWorkerType (String name)
-    : ThreadWorker (name)
-    , m_thread (name)
-    , m_calledStart (false)
-    , m_calledStop (false)
-    , m_shouldStop (false)
-  {
-  }
-
-  ~ThreadWorkerType ()
-  {
-    stop_and_wait ();
-  }
+  ~ThreadWorker ();
 
   //
   // Starts the worker.
   //
   void start (idle_t worker_idle = idle_t::None(),
               init_t worker_init = init_t::None(),
-              exit_t worker_exit = exit_t::None())
-  {
-    {
-      // TODO: Atomic for this
-      VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
-      // start() MUST be called.
-      vfassert (!m_calledStart);
-      m_calledStart = true;
-    }
-
-    m_init = worker_init;
-    m_idle = worker_idle;
-    m_exit = worker_exit;
-
-    m_thread.start (vf::bind (&ThreadWorkerType::run, this));
-  }
+              exit_t worker_exit = exit_t::None());
 
   //
   // Stop the thread and optionally wait until it exits.
@@ -86,37 +54,7 @@ public:
   // Any listeners registered on the worker need to be removed
   // before stop is called
   //
-  void stop (bool const wait)
-  {
-    // can't call stop(true) from within a thread function
-    vfassert (!wait || !m_thread.isTheCurrentThread ());
-
-    {
-      VF_NAMESPACE::Mutex::ScopedLockType lock (m_mutex);
-
-      // start() MUST be called.
-      vfassert (m_calledStart);
-
-      // TODO: Atomic for this
-      if (!m_calledStop)
-      {
-        m_calledStop = true;
-
-        {
-          Mutex::ScopedUnlockType unlock (m_mutex); // getting fancy
-
-          call (&ThreadWorkerType::do_stop, this);
-
-          // in theory something could slip in here
-
-          close ();
-        }
-      }
-    }
-
-    if (wait)
-      m_thread.join ();
-  }
+  void stop (bool const wait);
 
   // Sugar
   void stop_request () { stop (false); }
@@ -132,69 +70,29 @@ public:
   // If interruptionPoint returns true or throws, it must
   // not be called again before the thread has the opportunity to reset.
   //
-  const Thread::Interrupted interruptionPoint ()
-  {
-    return m_thread.interruptionPoint ();
-  }
+  const Thread::Interrupted interruptionPoint ();
 
   // Interrupts the idle function by queueing a call that does nothing.
-  void interrupt ()
-  {
-    call (Function <void (void)>::None ());
-  }
+  void interrupt ();
 
 private:
-  void reset ()
-  {
-  }
+  void reset ();
+  void signal ();
 
-  void signal ()
-  {
-    m_thread.interrupt ();
-  }
-
-  void do_stop ()
-  {
-    m_shouldStop = true;
-  }
-
-  void run ()
-  {
-    m_init ();
-
-    for (;;)
-    {
-      Worker::process ();
-
-      if (m_shouldStop)
-        break;
-
-      // idle_t::None() must return a non signaled Thread::Interrupted.
-      Thread::Interrupted interrupted = m_idle ();
-
-      if (!interrupted)
-        interrupted = interruptionPoint ();
-
-      if (!interrupted)
-        m_thread.wait ();
-    }
-
-    m_exit ();
-  }
+  void do_stop ();
+  void run ();
 
 private:
   bool m_calledStart;
   bool m_calledStop;
   bool m_shouldStop;
   Mutex m_mutex;
-  ThreadType m_thread;
+  JuceThread m_thread;
   idle_t m_idle;
   init_t m_init;
   exit_t m_exit;
 };
 
-//------------------------------------------------------------------------------
-
-typedef ThreadWorkerType <JuceThread> PollingWorker;
+typedef ThreadWorker PollingWorker;
 
 #endif

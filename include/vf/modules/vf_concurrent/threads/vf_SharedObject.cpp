@@ -65,7 +65,7 @@ public:
 private:
   AtomicCounter m_refs;
 
-  ThreadWorkerType <JuceThread> m_worker;
+  ThreadWorker m_worker;
 
   static Deleter* s_instance;
   static Static::Storage <LockType, Deleter> s_mutex;
