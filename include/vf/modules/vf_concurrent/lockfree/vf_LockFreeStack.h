@@ -6,19 +6,14 @@
 
 #include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
 
-namespace detail
-{
-
 struct LockFreeStackDefaultTag { };
-
-}
 
 /***
   Lock-free intrusive stack.
 
   The caller is responsible for preventing the "ABA" problem.
 */
-template <class Element, class Tag = detail::LockFreeStackDefaultTag>
+template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
 {
 public:
