@@ -97,14 +97,14 @@ bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
   return interrupted;
 }
 
-ThreadBase::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
+JuceThread::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
 {
   // Can only be called from the current thread
   vfassert (thread.isTheCurrentThread ());
 
   const bool interrupted = do_interruptionPoint ();
 
-  return ThreadBase::Interrupted (interrupted);
+  return JuceThread::Interrupted (interrupted);
 }
 
 bool JuceThread::PollingBased::do_interruptionPoint ()
@@ -185,7 +185,7 @@ void JuceThread::run ()
 
 namespace CurrentJuceThread {
 
-ThreadBase::Interrupted interruptionPoint ()
+JuceThread::Interrupted interruptionPoint ()
 {
   bool interrupted;
 
@@ -201,7 +201,7 @@ ThreadBase::Interrupted interruptionPoint ()
     vfassert (threadWrapper != 0);
 
     if (threadWrapper)
-      interrupted = threadWrapper->getThreadBase().interruptionPoint ();
+      interrupted = threadWrapper->getJuceThread().interruptionPoint ();
     else
       interrupted = false;
   }
@@ -210,7 +210,7 @@ ThreadBase::Interrupted interruptionPoint ()
     interrupted = false;
   }
 
-  return ThreadBase::Interrupted (interrupted);
+  return JuceThread::Interrupted (interrupted);
 }
 
 }

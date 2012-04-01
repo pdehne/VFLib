@@ -93,6 +93,4 @@ private:
   exit_t m_exit;
 };
 
-typedef ThreadWorker PollingWorker;
-
 #endif

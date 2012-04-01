@@ -8,7 +8,7 @@
 
 #include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
 
-class ThreadBase;
+class JuceThread;
 
 namespace detail
 {
@@ -20,24 +20,25 @@ namespace detail
 class JuceThreadWrapper : public VF_JUCE::Thread
 {
 public:
-  JuceThreadWrapper (String name, ThreadBase& threadBase)
+  JuceThreadWrapper (String name, JuceThread& juceThread)
     : VF_JUCE::Thread (name)
-    , m_threadBase (threadBase)
+    , m_juceThread (juceThread)
   {
   }
 
-  ThreadBase& getThreadBase () const
+  JuceThread& getJuceThread () const
   {
-    return m_threadBase;
+    return m_juceThread;
   }
 
 private:
-  ThreadBase& m_threadBase;
+  JuceThread& m_juceThread;
 };
 
 }
 
-class ThreadBase
+// InterruptibleThread
+class JuceThread : public detail::JuceThreadWrapper
 {
 public:
   // This is the flag used to indicate if an interruption
@@ -96,43 +97,6 @@ public:
     bool mutable m_checked;
   };
 
-public:
-  // Blocks until an interrupt occurs or the timeout expires.
-  // If milliseconds is less than 0, the wait is infinite.
-  // May only be called by the thread of execution.
-  // Returns true if the interrupt occurred, or false if
-  // the timeout expired.
-  //
-  virtual bool wait (int milliseconds = -1) = 0;
-
-  // Interrupts the thread.
-  //
-  virtual void interrupt () = 0;
-
-  // Called by the thread function, either throws
-  // an Interruption exception, or returns an Interrupted
-  // object indicating whether or not interruption is requested.
-  //
-  virtual Interrupted interruptionPoint () = 0;
-
-  // Returns true if the caller is this thread of execution.
-  // Only valid if the thread has been started.
-  //
-  virtual bool isTheCurrentThread () const = 0;
-
-  // Adjusts the priority, range is 0...10.
-  // Only available in some implementations.
-  //
-  virtual void setPriority (int priority) = 0;
-};
-
-//
-// Thread based on Juce
-//
-class JuceThread : public ThreadBase
-                 , private detail::JuceThreadWrapper
-{
-public:
   typedef VF_JUCE::Thread::ThreadID id;
 
 public:
@@ -168,16 +132,28 @@ public:
 
   void start (Function <void (void)> const& f);
 
+  // Blocks until an interrupt occurs or the timeout expires.
+  // If milliseconds is less than 0, the wait is infinite.
+  // May only be called by the thread of execution.
+  // Returns true if the interrupt occurred, or false if
+  // the timeout expired.
+  //
+
   bool wait (int milliseconds = -1)
   {
     return m_model.wait (milliseconds, *this);
   }
 
+  // Interrupts the thread.
+  //
   void interrupt ()
   {
     m_model.interrupt (*this);
   }
 
+  // Called by the thread function, returns an Interrupted
+  // object indicating whether or not interruption is requested.
+  //
   Interrupted interruptionPoint ()
   {
     return m_model.interruptionPoint (*this);
@@ -187,9 +163,14 @@ public:
 
   id getId () const;
 
-  // only valid if the thread is running
+  // Returns true if the caller is this thread of execution.
+  // Only valid if the thread has been started.
+  //
   bool isTheCurrentThread () const;
 
+  // Adjusts the priority, range is 0...10.
+  // Only available in some implementations.
+  //
   void setPriority (int priority);
 
 private:
@@ -209,7 +190,7 @@ namespace CurrentJuceThread {
 // Avoid this function because the implementation is slow.
 // Use JuceThread::interruptionPoint() instead.
 //
-extern ThreadBase::Interrupted interruptionPoint ();
+extern JuceThread::Interrupted interruptionPoint ();
 
 inline JuceThread::id getId ()
 {
