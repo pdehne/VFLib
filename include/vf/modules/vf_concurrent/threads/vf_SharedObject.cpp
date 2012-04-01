@@ -6,14 +6,14 @@ class SharedObject::Deleter : LeakChecked <Deleter>
 private:
   typedef VF_JUCE::SpinLock LockType;
 
-  Deleter () : m_worker ("Deleter")
+  Deleter () : m_queue ("Deleter")
   {
-	m_worker.start ();
+	m_queue.start ();
   }
 
   ~Deleter ()
   {
-    m_worker.stop_and_wait ();
+    m_queue.stop_and_wait ();
   }
 
 private:
@@ -27,15 +27,15 @@ public:
 
   CallQueue& getCallQueue ()
   {
-    return m_worker;
+    return m_queue;
   }
 
   void Delete (SharedObject* sharedObject)
   {
-    if (m_worker.isAssociatedWithCurrentThread ())
+    if (m_queue.isAssociatedWithCurrentThread ())
       delete sharedObject;
     else
-      m_worker.call (&Deleter::doDelete, sharedObject);
+      m_queue.call (&Deleter::doDelete, sharedObject);
   }
 
   static Deleter& getInstance ()
@@ -65,7 +65,7 @@ public:
 private:
   AtomicCounter m_refs;
 
-  ThreadWorker m_worker;
+  ThreadWorker m_queue;
 
   static Deleter* s_instance;
   static Static::Storage <LockType, Deleter> s_mutex;

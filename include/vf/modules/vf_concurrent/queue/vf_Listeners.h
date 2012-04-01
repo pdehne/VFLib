@@ -81,7 +81,7 @@ private:
                        void* const listener);
 
     bool empty        () const { return m_list.empty(); }
-    CallQueue& getCallQueue () const { return m_worker; }
+    CallQueue& getCallQueue () const { return m_queue; }
 
   private:
     void destroySharedObject() { delete this; }
@@ -90,7 +90,7 @@ private:
     struct Entry;
     typedef List <Entry> List;
 
-    CallQueue& m_worker;
+    CallQueue& m_queue;
     List m_list;
     void* m_listener;
     CacheLine::Aligned <ReadWriteMutex> m_mutex;
