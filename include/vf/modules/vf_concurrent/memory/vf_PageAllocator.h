@@ -43,7 +43,7 @@ private:
 
 private:
   struct Page;
-  typedef LockFree::Stack <Page> Pages;
+  typedef LockFreeStack <Page> Pages;
 
   struct Pool
   {
