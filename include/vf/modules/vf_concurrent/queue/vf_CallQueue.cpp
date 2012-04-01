@@ -52,11 +52,11 @@ void CallQueue::callp (Call* c)
   // calls process() concurrently.
   //
   if (isAssociatedWithCurrentThread () &&
-      m_in_process.trySet ())
+      m_isInProcess.trySet ())
   {
     do_process ();
 
-    m_in_process.clear ();
+    m_isInProcess.clear ();
   }
 }
 
@@ -67,14 +67,14 @@ bool CallQueue::process ()
   // Detect recursion into do_process(), and
   // break ties for concurrent calls atomically.
   //
-  if (m_in_process.trySet ())
+  if (m_isInProcess.trySet ())
   {
     // Remember this thread.
     m_id = CurrentThread::getId();
 
     did_something = do_process ();
 
-    m_in_process.clear ();
+    m_isInProcess.clear ();
   }
   else
   {

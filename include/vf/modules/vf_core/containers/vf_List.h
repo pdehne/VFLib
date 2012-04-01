@@ -16,7 +16,13 @@ struct List_default_tag
 
 //------------------------------------------------------------------------------
 
-// intrusive doubly linked list
+/***
+  Intrusive doubly linked list.
+
+  Elements must derive from one or more List<>::Node. "Tag" is used when an
+  element is derived from more than one Node, this allows it to exist in
+  multiple lists simultaneously.
+*/
 
 template <class Elem,
           class Tag = detail::List_default_tag>

@@ -83,7 +83,7 @@ public:
   bool isAssociatedWithCurrentThread () const;
 
   // used for diagnostics in Listener
-  bool isInProcess () const { return m_in_process.isSet(); }
+  bool isInProcess () const { return m_isInProcess.isSet(); }
 
   // Add the Call without executing immediately.
   void queuep (Call* call);
@@ -237,7 +237,7 @@ private:
   VF_JUCE::Thread::ThreadID m_id;
   Calls m_list;
   AtomicFlag m_closed;
-  AtomicFlag m_in_process;
+  AtomicFlag m_isInProcess;
   AllocatorType m_allocator;
 };
 
