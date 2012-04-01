@@ -4,43 +4,43 @@
 
 namespace db {
 
-statement::statement(session& s)
-  : m_imp(new detail::statement_imp(s))
+statement::statement (session& s)
+  : m_imp (new detail::statement_imp(s))
 {
 }
 
-statement::statement(detail::prepare_temp_type const& prep )
+statement::statement (detail::prepare_temp_type const& prep)
+  : m_imp (new detail::statement_imp(prep))
 {
-  m_imp.reset(new detail::statement_imp(prep));
 }
 
 statement::~statement()
 {
 }
 
-statement::statement(statement const& o)
-  : m_imp(o.m_imp)
+statement::statement (statement const& o)
+  : m_imp (o.m_imp)
 {
 }
 
-void statement::operator=(statement const& o)
+void statement::operator= (statement const& o)
 {
   m_imp = o.m_imp;
 }
 
-void statement::exchange(detail::into_type_ptr const& i)
+void statement::exchange (detail::into_type_ptr const& i)
 {
-  m_imp->exchange(i);
+  m_imp->exchange (i);
 }
 
-void statement::exchange(detail::use_type_ptr const& u)
+void statement::exchange (detail::use_type_ptr const& u)
 {
-  m_imp->exchange(u);
+  m_imp->exchange (u);
 }
 
 void statement::prepare(std::string const& query, bool bRepeatable)
 {
-  m_imp->prepare(query, bRepeatable);
+  m_imp->prepare (query, bRepeatable);
 }
 
 Error statement::execute ()

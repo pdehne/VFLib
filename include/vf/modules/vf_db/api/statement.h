@@ -39,8 +39,7 @@ private:
   void clean_up();
 
 private:
-  // STOP USING THIS!
-  boost::shared_ptr <detail::statement_imp> m_imp;
+  ReferenceCountedObjectPtr <detail::statement_imp> m_imp;
 };
 
 }

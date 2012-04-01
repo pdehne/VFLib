@@ -10,7 +10,9 @@ namespace db {
 namespace detail {
 
 // statement implementation
-class statement_imp : Uncopyable
+class statement_imp
+  : public ReferenceCountedObject
+  , Uncopyable
 {
 public:
   explicit statement_imp (session& s);
