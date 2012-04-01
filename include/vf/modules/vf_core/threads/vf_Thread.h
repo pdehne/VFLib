@@ -100,37 +100,12 @@ public:
   typedef VF_JUCE::Thread::ThreadID id;
 
 public:
-  class PollingBased
-  {
-  public:
-    PollingBased ();
-
-    void interrupt (JuceThread& thread);
-    bool wait (int milliseconds, JuceThread& thread);
-    Interrupted interruptionPoint (JuceThread& thread);
-
-  protected:
-    bool do_wait ();    // true if interrupted
-    bool do_timeout (); // true if interrupted
-    bool do_interruptionPoint ();
-
-  protected:
-    enum
-    {
-      stateRun,
-      stateInterrupt,
-      stateReturn,
-      stateWait
-    };
-
-    AtomicState m_state;
-  };
-
-public:
   explicit JuceThread (String name);
   ~JuceThread ();
 
   void start (Function <void (void)> const& f);
+
+  void join ();
 
   // Blocks until an interrupt occurs or the timeout expires.
   // If milliseconds is less than 0, the wait is infinite.
@@ -138,28 +113,16 @@ public:
   // Returns true if the interrupt occurred, or false if
   // the timeout expired.
   //
-
-  bool wait (int milliseconds = -1)
-  {
-    return m_model.wait (milliseconds, *this);
-  }
+  bool wait (int milliSeconds = -1);
 
   // Interrupts the thread.
   //
-  void interrupt ()
-  {
-    m_model.interrupt (*this);
-  }
+  void interrupt ();
 
   // Called by the thread function, returns an Interrupted
   // object indicating whether or not interruption is requested.
   //
-  Interrupted interruptionPoint ()
-  {
-    return m_model.interruptionPoint (*this);
-  }
-
-  void join ();
+  Interrupted interruptionPoint ();
 
   id getId () const;
 
@@ -180,7 +143,15 @@ private:
   VF_JUCE::WaitableEvent m_runEvent;
   id m_threadId;
 
-  PollingBased m_model;
+  enum
+  {
+    stateRun,
+    stateInterrupt,
+    stateReturn,
+    stateWait
+  };
+
+  AtomicState m_state;
 };
 
 //------------------------------------------------------------------------------

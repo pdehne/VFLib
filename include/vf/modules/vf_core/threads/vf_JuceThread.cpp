@@ -1,16 +1,39 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-JuceThread::PollingBased::PollingBased ()
-  : m_state (stateRun)
+JuceThread::JuceThread (String name)
+  : JuceThreadWrapper (name, *this)
+  , m_state (stateRun)
 {
 }
 
-// Attempt to transition into the wait state.
-// Returns true if we should interrupt instead.
-//
-bool JuceThread::PollingBased::do_wait ()
+JuceThread::~JuceThread ()
 {
+  m_runEvent.signal ();
+
+  join ();
+}
+
+void JuceThread::start (const Function <void (void)>& f)
+{
+  m_function = f;
+
+  VF_JUCE::Thread::startThread ();
+
+  // prevents data race with member variables
+  m_runEvent.signal ();
+}
+
+void JuceThread::join ()
+{
+  VF_JUCE::Thread::stopThread (-1);
+}
+
+bool JuceThread::wait (int milliSeconds)
+{
+  // Can only be called from the current thread
+  vfassert (isTheCurrentThread ());
+
   bool interrupted;
 
   for (;;)
@@ -35,30 +58,29 @@ bool JuceThread::PollingBased::do_wait ()
     }
   }
 
+  if (!interrupted)
+  {
+    interrupted = Thread::wait (milliSeconds);
+
+    if (!interrupted)
+	{
+	  if (m_state.tryChangeState (stateWait, stateRun))
+	  {
+		interrupted = false;
+	  }
+	  else
+	  {
+		vfassert (m_state == stateInterrupt);
+
+		interrupted = true;
+	  }
+	}
+  }
+
   return interrupted;
 }
 
-// Called when the event times out
-//
-bool JuceThread::PollingBased::do_timeout ()
-{
-  bool interrupted;
-
-  if (m_state.tryChangeState (stateWait, stateRun))
-  {
-    interrupted = false;
-  }
-  else
-  {
-    vfassert (m_state == stateInterrupt);
-
-    interrupted = true;
-  }
-
-  return interrupted;
-}
-
-void JuceThread::PollingBased::interrupt (JuceThread& thread)
+void JuceThread::interrupt ()
 {
   for (;;)
   {
@@ -73,42 +95,17 @@ void JuceThread::PollingBased::interrupt (JuceThread& thread)
     }
     else if (m_state.tryChangeState (stateWait, stateRun))
     {
-      thread.notify ();
+      VF_JUCE::Thread::notify ();
       break;
     }
   }
 }
 
-bool JuceThread::PollingBased::wait (int milliseconds, JuceThread& thread)
+JuceThread::Interrupted JuceThread::interruptionPoint ()
 {
   // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
+  vfassert (isTheCurrentThread ());
 
-  bool interrupted = do_wait ();
-
-  if (!interrupted)
-  {
-    interrupted = thread.Thread::wait (milliseconds);
-
-    if (!interrupted)
-      interrupted = do_timeout ();
-  }
-
-  return interrupted;
-}
-
-JuceThread::Interrupted JuceThread::PollingBased::interruptionPoint (JuceThread& thread)
-{
-  // Can only be called from the current thread
-  vfassert (thread.isTheCurrentThread ());
-
-  const bool interrupted = do_interruptionPoint ();
-
-  return JuceThread::Interrupted (interrupted);
-}
-
-bool JuceThread::PollingBased::do_interruptionPoint ()
-{
   if (m_state == stateWait)
   {
     // It is impossible for this function
@@ -126,35 +123,7 @@ bool JuceThread::PollingBased::do_interruptionPoint ()
   //bool const interrupted = m_state.tryChangeState (stateInterrupt, stateReturn);
   bool const interrupted = m_state.tryChangeState (stateInterrupt, stateRun);
 
-  return interrupted;
-}
-
-//------------------------------------------------------------------------------
-
-JuceThread::JuceThread (String name)
-  : JuceThreadWrapper (name, *this)
-{
-}
-
-JuceThread::~JuceThread ()
-{
-  m_runEvent.signal ();
-  join ();
-}
-
-void JuceThread::start (const Function <void (void)>& f)
-{
-  m_function = f;
-
-  VF_JUCE::Thread::startThread ();
-
-  // prevent data race with member variables
-  m_runEvent.signal ();
-}
-
-void JuceThread::join ()
-{
-  VF_JUCE::Thread::stopThread (-1);
+  return JuceThread::Interrupted (interrupted);
 }
 
 JuceThread::id JuceThread::getId () const
