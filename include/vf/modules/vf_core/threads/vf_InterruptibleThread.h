@@ -7,6 +7,13 @@
 #include "../diagnostic/vf_SafeBool.h"
 #include "../functor/vf_Function.h"
 
+/**
+  Encapsulates an interruptible thread.
+
+  The thread must periodically call interruptionPoint(), which returns
+  true the first time an interruption has occurred since the last call to
+  interruptionPoint().
+*/
 class InterruptibleThread : public VF_JUCE::Thread
 {
 public:
