@@ -32,7 +32,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiWorker.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -229,7 +229,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatorWithoutTls.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PageAllocator.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_StandardAllocator.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiWorker.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualWorker.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h" />

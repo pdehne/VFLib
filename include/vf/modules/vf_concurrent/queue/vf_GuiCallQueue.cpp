@@ -1,8 +1,12 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-namespace {
+namespace
+{
 
+// This tries to solve the problem where continual streams of work
+// cause some painting not to occur. This bug was fixed in JUCE.
+//
 void updateAllTopLevelWindows ()
 {
 #if JUCE_WINDOWS
@@ -29,30 +33,39 @@ void updateAllTopLevelWindows ()
 
 }
 
-GuiWorker::GuiWorker () : CallQueue ("JuceWorker")
+GuiCallQueue::GuiCallQueue () : CallQueue ("GuiCallQueue")
 {
+  // This object must be created from the Juce Message Thread.
+  //
   vfassert (VF_JUCE::MessageManager::getInstance()->isThisTheMessageThread());
 
-  // HACK! trick the CallQueue into getting the thread
-  // id so that calls become synchronous from the beginning.
-  associateWithCurrentThread ();
+  // Associate the CallQueue with the message thread right away.
+  //
+  process ();
 }
 
-void GuiWorker::signal ()
+void GuiCallQueue::close ()
+{
+  CallQueue::close ();
+}
+
+bool GuiCallQueue::process ()
+{
+  return CallQueue::process ();
+}
+
+void GuiCallQueue::signal ()
 {
   triggerAsyncUpdate ();
 }
 
-void GuiWorker::reset ()
+void GuiCallQueue::reset ()
 {
 }
 
-void GuiWorker::handleAsyncUpdate()
+void GuiCallQueue::handleAsyncUpdate()
 {
   process ();
 
-  // This tries to solve the problem where continual
-  // streams of work cause some painting not to occur.
-  // FIXED in the latest Juce tip
   //updateAllTopLevelWindows ();
 }

@@ -18,11 +18,11 @@ namespace vf
 #include "memory/vf_PageAllocator.h"
 #include "memory/vf_StandardAllocator.h"
 
-#include "queue/vf_GuiWorker.h"
+#include "queue/vf_CallQueue.h"
+#include "queue/vf_GuiCallQueue.h"
 #include "queue/vf_Listeners.h"
 #include "queue/vf_ManualWorker.h"
 #include "queue/vf_ThreadWorker.h"
-#include "queue/vf_CallQueue.h"
 
 #include "threads/vf_ReadWriteMutex.h"
 #include "threads/vf_ReadWriteMutexBase.h"

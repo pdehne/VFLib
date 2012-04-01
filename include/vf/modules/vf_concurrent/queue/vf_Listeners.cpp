@@ -283,7 +283,7 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
         // stack to guarantee that these calls will not execute immediately.
         // They will be handled by the tail recusion unrolling in the
         // thread queue.
-        vfassert (m_queue.in_process ());
+        vfassert (m_queue.isInProcess ());
 
         m_queue.callp (new (m_queue.getAllocator()) CallWork (c, m_listener));
 
@@ -318,7 +318,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
         {
           m_listener = entry->listener;
 
-          vfassert (m_queue.in_process ());
+          vfassert (m_queue.isInProcess ());
 
           m_queue.callp (new (m_queue.getAllocator()) CallWork (c, m_listener));
 

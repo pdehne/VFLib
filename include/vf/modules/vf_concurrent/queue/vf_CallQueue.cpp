@@ -44,7 +44,7 @@ void CallQueue::callp (Call* c)
   // recursed into do_process, then process the queue. This
   // makes calls from the process thread synchronous.
   //
-  // NOTE: The value of in_process is invalid/volatile unless
+  // NOTE: The value of isInProcess is invalid/volatile unless
   // this thread is the last process thread.
   //
   // NOTE: There is a small window of opportunity where we
@@ -58,13 +58,6 @@ void CallQueue::callp (Call* c)
 
     m_in_process.clear ();
   }
-}
-
-void CallQueue::associateWithCurrentThread ()
-{
-  vfassert (m_in_process.isClear ());
-
-  m_id = CurrentThread::getId();
 }
 
 bool CallQueue::process ()

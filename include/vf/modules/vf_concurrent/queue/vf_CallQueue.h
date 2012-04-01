@@ -83,10 +83,9 @@ public:
   bool isAssociatedWithCurrentThread () const;
 
   // used for diagnostics in Listener
-  bool in_process () const { return m_in_process.isSet(); }
+  bool isInProcess () const { return m_in_process.isSet(); }
 
   // Add the Call without executing immediately.
-  // Calls MUST NOT cause thread interruptions.
   void queuep (Call* call);
 
   // Add the Call, and process the queue if we're
@@ -205,9 +204,6 @@ public:
   { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 protected:
-  // Used by GuiWorker to synchronize calls
-  void associateWithCurrentThread ();
-
   // Derived class calls this when the queue is signaled,
   // or whenever it wants to. It is disallowed to call
   // process() from more than one thread simultaneously.
@@ -227,9 +223,8 @@ protected:
   //
   // Derived classes provide these functions to know when to call process().
   //
-  // Due to the lock-free implementation, and also because of the
-  // causing sychronous calls from the process thread, it is possible
-  // for the worker to become signaled and then see an empty queue.
+  // NOTE: Due to the implementation the queue can remain signaled for
+  // one cycle. This does not happen under load so it is not an issue.
   //
   virtual void reset () = 0;
   virtual void signal () = 0;
