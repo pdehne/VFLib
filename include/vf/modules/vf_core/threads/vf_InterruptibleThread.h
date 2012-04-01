@@ -4,41 +4,10 @@
 #ifndef VF_INTERRUPTIBLETHREAD_VFHEADER
 #define VF_INTERRUPTIBLETHREAD_VFHEADER
 
-#include "vf/modules/vf_core/functor/vf_Function.h"
+#include "../diagnostic/vf_SafeBool.h"
+#include "../functor/vf_Function.h"
 
-#include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
-
-class InterruptibleThread;
-
-namespace detail
-{
-
-// Stores a back pointer to our object so we can keep
-// the derivation from juce::Thread private and still use
-// dynamic_cast.
-//
-class JuceThreadWrapper : public VF_JUCE::Thread
-{
-public:
-  JuceThreadWrapper (String name, InterruptibleThread& juceThread)
-    : VF_JUCE::Thread (name)
-    , m_juceThread (juceThread)
-  {
-  }
-
-  InterruptibleThread& getJuceThread () const
-  {
-    return m_juceThread;
-  }
-
-private:
-  InterruptibleThread& m_juceThread;
-};
-
-}
-
-// InterruptibleThread
-class InterruptibleThread : public detail::JuceThreadWrapper
+class InterruptibleThread : public VF_JUCE::Thread
 {
 public:
   // This is the flag used to indicate if an interruption
@@ -174,19 +143,8 @@ inline void setPriority (int priority)
   VF_JUCE::Thread::setCurrentThreadPriority (priority);
 }
 
-inline void yield ()
-{
-  VF_JUCE::Thread::yield ();
 }
 
-inline void sleep (const int milliseconds)
-{
-  VF_JUCE::Thread::sleep (milliseconds);
-}
-
-}
-
-typedef InterruptibleThread Thread;
 namespace CurrentThread = CurrentJuceThread;
 
 #endif

@@ -22,20 +22,14 @@ private:
 
   void run ()
   {
-    try
+    for(;;)
     {
-      for(;;)
-      {
-        const bool interrupted = m_thread.wait (1000);
+      const bool interrupted = m_thread.wait (1000);
 
-        if (interrupted)
-          break;
+      if (interrupted)
+        break;
 
-        notify();
-      }
-    }
-    catch (Thread::Interrupted&)
-    {
+      notify();
     }
   }
 

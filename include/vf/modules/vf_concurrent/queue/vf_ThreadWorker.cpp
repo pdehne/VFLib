@@ -77,7 +77,7 @@ void ThreadWorker::stop (bool const wait)
 // If interruptionPoint returns true or throws, it must
 // not be called again before the thread has the opportunity to reset.
 //
-const Thread::Interrupted ThreadWorker::interruptionPoint ()
+const InterruptibleThread::Interrupted ThreadWorker::interruptionPoint ()
 {
   return m_thread.interruptionPoint ();
 }
@@ -114,7 +114,7 @@ void ThreadWorker::run ()
       break;
 
     // idle_t::None() must return a non signaled Thread::Interrupted.
-    Thread::Interrupted interrupted = m_idle ();
+    InterruptibleThread::Interrupted interrupted = m_idle ();
 
     if (!interrupted)
       interrupted = interruptionPoint ();

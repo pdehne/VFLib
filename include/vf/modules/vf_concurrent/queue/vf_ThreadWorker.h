@@ -22,7 +22,7 @@
 class ThreadWorker : public Worker
 {
 public:
-  typedef Function <const Thread::Interrupted (void)> idle_t;
+  typedef Function <const InterruptibleThread::Interrupted (void)> idle_t;
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
@@ -64,7 +64,7 @@ public:
   // If interruptionPoint returns true or throws, it must
   // not be called again before the thread has the opportunity to reset.
   //
-  const Thread::Interrupted interruptionPoint ();
+  const InterruptibleThread::Interrupted interruptionPoint ();
 
   // Interrupts the idle function by queueing a call that does nothing.
   void interrupt ();

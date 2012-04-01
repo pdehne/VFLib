@@ -2,7 +2,7 @@
 // See the file LICENSE.txt for licensing information.
 
 InterruptibleThread::InterruptibleThread (String name)
-  : JuceThreadWrapper (name, *this)
+  : Thread (name)
   , m_state (stateRun)
 {
 }
@@ -165,12 +165,12 @@ InterruptibleThread::Interrupted interruptionPoint ()
   
   if (thread)
   {
-    detail::JuceThreadWrapper* threadWrapper = dynamic_cast <detail::JuceThreadWrapper*> (thread);
+    InterruptibleThread* interruptibleThread = dynamic_cast <InterruptibleThread*> (thread);
 
-    vfassert (threadWrapper != 0);
+    vfassert (interruptibleThread != nullptr);
 
-    if (threadWrapper)
-      interrupted = threadWrapper->getJuceThread().interruptionPoint ();
+    if (interruptibleThread != nullptr)
+      interrupted = interruptibleThread->interruptionPoint ();
     else
       interrupted = false;
   }

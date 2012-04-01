@@ -404,9 +404,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_MurmurHash.h">
       <Filter>VF Modules\vf_core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h">
-      <Filter>VF Modules\vf_core\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>

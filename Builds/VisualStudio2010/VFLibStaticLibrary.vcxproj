@@ -263,7 +263,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_Uncopyable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_Mutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
