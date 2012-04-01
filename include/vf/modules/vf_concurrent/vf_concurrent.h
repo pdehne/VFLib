@@ -8,7 +8,6 @@
 
 namespace vf
 {
-#include "lockfree/vf_LockFreeList.h"
 #include "lockfree/vf_LockFreeQueue.h"
 #include "lockfree/vf_LockFreeStack.h"
 

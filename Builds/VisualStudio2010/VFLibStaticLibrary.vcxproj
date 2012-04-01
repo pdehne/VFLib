@@ -225,7 +225,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeList.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeQueue.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeStack.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h" />

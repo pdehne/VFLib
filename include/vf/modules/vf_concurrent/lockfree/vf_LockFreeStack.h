@@ -4,8 +4,6 @@
 #ifndef __VF_LOCKFREESTACK_VFHEADER__
 #define __VF_LOCKFREESTACK_VFHEADER__
 
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeList.h"
-
 struct LockFreeStackDefaultTag { };
 
 /***
