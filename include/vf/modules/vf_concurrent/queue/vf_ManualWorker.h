@@ -4,22 +4,22 @@
 #ifndef __VF_MANUALWORKER_VFHEADER__
 #define __VF_MANUALWORKER_VFHEADER__
 
-#include "vf/modules/vf_concurrent/queue/vf_Worker.h"
+#include "vf_CallQueue.h"
 
 //
-// A Worker that requires periodic manual calls to process.
+// A CallQueue that requires periodic manual calls to process.
 //
 
-class ManualWorker : public Worker
+class ManualWorker : public CallQueue
 {
 public:
   explicit ManualWorker (const char* szName = "")
-    : Worker (szName)
+    : CallQueue (szName)
   {
   }
 
-  void close ()   { Worker::close (); }
-  bool process () { return Worker::process (); }
+  void close ()   { CallQueue::close (); }
+  bool process () { return CallQueue::process (); }
 
 private:
   void signal ()  { }

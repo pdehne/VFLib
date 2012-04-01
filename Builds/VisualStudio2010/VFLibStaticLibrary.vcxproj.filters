@@ -195,9 +195,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.cpp">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Worker.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_Allocator.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,9 +434,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h">
       <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Worker.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
@@ -565,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h">
       <Filter>VF Modules\vf_core\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.h">
+      <Filter>VF Modules\vf_concurrent\queue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

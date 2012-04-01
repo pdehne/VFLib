@@ -2,7 +2,7 @@
 // See the file LICENSE.txt for licensing information.
 
 ThreadWorker::ThreadWorker (String name)
-  : Worker (name)
+  : CallQueue (name)
   , m_thread (name)
   , m_calledStart (false)
   , m_calledStop (false)
@@ -108,7 +108,7 @@ void ThreadWorker::run ()
 
   for (;;)
   {
-    Worker::process ();
+    CallQueue::process ();
 
     if (m_shouldStop)
       break;

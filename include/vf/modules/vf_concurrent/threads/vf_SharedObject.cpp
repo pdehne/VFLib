@@ -25,7 +25,7 @@ private:
 public:
   typedef ReferenceCountedObjectPtr <Deleter> Ptr;
 
-  Worker& getWorker ()
+  CallQueue& getCallQueue ()
   {
     return m_worker;
   }

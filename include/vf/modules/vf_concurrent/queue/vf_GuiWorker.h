@@ -4,20 +4,20 @@
 #ifndef __VF_GUIWORKER_VFHEADER__
 #define __VF_GUIWORKER_VFHEADER__
 
-#include "vf/modules/vf_concurrent/queue/vf_Worker.h"
+#include "vf_CallQueue.h"
 
 //
 // A thread queue processed by a the Juce Message thread (gui thread)
 //
 
-class GuiWorker : public Worker,
+class GuiWorker : public CallQueue,
                   private VF_JUCE::AsyncUpdater
 {
 public:
   GuiWorker ();
 
-  void close () { Worker::close (); }
-  bool process () { return Worker::process (); }
+  void close () { CallQueue::close (); }
+  bool process () { return CallQueue::process (); }
 
 private:
   void signal ();

@@ -1,12 +1,12 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-Worker::Worker (String name)
+CallQueue::CallQueue (String name)
 : m_name (name)
 {
 }
 
-Worker::~Worker ()
+CallQueue::~CallQueue ()
 {
   // Someone forget to close the queue.
   vfassert (m_closed.isSet ());
@@ -15,13 +15,13 @@ Worker::~Worker ()
   vfassert (m_list.empty ());
 }
 
-bool Worker::isAssociatedWithCurrentThread () const
+bool CallQueue::isAssociatedWithCurrentThread () const
 {
   return CurrentThread::getId() == m_id;
 }
 
 // Adds a call to the queue of execution.
-void Worker::queuep (Call* c)
+void CallQueue::queuep (Call* c)
 {
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
@@ -36,7 +36,7 @@ void Worker::queuep (Call* c)
 // thread as the last thread that called process(), then the call
 // will execute synchronously.
 //
-void Worker::callp (Call* c)
+void CallQueue::callp (Call* c)
 {
   queuep (c);
 
@@ -60,14 +60,14 @@ void Worker::callp (Call* c)
   }
 }
 
-void Worker::associateWithCurrentThread ()
+void CallQueue::associateWithCurrentThread ()
 {
   vfassert (m_in_process.isClear ());
 
   m_id = CurrentThread::getId();
 }
 
-bool Worker::process ()
+bool CallQueue::process ()
 {
   bool did_something;
 
@@ -92,7 +92,7 @@ bool Worker::process ()
 }
 
 // Can still have pending calls, just can't put new ones in.
-void Worker::close ()
+void CallQueue::close ()
 {
   m_closed.set ();
 }
@@ -103,7 +103,7 @@ void Worker::close ()
 //
 // Returns true if any functors were called.
 //
-bool Worker::do_process ()
+bool CallQueue::do_process ()
 {
   bool did_something;
 
@@ -119,8 +119,8 @@ bool Worker::do_process ()
   {
     did_something = true;
 
-    // This method of processing one at a time has the side
-    // effect of synchronizing calls to us from a functor.
+    // This method of processing one at a time has the desired
+	// side effect of synchronizing nested calls to us from a functor.
     //
     for (;;)
     {

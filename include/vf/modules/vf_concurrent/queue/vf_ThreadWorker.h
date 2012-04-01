@@ -4,10 +4,10 @@
 #ifndef __VF_THREADWORKER_VFHEADER__
 #define __VF_THREADWORKER_VFHEADER__
 
-#include "vf/modules/vf_concurrent/queue/vf_Worker.h"
+#include "vf_CallQueue.h"
 
 //
-// Worker that comes with its own thread of execution used
+// CallQueue that comes with its own thread of execution used
 // to process calls. When there are no calls to process,
 // an idle function will run. The idle function must either
 // return quickly, or periodically return the result of the
@@ -19,7 +19,7 @@
 // supply template arguments when they want to use a type,
 // for example, idle_t::None()
 //
-class ThreadWorker : public Worker
+class ThreadWorker : public CallQueue
 {
 public:
   typedef Function <const InterruptibleThread::Interrupted (void)> idle_t;
@@ -42,7 +42,7 @@ public:
   // It is safe to call this function at any time and as many times as desired.
   // It is an error to call stop(true) from inside any of the worker functions.
   //
-  // During a call to stop() the Worker is closed, and attempts to
+  // During a call to stop() the CallQueue is closed, and attempts to
   // queue new calls will throw a runtime exception.
   //
   // Any listeners registered on the worker need to be removed

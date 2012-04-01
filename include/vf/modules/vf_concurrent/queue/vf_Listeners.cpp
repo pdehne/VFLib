@@ -8,10 +8,10 @@ void ListenersBase::Call::destroySharedObject ()
 
 //------------------------------------------------------------------------------
 
-// Worker item to process a Call for a particular listener.
+// CallQueue item to process a Call for a particular listener.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::CallWork : public Worker::Call
+class ListenersBase::CallWork : public CallQueue::Call
 {
 public:
   inline CallWork (ListenersBase::Call* const c, void* const listener)
@@ -31,10 +31,10 @@ private:
 
 //------------------------------------------------------------------------------
 
-// Worker item to process a Call for a group.
+// CallQueue item to process a Call for a group.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::GroupWork : public Worker::Call
+class ListenersBase::GroupWork : public CallQueue::Call
 {
 public:
   inline GroupWork (Group* group,
@@ -59,10 +59,10 @@ private:
 
 //------------------------------------------------------------------------------
 
-// Worker item to process a call for a particular listener.
+// CallQueue item to process a call for a particular listener.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::GroupWork1 : public Worker::Call
+class ListenersBase::GroupWork1 : public CallQueue::Call
 {
 public:
   inline GroupWork1 (Group* group,
@@ -140,15 +140,15 @@ struct ListenersBase::Group::Entry : List::Node,
 //
 // Group
 //
-// - A list of listeners associated with the same Worker.
+// - A list of listeners associated with the same CallQueue.
 //
-// - The list is only iterated on the Worker's thread.
+// - The list is only iterated on the CallQueue's thread.
 //
 // - It is safe to add or remove listeners from the group
 //   at any time.
 //
 
-ListenersBase::Group::Group (Worker& worker)
+ListenersBase::Group::Group (CallQueue& worker)
   : m_worker (worker)
   , m_listener (0)
 {
@@ -251,8 +251,8 @@ void ListenersBase::Group::queue1 (Call* const c,
 
 // Queues a reference to the Call on the thread queue of each listener
 // that is currently in our list. The thread queue must be in the
-// stack's call chain, either directly from Worker::process(),
-// or from Proxy::do_call() called from Worker::process().
+// stack's call chain, either directly from CallQueue::process(),
+// or from Proxy::do_call() called from CallQueue::process().
 //
 void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
 {
@@ -339,10 +339,10 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 //
 //------------------------------------------------------------------------------
 
-// Worker item for processing a an Entry for a Proxy.
+// CallQueue item for processing a an Entry for a Proxy.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::Proxy::Work : public Worker::Call
+class ListenersBase::Proxy::Work : public CallQueue::Call
 {
 public:
   inline Work (Proxy* proxy,
@@ -372,7 +372,7 @@ private:
   const timestamp_t m_timestamp;
 };
 
-// Holds a Call, and gets put in the Worker in place of the Call.
+// Holds a Call, and gets put in the CallQueue in place of the Call.
 // The Call may be replaced if it hasn't been processed yet.
 // A Proxy exists for the lifetime of the Listeners.
 //
@@ -460,7 +460,7 @@ void ListenersBase::Proxy::update (Call* const c, const timestamp_t timestamp)
     // If no old call then they need to be queued
     if (!old)
     {
-      Worker& worker = entry->group->getWorker();
+      CallQueue& worker = entry->group->getCallQueue();
       worker.callp (new (worker.getAllocator ()) Work (this, entry, timestamp));
     }
     else
@@ -505,7 +505,7 @@ ListenersBase::~ListenersBase ()
     delete &(*iter++);
 }
 
-void ListenersBase::add_void (void* const listener, Worker& worker)
+void ListenersBase::add_void (void* const listener, CallQueue& worker)
 {
   ScopedWriteLock lock (m_groups_mutex);
 
@@ -529,7 +529,7 @@ void ListenersBase::add_void (void* const listener, Worker& worker)
   for (Groups::iterator iter = m_groups.begin(); iter != m_groups.end();)
   {
     Group::Ptr cur = &(*iter++);
-    if (&cur->getWorker() == &worker)
+    if (&cur->getCallQueue() == &worker)
     {
       group = cur;
       break;

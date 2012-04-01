@@ -8,25 +8,37 @@
 #include "../memory/vf_Allocator.h"
 #include "../lockfree/vf_LockFreeQueue.h"
 
-// Queue that executes functors on another thread, with these invariants:
-//
-// #1 Functors can be appended to queues from any thread, using call().
-//
-// #2 Functors execute and get destroyed during process().
-//
-// #3 Functors queued by the same thread always execute in order.
-//
-// #4 Functors queued from the thread that last called process() will
-//    execute immediately before call() returns. This will cause pending
-//    functors to execute first, to preserve the order of calls. 
-//
-// #5 It is an error to queue a functor into a closed queue.
-//
-// Derived classes are responsible for implementing signal() and reset()
-// in order to guarantee that the queue's process() function is eventually
-// called.
-//
-class Worker
+/**
+  Provides a functor FIFO, with these invariants:
+
+	#1 Functors are added to any open queue from any thread,
+	   using call() and/or queue()
+
+	#2 When process() is called the functors are executed and disposed.
+
+	#3 Functors queued by the same thread always execute in the
+	   order they were queued.
+
+	#4 When call() is used and the calling thread is the same one
+	   used in the last call to process(), the call is added and the
+	   queue is immediately processed. This behavior can be avoided by
+	   using queue() instead of call().
+
+	#5 Once queued, a functor must eventually execute. A functor is
+	   never lost or unprocessed. It is an error if the CallQueue
+	   is deleted while there are pending calls.
+
+	#6 Adding a call to a closed queue throws an exception.
+
+	#7 The overridable functions signal() and reset() are called
+	   when the queue transitions from empty to non-empty, and
+	   vice versa.
+
+  For performance considerations, this implementation is wait-free
+  for producers and mostly wait-free for consumers. It also uses a lock-free
+  and wait-free (in the fast path) custom memory allocator.
+*/
+class CallQueue
 {
 public:
   typedef Allocator AllocatorType;
@@ -58,8 +70,8 @@ public:
   };
 
 public:
-  explicit Worker (String name);
-  ~Worker ();
+  explicit CallQueue (String name);
+  ~CallQueue ();
 
   inline AllocatorType& getAllocator ()
   {
@@ -203,7 +215,7 @@ protected:
   bool process ();
 
   // This function should be called as early as possible.
-  // Closing the Worker is done for diagnostics, it allows
+  // Closing the CallQueue is done for diagnostics, it allows
   // detection of when new calls are being made when they
   // shouldn't be.
   //

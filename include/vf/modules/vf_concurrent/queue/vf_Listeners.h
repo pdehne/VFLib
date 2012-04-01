@@ -7,11 +7,11 @@
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_Allocator.h"
 #include "../threads/vf_ReadWriteMutex.h"
-#include "../queue/vf_Worker.h"
+#include "../queue/vf_CallQueue.h"
 
-// List where each Listener registers with the desired Worker
+// List where each Listener registers with the desired CallQueue
 // on which the call is made. Since the list traversal for an associated
-// Worker is done on its thread, it is impossible for a Listener to
+// CallQueue is done on its thread, it is impossible for a Listener to
 // get deleted while a callback is pending.
 
 //
@@ -55,7 +55,7 @@ private:
   class GroupWork;
   class GroupWork1;
 
-  // Maintains a list of listeners registered on the same Worker
+  // Maintains a list of listeners registered on the same CallQueue
   //
   class Group : public Groups::Node,
                 public ReferenceCountedObject,
@@ -64,7 +64,7 @@ private:
   public:
     typedef ReferenceCountedObjectPtr <Group> Ptr;
 
-    explicit Group    (Worker& worker);
+    explicit Group    (CallQueue& worker);
     ~Group            ();
     void add          (void* listener, const timestamp_t timestamp,
                        AllocatorType& allocator);
@@ -81,7 +81,7 @@ private:
                        void* const listener);
 
     bool empty        () const { return m_list.empty(); }
-    Worker& getWorker () const { return m_worker; }
+    CallQueue& getCallQueue () const { return m_worker; }
 
   private:
     void destroySharedObject() { delete this; }
@@ -90,7 +90,7 @@ private:
     struct Entry;
     typedef List <Entry> List;
 
-    Worker& m_worker;
+    CallQueue& m_worker;
     List m_list;
     void* m_listener;
     CacheLine::Aligned <ReadWriteMutex> m_mutex;
@@ -141,7 +141,7 @@ public:
   void queuep       (Call::Ptr c);
 
 protected:
-  void add_void     (void* const listener, Worker& worker);
+  void add_void     (void* const listener, CallQueue& worker);
   void remove_void  (void* const listener);
   void call1p_void  (void* const listener, Call* c);
   void queue1p_void (void* const listener, Call* c);
@@ -194,11 +194,11 @@ public:
   //  #4 The listener must not already exist in the list.
   //  #5 This can be called from any thread.
   // 
-  void add (ListenerClass* const listener, Worker& worker)
+  void add (ListenerClass* const listener, CallQueue& worker)
   {
     add_void (listener, worker);
   }
-  void add (ListenerClass* const listener, Worker* worker)
+  void add (ListenerClass* const listener, CallQueue* worker)
   {
     add (listener, *worker);
   }
@@ -213,7 +213,7 @@ public:
   //  #4 This can be called from any thread.
   //
   // A listener should always be removed before it's corresponding
-  //   Worker is closed.
+  //   CallQueue is closed.
   //
   void remove (ListenerClass* const listener)
   {
@@ -222,7 +222,7 @@ public:
 
   //
   // Call a specified member function on every listener's associated
-  // Worker with the given functor.
+  // CallQueue with the given functor.
   //
   //  #1 The arguments must match the function signature.
   //  #2 A listener that removes itself afterwards may not get called.

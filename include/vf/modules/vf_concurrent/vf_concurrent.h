@@ -22,7 +22,7 @@ namespace vf
 #include "queue/vf_Listeners.h"
 #include "queue/vf_ManualWorker.h"
 #include "queue/vf_ThreadWorker.h"
-#include "queue/vf_Worker.h"
+#include "queue/vf_CallQueue.h"
 
 #include "threads/vf_ReadWriteMutex.h"
 #include "threads/vf_ReadWriteMutexBase.h"
