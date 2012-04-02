@@ -4,7 +4,12 @@
 #ifndef __VF_BOOST_INCLUDES_VFHEADER__
 #define __VF_BOOST_INCLUDES_VFHEADER__
 
-// REMOVE ASAP
+#ifndef VF_USING_BOOST
+#define VF_USING_BOOST 1
+#endif
+
+#if VF_USING_BOOST
 #include <boost/thread/tss.hpp>
+#endif
 
 #endif

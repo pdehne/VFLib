@@ -1,22 +1,24 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_PAGEALLOCATOR_VFHEADER__
-#define __VF_PAGEALLOCATOR_VFHEADER__
+#ifndef VF_PAGEDFREESTORE_VFHEADER
+#define VF_PAGEDFREESTORE_VFHEADER
 
-#include "vf/modules/vf_concurrent/lockfree/vf_LockFreeStack.h"
+#include "../lockfree/vf_LockFreeStack.h"
 
-//
-// Wait-free allocator for fixed size pages with these properties:
-//
-// - Deallocated pages are re-used, after a delay to prevent ABA
-//
+/****
+  Lock-free memory allocator for fixed size pages.
 
-class PageAllocator : private OncePerSecond
+  The ABA problem (http://en.wikipedia.org/wiki/ABA_problem) is
+  avoided by treating freed pages as garbage, and performing a
+  collection every second.
+
+*/
+class PagedFreeStore : private OncePerSecond
 {
 public:
-  explicit PageAllocator (const size_t pageBytes);
-  ~PageAllocator ();
+  explicit PagedFreeStore (const size_t pageBytes);
+  ~PagedFreeStore ();
 
   // The available bytes per page is a little bit less
   // than requested in the constructor, due to overhead.
@@ -71,42 +73,6 @@ private:
   AtomicCounter m_total;
   AtomicCounter m_used;
 #endif
-};
-
-//------------------------------------------------------------------------------
-
-class GlobalPageAllocator
-  : public ReferenceCountedSingleton <GlobalPageAllocator>
-  , LeakChecked <GlobalPageAllocator>
-{
-private:
-  GlobalPageAllocator ();
-  ~GlobalPageAllocator ();
-
-public:
-  inline size_t getPageBytes ()
-  {
-    return m_allocator.getPageBytes ();
-  }
-
-  inline void* allocate ()
-  {
-    return m_allocator.allocate ();
-  }
-
-  static inline void deallocate (void* const p)
-  {
-    PageAllocator::deallocate (p);
-  }
-
-private:
-  // WTF?
-  friend class ReferenceCountedSingleton <GlobalPageAllocator>;
-
-  static GlobalPageAllocator* createInstance ();
-
-private:
-  PageAllocator m_allocator;
 };
 
 #endif

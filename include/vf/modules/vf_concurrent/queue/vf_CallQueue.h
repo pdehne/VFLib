@@ -1,11 +1,11 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_WORKER_VFHEADER__
-#define __VF_WORKER_VFHEADER__
+#ifndef VF_CALLQUEUE_VFHEADER
+#define VF_CALLQUEUE_VFHEADER
 
 #include "../memory/vf_AllocatedBy.h"
-#include "../memory/vf_Allocator.h"
+#include "../memory/vf_FifoFreeStore.h"
 #include "../lockfree/vf_LockFreeQueue.h"
 
 /**
@@ -41,7 +41,7 @@
 class CallQueue
 {
 public:
-  typedef Allocator AllocatorType;
+  typedef FifoFreeStore AllocatorType;
 
   class Call;
 

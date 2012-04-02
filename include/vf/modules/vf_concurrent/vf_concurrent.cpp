@@ -7,9 +7,10 @@
 
 namespace vf
 {
-#include "memory/vf_Allocator.cpp"
-#include "memory/vf_AllocatorWithoutTls.cpp"
-#include "memory/vf_PageAllocator.cpp"
+#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
+#include "memory/vf_FifoFreeStoreWithTLS.cpp"
+#include "memory/vf_GlobalPagedFreeStore.cpp"
+#include "memory/vf_PagedFreeStore.cpp"
 
 #include "queue/vf_CallQueue.cpp"
 #include "queue/vf_GuiCallQueue.cpp"

@@ -12,9 +12,11 @@ namespace vf
 #include "lockfree/vf_LockFreeStack.h"
 
 #include "memory/vf_AllocatedBy.h"
-#include "memory/vf_Allocator.h"
-#include "memory/vf_AllocatorWithoutTls.h"
-#include "memory/vf_PageAllocator.h"
+#include "memory/vf_FifoFreeStore.h"
+#include "memory/vf_FifoFreeStoreWithoutTLS.h"
+#include "memory/vf_FifoFreeStoreWithTLS.h"
+#include "memory/vf_GlobalPagedFreeStore.h"
+#include "memory/vf_PagedFreeStore.h"
 #include "memory/vf_StandardAllocator.h"
 
 #include "queue/vf_CallQueue.h"

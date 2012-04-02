@@ -5,10 +5,6 @@
 
 namespace {
 
-// This is the size of a page for GlobalPageAllocator.
-//
-static const size_t globalPageBytes = 8 * 1024;
-
 // This is the upper limit on the amount of physical memory an instance of the
 // allocator will allow. Going over this limit means that consumers cannot keep
 // up with producers, and application logic should be re-examined.
@@ -36,29 +32,29 @@ Implementation notes
 */
 //------------------------------------------------------------------------------
 
-struct PageAllocator::Page : Pages::Node, LeakChecked <Page>
+struct PagedFreeStore::Page : Pages::Node, LeakChecked <Page>
 {
-  explicit Page (PageAllocator* const allocator)
+  explicit Page (PagedFreeStore* const allocator)
     : m_allocator (*allocator)
   {
   }
 
-  PageAllocator& getAllocator () const
+  PagedFreeStore& getAllocator () const
   {
     return m_allocator;
   }
 
 private:
-  PageAllocator& m_allocator;
+  PagedFreeStore& m_allocator;
 };
 
-inline void* PageAllocator::fromPage (Page* const p)
+inline void* PagedFreeStore::fromPage (Page* const p)
 {
   return reinterpret_cast <char*> (p) +
     Memory::sizeAdjustedForAlignment (sizeof (Page));
 }
 
-inline PageAllocator::Page* PageAllocator::toPage (void* const p)
+inline PagedFreeStore::Page* PagedFreeStore::toPage (void* const p)
 {
   return reinterpret_cast <Page*> (
     (reinterpret_cast <char *> (p) -
@@ -67,7 +63,7 @@ inline PageAllocator::Page* PageAllocator::toPage (void* const p)
 
 //------------------------------------------------------------------------------
 
-PageAllocator::PageAllocator (const size_t pageBytes)
+PagedFreeStore::PagedFreeStore (const size_t pageBytes)
   : m_pageBytes (pageBytes)
   , m_pageBytesAvailable (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
   , m_newPagesLeft ((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes)
@@ -81,7 +77,7 @@ PageAllocator::PageAllocator (const size_t pageBytes)
   startOncePerSecond ();
 }
 
-PageAllocator::~PageAllocator ()
+PagedFreeStore::~PagedFreeStore ()
 {
   endOncePerSecond ();
 
@@ -99,7 +95,7 @@ PageAllocator::~PageAllocator ()
 
 //------------------------------------------------------------------------------
 
-void* PageAllocator::allocate ()
+void* PagedFreeStore::allocate ()
 {
   Page* page = m_hot->fresh->pop_front ();
 
@@ -129,10 +125,10 @@ void* PageAllocator::allocate ()
   return fromPage (page);
 }
 
-void PageAllocator::deallocate (void* const p)
+void PagedFreeStore::deallocate (void* const p)
 {
   Page* const page = toPage (p);
-  PageAllocator& allocator = page->getAllocator ();
+  PagedFreeStore& allocator = page->getAllocator ();
 
   allocator.m_hot->garbage->push_front (page);
 
@@ -144,7 +140,7 @@ void PageAllocator::deallocate (void* const p)
 //
 // Perform garbage collection.
 //
-void PageAllocator::doOncePerSecond ()
+void PagedFreeStore::doOncePerSecond ()
 {
   // Physically free one page.
   // This will reduce the working set over time after a spike.
@@ -178,7 +174,7 @@ void PageAllocator::doOncePerSecond ()
 #endif
 }
 
-void PageAllocator::dispose (Pages& pages)
+void PagedFreeStore::dispose (Pages& pages)
 {
   for (;;)
   {
@@ -200,25 +196,8 @@ void PageAllocator::dispose (Pages& pages)
   }
 }
 
-void PageAllocator::dispose (Pool& pool)
+void PagedFreeStore::dispose (Pool& pool)
 {
   dispose (pool.fresh);
   dispose (pool.garbage);
-}
-
-//------------------------------------------------------------------------------
-
-GlobalPageAllocator::GlobalPageAllocator ()
-  : ReferenceCountedSingleton <GlobalPageAllocator> (SingletonLifetime::persistAfterCreation)
-  , m_allocator (globalPageBytes)
-{
-}
-
-GlobalPageAllocator::~GlobalPageAllocator ()
-{
-}
-
-GlobalPageAllocator* GlobalPageAllocator::createInstance ()
-{
-  return new GlobalPageAllocator;
 }

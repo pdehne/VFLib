@@ -5,7 +5,7 @@
 #define __VF_LISTENERS_VFHEADER__
 
 #include "../memory/vf_AllocatedBy.h"
-#include "../memory/vf_Allocator.h"
+#include "../memory/vf_FifoFreeStore.h"
 #include "../threads/vf_ReadWriteMutex.h"
 #include "../queue/vf_CallQueue.h"
 

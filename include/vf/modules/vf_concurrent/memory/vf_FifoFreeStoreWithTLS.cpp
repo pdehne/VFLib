@@ -11,21 +11,21 @@
 //
 // - Page memory is deallocated when it is not active and no longer referenced.
 //
-// - Each instance of Allocator maintains its own set of per-thread active pages,
+// - Each instance of FifoFreeStoreWithTLS maintains its own set of per-thread active pages,
 //   but uses a global PageAllocator. This reduces memory consumption without
 //   affecting performance.
 //
 
 // This precedes every allocation
 //
-struct Allocator::Header
+struct FifoFreeStoreWithTLS::Header
 {
-  Allocator::Page* page;
+  FifoFreeStoreWithTLS::Page* page;
 };
 
 //------------------------------------------------------------------------------
 
-class Allocator::Page : LeakChecked <Page>, Uncopyable
+class FifoFreeStoreWithTLS::Page : LeakChecked <Page>, Uncopyable
 {
 public:
   explicit Page (const size_t bytes) : m_refs (1)
@@ -76,10 +76,10 @@ private:
 
 //------------------------------------------------------------------------------
 
-class Allocator::PerThreadData : LeakChecked <PerThreadData>, Uncopyable
+class FifoFreeStoreWithTLS::PerThreadData : LeakChecked <PerThreadData>, Uncopyable
 {
 public:
-  explicit PerThreadData (Allocator* allocator)
+  explicit PerThreadData (FifoFreeStoreWithTLS* allocator)
     : m_allocator (*allocator)
     , m_active (m_allocator.newPage ())
   {
@@ -119,31 +119,31 @@ public:
   }
 
 private:
-  Allocator& m_allocator;
+  FifoFreeStoreWithTLS& m_allocator;
   Page* m_active;
 };
 
 //------------------------------------------------------------------------------
 
-inline Allocator::Page* Allocator::newPage ()
+inline FifoFreeStoreWithTLS::Page* FifoFreeStoreWithTLS::newPage ()
 {
   return new (m_pages->allocate ()) Page (m_pages->getPageBytes());
 }
 
-inline void Allocator::deletePage (Page* page)
+inline void FifoFreeStoreWithTLS::deletePage (Page* page)
 {
   // Safe, because each thread maintains its own active page.
   page->~Page ();
-  PageAllocator::deallocate (page);
+  PagedFreeStoreType::deallocate (page);
 }
 
-Allocator::Allocator ()
-  : m_pages (GlobalPageAllocator::getInstance ())
+FifoFreeStoreWithTLS::FifoFreeStoreWithTLS ()
+  : m_pages (PagedFreeStoreType::getInstance ())
 {
   //vfassert (m_pages->getPageBytes () >= sizeof (Page) + Memory::allocAlignBytes);
 }
 
-Allocator::~Allocator ()
+FifoFreeStoreWithTLS::~FifoFreeStoreWithTLS ()
 {
   // Clean up this thread's data before we release
   // the reference to the global page allocator.
@@ -152,7 +152,7 @@ Allocator::~Allocator ()
 
 //------------------------------------------------------------------------------
 
-void* Allocator::allocate (const size_t bytes)
+void* FifoFreeStoreWithTLS::allocate (const size_t bytes)
 {
   PerThreadData* data = m_tsp.get ();
 
@@ -167,7 +167,7 @@ void* Allocator::allocate (const size_t bytes)
 
 //------------------------------------------------------------------------------
 
-void Allocator::deallocate (void* p)
+void FifoFreeStoreWithTLS::deallocate (void* p)
 {
   const size_t headerBytes = Memory::sizeAdjustedForAlignment (sizeof (Header));
   Header* const header = reinterpret_cast <Header*> (reinterpret_cast <char*> (p) - headerBytes);

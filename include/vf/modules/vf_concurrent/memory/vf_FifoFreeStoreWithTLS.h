@@ -1,33 +1,38 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_ALLOCATOR_VFHEADER__
-#define __VF_ALLOCATOR_VFHEADER__
+#ifndef VF_FIFOFREESTOREWITHTLS_VFHEADER
+#define VF_FIFOFREESTOREWITHTLS_VFHEADER
 
-#include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
+#include "vf_GlobalPagedFreeStore.h"
 
-#define LOCKFREE_ALLOCATOR_LOGGING 0
+/****
+  Lock-free and mostly wait-free memory allocator optimized for FIFO
+  style usage patterns.
 
-// Lock-free allocator for small variably sized memory blocks.
-//
-// - Any thread may allocate and free concurrently.
-//
-// - Freed memory is re-used in future allocations after a certain amount
-//   of time has passed, in order to prevent the ABA problem for callers.
-//
-// - When there are no free blocks available, the algorithm becomes a blocking
-//   algorithm since we request memory from the standard library.
-//
-class Allocator
+  It is expected that over time, deallocations will occur in roughly
+  the same order as allocations.
+
+  Invariants:
+
+  #1 allocate() and deallocate() are fully concurrent
+
+  #2 The ABA problem is handled automatically
+
+  This implementation uses Thread Local Storage to further improve
+  performance. However, it requires boost style thread_specific_ptr.
+*/
+class FifoFreeStoreWithTLS
 {
 public:
-  Allocator ();
-  ~Allocator ();
+  FifoFreeStoreWithTLS ();
+  ~FifoFreeStoreWithTLS ();
 
   void* allocate (const size_t bytes);
   static void deallocate (void* const p);
 
 private:
+  typedef GlobalPagedFreeStore PagedFreeStoreType;
   struct Header;
 
   class Page;
@@ -39,7 +44,7 @@ private:
   class PerThreadData;
   boost::thread_specific_ptr <PerThreadData> m_tsp;
 
-  GlobalPageAllocator::Ptr m_pages;
+  PagedFreeStoreType::Ptr m_pages;
 };
 
 //------------------------------------------------------------------------------
@@ -58,7 +63,12 @@ public:
 
   static inline void deallocate (void* const p)
   {
-    Allocator::deallocate (p);
+    FifoFreeStoreWithTLS::deallocate (p);
+  }
+
+  static GlobalAllocator* createInstance () // @implementation
+  {
+    return new GlobalAllocator;
   }
 
 private:
@@ -72,16 +82,7 @@ private:
   }
 
 private:
-  // WTF?
-  friend class ReferenceCountedSingleton <GlobalAllocator <Tag> >;
-
-  static GlobalAllocator* createInstance ()
-  {
-    return new GlobalAllocator;
-  }
-
-private:
-  Allocator m_allocator;
+  FifoFreeStoreWithTLS m_allocator;
 };
 
 #endif

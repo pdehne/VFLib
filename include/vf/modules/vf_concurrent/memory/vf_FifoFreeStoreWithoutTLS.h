@@ -1,25 +1,27 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_ALLOCATORWITHOUTTLS_VFHEADER__
-#define __VF_ALLOCATORWITHOUTTLS_VFHEADER__
+#ifndef VF_FIFOFREESTOREWITHOUTTLS_VFHEADER
+#define VF_FIFOFREESTOREWITHOUTTLS_VFHEADER
 
-#include "vf/modules/vf_concurrent/memory/vf_PageAllocator.h"
+#include "vf_GlobalPagedFreeStore.h"
 
 // Lock-free Allocator that doesn't use thread local storage.
 // This implementation is here in case a problem is found with
 // the use of thread local storage.
 //
-class AllocatorWithoutTls
+class FifoFreeStoreWithoutTLS
 {
 public:
-  explicit AllocatorWithoutTls ();
-  ~AllocatorWithoutTls ();
+  explicit FifoFreeStoreWithoutTLS ();
+  ~FifoFreeStoreWithoutTLS ();
 
   void* allocate (const size_t bytes);
   static void deallocate (void* const p);
 
 private:
+  typedef GlobalPagedFreeStore PagedFreeStoreType;
+
   struct Header;
 
   class Block;
@@ -29,7 +31,7 @@ private:
 
 private:
   Block* volatile m_active;
-  GlobalPageAllocator::Ptr m_pages;
+  PagedFreeStoreType::Ptr m_pages;
 };
 
 #endif

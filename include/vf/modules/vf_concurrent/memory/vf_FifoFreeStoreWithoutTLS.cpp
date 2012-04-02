@@ -2,11 +2,11 @@
 // See the file LICENSE.txt for licensing information.
 
 // This precedes every allocation
-struct AllocatorWithoutTls::Header
+struct FifoFreeStoreWithoutTLS::Header
 {
   union
   {
-    AllocatorWithoutTls::Block* block; // backpointer to the page
+    FifoFreeStoreWithoutTLS::Block* block; // backpointer to the page
 
     char pad [Memory::allocAlignBytes];
   };
@@ -14,7 +14,7 @@ struct AllocatorWithoutTls::Header
 
 //------------------------------------------------------------------------------
 
-class AllocatorWithoutTls::Block : Uncopyable
+class FifoFreeStoreWithoutTLS::Block : Uncopyable
 {
 public:
   explicit Block (const size_t bytes) : m_refs (1)
@@ -111,23 +111,23 @@ private:
 
 //------------------------------------------------------------------------------
 
-inline AllocatorWithoutTls::Block* AllocatorWithoutTls::newBlock ()
+inline FifoFreeStoreWithoutTLS::Block* FifoFreeStoreWithoutTLS::newBlock ()
 {
   return new (m_pages->allocate ()) Block (m_pages->getPageBytes());
 }
 
-inline void AllocatorWithoutTls::deleteBlock (Block* b)
+inline void FifoFreeStoreWithoutTLS::deleteBlock (Block* b)
 {
   // It is critical that we do not call the destructor,
   // because due to the lock-free implementation, a Block
   // can be accessed for a short time after it is deleted.
   /* b->~Block (); */ // DO NOT CALL!!!
 
-  PageAllocator::deallocate (b);
+  PagedFreeStoreType::deallocate (b);
 }
 
-AllocatorWithoutTls::AllocatorWithoutTls ()
-  : m_pages (GlobalPageAllocator::getInstance ())
+FifoFreeStoreWithoutTLS::FifoFreeStoreWithoutTLS ()
+  : m_pages (GlobalPagedFreeStore::getInstance ())
 {
   if (m_pages->getPageBytes () < sizeof (Block) + 256)
     Throw (Error().fail (__FILE__, __LINE__, TRANS("the block size is too small")));
@@ -135,14 +135,14 @@ AllocatorWithoutTls::AllocatorWithoutTls ()
   m_active = newBlock ();
 }
 
-AllocatorWithoutTls::~AllocatorWithoutTls ()
+FifoFreeStoreWithoutTLS::~FifoFreeStoreWithoutTLS ()
 {
   deleteBlock (m_active);
 }
 
 //------------------------------------------------------------------------------
 
-void* AllocatorWithoutTls::allocate (const size_t bytes)
+void* FifoFreeStoreWithoutTLS::allocate (const size_t bytes)
 {
   const size_t actual = sizeof (Header) + bytes;
 
@@ -164,8 +164,6 @@ void* AllocatorWithoutTls::allocate (const size_t bytes)
     // (*) It is possible for the block to get a final release here
     //     In this case it will have been put in the garbage, and
     //     m_active will not match.
-    //
-    // TODO: DIFFERENTIAL REFERENCE COUNTER?
 
     // Acquire a reference.
     b->addref ();
@@ -219,7 +217,7 @@ void* AllocatorWithoutTls::allocate (const size_t bytes)
 
 //------------------------------------------------------------------------------
 
-void AllocatorWithoutTls::deallocate (void* p)
+void FifoFreeStoreWithoutTLS::deallocate (void* p)
 {
   Block* const b = (reinterpret_cast <Header*> (p) - 1)->block;
 
