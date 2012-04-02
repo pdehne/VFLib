@@ -1,10 +1,10 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-// Original source code links in .cpp file
-
 #ifndef VF_MURMURHASH_VFHEADER
 #define VF_MURMURHASH_VFHEADER
+
+// Original source code links in .cpp file
 
 // This file depends on some Juce declarations and defines
 

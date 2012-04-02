@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_ALLOCATEDBY_VFHEADER__
-#define __VF_ALLOCATEDBY_VFHEADER__
+#ifndef VF_ALLOCATEDBY_VFHEADER
+#define VF_ALLOCATEDBY_VFHEADER
 
 // Derived classes will use the specified allocator for new and delete
 //

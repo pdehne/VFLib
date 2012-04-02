@@ -2,8 +2,8 @@
 // See the file LICENSE.txt for licensing information.
 // Based on ideas from the soci wrapper sqlite back-end.
 
-#ifndef __VF_DB_BACKEND_VFHEADER__
-#define __VF_DB_BACKEND_VFHEADER__
+#ifndef VF_DB_BACKEND_VFHEADER
+#define VF_DB_BACKEND_VFHEADER
 
 namespace db {
 

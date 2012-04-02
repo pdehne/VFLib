@@ -16,21 +16,23 @@
 
 	#2 When process() is called the functors are executed and disposed.
 
-	#3 Functors queued by the same thread always execute in the
+	#3 The thread from which process() is called is considered the
+	   thread associated with the CallQueue.
+
+	#4 Functors queued by the same thread always execute in the
 	   order they were queued.
 
-	#4 When call() is used and the calling thread is the same one
-	   used in the last call to process(), the call is added and the
-	   queue is immediately processed. This behavior can be avoided by
-	   using queue() instead of call().
+	#5 When call() is used from the associated thread, the call is
+	   added and the queue is immediately processed. This behavior
+	   can be avoided by using queue() instead of call().
 
-	#5 Once queued, a functor must eventually execute. A functor is
+	#6 Once queued, a functor must eventually execute. A functor is
 	   never lost or unprocessed. It is an error if the CallQueue
 	   is deleted while there are pending calls.
 
-	#6 Adding a call to a closed queue throws an exception.
+	#7 Adding a call to a closed queue throws an exception.
 
-	#7 The overridable functions signal() and reset() are called
+	#8 The overridable functions signal() and reset() are called
 	   when the queue transitions from empty to non-empty, and
 	   vice versa.
 

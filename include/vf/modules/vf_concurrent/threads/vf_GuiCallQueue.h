@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_GUICALLQUEUE_VFHEADER__
-#define __VF_GUICALLQUEUE_VFHEADER__
+#ifndef VF_GUICALLQUEUE_VFHEADER
+#define VF_GUICALLQUEUE_VFHEADER
 
 #include "vf_CallQueue.h"
 

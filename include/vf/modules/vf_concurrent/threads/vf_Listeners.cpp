@@ -1,13 +1,6 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-void ListenersBase::Call::destroySharedObject ()
-{
-  delete this;
-}
-
-//------------------------------------------------------------------------------
-
 // CallQueue item to process a Call for a particular listener.
 // This is used to avoid bind overhead.
 //
@@ -107,11 +100,6 @@ struct ListenersBase::Proxy::Entry : Entries::Node,
   ~Entry ()
   {
     vfassert (call.get () == 0);
-  }
-
-  void destroySharedObject ()
-  {
-    delete this;
   }
 
   Group::Ptr group;

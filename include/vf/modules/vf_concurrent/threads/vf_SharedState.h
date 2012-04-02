@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_SHAREDSTATE_VFHEADER__
-#define __VF_SHAREDSTATE_VFHEADER__
+#ifndef VF_SHAREDSTATE_VFHEADER
+#define VF_SHAREDSTATE_VFHEADER
 
 #include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 

@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_THREADWORKER_VFHEADER__
-#define __VF_THREADWORKER_VFHEADER__
+#ifndef VF_THREADWORKER_VFHEADER
+#define VF_THREADWORKER_VFHEADER
 
 #include "vf_CallQueue.h"
 

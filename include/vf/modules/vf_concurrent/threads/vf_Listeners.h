@@ -1,23 +1,21 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef __VF_LISTENERS_VFHEADER__
-#define __VF_LISTENERS_VFHEADER__
+#ifndef VF_LISTENERS_VFHEADER
+#define VF_LISTENERS_VFHEADER
 
 #include "vf_CallQueue.h"
 #include "vf_ReadWriteMutex.h"
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
 
-// List where each Listener registers with the desired CallQueue
-// on which the call is made. Since the list traversal for an associated
-// CallQueue is done on its thread, it is impossible for a Listener to
-// get deleted while a callback is pending.
+/****
+  Concurrent Listeners.
 
-//
-// TODO: CONST CORRECTNESS? List CONST-NESS?
-//
-
+  This is similar to the juce::ListenerList, except that when a
+  listener registers it also provides the CallQueue on which it
+  wishes to receive the notification.
+*/
 class ListenersBase
 {
 public:
@@ -35,8 +33,6 @@ public:
   public:
     typedef ReferenceCountedObjectPtr <Call> Ptr;
     virtual void operator () (void* const listener) = 0;
-  private:
-    void destroySharedObject ();
   };
 
 private:
@@ -79,9 +75,6 @@ private:
 
     bool empty        () const { return m_list.empty(); }
     CallQueue& getCallQueue () const { return m_queue; }
-
-  private:
-    void destroySharedObject() { delete this; }
 
   private:
     struct Entry;
