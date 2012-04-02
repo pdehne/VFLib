@@ -47,42 +47,4 @@ private:
   PagedFreeStoreType::Ptr m_pages;
 };
 
-//------------------------------------------------------------------------------
-
-// Singleton wrapper for a global allocator.
-// Immune to order of construction / initialization problems.
-//
-template <class Tag>
-class GlobalAllocator : public ReferenceCountedSingleton <GlobalAllocator <Tag> >
-{
-public:
-  inline void* allocate (size_t bytes)
-  {
-    return m_allocator.allocate (bytes);
-  }
-
-  static inline void deallocate (void* const p)
-  {
-    FifoFreeStoreWithTLS::deallocate (p);
-  }
-
-  static GlobalAllocator* createInstance () // @implementation
-  {
-    return new GlobalAllocator;
-  }
-
-private:
-  GlobalAllocator () : ReferenceCountedSingleton <GlobalAllocator <Tag> >
-                        (SingletonLifetime::persistAfterCreation)
-  {
-  }
-
-  ~GlobalAllocator ()
-  {
-  }
-
-private:
-  FifoFreeStoreWithTLS m_allocator;
-};
-
 #endif

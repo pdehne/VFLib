@@ -21,14 +21,11 @@
 class ListenersBase
 {
 public:
-  //typedef StandardAllocator AllocatorType;
   struct ListenersStructureTag { };
 
-  typedef GlobalAllocator <ListenersStructureTag> AllocatorType;
-  //typedef StandardAllocator AllocatorType;
+  typedef GlobalFifoFreeStore <ListenersStructureTag> AllocatorType;
 
-  typedef GlobalAllocator <ListenersBase> CallAllocatorType;
-  //typedef StandardAllocator CallAllocatorType;
+  typedef GlobalFifoFreeStore <ListenersBase> CallAllocatorType;
 
   // Reference counted polymorphic unary functor void (*)(void* listener).
   //

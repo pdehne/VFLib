@@ -575,5 +575,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
+      <Filter>VF Modules\vf_concurrent\memory</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

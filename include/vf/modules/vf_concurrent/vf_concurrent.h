@@ -15,6 +15,7 @@ namespace vf
 #include "memory/vf_FifoFreeStore.h"
 #include "memory/vf_FifoFreeStoreWithoutTLS.h"
 #include "memory/vf_FifoFreeStoreWithTLS.h"
+#include "memory/vf_GlobalFifoFreeStore.h"
 #include "memory/vf_GlobalPagedFreeStore.h"
 #include "memory/vf_PagedFreeStore.h"
 #include "memory/vf_StandardAllocator.h"

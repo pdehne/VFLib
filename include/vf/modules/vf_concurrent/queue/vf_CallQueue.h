@@ -41,7 +41,7 @@
 class CallQueue
 {
 public:
-  typedef FifoFreeStore AllocatorType;
+  typedef FifoFreeStoreType AllocatorType;
 
   class Call;
 

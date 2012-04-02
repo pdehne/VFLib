@@ -235,6 +235,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_StandardAllocator.h" />
