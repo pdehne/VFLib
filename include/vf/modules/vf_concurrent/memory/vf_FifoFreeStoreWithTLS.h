@@ -4,6 +4,8 @@
 #ifndef VF_FIFOFREESTOREWITHTLS_VFHEADER
 #define VF_FIFOFREESTOREWITHTLS_VFHEADER
 
+#if VF_USING_BOOST
+
 #include "vf_GlobalPagedFreeStore.h"
 
 /****
@@ -46,5 +48,7 @@ private:
 
   PagedFreeStoreType::Ptr m_pages;
 };
+
+#endif
 
 #endif

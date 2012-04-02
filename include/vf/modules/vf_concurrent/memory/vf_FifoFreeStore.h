@@ -5,6 +5,7 @@
 #define VF_FIFOFREESTORE_VFHEADER
 
 #include "vf_FifoFreeStoreWithTLS.h"
+#include "vf_FifoFreeStoreWithoutTLS.h"
 
 #if VF_USING_BOOST
 typedef FifoFreeStoreWithTLS FifoFreeStoreType;

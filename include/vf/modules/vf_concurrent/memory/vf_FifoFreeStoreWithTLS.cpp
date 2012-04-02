@@ -1,6 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
+#if VF_USING_BOOST
+
 // Implementation notes
 //
 // - A Page is a large allocation from a global PageAllocator.
@@ -176,3 +178,5 @@ void FifoFreeStoreWithTLS::deallocate (void* p)
   if (page->release ())
     deletePage (page);
 }
+
+#endif
