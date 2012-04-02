@@ -52,12 +52,6 @@ template <> struct VfStaticAssert <true>
 #define static_vfassert(expression) \
   VF_NAMESPACE::VfStaticAssert <expression>::static_assert_failed ();
 
-// This assertion goes into every build and causes an exception
-#ifndef fatal_vfassert
-#define fatal_vfassert(expression) if (!(expression)) \
-  VF_NAMESPACE::Throw (Error().fail (__FILE__, __LINE__, #expression, VF_NAMESPACE::Error::assertFailed))
-#endif
-
 // Stuff here is available without having to include it directly
 
 #include "vf/modules/vf_core/diagnostic/vf_Debug.h"
