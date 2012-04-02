@@ -56,9 +56,9 @@ XYZColour const LabColour::toXYZ () const
 
   float t;
 
-  if ((t = pow (x, 3)) > 0.008856) x = t; else x = (x - 16./116) / 7.787;
-  if ((t = pow (y, 3)) > 0.008856) y = t; else y = (y - 16./116) / 7.787;
-  if ((t = pow (z, 3)) > 0.008856) z = t; else z = (z - 16./116) / 7.787;
+  if ((t = pow (x, 3.f)) > 0.008856f) x = t; else x = (x - 16.f/116.f) / 7.787f;
+  if ((t = pow (y, 3.f)) > 0.008856f) y = t; else y = (y - 16.f/116.f) / 7.787f;
+  if ((t = pow (z, 3.f)) > 0.008856f) z = t; else z = (z - 16.f/116.f) / 7.787f;
 
   x *= x0;
   y *= y0;
@@ -83,9 +83,9 @@ LabColour const LabColour::from (XYZColour const& xyz)
   float y = (xyz.getY () / y0);
   float z = (xyz.getZ () / z0);
 
-  x = (x > 0.008856) ? pow (x, 1.f/3) : ((7.7787 * x) + 16/116);
-  y = (y > 0.008856) ? pow (y, 1.f/3) : ((7.7787 * y) + 16/116);
-  z = (z > 0.008856) ? pow (z, 1.f/3) : ((7.7787 * z) + 16/116);
+  x = (x > 0.008856f) ? pow (x, 1.f/3.f) : ((7.7787f * x) + 16.f/116.f);
+  y = (y > 0.008856f) ? pow (y, 1.f/3.f) : ((7.7787f * y) + 16.f/116.f);
+  z = (z > 0.008856f) ? pow (z, 1.f/3.f) : ((7.7787f * z) + 16.f/116.f);
 
   float const L = (116 * y) - 16;
   float const a = 500 * (x - y);

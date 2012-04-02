@@ -14,8 +14,8 @@ public:
     Colour const& endColour,
     Rectangle <int> const& bounds)
     : ColourGradient (
-        startColour, bounds.getX (), bounds.getY () + .5f,
-        endColour, bounds.getX (), bounds.getBottom () -.5f,
+        startColour, float (bounds.getX ()), float (bounds.getY ()) + .5f,
+        endColour, float (bounds.getX ()), float (bounds.getBottom ()) -.5f,
         false)
   {
   }

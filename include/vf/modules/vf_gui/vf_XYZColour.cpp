@@ -54,14 +54,14 @@ XYZColour const XYZColour::from (VF_JUCE::Colour const& sRGB)
   float g = sRGB.getGreen () / 255.f;
   float b = sRGB.getBlue  () / 255.f;
 
-  if (r > 0.04045f) r = 100 * pow ((r + 0.055) / 1.055, 2.4); else r = r / 12.92;
-  if (g > 0.04045f) g = 100 * pow ((g + 0.055) / 1.055, 2.4); else g = g / 12.92;
-  if (b > 0.04045f) b = 100 * pow ((b + 0.055) / 1.055, 2.4); else b = b / 12.92;
+  if (r > 0.04045f) r = 100.f * pow ((r + 0.055f) / 1.055f, 2.4f); else r = r / 12.92f;
+  if (g > 0.04045f) g = 100.f * pow ((g + 0.055f) / 1.055f, 2.4f); else g = g / 12.92f;
+  if (b > 0.04045f) b = 100.f * pow ((b + 0.055f) / 1.055f, 2.4f); else b = b / 12.92f;
 
   // D65
-  float x = r * 0.4124 + g * 0.3576 + b * 0.1805;
-  float y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-  float z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+  float x = r * 0.4124f + g * 0.3576f + b * 0.1805f;
+  float y = r * 0.2126f + g * 0.7152f + b * 0.0722f;
+  float z = r * 0.0193f + g * 0.1192f + b * 0.9505f;
 
   return XYZColour (x, y, z, sRGB.getAlpha() / 255.f);
 }
@@ -72,13 +72,13 @@ VF_JUCE::Colour const XYZColour::toRGB () const
   float y = m_y / 100;
   float z = m_z / 100;
 
-  float r = x *  3.2406 + y * -1.5372 + z * -0.4986;
-  float g = x * -0.9689 + y *  1.8758 + z *  0.0415;
-  float b = x *  0.0557 + y * -0.2040 + z *  1.0570;
+  float r = x *  3.2406f + y * -1.5372f + z * -0.4986f;
+  float g = x * -0.9689f + y *  1.8758f + z *  0.0415f;
+  float b = x *  0.0557f + y * -0.2040f + z *  1.0570f;
 
-  if (r > 0.0031308) r = 1.055 * pow (double (r), 1/2.4) - 0.055; else r = 12.92 * r;
-  if (g > 0.0031308) g = 1.055 * pow (double (g), 1/2.4) - 0.055; else g = 12.92 * g;
-  if (b > 0.0031308) b = 1.055 * pow (double (b), 1/2.4) - 0.055; else b = 12.92 * b;
+  if (r > 0.0031308f) r = 1.055f * pow (r, 1.f/2.4f) - 0.055f; else r = 12.92f * r;
+  if (g > 0.0031308f) g = 1.055f * pow (g, 1.f/2.4f) - 0.055f; else g = 12.92f * g;
+  if (b > 0.0031308f) b = 1.055f * pow (b, 1.f/2.4f) - 0.055f; else b = 12.92f * b;
 
   return Colour::fromFloatRGBA  (r, g, b, m_alpha);
 }
