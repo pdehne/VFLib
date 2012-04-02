@@ -4,17 +4,7 @@
 #ifndef __VF_LIST_VFHEADER__
 #define __VF_LIST_VFHEADER__
 
-// Intrusive list
-
-namespace detail {
-
-struct List_default_tag
-{
-};
-
-}
-
-//------------------------------------------------------------------------------
+struct ListDefaultTag { };
 
 /***
   Intrusive doubly linked list.
@@ -24,18 +14,17 @@ struct List_default_tag
   multiple lists simultaneously.
 */
 
-template <class Elem,
-          class Tag = detail::List_default_tag>
+template <class Element, class Tag = ListDefaultTag>
 class List : Uncopyable
 {
 public:
   typedef int size_type;
 
-  typedef Elem        value_type;
-  typedef Elem&       reference;
-  typedef Elem const& const_reference;
-  typedef Elem*       pointer;
-  typedef Elem const* const_pointer;
+  typedef Element        value_type;
+  typedef Element&       reference;
+  typedef Element const& const_reference;
+  typedef Element*       pointer;
+  typedef Element const* const_pointer;
 
   class Node : Uncopyable
   {
@@ -52,24 +41,12 @@ private:
   template <class ElemType, class NodeType>
   class iterator_base : public std::iterator <
 	std::bidirectional_iterator_tag, int>
-#if 0
-    : public boost::iterator_facade <
-      iterator_base <ElemType, NodeType>,
-      ElemType,
-      boost::bidirectional_traversal_tag
-    >
-#endif
   {
   public:
-#if 1
-    //typedef std::bidirectional_iterator_tag iterator_category;
-    //typedef boost::remove_const<Value>::type value_type;
 	typedef Value value_type;
     typedef ElemType* pointer;
 	typedef ElemType& reference;
 	
-    //typedef Difference difference_type;
-
     reference operator*() const
 	{
 	  return dereference ();
@@ -79,8 +56,6 @@ private:
 	{
 	  return &dereference ();
 	}
-
-    //operator[](difference_type n) const;
 
 	iterator_base& operator++()
 	{
@@ -107,11 +82,6 @@ private:
 	  decrement ();
 	  return result;
 	}
-
-    //iterator_base& operator+=(difference_type n);
-    //iterator_base& operator-=(difference_type n);
-    //iterator_base operator-(difference_type n) const;
-#endif
 
   private:
     explicit iterator_base (NodeType* node) : m_node (node)
@@ -147,13 +117,6 @@ private:
     {
       return ! this->operator== (other);
     }
-
-    /*
-    operator ElemType* () const
-    {
-      return static_cast <ElemType*> (m_node);
-    }
-    */
     
   private:
     friend class List;
@@ -195,19 +158,21 @@ private:
   };
 
 public:
-  typedef iterator_base <Elem, Node> iterator;
-  typedef iterator_base <Elem const, Node const> const_iterator;
+  typedef iterator_base <Element, Node> iterator;
+  typedef iterator_base <Element const, Node const> const_iterator;
 
 public:
-  List ()
-    : m_size (0)
+  List () : m_size (0)
   {
-    m_head.m_prev = 0; // identifies the head
-    m_tail.m_next = 0; // identifies the tail
+    m_head.m_prev = nullptr; // identifies the head
+    m_tail.m_next = nullptr; // identifies the tail
     clear ();
   }
 
-  size_type size () const { return m_size; }
+  size_type size () const
+  {
+	return m_size;
+  }
 
   reference front ()
   {
@@ -279,7 +244,7 @@ public:
     m_size = 0;
   }
 
-  iterator insert (iterator pos, Elem& elem)
+  iterator insert (iterator pos, Element& elem)
   {
     Node* node = node_from (elem);
     node->m_next = pos.get_node ();
@@ -314,7 +279,7 @@ public:
     return pos;
   }
 
-  void push_front (Elem& elem)
+  void push_front (Element& elem)
   {
     insert (begin(), elem);
   }
@@ -326,7 +291,7 @@ public:
     erase (begin ());
   }
 
-  void push_back (Elem& elem)
+  void push_back (Element& elem)
   {
     insert (end(), elem);
   }
@@ -356,12 +321,12 @@ public:
     insert (end(), list);
   }
 
-  iterator iterator_to (Elem& elem) const
+  iterator iterator_to (Element& elem) const
   {
     return iterator (static_cast <Node*> (&elem));
   }
 
-  const_iterator const_iterator_to (Elem const& elem) const
+  const_iterator const_iterator_to (Element const& elem) const
   {
     return const_iterator (static_cast <Node const*> (&elem));
   }
@@ -377,12 +342,12 @@ private:
     return *(static_cast <const_pointer> (node));
   }
 
-  inline Node* node_from (Elem& elem)
+  inline Node* node_from (Element& elem)
   {
     return static_cast <Node*> (&elem);
   }
 
-  inline Node const* node_from (Elem const& elem) const
+  inline Node const* node_from (Element const& elem) const
   {
     return static_cast <Node const*> (&elem);
   }
@@ -399,7 +364,7 @@ private:
 
 #if 0
 
-template <class Elem,
+template <class Element,
           class Tag = detail::List_default_tag>
 class ListOld
 {
@@ -483,8 +448,8 @@ private:
   };
 
 public:
-  typedef iterator_base <Elem, Node> iterator;
-  typedef iterator_base <Elem const, Node const> const_iterator;
+  typedef iterator_base <Element, Node> iterator;
+  typedef iterator_base <Element const, Node const> const_iterator;
 
 public:
   typedef int size_type;
@@ -512,25 +477,25 @@ public:
   iterator end ()               { return &m_tail; }
   const_iterator begin () const { return m_head.m_next; }
   const_iterator end () const   { return &m_tail; }
-  Elem* front () const          { return empty() ? 0 : static_cast <Elem*> (m_head.m_next); }
-  Elem* back () const           { return empty() ? 0 : static_cast <Elem*> (m_tail.m_prev); }
-  Elem* pop_front ()            { Elem* e = front ();
+  Element* front () const          { return empty() ? 0 : static_cast <Element*> (m_head.m_next); }
+  Element* back () const           { return empty() ? 0 : static_cast <Element*> (m_tail.m_prev); }
+  Element* pop_front ()            { Element* e = front ();
                                   if (e) erase (e); return e; }
-  Elem* pop_back ()             { Elem* e = back ();
+  Element* pop_back ()             { Element* e = back ();
                                   if (e) erase (e); return e; }
-  void push_front (Elem* e)     { insert (begin(), e); }
-  void push_back (Elem* e)      { insert (end(), e); }
+  void push_front (Element* e)     { insert (begin(), e); }
+  void push_back (Element* e)      { insert (end(), e); }
   void prepend (ListOld& list)     { insert (begin(), list); }
   void append (ListOld& list)      { insert (end(), list); }
-  void to_front (Elem* e)       { erase (e); push_front (e); }
-  void to_back (Elem* e)        { erase (e); push_back (e); }
+  void to_front (Element* e)       { erase (e); push_front (e); }
+  void to_back (Element* e)        { erase (e); push_back (e); }
  
-  iterator iterator_to (Elem& elem) const
+  iterator iterator_to (Element& elem) const
   {
     return static_cast <Node*> (&elem);
   }
 
-  const_iterator const_iterator_to (Elem& elem) const
+  const_iterator const_iterator_to (Element& elem) const
   {
     return static_cast <Node*> (&elem);
   }
@@ -548,7 +513,7 @@ public:
     clear ();
   }
 
-  iterator insert (iterator pos, Elem* e)
+  iterator insert (iterator pos, Element* e)
   {
     Node* node = static_cast <Node*> (e);
     node->m_next = pos;
@@ -575,7 +540,7 @@ public:
 
   iterator erase (iterator pos)
   {
-    Elem* e = pos++;
+    Element* e = pos++;
     Node* node = static_cast <Node*> (e);
     node->m_next->m_prev = node->m_prev;
     node->m_prev->m_next = node->m_next;
@@ -585,7 +550,7 @@ public:
 
   // messes up size()
   /*
-  static void remove (Elem* e)
+  static void remove (Element* e)
   {
     Node* node = static_cast <Node*> (e);
     node->m_next->m_prev = node->m_prev;
