@@ -1,30 +1,15 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#define USE_DEBUG_MUTEX 0
-
-#if USE_DEBUG_MUTEX
-
-ReadWriteMutex::ReadWriteMutex () { }
-ReadWriteMutex::~ReadWriteMutex () { }
-void ReadWriteMutex::enter_read () const  { m_mutex->enter (); }
-void ReadWriteMutex::exit_read () const   { m_mutex->exit (); }
-void ReadWriteMutex::enter_write () const { m_mutex->enter (); }
-void ReadWriteMutex::exit_write () const  { m_mutex->exit (); }
-void ReadWriteMutex::upgrade_write () const { }
-void ReadWriteMutex::downgrade_read () const { }
-
-#else
-
-ReadWriteMutex::ReadWriteMutex ()
+ReadWriteMutex::ReadWriteMutex () noexcept
 {
 }
 
-ReadWriteMutex::~ReadWriteMutex ()
+ReadWriteMutex::~ReadWriteMutex () noexcept
 {
 }
 
-void ReadWriteMutex::enter_read () const
+void ReadWriteMutex::enterRead () const noexcept
 {
   for (;;)
   {
@@ -53,12 +38,12 @@ void ReadWriteMutex::enter_read () const
   }
 }
 
-void ReadWriteMutex::exit_read () const
+void ReadWriteMutex::exitRead () const noexcept
 {
   m_readers->release ();
 }
 
-void ReadWriteMutex::enter_write () const
+void ReadWriteMutex::enterWrite () const noexcept
 {
   // Optimistically acquire the write lock.
   m_writes->addref ();
@@ -85,7 +70,7 @@ void ReadWriteMutex::enter_write () const
   }
 }
 
-void ReadWriteMutex::exit_write () const
+void ReadWriteMutex::exitWrite () const noexcept
 {
   // Releasing the mutex first and then decrementing the
   // writer count allows another waiting writer to atomically
@@ -96,40 +81,3 @@ void ReadWriteMutex::exit_write () const
 
   m_writes->release ();
 }
-
-#if 0
-void ReadWriteMutex::upgrade_write () const
-{
-  // Caller must have exactly one read lock
-
-  m_writes->addref ();
-
-  m_mutex->enter ();
-
-  // Release our read lock
-  m_readers->release ();
-
-  if (m_readers->is_signaled ())
-  {
-    Delay delay; 
-    do
-    {
-      delay.spin ();
-    }
-    while (m_readers->is_signaled ());
-  }
-}
-
-void ReadWriteMutex::downgrade_read () const
-{
-  // Caller must have exactly one write lock
-
-  m_readers->addref ();
-
-  m_mutex->exit ();
-
-  m_writes->release ();
-}
-#endif
-
-#endif

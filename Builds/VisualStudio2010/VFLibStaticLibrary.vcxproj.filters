@@ -455,9 +455,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutexBase.h">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedState.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>

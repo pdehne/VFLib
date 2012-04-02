@@ -238,7 +238,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutexBase.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedState.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h" />

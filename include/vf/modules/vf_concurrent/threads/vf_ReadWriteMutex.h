@@ -4,7 +4,43 @@
 #ifndef __VF_READWRITEMUTEX_VFHEADER__
 #define __VF_READWRITEMUTEX_VFHEADER__
 
-#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutexBase.h"
+template <class LockType>
+struct GenericScopedReadLock : Uncopyable
+{
+  inline explicit GenericScopedReadLock (LockType const& lock) noexcept
+    : m_lock (lock)
+  {
+    m_lock.enterRead ();
+  }
+
+  inline ~GenericScopedReadLock () noexcept
+  {
+    m_lock.exitRead ();
+  }
+
+private:
+  LockType const& m_lock;
+};
+
+template <class LockType>
+struct GenericScopedWriteLock : Uncopyable
+{
+  inline explicit GenericScopedWriteLock (LockType const& lock) noexcept
+    : m_lock (lock)
+  {
+    m_lock.enterWrite ();
+  }
+
+  inline ~GenericScopedWriteLock () noexcept
+  {
+    m_lock.exitWrite ();
+  }
+
+private:
+  LockType const& m_lock;
+};
+
+//------------------------------------------------------------------------------
 
 // Multiple-reader, single writer, write preferenced
 // partially recursive mutex with a wait-free fast path.
@@ -12,35 +48,22 @@
 class ReadWriteMutex
 {
 public:
-  typedef detail::ScopedReadLock <ReadWriteMutex> ScopedReadLockType;
-  typedef detail::ScopedWriteLock <ReadWriteMutex> ScopedWriteLockType;
+  typedef GenericScopedReadLock <ReadWriteMutex> ScopedReadLockType;
+  typedef GenericScopedWriteLock <ReadWriteMutex> ScopedWriteLockType;
 
-#if 0
-  typedef detail::ScopedUpgradeWriteLock <ReadWriteMutex> ScopedUpgradeWriteLockType;
-#endif
+  ReadWriteMutex () noexcept;
+  ~ReadWriteMutex () noexcept;
 
-  ReadWriteMutex ();
-  ~ReadWriteMutex ();
+  // Recursive
+  //
+  void enterRead () const noexcept;
+  void exitRead () const noexcept;
 
-  // Recursive.
-  void enter_read () const;
-  void exit_read () const;
-
-  // Recursive.
+  // Recursive
   // Cannot hold a read lock when acquiring a write lock.
-  void enter_write () const;
-  void exit_write () const;
-
-  // CAUSES DEADLOCK
-#if 0
-  // Non-recursive.
-  // Caller must hold exactly one read lock.
-  // The lock is released with exit_write().
-  void upgrade_write () const;
-
-  // Caller must hold exactly one write lock.
-  void downgrade_read () const;
-#endif
+  //
+  void enterWrite () const noexcept;
+  void exitWrite () const noexcept;
 
 private:
   VF_JUCE::CriticalSection m_mutex;
@@ -49,7 +72,7 @@ private:
   mutable CacheLine::Padded <AtomicCounter> m_readers;
 };
 
-typedef ReadWriteMutex::ScopedReadLockType ScopedReadLock;
-typedef ReadWriteMutex::ScopedWriteLockType ScopedWriteLock;
+//typedef GenericScopedReadLock::ScopedReadLockType ScopedReadLock;
+//typedef GenericScopedWriteLock::ScopedWriteLockType ScopedWriteLock;
 
 #endif
