@@ -132,26 +132,11 @@ private:
 
 //------------------------------------------------------------------------------
 
-namespace CurrentJuceThread {
+namespace CurrentInterruptibleThread
+{
 
-// Avoid this function because the implementation is slow.
-// Use InterruptibleThread::interruptionPoint() instead.
-//
 extern InterruptibleThread::Interrupted interruptionPoint ();
 
-inline InterruptibleThread::id getId ()
-{
-  return VF_JUCE::Thread::getCurrentThreadId ();
 }
-
-// [0, 10] where 5 = normal
-inline void setPriority (int priority) 
-{
-  VF_JUCE::Thread::setCurrentThreadPriority (priority);
-}
-
-}
-
-namespace CurrentThread = CurrentJuceThread;
 
 #endif

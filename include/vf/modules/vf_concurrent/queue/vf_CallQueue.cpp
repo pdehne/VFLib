@@ -17,7 +17,7 @@ CallQueue::~CallQueue ()
 
 bool CallQueue::isAssociatedWithCurrentThread () const
 {
-  return CurrentThread::getId() == m_id;
+  return VF_JUCE::Thread::getCurrentThreadId () == m_id;
 }
 
 // Adds a call to the queue of execution.
@@ -70,7 +70,7 @@ bool CallQueue::process ()
   if (m_isInProcess.trySet ())
   {
     // Remember this thread.
-    m_id = CurrentThread::getId();
+    m_id = VF_JUCE::Thread::getCurrentThreadId ();
 
     did_something = do_process ();
 

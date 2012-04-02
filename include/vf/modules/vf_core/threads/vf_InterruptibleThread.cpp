@@ -152,7 +152,8 @@ void InterruptibleThread::run ()
 
 //------------------------------------------------------------------------------
 
-namespace CurrentJuceThread {
+namespace CurrentInterruptibleThread
+{
 
 InterruptibleThread::Interrupted interruptionPoint ()
 {
