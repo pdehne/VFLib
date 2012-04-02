@@ -12,12 +12,11 @@ namespace vf
 #include "memory/vf_GlobalPagedFreeStore.cpp"
 #include "memory/vf_PagedFreeStore.cpp"
 
-#include "queue/vf_CallQueue.cpp"
-#include "queue/vf_GuiCallQueue.cpp"
-#include "queue/vf_Listeners.cpp"
-#include "queue/vf_ManualCallQueue.cpp"
-#include "queue/vf_ThreadWorker.cpp"
-
+#include "threads/vf_CallQueue.cpp"
+#include "threads/vf_GuiCallQueue.cpp"
+#include "threads/vf_Listeners.cpp"
+#include "threads/vf_ManualCallQueue.cpp"
 #include "threads/vf_ReadWriteMutex.cpp"
 #include "threads/vf_SharedObject.cpp"
+#include "threads/vf_ThreadWorker.cpp"
 }

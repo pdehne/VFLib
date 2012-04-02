@@ -4,10 +4,10 @@
 #ifndef __VF_LISTENERS_VFHEADER__
 #define __VF_LISTENERS_VFHEADER__
 
+#include "vf_CallQueue.h"
+#include "vf_ReadWriteMutex.h"
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
-#include "../threads/vf_ReadWriteMutex.h"
-#include "../queue/vf_CallQueue.h"
 
 // List where each Listener registers with the desired CallQueue
 // on which the call is made. Since the list traversal for an associated

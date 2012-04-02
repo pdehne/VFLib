@@ -105,7 +105,7 @@ public:
 
 // Model::Base abstracts a domain-specific object.
 //
-class Base : public ReferenceCountedObject
+class Base : public ReferenceCountedObject, Uncopyable
 {
 public:
   class Listener : public ListenerBase

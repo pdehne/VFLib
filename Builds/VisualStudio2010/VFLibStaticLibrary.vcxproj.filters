@@ -55,14 +55,8 @@
     <Filter Include="VF Modules\vf_concurrent">
       <UniqueIdentifier>{bfe4d7dd-602a-497d-ae2c-e21ebd70a50c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_concurrent\queue">
-      <UniqueIdentifier>{048c65bc-ebe2-4c20-bc4a-70b3d70a2829}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_concurrent\memory">
       <UniqueIdentifier>{df7aa0ac-bed7-4cfa-b118-23d5d20f4ad8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_concurrent\lockfree">
-      <UniqueIdentifier>{c94bd814-679b-4bee-a240-8662a6af31aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="VF Modules\vf_concurrent\threads">
       <UniqueIdentifier>{5404415f-3cad-4504-8fc0-86fc0fde3ed3}</UniqueIdentifier>
@@ -96,6 +90,9 @@
     </Filter>
     <Filter Include="VF Modules\vf_core\events">
       <UniqueIdentifier>{90588999-4e1a-4801-ad9f-024985ed227b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_concurrent\containers">
+      <UniqueIdentifier>{c94bd814-679b-4bee-a240-8662a6af31aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,12 +183,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.cpp">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
@@ -255,15 +246,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.cpp">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
@@ -273,11 +255,23 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,23 +425,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
       <Filter>VF Modules\vf_concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_StandardAllocator.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeQueue.h">
-      <Filter>VF Modules\vf_concurrent\lockfree</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeStack.h">
-      <Filter>VF Modules\vf_concurrent\lockfree</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
@@ -551,15 +530,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.h">
-      <Filter>VF Modules\vf_concurrent\queue</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
@@ -577,6 +547,27 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeStack.h">
+      <Filter>VF Modules\vf_concurrent\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeQueue.h">
+      <Filter>VF Modules\vf_concurrent\containers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

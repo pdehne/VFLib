@@ -8,8 +8,8 @@
 
 namespace vf
 {
-#include "lockfree/vf_LockFreeQueue.h"
-#include "lockfree/vf_LockFreeStack.h"
+#include "containers/vf_LockFreeQueue.h"
+#include "containers/vf_LockFreeStack.h"
 
 #include "memory/vf_AllocatedBy.h"
 #include "memory/vf_FifoFreeStore.h"
@@ -18,17 +18,15 @@ namespace vf
 #include "memory/vf_GlobalFifoFreeStore.h"
 #include "memory/vf_GlobalPagedFreeStore.h"
 #include "memory/vf_PagedFreeStore.h"
-#include "memory/vf_StandardAllocator.h"
 
-#include "queue/vf_CallQueue.h"
-#include "queue/vf_GuiCallQueue.h"
-#include "queue/vf_Listeners.h"
-#include "queue/vf_ManualCallQueue.h"
-#include "queue/vf_ThreadWorker.h"
-
+#include "threads/vf_CallQueue.h"
+#include "threads/vf_GuiCallQueue.h"
+#include "threads/vf_Listeners.h"
+#include "threads/vf_ManualCallQueue.h"
 #include "threads/vf_ReadWriteMutex.h"
 #include "threads/vf_SharedObject.h"
 #include "threads/vf_SharedState.h"
+#include "threads/vf_ThreadWorker.h"
 }
 
 #endif

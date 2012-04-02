@@ -4,7 +4,7 @@
 #ifndef VF_PAGEDFREESTORE_VFHEADER
 #define VF_PAGEDFREESTORE_VFHEADER
 
-#include "../lockfree/vf_LockFreeStack.h"
+#include "../containers/vf_LockFreeStack.h"
 
 /****
   Lock-free memory allocator for fixed size pages.

@@ -6,7 +6,7 @@
 
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
-#include "../lockfree/vf_LockFreeQueue.h"
+#include "../containers/vf_LockFreeQueue.h"
 
 /**
   Provides a functor FIFO, with these invariants:

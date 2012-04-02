@@ -36,23 +36,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -61,6 +57,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -229,8 +229,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeQueue.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\lockfree\vf_LockFreeStack.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeQueue.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeStack.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h" />
@@ -238,15 +238,14 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_StandardAllocator.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_GuiCallQueue.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_Listeners.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ManualCallQueue.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_ThreadWorker.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\queue\vf_CallQueue.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedState.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_List.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_CatchAny.h" />
