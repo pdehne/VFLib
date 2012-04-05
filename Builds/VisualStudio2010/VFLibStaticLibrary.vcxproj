@@ -305,7 +305,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Facade.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ListBoxSelection.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Model.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterGroup.h" />

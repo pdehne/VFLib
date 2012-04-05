@@ -11,7 +11,6 @@ namespace vf
 #include "vf_UiBase.h"
 
 #include "vf_Button.h"
-#include "vf_ListBoxSelection.h"
 #include "vf_Static.h"
 #include "vf_TransparentBorder.h"
 

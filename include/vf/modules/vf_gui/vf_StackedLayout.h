@@ -4,7 +4,7 @@
 #ifndef __VF_STACKEDLAYOUT_VFHEADER__
 #define __VF_STACKEDLAYOUT_VFHEADER__
 
-#include "vf/modules/vf_gui/vf_ResizableLayout.h"
+#include "vf_ResizableLayout.h"
 
 class StackedLayout
   : public Component

@@ -437,9 +437,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Button.h">
       <Filter>VF Modules\vf_gui\controls</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ListBoxSelection.h">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Static.h">
       <Filter>VF Modules\vf_gui\controls</Filter>
     </ClInclude>
