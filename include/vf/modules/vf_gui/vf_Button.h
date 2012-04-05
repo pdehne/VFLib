@@ -4,7 +4,7 @@
 #ifndef __VF_BUTTON_VFHEADER__
 #define __VF_BUTTON_VFHEADER__
 
-#include "vf/modules/vf_gui/vf_UiBase.h"
+#include "vf_UiBase.h"
 
 namespace Model {
 

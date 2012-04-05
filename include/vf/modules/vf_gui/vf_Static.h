@@ -4,8 +4,8 @@
 #ifndef __VF_STATIC_VFHEADER__
 #define __VF_STATIC_VFHEADER__
 
-#include "vf/modules/vf_gui/vf_UiBase.h"
-#include "vf/modules/vf_gui/vf_ResizableLayout.h"
+#include "vf_UiBase.h"
+#include "vf_ResizableLayout.h"
 
 // A Static control has no interaction, just drawing.
 // Child components can be added to the ResizableLayout.

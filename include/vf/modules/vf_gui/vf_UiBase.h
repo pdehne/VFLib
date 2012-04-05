@@ -12,6 +12,7 @@ class Base;
 
 // Special Listeners that uses dynamic_cast to allow a derivation hierarchy 
 //
+// DEPRECATED
 template <class ListenerClass>
 class Listeners
 {

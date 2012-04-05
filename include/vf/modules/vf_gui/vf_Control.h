@@ -4,8 +4,8 @@
 #ifndef VF_CONTROL_VFHEADER
 #define VF_CONTROL_VFHEADER
 
-#include "vf/modules/vf_gui/vf_Facade.h"
-#include "vf/modules/vf_gui/vf_Model.h"
+#include "vf_Facade.h"
+#include "vf_Model.h"
 
 namespace Ui {
 

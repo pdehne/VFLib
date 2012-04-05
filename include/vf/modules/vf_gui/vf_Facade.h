@@ -4,9 +4,9 @@
 #ifndef __VF_FACADE_VFHEADER__
 #define __VF_FACADE_VFHEADER__
 
-#include "vf/modules/vf_gui/vf_ConnectedEdges.h"
-#include "vf/modules/vf_gui/vf_Model.h"
-#include "vf/modules/vf_gui/vf_TransparentBorder.h"
+#include "vf_ConnectedEdges.h"
+#include "vf_Model.h"
+#include "vf_TransparentBorder.h"
 
 namespace Ui {
 
