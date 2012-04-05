@@ -222,7 +222,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\source\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h" />

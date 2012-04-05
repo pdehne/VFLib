@@ -225,9 +225,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Model.cpp">
       <Filter>VF Modules\vf_gui\core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\pch.cpp">
-      <Filter>Junk</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
