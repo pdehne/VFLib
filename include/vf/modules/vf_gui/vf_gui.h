@@ -8,15 +8,7 @@
 
 namespace vf
 {
-#include "vf_UiBase.h"
-
-#include "vf_Button.h"
-#include "vf_Static.h"
 #include "vf_TransparentBorder.h"
-
-#include "vf_Control.h"
-#include "vf_Facade.h"
-#include "vf_Model.h"
 
 #include "vf_LabColour.h"
 #include "vf_XYZColour.h"
