@@ -46,57 +46,54 @@
   the invariant that the data will not change except across a call to
   process().
 
-  Invariants:
-
-  #1 Functors can be added from any thread at any time,
-	 to any queue which is not closed.
-
-  #2 When process() is called, functors in the queue are
-	 executed and deleted.
-
-  #3 The thread from which process() is called is considered
-	 the thread associated with the CallQueue.
-
-  #4 Functors queued by the same thread always execute in
-	 the same order they were queued.
-
-  #5 Functors are guaranteed to execute. It is an error if
-	 the CallQueue is deleted while there are functors in it.
-
-  Since call queues are almost always used to invoke parameterized member
+  Since a CallQueue is almost always used to invoke parameterized member
   functions of objects, the call() function comes in a variety of convenient
   forms to make usage easy.
 
   Example:
 
-	void func1 (int);
+      void func1 (int);
 
-	struct Object
-	{
-	  void func2 (void);
-	  void func3 (String name);
+      struct Object
+      {
+        void func2 (void);
+        void func3 (String name);
 
-      static void func4 ();
-	};
+        static void func4 ();
+      };
 
-	CallQueue queue ("Example");
+      CallQueue queue ("Example");
 
-	void example ()
-	{
-	  // equivalent to func1 (42);
-	  queue.call (func1, 42); 
+      void example ()
+      {
+        queue.call (func1, 42);               // same as: func1 (42)
 
-	  Object* object = new Object;
+        Object* object = new Object;
 
-	  // equivalent to object->func2 ();
-	  queue.call (&Object::func2, object);
+        queue.call (&Object::func2, object);  // same as: object->func2 ()
 
-	  // equivalent to object->funcf ("Label");
-	  queue.call (&Object::func3, object, "Label");
+        queue.call (&Object::func3,           // same as: object->funcf ("Label")
+                    object,
+                    "Label");
 
-      // even static members can be called:
-      queue.call (&Object::func4);
-	}
+        queue.call (&Object::func4);          // even static members can be called.
+
+        queue.callf (bind (&Object::func2,    // same as: object->func2 ()
+                           object));
+      }
+
+  Invariants:
+
+  1. Functors can be added from any thread at any time,
+	 to any queue which is not closed.
+  2. When process() is called, functors in the queue are
+	 executed and deleted.
+  3. The thread from which process() is called is considered
+	 the thread associated with the CallQueue.
+  4. Functors queued by the same thread always execute in
+	 the same order they were queued.
+  5. Functors are guaranteed to execute. It is an error if
+	 the CallQueue is deleted while there are functors in it.
 
   Normally, you will not use CallQueue directly, but one of its subclasses
   instead. The CallQueue is one of a handful of objects that work together to
@@ -111,6 +108,153 @@
 class CallQueue
 {
 public:
+  /** Create a CallQueue.
+
+      @param  name  A string used to identify the associated thread for debugging.
+  */
+  explicit CallQueue (String name);
+
+  /** Destroy a CallQueue.
+
+      It is an error to destroy a CallQueue that still contains functors.
+  */
+  ~CallQueue ();
+
+  /** Add a function with no parameters and synchronize the queue if possible.
+
+      When a functor is added in a call made from the associated thread, this
+      routine will automatically call process(). This behavior can be avoided
+      by using queue() instead.
+
+      @see queue
+  */
+  template <class Fn>
+  void call (Fn f)
+  { callf (vf::bind (f)); }
+
+  /** Add a function with no parameters, without synchronizing the queue.
+
+      @see call
+  */
+  template <class Fn>
+  void queue (Fn f)
+  { queuef (vf::bind (f)); }
+
+  /** call() with automatic binding for a function with 1 parameter. */
+  template <class Fn, typename  T1>
+  void call (Fn f,    const T1& t1)
+  { callf (vf::bind (f, t1)); }
+
+  /** call() with automatic binding for a function with 2 parameters. */
+  template <class Fn, typename  T1, typename  T2>
+  void call (Fn f,    const T1& t1, const T2& t2)
+  { callf (vf::bind (f, t1, t2)); }
+
+  /** call() with automatic binding for a function with 3 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3>
+  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3)
+  { callf (vf::bind (f, t1, t2, t3)); }
+
+  /** call() with automatic binding for a function with 4 parameters. */
+  template <class Fn, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  void call (Fn f,    const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { callf (vf::bind (f, t1, t2, t3, t4)); }
+
+  /** call() with automatic binding for a function with 5 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { callf (vf::bind (f, t1, t2, t3, t4, t5)); }
+
+  /** call() with automatic binding for a function with 6 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
+
+  /** call() with automatic binding for a function with 7 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
+
+  /** call() with automatic binding for a function with 8 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
+
+  /** queue() with automatic binding for a function with 1 parameter. */
+  template <class Fn, typename  T1>
+  void queue (Fn f,   const T1& t1)
+  { queuef (vf::bind (f, t1)); }
+
+  /** queue() with automatic binding for a function with 2 parameters. */
+  template <class Fn, typename  T1, typename  T2>
+  void queue (Fn f,   const T1& t1, const T2& t2)
+  { queuef (vf::bind (f, t1, t2)); }
+
+  /** queue() with automatic binding for a function with 3 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3)
+  { queuef (vf::bind (f, t1, t2, t3)); }
+
+  /** queue() with automatic binding for a function with 4 parameters. */
+  template <class Fn, typename  T1, typename  T2,
+                      typename  T3, typename  T4>
+  void queue (Fn f,   const T1& t1, const T2& t2,
+                      const T3& t3, const T4& t4)
+  { queuef (vf::bind (f, t1, t2, t3, t4)); }
+
+  /** queue() with automatic binding for a function with 5 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5)
+  { queuef (vf::bind (f, t1, t2, t3, t4, t5)); }
+
+  /** queue() with automatic binding for a function with 6 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3,
+                      typename  T4, typename  T5, typename  T6>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
+                      const T4& t4, const T5& t5, const T6& t6)
+  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
+
+  /** queue() with automatic binding for a function with 7 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7)
+  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
+
+  /** queue() with automatic binding for a function with 8 parameters. */
+  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
+                      typename  T5, typename  T6, typename  T7, typename  T8>
+  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
+
+  /** call() for an arbitrary functor */
+  template <class Functor>
+  void callf (Functor const& f)
+  {
+    callp (new (m_allocator) CallType <Functor> (f));
+  }
+
+  /** queue() for an arbitrary functor */
+  template <class Functor>
+  void queuef (Functor const& f)
+  {
+    queuep (new (m_allocator) CallType <Functor> (f));
+  }
+
+public:
   typedef FifoFreeStoreType AllocatorType;
 
   class Call;
@@ -119,8 +263,13 @@ private:
   typedef LockFreeQueue <Call> Calls;
 
 public:
-  /* Internal API */
+  /** The abstract base that holds a functor.
 
+      Objects built on top of the CallQueue derive from this class for their
+      own custom work items to synergize with the allocator.
+
+      @see Listeners
+  */
   class Call : public Calls::Node,
                public AllocatedBy <AllocatorType>
   {
@@ -129,18 +278,12 @@ public:
     virtual void operator() () = 0;
   };
 
-  template <class Functor>
-  class CallType : public Call
-  {
-  public:
-    explicit CallType (Functor const& f) : m_f (f) { }
-    ~CallType () { }
-    void operator() () { m_f (); }
+  /** Retrieve the allocator associated with this CallQueue.
 
-  private:
-    Functor m_f;
-  };
+      Objects built on CallQueue use this.
 
+      @see Listeners
+  */
   inline AllocatorType& getAllocator ()
   {
     return m_allocator;
@@ -162,133 +305,6 @@ public:
 
   /** Add the Call, and process the queue if we're on the associated thread. */
   void callp (Call* call);
-
-public:
-  /* Public API */
-
-  /** Create a CallQueue.
-
-      The name is used to identify the associated thread for debugging.
-  */
-  explicit CallQueue (String name);
-
-  /** Destroy a CallQueue.
-
-      It is an error to destroy a CallQueue with functors inside.
-  */
-  ~CallQueue ();
-
-  /** Place caller defined functors into the queue.
- 
-      Use these when you want to do the bind yourself
-  */
-
-  template <class Functor>
-  void queuef (Functor const& f)
-  {
-    queuep (new (m_allocator) CallType <Functor> (f));
-  }
-
-  template <class Functor>
-  void callf (Functor const& f)
-  {
-    callp (new (m_allocator) CallType <Functor> (f));
-  }
-
-  /** Convenience functions with automatic binding for up to
-      eight parameters. */
-
-  template <class Fn>
-  void queue (Fn f)
-  { queuef (vf::bind (f)); }
-
-  template <class Fn, typename  T1>
-  void queue (Fn f,   const T1& t1)
-  { queuef (vf::bind (f, t1)); }
-
-  template <class Fn, typename  T1, typename  T2>
-  void queue (Fn f,   const T1& t1, const T2& t2)
-  { queuef (vf::bind (f, t1, t2)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3>
-  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3)
-  { queuef (vf::bind (f, t1, t2, t3)); }
-
-  template <class Fn, typename  T1, typename  T2,
-                      typename  T3, typename  T4>
-  void queue (Fn f,   const T1& t1, const T2& t2,
-                      const T3& t3, const T4& t4)
-  { queuef (vf::bind (f, t1, t2, t3, t4)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3,
-                      typename  T4, typename  T5>
-  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5)
-  { queuef (vf::bind (f, t1, t2, t3, t4, t5)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3,
-                      typename  T4, typename  T5, typename  T6>
-  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5, const T6& t6)
-  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
-                      typename  T5, typename  T6, typename  T7>
-  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7)
-  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
-                      typename  T5, typename  T6, typename  T7, typename  T8>
-  void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
-
-  template <class Fn>
-  void call (Fn f)
-  { callf (vf::bind (f)); }
-
-  template <class Fn, typename  T1>
-  void call (Fn f,    const T1& t1)
-  { callf (vf::bind (f, t1)); }
-
-  template <class Fn, typename  T1, typename  T2>
-  void call (Fn f,    const T1& t1, const T2& t2)
-  { callf (vf::bind (f, t1, t2)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3>
-  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3)
-  { callf (vf::bind (f, t1, t2, t3)); }
-
-  template <class Fn, typename  T1, typename  T2,
-                      typename  T3, typename  T4>
-  void call (Fn f,    const T1& t1, const T2& t2,
-                      const T3& t3, const T4& t4)
-  { callf (vf::bind (f, t1, t2, t3, t4)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3,
-                      typename  T4, typename  T5>
-  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5)
-  { callf (vf::bind (f, t1, t2, t3, t4, t5)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3,
-                      typename  T4, typename  T5, typename  T6>
-  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
-                      const T4& t4, const T5& t5, const T6& t6)
-  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
-                      typename  T5, typename  T6, typename  T7>
-  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7)
-  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
-
-  template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
-                      typename  T5, typename  T6, typename  T7, typename  T8>
-  void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                      const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 protected:
   /** Process all functors in the queue.
@@ -327,6 +343,18 @@ protected:
   virtual void signal () = 0;
 
 private:
+  template <class Functor>
+  class CallType : public Call
+  {
+  public:
+    explicit CallType (Functor const& f) : m_f (f) { }
+    ~CallType () { }
+    void operator() () { m_f (); }
+
+  private:
+    Functor m_f;
+  };
+
   bool do_process ();
 
 private:
