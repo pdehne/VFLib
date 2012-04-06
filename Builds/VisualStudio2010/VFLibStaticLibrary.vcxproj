@@ -161,15 +161,7 @@
     <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.c" />
     <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.c" />
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Button.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Control.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -181,15 +173,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Facade.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui.cpp" />
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Model.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -206,15 +190,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Static.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_UiBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -296,24 +272,18 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Button.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ConnectedEdges.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Control.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Facade.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Model.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ResizableLayout.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Static.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_UiBase.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h" />
     <ClInclude Include="..\..\include\vf\vf_boost_includes.h" />

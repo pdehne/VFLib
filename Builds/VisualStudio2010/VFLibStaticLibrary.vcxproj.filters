@@ -64,9 +64,6 @@
     <Filter Include="VF Modules\vf_gui">
       <UniqueIdentifier>{4133fdb3-4aa5-444b-8437-35def89aa012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_gui\controls">
-      <UniqueIdentifier>{4bd7583d-7cd0-41e1-8d6f-484189dfe3b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_gui\utilities">
       <UniqueIdentifier>{c04b82a4-caae-4010-80e5-ea8c0f6f1bb8}</UniqueIdentifier>
     </Filter>
@@ -78,9 +75,6 @@
     </Filter>
     <Filter Include="VF Modules\vf_gui\graphics">
       <UniqueIdentifier>{4352b1db-8caf-44af-ad7d-43faf9d79520}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_gui\core">
-      <UniqueIdentifier>{2a700231-350a-4010-b3bc-ee10a1722767}</UniqueIdentifier>
     </Filter>
     <Filter Include="Junk">
       <UniqueIdentifier>{ee5413bc-7eef-4c7b-8c82-264e6e4fdb80}</UniqueIdentifier>
@@ -186,18 +180,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Button.cpp">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Static.cpp">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_UiBase.cpp">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.cpp">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
@@ -215,15 +197,6 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Control.cpp">
-      <Filter>VF Modules\vf_gui\core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Facade.cpp">
-      <Filter>VF Modules\vf_gui\core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_Model.cpp">
-      <Filter>VF Modules\vf_gui\core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
@@ -269,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
+      <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,18 +410,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
       <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Button.h">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Static.h">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_UiBase.h">
-      <Filter>VF Modules\vf_gui\controls</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h">
       <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClInclude>
@@ -475,15 +439,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Control.h">
-      <Filter>VF Modules\vf_gui\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Facade.h">
-      <Filter>VF Modules\vf_gui\core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_Model.h">
-      <Filter>VF Modules\vf_gui\core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\vf_boost_includes.h">
       <Filter>Junk</Filter>
@@ -562,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeQueue.h">
       <Filter>VF Modules\vf_concurrent\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h">
+      <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
