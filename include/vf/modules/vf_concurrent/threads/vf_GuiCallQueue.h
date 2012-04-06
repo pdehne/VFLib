@@ -8,6 +8,11 @@
 
 /***
   Provides a CallQueue handled by the Juce Message Thread (Gui).
+
+  To use this, put an instance of the class in your application object
+  or other central location. Calls placed in the queue will automatically
+  get processed by the Juce message loop, no further action is required
+  to make it work.
 */
 class GuiCallQueue
   : public CallQueue

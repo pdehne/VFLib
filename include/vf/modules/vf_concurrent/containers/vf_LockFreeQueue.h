@@ -7,19 +7,31 @@
 struct LockFreeQueueDefaultTag { };
 
 /***
-  Mostly wait-free MPSC (Multiple Producer, Single Consumer) intrusive FIFO.
+  Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
+
+  This implementation is wait-free for producers and lock-free
+  for consumers.
 
   Invariants:
-	#1 Any thread may call push_back() at any time (Multiple Producer).
 
-	#2 Only one thread may call try_pop_front() at a time (Single Consumer)
+  #1 Any thread may call push_back() at any time (Multiple Producer).
 
-	#3 The queue is signaled if there are one or more elements.
+  #2 Only one thread may call try_pop_front() at a time (Single Consumer)
+
+  #3 The queue is signaled if there are one or more elements.
+
+  The caller is responsible for preventing the ABA problem.
 */
 template <class Element, class Tag = LockFreeQueueDefaultTag>
 class LockFreeQueue
 {
 public:
+  /* Base class for objects which may be placed into this queue.
+     
+     Derive your elements from this class. To put objects into more
+     than one queue at once, use different Tag types and inherit
+     from each Node.
+   */
   class Node : Uncopyable
   {
   public:
@@ -42,41 +54,45 @@ public:
   {
   }
 
-  // Not thread safe.
-  // Caller must synchronize.
-  //
+  /** Returns true if the queue is empty.
+
+      This is not thread safe, and the caller must synchronize.
+  */
   bool empty () const
   {
     return (m_head->get () == m_tail);
   }
 
-  // Returns true if the queue became signaled from the push.
-  // Wait-free.
-  //
+  /** Place an element at the back of the queue, returning true if
+      the queue was previously empty.
+
+      The call is wait-free.
+  */
   bool push_back (Node* node)
   {
     node->m_next.set (0);
 
     Node* prev = m_head->exchange (node);
 
-    // (*) If we get pre-empted here, then
-    //     pop_front() might not see this element.
-    //
-    // This only happens when the list is empty.
+    // (*) If a try_pop_front() happens at this point, it might not see the
+    //     element we are pushing. This only happens when the list is empty,
+    //     and furthermore it is detectable.
 
     prev->m_next.set (node);
 
     return prev == m_null;
   }
 
-  // Tries to pop an element until it succeeds, or the queue is empty.
-  // Lock-free.
-  //
+  /** Pop an element from the front of the queue, returning nullptr
+      if the queue is empty.
+
+      The call is lock-free.
+  */
   Element* pop_front ()
   {
     Element* elem;
 
-    // Crafted to sometimes avoid the Delay ctor.
+    // Avoid the SpinDelay ctor if possible
     if (!try_pop_front (&elem))
     {
       SpinDelay delay;
@@ -90,9 +106,16 @@ public:
     return elem;
   }
 
-  // Returns true on success.
-  // Wait-free.
-  //
+  /** Attempt to pop an element from the front of the queue, returning
+      true if the operation was successful.
+
+      A pop operation is successful if there is no contention for the queue.
+      On success, the value of *pElem is set to the popped element if it
+      exists, or nullptr if the queue was empty. On failure, the value
+      of *pElem is undefined.
+
+      This call is wait-free.
+  */
   bool try_pop_front (Element** pElem)
   {
     Node* tail = m_tail;
@@ -102,19 +125,17 @@ public:
     {
       if (next == 0)
       {
-        // (*) If push_back() is at the magic
-        //     spot, we might not see it's element.
-        //     This situation is detectable, and counts
-        //     as a 'failure'. The caller decides what to do.
+        // (*) If a push_back() happens at this point,
+        //     we might not see the element.
 
         if (m_head->get() == tail)
         {
-          *pElem = 0;
-          return true;
+          *pElem = nullptr;
+          return true; // success, but queue empty
         }
         else
         {
-          return false; // busy
+          return false; // failure: a push_back() caused contention
         }
       }
 
@@ -144,16 +165,17 @@ public:
       }
     }
 
-    // (*)
+    // (*) If a push_back() happens at this point,
+    //     we might not see the element.
 
     if (head == m_tail)
     {
-      *pElem = 0;
-      return true;
+      *pElem = nullptr;
+      return true; // success, but queue empty
     }
     else
     {
-      return false; // busy
+      return false; // failure: a push_back() caused contention
     }
   }
 

@@ -1,6 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
+namespace detail {
+
 AudioBufferPoolBase::Buffer::Buffer (int numChannels,
                                  int numSamples)
   : AudioSampleBuffer (numChannels, numSamples)
@@ -21,4 +23,6 @@ void AudioBufferPoolBase::Buffer::resize (int newNumChannels, int newNumSamples)
 int AudioBufferPoolBase::Buffer::getNumSamplesAllocated () const
 {
   return m_samplesAllocated;
+}
+
 }

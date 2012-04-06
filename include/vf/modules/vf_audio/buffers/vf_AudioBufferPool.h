@@ -4,6 +4,34 @@
 #ifndef VF_AUDIOBUFFERPOOL_VFHEADER
 #define VF_AUDIOBUFFERPOOL_VFHEADER
 
+//==============================================================================
+/**
+	A pool of multiple AudioSampleBuffer that get re-used.
+
+	This is useful when you need to allocate temporary buffers in your
+	audioDeviceIOCallback routines, but don't want to incur the penalty of
+	allocating and freeing every time. This class intelligently recycles
+	buffers to match your needs.
+
+	Example:
+
+	static AudioBufferPool pool;
+
+	void audioDeviceIOCallback ()
+	{
+	  // Request a stereo buffer with room for 1024 samples.
+	  AudioBufferPool::BufferType* buffer = pool.requestBuffer (2, 1024);
+
+	  // (Process buffer)
+
+	  // Release the buffer to be re-used later.
+	  pool.releaseBuffer (buffer);
+	}
+*/
+
+/* Factored base */
+namespace detail {
+
 class AudioBufferPoolBase
 {
 public:
@@ -22,25 +50,44 @@ public:
   };
 };
 
-// Manages a collection of AudioSampleBuffer that
-// persist in memory and never decrease in size.
-template <class BufferClass>
+}
+
+// Normally you will just use AudioBufferPool
+//
+template <class BufferClass = detail::AudioBufferPoolBase::Buffer,
+		  class MutexType = CriticalSection>
 class AudioBufferPoolTemplate
-  : public AudioBufferPoolBase
-  , public LeakChecked <AudioBufferPoolTemplate<BufferClass> >
+  : public detail::AudioBufferPoolBase
+  , public LeakChecked <AudioBufferPoolTemplate <BufferClass> >
 {
 public:
+  typedef typename BufferClass BufferType;
+
+  /** Create a new empty pool with enough slots for 10 buffers. If
+	  more slots are needed they will automatically be allocated.
+  */
   AudioBufferPoolTemplate ()
   {
 	m_buffers.ensureStorageAllocated (10);
   }
 
+  /** Destructor.
+
+	  All allocated buffers are freed.
+	  Any previously requested buffers must already be released.
+  */
   ~AudioBufferPoolTemplate ()
   {
 	for (int i = 0; i < m_buffers.size(); ++i)
 	  delete m_buffers[i];
   }    
 
+  /** Requests a buffer with the specified number of channels and
+	  enough room for at least numSamples, from the pool. The buffer
+	  is owned by the caller until it is released using releaseBuffer().
+
+	  @see releaseBuffer
+  */
   BufferClass* acquireBuffer (int numChannels, int numSamples)
   {
 	BufferClass* buffer = 0;
@@ -49,7 +96,7 @@ public:
 	int index = -1;
 
 	{
-	  CriticalSection::ScopedLockType lock (m_mutex);
+	  MutexType::ScopedLockType lock (m_mutex);
 
 	  for (int i = 0; i < m_buffers.size(); ++i)
 	  {
@@ -90,29 +137,30 @@ public:
 	return buffer;
   }
 
+  /** Releases a previously requested buffer back into the pool.
+
+	  @see requestBuffer
+  */
   void releaseBuffer (BufferClass* buffer)
   {
 	if (buffer)
 	{
-	  m_mutex.enter ();
+	  MutexType::ScopedLockType lock (m_mutex);
 
 	  m_buffers.add (buffer);
-
-	  m_mutex.exit ();
 	}
   }    
 
 private:
-  VF_JUCE::CriticalSection m_mutex;
+  MutexType m_mutex;
   VF_JUCE::Array <BufferClass*> m_buffers;
 };
 
-typedef AudioBufferPoolTemplate<AudioBufferPoolBase::Buffer> AudioBufferPool;
+typedef AudioBufferPoolTemplate <detail::AudioBufferPoolBase::Buffer> AudioBufferPool;
 
 //------------------------------------------------------------------------------
 
 // scoped lifetime management for a temporary audio buffer
-#if 1
 class ScopedAudioSampleBuffer
   // NO IDEA why the leak checking fails
   // : LeakChecked <ScopedAudioSampleBuffer>, Uncopyable
@@ -157,48 +205,5 @@ private:
 
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedAudioSampleBuffer);
 };
-#else
-
-class ScopedAudioSampleBuffer
-{
-public:
-  ScopedAudioSampleBuffer (AudioBufferPool& pool,
-	int numChannels,
-	int numSamples)
-	: m_buffer (numChannels, numSamples)
-  {
-  }
-
-  ~ScopedAudioSampleBuffer ()
-  {
-  }
-
-  VF_JUCE::AudioSampleBuffer* getBuffer ()
-  {
-	return &m_buffer;
-  }
-
-  VF_JUCE::AudioSampleBuffer* operator-> ()
-  {
-	return getBuffer();
-  }
-
-  VF_JUCE::AudioSampleBuffer& operator* ()
-  {
-	return *getBuffer();
-  }
-
-  operator VF_JUCE::AudioSampleBuffer* ()
-  {
-	return getBuffer();
-  }
-
-private:
-  AudioBufferPool::Buffer m_buffer;
-
-  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedAudioSampleBuffer);
-};
-
-#endif
 
 #endif
