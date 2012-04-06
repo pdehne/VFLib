@@ -24,13 +24,15 @@
   A LabColour uses floats for the colour components, with L in the range [0,1]
   and a and b in the range [-1, 1].
 
-  Examples:
+  Example:
 
-    // Returns a Colour which is a bit brighter than the starting colour.
-    Colour calculateHiliteColour (Colour const& startingColour)
-    {
-      return LabColour (startingColour).withAddedLuminance (0.1f).toRGB ();
-    }
+      // Returns a Colour which is a bit brighter than the starting colour.
+      //
+      Colour calculateHiliteColour (Colour const& startingColour)
+      {
+        return LabColour (startingColour).withAddedLuminance (0.1f).toRGB ();
+      }
+
 */
 class LabColour
 {

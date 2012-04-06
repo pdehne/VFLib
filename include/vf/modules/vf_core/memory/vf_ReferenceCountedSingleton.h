@@ -34,7 +34,6 @@ public:
 };
 
 //------------------------------------------------------------------------------
-
 /**
 	Thread-safe singleton which comes into existence on first use. Use this
 	instead of creating objects with static storage duration. These singletons
@@ -42,10 +41,8 @@ public:
 	object that depends on it, the order of destruction of objects is assured
 	to be correct.
 
-	class Object must provide this function:
-	  Object* Object::createInstance()
+	class Object must provide the function `Object* Object::createInstance()`
 */
-
 template <class Object>
 class ReferenceCountedSingleton : private PerformedAtExit
 {
