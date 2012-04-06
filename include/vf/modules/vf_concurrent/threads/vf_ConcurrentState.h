@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_SHAREDSTATE_VFHEADER
-#define VF_SHAREDSTATE_VFHEADER
+#ifndef VF_CONCURRENTSTATE_VFHEADER
+#define VF_CONCURRENTSTATE_VFHEADER
 
 #include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
 
@@ -15,8 +15,35 @@
 // from the behavior of the read/write mutex used.
 //
 
+//==============================================================================
+/** Encapsulation for an object accessed by multiple threads.
+
+    This template encloses an object typically consisting of public data members
+    of primitive and/or class types. Access to the object is restricted through
+    the use of accessor objects, based on the type of access required. There are
+    three types of access:
+
+    ReadAccess
+
+      Allows read access to the underlying object as const. ReadAccess may be
+      granted to one or more threads simultaneously. If one or more threads have 
+      ReadAccess, requests to obtain WriteAccess are blocked.
+
+    WriteAccess
+
+      Allows exclusive read/write access the underlying object. A WriteAccess
+      request blocks until all existing ReadAccess and WriteAccess requests are
+      released. While a WriteAccess exists, requests for ReadAccess will block.
+
+    UnlockedAccess
+
+      Allows read access to the underlying object without using the lock. This
+      can be helpful when designing concurrent structures through composition.
+      It also makes it easier to search for places in code which use unlocked
+      access.
+*/
 template <class Object>
-class SharedState : Uncopyable
+class ConcurrentState : Uncopyable
 {
 public:
   typedef ReadWriteMutex ReadWriteMutexType;
@@ -27,40 +54,41 @@ public:
 
   // Unlocked read access.
   //
+  // DEPRECATED
   Object const* getObject () const { return const_cast <Object*> (&m_obj); }
   Object const& operator* () const { return *getObject(); }
   Object const* operator->() const { return getObject(); }
-  
-  SharedState () { }
+
+  ConcurrentState () { }
 
   template <class T1>
-  explicit SharedState (T1 t1) : m_obj (t1) { }
+  explicit ConcurrentState (T1 t1) : m_obj (t1) { }
 
   template <class T1, class T2>
-  SharedState (T1 t1, T2 t2) : m_obj (t1, t2) { }
+  ConcurrentState (T1 t1, T2 t2) : m_obj (t1, t2) { }
 
   template <class T1, class T2, class T3>
-  SharedState (T1 t1, T2 t2, T3 t3) : m_obj (t1, t2, t3) { }
+  ConcurrentState (T1 t1, T2 t2, T3 t3) : m_obj (t1, t2, t3) { }
 
   template <class T1, class T2, class T3, class T4>
-  SharedState (T1 t1, T2 t2, T3 t3, T4 t4) : m_obj (t1, t2, t3, t4) { }
+  ConcurrentState (T1 t1, T2 t2, T3 t3, T4 t4) : m_obj (t1, t2, t3, t4) { }
 
   template <class T1, class T2, class T3, class T4, class T5>
-  SharedState (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
+  ConcurrentState (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
                : m_obj (t1, t2, t3, t4, t5) { }
 
   template <class T1, class T2, class T3, class T4, class T5, class T6>
-  SharedState (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
+  ConcurrentState (T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
                : m_obj (t1, t2, t3, t4, t5, t6) { }
 
   template <class T1, class T2, class T3, class T4,
             class T5, class T6, class T7>
-  SharedState (T1 t1, T2 t2, T3 t3, T4 t4,
+  ConcurrentState (T1 t1, T2 t2, T3 t3, T4 t4,
                T5 t5, T6 t6, T7 t7) : m_obj (t1, t2, t3, t4, t5, t6, t7) { }
 
   template <class T1, class T2, class T3, class T4,
             class T5, class T6, class T7, class T8>
-  SharedState (T1 t1, T2 t2, T3 t3, T4 t4,
+  ConcurrentState (T1 t1, T2 t2, T3 t3, T4 t4,
                T5 t5, T6 t6, T7 t7, T8 t8)
                : m_obj (t1, t2, t3, t4, t5, t6, t7, t8) { }
 
@@ -72,10 +100,10 @@ private:
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::UnlockedAccess : Uncopyable
+class ConcurrentState <Object>::UnlockedAccess : Uncopyable
 {
 public:
-  explicit UnlockedAccess (SharedState const& state)
+  explicit UnlockedAccess (ConcurrentState const& state)
     : m_state (state)
   {
   }
@@ -85,17 +113,17 @@ public:
   Object const* operator->() const { return getObject(); }
 
 private:
-  SharedState const& m_state;
+  ConcurrentState const& m_state;
 };
 
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::ReadAccess : Uncopyable
+class ConcurrentState <Object>::ReadAccess : Uncopyable
 {
 public:
-  explicit ReadAccess (SharedState const volatile& state)
-    : m_state (const_cast <SharedState const&> (state))
+  explicit ReadAccess (ConcurrentState const volatile& state)
+    : m_state (const_cast <ConcurrentState const&> (state))
     , m_lock (m_state.m_mutex)
   {
   }
@@ -105,17 +133,17 @@ public:
   Object const* operator->() const { return getObject(); }
 
 private:
-  SharedState const& m_state;
+  ConcurrentState const& m_state;
   ReadWriteMutexType::ScopedReadLockType m_lock;
 };
 
 //------------------------------------------------------------------------------
 
 template <class Object>
-class SharedState <Object>::WriteAccess : Uncopyable
+class ConcurrentState <Object>::WriteAccess : Uncopyable
 {
 public:
-  explicit WriteAccess (SharedState& state)
+  explicit WriteAccess (ConcurrentState& state)
     : m_state (state)
     , m_lock (m_state.m_mutex)
   {
@@ -130,7 +158,7 @@ public:
   Object* operator->() { return getObject(); }
 
 private:
-  SharedState& m_state;
+  ConcurrentState& m_state;
   ReadWriteMutexType::ScopedWriteLockType m_lock;
 };
 

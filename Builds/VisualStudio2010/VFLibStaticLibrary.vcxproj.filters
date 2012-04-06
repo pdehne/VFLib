@@ -404,9 +404,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedState.h">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
       <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
@@ -520,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h">
       <Filter>VF Modules\vf_gui\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentState.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

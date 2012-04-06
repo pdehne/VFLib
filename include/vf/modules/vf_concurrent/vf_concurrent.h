@@ -20,12 +20,12 @@ namespace vf
 #include "memory/vf_PagedFreeStore.h"
 
 #include "threads/vf_CallQueue.h"
+#include "threads/vf_ConcurrentState.h"
 #include "threads/vf_GuiCallQueue.h"
 #include "threads/vf_Listeners.h"
 #include "threads/vf_ManualCallQueue.h"
 #include "threads/vf_ReadWriteMutex.h"
 #include "threads/vf_SharedObject.h"
-#include "threads/vf_SharedState.h"
 #include "threads/vf_ThreadWorker.h"
 }
 
