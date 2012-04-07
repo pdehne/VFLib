@@ -210,9 +210,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.cpp">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.cpp">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
@@ -245,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
       <Filter>VF Modules\vf_gui\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,9 +467,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_SharedObject.h">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_Uncopyable.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
@@ -519,6 +516,9 @@
       <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentState.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>

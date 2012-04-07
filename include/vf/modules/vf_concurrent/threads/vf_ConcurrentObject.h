@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_SHAREDOBJECT_VFHEADER
-#define VF_SHAREDOBJECT_VFHEADER
+#ifndef VF_CONCURRENTOBJECT_VFHEADER
+#define VF_CONCURRENTOBJECT_VFHEADER
 
 // A copy of juce::ReferenceCountedObject,
 // with the following features:
@@ -14,7 +14,7 @@
 // - Default behavior performs the delete on a separate thread.
 //
 
-class SharedObject : Uncopyable
+class ConcurrentObject : Uncopyable
 {
 public:
   inline void incReferenceCount() noexcept
@@ -37,9 +37,9 @@ public:
   }
 
 protected:
-  SharedObject();
+  ConcurrentObject();
 
-  virtual ~SharedObject();
+  virtual ~ConcurrentObject();
 
   // default implementation performs the delete
   // on a separate, provided thread that cleans up

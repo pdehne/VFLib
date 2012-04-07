@@ -1,7 +1,7 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-class SharedObject::Deleter
+class ConcurrentObject::Deleter
   : public ReferenceCountedSingleton <Deleter>
   , LeakChecked <Deleter>
 {
@@ -21,13 +21,13 @@ private:
   }
 
 private:
-  static void doDelete (SharedObject* sharedObject)
+  static void doDelete (ConcurrentObject* sharedObject)
   {
     delete sharedObject;
   }
 
 public:
-  void Delete (SharedObject* sharedObject)
+  void Delete (ConcurrentObject* sharedObject)
   {
     if (m_queue.isAssociatedWithCurrentThread ())
       delete sharedObject;
@@ -48,17 +48,17 @@ private:
 
 //------------------------------------------------------------------------------
 
-SharedObject::SharedObject()
+ConcurrentObject::ConcurrentObject()
 {
   Deleter::getInstance()->incReferenceCount();
 }
 
-SharedObject::~SharedObject()
+ConcurrentObject::~ConcurrentObject()
 {
   Deleter::getInstance()->decReferenceCount ();
 }
 
-void SharedObject::destroySharedObject ()
+void ConcurrentObject::destroySharedObject ()
 {
   Deleter::getInstance()->Delete (this);
 }
