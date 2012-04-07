@@ -16,8 +16,8 @@
     interface, and registers on a provided instance of Listeners to receive
     asynchronous notifications of changes to concurrent states. Another way of
     defining Listeners, is that it is similar to a Juce ListenerList but with
-    the provision that the Listener additional that the Listener specifies the
-    CallQueue upon which the notification is made, at the time it registers.
+    the provision that the Listener registers with the CallQueue upon which the
+    notification should be made.
 
     Listeners makes extensive use of CallQueue for providing the notifications,
     and provides a higher level facility for implementing the concurrent
@@ -87,10 +87,10 @@
 
       void onOutputLevelChanged (float outputLevel)
       {
-        // Update our copy of the output level shared state
+        // Update our copy of the output level shared state.
         m_outputLevel = outputLevel;
         
-        // And repaint
+        // Now trigger a redraw of the control.
         repaint ();
       }
 
@@ -193,10 +193,10 @@
 
     @endcode
 
-    Although the rigor demonstrated in the example above is not strictly required
-    when the shared state consists only of a single float, it becomes necessary
-    when there are dynamically allocated objects with complex interactions in the
-    shared state.
+    Although the rigor demonstrated in the example above is not strictly
+    required when the shared state consists only of a single float, it
+    becomes necessary when there are dynamically allocated objects with complex
+    interactions in the shared state.
 
     @see CallQueue
 */
@@ -302,7 +302,7 @@ private:
     Entries m_entries;
   };
 
-public:
+protected:
   ListenersBase ();
   ~ListenersBase ();
 
@@ -311,12 +311,11 @@ public:
     return *m_callAllocator;
   }
 
-  void callp        (Call::Ptr c);
-  void queuep       (Call::Ptr c);
-
-protected:
   void add_void     (void* const listener, CallQueue& callQueue);
   void remove_void  (void* const listener);
+
+  void callp        (Call::Ptr c);
+  void queuep       (Call::Ptr c);
   void call1p_void  (void* const listener, Call* c);
   void queue1p_void (void* const listener, Call* c);
   void updatep      (void const* const member,
@@ -360,87 +359,27 @@ private:
   private:
     Functor m_f;
   };
-#endif
 
-public:
-  //
-  // Add a listener to receive call notifications.
-  //
-  //  #1 All other functions are blocked during add().
-  //  #2 The listener's receipt of every subsequent call() is guaranteed.
-  //  #3 Member functions are called on the specified thread queue.
-  //  #4 The listener must not already exist in the list.
-  //  #5 This can be called from any thread.
-  // 
-  void add (ListenerClass* const listener, CallQueue& callQueue)
-  {
-    add_void (listener, callQueue);
-  }
-  void add (ListenerClass* const listener, CallQueue* callQueue)
-  {
-    add (listener, *callQueue);
-  }
-
-  //
-  // Remove a listener from the list
-  //
-  //  #1 All other functions are blocked during remove().
-  //  #2 The listener is guaranteed not to receive calls
-  //     after remove() returns.
-  //  #3 The listener must exist in the list.
-  //  #4 This can be called from any thread.
-  //
-  // A listener should always be removed before it's corresponding
-  //   CallQueue is closed.
-  //
-  void remove (ListenerClass* const listener)
-  {
-    remove_void (listener);
-  }
-
-  //
-  // Call a specified member function on every listener's associated
-  // CallQueue with the given functor.
-  //
-  //  #1 The arguments must match the function signature.
-  //  #2 A listener that removes itself afterwards may not get called.
-  //  #3 Calls from the same thread always execute in order.
-  //  #4 Listener members are always invoked immediately in call() by the
-  //     current thread of execution if it matches the thread used
-  //     by the listener's thread queue. This happens before call() returns.
-  //  #5 A listener can always remove itself even if there are pending calls.
-  //
-
-  // Queue a call to a single listener.
-  // The CallQueue is processed if called on the associated thread.
-  //
-  inline void call1p (ListenerClass* const listener, Call::Ptr c)
-  {
-    call1p_void (listener, c);
-  }
-
-  // Queue a call to a single listener.
-  //
-  inline void queue1p (ListenerClass* const listener, Call::Ptr c)
-  {
-    queue1p_void (listener, c);
-  }
-
-  // Queue a call to all listeners.
-  // The CallQueue is processed if called on the associated thread.
-  //
   template <class Functor>
   inline void callf (const Functor& f)
   {
     callp (new (getCallAllocator ()) CallType <Functor> (f));
   }
 
-  // Queue a call to all listeners.
-  //
   template <class Functor>
   inline void queuef (const Functor& f)
   {
     queuep (new (getCallAllocator ()) CallType <Functor> (f));
+  }
+
+  inline void call1p (ListenerClass* const listener, Call::Ptr c)
+  {
+    call1p_void (listener, c);
+  }
+
+  inline void queue1p (ListenerClass* const listener, Call::Ptr c)
+  {
+    queue1p_void (listener, c);
   }
 
   template <class Functor>
@@ -461,10 +400,140 @@ public:
     updatep (reinterpret_cast <void*> (&member), sizeof (Member),
              new (getCallAllocator ()) CallType <Functor> (f));
   }
+#endif
 
+public:
+  /** Add a listener.
+
+      The specified listener is associated with the specified CallQueue and
+      added to the list.
+
+      Invariants:
+
+      - All other members of Listeners are blocked during add().
+
+      - The listener is guaranteed to receive every subsequent call.
+
+      - The listener must not already exist in the list.
+
+      - Safe to call from any thread.
+
+      @param listener   The listener to add.
+      @param callQueue  The CallQueue to associate with the listener.
+  */
+  void add (ListenerClass* const listener, CallQueue& callQueue)
+  {
+    add_void (listener, callQueue);
+  }
+
+  /** Remove a listener.
+
+      The specified listener, which must have been previously added, is removed
+      from the list. A listener always needs to remove itself before the
+      associated CallQueue is closed.
+
+      Invariants:
+
+      - All other members of Listeners are blocked during remove().
+
+      - The listener is guaranteed not to receive calls after remove() returns.
+
+      - Safe to call from any thread.
+
+      @param listener The listener to remove.
+  */
+  void remove (ListenerClass* const listener)
+  {
+    remove_void (listener);
+  }
+
+  /** Call a member function on every added listener, on its associated
+      CallQueue.
+
+      A listener's CallQueue will be synchronized if this function is called
+      from it's associated thread.
+
+      Invariants:
+
+      - A listener that later removes itself afterwards may not get called.
+
+      - Calls from the same thread always execute in order.
+
+      - A listener can remove itself even if it has a pending call.
+
+      @param mf The member function to call. This may be followed by up to 8
+                arguments.
+  */
   template <class Mf>
   inline void call (Mf mf)
-  { callf (vf::bind (mf, vf::_1)); }
+  {
+    callf (vf::bind (mf, vf::_1));
+  }
+
+  /** Queue a member function on every added listener, without synchronizing.
+
+      Operates like call(), but no CallQueue synchronization takes place. This
+      can be necessary when the call to queue() is made inside a held lock.
+
+      @param mf The member function to call. This may be followed by up to 8
+                arguments.
+  */
+  template <class Mf>
+  inline void queue (Mf mf)
+  {
+    queuef (vf::bind (mf, vf::_1));
+  }
+
+  /** Call a member function on every added listener, replacing pending
+      calls to the same member.
+
+      This operates like call(), except that if there are pending unprocessed
+      calls to the same member function,they will be replaced, with the previous
+      parameters destroyed normally. This functionality is useful for
+      high frequency notifications of non critical data, where the recipient
+      may not catch up often enough. For example, the output level of the
+      audioDeviceIOCallback in the example is a candidate for the use of
+      update().
+
+      @param mf The member function to call. This may be followed by up to 8
+                arguments.
+  */
+  template <class Mf>
+  inline void update (Mf mf)
+  { updatef (mf, vf::bind (mf, vf::_1)); }
+
+  /** Call a member function on a specific listener.
+
+      Like call(), except that one listener is targeted only. This is useful when
+      builing complex behaviors during the addition of a listener, such as
+      providing an initial state.
+
+      @param listener The listener to call.
+      @param mf       The member function to call. This may be followed by up
+                      to 8 arguments.
+  */
+  template <class Mf>
+  inline void call1 (ListenerClass* const listener, Mf mf)
+  {
+    call1f (listener, vf::bind (mf, vf::_1));
+  }
+
+  /** Queue a member function on a specific listener.
+
+      Like call1(), except that no CallQueue synchronization takes place.
+
+      @param listener The listener to call.
+      @param mf       The member function to call. This may be followed by up
+                      to 8 arguments.
+  */
+  template <class Mf>
+  inline void queue1 (ListenerClass* const listener, Mf mf)
+  {
+    queue1f (listener, vf::bind (mf, vf::_1));
+  }
+
+#ifndef DOXYGEN
+  /* Automatic binding for up to 8 arguments */
 
   template <class Mf, typename  T1>
   inline void call (Mf mf,   const T1& t1)
@@ -508,14 +577,6 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { callf (vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
-  //
-  // Queue a call without synchronizing
-  //
-
-  template <class Mf>
-  inline void queue (Mf mf)
-  { queuef (vf::bind (mf, vf::_1)); }
-
   template <class Mf, typename  T1>
   inline void queue (Mf mf,  const T1& t1)
   { queuef (vf::bind (mf, vf::_1, t1)); }
@@ -557,13 +618,6 @@ public:
   inline void queue (Mf mf,  const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queuef (vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
-
-  // These are for targeting individual listeners.
-  // Use carefully!
-
-  template <class Mf>
-  inline void call1 (ListenerClass* const listener, Mf mf)
-  { call1f (listener, vf::bind (mf, vf::_1)); }
 
   template <class Mf, typename  T1>
   inline void call1 (ListenerClass* const listener,
@@ -615,10 +669,6 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { call1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
-  template <class Mf>
-  inline void queue1 (ListenerClass* const listener, Mf mf)
-  { queue1f (listener, vf::bind (mf, vf::_1)); }
-
   template <class Mf, typename  T1>
   inline void queue1 (ListenerClass* const listener,
                Mf mf, const T1& t1)
@@ -669,18 +719,6 @@ public:
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queue1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
-  //
-  // update()
-  //
-  // Like call(), but if there is a previous unprocessed call for
-  // the same member f, the previous call is replaced. It is
-  // up to the caller to determine if this behavior is desired.
-  //
-
-  template <class Mf>
-  inline void update (Mf mf)
-  { updatef (mf, vf::bind (mf, vf::_1)); }
-
   template <class Mf, typename  T1>
   inline void update (Mf mf,  const T1& t1)
   { updatef (mf, vf::bind (mf, vf::_1, t1)); }
@@ -722,6 +760,8 @@ public:
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { updatef (mf, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+#endif
+
 };
 
 #endif

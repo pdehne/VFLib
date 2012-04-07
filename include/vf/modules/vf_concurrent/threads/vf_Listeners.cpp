@@ -124,10 +124,11 @@ struct ListenersBase::Group::Entry : List::Node,
 };
 
 //------------------------------------------------------------------------------
-
 //
 // Group
 //
+//------------------------------------------------------------------------------
+
 // - A list of listeners associated with the same CallQueue.
 //
 // - The list is only iterated on the CallQueue's thread.
