@@ -4,8 +4,13 @@
 #ifndef VF_CORE_VFHEADER
 #define VF_CORE_VFHEADER
 
+#include "vf_StandardHeader.h"
+
 namespace vf
 {
+
+#include "memory/vf_Uncopyable.h"
+
 #include "containers/vf_List.h"
 
 #include "diagnostic/vf_CatchAny.h"
@@ -32,7 +37,6 @@ namespace vf
 #include "memory/vf_AtomicState.h"
 #include "memory/vf_CacheLine.h"
 #include "memory/vf_MemoryAlignment.h"
-#include "memory/vf_Uncopyable.h"
 #include "memory/vf_ReferenceCountedSingleton.h"
 #include "memory/vf_StaticObject.h"
 

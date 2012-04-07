@@ -6,8 +6,15 @@
 
 #include "../vf_core/vf_core.h"
 
+#if JUCE_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4100) // unreferenced formal parameter
+#pragma warning (disable: 4355) // 'this' : used in base member initializer list
+#endif
+
 namespace vf
 {
+
 #include "vf_TransparentBorder.h"
 
 #include "vf_LabColour.h"
@@ -25,7 +32,12 @@ namespace vf
 
 #include "vf_ComponentBroadcast.h"
 #include "vf_ConnectedEdges.h"
+
 }
+
+#if JUCE_MSVC
+#pragma warning (pop)
+#endif
 
 #endif
 

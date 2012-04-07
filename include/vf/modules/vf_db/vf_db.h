@@ -23,6 +23,11 @@ class session;						// statement.h
 }
 }
 
+#if JUCE_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4355) // 'this' : used in base member initializer list
+#endif
+
 namespace vf
 {
 
@@ -54,5 +59,9 @@ namespace vf
 #include "api/session.h"
 
 }
+
+#if JUCE_MSVC
+#pragma warning (pop)
+#endif
 
 #endif

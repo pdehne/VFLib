@@ -88,6 +88,9 @@
     <Filter Include="VF Modules\vf_concurrent\containers">
       <UniqueIdentifier>{c94bd814-679b-4bee-a240-8662a6af31aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AppConfigTemplate">
+      <UniqueIdentifier>{43253bc6-21fd-48b8-93f5-61505c414485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -437,21 +440,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf_boost_includes.h">
-      <Filter>Junk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf_Config.h">
-      <Filter>Junk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf_juce_includes.h">
-      <Filter>Junk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf_StandardHeader.h">
-      <Filter>Junk</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf_stdlib_includes.h">
-      <Filter>Junk</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
@@ -521,9 +509,14 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppConfig.h" />
     <ClInclude Include="..\..\include\vf\vf.h">
       <Filter>VF Library Code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_StandardHeader.h">
+      <Filter>VF Modules\vf_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppConfig.h">
+      <Filter>AppConfigTemplate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -250,6 +250,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_StandardHeader.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\into.h" />
@@ -288,11 +289,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h" />
     <ClInclude Include="..\..\include\vf\vf.h" />
-    <ClInclude Include="..\..\include\vf\vf_boost_includes.h" />
-    <ClInclude Include="..\..\include\vf\vf_Config.h" />
-    <ClInclude Include="..\..\include\vf\vf_juce_includes.h" />
-    <ClInclude Include="..\..\include\vf\vf_StandardHeader.h" />
-    <ClInclude Include="..\..\include\vf\vf_stdlib_includes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6F6AC608-6440-4E8F-B15F-691C47180FA4}</ProjectGuid>
@@ -329,7 +325,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;..\..\..\..\boost_1_46_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -340,14 +336,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;..\..\..\..\boost_1_46_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
