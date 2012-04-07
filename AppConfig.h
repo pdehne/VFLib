@@ -6,7 +6,17 @@
 
 /** AppConfig.h template
 
+    Append this section to your AppConfig.h to control VFLib build options.
 */
+
+/* If boost is available, and your project is configured to find the includes
+   and libraries, this can be turned on.
+*/
+#ifndef VF_HAVE_BOOST
+#define VF_HAVE_BOOST 0
+#endif
+
+//==============================================================================
 
 #define JUCE_CHECK_MEMORY_LEAKS 1
 

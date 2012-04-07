@@ -4,7 +4,7 @@
 #ifndef VF_FIFOFREESTOREWITHTLS_VFHEADER
 #define VF_FIFOFREESTOREWITHTLS_VFHEADER
 
-#if VF_USING_BOOST
+#if VF_HAVE_BOOST
 
 #include "vf_GlobalPagedFreeStore.h"
 

@@ -7,7 +7,7 @@
 #include "vf_FifoFreeStoreWithTLS.h"
 #include "vf_FifoFreeStoreWithoutTLS.h"
 
-#if VF_USING_BOOST
+#if VF_HAVE_BOOST
 typedef FifoFreeStoreWithTLS FifoFreeStoreType;
 #else
 typedef FifoFreeStoreWithoutTLS FifoFreeStoreType;

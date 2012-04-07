@@ -4,11 +4,11 @@
 #ifndef __VF_BOOST_INCLUDES_VFHEADER__
 #define __VF_BOOST_INCLUDES_VFHEADER__
 
-#ifndef VF_USING_BOOST
-#define VF_USING_BOOST 0
+#ifndef VF_HAVE_BOOST
+#define VF_HAVE_BOOST 0
 #endif
 
-#if VF_USING_BOOST
+#if VF_HAVE_BOOST
 #include <boost/thread/tss.hpp>
 #endif
 
