@@ -193,7 +193,6 @@ protected:
       Due to the implementation the queue can remain signaled for one extra
       cycle. This does not happen under load and is not an issue in practice.
   */
-
   virtual void signal () = 0;
 
   /** Notification when a queue becomes empty */

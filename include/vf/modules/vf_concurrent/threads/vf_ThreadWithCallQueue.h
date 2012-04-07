@@ -6,21 +6,21 @@
 
 #include "vf_CallQueue.h"
 
-/***
-*/
-//
-// CallQueue that comes with its own thread of execution used
-// to process calls. When there are no calls to synchronize,
-// an idle function will run. The idle function must either
-// return quickly, or periodically return the result of the
-// interruptionPoint() function in order to stop what it is
-// doing in order to process new calls.
-//
+//==============================================================================
+/** An InterruptibleThread with a CallQueue.
 
-// Factored out the types so that callers don't need to
-// supply template arguments when they want to use a type,
-// for example, idle_t::None()
-//
+    This combines an InterruptibleThread with a CallQueue, allowing functors to
+    be queued for asynchronous execution on the thread.
+
+    The thread runs an optional user-defined idle function, which must regularly
+    check for an interruption using the InterruptibleThread interface. When an
+    interruption is signaled, the idle function returns and the CallQueue is
+    synchronized. Then, the idle function is resumed.
+
+    When the ThreadWithCallQueue first starts up, an optional user-defined
+    initialization function is executed on the thread. When the thread exits,
+    a user-defined exit function may be executed on the thread.
+*/
 class ThreadWithCallQueue : public CallQueue
 {
 public:
@@ -28,8 +28,18 @@ public:
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
+  /** Create a ThreadWithCallQueue.
+
+      @param name The name of the InterruptibleThread and CallQueue, used
+                  for diagnostics when debugging.
+  */
   explicit ThreadWithCallQueue (String name);
 
+  /** Destroy a ThreadWithCallQueue.
+
+      If the thread is still running it is stopped. The destructor blocks
+      until the thread exits cleanly.
+  */
   ~ThreadWithCallQueue ();
 
   //
@@ -52,10 +62,6 @@ public:
   //
   void stop (bool const wait);
 
-  // Sugar
-  void stop_request () { stop (false); }
-  void stop_and_wait () { stop (true); }
-
   // Should be called periodically by the idle function.
   // There are three possible results:
   //
@@ -72,8 +78,8 @@ public:
   void interrupt ();
 
 private:
-  void reset ();
   void signal ();
+  void reset ();
 
   void do_stop ();
   void run ();

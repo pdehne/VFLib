@@ -12,7 +12,7 @@ ThreadWithCallQueue::ThreadWithCallQueue (String name)
 
 ThreadWithCallQueue::~ThreadWithCallQueue ()
 {
-  stop_and_wait ();
+  stop (true);
 }
 
 void ThreadWithCallQueue::start (idle_t worker_idle,
@@ -88,13 +88,13 @@ void ThreadWithCallQueue::interrupt ()
   call (Function <void (void)>::None ());
 }
 
-void ThreadWithCallQueue::reset ()
-{
-}
-
 void ThreadWithCallQueue::signal ()
 {
   m_thread.interrupt ();
+}
+
+void ThreadWithCallQueue::reset ()
+{
 }
 
 void ThreadWithCallQueue::do_stop ()

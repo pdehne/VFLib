@@ -17,7 +17,7 @@ private:
 
   ~Deleter ()
   {
-    m_fifo.stop_and_wait ();
+    m_fifo.stop (true);
   }
 
 private:
