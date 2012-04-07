@@ -4,36 +4,35 @@
 #ifndef VF_LOCKFREEQUEUE_VFHEADER
 #define VF_LOCKFREEQUEUE_VFHEADER
 
+//==============================================================================
+/** Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
+
+    This container uses the same intrusive interface as List. It is wait-free
+    for producers and lock-free for consumers. The caller is responsible for
+    preventing the ABA problem (http://en.wikipedia.org/wiki/ABA_problem)
+
+    Invariants:
+
+    - Any thread may call push_back() at any time (Multiple Producer).
+
+    - Only one thread may call try_pop_front() at a time (Single Consumer)
+
+    - The queue is signaled if there are one or more elements.
+
+    @param Tag  A type name used to distinguish lists and nodes, for
+                putting objects in multiple lists. If this parameter is
+                omitted, the default tag is used.
+*/
+
 #ifndef DOXYGEN
 struct LockFreeQueueDefaultTag { };
 #endif
 
-/***
-  Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
-
-  This implementation is wait-free for producers and lock-free
-  for consumers.
-
-  Invariants:
-
-  #1 Any thread may call push_back() at any time (Multiple Producer).
-
-  #2 Only one thread may call try_pop_front() at a time (Single Consumer)
-
-  #3 The queue is signaled if there are one or more elements.
-
-  The caller is responsible for preventing the ABA problem.
-*/
 template <class Element, class Tag = LockFreeQueueDefaultTag>
 class LockFreeQueue
 {
 public:
-  /* Base class for objects which may be placed into this queue.
-     
-     Derive your elements from this class. To put objects into more
-     than one queue at once, use different Tag types and inherit
-     from each Node.
-   */
+#ifndef DOXYGEN
   class Node : Uncopyable
   {
   public:
@@ -47,8 +46,10 @@ public:
 
     AtomicPointer <Node> m_next;
   };
+#endif
 
 public:
+  /** Create an empty list. */
   LockFreeQueue ()
     : m_head ((Node*)m_null)
     , m_tail ((Node*)m_null)
@@ -56,19 +57,23 @@ public:
   {
   }
 
-  /** Returns true if the queue is empty.
+  /** Determine if the list is empty.
+  
+      This is not thread safe, the caller must synchronize.
 
-      This is not thread safe, and the caller must synchronize.
+      @return   `true` if the list is empty.
   */
   bool empty () const
   {
     return (m_head->get () == m_tail);
   }
 
-  /** Place an element at the back of the queue, returning true if
-      the queue was previously empty.
+  /** Put an element into the list.
+  
+      This operation is wait-free.
 
-      The call is wait-free.
+      @return   `true` if the list was previously empty.
+
   */
   bool push_back (Node* node)
   {
@@ -85,10 +90,11 @@ public:
     return prev == m_null;
   }
 
-  /** Pop an element from the front of the queue, returning nullptr
-      if the queue is empty.
+  /** Retrieve an element from the list.
 
-      The call is lock-free.
+      This operation is lock-free.
+
+      @return   The element, or nullptr if the list was empty.
   */
   Element* pop_front ()
   {
@@ -108,15 +114,20 @@ public:
     return elem;
   }
 
-  /** Attempt to pop an element from the front of the queue, returning
-      true if the operation was successful.
+  /** Attempt to retrieve an element.
 
-      A pop operation is successful if there is no contention for the queue.
-      On success, the value of *pElem is set to the popped element if it
-      exists, or nullptr if the queue was empty. On failure, the value
-      of *pElem is undefined.
+      This attempts to pop an element from the front of the list. The return
+      value indicates if the operation was successful. An operation is
+      successful if there is no contention for the list. On a successful
+      operation, an element is returned if the list was non empty, else nullptr
+      is returned. On failure, the returned element is undefined.
 
-      This call is wait-free.
+      This operation is wait-free.
+
+      @param pElem [out]  The element that was retrieved, or nullptr if the
+                          list was empty.
+
+      @return             `true` if the list was uncontended.
   */
   bool try_pop_front (Element** pElem)
   {

@@ -4,6 +4,7 @@
 #ifndef VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
 #define VF_AUDIOSAMPLEBUFFERARRAY_VFHEADER
 
+//==============================================================================
 // lightweight object to track an adjustable array of pointers to audio data.
 template <int Channels = 2>
 class AudioSampleBufferArray

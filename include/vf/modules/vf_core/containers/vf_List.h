@@ -20,7 +20,7 @@
     which don't support intrusive techniques. List not only reintroduces this
     technique to C++ for doubly linked lists, but also encapsulates the
     implementation in a mostly compliant STL interface. Hence anyone familiar
-    with standard containers can easily use List.
+    with standard containers can easily use it.
 
     To use the list, we first derive the object we want to place into the list
     from List::Node:
@@ -65,11 +65,14 @@
 
     @endcode
 
-    You can even use FOREACH, or range based for loops:
+    You can even use BOOST_FOREACH, or range based for loops:
 
     @code
 
-    BOOST_FOREACH (Object& object, list)
+    BOOST_FOREACH (Object& object, list)  // boost only
+      std::cout << object.m_value;
+
+    for (Object& object : list)           // c++11 only
       std::cout << object.m_value;
 
     @endcode
@@ -78,7 +81,7 @@
     e.g. std::for_each() or std::find_first_of.
 
     In general, objects placed into a List should be dynamically allocated
-    although this cannot be enforced at compie time. Since the caller provides
+    although this cannot be enforced at compile time. Since the caller provides
     the storage for the object, the caller is also responsible for deleting the
     object. An object still exists after being removed from a List, until the
     caller deletes it. This means an element can be moved from one List to
@@ -112,6 +115,10 @@
     };
 
     @endcode
+
+    @param Tag  A type name used to distinguish lists and nodes, for
+                putting objects in multiple lists. If this parameter is
+                omitted, the default tag is used.
 */
 
 #ifndef DOXYGEN

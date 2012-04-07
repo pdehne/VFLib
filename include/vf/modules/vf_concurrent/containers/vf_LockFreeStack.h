@@ -4,16 +4,24 @@
 #ifndef VF_LOCKFREESTACK_VFHEADER
 #define VF_LOCKFREESTACK_VFHEADER
 
+//==============================================================================
+/** Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
+
+    This stack is implemented using the same intrusive interface as List. All
+    operations are lock-free.
+
+    The caller is responsible for preventing the "ABA" problem
+      (http://en.wikipedia.org/wiki/ABA_problem)
+
+    @param Tag  A type name used to distinguish lists and nodes, for
+                putting objects in multiple lists. If this parameter is
+                omitted, the default tag is used.
+*/
+
 #ifndef DOXYGEN
 struct LockFreeStackDefaultTag { };
 #endif
 
-/** Lock-free intrusive stack.
-
-    This stack is implemented using the same intrusive interface as List.
-
-    The caller is responsible for preventing the "ABA" problem.
-*/
 template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
 {
@@ -29,6 +37,9 @@ public:
 	explicit Node (Node* next) : m_next (next)
 	{
 	}
+  
+  private:
+    friend class LockFreeStack;
 
     AtomicPointer <Node> m_next;
   };
@@ -61,8 +72,8 @@ public:
 
   /** Push a node onto the stack.
 
-      This operation is lock-free. Caller is responsible for preventing the
-      ABA problem.
+      The caller is responsible for preventing the ABA problem. This operation
+      is lock-free. 
 
       @param node The node to push.
 
@@ -87,7 +98,8 @@ public:
 
   /** Pop an element off the stack.
 
-      The caller is responsible for preventing the ABA problem.
+      The caller is responsible for preventing the ABA problem. This operation
+      is lock-free. 
 
       @return   The element that was popped, or nullptr if the stack was empty.
   */
