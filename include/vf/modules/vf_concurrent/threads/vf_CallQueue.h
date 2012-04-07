@@ -12,41 +12,48 @@
 /** 
     A FIFO for calling functors asynchronously.
 
-    @todo Discussion of synchronization concept and time evolution of mutable state
-
     This object is an alternative to traditional locking techniques used to
     implement concurrent systems. Instead of acquiring a mutex to change shared
-    data, a functor is queued for execution on another thread. The functor
-    typically performs the operation that was previously executed within a lock
-    (i.e. CriticalSection).
+    data, a functor is queued for later execution (usually on another thread). The
+    execution of the functor applies the transformation to the shared state that
+    was formerly performed within a lock (i.e. CriticalSection).
 
-    For reading operations on shared data, instead of acquiring a mutex and
+    For read operations on shared data, instead of acquiring a mutex and
     accessing the data directly, copies are made (one for each thread), and the
-    thread accesses its copy without taking a lock. One thread owns the master
-    data. It is to this thread that requests to change the data are posted to
-    the CallQueue. When the owning thread updates the shared data, it then in
-    turn posts calls to other threads (using the CallQueue again) with functors
-    that incrementally update portions of the copy of the data.
+    thread accesses its copy without acquiring a lock. One thread owns the master
+    copy of the shared state. Requests for changing shared state are made by other
+    threads by posting functors to the master thread's CallQueue. The master
+    thread notifies other threads of changes by posting functors to their
+    respective associated CallQueue, using the Listeners interface.
 
-    Setting up a system to use this method of shared data access requires more
-    work up front and a small increase in complexity of objects used in the
-    system. For example, when dynamically allocated objects of class type are
-    part of the shared data (which is expected, for all but the most trivial
-    systems), it becomes necessary to make objects reference counted.
+    The purpose of the functor is to encapsulate one mutation of shared state to
+    guarantee progress towards a consensus of the concurrent data among
+    participating threads. Functors should execute quickly, ideally in constant
+    time. Dynamically allocated objects of class type passed as functor parameters
+    should, in general, be reference counted. The ConcurrentObject class is ideal
+    for meeting this requirement, and has the additional benefit that the workload
+    of deletion is performed on a separate, provided thread. This queue is not a
+    replacement for a thread pool or job queue type system.
 
-    The benefits of this model are significant, however. Since functors only
-    execute at well defined times (via the call to synchronize()), under control
-    of the associated thread, the programmer can reason and make strong
-    statements about the correctness of the concurrent system. For example, if
-    the audioDeviceIOCallback calls process() on its CallQueue at the beginning
-    of its execution and nowhere else, we can be assured that shared data will
-    only be changed at the defined point.
+    A CallQueue is considered signaled when one or more functors are present.
+    Functors are executed during a call to synchronize(). The operation of
+    executing functors via the call to synchronize() is called synchronizing
+    the queue. It can more generally be thought of as synchronizing multiple
+    copies of shared data between threads.
 
-    Avoiding locking by making copies of shared data requires additional set up
-    and maintenance, but is rewarded by an increase in performance. Readers of
-    the shared data have carte blanch to access their copy in any manner
-    desired, with the invariant that the data will not change except across a
-    call to synchronize().
+    Although there is some extra work required to set up and maintain this
+    system, the benefits are significant. Since shared data is only synchronized
+    at well defined times, the programmer can reason and make strong statements
+    about the correctness of the concurrent system. For example, if the
+    audioDeviceIOCallback synchronizes the CallQueue only at the beginning of its
+    execution, it is guaranteed that shared data will remain the same throughout
+    the remainder of the function.
+
+    Because shared data is accessed for reading without a lock, upper bounds
+    on the run time performance can easily be calculated and assured. Compare
+    this with the use of a mutex - the run time performance experiences a
+    combinatorial explosion of possibilities depending on the complex interaction
+    of multiple threads.
 
     Since a CallQueue is almost always used to invoke parameterized member
     functions of objects, the call() function comes in a variety of convenient
@@ -85,12 +92,6 @@
     }
 
     @endcode
-
-    Functors should execute quickly, ideally in constant time. This queue is
-    not a replacement for a thread pool or job queue type system. The purpose
-    of a functor is to trigger the time evolution of mutable data towards a
-    consensus among multiple threads. Objects of class type passed as
-    parameters should, in general, be reference counted.
 
     Invariants:
 
@@ -169,7 +170,7 @@ protected:
 
       Derived class call this when the queue is signaled, and optionally at any
       additional time. Calling this function from more than one thread
-      simultaneously results in undefined behavior.
+      simultaneously is undefined.
 
       @return  `true` if any functors were executed.
   */

@@ -12,16 +12,16 @@
 //==============================================================================
 /** A group of concurrent Listeners.
 
-    A Listener is an object of class type which inherits from a defined interface,
-    and registers on a provided instance of Listeners to receive asynchronous
-    notifications of changes to concurrent states. Another way of defining
-    Listeners, is that it is similar to a Juce ListenerList but with the provision that the Listener additional
-    that the Listener specifies the CallQueue upon which the notification is made,
-    at the time it registers.
+    A Listener is an object of class type which inherits from a defined
+    interface, and registers on a provided instance of Listeners to receive
+    asynchronous notifications of changes to concurrent states. Another way of
+    defining Listeners, is that it is similar to a Juce ListenerList but with
+    the provision that the Listener additional that the Listener specifies the
+    CallQueue upon which the notification is made, at the time it registers.
 
     Listeners makes extensive use of CallQueue for providing the notifications,
-    and provides another object used to implement the concurrent synchronization
-    strategy outlined in the CallQueue documentation. Therefore, the same notes
+    and provides a higher level facility for implementing the concurrent
+    synchronization strategy outlined in CallQueue. Therefore, the same notes
     which apply to functors in CallQueue also apply to Listener member
     invocations. Their execution time should be brief, limited in scope to
     updating the recipient's view of a shared state, and use reference counting
@@ -110,13 +110,13 @@
 
     @code
 
-    // Handles audio device output
+    // Handles audio device output.
     class AudioDeviceOutput : public AudioIODeviceCallback
     {
     public:
       struct Listener
       {
-        // Sent on every output block
+        // Sent on every output block.
         virtual void onOutputLevelChanged (float outputLevel) { }
       };
 
@@ -126,21 +126,21 @@
 
       ~AudioDeviceOutput ()
       {
-        // Handle any remaining functors to prevent leaks
-        m_fifo.process ();
+        // Synchronize required since we're using a ManualCallQueue.
+        m_fifo.synchronize ();
 
         m_fifo.close ();
       }
 
       void addListener (Listener* listener, CallQueue& callQueue)
       {
-        // Prepare to read the shared state
-        SharedStateType::ReadAccess state (m_state);
+        // Acquire read access to the shared state.
+        ConcurrentState <State>::ReadAccess state (m_state);
 
-        // Add the listener
+        // Add the listener.
         m_listeners.add (listener, callQueue);
 
-        // Queue an update for the listener so it gets the initial state
+        // Queue an update for the listener to receive the initial state.
         m_listeners.queue1 (listener,
                             &Listener::onOutputLevelChanged,
                             state->outputLevel);
@@ -158,39 +158,45 @@
 							      int numOutputChannels,
 							      int numSamples)
       {
-        // Process our fifo
+        // Synchronize our call queue. Not needed for this example but
+        // included here as a best-practice for audio device I/O callbacks.
+        m_fifo.synchronize ();
 
-        // Process audio data
+        // (Process audio data)
 
-        // Calculate output level
+        // Calculate output level.
         float newOutputLevel = calcOutputLevel ();
 
-        // Update shared state
+        // Update shared state.
         {
-          SharedStateType::WriteAccess state (m_state);
+          ConcurrentState <State>::WriteAccess state (m_state);
           
           m_state->outputLevel = newOutputLevel;
         }
 
-        // Notify listeners
+        // Notify listeners.
         listeners.call (&Listener::onOutputLevelChanged, newOutputLevel);
       }
 
     private:
-      struct SharedState
+      struct State
       {
-        SharedState () : outputLevel (0) { }
+        State () : outputLevel (0) { }
+
         float outputLevel;
       };
 
-      typedef ConcurrentState <SharedState> SharedStateType;
-
-      SharedStateType <SharedState> m_state;
+      ConcurrentState <State> m_state;
 
       ManualCallQueue m_fifo;
     };
 
     @endcode
+
+    Although the rigor demonstrated in the example above is not strictly required
+    when the shared state consists only of a single float, it becomes necessary
+    when there are dynamically allocated objects with complex interactions in the
+    shared state.
 
     @see CallQueue
 */
@@ -336,7 +342,8 @@ private:
 template <class ListenerClass>
 class Listeners : public ListenersBase
 {
-public:
+private:
+#ifndef DOXYGEN
   template <class Functor>
   class CallType : public Call
   {
@@ -353,6 +360,7 @@ public:
   private:
     Functor m_f;
   };
+#endif
 
 public:
   //

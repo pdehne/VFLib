@@ -3,6 +3,11 @@
 
 #include "vf_concurrent.h"
 
+#if JUCE_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4100) // unreferenced formal parmaeter
+#endif
+
 namespace vf
 {
 #include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
@@ -18,3 +23,7 @@ namespace vf
 #include "threads/vf_ReadWriteMutex.cpp"
 #include "threads/vf_ThreadWorker.cpp"
 }
+
+#if JUCE_MSVC
+#pragma warning (pop)
+#endif

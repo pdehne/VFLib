@@ -3,6 +3,13 @@
 
 #include "vf_gui.h"
 
+#if JUCE_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4100) // unreferenced formal parmaeter
+#pragma warning (disable: 4355) // 'this' used in base member
+
+#endif
+
 namespace vf
 {
 #include "vf_TransparentBorder.cpp"
@@ -18,3 +25,7 @@ namespace vf
 #include "vf_DragAndDropTarget.cpp"
 #include "vf_MouseEnterEditable.cpp"
 }
+
+#if JUCE_MSVC
+#pragma warning (pop)
+#endif

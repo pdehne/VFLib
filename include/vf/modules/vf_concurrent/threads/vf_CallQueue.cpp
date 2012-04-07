@@ -33,7 +33,7 @@ void CallQueue::queuep (Call* c)
 }
 
 // Append the Call to the queue. If this call is made from the same
-// thread as the last thread that called process(), then the call
+// thread as the last thread that called synchronize(), then the call
 // will execute synchronously.
 //
 void CallQueue::callp (Call* c)
@@ -49,7 +49,7 @@ void CallQueue::callp (Call* c)
   //
   // NOTE: There is a small window of opportunity where we
   // might get an undesired synchronization if new thread
-  // calls process() concurrently.
+  // calls synchronize() concurrently.
   //
   if (isAssociatedWithCurrentThread () &&
       m_isBeingSynchronized.trySet ())

@@ -156,11 +156,6 @@ using VF_JUCE::uint8;
 #include <stdlib.h>
 #include <string.h>
 
-#if JUCE_MSVC
-#pragma warning (push)
-#pragma warning (disable: 4100) // Unused parameters
-#endif
-
 namespace vf
 {
 
@@ -175,22 +170,6 @@ template <> struct VfStaticAssert <true>
 #define static_vfassert(expression) \
   vf::VfStaticAssert <expression>::static_assert_failed ();
 
-// Stuff here is available without having to include it directly
-
-#if 0
-#include "vf/modules/vf_core/diagnostic/vf_Debug.h"
-#include "vf/modules/vf_core/diagnostic/vf_Error.h"
-#include "vf/modules/vf_core/diagnostic/vf_LeakChecked.h"
-#include "vf/modules/vf_core/memory/vf_Uncopyable.h"
-#include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
-#include "vf/modules/vf_core/memory/vf_StaticObject.h"
-#include "vf/modules/vf_core/diagnostic/vf_Throw.h"
-#endif
-
 }
-
-#if JUCE_MSVC
-#pragma warning (pop)
-#endif
 
 #endif
