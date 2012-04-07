@@ -108,7 +108,7 @@ void ThreadWorker::run ()
 
   for (;;)
   {
-    CallQueue::process ();
+    CallQueue::synchronize ();
 
     if (m_shouldStop)
       break;

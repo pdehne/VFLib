@@ -239,8 +239,8 @@ void ListenersBase::Group::queue1 (Call* const c,
 
 // Queues a reference to the Call on the thread queue of each listener
 // that is currently in our list. The thread queue must be in the
-// stack's call chain, either directly from CallQueue::process(),
-// or from Proxy::do_call() called from CallQueue::process().
+// stack's call chain, either directly from CallQueue::synchronize(),
+// or from Proxy::do_call() called from CallQueue::synchronize().
 //
 void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
 {
@@ -267,11 +267,11 @@ void ListenersBase::Group::do_call (Call* const c, const timestamp_t timestamp)
       {
         m_listener = entry->listener;
 
-        // The thread queue's process() function MUST be in our call
+        // The thread queue's synchronize() function MUST be in our call
         // stack to guarantee that these calls will not execute immediately.
         // They will be handled by the tail recusion unrolling in the
         // thread queue.
-        vfassert (m_fifo.isInProcess ());
+        vfassert (m_fifo.isBeingSynchronized ());
 
         m_fifo.callp (new (m_fifo.getAllocator()) CallWork (c, m_listener));
 
@@ -306,7 +306,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
         {
           m_listener = entry->listener;
 
-          vfassert (m_fifo.isInProcess ());
+          vfassert (m_fifo.isBeingSynchronized ());
 
           m_fifo.callp (new (m_fifo.getAllocator()) CallWork (c, m_listener));
 

@@ -41,7 +41,7 @@ GuiCallQueue::GuiCallQueue () : CallQueue ("GuiCallQueue")
 
   // Associate the CallQueue with the message thread right away.
   //
-  process ();
+  synchronize ();
 }
 
 void GuiCallQueue::close ()
@@ -49,9 +49,9 @@ void GuiCallQueue::close ()
   CallQueue::close ();
 }
 
-bool GuiCallQueue::process ()
+bool GuiCallQueue::synchronize ()
 {
-  return CallQueue::process ();
+  return CallQueue::synchronize ();
 }
 
 void GuiCallQueue::signal ()
@@ -65,7 +65,7 @@ void GuiCallQueue::reset ()
 
 void GuiCallQueue::handleAsyncUpdate()
 {
-  process ();
+  synchronize ();
 
   //updateAllTopLevelWindows ();
 }

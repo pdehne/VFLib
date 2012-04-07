@@ -10,7 +10,7 @@
 */
 //
 // CallQueue that comes with its own thread of execution used
-// to process calls. When there are no calls to process,
+// to process calls. When there are no calls to synchronize,
 // an idle function will run. The idle function must either
 // return quickly, or periodically return the result of the
 // interruptionPoint() function in order to stop what it is

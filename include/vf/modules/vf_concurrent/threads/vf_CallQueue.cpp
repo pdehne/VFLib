@@ -44,7 +44,7 @@ void CallQueue::callp (Call* c)
   // recursed into do_process, then process the queue. This
   // makes calls from the process thread synchronous.
   //
-  // NOTE: The value of isInProcess is invalid/volatile unless
+  // NOTE: The value of isBeingSynchronized is invalid/volatile unless
   // this thread is the last process thread.
   //
   // NOTE: There is a small window of opportunity where we
@@ -52,29 +52,29 @@ void CallQueue::callp (Call* c)
   // calls process() concurrently.
   //
   if (isAssociatedWithCurrentThread () &&
-      m_isInProcess.trySet ())
+      m_isBeingSynchronized.trySet ())
   {
     do_process ();
 
-    m_isInProcess.clear ();
+    m_isBeingSynchronized.clear ();
   }
 }
 
-bool CallQueue::process ()
+bool CallQueue::synchronize ()
 {
   bool did_something;
 
   // Detect recursion into do_process(), and
   // break ties for concurrent calls atomically.
   //
-  if (m_isInProcess.trySet ())
+  if (m_isBeingSynchronized.trySet ())
   {
     // Remember this thread.
     m_id = VF_JUCE::Thread::getCurrentThreadId ();
 
     did_something = do_process ();
 
-    m_isInProcess.clear ();
+    m_isBeingSynchronized.clear ();
   }
   else
   {

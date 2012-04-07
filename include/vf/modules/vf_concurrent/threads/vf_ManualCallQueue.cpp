@@ -11,9 +11,9 @@ void ManualCallQueue::close ()
   CallQueue::close ();
 }
 
-bool ManualCallQueue::process ()
+bool ManualCallQueue::synchronize ()
 {
-  return CallQueue::process ();
+  return CallQueue::synchronize ();
 }
 
 void ManualCallQueue::signal ()

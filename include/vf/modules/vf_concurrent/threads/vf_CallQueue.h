@@ -35,18 +35,18 @@
     systems), it becomes necessary to make objects reference counted.
 
     The benefits of this model are significant, however. Since functors only
-    execute at well defined times (via the call to process()), under control of
-    the associated thread, the programmer can reason and make strong statements
-    about the correctness of the concurrent system. For example, if the
-    audioDeviceIOCallback calls process() on its CallQueue at the beginning of
-    its execution and nowhere else, we can be assured that shared data will only
-    be changed at the defined point.
+    execute at well defined times (via the call to synchronize()), under control
+    of the associated thread, the programmer can reason and make strong
+    statements about the correctness of the concurrent system. For example, if
+    the audioDeviceIOCallback calls process() on its CallQueue at the beginning
+    of its execution and nowhere else, we can be assured that shared data will
+    only be changed at the defined point.
 
     Avoiding locking by making copies of shared data requires additional set up
     and maintenance, but is rewarded by an increase in performance. Readers of
     the shared data have carte blanch to access their copy in any manner
     desired, with the invariant that the data will not change except across a
-    call to process().
+    call to synchronize().
 
     Since a CallQueue is almost always used to invoke parameterized member
     functions of objects, the call() function comes in a variety of convenient
@@ -97,9 +97,9 @@
     - Functors can be added from any thread at any time,
       to any queue which is not closed.
 
-    - When process() is called, functors in the queue are executed and deleted.
+    - When synchronize() is called, functors are called and deleted.
 
-    - The thread from which process() is called is considered the thread
+    - The thread from which synchronize() is called is considered the thread
       associated with the CallQueue.
 
     - Functors queued by the same thread always execute in the same order
@@ -138,8 +138,8 @@ public:
   /** Add a function with no parameters and synchronize if possible.
 
       When a functor is added in a call made from the associated thread, this
-      routine will automatically call process(). This behavior can be avoided
-      by using queue() instead.
+      routine will automatically call synchronize(). This behavior can be
+      avoided by using queue() instead.
 
       @see queue
   */
@@ -173,7 +173,7 @@ protected:
 
       @return  `true` if any functors were executed.
   */
-  bool process ();
+  bool synchronize ();
 
   /** Close the queue.
 
@@ -187,7 +187,7 @@ protected:
 
       A queue is signaled on the transition from empty to non-empty. Derived
       classes implement this function to perform a notification so that
-      process() will be called. For example, by triggering a WaitableEvent.
+      synchronize() will be called. For example, by triggering a WaitableEvent.
 
       Due to the implementation the queue can remain signaled for one extra
       cycle. This does not happen under load and is not an issue in practice.
@@ -343,14 +343,14 @@ public:
   }
 
   /** Used internally to determine if the current thread of execution is the
-      last one used to process this queue.
+      last one used to synchronize this queue.
   */
   bool isAssociatedWithCurrentThread () const;
 
   /** Used internally for diagnostics to determine if the call queue is currently
-      inside process ().
+      inside synchronize ().
   */
-  bool isInProcess () const { return m_isInProcess.isSet(); }
+  bool isBeingSynchronized () const { return m_isBeingSynchronized.isSet(); }
 
   /** Add the Call without executing immediately. */
   void queuep (Call* call);
@@ -381,7 +381,7 @@ private:
   VF_JUCE::Thread::ThreadID m_id;
   Calls m_list;
   AtomicFlag m_closed;
-  AtomicFlag m_isInProcess;
+  AtomicFlag m_isBeingSynchronized;
   AllocatorType m_allocator;
 };
 

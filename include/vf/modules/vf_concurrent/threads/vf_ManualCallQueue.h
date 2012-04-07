@@ -6,10 +6,10 @@
 
 #include "vf_CallQueue.h"
 
-/** A CallQueue that requires periodic manual calls to process.
+/** A CallQueue that requires periodic manual synchronization.
 
     To use this, declare an instance and then place calls into it as usual.
-    Every so often, you must call process() from the thread you want to
+    Every so often, you must call synchronize() from the thread you want to
     associate with the queue. Typically this is done with the
     audioDeviceIOCallback:
 
@@ -23,7 +23,7 @@
 							    int numOutputChannels,
 							    int numSamples)
     {
-	  fifo.process ();
+	  fifo.synchronize ();
 
 	  // do audio i/o
     }
@@ -52,8 +52,8 @@ public:
   */
   void close ();
 
-  /** Process all functors in the queue. */
-  bool process ();
+  /** Synchronize the queue by calling all pending functors. */
+  bool synchronize ();
 
 private:
   void signal ();

@@ -34,7 +34,7 @@
     struct Listener
     {
       // Sent on every output block
-      virtual void onOutputLevels (const float outputLevels[2]) { }
+      virtual void onOutputLevelChanged (const float outputLevel) { }
     };
 
     @endcode
@@ -42,7 +42,7 @@
     Now set up the place where you want to send the notifications. In this
     example, we will set up the audioDeviceIOCallback to notify anyone who is
     interested about changes in the current audio output level. We will use
-    this to implement VU meter:
+    this to implement a VU meter:
 
     @code
 
@@ -56,15 +56,11 @@
     {
       // Process audio data
 
-      // Calculate output levels
-      float outputLevels [2];
-      calcOutputLevels (outputLevels,
-                        numOutputChannels,
-                        numSamples,
-                        outputChannelData);
+      // Calculate output level
+      float outputLevel = calcOutputLevel ();
 
       // Notify listeners
-      listeners.call (&Listener::onOutputLevels, outputLevels);
+      listeners.call (&Listener::onOutputLevelChanged, outputLevel);
     }
 
     @endcode
@@ -79,7 +75,7 @@
 
     struct VUMeter : public Listener, public Component
     {
-      VUMeter ()
+      VUMeter () : m_outputLevel (0)
       {
         listeners.add (this, fifo);
       }
@@ -89,17 +85,109 @@
         listeners.remove (this);
       }
 
-      void onOutputLevels (const float outputLevels[2])
+      void onOutputLevelChanged (float outputLevel)
       {
         // Update our copy of the output level shared state
-        m_outputLevels [0] = outputLevels [0];
-        m_outputLevels [1] = outputLevels [1];
+        m_outputLevel = outputLevel;
         
         // And repaint
         repaint ();
       }
 
-      float m_outputLevels [2];
+      float m_outputLevel;
+    };
+
+    @endcode
+
+    In this example, the VUMeter constructs with the output level set to zero,
+    and must wait for a notification before it shows up to date data. For a
+    simple VU meter, this is likely not a problem. But if the shared state
+    contains complex information, such as dynamically allocated objects with
+    rich data, then we need a more solid system.
+
+    We will add some classes to create a complete robust example of the use of
+    Listeners to synchronize shared state:
+
+    @code
+
+    // Handles audio device output
+    class AudioDeviceOutput : public AudioIODeviceCallback
+    {
+    public:
+      struct Listener
+      {
+        // Sent on every output block
+        virtual void onOutputLevelChanged (float outputLevel) { }
+      };
+
+      AudioDeviceOutput () : AudioDeviceOutput ("Audio CallQueue")
+      {
+      }
+
+      ~AudioDeviceOutput ()
+      {
+        // Handle any remaining functors to prevent leaks
+        m_fifo.process ();
+
+        m_fifo.close ();
+      }
+
+      void addListener (Listener* listener, CallQueue& callQueue)
+      {
+        // Prepare to read the shared state
+        SharedStateType::ReadAccess state (m_state);
+
+        // Add the listener
+        m_listeners.add (listener, callQueue);
+
+        // Queue an update for the listener so it gets the initial state
+        m_listeners.queue1 (listener,
+                            &Listener::onOutputLevelChanged,
+                            state->outputLevel);
+      }
+
+      void removeListener (Listener* listener)
+      {
+        m_listeners.remove (listener);
+      }
+
+    protected:
+      void audioDeviceIOCallback (const float** inputChannelData,
+							      int numInputChannels,
+							      float** outputChannelData,
+							      int numOutputChannels,
+							      int numSamples)
+      {
+        // Process our fifo
+
+        // Process audio data
+
+        // Calculate output level
+        float newOutputLevel = calcOutputLevel ();
+
+        // Update shared state
+        {
+          SharedStateType::WriteAccess state (m_state);
+          
+          m_state->outputLevel = newOutputLevel;
+        }
+
+        // Notify listeners
+        listeners.call (&Listener::onOutputLevelChanged, newOutputLevel);
+      }
+
+    private:
+      struct SharedState
+      {
+        SharedState () : outputLevel (0) { }
+        float outputLevel;
+      };
+
+      typedef ConcurrentState <SharedState> SharedStateType;
+
+      SharedStateType <SharedState> m_state;
+
+      ManualCallQueue m_fifo;
     };
 
     @endcode

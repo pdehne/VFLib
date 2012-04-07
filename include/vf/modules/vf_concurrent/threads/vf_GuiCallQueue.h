@@ -33,7 +33,7 @@ public:
 
       This can be called manually if needed
   */
-  bool process ();
+  bool synchronize ();
 
 private:
   void signal ();
