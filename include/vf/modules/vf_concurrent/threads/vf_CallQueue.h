@@ -9,108 +9,122 @@
 #include "../containers/vf_LockFreeQueue.h"
 
 //==============================================================================
-/**
-  A queue / fifo of functors.
+/** 
+    A FIFO for calling functors asynchronously.
 
-  This object is an alternative to traditional locking techniques used to
-  implement concurrent systems. Instead of acquiring a mutex to change shared
-  data, a functor is queued for execution on another thread. The functor
-  typically performs the operation that was previously executed within a lock
-  (i.e. CriticalSection).
+    @todo Discussion of synchronization concept and time evolution of mutable state
 
-  For reading operations on shared data, instead of acquiring a mutex and
-  accessing the data directly, copies are made (one for each thread), and the
-  thread accesses its copy without taking a lock. One thread owns the master
-  data. It is to this thread that requests to change the data are posted to the
-  CallQueue. When the owning thread updates the shared data, it then in turn
-  posts calls to other threads (using the CallQueue again) with functors that
-  incrementally update portions of the copy of the data.
+    This object is an alternative to traditional locking techniques used to
+    implement concurrent systems. Instead of acquiring a mutex to change shared
+    data, a functor is queued for execution on another thread. The functor
+    typically performs the operation that was previously executed within a lock
+    (i.e. CriticalSection).
 
-  Setting up a system to use this method of shared data access requires more
-  work up front and a small increase in complexity of objects used in the
-  system. For example, when dynamically allocated objects of class type are
-  part of the shared data (which is expected, for all but the most trivial
-  systems), it becomes necessary to make objects reference counted.
+    For reading operations on shared data, instead of acquiring a mutex and
+    accessing the data directly, copies are made (one for each thread), and the
+    thread accesses its copy without taking a lock. One thread owns the master
+    data. It is to this thread that requests to change the data are posted to
+    the CallQueue. When the owning thread updates the shared data, it then in
+    turn posts calls to other threads (using the CallQueue again) with functors
+    that incrementally update portions of the copy of the data.
 
-  The benefits of this model are significant, however. Since functors only
-  execute at well defined times (via the call to process()), under control of
-  the associated thread, the programmer can reason and make strong statements
-  about the correctness of the concurrent system. For example, if the
-  audioDeviceIOCallback calls process() on its CallQueue at the beginning of
-  its execution and nowhere else, we can be assured that shared data will only
-  be changed at the defined point.
+    Setting up a system to use this method of shared data access requires more
+    work up front and a small increase in complexity of objects used in the
+    system. For example, when dynamically allocated objects of class type are
+    part of the shared data (which is expected, for all but the most trivial
+    systems), it becomes necessary to make objects reference counted.
 
-  Avoiding locking by making copies of shared data requires additional set up
-  and maintenance, but is rewarded by an increase in performance. Readers of the
-  shared data have carte blanch to access their copy in any manner desired, with
-  the invariant that the data will not change except across a call to
-  process().
+    The benefits of this model are significant, however. Since functors only
+    execute at well defined times (via the call to process()), under control of
+    the associated thread, the programmer can reason and make strong statements
+    about the correctness of the concurrent system. For example, if the
+    audioDeviceIOCallback calls process() on its CallQueue at the beginning of
+    its execution and nowhere else, we can be assured that shared data will only
+    be changed at the defined point.
 
-  Since a CallQueue is almost always used to invoke parameterized member
-  functions of objects, the call() function comes in a variety of convenient
-  forms to make usage easy.
+    Avoiding locking by making copies of shared data requires additional set up
+    and maintenance, but is rewarded by an increase in performance. Readers of
+    the shared data have carte blanch to access their copy in any manner
+    desired, with the invariant that the data will not change except across a
+    call to process().
 
-  Example:
+    Since a CallQueue is almost always used to invoke parameterized member
+    functions of objects, the call() function comes in a variety of convenient
+    forms to make usage easy:
 
-      void func1 (int);
+    @code
 
-      struct Object
-      {
-        void func2 (void);
-        void func3 (String name);
+    void func1 (int);
 
-        static void func4 ();
-      };
+    struct Object
+    {
+      void func2 (void);
+      void func3 (String name);
 
-      CallQueue queue ("Example");
+      static void func4 ();
+    };
 
-      void example ()
-      {
-        queue.call (func1, 42);               // same as: func1 (42)
+    CallQueue fifo ("Example");
 
-        Object* object = new Object;
+    void example ()
+    {
+      fifo.call (func1, 42);               // same as: func1 (42)
 
-        queue.call (&Object::func2, object);  // same as: object->func2 ()
+      Object* object = new Object;
 
-        queue.call (&Object::func3,           // same as: object->funcf ("Label")
-                    object,
-                    "Label");
+      fifo.call (&Object::func2, object);  // same as: object->func2 ()
 
-        queue.call (&Object::func4);          // even static members can be called.
+      fifo.call (&Object::func3,           // same as: object->funcf ("Label")
+                 object,
+                 "Label");
 
-        queue.callf (bind (&Object::func2,    // same as: object->func2 ()
-                           object));
-      }
+      fifo.call (&Object::func4);          // even static members can be called.
 
-  Invariants:
+      fifo.callf (bind (&Object::func2,    // same as: object->func2 ()
+                        object));
+    }
 
-  1. Functors can be added from any thread at any time,
-	 to any queue which is not closed.
-  2. When process() is called, functors in the queue are
-	 executed and deleted.
-  3. The thread from which process() is called is considered
-	 the thread associated with the CallQueue.
-  4. Functors queued by the same thread always execute in
-	 the same order they were queued.
-  5. Functors are guaranteed to execute. It is an error if
-	 the CallQueue is deleted while there are functors in it.
+    @endcode
 
-  Normally, you will not use CallQueue directly, but one of its subclasses
-  instead. The CallQueue is one of a handful of objects that work together to
-  implement this system of concurrent data access.
+    Functors should execute quickly, ideally in constant time. This queue is
+    not a replacement for a thread pool or job queue type system. The purpose
+    of a functor is to trigger the time evolution of mutable data towards a
+    consensus among multiple threads. Objects of class type passed as
+    parameters should, in general, be reference counted.
 
-  For performance considerations, this implementation is wait-free for
-  producers and mostly wait-free for consumers. It also uses a lock-free
-  and wait-free (in the fast path) custom memory allocator.
+    Invariants:
 
-  @see GuiCallQueue, ManualCallQueue
+    - Functors can be added from any thread at any time,
+      to any queue which is not closed.
+
+    - When process() is called, functors in the queue are executed and deleted.
+
+    - The thread from which process() is called is considered the thread
+      associated with the CallQueue.
+
+    - Functors queued by the same thread always execute in the same order
+      they were queued.
+
+    - Functors are guaranteed to execute. It is an error if the CallQueue
+      is deleted while there are functors in it.
+
+    Normally, you will not use CallQueue directly, but one of its subclasses
+    instead. The CallQueue is one of a handful of objects that work together to
+    implement this system of concurrent data access.
+
+    For performance considerations, this implementation is wait-free for
+    producers and mostly wait-free for consumers. It also uses a lock-free
+    and wait-free (in the fast path) custom memory allocator.
+
+    @see GuiCallQueue, ManualCallQueue
 */
 class CallQueue
 {
 public:
+  //============================================================================
   /** Create a CallQueue.
 
-      @param  name  A string used to identify the associated thread for debugging.
+      @param  name  A string identifying the associated thread for debugging.
   */
   explicit CallQueue (String name);
 
@@ -120,7 +134,8 @@ public:
   */
   ~CallQueue ();
 
-  /** Add a function with no parameters and synchronize the queue if possible.
+  //============================================================================
+  /** Add a function with no parameters and synchronize if possible.
 
       When a functor is added in a call made from the associated thread, this
       routine will automatically call process(). This behavior can be avoided
@@ -130,16 +145,61 @@ public:
   */
   template <class Fn>
   void call (Fn f)
-  { callf (vf::bind (f)); }
+  {
+    callf (vf::bind (f));
+  }
 
-  /** Add a function with no parameters, without synchronizing the queue.
+  /** Add a function with no parameters, without synchronizing.
+
+      This function can be useful when the caller is holding a lock, and the
+      functors to be added would cause contention or undefined behavior due
+      to the locking model, if a synchronization took place.
 
       @see call
   */
   template <class Fn>
   void queue (Fn f)
-  { queuef (vf::bind (f)); }
+  {
+    queuef (vf::bind (f));
+  }
 
+protected:
+  //============================================================================
+  /** Synchronize by calling all functors.
+
+      Derived class call this when the queue is signaled, and optionally at any
+      additional time. Calling this function from more than one thread
+      simultaneously results in undefined behavior.
+
+      @return  `true` if any functors were executed.
+  */
+  bool process ();
+
+  /** Close the queue.
+
+      Functors may not be added after this routine is called. This is used for
+      diagnostics, to track down spurious calls during application shutdown
+      or exit. Derived classes may call this if the appropriate time is known.
+  */
+  void close ();
+
+  /** Notification when a queue is signaled.
+
+      A queue is signaled on the transition from empty to non-empty. Derived
+      classes implement this function to perform a notification so that
+      process() will be called. For example, by triggering a WaitableEvent.
+
+      Due to the implementation the queue can remain signaled for one extra
+      cycle. This does not happen under load and is not an issue in practice.
+  */
+
+  virtual void signal () = 0;
+
+  /** Notification when a queue becomes empty */
+  virtual void reset () = 0;
+
+public:
+#ifndef DOXYGEN
   /** call() with automatic binding for a function with 1 parameter. */
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
@@ -253,7 +313,9 @@ public:
   {
     queuep (new (m_allocator) CallType <Functor> (f));
   }
+#endif
 
+#ifndef DOXYGEN
 public:
   typedef FifoFreeStoreType AllocatorType;
 
@@ -263,12 +325,7 @@ private:
   typedef LockFreeQueue <Call> Calls;
 
 public:
-  /** The abstract base that holds a functor.
-
-      Objects built on top of the CallQueue derive from this class for their
-      own custom work items to synergize with the allocator.
-
-      @see Listeners
+  /** Used internally to create custom work items.
   */
   class Call : public Calls::Node,
                public AllocatedBy <AllocatorType>
@@ -278,25 +335,20 @@ public:
     virtual void operator() () = 0;
   };
 
-  /** Retrieve the allocator associated with this CallQueue.
-
-      Objects built on CallQueue use this.
-
-      @see Listeners
+  /** Used internally to share the allocator with other objects.
   */
   inline AllocatorType& getAllocator ()
   {
     return m_allocator;
   }
 
-  /** Returns true if the current thread of execution is the
-      last one used to process this queue. */
+  /** Used internally to determine if the current thread of execution is the
+      last one used to process this queue.
+  */
   bool isAssociatedWithCurrentThread () const;
 
-  /** Returns true of the call queue is currently in the call
-      to process().
-      
-      Used for diagnostics in Listener.
+  /** Used internally for diagnostics to determine if the call queue is currently
+      inside process ().
   */
   bool isInProcess () const { return m_isInProcess.isSet(); }
 
@@ -305,44 +357,10 @@ public:
 
   /** Add the Call, and process the queue if we're on the associated thread. */
   void callp (Call* call);
-
-protected:
-  /** Process all functors in the queue.
-
-      Derived class call this when the queue is signaled, or whenever it
-      wants to. Calling this function from more than one thread simultaneously
-      results in undefined behavior.
-  */
-  bool process ();
-
-  /** Close the queue.
-
-      Functors may not be placed into a closed queue. This is used for
-      diagnostics, to track down spurious calls during application shutdown
-      or exit.
-
-      Derived classes may call this if the appropriate time is known.
-  */
-  void close ();
-
-  /** Signaling notification.
-
-      A queue is considered signaled when there are one or more functors.
-
-      Due to the implementation the queue can remain signaled for one excess
-      cycle. This does not happen under load and is not an issue in practice.
-  */
-
-  /** Called when the queue becomes empty */
-  virtual void reset () = 0;
-
-  /** Called when the queue has functors. Derived classes will override this
-      and perform some type of signaling operation. For example, pulsing a
-      WaitableEvent
-  */
-  virtual void signal () = 0;
+#endif
 
 private:
+#ifndef DOXYGEN
   template <class Functor>
   class CallType : public Call
   {
@@ -354,6 +372,7 @@ private:
   private:
     Functor m_f;
   };
+#endif
 
   bool do_process ();
 

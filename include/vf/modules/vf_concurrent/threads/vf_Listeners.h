@@ -9,13 +9,105 @@
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
 
-/****
-  Concurrent Listeners.
+//==============================================================================
+/** A group of concurrent Listeners.
 
-  This is similar to the juce::ListenerList, except that when a
-  listener registers it also provides the CallQueue on which it
-  wishes to receive the notification.
+    A Listener is an object of class type which inherits from a defined interface,
+    and registers on a provided instance of Listeners to receive asynchronous
+    notifications of changes to concurrent states. Another way of defining
+    Listeners, is that it is similar to a Juce ListenerList but with the provision that the Listener additional
+    that the Listener specifies the CallQueue upon which the notification is made,
+    at the time it registers.
+
+    Listeners makes extensive use of CallQueue for providing the notifications,
+    and provides another object used to implement the concurrent synchronization
+    strategy outlined in the CallQueue documentation. Therefore, the same notes
+    which apply to functors in CallQueue also apply to Listener member
+    invocations. Their execution time should be brief, limited in scope to
+    updating the recipient's view of a shared state, and use reference counting
+    for parameters of class type.
+  
+    To use this system, first declare your Listener interface:
+
+    @code
+
+    struct Listener
+    {
+      // Sent on every output block
+      virtual void onOutputLevels (const float outputLevels[2]) { }
+    };
+
+    @endcode
+
+    Now set up the place where you want to send the notifications. In this
+    example, we will set up the audioDeviceIOCallback to notify anyone who is
+    interested about changes in the current audio output level. We will use
+    this to implement VU meter:
+
+    @code
+
+    Listeners <Listener> listeners;
+
+    void audioDeviceIOCallback (const float** inputChannelData,
+							    int numInputChannels,
+							    float** outputChannelData,
+							    int numOutputChannels,
+							    int numSamples)
+    {
+      // Process audio data
+
+      // Calculate output levels
+      float outputLevels [2];
+      calcOutputLevels (outputLevels,
+                        numOutputChannels,
+                        numSamples,
+                        outputChannelData);
+
+      // Notify listeners
+      listeners.call (&Listener::onOutputLevels, outputLevels);
+    }
+
+    @endcode
+
+    To receive notifications, derive from Listener and then add yourself to the
+    Listeners object using the desired CallQueue.
+
+    @code
+
+    // We want notifications on the message thread
+    GuiCallQueue fifo;
+
+    struct VUMeter : public Listener, public Component
+    {
+      VUMeter ()
+      {
+        listeners.add (this, fifo);
+      }
+
+      ~VUMeter ()
+      {
+        listeners.remove (this);
+      }
+
+      void onOutputLevels (const float outputLevels[2])
+      {
+        // Update our copy of the output level shared state
+        m_outputLevels [0] = outputLevels [0];
+        m_outputLevels [1] = outputLevels [1];
+        
+        // And repaint
+        repaint ();
+      }
+
+      float m_outputLevels [2];
+    };
+
+    @endcode
+
+    @see CallQueue
 */
+
+#ifndef DOXYGEN
 class ListenersBase
 {
 public:
@@ -25,8 +117,6 @@ public:
 
   typedef GlobalFifoFreeStore <ListenersBase> CallAllocatorType;
 
-  // Reference counted polymorphic unary functor void (*)(void* listener).
-  //
   class Call : public ReferenceCountedObject,
                public AllocatedBy <CallAllocatorType>
   {
@@ -57,7 +147,7 @@ private:
   public:
     typedef ReferenceCountedObjectPtr <Group> Ptr;
 
-    explicit Group    (CallQueue& worker);
+    explicit Group    (CallQueue& callQueue);
     ~Group            ();
     void add          (void* listener, const timestamp_t timestamp,
                        AllocatorType& allocator);
@@ -74,13 +164,13 @@ private:
                        void* const listener);
 
     bool empty        () const { return m_list.empty(); }
-    CallQueue& getCallQueue () const { return m_queue; }
+    CallQueue& getCallQueue () const { return m_fifo; }
 
   private:
     struct Entry;
     typedef List <Entry> List;
 
-    CallQueue& m_queue;
+    CallQueue& m_fifo;
     List m_list;
     void* m_listener;
     CacheLine::Aligned <ReadWriteMutex> m_mutex;
@@ -131,7 +221,7 @@ public:
   void queuep       (Call::Ptr c);
 
 protected:
-  void add_void     (void* const listener, CallQueue& worker);
+  void add_void     (void* const listener, CallQueue& callQueue);
   void remove_void  (void* const listener);
   void call1p_void  (void* const listener, Call* c);
   void queue1p_void (void* const listener, Call* c);
@@ -150,6 +240,8 @@ private:
   AllocatorType::Ptr m_allocator;
   CallAllocatorType::Ptr m_callAllocator;
 };
+
+#endif
 
 //------------------------------------------------------------------------------
 
@@ -184,13 +276,13 @@ public:
   //  #4 The listener must not already exist in the list.
   //  #5 This can be called from any thread.
   // 
-  void add (ListenerClass* const listener, CallQueue& worker)
+  void add (ListenerClass* const listener, CallQueue& callQueue)
   {
-    add_void (listener, worker);
+    add_void (listener, callQueue);
   }
-  void add (ListenerClass* const listener, CallQueue* worker)
+  void add (ListenerClass* const listener, CallQueue* callQueue)
   {
-    add (listener, *worker);
+    add (listener, *callQueue);
   }
 
   //
@@ -224,7 +316,7 @@ public:
   //
 
   // Queue a call to a single listener.
-  // The worker is processed if called on the associated thread.
+  // The CallQueue is processed if called on the associated thread.
   //
   inline void call1p (ListenerClass* const listener, Call::Ptr c)
   {
@@ -239,7 +331,7 @@ public:
   }
 
   // Queue a call to all listeners.
-  // The worker is processed if called on the associated thread.
+  // The CallQueue is processed if called on the associated thread.
   //
   template <class Functor>
   inline void callf (const Functor& f)

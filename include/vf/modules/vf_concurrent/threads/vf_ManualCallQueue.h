@@ -6,35 +6,36 @@
 
 #include "vf_CallQueue.h"
 
-/****
-  A CallQueue that requires periodic manual calls to process.
+/** A CallQueue that requires periodic manual calls to process.
 
-  To use this, declare an instance and then place calls into it as usual.
-  Every so often, you must call process() from the thread you want to
-  associate with the queue. Typically this is done with the
-  audioDeviceIOCallback:
+    To use this, declare an instance and then place calls into it as usual.
+    Every so often, you must call process() from the thread you want to
+    associate with the queue. Typically this is done with the
+    audioDeviceIOCallback:
 
-  Example:
+    @code
 
-	ManualCallQueue queue ("Audio CallQueue");
+    ManualCallQueue fifo ("Audio CallQueue");
 
-	void audioDeviceIOCallback (const float** inputChannelData,
-								int numInputChannels,
-								float** outputChannelData,
-								int numOutputChannels,
-								int numSamples)
-	{
-	  queue.process ();
+    void audioDeviceIOCallback (const float** inputChannelData,
+							    int numInputChannels,
+							    float** outputChannelData,
+							    int numOutputChannels,
+							    int numSamples)
+    {
+	  fifo.process ();
 
 	  // do audio i/o
-	}
+    }
 
-	The close() function is provided for diagnostics. Call it as early
-	as possible based on the exit or shutdown logic of your application.
-	If calls are put into the queue after it is closed, it will generate
-	an exception so you can track it down.
+    @endcode
 
-  @see CallQueue
+	The close() function is provided for diagnostics. Call it as early as
+	possible based on the exit or shutdown logic of your application. If calls
+    are put into the queue after it is closed, it will generate an exception so
+    you can track it down.
+
+    @see CallQueue
 */
 class ManualCallQueue : public CallQueue
 {

@@ -4,62 +4,84 @@
 #ifndef VF_CONCURRENTSTATE_VFHEADER
 #define VF_CONCURRENTSTATE_VFHEADER
 
-#include "vf/modules/vf_concurrent/threads/vf_ReadWriteMutex.h"
-
-//
-// An object intended to be accessed from multiple threads
-// simultaneously. Multiple readers may exist simultaneously.
-// A writer will block readers and gain exclusive access.
-//
-// The treatment with respect to readers and writers is inherited
-// from the behavior of the read/write mutex used.
-//
+#include "vf_ReadWriteMutex.h"
 
 //==============================================================================
-/** Encapsulation for an object accessed by multiple threads.
+/**
+    Encapsulation for data accessed by multiple threads.
 
     This template encloses an object typically consisting of public data members
     of primitive and/or class types. Access to the object is restricted through
     the use of accessor objects, based on the type of access required. There are
     three types of access:
 
-    ReadAccess
+    - ReadAccess
 
       Allows read access to the underlying object as const. ReadAccess may be
       granted to one or more threads simultaneously. If one or more threads have 
       ReadAccess, requests to obtain WriteAccess are blocked.
 
-    WriteAccess
+    - WriteAccess
 
       Allows exclusive read/write access the underlying object. A WriteAccess
       request blocks until all existing ReadAccess and WriteAccess requests are
       released. While a WriteAccess exists, requests for ReadAccess will block.
 
-    UnlockedAccess
+    - UnlockedAccess
 
       Allows read access to the underlying object without using the lock. This
       can be helpful when designing concurrent structures through composition.
       It also makes it easier to search for places in code which use unlocked
       access.
+
+    @code
+
+    struct SharedData
+    {
+      int value1;
+      String value2;
+    };
+
+    typedef ConcurrentState <SharedData> SharedState;
+
+    SharedState sharedState;
+
+    void readExample ()
+    {
+      SharedState::ReadAccess state (sharedState);
+
+      print (state->value1);   // read access
+      print (state->value2);   // read access
+
+      state->value1 = 42;      // write disallowed: compile error
+    }
+
+    void writeExample ()
+    {
+      SharedState::WriteAccess state (sharedState);
+
+      state->value2 = "Label"; // write access
+    }
+
+    @endcode
 */
 template <class Object>
 class ConcurrentState : Uncopyable
 {
 public:
-  typedef ReadWriteMutex ReadWriteMutexType;
-
   class ReadAccess;
   class WriteAccess;
   class UnlockedAccess;
 
-  // Unlocked read access.
-  //
-  // DEPRECATED
-  Object const* getObject () const { return const_cast <Object*> (&m_obj); }
-  Object const& operator* () const { return *getObject(); }
-  Object const* operator->() const { return getObject(); }
+  /** Create a ConcurrentState.
 
+      The Object constructor may be called with up to eight
+      parameters, using the forwarding constructors.
+  */
   ConcurrentState () { }
+
+#ifndef DOXYGEN
+  /** Forwarding constructors */
 
   template <class T1>
   explicit ConcurrentState (T1 t1) : m_obj (t1) { }
@@ -92,44 +114,64 @@ public:
                T5 t5, T6 t6, T7 t7, T8 t8)
                : m_obj (t1, t2, t3, t4, t5, t6, t7, t8) { }
 
+  // Unlocked read access.
+  //
+  // DEPRECATED
+  Object const* getObject () const { return const_cast <Object*> (&m_obj); }
+  Object const& operator* () const { return *getObject(); }
+  Object const* operator->() const { return getObject(); }
+#endif
+
 private:
+  typedef ReadWriteMutex ReadWriteMutexType;
+
   Object m_obj;
   ReadWriteMutexType m_mutex;
 };
 
-//------------------------------------------------------------------------------
-
+/** Unlocked access to a ConcurrentState */
 template <class Object>
 class ConcurrentState <Object>::UnlockedAccess : Uncopyable
 {
 public:
+  /** Create an UnlockedAccess from the specified ConcurrentState */
   explicit UnlockedAccess (ConcurrentState const& state)
     : m_state (state)
   {
   }
 
+  /** Obtain a read only pointer to Object */
   Object const* getObject () const { return m_state.getObject (); }
+
+  /** Obtain a read only reference to Object */
   Object const& operator* () const { return *getObject(); }
+
+  /** Obtain a read only smart pointer to Object */
   Object const* operator->() const { return getObject(); }
 
 private:
   ConcurrentState const& m_state;
 };
 
-//------------------------------------------------------------------------------
-
+/** Read only access to a ConcurrentState */
 template <class Object>
 class ConcurrentState <Object>::ReadAccess : Uncopyable
 {
 public:
+  /** Create a ReadAccess from the specified ConcurrentState */
   explicit ReadAccess (ConcurrentState const volatile& state)
     : m_state (const_cast <ConcurrentState const&> (state))
     , m_lock (m_state.m_mutex)
   {
   }
 
+  /** Obtain a read only pointer to Object */
   Object const* getObject () const { return m_state.getObject (); }
+
+  /** Obtain a read only reference to Object */
   Object const& operator* () const { return *getObject(); }
+
+  /** Obtain a read only smart pointer to Object */
   Object const* operator->() const { return getObject(); }
 
 private:
@@ -137,8 +179,7 @@ private:
   ReadWriteMutexType::ScopedReadLockType m_lock;
 };
 
-//------------------------------------------------------------------------------
-
+/** Read/write access to a ConcurrentState */
 template <class Object>
 class ConcurrentState <Object>::WriteAccess : Uncopyable
 {
@@ -149,12 +190,22 @@ public:
   {
   }
 
+  /** Obtain a read only pointer to Object */
   Object const* getObject () const { return m_state.getObject (); }
+
+  /** Obtain a read only reference to Object */
   Object const& operator* () const { return *getObject(); }
+
+  /** Obtain a read only smart pointer to Object */
   Object const* operator->() const { return getObject(); }
 
+  /** Obtain a read/write pointer to Object */
   Object* getObject () { return &m_state.m_obj; }
+
+  /** Obtain a read/write reference to Object */
   Object& operator* () { return *getObject(); }
+
+  /** Obtain a read/write smart pointer to Object */
   Object* operator->() { return getObject(); }
 
 private:
