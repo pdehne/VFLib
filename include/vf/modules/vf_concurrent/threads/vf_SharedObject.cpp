@@ -1,12 +1,16 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-class SharedObject::Deleter : LeakChecked <Deleter>
+class SharedObject::Deleter
+  : public ReferenceCountedSingleton <Deleter>
+  , LeakChecked <Deleter>
 {
 private:
   typedef VF_JUCE::SpinLock LockType;
 
-  Deleter () : m_queue ("Deleter")
+  Deleter ()
+    : ReferenceCountedSingleton (SingletonLifetime::persistAfterCreation)
+    , m_queue ("Deleter")
   {
 	m_queue.start ();
   }
@@ -23,13 +27,6 @@ private:
   }
 
 public:
-  typedef ReferenceCountedObjectPtr <Deleter> Ptr;
-
-  CallQueue& getCallQueue ()
-  {
-    return m_queue;
-  }
-
   void Delete (SharedObject* sharedObject)
   {
     if (m_queue.isAssociatedWithCurrentThread ())
@@ -38,50 +35,34 @@ public:
       m_queue.call (&Deleter::doDelete, sharedObject);
   }
 
-  static Deleter& getInstance ()
+  static Deleter* createInstance ()
   {
-    if (s_instance == nullptr)
-    {
-      LockType::ScopedLockType lock (*s_mutex);
-
-      if (s_instance == nullptr)
-      {
-        s_instance = new Deleter;
-      }
-    }
-
-    return *s_instance;
-  }
-
-  static void performAtExit ()
-  {
-    if (s_instance != nullptr)
-    {
-      delete s_instance;
-      s_instance = nullptr;
-    }
+    return new Deleter;
   }
 
 private:
   AtomicCounter m_refs;
 
   ThreadWorker m_queue;
-
-  static Deleter* s_instance;
-  static Static::Storage <LockType, Deleter> s_mutex;
 };
-
-SharedObject::Deleter* SharedObject::Deleter::s_instance;
-Static::Storage <SharedObject::Deleter::LockType, SharedObject::Deleter> SharedObject::Deleter::s_mutex;
 
 //------------------------------------------------------------------------------
 
+SharedObject::SharedObject()
+{
+  Deleter::getInstance()->incReferenceCount();
+}
+
+SharedObject::~SharedObject()
+{
+  Deleter::getInstance()->decReferenceCount ();
+}
+
 void SharedObject::destroySharedObject ()
 {
-  Deleter::getInstance().Delete (this);
+  Deleter::getInstance()->Delete (this);
 }
 
 void SharedObject::performLibraryAtExit ()
 {
-  Deleter::performAtExit ();
 }

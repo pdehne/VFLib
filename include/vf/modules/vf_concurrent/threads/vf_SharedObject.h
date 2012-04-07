@@ -37,9 +37,9 @@ public:
   }
 
 protected:
-  SharedObject() { }
+  SharedObject();
 
-  virtual ~SharedObject() { }
+  virtual ~SharedObject();
 
   // default implementation performs the delete
   // on a separate, provided thread that cleans up
