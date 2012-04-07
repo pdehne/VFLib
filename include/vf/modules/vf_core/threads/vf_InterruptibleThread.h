@@ -24,7 +24,7 @@ public:
   //
   // #1 The default constructor must produce an object that
   //    is considered non-signaled (i.e. not interrupted)
-  //    in order for ThreadWorker that uses a default Callable
+  //    in order for ThreadWithCallQueue that uses a default Callable
   //    for its idle function to work.
   //
   class Interrupted : public SafeBool <Interrupted>

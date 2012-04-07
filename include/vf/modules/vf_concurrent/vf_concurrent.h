@@ -26,7 +26,7 @@ namespace vf
 #include "threads/vf_Listeners.h"
 #include "threads/vf_ManualCallQueue.h"
 #include "threads/vf_ReadWriteMutex.h"
-#include "threads/vf_ThreadWorker.h"
+#include "threads/vf_ThreadWithCallQueue.h"
 }
 
 #endif

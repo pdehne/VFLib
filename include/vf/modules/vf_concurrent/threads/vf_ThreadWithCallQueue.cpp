@@ -1,7 +1,7 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-ThreadWorker::ThreadWorker (String name)
+ThreadWithCallQueue::ThreadWithCallQueue (String name)
   : CallQueue (name)
   , m_thread (name)
   , m_calledStart (false)
@@ -10,12 +10,12 @@ ThreadWorker::ThreadWorker (String name)
 {
 }
 
-ThreadWorker::~ThreadWorker ()
+ThreadWithCallQueue::~ThreadWithCallQueue ()
 {
   stop_and_wait ();
 }
 
-void ThreadWorker::start (idle_t worker_idle,
+void ThreadWithCallQueue::start (idle_t worker_idle,
 						  init_t worker_init,
 						  exit_t worker_exit)
 {
@@ -32,10 +32,10 @@ void ThreadWorker::start (idle_t worker_idle,
   m_idle = worker_idle;
   m_exit = worker_exit;
 
-  m_thread.start (vf::bind (&ThreadWorker::run, this));
+  m_thread.start (vf::bind (&ThreadWithCallQueue::run, this));
 }
 
-void ThreadWorker::stop (bool const wait)
+void ThreadWithCallQueue::stop (bool const wait)
 {
   // can't call stop(true) from within a thread function
   vfassert (!wait || !m_thread.isTheCurrentThread ());
@@ -54,7 +54,7 @@ void ThreadWorker::stop (bool const wait)
       {
 		VF_JUCE::CriticalSection::ScopedUnlockType unlock (m_mutex); // getting fancy
 
-        call (&ThreadWorker::do_stop, this);
+        call (&ThreadWithCallQueue::do_stop, this);
 
         // in theory something could slip in here
 
@@ -77,32 +77,32 @@ void ThreadWorker::stop (bool const wait)
 // If interruptionPoint returns true or throws, it must
 // not be called again before the thread has the opportunity to reset.
 //
-const InterruptibleThread::Interrupted ThreadWorker::interruptionPoint ()
+const InterruptibleThread::Interrupted ThreadWithCallQueue::interruptionPoint ()
 {
   return m_thread.interruptionPoint ();
 }
 
 // Interrupts the idle function by queueing a call that does nothing.
-void ThreadWorker::interrupt ()
+void ThreadWithCallQueue::interrupt ()
 {
   call (Function <void (void)>::None ());
 }
 
-void ThreadWorker::reset ()
+void ThreadWithCallQueue::reset ()
 {
 }
 
-void ThreadWorker::signal ()
+void ThreadWithCallQueue::signal ()
 {
   m_thread.interrupt ();
 }
 
-void ThreadWorker::do_stop ()
+void ThreadWithCallQueue::do_stop ()
 {
   m_shouldStop = true;
 }
 
-void ThreadWorker::run ()
+void ThreadWithCallQueue::run ()
 {
   m_init ();
 

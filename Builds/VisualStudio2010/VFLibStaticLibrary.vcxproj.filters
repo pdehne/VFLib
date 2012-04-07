@@ -219,9 +219,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.cpp">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
@@ -248,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
       <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -461,9 +461,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWorker.h">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
@@ -520,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -43,7 +43,7 @@ public:
 private:
   AtomicCounter m_refs;
 
-  ThreadWorker m_fifo;
+  ThreadWithCallQueue m_fifo;
 };
 
 //------------------------------------------------------------------------------

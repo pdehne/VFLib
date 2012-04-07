@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file LICENSE.txt for licensing information.
 
-#ifndef VF_THREADWORKER_VFHEADER
-#define VF_THREADWORKER_VFHEADER
+#ifndef VF_THREADWITHCALLQUEUE_VFHEADER
+#define VF_THREADWITHCALLQUEUE_VFHEADER
 
 #include "vf_CallQueue.h"
 
@@ -21,16 +21,16 @@
 // supply template arguments when they want to use a type,
 // for example, idle_t::None()
 //
-class ThreadWorker : public CallQueue
+class ThreadWithCallQueue : public CallQueue
 {
 public:
   typedef Function <const InterruptibleThread::Interrupted (void)> idle_t;
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
-  explicit ThreadWorker (String name);
+  explicit ThreadWithCallQueue (String name);
 
-  ~ThreadWorker ();
+  ~ThreadWithCallQueue ();
 
   //
   // Starts the worker.
