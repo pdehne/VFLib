@@ -6,12 +6,12 @@
 
 //==============================================================================
 /**
-	A pool of multiple AudioSampleBuffer that get re-used.
+    A pool of reusable AudioSampleBuffer.
 
-	This is useful when you need to allocate temporary buffers in your
-	audioDeviceIOCallback routines, but don't want to incur the penalty of
-	allocating and freeing every time. This class intelligently recycles
-	buffers to match your needs. It is easy to use:
+    This is useful when you need to allocate temporary buffers in your
+    audioDeviceIOCallback routines, but don't want to incur the penalty of
+    allocating and freeing every time. This class intelligently recycles
+    buffers to match your needs. It is easy to use:
 
     @code
 	
@@ -22,15 +22,15 @@
 							    float** outputChannelData,
 							    int numOutputChannels,
 							    int numSamples)
-	{
-	  // Request a stereo buffer with room for 1024 samples.
-	  AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
+    {
+      // Request a stereo buffer with room for 1024 samples.
+      AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
-	  // (Process buffer)
+      // (Process buffer)
 
-	  // Release the buffer to be re-used later.
-	  pool.releaseBuffer (buffer);
-	}
+      // Release the buffer to be re-used later.
+      pool.releaseBuffer (buffer);
+    }
 
     @endcode
 
@@ -40,12 +40,13 @@
 
     @code
 
-	{
-	  // Request a stereo buffer with room for 1024 samples.
-	  AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
+    {
+      // Request a stereo buffer with room for 1024 samples.
+      AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
       AudioSourceChannelInfo info;
-      info.buffer = buffer;
+      info.buffer = buffer;         // allowed, since AudioBufferPool::Buffer *
+                                    // is-a AudioSampleBuffer *
       info.startSample = 0;
       info.numSamples = 1024;
       info.clearActiveBufferRegion ();
@@ -150,12 +151,54 @@ private:
 
 //------------------------------------------------------------------------------
 
-// scoped lifetime management for a temporary audio buffer
+/** Scoped lifetime temporary audio buffer.
+
+    This utility class allows scoped lifetime management for acquiring temporary
+    audio buffers during processing. It is easy to use:
+
+    @code
+
+    AudioBufferPoolType <CriticalSection> pool;
+
+    {
+      // Request a stereo buffer with room for 1024 samples.
+      ScopedAudioSampleBuffer buffer (pool, 2, 1024);
+
+      // `buffer` is released when it goes out of scope.
+    }
+
+    @endcode
+
+    ScopedAudioSampleBuffer is freely convertible to AudioSampleBuffer* so it
+    can be used anywhere a pointer to AudioSampleBuffer is expected. The
+    dereference and pointer to member operators are similarly overloaded to
+    support transparent usage of the underlying AudioSampleBuffer:
+
+    @code
+
+    AudioBufferPoolType <CriticalSection> pool;
+
+    {
+      ScopedAudioSampleBuffer buffer (pool, 2, 1024);
+
+      // Call a member of AudioSampleBuffer
+      buffer->clear ();
+    }
+
+    @endcode
+
+    Note that changing the size of a buffer is undefined.
+*/
 class ScopedAudioSampleBuffer
   // NO IDEA why the leak checking fails
   // : LeakChecked <ScopedAudioSampleBuffer>, Uncopyable
 {
 public:
+  /** Acquire a ScopedAudioSampleBuffer from a pool.
+
+      @param numChannels  The number of channels requested.
+      @param numSamples   The number of samples per channel requested.
+  */
   ScopedAudioSampleBuffer (AudioBufferPool& pool,
 	int numChannels,
 	int numSamples)
@@ -164,26 +207,31 @@ public:
   {
   }
 
+  /** Destroy the ScopedAudioSampleBuffer, releasing the buffer */
   ~ScopedAudioSampleBuffer ()
   {
 	m_pool.releaseBuffer (m_buffer);
   }
 
+  /** Return the object as a AudioSampleBuffer pointer */
   VF_JUCE::AudioSampleBuffer* getBuffer ()
   {
 	return m_buffer;
   }
 
+  /** Return the object as a AudioSampleBuffer pointer */
   VF_JUCE::AudioSampleBuffer* operator-> ()
   {
 	return getBuffer();
   }
 
+  /** Return the object as a reference to AudioSampleBuffer */
   VF_JUCE::AudioSampleBuffer& operator* ()
   {
 	return *getBuffer();
   }
 
+  /** Conversion operator for pointer to AudioSampleBuffer */
   operator VF_JUCE::AudioSampleBuffer* ()
   {
 	return getBuffer();
