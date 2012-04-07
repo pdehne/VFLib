@@ -200,7 +200,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\AppConfig.h" />
+    <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h" />

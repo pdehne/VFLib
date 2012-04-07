@@ -76,9 +76,6 @@
     <Filter Include="VF Modules\vf_gui\graphics">
       <UniqueIdentifier>{4352b1db-8caf-44af-ad7d-43faf9d79520}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Junk">
-      <UniqueIdentifier>{ee5413bc-7eef-4c7b-8c82-264e6e4fdb80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_core\native">
       <UniqueIdentifier>{57dc91b0-d6b1-4eeb-bcf0-c410536b35c8}</UniqueIdentifier>
     </Filter>
@@ -515,7 +512,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_StandardHeader.h">
       <Filter>VF Modules\vf_core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\AppConfig.h">
+    <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
     </ClInclude>
   </ItemGroup>

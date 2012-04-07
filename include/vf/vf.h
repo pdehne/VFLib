@@ -4,7 +4,10 @@
 #ifndef __VF_VFHEADER__
 #define __VF_VFHEADER__
 
-// modules
+/** Include this header to bring in all the modules,
+    or manually include only the modules that you want
+*/
+
 #include "modules/vf_audio/vf_audio.h"
 #include "modules/vf_concurrent/vf_concurrent.h"
 #include "modules/vf_core/vf_core.h"
