@@ -522,5 +522,8 @@
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppConfig.h" />
+    <ClInclude Include="..\..\include\vf\vf.h">
+      <Filter>VF Library Code</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

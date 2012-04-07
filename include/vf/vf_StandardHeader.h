@@ -29,19 +29,12 @@ using VF_JUCE::uint8;
 
 //------------------------------------------------------------------------------
 
-#ifdef VF_NAMESPACE
-  #define BEGIN_VF_NAMESPACE namespace VF_NAMESPACE {
-  #define END_VF_NAMESPACE   }
-#else
-  #define BEGIN_VF_NAMESPACE
-  #define END_VF_NAMESPACE
-#endif
-
 //
 // These are always avaialble
 //
 
-BEGIN_VF_NAMESPACE
+namespace vf
+{
 
 #define vfassert jassert
 
@@ -50,7 +43,7 @@ template <bool condition> struct VfStaticAssert;
 template <> struct VfStaticAssert <true>
   { static void static_assert_failed () {} };
 #define static_vfassert(expression) \
-  VF_NAMESPACE::VfStaticAssert <expression>::static_assert_failed ();
+  vf::VfStaticAssert <expression>::static_assert_failed ();
 
 // Stuff here is available without having to include it directly
 
@@ -62,6 +55,6 @@ template <> struct VfStaticAssert <true>
 #include "vf/modules/vf_core/memory/vf_StaticObject.h"
 #include "vf/modules/vf_core/diagnostic/vf_Throw.h"
 
-END_VF_NAMESPACE
+}
 
 #endif

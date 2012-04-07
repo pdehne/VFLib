@@ -287,6 +287,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h" />
+    <ClInclude Include="..\..\include\vf\vf.h" />
     <ClInclude Include="..\..\include\vf\vf_boost_includes.h" />
     <ClInclude Include="..\..\include\vf\vf_Config.h" />
     <ClInclude Include="..\..\include\vf\vf_juce_includes.h" />

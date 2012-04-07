@@ -12,7 +12,8 @@
 
 #include <windows.h>
 
-BEGIN_VF_NAMESPACE
+namespace vf
+{
 
 #include "vf/modules/vf_core/threads/vf_Mutex.h"
 
@@ -103,7 +104,7 @@ LPTOP_LEVEL_EXCEPTION_FILTER ScopedPlatformExceptionCatcher::s_sehPrev = 0;
 
 }
 
-END_VF_NAMESPACE
+}
 
 //------------------------------------------------------------------------------
 
@@ -113,7 +114,8 @@ END_VF_NAMESPACE
 
 #pragma message(VF_LOC_"Missing class ScopedPlatformExceptionCatcher")
 
-BEGIN_VF_NAMESPACE
+namespace vf
+{
 
 namespace {
 

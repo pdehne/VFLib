@@ -4,16 +4,6 @@
 #ifndef __VF_CONFIG_VFHEADER__
 #define __VF_CONFIG_VFHEADER__
 
-//
-// Master settings file
-//
-
-// Controls the namespace
-//
-#ifndef VF_NAMESPACE
-#define VF_NAMESPACE vf
-#endif
-
 // Turns vflib specific debugging support on or off
 //
 #ifndef VF_DEBUG
