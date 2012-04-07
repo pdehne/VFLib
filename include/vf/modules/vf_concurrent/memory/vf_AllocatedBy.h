@@ -4,6 +4,8 @@
 #ifndef VF_ALLOCATEDBY_VFHEADER
 #define VF_ALLOCATEDBY_VFHEADER
 
+#ifndef DOXYGEN
+
 // Derived classes will use the specified allocator for new and delete
 //
 template <class AllocatorType>
@@ -35,5 +37,7 @@ public:
     AllocatorType::deallocate (p);
   }
 };
+
+#endif
 
 #endif

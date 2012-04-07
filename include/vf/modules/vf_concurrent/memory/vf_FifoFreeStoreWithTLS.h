@@ -4,6 +4,8 @@
 #ifndef VF_FIFOFREESTOREWITHTLS_VFHEADER
 #define VF_FIFOFREESTOREWITHTLS_VFHEADER
 
+#ifndef DOXYGEN
+
 #if VF_HAVE_BOOST
 
 #include "vf_GlobalPagedFreeStore.h"
@@ -48,6 +50,8 @@ private:
 
   PagedFreeStoreType::Ptr m_pages;
 };
+
+#endif
 
 #endif
 

@@ -4,6 +4,8 @@
 #ifndef VF_PAGEDFREESTORE_VFHEADER
 #define VF_PAGEDFREESTORE_VFHEADER
 
+#ifndef DOXYGEN
+
 #include "../containers/vf_LockFreeStack.h"
 
 /****
@@ -74,5 +76,7 @@ private:
   AtomicCounter m_used;
 #endif
 };
+
+#endif
 
 #endif

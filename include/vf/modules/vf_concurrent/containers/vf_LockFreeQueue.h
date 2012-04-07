@@ -4,7 +4,9 @@
 #ifndef VF_LOCKFREEQUEUE_VFHEADER
 #define VF_LOCKFREEQUEUE_VFHEADER
 
+#ifndef DOXYGEN
 struct LockFreeQueueDefaultTag { };
+#endif
 
 /***
   Multiple Producer, Single Consumer (MPSC) intrusive FIFO.

@@ -88,6 +88,9 @@
     <Filter Include="AppConfigTemplate">
       <UniqueIdentifier>{43253bc6-21fd-48b8-93f5-61505c414485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VF Modules\vf_concurrent\memory\internal">
+      <UniqueIdentifier>{4c8defa0-527e-49d3-a8e4-b577158a65f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -213,18 +216,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.cpp">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.cpp">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.cpp">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
@@ -245,6 +236,18 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.cpp">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.cpp">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.cpp">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +401,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
       <Filter>VF Modules\vf_concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
@@ -458,24 +458,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStore.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
-      <Filter>VF Modules\vf_concurrent\memory</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
@@ -517,6 +499,27 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h">
       <Filter>VF Modules\vf_db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStore.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
+      <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

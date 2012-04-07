@@ -11,35 +11,62 @@
 	This is useful when you need to allocate temporary buffers in your
 	audioDeviceIOCallback routines, but don't want to incur the penalty of
 	allocating and freeing every time. This class intelligently recycles
-	buffers to match your needs.
+	buffers to match your needs. It is easy to use:
 
-	Example:
+    @code
+	
+    AudioBufferPoolType <DummyCriticalSection> pool;
 
-	static AudioBufferPool pool;
-
-	void audioDeviceIOCallback ()
+    void audioDeviceIOCallback (const float** inputChannelData,
+							    int numInputChannels,
+							    float** outputChannelData,
+							    int numOutputChannels,
+							    int numSamples)
 	{
 	  // Request a stereo buffer with room for 1024 samples.
-	  AudioBufferPool::BufferType* buffer = pool.requestBuffer (2, 1024);
+	  AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
 	  // (Process buffer)
 
 	  // Release the buffer to be re-used later.
 	  pool.releaseBuffer (buffer);
 	}
+
+    @endcode
+
+    Since Buffer is derived from AudioSampleBuffer, it can be used anywhere
+    an AudioSampleBuffer is expected. This example requests a temporary buffer
+    and stores it in an AudioSourceChannelInfo:
+
+    @code
+
+	{
+	  // Request a stereo buffer with room for 1024 samples.
+	  AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
+
+      AudioSourceChannelInfo info;
+      info.buffer = buffer;
+      info.startSample = 0;
+      info.numSamples = 1024;
+      info.clearActiveBufferRegion ();
+
+    }
+    
+    @endcode
+
+    @param LockType  The type of lock to use. To share the pool between threads
+                     a CriticalSection is needed. To use the pool without any
+                     locking, a DummyCriticalSection may be used.
 */
 
-/* Factored base */
-namespace detail {
-
-class AudioBufferPoolBase
+class AudioBufferPool
 {
 public:
+#ifndef DOXYGEN
   class Buffer : public VF_JUCE::AudioSampleBuffer
   {
   public:
-	Buffer (int numChannels,
-	  int numSamples);
+	Buffer (int numChannels, int numSamples);
 
 	void resize (int newNumChannels, int newNumSamples);
 
@@ -48,115 +75,78 @@ public:
   private:
 	int m_samplesAllocated;
   };
-};
+#endif
 
-}
-
-// Normally you will just use AudioBufferPool
-//
-template <class BufferClass = detail::AudioBufferPoolBase::Buffer,
-		  class MutexType = CriticalSection>
-class AudioBufferPoolTemplate
-  : public detail::AudioBufferPoolBase
-  , public LeakChecked <AudioBufferPoolTemplate <BufferClass> >
-{
-public:
-  typedef typename BufferClass BufferType;
-
-  /** Create a new empty pool with enough slots for 10 buffers. If
-	  more slots are needed they will automatically be allocated.
+  /** Create a new, empty pool.
+  
+      The pool starts with enough slots for 10 buffers. More slots are
+      automatically allocated if needed.
   */
-  AudioBufferPoolTemplate ()
-  {
-	m_buffers.ensureStorageAllocated (10);
-  }
+  AudioBufferPool ();
 
-  /** Destructor.
+  /** Destroy a pool.
 
-	  All allocated buffers are freed.
-	  Any previously requested buffers must already be released.
+	  All allocated buffers are freed. Any previously requested buffers must
+      already be released.
   */
-  ~AudioBufferPoolTemplate ()
-  {
-	for (int i = 0; i < m_buffers.size(); ++i)
-	  delete m_buffers[i];
-  }    
+  ~AudioBufferPool ();
 
-  /** Requests a buffer with the specified number of channels and
-	  enough room for at least numSamples, from the pool. The buffer
-	  is owned by the caller until it is released using releaseBuffer().
+  /** Request a temporary buffer.
 
-	  @see releaseBuffer
+      A buffer is returned from the pool with the specified number of channels
+      and enough room for at least numSamples. The buffer is taken out of the
+      pool, until it is released with a matching call to releaseBuffer().
+
+      @param numChannels  The number of channels requested.
+      @param numSamples   The number of samples per channel requested.
+
+      @return             The resulting buffer.
+
+      @see releaseBuffer
   */
-  BufferClass* acquireBuffer (int numChannels, int numSamples)
-  {
-	BufferClass* buffer = 0;
-	int samplesNeeded = numChannels * numSamples;
-
-	int index = -1;
-
-	{
-	  MutexType::ScopedLockType lock (m_mutex);
-
-	  for (int i = 0; i < m_buffers.size(); ++i)
-	  {
-		BufferClass* cur = m_buffers[i];
-
-		if (!buffer)
-		{
-		  buffer = cur;
-		  index = i;
-		}
-		else
-		{
-		  int numSamplesAvailable = cur->getNumSamplesAllocated();
-
-		  // Use the smallest buffer which is equal or bigger than what
-		  // we need. If no buffer is large enough, then we will use the
-		  // largest available and increase it, to minimize memory usage.
-		  if ( (numSamplesAvailable >= samplesNeeded &&
-			numSamplesAvailable < buffer->getNumSamplesAllocated()) ||
-			(numSamplesAvailable < samplesNeeded &&
-			numSamplesAvailable > buffer->getNumSamplesAllocated()))
-		  {
-			buffer = cur;
-			index = i;
-		  }
-		}
-	  }
-
-	  if (buffer)
-		m_buffers.remove (index);
-	}
-
-	if (buffer)
-	  buffer->resize (numChannels, numSamples);
-	else
-	  buffer = new BufferClass (numChannels, numSamples);
-
-	return buffer;
-  }
+  virtual Buffer* acquireBuffer (int numChannels, int numSamples) = 0;
 
   /** Releases a previously requested buffer back into the pool.
 
 	  @see requestBuffer
   */
-  void releaseBuffer (BufferClass* buffer)
-  {
-	if (buffer)
-	{
-	  MutexType::ScopedLockType lock (m_mutex);
+  virtual void releaseBuffer (Buffer* buffer) = 0;
 
-	  m_buffers.add (buffer);
-	}
+protected:
+  Buffer* acquireBufferInternal (int numChannels, int numSamples);
+  void releaseBufferInternal (Buffer* buffer);
+
+private:
+  VF_JUCE::Array <Buffer*> m_buffers;
+};
+
+//==============================================================================
+
+#ifndef DOXYGEN
+template <class LockType = CriticalSection>
+class AudioBufferPoolType
+  : public AudioBufferPool
+  , public LeakChecked <AudioBufferPoolType <LockType> >
+{
+public:
+  Buffer* acquireBuffer (int numChannels, int numSamples)
+  {
+    LockType::ScopedLockType lock (m_mutex);
+
+    return acquireBufferInternal (numChannels, numSamples);
+  }
+
+  void releaseBuffer (Buffer* buffer)
+  {
+    LockType::ScopedLockType lock (m_mutex);
+
+    releaseBufferInternal (buffer);
   }    
 
 private:
-  MutexType m_mutex;
-  VF_JUCE::Array <BufferClass*> m_buffers;
+  LockType m_mutex;
 };
-
-typedef AudioBufferPoolTemplate <detail::AudioBufferPoolBase::Buffer> AudioBufferPool;
+#endif
 
 //------------------------------------------------------------------------------
 
@@ -201,7 +191,7 @@ public:
 
 private:
   AudioBufferPool& m_pool;
-  AudioBufferPool::Buffer* m_buffer;
+  AudioBufferPool::Buffer* const m_buffer;
 
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedAudioSampleBuffer);
 };

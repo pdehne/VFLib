@@ -4,11 +4,11 @@
 #ifndef VF_GLOBALPAGEDFREESTORE_VFHEADER
 #define VF_GLOBALPAGEDFREESTORE_VFHEADER
 
+#ifndef DOXYGEN
+
 #include "vf_PagedFreeStore.h"
 
-/****
-  A PagedFreeStore singleton.
-*/
+/** A PagedFreeStore singleton. */
 class GlobalPagedFreeStore
   : public ReferenceCountedSingleton <GlobalPagedFreeStore>
   , LeakChecked <GlobalPagedFreeStore>
@@ -38,5 +38,7 @@ public:
 private:
   PagedFreeStore m_allocator;
 };
+
+#endif
 
 #endif

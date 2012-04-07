@@ -4,7 +4,9 @@
 #ifndef VF_LOCKFREESTACK_VFHEADER
 #define VF_LOCKFREESTACK_VFHEADER
 
+#ifndef DOXYGEN
 struct LockFreeStackDefaultTag { };
+#endif
 
 /***
   Lock-free intrusive stack.
@@ -15,6 +17,7 @@ template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
 {
 public:
+#ifndef DOXYGEN
   class Node : Uncopyable
   {
   public:
@@ -28,14 +31,18 @@ public:
 
     AtomicPointer <Node> m_next;
   };
+#endif
 
 public:
   LockFreeStack () : m_head (0)
   {
   }
 
-  // This constructor atomically acquires the contents
-  // of the other stack. The other stack is cleared.
+  /** Create a LockFreeStack from another stack.
+
+      The contents of the other stack are atomically acquired.
+      The other stack is cleared.
+  */
   explicit LockFreeStack (LockFreeStack& other)
   {
     Node* head;
