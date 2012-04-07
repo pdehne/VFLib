@@ -4,20 +4,125 @@
 #ifndef VF_LIST_VFHEADER
 #define VF_LIST_VFHEADER
 
-struct ListDefaultTag { };
+//==============================================================================
+/** Intrusive doubly linked list.
 
-/***
-  Intrusive doubly linked list.
+    The intrusive List is container similar in operation to std::list in the
+    Standard Template Library (STL). Intrusive containers are special containers
+    that offer better performance and exception safety guarantees than
+    non-intrusive containers (like the STL containers). They are useful building
+    blocks for high performance concurrent systems or other purposes where
+    allocations are restricted (such as the audioDeviceIOCallback), because
+    intrusive list operations do not allocate or free memory.
 
-  Elements must derive from one or more List<>::Node. "Tag" is used when an
-  element is derived from more than one Node, this allows it to exist in
-  multiple lists simultaneously.
+    While intrusive containers were and are widely used in C, they became more
+    and more forgotten in C++ due to the presence of the standard containers
+    which don't support intrusive techniques. List not only reintroduces this
+    technique to C++ for doubly linked lists, but also encapsulates the
+    implementation in a mostly compliant STL interface. Hence anyone familiar
+    with standard containers can easily use List.
+
+    To use the list, we first derive the object we want to place into the list
+    from List::Node:
+
+    @code
+
+    struct Object : List <Object>::Node
+    {
+      Object (int value) : m_value (value)
+      {
+      }
+      
+      int m_value;
+    };
+
+    @endcode
+
+    Now we declare the list, and add a couple of items.
+
+    @code
+
+    List <Object> list;
+
+    list.push_back (* (new Object (1)));
+    list.push_back (* (new Object (2)));
+
+    @endcode
+
+    For compatibility with the standard containers, push_back() expects
+    a reference to the object. Unlike the standard container, however,
+    push_back() places the actual object in the list and not a copy-constructed
+    duplicate.
+
+    Iterating over the list follows the same idiom as the STL:
+
+    @code
+
+    for (List <Object>::iterator iter = list.begin();
+         iter != list.end;
+         ++iter)
+      std::cout << iter->m_value;
+
+    @endcode
+
+    You can even use FOREACH, or range based for loops:
+
+    @code
+
+    BOOST_FOREACH (Object& object, list)
+      std::cout << object.m_value;
+
+    @endcode
+
+    Because List is mostly STL compliant, it can be passed into STL algorithms:
+    e.g. std::for_each() or std::find_first_of.
+
+    In general, objects placed into a List should be dynamically allocated
+    although this cannot be enforced at compie time. Since the caller provides
+    the storage for the object, the caller is also responsible for deleting the
+    object. An object still exists after being removed from a List, until the
+    caller deletes it. This means an element can be moved from one List to
+    another with practically no overhead.
+
+    Unlike the standard containers, an object may only exist in one list at a
+    time, unless special preparations are made. The Tag template parameter is
+    used to distinguish between different list types for the same object,
+    allowing the object to exist in more than one list simultaneously.
+
+    For example, consider an actor system where a global list of actors is
+    maintained, so that they can each be periodically receive processing
+    time. We wish to also maintain a list of the subset of actors that require
+    a domain-dependent update. To achieve this, we declare two tags, the
+    associated list types, and the list element thusly:
+
+    @code
+
+    struct Actor;         // Forward declaration required
+
+    struct ProcessTag { };
+    struct UpdateTag { };
+
+    typedef List <Actor, ProcessTag> ProcessList;
+    typedef List <Actor, UpdateTag> UpdateList;
+
+    struct Actor
+    {
+      bool process ();    // returns true if we need an update
+      void update ();
+    };
+
+    @endcode
 */
+
+#ifndef DOXYGEN
+struct ListDefaultTag { };
+#endif
 
 template <class Element, class Tag = ListDefaultTag>
 class List : Uncopyable
 {
 public:
+#ifndef DOXYGEN
   typedef int size_type;
 
   typedef Element        value_type;
@@ -36,6 +141,7 @@ public:
     Node* m_next;
     Node* m_prev;
   };
+#endif
 
 private:
   template <class ElemType, class NodeType>

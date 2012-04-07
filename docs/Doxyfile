@@ -676,9 +676,9 @@ INPUT                  = \
      ../include/vf/modules/vf_audio/sources/ \
      ../include/vf/modules/vf_concurrent/containers/ \
      ../include/vf/modules/vf_concurrent/memory/ \
-     ../include/vf/modules/vf_concurrent/threads/ 
+     ../include/vf/modules/vf_concurrent/threads/ \
+     ../include/vf/modules/vf_core/containers/
 
-#     ../include/vf/modules/vf_core/containers/ \
 #     ../include/vf/modules/vf_core/diagnostic/ \
 #     ../include/vf/modules/vf_core/events/
      

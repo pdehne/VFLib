@@ -4,12 +4,7 @@
 #ifndef VF_NOISEAUDIOSOURCE_VFHEADER
 #define VF_NOISEAUDIOSOURCE_VFHEADER
 
-/*
- * Juce AudioSource that produces various types of noise
- *
- */
-
-//------------------------------------------------------------------------------
+#ifndef DOXYGEN
 
 //
 // "Filter to make pink noise from white"
@@ -73,8 +68,11 @@ private:
   double b0, b1, b2, b3, b4, b5, b6;
 };
 
-//------------------------------------------------------------------------------
+#endif
 
+//==============================================================================
+/** AudioSource that produces various types of noise.
+*/
 class NoiseAudioSource : public AudioSource
 {
 public:

@@ -8,10 +8,11 @@
 struct LockFreeStackDefaultTag { };
 #endif
 
-/***
-  Lock-free intrusive stack.
+/** Lock-free intrusive stack.
 
-  The caller is responsible for preventing the "ABA" problem.
+    This stack is implemented using the same intrusive interface as List.
+
+    The caller is responsible for preventing the "ABA" problem.
 */
 template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
@@ -42,6 +43,8 @@ public:
 
       The contents of the other stack are atomically acquired.
       The other stack is cleared.
+
+      @param other  The other stack to acquire.
   */
   explicit LockFreeStack (LockFreeStack& other)
   {
@@ -56,7 +59,16 @@ public:
     m_head = head;
   }
 
-  // returns true if it pushed the first element
+  /** Push a node onto the stack.
+
+      This operation is lock-free. Caller is responsible for preventing the
+      ABA problem.
+
+      @param node The node to push.
+
+      @return     True if the stack was previously empty. If multiple threads
+                  are attempting to push, only one will receive true.
+  */
   bool push_front (Node* node)
   {
     bool first;
@@ -73,6 +85,12 @@ public:
     return first;
   }
 
+  /** Pop an element off the stack.
+
+      The caller is responsible for preventing the ABA problem.
+
+      @return   The element that was popped, or nullptr if the stack was empty.
+  */
   Element* pop_front ()
   {
     Node* node;
@@ -90,9 +108,13 @@ public:
     return node ? static_cast <Element*> (node) : nullptr;
   }
 
-  // Swap contents with another stack.
-  // Not thread safe or atomic.
-  // Caller must synchronize.
+  /** Swap the contents of this stack with another stack.
+
+      This call is not thread safe or atomic. The caller is responsible for
+      synchronizing access.
+
+      @param other  The other stack to swap contents with.
+  */
   void swap (LockFreeStack& other)
   {
     Node* temp = other.m_head.get ();
