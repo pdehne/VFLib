@@ -4,6 +4,12 @@
 #ifndef APPCONFIG_HEADER
 #define APPCONFIG_HEADER
 
+/** AppConfig.h template
+
+*/
+
+#if 0
+
 #define JUCE_CHECK_MEMORY_LEAKS 1
 
 //==============================================================================
@@ -26,23 +32,23 @@
 // juce_audio_devices flags:
 
 #ifndef JUCE_ASIO
-#define JUCE_ASIO 1
+#define JUCE_ASIO 0
 #endif
 
 #ifndef JUCE_WASAPI
-#define JUCE_WASAPI 1
+#define JUCE_WASAPI 0
 #endif
 
 #ifndef JUCE_DIRECTSOUND
-#define JUCE_DIRECTSOUND 1
+#define JUCE_DIRECTSOUND 0
 #endif
 
 #ifndef JUCE_ALSA
-#define JUCE_ALSA 1
+#define JUCE_ALSA 0
 #endif
 
 #ifndef JUCE_JACK
-#define JUCE_JACK 1
+#define JUCE_JACK 0
 #endif
 
 #ifndef JUCE_USE_CDREADER
@@ -152,6 +158,8 @@
 
 #ifndef    JUCE_USE_CAMERA
  //#define JUCE_USE_CAMERA
+#endif
+
 #endif
 
 #endif

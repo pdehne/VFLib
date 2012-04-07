@@ -521,5 +521,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\AppConfig.h" />
   </ItemGroup>
 </Project>
