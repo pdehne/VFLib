@@ -9,13 +9,6 @@
 #include <crtdbg.h>
 #endif
 
-// PROBLEM!
-namespace vf
-{
-// PROBLEM!
-#include "vf/modules/vf_concurrent/threads/vf_SharedObject.h"
-}
-
 namespace vf
 {
 

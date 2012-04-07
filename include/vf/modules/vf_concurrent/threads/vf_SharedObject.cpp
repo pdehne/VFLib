@@ -62,7 +62,3 @@ void SharedObject::destroySharedObject ()
 {
   Deleter::getInstance()->Delete (this);
 }
-
-void SharedObject::performLibraryAtExit ()
-{
-}

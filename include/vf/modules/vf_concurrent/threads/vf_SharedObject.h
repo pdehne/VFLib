@@ -51,11 +51,6 @@ protected:
   class Deleter;
 
 private:
-  friend class PerformedAtExit;
-
-  static void performLibraryAtExit ();
-
-private:
   AtomicCounter m_refs;
 };
 

@@ -49,8 +49,6 @@ PerformedAtExit::PerformedAtExit (bool perform)
 
 void PerformedAtExit::performLibraryAtExit ()
 {
-  SharedObject::performLibraryAtExit ();
-
   LeakCheckedBase::performLibraryAtExit ();
 }
 
