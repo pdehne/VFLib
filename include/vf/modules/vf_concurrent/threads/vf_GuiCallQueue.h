@@ -7,7 +7,7 @@
 #include "vf_CallQueue.h"
 
 //==============================================================================
-/** A CallQueue handled by the Juce Message Thread (Gui).
+/** A CallQueue handled by the Juce message thread (gui).
 
     To use this, put an instance of the class in your application object
     or other central location. Calls placed in the queue will automatically
