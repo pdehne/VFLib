@@ -10,22 +10,24 @@ private:
   friend class ReferenceCountedSingleton <Sqlite3>;
 
   Sqlite3 () : ReferenceCountedSingleton (SingletonLifetime::persistAfterCreation)
-	{
+  {
     int threadSafe = sqlite3_threadsafe ();
-    if (threadSafe != 1)
+
+    if (threadSafe == 0)
       Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
 
-		int result = sqlite3_config (SQLITE_CONFIG_MULTITHREAD);
+    int result = sqlite3_config (SQLITE_CONFIG_MULTITHREAD);
+
     if (result != SQLITE_OK)
       Throw (Error().fail (__FILE__, __LINE__, Error::assertFailed));
 
   	sqlite3_initialize ();
-	}
+  }
 
-	~Sqlite3()
-	{
-		sqlite3_shutdown ();
-	}
+  ~Sqlite3()
+  {
+	  sqlite3_shutdown ();
+  }
 
   static Sqlite3* createInstance ()
   {

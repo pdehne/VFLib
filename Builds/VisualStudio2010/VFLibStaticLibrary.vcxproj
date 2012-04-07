@@ -158,8 +158,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.c" />
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.c" />
+    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -274,6 +280,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ConnectedEdges.h" />

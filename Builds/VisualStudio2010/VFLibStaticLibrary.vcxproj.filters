@@ -515,5 +515,8 @@
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h">
+      <Filter>VF Modules\vf_db</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
