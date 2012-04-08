@@ -50,8 +50,7 @@ protected:
   typedef VF_JUCE::SpinLock LockType;
 
   explicit ReferenceCountedSingleton (SingletonLifetime::Lifetime const lifetime)
-    : PerformedAtExit (lifetime == SingletonLifetime::persistAfterCreation)
-    , m_lifetime (lifetime)
+    : m_lifetime (lifetime)
   {
     vfassert (s_instance == nullptr);
 
@@ -120,7 +119,8 @@ public:
 private:
   void performAtExit ()
   {
-    decReferenceCount ();
+    if (m_lifetime == SingletonLifetime::persistAfterCreation)
+      decReferenceCount ();
   }
 
   void destroySingleton ()

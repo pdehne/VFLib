@@ -41,10 +41,9 @@ private:
 PerformedAtExit::Performer PerformedAtExit::Performer::s_performer;
 Head PerformedAtExit::Performer::s_head;
 
-PerformedAtExit::PerformedAtExit (bool perform)
+PerformedAtExit::PerformedAtExit ()
 {
-  if (perform)
-    Performer::push_front (this);
+  Performer::push_front (this);
 }
 
 void PerformedAtExit::performLibraryAtExit ()

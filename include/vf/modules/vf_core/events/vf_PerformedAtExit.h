@@ -4,10 +4,17 @@
 #ifndef VF_PERFORMEDATEXIT_VFHEADER
 #define VF_PERFORMEDATEXIT_VFHEADER
 
+//==============================================================================
+/** Provides an opportunity to perform an action at exit
+
+    To use, derive your class from PerformedAtExit, and override performAtExit().
+    The call will be made during the destruction of objects with static storage
+    duration, before LeakChecked performs its diagnostics.
+*/
 class PerformedAtExit : Uncopyable
 {
 protected:
-  explicit PerformedAtExit (bool perform);
+  explicit PerformedAtExit ();
 
 private:
   virtual void performAtExit () = 0;
