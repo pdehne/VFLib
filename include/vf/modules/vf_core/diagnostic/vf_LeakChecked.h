@@ -4,9 +4,9 @@
 #ifndef VF_LEAKCHECKED_VFHEADER
 #define VF_LEAKCHECKED_VFHEADER
 
-#include "vf/modules/vf_core/diagnostic/vf_Error.h"
-#include "vf/modules/vf_core/memory/vf_StaticObject.h"
-#include "vf/modules/vf_core/diagnostic/vf_Throw.h"
+#include "vf_Error.h"
+#include "vf_Throw.h"
+#include "../memory/vf_StaticObject.h"
 
 //
 // Derived classes are automatically leak-checked on exit

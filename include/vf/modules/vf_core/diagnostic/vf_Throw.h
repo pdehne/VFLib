@@ -4,7 +4,7 @@
 #ifndef VF_THROW_VFHEADER
 #define VF_THROW_VFHEADER
 
-#include "vf/modules/vf_core/diagnostic/vf_Debug.h"
+#include "vf_Debug.h"
 
 //
 // Throw an exception, with the opportunity to get a

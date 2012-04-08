@@ -4,7 +4,7 @@
 #ifndef VF_CATCHANY_VFHEADER
 #define VF_CATCHANY_VFHEADER
 
-#include "vf/modules/vf_core/functor/vf_Function.h"
+#include "../functor/vf_Function.h"
 
 //
 // Executes the function and catches any exception.

@@ -4,7 +4,7 @@
 #ifndef VF_CACHELINE_VFHEADER
 #define VF_CACHELINE_VFHEADER
 
-#include "vf/modules/vf_core/memory/vf_MemoryAlignment.h"
+#include "vf_MemoryAlignment.h"
 
 // Allows turning off of all padding,
 // e.g. for memory-constrained systems or testing.

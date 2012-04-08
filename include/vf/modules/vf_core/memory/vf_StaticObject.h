@@ -4,7 +4,7 @@
 #ifndef VF_STATICOBJECT_VFHEADER
 #define VF_STATICOBJECT_VFHEADER
 
-#include "vf/modules/vf_core/threads/vf_SpinDelay.h"
+#include "../threads/vf_SpinDelay.h"
 
 //
 // A full suite of thread-safe objects designed for static storage duration.

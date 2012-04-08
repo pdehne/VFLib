@@ -4,7 +4,7 @@
 #ifndef VF_ERROR_VFHEADER
 #define VF_ERROR_VFHEADER
 
-#include "vf/modules/vf_core/diagnostic/vf_SafeBool.h"
+#include "vf_SafeBool.h"
 
 // Yet another error reporting class. This one records the file/line
 // where the error occurred along with some human readable text. It
