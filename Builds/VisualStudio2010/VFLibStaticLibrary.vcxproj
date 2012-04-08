@@ -167,43 +167,43 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui.cpp" />
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_ResizableLayout.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
@@ -281,20 +281,20 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ConnectedEdges.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ConnectedEdges.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_VerticalGradient.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterGroup.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ResizableLayout.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h" />
     <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

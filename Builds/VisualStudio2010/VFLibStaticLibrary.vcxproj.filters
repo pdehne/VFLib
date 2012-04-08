@@ -64,17 +64,11 @@
     <Filter Include="VF Modules\vf_gui">
       <UniqueIdentifier>{4133fdb3-4aa5-444b-8437-35def89aa012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_gui\utilities">
-      <UniqueIdentifier>{c04b82a4-caae-4010-80e5-ea8c0f6f1bb8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_gui\mouse">
       <UniqueIdentifier>{37af44fd-3675-47d7-8e0b-c422b9dca628}</UniqueIdentifier>
     </Filter>
     <Filter Include="VF Modules\vf_gui\layout">
       <UniqueIdentifier>{4dbbaec8-3d60-48d1-8fde-091af7f7c16c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_gui\graphics">
-      <UniqueIdentifier>{4352b1db-8caf-44af-ad7d-43faf9d79520}</UniqueIdentifier>
     </Filter>
     <Filter Include="VF Modules\vf_core\native">
       <UniqueIdentifier>{57dc91b0-d6b1-4eeb-bcf0-c410536b35c8}</UniqueIdentifier>
@@ -87,6 +81,12 @@
     </Filter>
     <Filter Include="VF Modules\vf_concurrent\memory\internal">
       <UniqueIdentifier>{4c8defa0-527e-49d3-a8e4-b577158a65f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_gui\graphics">
+      <UniqueIdentifier>{4352b1db-8caf-44af-ad7d-43faf9d79520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_gui\components">
+      <UniqueIdentifier>{c04b82a4-caae-4010-80e5-ea8c0f6f1bb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,30 +180,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.cpp">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.cpp">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.cpp">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_ResizableLayout.cpp">
-      <Filter>VF Modules\vf_gui\layout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.cpp">
-      <Filter>VF Modules\vf_gui\layout</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.cpp">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.cpp">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_LabColour.cpp">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.cpp">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
@@ -225,9 +201,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.cpp">
-      <Filter>VF Modules\vf_gui\utilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
@@ -245,6 +218,33 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.cpp">
+      <Filter>VF Modules\vf_gui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.cpp">
+      <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.cpp">
+      <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.cpp">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.cpp">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.cpp">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -404,42 +404,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
       <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ComponentBroadcast.h">
-      <Filter>VF Modules\vf_gui\utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ConnectedEdges.h">
-      <Filter>VF Modules\vf_gui\utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropData.h">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_DragAndDropTarget.h">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterEditable.h">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_MouseEnterGroup.h">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_ResizableLayout.h">
-      <Filter>VF Modules\vf_gui\layout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_StackedLayout.h">
-      <Filter>VF Modules\vf_gui\layout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_RadialImageConvolutionKernel.h">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_VerticalGradient.h">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_XYZColour.h">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_LabColour.h">
-      <Filter>VF Modules\vf_gui\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.h">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClInclude>
@@ -466,9 +430,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h">
-      <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentState.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
@@ -517,6 +478,45 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_LockFreeQueue.h">
       <Filter>VF Modules\vf_core\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_VerticalGradient.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.h">
+      <Filter>VF Modules\vf_gui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h">
+      <Filter>VF Modules\vf_gui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ConnectedEdges.h">
+      <Filter>VF Modules\vf_gui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h">
+      <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h">
+      <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.h">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h">
+      <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

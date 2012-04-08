@@ -12,18 +12,18 @@
 
 namespace vf
 {
-#include "vf_TransparentBorder.cpp"
+#include "components/vf_TransparentBorder.cpp"
 
-#include "vf_LabColour.cpp"
-#include "vf_XYZColour.cpp"
-#include "vf_RadialImageConvolutionKernel.cpp"
+#include "graphics/vf_LabColour.cpp"
+#include "graphics/vf_XYZColour.cpp"
+#include "graphics/vf_RadialImageConvolutionKernel.cpp"
 
-#include "vf_ResizableLayout.cpp"
-#include "vf_StackedLayout.cpp"
+#include "layout/vf_ResizableLayout.cpp"
+#include "layout/vf_StackedLayout.cpp"
 
-#include "vf_DragAndDropData.cpp"
-#include "vf_DragAndDropTarget.cpp"
-#include "vf_MouseEnterEditable.cpp"
+#include "mouse/vf_DragAndDropData.cpp"
+#include "mouse/vf_DragAndDropTarget.cpp"
+#include "mouse/vf_MouseEnterEditable.cpp"
 }
 
 #if JUCE_MSVC
