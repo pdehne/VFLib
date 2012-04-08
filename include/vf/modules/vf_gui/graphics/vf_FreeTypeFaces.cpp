@@ -300,7 +300,8 @@ protected:
         tags--;
       }
 
-      x1 = v_start.x; y1 = v_start.y;
+      x1 = value_type(v_start.x);
+      y1 = value_type(v_start.y);
       destShape.startNewSubPath (x1, y1);
 
       while(point < limit)
@@ -313,7 +314,8 @@ protected:
         {
         case FT_CURVE_TAG_ON:  // emit a single lineTo
           {
-            x1 = point->x; y1 = point->y;
+            x1 = value_type(point->x);
+            y1 = value_type(point->y);
             destShape.lineTo(x1, y1);
             continue;
           }
@@ -337,8 +339,10 @@ Do_Conic:
 
               if(tag == FT_CURVE_TAG_ON)
               {
-                x1 = v_control.x; y1 = v_control.y;
-                x2 = vec.x; y2 = vec.y;
+                x1 = value_type(v_control.x);
+                y1 = value_type(v_control.y);
+                x2 = value_type(vec.x);
+                y2 = value_type(vec.y);
                 destShape.quadraticTo (x1, y1, x2, y2);
                 continue;
               }
@@ -349,15 +353,21 @@ Do_Conic:
               v_middle.x = (v_control.x + vec.x) / 2;
               v_middle.y = (v_control.y + vec.y) / 2;
 
-              x1 = v_control.x; y1 = v_control.y;
-              x2 = v_middle.x; y2 = v_middle.y;
+              x1 = value_type(v_control.x);
+              y1 = value_type(v_control.y);
+              x2 = value_type(v_middle.x);
+              y2 = value_type(v_middle.y);
+
               destShape.quadraticTo (x1, y1, x2, y2);
               v_control = vec;
               goto Do_Conic;
             }
 
-            x1 = v_control.x; y1 = v_control.y;
-            x2 = v_start.x; y2 = v_start.y;
+            x1 = value_type(v_control.x);
+            y1 = value_type(v_control.y);
+            x2 = value_type(v_start.x);
+            y2 = value_type(v_start.y);
+
             destShape.quadraticTo (x1, y1, x2, y2);
             goto Close;
           }
@@ -381,17 +391,26 @@ Do_Conic:
 
               vec.x = point->x; vec.y = point->y;
 
-              x1 = vec1.x; y1 = vec1.y;
-              x2 = vec2.x; y2 = vec2.y;
-              x3 = vec.x; y3 = vec.y;
+              x1 = value_type(vec1.x);
+              y1 = value_type(vec1.y);
+              x2 = value_type(vec2.x);
+              y2 = value_type(vec2.y);
+              x3 = value_type(vec.x);
+              y3 = value_type(vec.y);
+
               destShape.cubicTo(x1, y1, x2, y2, x3, y3);
+
               continue;
             }
 
-            x1 = vec1.x; y1 = vec1.y;
-            x2 = vec2.x; y2 = vec2.y;
-            x3 = v_start.x; y3 = v_start.y;
+            x1 = value_type(vec1.x);
+            y1 = value_type(vec1.y);
+            x2 = value_type(vec2.x);
+            y2 = value_type(vec2.y);
+            x3 = value_type(v_start.x);
+            y3 = value_type(v_start.y);
             destShape.cubicTo (x1, y1, x2, y2, x3, y3);
+
             goto Close;
           }
         }
@@ -518,7 +537,7 @@ private:
         addKerningPairsForGlyph (glyph_index, characterNeeded);
 #endif
 
-        float advance = m_face->glyph->metrics.horiAdvance;
+        float advance = float(m_face->glyph->metrics.horiAdvance);
         // convert to juce normalized units
         path.applyTransform (AffineTransform::scale(m_scale, -m_scale));
         advance *= m_scale;
@@ -697,9 +716,9 @@ protected:
     // calculate outline scale factor
     float scale = 1.f;
     // convert 26p6 screen pixels to fractional screen pixels
-    scale *= 1. / 64;
+    scale *= 1.f / 64;
     // convert to normalized based on created height
-    scale *= 1. / adjustedHeight;
+    scale *= 1.f / adjustedHeight;
     // account for the discrepancy in the juce height and the created height
     scale *= adjustedHeight / m_fontHeight;
 

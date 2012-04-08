@@ -34,8 +34,3 @@ JUCE
 
   VFLib uses Juce (http://rawmaterialsoftware.com), which is available under
   the GNU General Public License. Commercial licenses are also available.
-
-ZLib
-
-  ZLib (http://zlib.net) is distributed under the ZLib license, available
-  at http://www.gzip.org/zlib/zlib_license.html.
