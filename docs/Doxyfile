@@ -679,7 +679,11 @@ INPUT                  = \
      ../include/vf/modules/vf_concurrent/threads/ \
      ../include/vf/modules/vf_core/containers/ \
      ../include/vf/modules/vf_core/events/ \
-     ../include/vf/modules/vf_gui/ \
+     ../include/vf/modules/vf_gui/components/ \
+     ../include/vf/modules/vf_gui/graphics/ \
+     ../include/vf/modules/vf_gui/layout/ \
+     ../include/vf/modules/vf_gui/mouse/
+
 
 
 

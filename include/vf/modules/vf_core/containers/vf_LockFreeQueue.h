@@ -127,10 +127,10 @@ public:
 
       This operation is wait-free.
 
-      @param pElem [out]  The element that was retrieved, or nullptr if the
-                          list was empty.
+      @param[out] pElem The element that was retrieved, or nullptr if the
+                        list was empty.
 
-      @return             `true` if the list was uncontended.
+      @return           `true` if the list was uncontended.
   */
   bool try_pop_front (Element** pElem)
   {

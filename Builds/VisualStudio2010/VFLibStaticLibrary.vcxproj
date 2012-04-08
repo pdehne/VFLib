@@ -288,6 +288,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_VerticalGradient.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ContentComponentConstrainer.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h" />

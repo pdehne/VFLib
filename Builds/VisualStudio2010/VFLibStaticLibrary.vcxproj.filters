@@ -518,5 +518,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ContentComponentConstrainer.h">
+      <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
