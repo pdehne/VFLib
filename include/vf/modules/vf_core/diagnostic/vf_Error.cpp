@@ -52,17 +52,10 @@ bool Error::failed () const
   return code () != success;
 }
 
-#if 0
-Error::operator bool () const
-{
-  return code () != success;
-}
-#else
 bool Error::asBoolean () const
 {
   return code () != success;
 }
-#endif
 
 const String Error::getReasonText () const
 {
