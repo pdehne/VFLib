@@ -205,6 +205,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui.cpp" />
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.h" />
     <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

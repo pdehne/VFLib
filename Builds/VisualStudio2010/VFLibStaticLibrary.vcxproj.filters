@@ -243,14 +243,17 @@
     <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.cpp">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c">
-      <Filter>VF Library Code</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3.c">
       <Filter>Externals\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3async.c">
       <Filter>Externals\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.c">
+      <Filter>VF Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c">
+      <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -526,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3.h">
       <Filter>Externals\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.h">
+      <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
