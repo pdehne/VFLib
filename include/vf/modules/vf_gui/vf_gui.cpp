@@ -11,7 +11,7 @@
 #endif
 
 #if VF_USE_FREETYPE
-#include "vf_gui_externals.h"
+#include "../vf_freetype/vf_freetype.h"
 #endif
 
 namespace vf

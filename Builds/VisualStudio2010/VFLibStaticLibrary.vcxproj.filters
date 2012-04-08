@@ -91,8 +91,17 @@
     <Filter Include="Externals\sqlite">
       <UniqueIdentifier>{b0738ea9-c3f9-48e1-bb77-bc540c4cb273}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Externals\freetype">
-      <UniqueIdentifier>{8e2cc531-884c-41e2-a7b3-ccb4bd37e21d}</UniqueIdentifier>
+    <Filter Include="VF Modules\vf_freetype">
+      <UniqueIdentifier>{736ee987-142e-44a5-a8e6-4b599c17f291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_freetype\freetype">
+      <UniqueIdentifier>{4f7641a9-6421-4b62-86ca-447c63b4bb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_sqlite">
+      <UniqueIdentifier>{77750aaf-a021-4260-943d-ffb29fd235f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_sqlite\sqlite">
+      <UniqueIdentifier>{41878b9f-da99-49d3-84d6-fa396beda121}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -252,17 +261,23 @@
     <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3async.c">
       <Filter>Externals\sqlite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.c">
-      <Filter>VF Library Code</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c">
-      <Filter>VF Library Code</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.c">
-      <Filter>Externals\freetype</Filter>
+    <ClCompile Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.c">
+      <Filter>VF Modules\vf_freetype\freetype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_freetype\vf_freetype.c">
+      <Filter>VF Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.c">
+      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.c">
+      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.c">
+      <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -452,9 +467,6 @@
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h">
-      <Filter>VF Modules\vf_db</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory\internal</Filter>
     </ClInclude>
@@ -536,14 +548,26 @@
     <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3.h">
       <Filter>Externals\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.h">
-      <Filter>VF Modules\vf_gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.h">
-      <Filter>Externals\freetype</Filter>
+    <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h">
+      <Filter>VF Modules\vf_freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.h">
+      <Filter>VF Modules\vf_freetype\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.h">
+      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.h">
+      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h">
+      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
+      <Filter>VF Modules\vf_sqlite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,6 @@ void z_error (char* message)
 {
 }
 
-#include "../../externals/freetype/FreeTypeAmalgam.c"
+#include "freetype/FreeTypeAmalgam.c"
 
 #endif

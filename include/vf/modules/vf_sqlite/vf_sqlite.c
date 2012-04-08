@@ -22,15 +22,31 @@
 //   http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef VF_DB_EXTERNALS_VFHEADER
-#define VF_DB_EXTERNALS_VFHEADER
-
 #include "AppConfig.h"
 
 #if VF_USE_SQLITE
 
-#include "../../externals/sqlite/sqlite3.h"
+#if _MSC_VER
+#pragma warning (push)
+#pragma warning (disable: 4127) // conditional expression is constant
+#pragma warning (disable: 4232) // nonstandard extension used: dllimport address 
+#pragma warning (disable: 4244) // conversion from 'int': possible loss of data
+#pragma warning (disable: 4701) // potentially uninitialized variable
+#pragma warning (disable: 4706) // assignment within conditional expression
+#endif
 
+/* When compiled with SQLITE_THREADSAFE=2, SQLite can be used in a
+   multithreaded program so long as no two threads attempt to use the
+   same database connection at the same time.
+*/
+
+#define SQLITE_THREADSAFE 2
+
+#include "sqlite/sqlite3.c"
+#include "sqlite/sqlite3async.c"
+
+#if _MSC_VER
+#pragma warning (pop)
 #endif
 
 #endif

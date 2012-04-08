@@ -4,6 +4,8 @@
 #ifndef __VF_VFHEADER__
 #define __VF_VFHEADER__
 
+#include "AppConfig.h"
+
 /** Include this header to bring in all the modules,
     or manually include only the modules that you want
 */

@@ -2,11 +2,11 @@
 // See the file README.md for licensing information.
 // Based on ideas from the soci wrapper sqlite back-end.
 
-#include "vf_db_externals.h"
-
 #include "vf_db.h"
 
 #if VF_USE_SQLITE
+
+#include "../vf_sqlite/vf_sqlite.h"
 
 #if JUCE_MSVC
 #pragma warning (push)
