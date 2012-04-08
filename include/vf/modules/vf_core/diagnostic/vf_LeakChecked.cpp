@@ -3,48 +3,37 @@
 
 #if VF_CHECK_LEAKS
 
+//==============================================================================
+// Type-independent portion of Counter
 class LeakCheckedBase::CounterBase::Singleton
 {
 public:
   void push_back (CounterBase* counter)
   {
-    CounterBase* next;
-
-    do
-    {
-      next = m_head.get ();
-      counter->m_next = next;
-    }
-    while (!m_head.compareAndSet (counter, next));
+    m_list.push_front (counter);
   }
 
-  void detectLeaks ()
+  void detectAllLeaks ()
   {
-    CounterBase* counter = m_head.get ();
-    while (counter)
+    CounterBase* counter = m_list.pop_front ();
+    
+    while (counter != nullptr)
     {
-      counter->detectLeak ();
-      counter = counter->m_next;
+      counter->detectLeaks ();
+      
+      counter = m_list.pop_front ();
     }
   }
 
   static Singleton& getInstance ()
   {
-    static Singleton* volatile s_instance;
-    static Static::Initializer s_initializer;
+    static Singleton instance;
 
-    if (s_initializer.begin ())
-    {
-      static Singleton s_object;
-      s_instance = &s_object;
-      s_initializer.end ();
-    }
-
-    return *s_instance;
+    return instance;
   }
 
 private:
-  AtomicPointer <CounterBase> m_head;
+  LockFreeStack <CounterBase> m_list;
 };
 
 //------------------------------------------------------------------------------
@@ -54,16 +43,16 @@ LeakCheckedBase::CounterBase::CounterBase ()
   Singleton::getInstance().push_back (this);
 }
 
-void LeakCheckedBase::CounterBase::detectLeaks()
+void LeakCheckedBase::CounterBase::detectAllLeaks ()
 {
-  Singleton::getInstance().detectLeaks ();
+  Singleton::getInstance().detectAllLeaks ();
 }
 
 //------------------------------------------------------------------------------
 
-void LeakCheckedBase::performLibraryAtExit ()
+void LeakCheckedBase::detectAllLeaks ()
 {
-  CounterBase::detectLeaks ();
+  CounterBase::detectAllLeaks ();
 }
 
 #endif

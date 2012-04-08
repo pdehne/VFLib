@@ -33,7 +33,7 @@ public:
     PagedFreeStore::deallocate (p);
   }
 
-  static GlobalPagedFreeStore* createInstance (); // @implementation
+  static GlobalPagedFreeStore* createInstance ();
 
 private:
   PagedFreeStore m_allocator;

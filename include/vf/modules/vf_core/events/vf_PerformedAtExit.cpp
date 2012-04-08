@@ -17,7 +17,7 @@ private:
       object = next;
     }
 
-    PerformedAtExit::performLibraryAtExit ();
+    LeakCheckedBase::detectAllLeaks ();
   }
 
 public:
@@ -44,10 +44,5 @@ Head PerformedAtExit::Performer::s_head;
 PerformedAtExit::PerformedAtExit ()
 {
   Performer::push_front (this);
-}
-
-void PerformedAtExit::performLibraryAtExit ()
-{
-  LeakCheckedBase::performLibraryAtExit ();
 }
 

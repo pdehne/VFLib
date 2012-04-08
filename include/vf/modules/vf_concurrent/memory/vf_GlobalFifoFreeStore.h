@@ -23,7 +23,7 @@ public:
     FifoFreeStoreType::deallocate (p);
   }
 
-  static GlobalFifoFreeStore* createInstance () // @implementation
+  static GlobalFifoFreeStore* createInstance ()
   {
     return new GlobalFifoFreeStore;
   }

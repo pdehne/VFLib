@@ -20,8 +20,6 @@ private:
   virtual void performAtExit () = 0;
 
 private:
-  static void performLibraryAtExit ();
-
   class Performer;
 
   PerformedAtExit* m_next;

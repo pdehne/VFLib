@@ -7,6 +7,7 @@
 #include "vf_Error.h"
 #include "vf_Throw.h"
 #include "../memory/vf_StaticObject.h"
+#include "../containers/vf_LockFreeStack.h"
 
 //
 // Derived classes are automatically leak-checked on exit
@@ -16,27 +17,23 @@
 
 class LeakCheckedBase
 {
+public:
+  static void detectAllLeaks ();
+
 protected:
-  class CounterBase
+  class CounterBase : public LockFreeStack <CounterBase>::Node
   {
   public:
     CounterBase ();
 
-    static void detectLeaks ();
+    static void detectAllLeaks ();
 
   private:
-    virtual void detectLeak () = 0;
+    virtual void detectLeaks () = 0;
 
   private:
     class Singleton;
-
-    CounterBase* m_next;
   };
-
-private:
-  friend class PerformedAtExit;
-
-  static void performLibraryAtExit ();
 };
 
 //------------------------------------------------------------------------------
@@ -86,7 +83,7 @@ private:
       return --m_count;
     }
     
-    void detectLeak ()
+    void detectLeaks ()
     {
       const int count = m_count.get ();
 
@@ -128,7 +125,7 @@ class LeakCheckedBase
 private:
   friend class PerformedAtExit;
 
-  static void performLibraryAtExit () { }
+  static void detectAllLeaks () { }
 };
 
 template <class Object>
@@ -136,13 +133,6 @@ struct LeakChecked : LeakCheckedBase
 {
 };
 
-#endif
-
-#if 0
-template <class Object>
-class LeakCheckedAndNonCopyable : LeakChecked <Object>, Uncopyable
-{
-};
 #endif
 
 #endif
