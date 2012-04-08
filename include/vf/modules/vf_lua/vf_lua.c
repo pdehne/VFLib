@@ -56,12 +56,11 @@ extern "C"
 #ifdef _MSC_VER
 #pragma warning (push)
 #pragma warning (disable: 4244)
+#pragma warning (disable: 4702)
 #endif
 
 #include "lua/lauxlib.c"
 #include "lua/lbaselib.c"
-
-//#include "lua/ltable.c"
 
 #include "lua/lbitlib.c"
 #include "lua/lcorolib.c"
@@ -72,8 +71,6 @@ extern "C"
 #include "lua/loslib.c"
 #include "lua/lstrlib.c"
 #include "lua/ltablib.c"
-
-#if 1
 
 // Must come before any include of llimits.h, for luai_hashnum
 #include "lua/ltable.c"
@@ -102,8 +99,6 @@ extern "C"
 // loadlib.c includes Windows.h, which defines the LoadString macro,
 // so include it last to prevent errors.
 #include "lua/loadlib.c"
-
-#endif
 
 #ifdef _MSC_VER
 #pragma warning (pop)
