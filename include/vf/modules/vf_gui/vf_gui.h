@@ -24,6 +24,10 @@ namespace vf
 #include "graphics/vf_RadialImageConvolutionKernel.h"
 #include "graphics/vf_VerticalGradient.h"
 
+#if VF_USE_FREETYPE
+#include "graphics/vf_FreeTypeFaces.h"
+#endif
+
 #include "layout/vf_ContentComponentConstrainer.h"
 #include "layout/vf_ResizableLayout.h"
 #include "layout/vf_StackedLayout.h"

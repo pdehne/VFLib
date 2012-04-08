@@ -1,7 +1,10 @@
 /* This produces ftamalgam.h */
 
 #ifdef _MSC_VER
+#pragma push_macro("_CRT_SECURE_NO_WARNINGS")
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #endif
 
 
@@ -854,6 +857,9 @@
 /*                                                                         */
 /***************************************************************************/
 
+#ifndef __FREETYPE_H__
+#define __FREETYPE_H__
+
 #ifndef FT_FREETYPE_H
 #error "`ft2build.h' hasn't been included yet!"
 #error "Please always use macros to include FreeType header files."
@@ -861,9 +867,6 @@
 #error "  #include <ft2build.h>"
 #error "  #include FT_FREETYPE_H"
 #endif
-
-#ifndef __FREETYPE_H__
-#define __FREETYPE_H__
 
 
 /*** Start of inlined file: ftconfig.h ***/
@@ -8743,7 +8746,7 @@ FT_BEGIN_HEADER
    */
 #define FREETYPE_MAJOR  2
 #define FREETYPE_MINOR  4
-#define FREETYPE_PATCH  8
+#define FREETYPE_PATCH  9
 
   /*************************************************************************/
   /*                                                                       */
@@ -9497,4 +9500,8 @@ FT_END_HEADER
 /* End:             */
 
 /*** End of inlined file: ftoutln.h ***/
+
+#ifdef _MSC_VER
+#pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
+#endif
 

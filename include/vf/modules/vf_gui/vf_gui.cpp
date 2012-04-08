@@ -10,6 +10,10 @@
 
 #endif
 
+#if VF_USE_FREETYPE
+#include "vf_gui_externals.h"
+#endif
+
 namespace vf
 {
 #include "components/vf_TransparentBorder.cpp"
@@ -17,6 +21,10 @@ namespace vf
 #include "graphics/vf_LabColour.cpp"
 #include "graphics/vf_XYZColour.cpp"
 #include "graphics/vf_RadialImageConvolutionKernel.cpp"
+
+#if VF_USE_FREETYPE
+#include "graphics/vf_FreeTypeFaces.cpp"
+#endif
 
 #include "layout/vf_ResizableLayout.cpp"
 #include "layout/vf_StackedLayout.cpp"

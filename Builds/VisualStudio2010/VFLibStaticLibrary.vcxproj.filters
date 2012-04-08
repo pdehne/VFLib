@@ -255,6 +255,9 @@
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
@@ -440,9 +443,6 @@
     <ClInclude Include="..\..\include\vf\vf.h">
       <Filter>VF Library Code</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_StandardHeader.h">
-      <Filter>VF Modules\vf_core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
     </ClInclude>
@@ -532,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.h">
       <Filter>VF Modules\vf_gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
+      <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

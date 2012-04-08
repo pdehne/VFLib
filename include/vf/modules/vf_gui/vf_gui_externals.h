@@ -8,7 +8,13 @@
 
 #if VF_USE_FREETYPE
 
+// Amalgamated
 #include "../../externals/freetype/FreeTypeAmalgam.h"
+
+// Shared library
+//#include <ft2build.h>
+//#include <freetype/freetype.h>
+//#include <freetype/ftgasp.h>
 
 #endif
 

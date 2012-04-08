@@ -172,6 +172,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -261,7 +265,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_StandardHeader.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\into.h" />
@@ -286,6 +289,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ConnectedEdges.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_VerticalGradient.h" />
