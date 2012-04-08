@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -213,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
+    <ClInclude Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.h" />
     <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3.h" />
     <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3async.h" />
     <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3ext.h" />
@@ -304,6 +309,10 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui_externals.h" />
     <ClInclude Include="..\..\include\vf\vf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" />
+    <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6F6AC608-6440-4E8F-B15F-691C47180FA4}</ProjectGuid>

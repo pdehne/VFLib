@@ -1,5 +1,5 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-// See the file LICENSE.txt for licensing information.
+// See the file README.md for licensing information.
 
 // CallQueue item to process a Call for a particular listener.
 // This is used to avoid bind overhead.

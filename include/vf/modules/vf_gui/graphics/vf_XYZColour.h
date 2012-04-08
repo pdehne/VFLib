@@ -1,5 +1,5 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-// See the file LICENSE.txt for licensing information.
+// See the file README.md for licensing information.
 
 #ifndef VF_XYZCOLOUR_VFHEADER
 #define VF_XYZCOLOUR_VFHEADER

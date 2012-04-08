@@ -91,6 +91,9 @@
     <Filter Include="Externals\sqlite">
       <UniqueIdentifier>{b0738ea9-c3f9-48e1-bb77-bc540c4cb273}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Externals\freetype">
+      <UniqueIdentifier>{8e2cc531-884c-41e2-a7b3-ccb4bd37e21d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -257,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.c">
+      <Filter>Externals\freetype</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -536,5 +542,12 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\externals\freetype\FreeTypeAmalgam.h">
+      <Filter>Externals\freetype</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" />
+    <None Include="..\..\README.md" />
   </ItemGroup>
 </Project>
