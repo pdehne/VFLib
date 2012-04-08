@@ -4,6 +4,9 @@
 #ifndef VF_LOCKFREEQUEUE_VFHEADER
 #define VF_LOCKFREEQUEUE_VFHEADER
 
+#include "../memory/vf_CacheLine.h"
+#include "../memory/vf_AtomicPointer.h"
+
 //==============================================================================
 /** Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
 

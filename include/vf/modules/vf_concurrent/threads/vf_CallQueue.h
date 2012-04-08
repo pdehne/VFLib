@@ -6,7 +6,6 @@
 
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
-#include "../containers/vf_LockFreeQueue.h"
 
 //==============================================================================
 /** 

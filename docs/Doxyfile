@@ -677,11 +677,12 @@ INPUT                  = \
      ../include/vf/modules/vf_concurrent/containers/ \
      ../include/vf/modules/vf_concurrent/memory/ \
      ../include/vf/modules/vf_concurrent/threads/ \
-     ../include/vf/modules/vf_core/containers/
+     ../include/vf/modules/vf_core/containers/ \
+     ../include/vf/modules/vf_core/events/
+
+
 
 #     ../include/vf/modules/vf_core/diagnostic/ \
-#     ../include/vf/modules/vf_core/events/
-     
 #     ../include/vf/modules/vf_core/functor/ \
 #     ../include/vf/modules/vf_core/math/ \
 #     ../include/vf/modules/vf_core/memory/ \

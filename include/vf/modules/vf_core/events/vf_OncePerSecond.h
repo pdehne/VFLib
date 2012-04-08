@@ -6,23 +6,29 @@
 
 #include "../containers/vf_List.h"
 
-// Class derived from OncePerSecond have their override
-// called once per second
-//
+//==============================================================================
+/** Provides a once per second notification.
+
+    Derive your class from OncePerSecond and override doOncePerSecond(). Then,
+    call startOncePerSecond() to begin receiving the notifications. No clean-up
+    or other actions are required.
+*/
 class OncePerSecond : Uncopyable
 {
 public:
+#ifndef DOXYGEN
   OncePerSecond ();
   ~OncePerSecond ();
+#endif
 
-  // Derived class must call this to insert itself.
-  // We avoid doing this in our constructor to prevent
-  // getting called with a partially-constructed object.
-  //
+  /** Begin receiving notifications. */
   void startOncePerSecond ();
+
+  /** Stop receiving notifications. */
   void endOncePerSecond ();
 
 protected:
+  /** Called once per second. */
   virtual void doOncePerSecond () = 0;
 
 private:

@@ -6,8 +6,6 @@
 
 #ifndef DOXYGEN
 
-#include "../containers/vf_LockFreeStack.h"
-
 /****
   Lock-free memory allocator for fixed size pages.
 

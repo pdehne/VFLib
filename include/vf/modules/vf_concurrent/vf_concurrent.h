@@ -8,9 +8,6 @@
 
 namespace vf
 {
-#include "containers/vf_LockFreeQueue.h"
-#include "containers/vf_LockFreeStack.h"
-
 #include "memory/vf_AllocatedBy.h"
 #include "memory/vf_FifoFreeStore.h"
 #include "memory/vf_FifoFreeStoreWithoutTLS.h"

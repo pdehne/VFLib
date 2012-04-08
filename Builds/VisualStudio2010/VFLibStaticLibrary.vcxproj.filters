@@ -82,9 +82,6 @@
     <Filter Include="VF Modules\vf_core\events">
       <UniqueIdentifier>{90588999-4e1a-4801-ad9f-024985ed227b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_concurrent\containers">
-      <UniqueIdentifier>{c94bd814-679b-4bee-a240-8662a6af31aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AppConfigTemplate">
       <UniqueIdentifier>{43253bc6-21fd-48b8-93f5-61505c414485}</UniqueIdentifier>
     </Filter>
@@ -470,12 +467,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeStack.h">
-      <Filter>VF Modules\vf_concurrent\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\containers\vf_LockFreeQueue.h">
-      <Filter>VF Modules\vf_concurrent\containers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_TransparentBorder.h">
       <Filter>VF Modules\vf_gui\utilities</Filter>
     </ClInclude>
@@ -520,6 +511,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_LockFreeStack.h">
+      <Filter>VF Modules\vf_core\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_LockFreeQueue.h">
+      <Filter>VF Modules\vf_core\containers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
