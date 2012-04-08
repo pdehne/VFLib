@@ -311,7 +311,6 @@
     <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\LICENSE.txt" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

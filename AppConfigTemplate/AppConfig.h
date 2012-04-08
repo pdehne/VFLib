@@ -17,8 +17,7 @@
 #define VF_USE_BOOST 0
 #endif
 
-/* Activate features that depend on SQLite.
-*/
+/* Activate features that depend on SQLite. */
 #ifndef VF_USE_SQLITE
 #define VF_USE_SQLITE 1
 #endif

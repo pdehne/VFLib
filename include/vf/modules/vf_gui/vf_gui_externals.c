@@ -5,6 +5,12 @@
 
 #if VF_USE_FREETYPE
 
+int z_verbose = 0;
+
+void z_error (char* message)
+{
+}
+
 #include "../../externals/freetype/FreeTypeAmalgam.c"
 
 #endif
