@@ -19,19 +19,15 @@
 
     DragAndDropData is:
 
-    - Capable of holding multiple representations of the drag and drop data
-      simultaneously.
-
-    - Type-safe: objects placed into the container are disposed of correctly.
-      If add(), find() are called with a ReferenceCountedObject, it does the
-      right thing.
-
     - Convenient. The helper class DragAndDropTarget works with DragAndDropData
       to manage these objects behind the scenes and hide some of the work.
 
-    - Infinitely flexible. A DragAndDropData container can hold any object which
-      can go into a STL container (i.e. supports copy construction and
-      assignment).
+    - Flexible: A DragAndDropData container can hold any objects which can go
+      into a STL container (i.e. support copy construction and assignment).
+
+    - Type-safe: objects placed into the container are disposed of correctly.
+      If add(), find() are called with a ReferenceCountedObjectPtr, it does the
+      right thing.
 
     In this example we will create a DragAndDropData for an image represented by
     a hyperlink. The container will hold two typed representations: an Image
@@ -62,18 +58,21 @@
     imageData.image = new Image ();
 
     URLDragData urlData;
-    urlData.url = "http://www.domain.com/images/logo.jpg";
+    urlData.url = "logo.jpg";
 
     DragAndDropData::Ptr dragData (new DragAndDropData);
 
     dragData.add (imageData);
     dragData.add (urlData);
 
+    // Perform the drag
+    DragAndDropContainer* container = findDragAndDropContainer (thisComponent);
+    container->startDragging (dragData, ...);
+
     @endcode
 
-    At this point, `dragData` may be passed to a suitable Juce function to begin
-    the drag and drop operation. To modify a Component to receive the container,
-    simply derive it from DragAndDropTarget, then override the desired members:
+    To modify a Component to receive the container, simply derive it from
+    DragAndDropTarget, then override the desired members:
 
     @code
 
@@ -110,9 +109,9 @@
 class DragAndDropData : public VF_JUCE::ReferenceCountedObject
 {
 public:
+#ifndef DOXYGEN
   typedef VF_JUCE::ReferenceCountedObjectPtr <DragAndDropData> Ptr;
 
-#ifndef DOXYGEN
   DragAndDropData ();
 
   ~DragAndDropData ();
@@ -163,6 +162,7 @@ public:
   }
 
 private:
+#ifndef DOXYGEN
   class Item;
   typedef List <Item> Items;
 
@@ -187,6 +187,7 @@ private:
   private:
     Object m_object;
   };
+#endif
 
   Items m_items;
 };

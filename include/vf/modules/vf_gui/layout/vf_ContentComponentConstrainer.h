@@ -4,25 +4,30 @@
 #ifndef VF_CONTENTCOMPONENTCONSTRAINER_VFHEADER
 #define VF_CONTENTCOMPONENTCONSTRAINER_VFHEADER
 
-// "shim" which goes between your constrainer and a ResizableWindow
-// or derived class. This will adjust the parameters of the associated
-// constrainer so that all constraints are based on the content component
-// and do not include the title bar, native window frame, menu bar, or
-// window border.
-//
-// If you set a minimum size with your constrainer, the content component will
-// be constrained to EXACTLY your desired dimensions.
-//
-// This class is SUPER easy to use. First put a constrainer on your window
-// or use the function ResizableWindow::setResizeLimits(), and then
-// just call ContentComponentConstrainer::attachTo (yourResizableWindow).
-// It will take care of deleting itself and handle everything for you.
+//==============================================================================
+/** Component constraint adjuster.
+
+    When using a ComponentBoundsConstrainer, the size limits include variable
+    elements such as the title bar, native window, menu bar, or window border.
+    By using this shim, which which goes between your constrainer and a
+    ResizableWindow or ResizableWindow-derived class, all specified constraints
+    will be relative to the size of the content component itself and excluding
+    window decorations.
+
+    If you set a minimum size with your constrainer, the content component will
+    be constrained to exactly the desired dimensions.
+
+    The class is very easy to use. First put a constrainer on your window or use
+    the function ResizableWindow::setResizeLimits(), and then just call
+    ContentComponentConstrainer::attachTo (yourResizableWindow). It will take
+    care of deleting itself and handle everything for you, like this:
+*/
 class ContentComponentConstrainer
   : private ComponentBoundsConstrainer
   , private ComponentListener
 {
 public:
-  // we can attach to anything with ResizableWindow as a base
+  /** Attach a new ContentComponentConstrainer to a window. */
   static void attachTo (ResizableWindow* resizableWindow)
   {
     ContentComponentConstrainer* contentConstrainer =
@@ -35,7 +40,7 @@ private:
    : m_resizableWindow (resizableWindow)
    , m_originalConstrainer (0)
   {
-    // if you aren't using a custom constrainer, then at least put a
+    // If you aren't using a custom constrainer, then at least put a
     // constraint on your ResizableWindow using ResizableWindow::setResizeLimits
     // so that it gets the defaultConstrainer.
     m_originalConstrainer = m_resizableWindow->getConstrainer();

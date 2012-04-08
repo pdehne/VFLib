@@ -6,6 +6,7 @@
 
 #include "vf_XYZColour.h"
 
+//==============================================================================
 /**
   A colour specified in CIELAB coordinates.
 

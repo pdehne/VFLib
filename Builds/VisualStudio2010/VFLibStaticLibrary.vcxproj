@@ -167,6 +167,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
+    <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c" />
     <ClCompile Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

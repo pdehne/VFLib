@@ -2,7 +2,7 @@
 // See the file LICENSE.txt for licensing information.
 // Based on ideas from the soci wrapper sqlite back-end.
 
-#include "sqlite/sqlite3.h"
+#include "vf_db_externals.h"
 
 #include "vf_db.h"
 
