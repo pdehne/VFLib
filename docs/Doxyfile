@@ -674,25 +674,20 @@ WARN_LOGFILE           =
 INPUT                  = \
      ../include/vf/modules/vf_audio/buffers/ \
      ../include/vf/modules/vf_audio/sources/ \
-     ../include/vf/modules/vf_concurrent/containers/ \
      ../include/vf/modules/vf_concurrent/memory/ \
      ../include/vf/modules/vf_concurrent/threads/ \
      ../include/vf/modules/vf_core/containers/ \
+     ../include/vf/modules/vf_core/diagnostic/ \
      ../include/vf/modules/vf_core/events/ \
+     ../include/vf/modules/vf_core/functor/ \
+     ../include/vf/modules/vf_core/math/ \
+     ../include/vf/modules/vf_core/memory/ \
+     ../include/vf/modules/vf_core/threads/ \
      ../include/vf/modules/vf_gui/components/ \
      ../include/vf/modules/vf_gui/graphics/ \
      ../include/vf/modules/vf_gui/layout/ \
-     ../include/vf/modules/vf_gui/mouse/
-
-
-
-
-#     ../include/vf/modules/vf_core/diagnostic/ \
-#     ../include/vf/modules/vf_core/functor/ \
-#     ../include/vf/modules/vf_core/math/ \
-#     ../include/vf/modules/vf_core/memory/ \
-#     ../include/vf/modules/vf_core/threads/ \
-#     ../include/vf/modules/vf_db/api/
+     ../include/vf/modules/vf_gui/mouse/ \
+     ../include/vf/modules/vf_db/api/
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
