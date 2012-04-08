@@ -22,6 +22,10 @@
 //   http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#include "AppConfig.h"
+
+#if VF_USE_SQLITE
+
 #if _MSC_VER
 #pragma warning (push)
 #pragma warning (disable: 4127) // conditional expression is constant
@@ -38,9 +42,11 @@
 
 #define SQLITE_THREADSAFE 2
 
-#include "sqlite/sqlite3.c"
-#include "sqlite/sqlite3async.c"
+#include "../../externals/sqlite/sqlite3.c"
+#include "../../externals/sqlite/sqlite3async.c"
 
 #if _MSC_VER
 #pragma warning (pop)
+#endif
+
 #endif

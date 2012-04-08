@@ -11,6 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3async.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -158,14 +166,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c" />
     <ClCompile Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.cpp">
@@ -208,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3.h" />
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3async.h" />
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h" />
@@ -277,9 +280,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\type_conversion.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\type_ptr.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\use_type.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db_externals.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />

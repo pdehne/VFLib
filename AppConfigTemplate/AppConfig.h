@@ -10,11 +10,22 @@
     Append this section to your existing AppConfig.h to control VFLib options.
 */
 
-/* If boost is available, and your project is configured to find the includes
-   and libraries, this can be turned on.
+/* Activate features that depend on Boost. Your project will need to be
+   configured to find the Boost includes and libraries.
 */
-#ifndef VF_HAVE_BOOST
-#define VF_HAVE_BOOST 0
+#ifndef VF_USE_BOOST
+#define VF_USE_BOOST 0
+#endif
+
+/* Activate features that depend on SQLite.
+*/
+#ifndef VF_USE_SQLITE
+#define VF_USE_SQLITE 1
+#endif
+
+/* This turns on features that depend on FreeType */
+#ifndef VF_USE_FREETYPE
+#define VF_USE_FREETYPE 1
 #endif
 
 //==============================================================================

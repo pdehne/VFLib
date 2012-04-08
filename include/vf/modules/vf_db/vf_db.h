@@ -27,6 +27,8 @@
 
 #include "../vf_core/vf_core.h"
 
+#if VF_USE_SQLITE
+
 // forward declares
 struct sqlite3;
 struct sqlite3_blob;
@@ -82,6 +84,8 @@ namespace vf
 
 #if JUCE_MSVC
 #pragma warning (pop)
+#endif
+
 #endif
 
 #endif

@@ -6,6 +6,8 @@
 
 #include "vf_db.h"
 
+#if VF_USE_SQLITE
+
 #if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parmaeter
@@ -37,4 +39,6 @@ namespace vf
 
 #if JUCE_MSVC
 #pragma warning (pop)
+#endif
+
 #endif

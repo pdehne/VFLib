@@ -19,9 +19,6 @@
     <Filter Include="VF Modules\vf_db\detail">
       <UniqueIdentifier>{e48de597-f58c-42ba-a199-02c6ac9e126f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_db\sqlite">
-      <UniqueIdentifier>{b0738ea9-c3f9-48e1-bb77-bc540c4cb273}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_core">
       <UniqueIdentifier>{50582636-8580-450b-bc1d-33980b3bd717}</UniqueIdentifier>
     </Filter>
@@ -88,6 +85,12 @@
     <Filter Include="VF Modules\vf_gui\components">
       <UniqueIdentifier>{c04b82a4-caae-4010-80e5-ea8c0f6f1bb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Externals">
+      <UniqueIdentifier>{63502a36-fdc3-4ad8-acf7-1ae51e053a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Externals\sqlite">
+      <UniqueIdentifier>{b0738ea9-c3f9-48e1-bb77-bc540c4cb273}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -140,12 +143,6 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\source\use_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.c">
-      <Filter>VF Modules\vf_db\sqlite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.c">
-      <Filter>VF Modules\vf_db\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_Debug.cpp">
       <Filter>VF Modules\vf_core\native</Filter>
@@ -249,6 +246,12 @@
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db_externals.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3.c">
+      <Filter>Externals\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\externals\sqlite\sqlite3async.c">
+      <Filter>Externals\sqlite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
@@ -310,15 +313,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\use_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3.h">
-      <Filter>VF Modules\vf_db\sqlite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3async.h">
-      <Filter>VF Modules\vf_db\sqlite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\sqlite\sqlite3ext.h">
-      <Filter>VF Modules\vf_db\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
       <Filter>VF Modules\vf_core</Filter>
@@ -523,6 +517,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ContentComponentConstrainer.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3async.h">
+      <Filter>Externals\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3ext.h">
+      <Filter>Externals\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\externals\sqlite\sqlite3.h">
+      <Filter>Externals\sqlite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

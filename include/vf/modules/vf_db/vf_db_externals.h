@@ -25,6 +25,12 @@
 #ifndef VF_DB_EXTERNALS_VFHEADER
 #define VF_DB_EXTERNALS_VFHEADER
 
-#include "sqlite/sqlite3.h"
+#include "AppConfig.h"
+
+#if VF_USE_SQLITE
+
+#include "../../externals/sqlite/sqlite3.h"
+
+#endif
 
 #endif

@@ -6,7 +6,7 @@
 
 #ifndef DOXYGEN
 
-#if VF_HAVE_BOOST
+#if VF_USE_BOOST
 
 #include "vf_GlobalPagedFreeStore.h"
 
