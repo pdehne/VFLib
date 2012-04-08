@@ -21,7 +21,7 @@ public:
   static void detectAllLeaks ();
 
 protected:
-  class CounterBase : public LockFreeStack <CounterBase>::Node
+  class CounterBase : LockFreeStack <CounterBase>::Node
   {
   public:
     CounterBase ();
