@@ -20,7 +20,7 @@
 //==============================================================================
 
 CallQueue::CallQueue (String name)
-: m_name (name)
+  : m_name (name)
 {
 }
 
@@ -44,7 +44,7 @@ void CallQueue::queuep (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-	  vfassert (m_closed.isClear());
+  vfassert (m_closed.isClear());
 
   if (m_list.push_back (c))
     signal ();
@@ -59,7 +59,7 @@ void CallQueue::callp (Call* c)
   queuep (c);
 
   // If we are called on the process thread and we are not
-  // recursed into do_process, then process the queue. This
+  // recursed into doSynchronize, then process the queue. This
   // makes calls from the process thread synchronous.
   //
   // NOTE: The value of isBeingSynchronized is invalid/volatile unless
@@ -70,11 +70,11 @@ void CallQueue::callp (Call* c)
   // calls synchronize() concurrently.
   //
   if (isAssociatedWithCurrentThread () &&
-      m_isBeingSynchronized.trySet ())
+    m_isBeingSynchronized.trySignal ())
   {
-    do_process ();
+    doSynchronize ();
 
-    m_isBeingSynchronized.clear ();
+    m_isBeingSynchronized.reset ();
   }
 }
 
@@ -82,17 +82,17 @@ bool CallQueue::synchronize ()
 {
   bool did_something;
 
-  // Detect recursion into do_process(), and
+  // Detect recursion into doSynchronize(), and
   // break ties for concurrent calls atomically.
   //
-  if (m_isBeingSynchronized.trySet ())
+  if (m_isBeingSynchronized.trySignal ())
   {
     // Remember this thread.
     m_id = VF_JUCE::Thread::getCurrentThreadId ();
 
-    did_something = do_process ();
+    did_something = doSynchronize ();
 
-    m_isBeingSynchronized.clear ();
+    m_isBeingSynchronized.reset ();
   }
   else
   {
@@ -105,7 +105,7 @@ bool CallQueue::synchronize ()
 // Can still have pending calls, just can't put new ones in.
 void CallQueue::close ()
 {
-  m_closed.set ();
+  m_closed.signal ();
 }
 
 // Process everything in the queue. The list of pending calls is
@@ -114,7 +114,7 @@ void CallQueue::close ()
 //
 // Returns true if any functors were called.
 //
-bool CallQueue::do_process ()
+bool CallQueue::doSynchronize ()
 {
   bool did_something;
 
@@ -131,7 +131,7 @@ bool CallQueue::do_process ()
     did_something = true;
 
     // This method of processing one at a time has the desired
-	// side effect of synchronizing nested calls to us from a functor.
+    // side effect of synchronizing nested calls to us from a functor.
     //
     for (;;)
     {

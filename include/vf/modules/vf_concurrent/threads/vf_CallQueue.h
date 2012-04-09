@@ -391,7 +391,7 @@ private:
   };
 #endif
 
-  bool do_process ();
+  bool doSynchronize ();
 
 private:
   String const m_name;

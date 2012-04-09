@@ -22,45 +22,63 @@
 #ifndef VF_ATOMICFLAG_VFHEADER
 #define VF_ATOMICFLAG_VFHEADER
 
+//==============================================================================
+/** A thread safe flag.
+ 
+    This provides a simplified interface to an atomic integer suitable for
+    representing a flag. The flag is signaled when on, else it is considered
+    reset.
+*/
 class AtomicFlag
 {
 public:
-  // Starts non-signaled
+  /** Create an AtomicFlag in the reset state */
   AtomicFlag () noexcept
 	: m_value (0)
   {
   }
 
-  inline void set () noexcept
-  {
-#if VF_DEBUG
-    const bool success = m_value.compareAndSetBool (1, 0);
-    vfassert (success);
-#else
-    m_value.set (1);
-#endif
-  }
+  /** Signal the AtomicFlag.
 
-  inline void clear () noexcept
-  {
-#if VF_DEBUG
-    const bool success = m_value.compareAndSetBool (0, 1);
-    vfassert (success);
-#else
-    m_value.set (0);
-#endif
-  }
+      If two or more threads simultaneously attempt to signal the flag,
+      only one will receive a `true` return value.
 
-  // returns true if it was successful at changing the flag
-  inline bool trySet () noexcept
+      @return `true` if the AtomicFlag was previously reset.
+  */
+  inline bool trySignal () noexcept
   {
     return m_value.compareAndSetBool (1, 0);
   }
 
-  // returns true if it was successful at changing the flag
-  inline bool tryClear () noexcept
+  /** Signal the AtomicFlag.
+  
+      The flag must be in the reset state. Only one thread may
+      call this at a time.
+  */
+  inline void signal () noexcept
   {
-    return m_value.compareAndSetBool (0, 1);
+  #if VF_DEBUG
+    const bool success = m_value.compareAndSetBool (1, 0);
+    vfassert (success);
+  #else
+    m_value.set (1);
+  #endif
+  }
+
+  /** Reset the AtomicFlag.
+
+      The flag must be in the signaled state. Only one thread may
+      call this at a time. Usually it is the thread that was successful
+      in a previous call to trySignal().
+  */
+  inline void reset () noexcept
+  {
+  #if VF_DEBUG
+    const bool success = m_value.compareAndSetBool (0, 1);
+    vfassert (success);
+  #else
+    m_value.set (0);
+  #endif
   }
 
   // Caller must synchronize
