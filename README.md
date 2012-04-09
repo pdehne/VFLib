@@ -68,4 +68,4 @@ TagLib is distributed under both the GNU Lesser General Public License
 JUCE
 
 
-[1]: http://rawmaterialsoftware.com/		"Raw Material Software (JUCE)"
+[1]: http://rawmaterialsoftware.com/ "Raw Material Software (JUCE)"
