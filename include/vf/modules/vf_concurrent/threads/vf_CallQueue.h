@@ -26,7 +26,8 @@
 #include "../memory/vf_FifoFreeStore.h"
 
 //==============================================================================
-/** 
+/** \ingroup vf_concurrent
+
     A FIFO for calling functors asynchronously.
 
     This object is an alternative to traditional locking techniques used to

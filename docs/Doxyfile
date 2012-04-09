@@ -671,22 +671,34 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = \
+INPUT = \
+     ../include/vf/vf.h \
+
+INPUT += \
      ../include/vf/modules/vf_audio/buffers/ \
-     ../include/vf/modules/vf_audio/sources/ \
+     ../include/vf/modules/vf_audio/sources/
+
+INPUT += \
+     ../include/vf/modules/vf_concurrent/vf_concurrent.h \
      ../include/vf/modules/vf_concurrent/memory/ \
-     ../include/vf/modules/vf_concurrent/threads/ \
+     ../include/vf/modules/vf_concurrent/threads/
+
+INPUT += \
      ../include/vf/modules/vf_core/containers/ \
      ../include/vf/modules/vf_core/diagnostic/ \
      ../include/vf/modules/vf_core/events/ \
      ../include/vf/modules/vf_core/functor/ \
      ../include/vf/modules/vf_core/math/ \
      ../include/vf/modules/vf_core/memory/ \
-     ../include/vf/modules/vf_core/threads/ \
+     ../include/vf/modules/vf_core/threads/
+
+INPUT += \
      ../include/vf/modules/vf_gui/components/ \
      ../include/vf/modules/vf_gui/graphics/ \
      ../include/vf/modules/vf_gui/layout/ \
      ../include/vf/modules/vf_gui/mouse/ \
+
+INPUT += \
      ../include/vf/modules/vf_db/api/
 
 # This tag can be used to specify the character encoding of the source files 
@@ -731,7 +743,7 @@ EXCLUDE_SYMLINKS       = NO
 # EXCLUDE_PATTERNS tag to specify one or more wildcard patterns to exclude 
 # certain files from those directories. Note that the wildcards are matched 
 # against the file with absolute path, so to exclude all test directories 
-# for example use the pattern */test/*
+# for example use the pattern \*/test/\* without the backslashes
 
 EXCLUDE_PATTERNS       = 
 

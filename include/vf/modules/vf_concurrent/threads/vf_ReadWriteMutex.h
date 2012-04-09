@@ -22,6 +22,31 @@
 #ifndef VF_READWRITEMUTEX_VFHEADER
 #define VF_READWRITEMUTEX_VFHEADER
 
+//==============================================================================
+/** \ingroup vf_concurrent
+
+    Multiple consumer, single producer (MCSP) synchronization primitive.
+
+    This is an optimized lock for the multiple reader, single writer
+    scenario. It provides only a subset of features of the more general
+    traditional read/write lock. Specifically, these rules apply:
+
+    - A caller cannot hold a read lock while acquiring a write lock.
+
+    - Write locks are only recursive with respect to write locks.
+
+    - Read locks are only recursive with respect to read locks.
+
+    - A write lock cannot be downgraded.
+
+    - Writes are preferenced over reads.
+
+    For real-time applications, these restrictions are often not an issue.
+
+    The implementation is wait-free in the fast path: acquiring read access
+    for a lock without contention - just one interlocked increment!
+*/
+
 #ifndef DOXYGEN
 template <class LockType>
 struct GenericScopedReadLock : Uncopyable
@@ -60,29 +85,6 @@ private:
 };
 #endif
 
-//==============================================================================
-
-/** Multiple reader, single writer synchronization primitive.
-
-    This is an optimized lock for the multiple reader, single writer
-    scenario. It provides only a subset of features of the more general
-    traditional read/write lock. Specifically, these rules apply:
-
-    - A caller cannot hold a read lock while acquiring a write lock.
-
-    - Write locks are only recursive with respect to write locks.
-
-    - Read locks are only recursive with respect to read locks.
-
-    - A write lock cannot be downgraded.
-
-    - Writes are preferenced over reads.
-
-    For real-time applications, these restrictions are often not an issue.
-
-    The implementation is wait-free in the fast path: acquiring read access
-    for a lock without contention - just one interlocked increment!
-*/
 class ReadWriteMutex
 {
 public:

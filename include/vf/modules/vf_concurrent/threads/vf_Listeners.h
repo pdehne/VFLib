@@ -28,7 +28,9 @@
 #include "../memory/vf_FifoFreeStore.h"
 
 //==============================================================================
-/** A group of concurrent Listeners.
+/** \ingroup vf_concurrent
+
+    A group of concurrent Listeners.
 
     A Listener is an object of class type which inherits from a defined
     interface, and registers on a provided instance of Listeners to receive

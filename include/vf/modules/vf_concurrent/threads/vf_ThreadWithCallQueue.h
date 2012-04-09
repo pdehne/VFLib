@@ -25,7 +25,9 @@
 #include "vf_CallQueue.h"
 
 //==============================================================================
-/** An InterruptibleThread with a CallQueue.
+/** \ingroup vf_concurrent
+
+    InterruptibleThread with CallQueue.
 
     This combines an InterruptibleThread with a CallQueue, allowing functors to
     be queued for asynchronous execution on the thread.

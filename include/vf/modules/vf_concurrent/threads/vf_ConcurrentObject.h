@@ -23,7 +23,9 @@
 #define VF_CONCURRENTOBJECT_VFHEADER
 
 //==============================================================================
-/** A reference counted object, deleted on a separate thread.
+/** \ingroup vf_concurrent
+
+    A reference counted object, deleted on a separate thread.
 
     This is a reference counted object compatible with
     ReferenceCountedObjectPtr. When the last reference is removed, the
