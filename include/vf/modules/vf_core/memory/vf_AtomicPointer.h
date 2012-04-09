@@ -22,30 +22,60 @@
 #ifndef VF_ATOMICPOINTER_VFHEADER
 #define VF_ATOMICPOINTER_VFHEADER
 
+//==============================================================================
+/** A thread safe pointer.
+ 
+    This provides a simplified interface to an atomic pointer suitable
+    for building containers or composite classes. Operator overloads
+    allow access to the underlying pointer using natural C++ syntax.
+*/
 template <class P>
 class AtomicPointer
 {
 public:
+  /** Create a pointer.
+
+      @param initialValue An option starting value (default is null).
+  */
   explicit AtomicPointer (P* const p = nullptr) noexcept
 	: m_value (p)
   {
   }
 
+  /** Retrieve the pointer value */
   inline P* get () const noexcept
   {
 	return m_value.get();
   }
 
+  /** Obtain a pointer to P through type conversion.
+
+      The caller must synchronize access to P.
+
+      @return A pointer to P.
+  */
   inline operator P* () const noexcept
   {
 	return get ();
   }
 
-  inline operator P& () const noexcept
+  /** Dereference operator
+
+      The caller must synchronize access to P.
+
+      @return A reference to P.
+  */
+  inline P& operator* () const noexcept
   {
 	return &get();
   }
 
+  /** Member selection
+
+      The caller must synchronize access to P.
+  
+      @return A pointer to P.
+  */
   inline P* operator-> () const noexcept
   {
 	return get();
@@ -56,22 +86,38 @@ public:
 	m_value.set (p);
   }
 
-  inline void operator= (P* p) noexcept
+  /** Atomically assign a new pointer
+
+      @param newValue The new value to assign.
+  */
+  inline void operator= (P* newValue) noexcept
   {
-	set (p);
+	set (newValue);
   }
 
-  inline void operator= (P& p) noexcept
+  /** Atomically assign a new pointer and return the old value.
+
+      @param newValue The new value to assign.
+
+      @return         The previous value.
+  */
+  inline P* exchange (P* newValue)
   {
-	set (&p);
+	return m_value.exchange (newValue);
   }
 
-  // returns the previous value
-  inline P* exchange (P* p)
-  {
-	return m_value.exchange (p);
-  }
+  /** Conditionally perform an atomic assignment.
 
+      The current value is compared with oldValue and atomically
+      set to newValue if the comparison is equal.
+      
+      The caller is responsible for handling the ABA problem.
+
+      @param  newValue  The new value to assign.
+      @param  oldValue  The matching old value.
+
+      @return `true` if the assignment was performed.
+  */
   inline bool compareAndSet (P* newValue, P* oldValue)
   {
     return m_value.compareAndSetBool (newValue, oldValue);

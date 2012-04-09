@@ -32,25 +32,25 @@
 class AtomicFlag
 {
 public:
-  /** Create an AtomicFlag in the reset state */
+  /** Create an AtomicFlag in the reset state. */
   AtomicFlag () noexcept
 	: m_value (0)
   {
   }
 
-  /** Signal the AtomicFlag.
+  /** Signal the flag.
 
       If two or more threads simultaneously attempt to signal the flag,
       only one will receive a `true` return value.
 
-      @return `true` if the AtomicFlag was previously reset.
+      @return `true` if the flag was previously reset.
   */
   inline bool trySignal () noexcept
   {
     return m_value.compareAndSetBool (1, 0);
   }
 
-  /** Signal the AtomicFlag.
+  /** Signal the flag.
   
       The flag must be in the reset state. Only one thread may
       call this at a time.
@@ -65,7 +65,7 @@ public:
   #endif
   }
 
-  /** Reset the AtomicFlag.
+  /** Reset the flag.
 
       The flag must be in the signaled state. Only one thread may
       call this at a time. Usually it is the thread that was successful
@@ -81,16 +81,16 @@ public:
   #endif
   }
 
-  // Caller must synchronize
-  inline bool isSet () const noexcept
+  /** Check if the AtomicFlag is signaled
+
+      The signaled status may change immediately after this call
+      returns. The caller must synchronize.
+
+      @return `true` if the flag was signaled.
+  */
+  inline bool isSignaled () const noexcept
   {
 	return m_value.get() == 1;
-  }
-
-  // Caller must synchronize
-  inline bool isClear () const noexcept
-  {
-	return m_value.get() == 0;
   }
 
 private:

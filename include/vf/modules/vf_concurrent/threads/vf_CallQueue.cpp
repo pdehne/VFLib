@@ -27,7 +27,7 @@ CallQueue::CallQueue (String name)
 CallQueue::~CallQueue ()
 {
   // Someone forget to close the queue.
-  vfassert (m_closed.isSet ());
+  vfassert (m_closed.isSignaled ());
 
   // Can't destroy queue with unprocessed calls.
   vfassert (m_list.empty ());
@@ -44,7 +44,7 @@ void CallQueue::queuep (Call* c)
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
   // process it.
-  vfassert (m_closed.isClear());
+  vfassert (!m_closed.isSignaled ());
 
   if (m_list.push_back (c))
     signal ();

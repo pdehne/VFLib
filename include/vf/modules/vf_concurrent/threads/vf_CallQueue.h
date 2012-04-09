@@ -367,7 +367,7 @@ public:
   /** Used internally for diagnostics to determine if the call queue is currently
       inside synchronize ().
   */
-  bool isBeingSynchronized () const { return m_isBeingSynchronized.isSet(); }
+  bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
 
   /** Add the Call without executing immediately. */
   void queuep (Call* call);
