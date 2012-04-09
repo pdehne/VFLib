@@ -25,10 +25,7 @@
 // Prevents warnings about missing copy
 // constructors and assignment operators.
 
-namespace detail {
-
 // Ideas based on boost
-
 class Uncopyable
 {
 protected:
@@ -39,9 +36,5 @@ private:
   Uncopyable (Uncopyable const&);
   Uncopyable const& operator= (Uncopyable const&);
 };
-
-}
-
-typedef detail::Uncopyable Uncopyable;
 
 #endif

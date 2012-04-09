@@ -183,9 +183,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_db\source\use_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_Debug.cpp">
-      <Filter>VF Modules\vf_core\native</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_FPUFlags.cpp">
       <Filter>VF Modules\vf_core\native</Filter>
     </ClCompile>
@@ -843,5 +840,6 @@
   <ItemGroup>
     <None Include="..\..\README.md" />
     <None Include="..\..\docs\Doxyfile" />
+    <None Include="..\..\GNU_GPL_v2.txt" />
   </ItemGroup>
 </Project>

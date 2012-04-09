@@ -126,10 +126,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_Debug.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_FPUFlags.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -528,6 +524,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\docs\Doxyfile" />
+    <None Include="..\..\GNU_GPL_v2.txt" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
