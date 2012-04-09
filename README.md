@@ -63,7 +63,7 @@ TagLib is distributed under both the GNU Lesser General Public License
 (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
 (http://www.mozilla.org/MPL/1.1/)
 
-----
+--------
 | Lua | http://lua.org |
 | FreeType | http://www.freetype.org |
-----
+--------
