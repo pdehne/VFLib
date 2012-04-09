@@ -1,26 +1,23 @@
+//==============================================================================
+//
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-//
-// Distributed under the Boost Software License, Version 1.0.
-// (See accompanying file BOOST_LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
-//
-// This file incorporates work covered by the following copyright
-// and permission notice:
-//
-//   Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton,
-//   Mateusz Loskot, Pawel Aleksander Fedorynski, David Courtney,
-//   Rafal Bobrowski, Julian Taylor, Henning Basold, Ilia Barahovski,
-//   Denis Arnaud, Daniel Lidström, Matthieu Kermagoret, Artyom Beilis,
-//   Cory Bennett, Chris Weed, Michael Davidsaver, Jakub Stachowski,
-//   Alex Ott, Rainer Bauer, Martin Muenstermann, Philip Pemberton,
-//   Eli Green, Frederic Chateau, Artyom Tonkikh, Roger Orr,
-//   Robert Massaioli, Sergey Nikulov, Shridhar Daithankar,
-//   Sören Meyer-Eppler, Mario Valesco
-//
-//   Distributed under the Boost Software License, Version 1.0.
-//   (See accompanying file BOOST_LICENSE_1_0.txt or copy at
-//   http://www.boost.org/LICENSE_1_0.txt)
-//
+// See the file GNU_GPL_v2.txt for full licensing terms.
+// 
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the Free
+// Software Foundation; either version 2 of the License, or (at your option)
+// any later version.
+// 
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+// details.
+// 
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, write to the Free Software Foundation, Inc., 51
+// Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+// 
+//==============================================================================
 
 #include "vf_db.h"
 
