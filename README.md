@@ -6,55 +6,64 @@ This is my soon to be released project which is NOT QUITE READY FOR PUBLIC USE!
 There's no documentation, no testing, and no support so unless you enjoy
 banging your head repeatedly against the wall wait until the official release!
 
-# Licensing
+## License
 
-VFLib can be redistributed and/or modified under the terms of the GNU General
-Public License Version 2, as published by the Free Software Foundation.
-A copy of the license is included in the file GNU_GPL_2.txt, or can be found
-online at http://www.gnu.org/licenses.
+Copyright (C) 2008 by Vinnie Falco
+See the file GNU_GPL_v2.txt for full licensing terms.
 
-VFLib is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 Unless otherwise marked, files in VFLib are published under the GNU General
-Public License (Version 2). Individually marked files of VFLib contain
-portions of these external projects, licensed separately:
+Public License, Version 2. Individually marked files of VFLib contain portions
+of these external projects, licensed separately:
 
-JUCE
+### JUCE
 
-  VFLib uses Juce (http://rawmaterialsoftware.com), which is available under
-  the GNU General Public License. Commercial licenses are also available.
+VFLib uses Juce (http://rawmaterialsoftware.com), which is available under the
+GNU General Public License. Commercial licenses are also available.
 
-Bzip2
+### Bzip2
 
-  Bzip2 is Copyright (C) 1996-2010 Julian R Seward.  All rights reserved.
+Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
 
-FreeType
+### FreeType
 
-  Portions of this software are copyright © 1996-2001, 2006 by
-  The FreeType Project (http://www.freetype.org). All rights reserved.
+Portions of this software are copyright © 1996-2001, 2006 by The FreeType
+Project (http://www.freetype.org). All rights reserved.
 
-SQLite
+### SQLite
 
-  SQLite, available at (http://sqlite.org), is in the public domain.
+SQLite, available at (http://sqlite.org), is in the public domain.
 
-Lua
+### Lua
 
-  Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
+Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
 
-Luabridge
+### Luabridge
 
-  Luabridge is copyrighted (C) 2007 by Nathan Reed.
+Luabridge is copyrighted (C) 2007 by Nathan Reed.
 
-Soci
+### Soci
 
-  Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej
-  Sobczak, Stephen Hutton. Soci is distributed under the Boost Software
-  License, Version 1.0. available at http://www.boost.org/LICENSE_1_0.txt.
+Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej Sobczak,
+Stephen Hutton, and various others noted in the corresponding source files.
+Soci is distributed under the Boost Software License, Version 1.0. available
+at http://www.boost.org/LICENSE_1_0.txt.
 
-TagLib
+### TagLib
 
-  TagLib is distributed under both the GNU Lesser General Public License
-  (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public
-  License (http://www.mozilla.org/MPL/1.1/)
+TagLib is distributed under both the GNU Lesser General Public License
+(http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
+(http://www.mozilla.org/MPL/1.1/)
+
+----
+| Lua | http://lua.org |
+| FreeType | http://www.freetype.org |
+----
