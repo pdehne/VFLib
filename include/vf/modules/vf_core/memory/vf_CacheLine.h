@@ -24,6 +24,8 @@
 
 #include "vf_MemoryAlignment.h"
 
+#ifndef DOXYGEN
+
 // Allows turning off of all padding,
 // e.g. for memory-constrained systems or testing.
 //
@@ -368,5 +370,7 @@ private:
 };
 
 }
+
+#endif
 
 #endif
