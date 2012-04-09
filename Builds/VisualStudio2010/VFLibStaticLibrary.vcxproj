@@ -527,6 +527,7 @@
     <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\docs\Doxyfile" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

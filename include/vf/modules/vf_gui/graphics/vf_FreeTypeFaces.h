@@ -4,8 +4,9 @@
 #ifndef VF_FREETYPEFACES_VFHEADER
 #define VF_FREETYPEFACES_VFHEADER
 
-#if VF_USE_FREETYPE
+/** FreeType hinted fonts singleton.
 
+*/
 // This singleton uses FreeType to open font files and
 // extract glyph outlines, with the option of using hinting
 // at a customizable range of sizes.
@@ -90,7 +91,5 @@ public:
   }
 };
 */
-
-#endif
 
 #endif

@@ -842,5 +842,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />
+    <None Include="..\..\docs\Doxyfile" />
   </ItemGroup>
 </Project>
