@@ -109,6 +109,12 @@
     <Filter Include="VF Modules\vf_lua\lua\source">
       <UniqueIdentifier>{cfdc7e47-4891-4337-a947-c406c78f71f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VF Modules\vf_bzip2">
+      <UniqueIdentifier>{ef3dc382-c39d-46c6-952d-53b8dc49e6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_bzip2\bzip2">
+      <UniqueIdentifier>{02c3fb32-0d71-4bd0-ba24-056e9494ba5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -379,6 +385,30 @@
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\vf_lua.c">
+      <Filter>VF Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\blocksort.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\bzlib.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\compress.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\crctable.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\decompress.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\huffman.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\bzip2\randtable.c">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip\vf_bzip2.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
@@ -739,6 +769,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldo.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_bzip\bzip2\bzlib.h">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_bzip\bzip2\bzlib_private.h">
+      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_bzip\vf_bzip2.h">
+      <Filter>VF Modules\vf_bzip2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

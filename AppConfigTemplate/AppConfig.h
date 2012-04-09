@@ -32,6 +32,11 @@
 #define VF_USE_LUA 1
 #endif
 
+/* Turns on BZip2 features */
+#ifndef VF_USE_BZIP2
+#define VF_USE_BZIP2 1
+#endif
+
 //==============================================================================
 
 // Ignore this
