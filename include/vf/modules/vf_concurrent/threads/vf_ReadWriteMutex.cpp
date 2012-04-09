@@ -37,7 +37,7 @@ void ReadWriteMutex::enterRead () const noexcept
 
     // is there a writer?
     // THIS IS NOT CACHE-FRIENDLY!
-    if (m_writes->is_signaled ())
+    if (m_writes->isSignaled ())
     {
       // a writer exists, give up the read lock
       m_readers->release ();
@@ -75,16 +75,14 @@ void ReadWriteMutex::enterWrite () const noexcept
   // readers no matter what. New readers will be
   // blocked by the mutex.
   //
-  // Crafted to sometimes avoid the Delay ctor.
-  //
-  if (m_readers->is_signaled ())
+  if (m_readers->isSignaled ())
   {
     SpinDelay delay; 
     do
     {
       delay.pause ();
     }
-    while (m_readers->is_signaled ());
+    while (m_readers->isSignaled ());
   }
 }
 

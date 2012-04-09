@@ -122,8 +122,6 @@ public:
 
   inline void decReferenceCount() noexcept
   {
-    vfassert (m_refs.is_signaled ());
-
     if (m_refs.release ())
       destroySingleton ();
   }
@@ -131,7 +129,7 @@ public:
   // Caller must synchronize.
   inline bool isBeingReferenced () const
   {
-    return m_refs.is_signaled ();
+    return m_refs.isSignaled ();
   }
 
 private:

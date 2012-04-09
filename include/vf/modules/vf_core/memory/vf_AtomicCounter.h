@@ -22,63 +22,54 @@
 #ifndef VF_ATOMICCOUNTER_VFHEADER
 #define VF_ATOMICCOUNTER_VFHEADER
 
+//==============================================================================
+/** A thread safe usage counter.
+ 
+    This provides a simplified interface to an atomic integer suitable for
+    measuring reference or usage counts. The counter is signaled when the
+    count is non zero, else it is considered reset.
+*/
 class AtomicCounter
 {
 public:
+  /** Create a new counter.
+
+      @param initialValue An optional starting usage count (default is 0).
+  */
   AtomicCounter (int initialValue = 0) noexcept
 	: m_value (initialValue)
   {
   }
 
-  //
-  // Increments the usage count.
-  // Returns true if the counter was previously zero.
-  //
+  /** Increment the usage count.
+
+      Returns true if the counter was previously reset.
+  */
   inline bool addref () noexcept
   {
 	return (++m_value) == 1;
   }
 
-  // Decrements the usage count.
-  // Returns true if the counter became non-signaled.
+  /** Decrements the usage count.
+
+      Returns true if the counter is reset.
+  */
   inline bool release () noexcept
   {
+    jassert (isSignaled ());
 	return (--m_value) == 0;
   }
 
-  // Decrements the usage count and asserts that it a final release.
-  inline void finalRelease () noexcept
-  {
-#if VF_DEBUG
-    const bool final = release();
-    vfassert (final);
-#else
-    release ();
-#endif
-  }
+  /** Determine if the counter is signaled.
 
-  // Returns the signaled state of the counter.
-  // The caller must synchronize the value.
-  inline bool is_reset () const noexcept
-  {
-	return m_value.get() == 0;
-  }
+      Note that another thread can cause the counter to become reset after
+      this function returns true.
 
-  inline bool is_signaled () const noexcept
+      @return `true` if the counter was signaled.
+  */
+  inline bool isSignaled () const noexcept
   {
 	return m_value.get() > 0;
-  }
-
-  // Caller must synchronize.
-  inline void set (int value) noexcept
-  {
-	m_value.set (value);
-  }
-
-  // for diagnostics ONLY!
-  inline int get () const noexcept
-  {
-	return m_value.get();
   }
 
 private:

@@ -26,6 +26,7 @@
 // constructors and assignment operators.
 
 // Ideas based on boost
+#ifndef DOXYGEN
 class Uncopyable
 {
 protected:
@@ -36,5 +37,6 @@ private:
   Uncopyable (Uncopyable const&);
   Uncopyable const& operator= (Uncopyable const&);
 };
+#endif
 
 #endif
