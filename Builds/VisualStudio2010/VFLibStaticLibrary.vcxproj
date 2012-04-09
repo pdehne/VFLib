@@ -386,6 +386,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.c" />
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
@@ -517,6 +522,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h" />
     <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <ItemGroup>
@@ -554,12 +561,13 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -571,13 +579,15 @@
       <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\AppConfigTemplate;..\..\include;..\..\..\Juce;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -124,6 +124,12 @@
     <Filter Include="VF Modules\vf_luabridge\luabridge\impl">
       <UniqueIdentifier>{7854c24c-191a-4387-878a-b13717ac100e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VF Modules\vf_taglib">
+      <UniqueIdentifier>{1eb38624-3e95-4908-b51d-8abfdccc994e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_taglib\taglib">
+      <UniqueIdentifier>{5741bdf7-2284-42a6-869f-a0585e67e3f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -427,6 +433,12 @@
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.cpp">
+      <Filter>VF Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.cpp">
+      <Filter>VF Modules\vf_taglib\taglib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
@@ -820,6 +832,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\typelist.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h">
+      <Filter>VF Modules\vf_taglib\taglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
+      <Filter>VF Modules\vf_taglib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -54,8 +54,8 @@ public:
 public:
   /** Create an empty list. */
   LockFreeQueue ()
-    : m_head ((Node*)m_null)
-    , m_tail ((Node*)m_null)
+    : m_head (&m_null)
+    , m_tail (&m_null)
     , m_null (nullptr)
   {
   }
@@ -68,7 +68,7 @@ public:
   */
   bool empty () const
   {
-    return (m_head->get () == m_tail);
+    return (m_head.get () == m_tail);
   }
 
   /** Put an element into the list.
@@ -82,7 +82,7 @@ public:
   {
     node->m_next.set (0);
 
-    Node* prev = m_head->exchange (node);
+    Node* prev = m_head.exchange (node);
 
     // (*) If a try_pop_front() happens at this point, it might not see the
     //     element we are pushing. This only happens when the list is empty,
@@ -90,7 +90,7 @@ public:
 
     prev->m_next.set (node);
 
-    return prev == m_null;
+    return prev == &m_null;
   }
 
   /** Retrieve an element from the list.
@@ -137,14 +137,14 @@ public:
     Node* tail = m_tail;
     Node* next = tail->m_next.get ();
 
-    if (tail == m_null)
+    if (tail == &m_null)
     {
       if (next == 0)
       {
         // (*) If a push_back() happens at this point,
         //     we might not see the element.
 
-        if (m_head->get() == tail)
+        if (m_head.get() == tail)
         {
           *pElem = nullptr;
           return true; // success, but queue empty
@@ -167,11 +167,11 @@ public:
       return true;
     }
 
-    Node* head = m_head->get ();
+    Node* head = m_head.get ();
 
     if (tail == head)
     {
-      push_back (m_null);
+      push_back (&m_null);
       next = tail->m_next.get();
       if (next)
       {
@@ -197,9 +197,9 @@ public:
 
 private:
   // Elements are pushed on to the head and popped from the tail.
-  CacheLine::Unpadded <AtomicPointer <Node> > m_head;
-  CacheLine::Unpadded <Node*> m_tail;
-  CacheLine::Unpadded <Node> m_null;
+  AtomicPointer <Node> m_head;
+  Node* m_tail;
+  Node m_null;
 };
 
 #endif

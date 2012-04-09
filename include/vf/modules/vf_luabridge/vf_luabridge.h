@@ -39,9 +39,9 @@
 #if VF_USE_LUABRIDGE
 
 #if VF_USE_LUA
-#include "../vf_lua/vf_lua.h"
+#  include "../vf_lua/vf_lua.h"
 #else
-#error "vf_luabridge requires vf_lua"
+#  error vf_luabridge requires vf_lua
 #endif
 
 #include "luabridge/luabridge.hpp"

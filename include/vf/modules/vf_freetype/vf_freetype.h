@@ -1,8 +1,8 @@
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file README.md for licensing information.
 
-#ifndef VF_FREETYPE_EXTERNAL_VFHEADER
-#define VF_FREETYPE_EXTERNAL_VFHEADER
+#ifndef VF_FREETYPE_VFHEADER
+#define VF_FREETYPE_VFHEADER
 
 #include "AppConfig.h"
 

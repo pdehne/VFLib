@@ -42,6 +42,11 @@
 #define VF_USE_SQLITE 1
 #endif
 
+/* Turns on Taglib features */
+#ifndef VF_USE_TAGLIB
+#define VF_USE_TAGLIB 1
+#endif
+
 //==============================================================================
 
 // Ignore this

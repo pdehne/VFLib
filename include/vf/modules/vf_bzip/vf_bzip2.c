@@ -55,6 +55,7 @@
 #pragma warning (disable: 4100) // unreferenced formal parameter
 #pragma warning (disable: 4127) // conditional expression is constant
 #pragma warning (disable: 4244) // conversion, possible loss of data
+#pragma warning (disable: 4701) // potentially uninitialized variable
 #pragma warning (disable: 4996) // deprecated POSIX name
 #endif
 

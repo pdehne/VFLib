@@ -26,6 +26,10 @@ JUCE
   VFLib uses Juce (http://rawmaterialsoftware.com), which is available under
   the GNU General Public License. Commercial licenses are also available.
 
+Bzip2
+
+
+
 FreeType
 
   Portions of this software are copyright © 1996-2001, 2006 by
@@ -42,3 +46,9 @@ Lua
 Luabridge
 
   Luabridge is copyrighted (C) 2007 by Nathan Reed.
+
+TagLib
+
+  TagLib is distributed under both the GNU Lesser General Public License
+  (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public
+  License (http://www.mozilla.org/MPL/1.1/)
