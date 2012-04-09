@@ -17,9 +17,9 @@
 #define VF_USE_BOOST 0
 #endif
 
-/* Turns on SQLite features */
-#ifndef VF_USE_SQLITE
-#define VF_USE_SQLITE 1
+/* Turns on BZip2 features */
+#ifndef VF_USE_BZIP2
+#define VF_USE_BZIP2 1
 #endif
 
 /* Turns on FreeType features */
@@ -32,9 +32,14 @@
 #define VF_USE_LUA 1
 #endif
 
-/* Turns on BZip2 features */
-#ifndef VF_USE_BZIP2
-#define VF_USE_BZIP2 1
+/* Turn on luabridge features */
+#ifndef VF_USE_LUABRIDGE
+#define VF_USE_LUABRIDGE 1
+#endif
+
+/* Turns on SQLite features */
+#ifndef VF_USE_SQLITE
+#define VF_USE_SQLITE 1
 #endif
 
 //==============================================================================

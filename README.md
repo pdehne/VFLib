@@ -38,3 +38,7 @@ SQLite
 Lua
 
   Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
+
+Luabridge
+
+  Luabridge is copyrighted (C) 2007 by Nathan Reed.

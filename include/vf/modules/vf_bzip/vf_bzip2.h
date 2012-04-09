@@ -42,8 +42,8 @@
 //   bzip2/libbzip2 version 1.0.6 of 6 September 2010
 //
 
-#ifndef VF_BZIP_VFHEADER
-#define VF_BZIP_VFHEADER
+#ifndef VF_BZIP2_VFHEADER
+#define VF_BZIP2_VFHEADER
 
 #include "AppConfig.h"
 

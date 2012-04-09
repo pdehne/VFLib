@@ -234,6 +234,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui.cpp" />
+    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.cpp" />
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lapi.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -470,6 +479,14 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\class.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\module.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\shared_ptr.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\stack.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\typelist.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.hpp" />
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lapi.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lauxlib.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lcode.h" />
