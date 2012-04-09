@@ -21,16 +21,20 @@ Unless otherwise marked, files in VFLib are published under the GNU General
 Public License (Version 2). Individually marked files of VFLib contain
 portions of these external projects, licensed separately:
 
+JUCE
+
+  VFLib uses Juce (http://rawmaterialsoftware.com), which is available under
+  the GNU General Public License. Commercial licenses are also available.
+
 FreeType
 
   Portions of this software are copyright © 1996-2001, 2006 by
-    The FreeType Project (http://www.freetype.org). All rights reserved.
+  The FreeType Project (http://www.freetype.org). All rights reserved.
 
 SQLite
 
   SQLite, available at (http://sqlite.org), is in the public domain.
 
-JUCE
+Lua
 
-  VFLib uses Juce (http://rawmaterialsoftware.com), which is available under
-  the GNU General Public License. Commercial licenses are also available.
+  Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.

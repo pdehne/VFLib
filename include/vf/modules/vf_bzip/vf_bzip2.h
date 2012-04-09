@@ -49,7 +49,7 @@
 
 #if VF_USE_BZIP2
 
-#include "bzip/bzlib.h"
+#include "bzip2/bzlib.h"
 
 #endif
 
