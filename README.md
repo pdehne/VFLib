@@ -1,8 +1,13 @@
 # VFLib
 
 This is my soon to be released project which is NOT QUITE READY FOR PUBLIC USE!
-There's no documentation, no testing, and no support so unless you enjoy
-banging your head repeatedly against the wall wait until the official release!
+There's unfinished documentation, no testing, and no support so unless you
+enjoy banging your head repeatedly against the wall wait until the official
+release!
+
+## Documentation
+
+Some [unfinished documentation][0] is in development.
 
 ## Location
 
@@ -12,11 +17,12 @@ VFLib is hosted on github, at https://github.com/vinniefalco/VFLib
 
 Copyright (C) 2008 by Vinnie Falco.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. Unless otherwise marked, files in VFLib are published under
-the [GNU General Public License, Version 2][01]. Some files contain portions of
-these external projects, licensed separately:
+Unless otherwise marked, files in VFLib are published under the [GNU General
+Public License, Version 2][01].  This program is distributed in the hope that
+it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Some files contain portions of these external projects, licensed separately:
 
 ### [bZip2][1]
 
@@ -59,6 +65,8 @@ under the [Boost Software License, Version 1.0][05].
 
 [TagLib][8] is distributed under both the [GNU Lesser General Public License,
 Version 2.1][06] and the [Mozilla Public License][07].
+
+[0]: http://vinniefalco.github.com/VFLib/ "VFLib Documentation"
 
 [1]: http://www.bzip.org/ "bZip2: Home"
 [2]: http://freetype.org/ "The FreeType Project"
