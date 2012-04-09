@@ -12,17 +12,11 @@ VFLib is hosted on github, at https://github.com/vinniefalco/VFLib
 
 Copyright (C) 2008 by Vinnie Falco.
 
-This program is free software; you can redistribute it and/or modify it under
-the terms of the [GNU General Public License, Version 2][01] as published by
-the Free Software Foundation.
-
 This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-Unless otherwise marked, files in VFLib are published under the [GNU General
-Public License, Version 2][01]. Individually marked files of VFLib contain
-portions of these external projects, licensed separately:
+PARTICULAR PURPOSE. Unless otherwise marked, files in VFLib are published under
+the [GNU General Public License, Version 2][01]. Some files contain portions of
+these external projects, licensed separately:
 
 ### [bZip2][1]
 
@@ -39,7 +33,7 @@ under both the [GNU General Public License, Version 2][01], or the
 ### [JUCE][3]
 
 This software uses [JUCE][3], which is available under the [GNU General Public
-License][01]. Commercial licenses are also [available][3].
+License][01]. [Commercial licenses][9] are also available.
 
 ### [Lua][4]
 
@@ -59,7 +53,7 @@ under the [Boost Software License, Version 1.0][05].
 
 ### [SQLite][7]
 
-[SQLite][7], has been placed in the public domain.
+[SQLite][7] has been placed in the public domain.
 
 ### [TagLib][8]
 
@@ -68,12 +62,13 @@ Version 2.1][06] and the [Mozilla Public License][07].
 
 [1]: http://www.bzip.org/ "bZip2: Home"
 [2]: http://freetype.org/ "The FreeType Project"
-[3]: http://rawmaterialsoftware.com/ "Raw Material Software - Home"
+[3]: http://rawmaterialsoftware.com/juce.php "JUCE"
 [4]: http://www.lua.org/ "The Programming Language Lua"
 [5]: http://sourceforge.net/projects/luabridge/ "luabridge"
 [6]: http://soci.sourceforge.net/ "SOCI"
 [7]: http://sqlite.org/ "SQLite Home Page"
 [8]: http://developer.kde.org/~wheeler/taglib.html "TagLib"
+[9]: http://rawmaterialsoftware.com/jucelicense.php "JUCE Commercial Licensing"
 
 [01]: http://www.gnu.org/licenses/gpl-2.0.html "GNU General Public License, version 2"
 [02]: http://www.freetype.org/FTL.TXT "The FreeType Project License"
