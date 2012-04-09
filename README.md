@@ -24,44 +24,44 @@ Unless otherwise marked, files in VFLib are published under the GNU General
 Public License, Version 2. Individually marked files of VFLib contain portions
 of these external projects, licensed separately:
 
-### Bzip2
+- Bzip2
 
-Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
+  Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
 
-### FreeType
+- FreeType
 
-Portions of this software are copyright © 1996-2001, 2006 by The FreeType
-Project (http://www.freetype.org). All rights reserved.
+  Portions of this software are copyright © 1996-2001, 2006 by The FreeType
+  Project (http://www.freetype.org). All rights reserved.
 
-### JUCE
+- JUCE
 
-VFLib uses [JUCE][1], which is available under the GNU General Public License.
-Commercial licenses are also available.
+  VFLib uses [JUCE][1], which is available under the GNU General Public License.
+  Commercial licenses are also available.
 
-### Lua
+- Lua
 
-Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
+  Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
 
-### Luabridge
+- Luabridge
 
-Luabridge is copyrighted (C) 2007 by Nathan Reed.
+  Luabridge is copyrighted (C) 2007 by Nathan Reed.
 
-### Soci
+- Soci
 
-Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej Sobczak,
-Stephen Hutton, and various others noted in the corresponding source files.
-Soci is distributed under the Boost Software License, Version 1.0. available
-at http://www.boost.org/LICENSE_1_0.txt.
+  Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej Sobczak,
+  Stephen Hutton, and various others noted in the corresponding source files.
+  Soci is distributed under the Boost Software License, Version 1.0. available
+  at http://www.boost.org/LICENSE_1_0.txt.
 
-### SQLite
+- SQLite
 
-SQLite, available at (http://sqlite.org), is in the public domain.
+  SQLite, available at (http://sqlite.org), is in the public domain.
 
-### TagLib
+- TagLib
 
-TagLib is distributed under both the GNU Lesser General Public License
-(http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
-(http://www.mozilla.org/MPL/1.1/)
+  TagLib is distributed under both the GNU Lesser General Public License
+  (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
+  (http://www.mozilla.org/MPL/1.1/)
 
 ## Links
 
