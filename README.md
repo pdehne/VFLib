@@ -24,48 +24,52 @@ Unless otherwise marked, files in VFLib are published under the GNU General
 Public License, Version 2. Individually marked files of VFLib contain portions
 of these external projects, licensed separately:
 
-- Bzip2
+### [bZip2][1]
 
-  Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
+[bZip2][1] is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
 
-- FreeType
+### [FreeType][2]
 
-  Portions of this software are copyright © 1996-2001, 2006 by The FreeType
-  Project (http://www.freetype.org). All rights reserved.
+Portions of the software are Copyright © 1996-2001, 2006 by
+[The FreeType Project][2]. All rights reserved.
 
-- JUCE
+### [JUCE][3]
 
-  VFLib uses [JUCE][1], which is available under the GNU General Public License.
-  Commercial licenses are also available.
+This software uses [JUCE][3], which is available under the GNU General Public
+License. Commercial licenses are also [available][3].
 
-- Lua
+### [Lua][4]
 
-  Portions of this software are Copyright © 1994–2012 Lua.org, PUC-Rio.
+Portions of this software are Copyright © 1994–2012 [Lua.org][4], PUC-Rio.
 
-- Luabridge
+### [Luabridge][5]
 
-  Luabridge is copyrighted (C) 2007 by Nathan Reed.
+[Luabridge][5] is Copyrighted (C) 2007 by Nathan Reed.
 
-- Soci
+### [Soci][6]
 
-  Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej Sobczak,
-  Stephen Hutton, and various others noted in the corresponding source files.
-  Soci is distributed under the Boost Software License, Version 1.0. available
-  at http://www.boost.org/LICENSE_1_0.txt.
+[Soci][6] is Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton, and
+various others noted in the corresponding source files. Soci is distributed
+under the Boost Software License, Version 1.0. available at
+http://www.boost.org/LICENSE_1_0.txt.
 
-- SQLite
+### [SQLite][7]
 
-  SQLite, available at (http://sqlite.org), is in the public domain.
+[SQLite][7], has been placed in the public domain.
 
-- TagLib
+### [TagLib][8]
 
-  TagLib is distributed under both the GNU Lesser General Public License
+[TagLib][8] is distributed under both the GNU Lesser General Public License
   (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
   (http://www.mozilla.org/MPL/1.1/)
 
 ## Links
 
-JUCE
-
-
-[1]: http://rawmaterialsoftware.com/ "Raw Material Software (JUCE)"
+[1]: http://www.bzip.org/ "bZip2: Home"
+[2]: http://freetype.org/ "The FreeType Project"
+[3]: http://rawmaterialsoftware.com/ "Raw Material Software - Home"
+[4]: http://www.lua.org/ "The Programming Language Lua"
+[5]: http://sourceforge.net/projects/luabridge/ "luabridge"
+[6]: http://soci.sourceforge.net/ "SOCI"
+[7]: http://sqlite.org/ "SQLite Home Page"
+[8]: http://developer.kde.org/~wheeler/taglib.html "TagLib"
