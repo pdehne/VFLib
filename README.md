@@ -28,7 +28,7 @@ JUCE
 
 Bzip2
 
-
+  Bzip2 is Copyright (C) 1996-2010 Julian R Seward.  All rights reserved.
 
 FreeType
 
@@ -46,6 +46,12 @@ Lua
 Luabridge
 
   Luabridge is copyrighted (C) 2007 by Nathan Reed.
+
+Soci
+
+  Soci (http://soci.sourceforge.net/) is Copyright (C) 2004-2008 Maciej
+  Sobczak, Stephen Hutton. Soci is distributed under the Boost Software
+  License, Version 1.0. available at http://www.boost.org/LICENSE_1_0.txt.
 
 TagLib
 
