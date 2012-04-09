@@ -24,11 +24,6 @@ Unless otherwise marked, files in VFLib are published under the GNU General
 Public License, Version 2. Individually marked files of VFLib contain portions
 of these external projects, licensed separately:
 
-### JUCE
-
-VFLib uses Juce (http://rawmaterialsoftware.com), which is available under the
-GNU General Public License. Commercial licenses are also available.
-
 ### Bzip2
 
 Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
@@ -38,9 +33,10 @@ Bzip2 is Copyright (C) 1996-2010 Julian R Seward. All rights reserved.
 Portions of this software are copyright © 1996-2001, 2006 by The FreeType
 Project (http://www.freetype.org). All rights reserved.
 
-### SQLite
+### JUCE
 
-SQLite, available at (http://sqlite.org), is in the public domain.
+VFLib uses [JUCE][1], which is available under the GNU General Public License.
+Commercial licenses are also available.
 
 ### Lua
 
@@ -57,13 +53,19 @@ Stephen Hutton, and various others noted in the corresponding source files.
 Soci is distributed under the Boost Software License, Version 1.0. available
 at http://www.boost.org/LICENSE_1_0.txt.
 
+### SQLite
+
+SQLite, available at (http://sqlite.org), is in the public domain.
+
 ### TagLib
 
 TagLib is distributed under both the GNU Lesser General Public License
 (http://www.gnu.org/licenses/lgpl-2.1.html) and the Mozilla Public License
 (http://www.mozilla.org/MPL/1.1/)
 
---------
-| Lua | http://lua.org |
-| FreeType | http://www.freetype.org |
---------
+## Links
+
+JUCE
+
+
+[1]: http://rawmaterialsoftware.com/		"Raw Material Software (JUCE)"
