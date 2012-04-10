@@ -22,9 +22,11 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
-/** Audio processing classes.
+/**
+    Audio processing classes.
 
-    Description.
+    This is a small collection of useful utility classes for performing audio
+    processing on buffers of sample data.
 
     \defgroup vf_audio vf_audio
 */

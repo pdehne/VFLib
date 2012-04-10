@@ -62,6 +62,7 @@ public:
       successful the state becomes `to`. The entire operation is atomic.
 
       @param from   The current state, for comparison.
+      
       @param to     The desired new state.
 
       @return       `true` if the state transition succeeded.
@@ -78,6 +79,7 @@ public:
       when program logic requires that the state change must succeed.
 
       @param from   The required current state.
+      
       @param to     The new state.
   */
   inline void changeState (const int from, const int to) noexcept

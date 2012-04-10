@@ -100,7 +100,7 @@
     @endcode
 
     componentBroadcast can even be used to call member functions of
-    already existing interfaces, without changing any Components! This
+    already existing interfaces, without changing any Component code! This
     example will automatically clear the contents of every child TextEditor
     Component in a DocumentWindow:
 
@@ -143,6 +143,7 @@ public:
       Overloads are provided for calling members with up to 8 arguments
 
       @param c  The Component to broadcast to.
+      
       @param f  Any non-static class member to call.
   */
   template <class C>

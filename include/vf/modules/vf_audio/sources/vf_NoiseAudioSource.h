@@ -22,6 +22,17 @@
 #ifndef VF_NOISEAUDIOSOURCE_VFHEADER
 #define VF_NOISEAUDIOSOURCE_VFHEADER
 
+//==============================================================================
+/**
+    An AudioSource to produce noise.
+
+    The noise can be pink or white.
+
+    \ingroup vf_audio
+*/
+
+//==============================================================================
+
 #ifndef DOXYGEN
 
 //
@@ -89,25 +100,32 @@ private:
 #endif
 
 //==============================================================================
-/** AudioSource that produces various types of noise.
-*/
+
 class NoiseAudioSource : public AudioSource
 {
 public:
+  /** Create a noise source.
+
+      @param pink `true for pink noise, else white noise.
+
+  */
   explicit NoiseAudioSource (bool pink = false);
+  
+  /** Destroy the noise source. */
   ~NoiseAudioSource ();
 
+#ifndef DOXYGEN
+  /* AudioSource overrides */
   void prepareToPlay (int samplesPerBlockExpected,
                       double sampleRate);
-
   void releaseResources();
-
   void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill);
-
-  void white_noise (int numSamples, float* dest);
-  void pink_noise (int numSamples, float* dest);
+#endif
   
 private:
+  void white_noise (int numSamples, float* dest);
+  void pink_noise (int numSamples, float* dest);
+
   bool m_pink;
   Random m_random;
   pink_noise_filter m_filter;

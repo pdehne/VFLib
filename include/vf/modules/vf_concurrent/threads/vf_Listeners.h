@@ -439,6 +439,7 @@ public:
       - Safe to call from any thread.
 
       @param listener   The listener to add.
+      
       @param callQueue  The CallQueue to associate with the listener.
   */
   void add (ListenerClass* const listener, CallQueue& callQueue)
@@ -529,6 +530,7 @@ public:
       providing an initial state.
 
       @param listener The listener to call.
+
       @param mf       The member function to call. This may be followed by up
                       to 8 arguments.
   */
@@ -543,6 +545,7 @@ public:
       Like call1(), except that no CallQueue synchronization takes place.
 
       @param listener The listener to call.
+
       @param mf       The member function to call. This may be followed by up
                       to 8 arguments.
   */

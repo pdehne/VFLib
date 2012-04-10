@@ -114,6 +114,7 @@ public:
       The caller is responsible for handling the ABA problem.
 
       @param  newValue  The new value to assign.
+
       @param  oldValue  The matching old value.
 
       @return `true` if the assignment was performed.
