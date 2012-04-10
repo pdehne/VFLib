@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['fileexists',['fileExists',['../class_error.html#ab5980e13b879db253df802b0950d1708aa31de129a85f7e6df5b4327453a73ec9',1,'Error']]],
-  ['fileinuse',['fileInUse',['../class_error.html#ab5980e13b879db253df802b0950d1708a2a9e89004efd5da15020f898a6df4e9b',1,'Error']]],
-  ['fileioerror',['fileIOError',['../class_error.html#ab5980e13b879db253df802b0950d1708ac172f700af5e94636af1b94735784d91',1,'Error']]],
-  ['filenameinvalid',['fileNameInvalid',['../class_error.html#ab5980e13b879db253df802b0950d1708a7cbc27e963d310800cfd123d0fd94eb3',1,'Error']]],
-  ['filenoperm',['fileNoPerm',['../class_error.html#ab5980e13b879db253df802b0950d1708ab1b91ab18d69b092c92dfabb7881b563',1,'Error']]],
-  ['filenospace',['fileNoSpace',['../class_error.html#ab5980e13b879db253df802b0950d1708a0cba62188963a3196eb689e1cb313b7a',1,'Error']]],
-  ['filenotfound',['fileNotFound',['../class_error.html#ab5980e13b879db253df802b0950d1708a57839da9bba440e4050e0c69dd9ef89e',1,'Error']]]
+  ['fileexists',['fileExists',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dab148e15e472956c458c95f42980091e0',1,'vf::Error']]],
+  ['fileinuse',['fileInUse',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281daa91b5a3a10cfc59e903b33ac6ffa6366',1,'vf::Error']]],
+  ['fileioerror',['fileIOError',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281da2a68a307aa6e859ce87d5c144f6f82ec',1,'vf::Error']]],
+  ['filenameinvalid',['fileNameInvalid',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281daced6989ce5525ab959c6d2509d842acd',1,'vf::Error']]],
+  ['filenoperm',['fileNoPerm',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281da5ed903b90b536697043a27d299611731',1,'vf::Error']]],
+  ['filenospace',['fileNoSpace',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dafc2184ee9d30fdb1c3dfa52aa0abc8b8',1,'vf::Error']]],
+  ['filenotfound',['fileNotFound',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dae35c133f0f5830c3476b1f96a9557b80',1,'vf::Error']]]
 ];

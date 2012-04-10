@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lifetime',['Lifetime',['../class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2',1,'SingletonLifetime']]]
+  ['lifetime',['Lifetime',['../classvf_1_1_singleton_lifetime.html#aa89815eef77cb4c080dc9d11c3914c49',1,'vf::SingletonLifetime']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['persistaftercreation',['persistAfterCreation',['../class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2ac60514e25bc9b84dc84052a7dbc998b0',1,'SingletonLifetime']]],
-  ['platform',['platform',['../class_error.html#ab5980e13b879db253df802b0950d1708a2d6554ede0ade5cc199afd5d2e2452d3',1,'Error']]]
+  ['persistaftercreation',['persistAfterCreation',['../classvf_1_1_singleton_lifetime.html#aa89815eef77cb4c080dc9d11c3914c49a82bcc265a4a3e82c4b79ba37e0875634',1,'vf::SingletonLifetime']]],
+  ['platform',['platform',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dadc3a21ccb616231a81529950cab007f4',1,'vf::Error']]]
 ];

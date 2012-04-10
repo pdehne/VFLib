@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['decreferencecount',['decReferenceCount',['../class_concurrent_object.html#af0e492762a311984389ed16538635929',1,'ConcurrentObject::decReferenceCount()'],['../class_reference_counted_singleton.html#a0ec97c0fa2093ba6225a2e56e4486a76',1,'ReferenceCountedSingleton::decReferenceCount()']]],
-  ['destroy',['destroy',['../class_static_1_1_storage.html#a6e68dc3421e273ed2c6dc8c1134c52ec',1,'Static::Storage']]],
-  ['destroyconcurrentobject',['destroyConcurrentObject',['../class_concurrent_object.html#aaa2d654e4065c897625122170254318d',1,'ConcurrentObject']]],
-  ['disjoint',['disjoint',['../class_interval.html#a0b7bfab2af05f298bb92e87a216b1743',1,'Interval']]],
-  ['distance',['distance',['../class_interval.html#a9a9e8d36f2990f00d50cfbca0b0f4092',1,'Interval']]],
-  ['dooncepersecond',['doOncePerSecond',['../class_once_per_second.html#aefffb5f95afbc79aa6928ecfb1c964b1',1,'OncePerSecond']]]
+  ['decreferencecount',['decReferenceCount',['../classvf_1_1_concurrent_object.html#a6d05eae7b3a549fbdcf704da9f69e01b',1,'vf::ConcurrentObject::decReferenceCount()'],['../classvf_1_1_reference_counted_singleton.html#a6d05eae7b3a549fbdcf704da9f69e01b',1,'vf::ReferenceCountedSingleton::decReferenceCount()']]],
+  ['destroy',['destroy',['../classvf_1_1_static_1_1_storage.html#a112a068c3a6f373ec6c12fdf0b48987b',1,'vf::Static::Storage::destroy()'],['../classvf_1_1_static_1_1_storage.html#a112a068c3a6f373ec6c12fdf0b48987b',1,'vf::Static::Storage::destroy()'],['../classvf_1_1_static_1_1_storage.html#a112a068c3a6f373ec6c12fdf0b48987b',1,'vf::Static::Storage::destroy()']]],
+  ['destroyconcurrentobject',['destroyConcurrentObject',['../classvf_1_1_concurrent_object.html#a1dc186ec6b1f98789959a6e8be36f390',1,'vf::ConcurrentObject']]],
+  ['disjoint',['disjoint',['../classvf_1_1_interval.html#a55c044018b4cd8fde2bd36f560dccae1',1,'vf::Interval']]],
+  ['distance',['distance',['../classvf_1_1_interval.html#a4d44bcc204d67dcdbb78763f48fb7c60',1,'vf::Interval']]],
+  ['dooncepersecond',['doOncePerSecond',['../classvf_1_1_once_per_second.html#aaa46c36b09f394764a34a1c79e8f95ef',1,'vf::OncePerSecond']]]
 ];

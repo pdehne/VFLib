@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exception',['exception',['../class_error.html#ab5980e13b879db253df802b0950d1708aea9351866a48a3c073b07efd6e3b8c33',1,'Error']]]
+  ['exception',['exception',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281daec2b4fd1f327cbebb003cfc415e8bccb',1,'vf::Error']]]
 ];

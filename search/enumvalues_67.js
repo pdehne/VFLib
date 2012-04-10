@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['general',['general',['../class_error.html#ab5980e13b879db253df802b0950d1708a30db508fbaa6eaa63263d23ba175027c',1,'Error']]]
+  ['general',['general',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dad797829e3284fd15f2780269ce9bb6dc',1,'vf::Error']]]
 ];

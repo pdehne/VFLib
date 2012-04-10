@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['invaliddata',['invalidData',['../class_error.html#ab5980e13b879db253df802b0950d1708a10bc4dc5f37499f02a549dcb373b2d38',1,'Error']]]
+  ['invaliddata',['invalidData',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281da3ca89b8bd7ebe6205b9c8aac4ff64c13',1,'vf::Error']]]
 ];

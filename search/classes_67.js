@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['guicallqueue',['GuiCallQueue',['../class_gui_call_queue.html',1,'']]]
+  ['guicallqueue',['GuiCallQueue',['../classvf_1_1_gui_call_queue.html',1,'vf']]]
 ];

@@ -1,17 +1,19 @@
 var searchData=
 [
-  ['labcolour',['LabColour',['../class_lab_colour.html',1,'LabColour'],['../class_lab_colour.html#ad63aade21bb9439e1b7ca6e24c8d542a',1,'LabColour::LabColour()'],['../class_lab_colour.html#a0e15998f4f7cb58eb6747274991769bc',1,'LabColour::LabColour(float L, float a, float b)'],['../class_lab_colour.html#a51e6d9c892654a76f020b1cd7a373657',1,'LabColour::LabColour(float L, float a, float b, float alpha)'],['../class_lab_colour.html#ada5f0d595eec90e56e6ff231e1a7505e',1,'LabColour::LabColour(LabColour const &amp;lab)'],['../class_lab_colour.html#a0526ec73039d675261152a3ee29c2dde',1,'LabColour::LabColour(VF_JUCE::Colour const &amp;sRGB)'],['../class_lab_colour.html#a47dbc729368ff71475e516fdfb3abc11',1,'LabColour::LabColour(XYZColour const &amp;xyz)']]],
-  ['last_5finsert_5frowid',['last_insert_rowid',['../classdb_1_1session.html#a4638d653a45ba296b6f2bb593217eff2',1,'db::session::last_insert_rowid()'],['../classdb_1_1statement.html#a16c18d507ddfdc1945756a9ccc500191',1,'db::statement::last_insert_rowid()']]],
-  ['leakchecked',['LeakChecked',['../struct_leak_checked.html',1,'']]],
-  ['leakchecked_3c_20transparentborder_20_3e',['LeakChecked< TransparentBorder >',['../struct_leak_checked.html',1,'']]],
-  ['leakcheckedbase',['LeakCheckedBase',['../class_leak_checked_base.html',1,'']]],
-  ['length',['length',['../class_interval.html#a492ae831a81bdafca8e3054c66ef9560',1,'Interval']]],
-  ['lifetime',['Lifetime',['../class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2',1,'SingletonLifetime']]],
-  ['lingermilliseconds',['lingerMilliseconds',['../class_mouse_enter_editable_1_1_container.html#acc1ef47499e2431439f4d4323224f1d2ac168679083b9b04f1a4a087bc0233055',1,'MouseEnterEditable::Container']]],
-  ['list',['List',['../class_list.html',1,'List&lt; Element, Tag &gt;'],['../class_list.html#ae1c55dd44f5e78df24df2fa6ea9d65da',1,'List::List()']]],
-  ['listeners',['Listeners',['../class_listeners.html',1,'']]],
-  ['lockfreequeue',['LockFreeQueue',['../class_lock_free_queue.html',1,'LockFreeQueue&lt; Element, Tag &gt;'],['../class_lock_free_queue.html#a90e0d2c91d52236606baad316dbdcb13',1,'LockFreeQueue::LockFreeQueue()']]],
-  ['lockfreestack',['LockFreeStack',['../class_lock_free_stack.html',1,'LockFreeStack&lt; Element, Tag &gt;'],['../class_lock_free_stack.html#ae1117487a808dca399f44b818cff9d24',1,'LockFreeStack::LockFreeStack()'],['../class_lock_free_stack.html#a4349f93f357d5f7f95be0a1aeed3f7b3',1,'LockFreeStack::LockFreeStack(LockFreeStack &amp;other)']]],
-  ['locktype',['LockType',['../class_reference_counted_singleton.html#a96e8f010d56feefb762ed738f2421099',1,'ReferenceCountedSingleton']]],
-  ['log_5fquery',['log_query',['../classdb_1_1session.html#a0faf48d942d22f1ad53ef3f0b327ad09',1,'db::session']]]
+  ['labcolour',['LabColour',['../classvf_1_1_lab_colour.html',1,'vf']]],
+  ['labcolour',['LabColour',['../classvf_1_1_lab_colour.html#ab0348f6df84c9ffa078f879a9b22537c',1,'vf::LabColour::LabColour()'],['../classvf_1_1_lab_colour.html#a528ea1883c61694c4385a95930145c05',1,'vf::LabColour::LabColour(float L, float a, float b)'],['../classvf_1_1_lab_colour.html#aaa606f02600a5eec30d92313f4515d17',1,'vf::LabColour::LabColour(float L, float a, float b, float alpha)'],['../classvf_1_1_lab_colour.html#a196071c5083278b28cd22a181b186836',1,'vf::LabColour::LabColour(LabColour const &amp;lab)'],['../classvf_1_1_lab_colour.html#a048002a59f7a9025b7dbcd03d5fd5d57',1,'vf::LabColour::LabColour(VF_JUCE::Colour const &amp;sRGB)'],['../classvf_1_1_lab_colour.html#a7488a4a1fc5138b62d19f53ac3687fff',1,'vf::LabColour::LabColour(XYZColour const &amp;xyz)']]],
+  ['leakchecked',['LeakChecked',['../structvf_1_1_leak_checked.html',1,'vf']]],
+  ['leakchecked_3c_20transparentborder_20_3e',['LeakChecked< TransparentBorder >',['../structvf_1_1_leak_checked.html',1,'vf']]],
+  ['leakcheckedbase',['LeakCheckedBase',['../classvf_1_1_leak_checked_base.html',1,'vf']]],
+  ['length',['length',['../classvf_1_1_interval.html#a77b31dc951dd89db1d76d40214325b41',1,'vf::Interval']]],
+  ['lifetime',['Lifetime',['../classvf_1_1_singleton_lifetime.html#aa89815eef77cb4c080dc9d11c3914c49',1,'vf::SingletonLifetime']]],
+  ['lingermilliseconds',['lingerMilliseconds',['../classvf_1_1_mouse_enter_editable_1_1_container.html#a0411cd49bb5b71852cecd93bcbf0ca2da3fcd0410c87bd8137e7b358ca0a807ab',1,'vf::MouseEnterEditable::Container']]],
+  ['list',['List',['../classvf_1_1_list.html',1,'vf']]],
+  ['list',['List',['../classvf_1_1_list.html#a17e6c90f14225bdac5c65ed915b0a2f6',1,'vf::List::List()'],['../classvf_1_1_list.html#a17e6c90f14225bdac5c65ed915b0a2f6',1,'vf::List::List()']]],
+  ['listeners',['Listeners',['../classvf_1_1_listeners.html',1,'vf']]],
+  ['lockfreequeue',['LockFreeQueue',['../classvf_1_1_lock_free_queue.html#a6551aa44a481d3056f70a4334f38095c',1,'vf::LockFreeQueue']]],
+  ['lockfreequeue',['LockFreeQueue',['../classvf_1_1_lock_free_queue.html',1,'vf']]],
+  ['lockfreestack',['LockFreeStack',['../classvf_1_1_lock_free_stack.html',1,'vf']]],
+  ['lockfreestack',['LockFreeStack',['../classvf_1_1_lock_free_stack.html#ade2b214faa60f36981763b2f4d59884e',1,'vf::LockFreeStack::LockFreeStack()'],['../classvf_1_1_lock_free_stack.html#a59d11b09dca0f3f54a01773cdd7b3853',1,'vf::LockFreeStack::LockFreeStack(LockFreeStack &amp;other)'],['../classvf_1_1_lock_free_stack.html#ade2b214faa60f36981763b2f4d59884e',1,'vf::LockFreeStack::LockFreeStack()'],['../classvf_1_1_lock_free_stack.html#a59d11b09dca0f3f54a01773cdd7b3853',1,'vf::LockFreeStack::LockFreeStack(LockFreeStack &amp;other)'],['../classvf_1_1_lock_free_stack.html#ade2b214faa60f36981763b2f4d59884e',1,'vf::LockFreeStack::LockFreeStack()'],['../classvf_1_1_lock_free_stack.html#a59d11b09dca0f3f54a01773cdd7b3853',1,'vf::LockFreeStack::LockFreeStack(LockFreeStack &amp;other)'],['../classvf_1_1_lock_free_stack.html#ade2b214faa60f36981763b2f4d59884e',1,'vf::LockFreeStack::LockFreeStack()'],['../classvf_1_1_lock_free_stack.html#a59d11b09dca0f3f54a01773cdd7b3853',1,'vf::LockFreeStack::LockFreeStack(LockFreeStack &amp;other)']]],
+  ['locktype',['LockType',['../classvf_1_1_reference_counted_singleton.html#a46bbdfa792fb3e2a990f61aee3abf449',1,'vf::ReferenceCountedSingleton']]]
 ];

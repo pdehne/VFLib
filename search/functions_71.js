@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['queue',['queue',['../class_call_queue.html#a7b7121a53b44c35b82358544a6a7cea0',1,'CallQueue::queue()'],['../class_listeners.html#a6ce1ff9fed14ef5bc35ef67c52379eaf',1,'Listeners::queue()']]],
-  ['queue1',['queue1',['../class_listeners.html#a5c0c14bbc7b07aadefc96b6ddfa1de0c',1,'Listeners']]]
+  ['queue',['queue',['../classvf_1_1_call_queue.html#abadcc331ce9edb71f91dc4e2bcd798d4',1,'vf::CallQueue::queue(Fn f)'],['../classvf_1_1_call_queue.html#abadcc331ce9edb71f91dc4e2bcd798d4',1,'vf::CallQueue::queue(Fn f)'],['../classvf_1_1_call_queue.html#abadcc331ce9edb71f91dc4e2bcd798d4',1,'vf::CallQueue::queue(Fn f)'],['../classvf_1_1_listeners.html#aacbeb550665677fde99a950d9fc69b9b',1,'vf::Listeners::queue()'],['../classvf_1_1_call_queue.html#abadcc331ce9edb71f91dc4e2bcd798d4',1,'vf::CallQueue::queue(Fn f)'],['../classvf_1_1_call_queue.html#abadcc331ce9edb71f91dc4e2bcd798d4',1,'vf::CallQueue::queue(Fn f)']]],
+  ['queue1',['queue1',['../classvf_1_1_listeners.html#a2dd0425fb0ddf5d742426431347e6ffd',1,'vf::Listeners']]]
 ];

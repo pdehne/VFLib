@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['wait',['wait',['../class_interruptible_thread.html#a525dc890dc9d564821bf8046855b6df9',1,'InterruptibleThread']]],
-  ['what',['what',['../class_error.html#a1c49b8ea27ba4008faad5e4b51ce7147',1,'Error']]],
-  ['white_5fnoise',['white_noise',['../class_noise_audio_source.html#a7a1953c90bac6e4bb82a15425fd1a97a',1,'NoiseAudioSource']]],
-  ['willbereported',['willBeReported',['../class_error.html#a613cca5071ea6afcb633996c66ee241b',1,'Error']]],
-  ['withaddedluminance',['withAddedLuminance',['../class_lab_colour.html#a4e2cfcefd705416f8b150707e5b254ea',1,'LabColour']]],
-  ['withluminance',['withLuminance',['../class_lab_colour.html#a75daaab5a8fed4e86d97cc1edb370055',1,'LabColour']]],
-  ['withmultipliedcolour',['withMultipliedColour',['../class_lab_colour.html#a87960a20b7c247273991c23cdcdfbec2',1,'LabColour']]],
-  ['write',['write',['../classdb_1_1blob.html#a33cbcc7a82c45ed102a5f5a3477d7250',1,'db::blob']]],
-  ['writeaccess',['WriteAccess',['../class_concurrent_state_1_1_write_access.html#a9e6be0388ed612d6e3de5a19d365a7d7',1,'ConcurrentState::WriteAccess']]],
-  ['writeaccess',['WriteAccess',['../class_concurrent_state_1_1_write_access.html',1,'ConcurrentState']]]
+  ['wait',['wait',['../classvf_1_1_interruptible_thread.html#a6d8be6d36736d823ad1f060b7a32b1e4',1,'vf::InterruptibleThread']]],
+  ['what',['what',['../classvf_1_1_error.html#a6e01571e6589dc64e08addf4b1148a7a',1,'vf::Error::what() const noexcept'],['../classvf_1_1_error.html#a6e01571e6589dc64e08addf4b1148a7a',1,'vf::Error::what() const noexcept']]],
+  ['white_5fnoise',['white_noise',['../classvf_1_1_noise_audio_source.html#aa5fa09eca82b55b2f4e2566b75126798',1,'vf::NoiseAudioSource']]],
+  ['willbereported',['willBeReported',['../classvf_1_1_error.html#a0e8a47f1bce31e4c7acd5fd3944ecd90',1,'vf::Error::willBeReported() const '],['../classvf_1_1_error.html#a0e8a47f1bce31e4c7acd5fd3944ecd90',1,'vf::Error::willBeReported() const ']]],
+  ['withaddedluminance',['withAddedLuminance',['../classvf_1_1_lab_colour.html#a920b464840e59b6835dcff69f34137b7',1,'vf::LabColour']]],
+  ['withluminance',['withLuminance',['../classvf_1_1_lab_colour.html#ab7afe73edcea3faf81be3a36f6ae5ae2',1,'vf::LabColour']]],
+  ['withmultipliedcolour',['withMultipliedColour',['../classvf_1_1_lab_colour.html#aeaeb70084cc889f333977b9ef162930c',1,'vf::LabColour']]],
+  ['writeaccess',['WriteAccess',['../classvf_1_1_concurrent_state_1_1_write_access.html#a708873e8df6278d52ade12fff39e948c',1,'vf::ConcurrentState::WriteAccess']]],
+  ['writeaccess',['WriteAccess',['../classvf_1_1_concurrent_state_1_1_write_access.html',1,'vf::ConcurrentState']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['canceled',['canceled',['../class_error.html#ab5980e13b879db253df802b0950d1708aa8a3632d7b35e3c7ef08e81a30853986',1,'Error']]],
-  ['createondemand',['createOnDemand',['../class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2a1e2725e778aa8d0f99589bfe980f362f',1,'SingletonLifetime']]],
-  ['createondemandonce',['createOnDemandOnce',['../class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2ab159ee90f788a298c261780fb5b84dd3',1,'SingletonLifetime']]]
+  ['canceled',['canceled',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281da098ae45a6c36358efa041c6f3e6a8779',1,'vf::Error']]],
+  ['createondemand',['createOnDemand',['../classvf_1_1_singleton_lifetime.html#aa89815eef77cb4c080dc9d11c3914c49a04fadc132dab89d11ddecf1b8aee74b4',1,'vf::SingletonLifetime']]],
+  ['createondemandonce',['createOnDemandOnce',['../classvf_1_1_singleton_lifetime.html#aa89815eef77cb4c080dc9d11c3914c49a8d412dcb577c57729e90b79e83a1c414',1,'vf::SingletonLifetime']]]
 ];
