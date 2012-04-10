@@ -26,7 +26,9 @@
 #include "../memory/vf_AtomicPointer.h"
 
 //==============================================================================
-/** Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
+/** \ingroup vf_core
+
+    Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
 
     This container uses the same intrusive interface as List. It is wait-free
     for producers and lock-free for consumers. The caller is responsible for

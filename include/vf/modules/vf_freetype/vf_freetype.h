@@ -22,6 +22,13 @@
 #ifndef VF_FREETYPE_VFHEADER
 #define VF_FREETYPE_VFHEADER
 
+/** \defgroup vf_freetype vf_freetype
+
+    FreeType: A Free, High-Quality, and Portable Font Engine.
+
+    This module provides the FreeType Engine.
+*/
+
 #include "AppConfig.h"
 
 #if VF_USE_FREETYPE

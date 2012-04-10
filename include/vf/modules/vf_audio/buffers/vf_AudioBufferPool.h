@@ -26,29 +26,38 @@
 /**
     A pool of reusable AudioSampleBuffer.
 
-    This is useful when you need to allocate temporary buffers in your
-    audioDeviceIOCallback routines, but don't want to incur the penalty of
-    allocating and freeing every time. This class intelligently recycles
-    buffers to match your needs. It is easy to use:
+    The container provides a pool of audio buffers that grow to match the
+    working set requirements based on actual usage. Since the buffers never
+    shrink or get deleted, there are no calls to the system to allocate or
+    free memory after a few uses.
+
+    This is ideal for audioDeviceIOCallback implementations which process
+    audio buffers and require temporary storage for intermediate calculations.
+    The usage style is to request a temporary buffer of the desired size,
+    perform calculations, and then release the buffer when finished.
+
+    The container will intelligently resize and recycle these buffers to
+    consume the smallest amount of memory possible based on usage patterns,
+    with no effort required by the programmer.
+
+    The ScopedAudioSampleBuffer provides convenient, scoped lifetime management
+    for allocating temporary audio buffers.
+
+    It's easy to use:
 
     @code
 	
     AudioBufferPoolType <DummyCriticalSection> pool;
 
-    void audioDeviceIOCallback (const float** inputChannelData,
-							    int numInputChannels,
-							    float** outputChannelData,
-							    int numOutputChannels,
-							    int numSamples)
-    {
-      // Request a stereo buffer with room for 1024 samples.
-      AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
+    // Request a stereo buffer with room for 1024 samples.
+    /
+    AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
-      // (Process buffer)
+    // (Process buffer)
 
-      // Release the buffer to be re-used later.
-      pool.releaseBuffer (buffer);
-    }
+    // Release the buffer to be re-used later.
+    //
+    pool.releaseBuffer (buffer);
 
     @endcode
 
@@ -58,26 +67,30 @@
 
     @code
 
-    {
-      // Request a stereo buffer with room for 1024 samples.
-      AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
+    // Request a stereo buffer with room for 1024 samples.
+    //
+    AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
-      AudioSourceChannelInfo info;
-      info.buffer = buffer;         // allowed, since AudioBufferPool::Buffer *
-                                    // is-a AudioSampleBuffer *
-      info.startSample = 0;
-      info.numSamples = 1024;
-      info.clearActiveBufferRegion ();
+    // Fill out the AudioSourceChannelInfo structure with the buffer
+    //
+    AudioSourceChannelInfo info;
+    info.buffer = buffer;         // allowed, since AudioBufferPool::Buffer *
+                                  // is-a AudioSampleBuffer *
+    info.startSample = 0;
+    info.numSamples = 1024;
 
-    }
+    // Clear out the range of samples
+    //
+    info.clearActiveBufferRegion ();
     
     @endcode
 
     @param LockType  The type of lock to use. To share the pool between threads
                      a CriticalSection is needed. To use the pool without any
                      locking, a DummyCriticalSection may be used.
-*/
 
+    \ingroup vf_audio
+*/
 class AudioBufferPool
 {
 public:
@@ -206,6 +219,8 @@ private:
     @endcode
 
     Note that changing the size of a buffer is undefined.
+
+    \ingroup vf_audio
 */
 class ScopedAudioSampleBuffer
   // NO IDEA why the leak checking fails

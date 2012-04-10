@@ -25,7 +25,9 @@
 #include "../memory/vf_AtomicPointer.h"
 
 //==============================================================================
-/** Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
+/** \ingroup vf_core
+
+    Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
 
     This stack is implemented using the same intrusive interface as List. All
     operations are lock-free.

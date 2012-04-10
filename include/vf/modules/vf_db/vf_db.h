@@ -25,6 +25,13 @@
 #ifndef VF_DB_VFHEADER
 #define VF_DB_VFHEADER
 
+/** \defgroup vf_db vf_db
+
+    A SQLite wrapper with a natural, intuitive, and type-safe interface.
+
+    Description.
+*/
+
 #include "../vf_core/vf_core.h"
 
 #if VF_USE_SQLITE

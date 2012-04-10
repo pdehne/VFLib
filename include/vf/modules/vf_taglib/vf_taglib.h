@@ -25,6 +25,13 @@
 #ifndef VF_TAGLIB_VFHEADER
 #define VF_TAGLIB_VFHEADER
 
+/** \defgroup vf_taglib vf_taglib
+
+    TagLib: Meta data extraction and output to multimedia files.
+
+    This is an external module that provides TagLib.
+*/
+
 #include "AppConfig.h"
 
 #if VF_USE_TAGLIB

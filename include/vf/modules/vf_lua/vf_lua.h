@@ -19,8 +19,15 @@
 // 
 //==============================================================================
 
-#ifndef VF_SQLITE_VFHEADER
-#define VF_SQLITE_VFHEADER
+#ifndef VF_LUA_VFHEADER
+#define VF_LUA_VFHEADER
+
+/** \defgroup vf_lua vf_lua
+
+    Lua: A powerful, fast, lightweight, embeddable scripting language.
+
+    This is an external module that provides Lua.
+*/
 
 #include "AppConfig.h"
 

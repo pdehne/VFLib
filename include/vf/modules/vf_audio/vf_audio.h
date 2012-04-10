@@ -22,6 +22,13 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
+/** Audio processing classes.
+
+    Description.
+
+    \defgroup vf_audio vf_audio
+*/
+
 #include "../vf_core/vf_core.h"
 
 namespace vf

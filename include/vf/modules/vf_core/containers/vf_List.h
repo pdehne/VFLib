@@ -23,7 +23,9 @@
 #define VF_LIST_VFHEADER
 
 //==============================================================================
-/** Intrusive doubly linked list.
+/** \ingroup vf_core
+
+    Intrusive doubly linked list.
 
     The intrusive List is container similar in operation to std::list in the
     Standard Template Library (STL). Intrusive containers are special containers

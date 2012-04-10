@@ -67,6 +67,12 @@
   that the reader understands additional domain-specific information. Modules
   with additional prerequisites are marked in the documentation.
 
+  \section External Modules
+
+  Some modules bring in functionality provided by third party libraries.
+
+  Description.
+
   \section Usage
 
   The library offers several logical sets of aggregated functionality, with
@@ -75,6 +81,8 @@
   or project, which points to the VFLib include directory. Then add the
   corresponding .c or .cpp file (for example, vf_concurrent.cpp) to your
   existing project which already uses JUCE.
+
+  \section AppConfig.h
 
   \section References
 

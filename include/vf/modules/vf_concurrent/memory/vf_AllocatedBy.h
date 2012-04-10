@@ -24,6 +24,9 @@
 
 #ifndef DOXYGEN
 
+/** \ingroup vf_concurrent
+
+*/
 // Derived classes will use the specified allocator for new and delete
 //
 template <class AllocatorType>

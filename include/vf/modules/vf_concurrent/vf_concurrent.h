@@ -22,11 +22,11 @@
 #ifndef VF_CONCURRENT_VFHEADER
 #define VF_CONCURRENT_VFHEADER
 
-/** \defgroup vf_concurrent Concurrent Programming (module vf_concurrent)
+/** \defgroup vf_concurrent vf_concurrent
 
-    A suite of classes useful for building concurrent systems.
+    Classes for building a concurrent system.
 
-    This module provides a concurrency model.
+    Description.
 */
 
 #include "../vf_core/vf_core.h"
