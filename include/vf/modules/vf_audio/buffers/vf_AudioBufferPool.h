@@ -92,6 +92,8 @@
     @see ScopedAudioSampleBuffer
 
     \ingroup vf_audio
+
+    \todo Document the AudioBufferPoolType template properly
 */
 class AudioBufferPool
 {
@@ -156,8 +158,8 @@ private:
 
 //==============================================================================
 
-/* @todo Document the AudioBufferPoolType template properly */
 #ifndef DOXYGEN
+
 template <class LockType = CriticalSection>
 class AudioBufferPoolType
   : public AudioBufferPool
@@ -181,6 +183,7 @@ public:
 private:
   LockType m_mutex;
 };
+
 #endif
 
 #endif

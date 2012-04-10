@@ -22,11 +22,12 @@
 #ifndef VF_BZIP2_VFHEADER
 #define VF_BZIP2_VFHEADER
 
-/** \defgroup vf_bzip2 vf_bzip2
-
+/** 
     bZip2: a freely available, high quality data compressor.
 
-    Description.
+    This external module brings in the bZip2 library.
+
+    \defgroup vf_bzip2 vf_bzip2
 */
 
 #include "AppConfig.h"

@@ -82,7 +82,7 @@
   corresponding .c or .cpp file (for example, vf_concurrent.cpp) to your
   existing project which already uses JUCE.
 
-  \section AppConfig.h
+  \section AppConfig
 
   \section References
 
