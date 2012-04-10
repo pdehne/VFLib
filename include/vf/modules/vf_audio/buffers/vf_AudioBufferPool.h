@@ -82,15 +82,14 @@
     
     @endcode
 
-    A separate ScopedAudioSampleBuffer class provides convenient, scoped
-    lifetime management for buffers allocated from the AudioBufferPool.
-
     The thread safety of AudioBufferPoolType is determined by the LockType
     template parameter:
 
     @param LockType  The type of lock to use. To share the pool between threads
                      a CriticalSection is needed. To use the pool without any
                      locking, a DummyCriticalSection may be used.
+
+    @see ScopedAudioSampleBuffer
 
     \ingroup vf_audio
 */
@@ -133,17 +132,17 @@ public:
       pool, until it is released with a matching call to releaseBuffer().
 
       @param numChannels  The number of channels requested.
+
       @param numSamples   The number of samples per channel requested.
 
       @return             The resulting buffer.
-
-      @see releaseBuffer
   */
   virtual Buffer* requestBuffer (int numChannels, int numSamples) = 0;
 
   /** Releases a previously requested buffer back into the pool.
 
-	  @see requestBuffer
+      @param buffer The buffer to release. This must have been provided by an
+                    earlier call to requestBuffer()
   */
   virtual void releaseBuffer (Buffer* buffer) = 0;
 

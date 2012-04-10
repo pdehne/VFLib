@@ -29,46 +29,64 @@
     Provided functions can move the pointers back and forth as a group,
     making certain forms of code that manipulate audio buffers more concise.
 
-    Conversion to and from AudioSampleBuffer allow seamless usage.
+    Conversions to and from AudioSampleBuffer allow seamless, intuitive usage.
+
+    @param Channels A template parameter specifying the number of channels in
+                    the array of pointers, default to 2 (stereo).
 
     \ingroup vf_audio
 */
+
+// If AudioSampleBuffer ever becomes a template, we can
+// move the Sample typedef into the template parameters.
+//
 template <int Channels = 2>
 class AudioSampleBufferArray
 {
 public:
   typedef float Sample;
 
-  /** Create a new array of pointers with no data. */
+  /** Construct a new array with 0 samples. */
   AudioSampleBufferArray ()
     : m_numSamples (0)
   {
   }
 
-  /** Create an array of pointers from existing data pointers.
+  /** Construct an array from existing data.
   
-      @param numSamples The number of samples in the resulting array. The
-                        passed array of channels must have sufficient space.
-
-      @param channels   */
-  AudioSampleBufferArray (int numSamples, Sample* const* channels)
+      @param numSamples      The number of samples in the resulting array. This
+                             may be less than or equal to the actual amount of
+                             space in the memory pointed to by arrayOfChannels.
+      
+      @param arrayOfChannels The array of pointers to existing memory.
+  */
+  AudioSampleBufferArray (int numSamples, Sample* const* arrayOfChannels)
   {
-    setFrom (numSamples, channels);
+    setFrom (numSamples, arrayOfChannels);
   }
 
-  /** Copy constructor. */
+  /** Construct an array from another array.
+  
+      Both arrays will point to the same memory and contain the same number of
+      samples.
+
+      @param other The AudioSampleBufferArray to copy from.
+  */
   AudioSampleBufferArray (const AudioSampleBufferArray& other)
   {
     setFrom (other);
   }
 
-  // if AudioSampleBuffer ever becomes a template, we can
-  // move the Sample typedef into the template parameters.
+  /** Construct an array from an AudioSampleBuffer.
 
-  /** Create a new array from an existing AudioSampleBuffer.
+      @param buffer              The AudioSampleBuffer to point to.
 
       @param startingSampleIndex Zero based index of the first sample to use.
+
       @param numSamples          The number of samples in the desired range.
+                                 This must be less than or equal to the actual
+                                 amount of space in the memory pointed to by
+                                 buffer, less startingSampleIndex.
   */
   AudioSampleBufferArray (const VF_JUCE::AudioSampleBuffer& buffer,
                           int startSample = 0,
@@ -77,9 +95,9 @@ public:
     setFrom (buffer, startSample, numSamples);
   }
 
-  /** Create a new array from a AudioSourceChannelInfo
+  /** Create an array from an AudioSourceChannelInfo.
 
-      This provides a convenient conversion.
+      @param bufferToFill The AudioSourceChannelInfo to point to.
   */
   AudioSampleBufferArray (const VF_JUCE::AudioSourceChannelInfo& bufferToFill)
   {
@@ -88,31 +106,25 @@ public:
              bufferToFill.numSamples);
   }
 
-  int getNumSamples () const
-  {
-    return m_numSamples;
-  }
-
+  /** Assign from an AudioSampleBuffer */
   AudioSampleBufferArray& operator= (const VF_JUCE::AudioSampleBuffer& buffer)
   {
     setFrom (buffer);
     return *this;
   }
 
+  /** Assign from an AudioSourceChannelInfo */
   AudioSampleBufferArray& operator= (const VF_JUCE::AudioSourceChannelInfo& bufferToFill)
   {
     setFrom (bufferToFill);
     return *this;
   }
 
-  operator VF_JUCE::AudioSampleBuffer()
+  /** Assign from another array. */
+  AudioSampleBufferArray& operator= (const AudioSampleBufferArray& other)
   {
-    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
-  }
-
-  operator const AudioSampleBuffer() const
-  {
-    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
+    setFrom (other);
+    return *this;
   }
 
   /** Manually assign a range of samples from a set of pointers. */
@@ -123,7 +135,7 @@ public:
       m_channels[i]=channels[i];
   }
 
-  /** Assign the array from another array. */
+  /** Assign from another array */
   void setFrom (const AudioSampleBufferArray& other)
   {
     m_numSamples = other.m_numSamples;
@@ -131,6 +143,7 @@ public:
       m_channels[i] = other.m_channels[i];
   }
 
+  /** Assign from a range within an AudioSampleBuffer  */
   void setFrom (VF_JUCE::AudioSampleBuffer const& buffer,
                 int startSample = 0,
                 int numSamples = -1)
@@ -145,16 +158,46 @@ public:
       m_channels[i] = buffer.getArrayOfChannels()[i] + startSample;
   }
 
-  /** Assign the array from another array. */
-  AudioSampleBufferArray& operator= (const AudioSampleBufferArray& other)
+  /** Type conversion to an array of pointers to sample data. */
+  operator Sample* const* () const
   {
-    setFrom (other);
-    return *this;
+    return m_channels;
+  }
+
+  /** Type conversion to AudioSampleBuffer */
+  operator VF_JUCE::AudioSampleBuffer()
+  {
+    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
+  }
+
+  operator const AudioSampleBuffer() const
+  {
+    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
+  }
+
+  /** Get a raw channel pointer.
+
+      @param index The zero based channel number. This must be less than Channels.
+
+      @return A pointer to the channel data.
+  */
+  Sample*& operator[] (int index)
+  {
+    jassert (index >= 0 && index < Channels);
+    return m_channels[index];
+  }
+
+  const Sample* operator[] (int index) const
+  {
+    jassert (index >= 0 && index < Channels);
+    return m_channels[index];
   }
 
   /** Advance all channels by the specified number of samples.
 
       Advancing by more than the number of samples remaining is undefined.
+      After the pointers are moved forward, the number of samples remaining
+      is adjusted downwards.
 
       @param numSamples The number of samples to advance by.
 
@@ -177,11 +220,13 @@ public:
 
   /** Rewind all channels by the specified number of samples.
 
-      Rewinding past the original beginning of the buffer is undefined.
+      Rewinding to before the start of the original memory pointers is
+      undefined. After the pointers are moved back, the number of samples
+      remaining is adjusted upwards.
 
       @param numSamples The number of samples to rewind by.
 
-      @return An array that points to the new range of samples.
+      @return An array representing the new range of samples.
   */
   AudioSampleBufferArray operator- (int numSamples)
   {
@@ -193,45 +238,41 @@ public:
     return operator+= (-numSamples);
   }
 
-  /** Determine if the range of samples if empty.
+  /** Determine if there are samples remaining in the array.
 
-      @return `true` if there are no more samples in the buffer.
+      @return `true` if there are no more samples in the data pointed
+                     to by the array.
   */
   bool isEmpty () const
   {
     return m_numSamples <= 0;
   }
 
+  /** Determine the number of samples remaining in the array.
+
+      @return The number of samples remaining. This will decrease or increase
+              as the array is incremented or decremented respectively.
+  */
+  int getNumSamples () const
+  {
+    return m_numSamples;
+  }
+
   /** Retrieve the raw array of channel pointers.
 
-       @return An array of pointers to sample data.
+      @return An array of pointers to sample data.
   */
   Sample* const* getArrayOfChannels() const
   {
     return m_channels;
   }
 
-  operator Sample* const* () const
-  {
-    return m_channels;
-  }
-
+  /* DEPRECATED
   Sample* const* operator()() const
   {
     return m_channels;
   }
-
-  Sample*& operator[] (int index)
-  {
-    jassert (index >= 0 && index < Channels);
-    return m_channels[index];
-  }
-
-  const Sample* operator[] (int index) const
-  {
-    jassert (index >= 0 && index < Channels);
-    return m_channels[index];
-  }
+  */
 
 private:
   int m_numSamples;
