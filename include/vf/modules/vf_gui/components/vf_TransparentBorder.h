@@ -22,9 +22,20 @@
 #ifndef __VF_TRANSPARENTBORDER_VFHEADER__
 #define __VF_TRANSPARENTBORDER_VFHEADER__
 
-// Allows a Component to draw with setOpaque in a rectangular
-// subsection of its client area, with the border being transparent.
-  //
+//==============================================================================
+/**
+    Transparent border for an opaque Component.
+
+    This lets you make the sides of a component draw with transparency,
+    while allowing the rest to take advantage of the opaque Component
+    optimization (see Component::setOpaque).
+
+    To use this, add TransparentBorder as a member of your Component
+    derived class. Then call setComponent with the size of the desired
+    transparent border.
+
+    \ingroup vf_gui
+*/
 class TransparentBorder
   : private ComponentListener
   , LeakChecked <TransparentBorder>

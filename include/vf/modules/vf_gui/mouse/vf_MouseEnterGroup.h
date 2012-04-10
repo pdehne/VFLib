@@ -19,13 +19,19 @@
 // 
 //==============================================================================
 
-#ifndef __VF_MOUSEENTERGROUP_VFHEADER__
-#define __VF_MOUSEENTERGROUP_VFHEADER__
+#ifndef VF_MOUSEENTERGROUP_VFHEADER
+#define VF_MOUSEENTERGROUP_VFHEADER
 
-// Derive your Component-derived class from this object in order to receive
-// mouse enter and mouse exit messages for your component and all of it's
-// children.
-//
+//==============================================================================
+/**
+    Consolidated mouse enter and exits for a Component and its children.
+
+    Derive your Component-derived class from this object in order to receive
+    mouse enter and mouse exit messages for your component and all of it's
+    children.
+
+    \ingroup vf_gui
+*/
 class MouseEnterGroup
 {
 public:

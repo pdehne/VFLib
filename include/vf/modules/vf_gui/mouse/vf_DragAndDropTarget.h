@@ -19,15 +19,17 @@
 // 
 //==============================================================================
 
-#ifndef __VF_DRAGANDDROPTARGET_VFHEADER__
-#define __VF_DRAGANDDROPTARGET_VFHEADER__
+#ifndef VF_DRAGANDDROPTARGET_VFHEADER
+#define VF_DRAGANDDROPTARGET_VFHEADER
 
 #include "vf_DragAndDropData.h"
 
-// Puts a front-end on the juce DragAndDropTarget to make it work with
-// DragAndDropData.
-//
+//==============================================================================
+/**
+    DragAndDropTarget wrapper supporting the DragAndDropData container.
 
+    \ingroup vf_gui
+*/
 class DragAndDropTarget : public juce::DragAndDropTarget
 {
 public:

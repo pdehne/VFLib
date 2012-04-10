@@ -19,11 +19,12 @@
 // 
 //==============================================================================
 
-#ifndef __VF_DRAGANDDROPDATA_VFHEADER__
-#define __VF_DRAGANDDROPDATA_VFHEADER__
+#ifndef VF_DRAGANDDROPDATA_VFHEADER
+#define VF_DRAGANDDROPDATA_VFHEADER
 
 //==============================================================================
-/** Flexible, reference counted container for encapsulating drag and drop data.
+/**
+    Flexible container for drag and drop data.
 
     This container is designed to be used with the Juce Component drag and drop
     mechanism. To use it, create a new, dynamic DragAndDropData object. Then
@@ -123,6 +124,8 @@
     }
 
     @endcode
+
+    \ingroup vf_gui
 */
 class DragAndDropData : public juce::ReferenceCountedObject
 {

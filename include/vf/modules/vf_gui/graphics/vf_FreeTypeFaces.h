@@ -22,8 +22,11 @@
 #ifndef VF_FREETYPEFACES_VFHEADER
 #define VF_FREETYPEFACES_VFHEADER
 
-/** FreeType hinted fonts singleton.
+//==============================================================================
+/**
+    FreeType typefaces with font hinting.
 
+    \ingroup vf_gui
 */
 // This singleton uses FreeType to open font files and
 // extract glyph outlines, with the option of using hinting

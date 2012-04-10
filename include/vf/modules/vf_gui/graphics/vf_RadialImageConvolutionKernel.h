@@ -19,10 +19,18 @@
 // 
 //==============================================================================
 
-#ifndef __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
-#define __VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER__
+#ifndef VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER
+#define VF_RADIALIMAGECONVOLUTIONKERNEL_VFHEADER
 
-// Takes advantage of radial symmetry to implement an efficient image convolution
+//==============================================================================
+/**
+    Fast Image convolution with radially symmetric kernels.
+
+    Takes advantage of radial symmetry to implement an efficient image
+    convolution.
+
+    \ingroup vf_gui
+*/
 class RadialImageConvolutionKernel
 {
 public:

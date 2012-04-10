@@ -23,7 +23,8 @@
 #define VF_CONTENTCOMPONENTCONSTRAINER_VFHEADER
 
 //==============================================================================
-/** Component constraint adjuster.
+/**
+    Component constraint adjuster.
 
     When using a ComponentBoundsConstrainer, the size limits include variable
     elements such as the title bar, native window, menu bar, or window border.
@@ -39,6 +40,8 @@
     the function ResizableWindow::setResizeLimits(), and then just call
     ContentComponentConstrainer::attachTo (yourResizableWindow). It will take
     care of deleting itself and handle everything for you, like this:
+
+    \ingroup vf_gui
 */
 class ContentComponentConstrainer
   : private ComponentBoundsConstrainer

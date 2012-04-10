@@ -19,11 +19,15 @@
 // 
 //==============================================================================
 
-#ifndef __VF_VERTICALGRADIENT_VFHEADER__
-#define __VF_VERTICALGRADIENT_VFHEADER__
+#ifndef VF_VERTICALGRADIENT_VFHEADER
+#define VF_VERTICALGRADIENT_VFHEADER
 
-// Simple class to facilitate setting vertical blends
-//
+//==============================================================================
+/**
+    A vertical ColourGradient.
+
+    \ingroup vf_gui
+*/
 class VerticalGradient : public juce::ColourGradient
 {
 public:

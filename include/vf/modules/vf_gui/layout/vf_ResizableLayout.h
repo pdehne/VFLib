@@ -19,8 +19,8 @@
 // 
 //==============================================================================
 
-#ifndef __VF_RESIZABLELAYOUT_VFHEADER__
-#define __VF_RESIZABLELAYOUT_VFHEADER__
+#ifndef VF_RESIZABLELAYOUT_VFHEADER
+#define VF_RESIZABLELAYOUT_VFHEADER
 
 // Subclasses have size information
 //

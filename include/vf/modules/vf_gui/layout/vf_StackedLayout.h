@@ -19,8 +19,8 @@
 // 
 //==============================================================================
 
-#ifndef __VF_STACKEDLAYOUT_VFHEADER__
-#define __VF_STACKEDLAYOUT_VFHEADER__
+#ifndef VF_STACKEDLAYOUT_VFHEADER
+#define VF_STACKEDLAYOUT_VFHEADER
 
 #include "vf_ResizableLayout.h"
 

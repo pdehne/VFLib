@@ -22,6 +22,14 @@
 #ifndef VF_XYZCOLOUR_VFHEADER
 #define VF_XYZCOLOUR_VFHEADER
 
+//==============================================================================
+/**
+    A colour specified in the CIE XYZ colour space.
+
+    See http://en.wikipedia.org/wiki/CIE_1931_color_space
+
+    \ingroup vf_gui
+*/
 class XYZColour
 {
 public:

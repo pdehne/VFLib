@@ -22,10 +22,16 @@
 #ifndef __VF_MOUSEENTEREDITABLE_VFHEADER__
 #define __VF_MOUSEENTEREDITABLE_VFHEADER__
 
-// A MouseEnterEditable allows your Component to go into an 'edit mode' when
-// the mouse enters. For example, zoom in/out buttons can appear when the mouse
-// enters, and disappear when the mouse leaves.
-//
+//==============================================================================
+/**
+    An mode activated on mouse enter.
+
+    A MouseEnterEditable allows your Component to go into an 'edit mode' when
+    the mouse enters. For example, zoom in/out buttons can appear when the mouse
+    enters, and disappear when the mouse leaves.
+
+    \ingroup vf_gui
+*/
 class MouseEnterEditable : Uncopyable
 {
 private:
