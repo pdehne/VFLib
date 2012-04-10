@@ -67,14 +67,17 @@ class ScopedAudioSampleBuffer
   // : LeakChecked <ScopedAudioSampleBuffer>, Uncopyable
 {
 public:
-  /** Acquire a ScopedAudioSampleBuffer from a pool.
+  /** Create a ScopedAudioSampleBuffer from a pool.
+
+      @param pool         The pool to acquire a buffer from.
 
       @param numChannels  The number of channels requested.
+
       @param numSamples   The number of samples per channel requested.
   */
   ScopedAudioSampleBuffer (AudioBufferPool& pool,
-	int numChannels,
-	int numSamples)
+	                       int numChannels,
+	                       int numSamples)
 	: m_pool (pool)
 	, m_buffer (pool.requestBuffer (numChannels, numSamples))
   {
@@ -84,12 +87,6 @@ public:
   ~ScopedAudioSampleBuffer ()
   {
 	m_pool.releaseBuffer (m_buffer);
-  }
-
-  /** Return the object as a AudioSampleBuffer pointer */
-  VF_JUCE::AudioSampleBuffer* getBuffer ()
-  {
-	return m_buffer;
   }
 
   /** Return the object as a AudioSampleBuffer pointer */
@@ -104,10 +101,16 @@ public:
 	return *getBuffer();
   }
 
-  /** Conversion operator for pointer to AudioSampleBuffer */
+  /** Type conversion to pointer to AudioSampleBuffer */
   operator VF_JUCE::AudioSampleBuffer* ()
   {
 	return getBuffer();
+  }
+
+  /** Return the object as a pointer to AudioSampleBuffer */
+  VF_JUCE::AudioSampleBuffer* getBuffer ()
+  {
+	return m_buffer;
   }
 
 private:
