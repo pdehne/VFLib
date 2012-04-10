@@ -836,6 +836,9 @@
     <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib_private.h">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h">
+      <Filter>VF Modules\vf_audio\buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />

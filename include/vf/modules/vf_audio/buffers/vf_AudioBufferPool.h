@@ -24,12 +24,12 @@
 
 //==============================================================================
 /**
-    A pool of reusable AudioSampleBuffer.
+    Temporary buffers for audio processing calculations.
 
     The container provides a pool of audio buffers that grow to match the
     working set requirements based on actual usage. Since the buffers never
-    shrink or get deleted, there are no calls to the system to allocate or
-    free memory after a few uses.
+    shrink or get deleted, there are almost no calls to the system to allocate
+    or free memory.
 
     This is ideal for audioDeviceIOCallback implementations which process
     audio buffers and require temporary storage for intermediate calculations.
@@ -39,9 +39,6 @@
     The container will intelligently resize and recycle these buffers to
     consume the smallest amount of memory possible based on usage patterns,
     with no effort required by the programmer.
-
-    The ScopedAudioSampleBuffer provides convenient, scoped lifetime management
-    for allocating temporary audio buffers.
 
     It's easy to use:
 
@@ -84,6 +81,12 @@
     info.clearActiveBufferRegion ();
     
     @endcode
+
+    A separate ScopedAudioSampleBuffer class provides convenient, scoped
+    lifetime management for buffers allocated from the AudioBufferPool.
+
+    The thread safety of AudioBufferPoolType is determined by the LockType
+    template parameter:
 
     @param LockType  The type of lock to use. To share the pool between threads
                      a CriticalSection is needed. To use the pool without any
@@ -136,7 +139,7 @@ public:
 
       @see releaseBuffer
   */
-  virtual Buffer* acquireBuffer (int numChannels, int numSamples) = 0;
+  virtual Buffer* requestBuffer (int numChannels, int numSamples) = 0;
 
   /** Releases a previously requested buffer back into the pool.
 
@@ -145,7 +148,7 @@ public:
   virtual void releaseBuffer (Buffer* buffer) = 0;
 
 protected:
-  Buffer* acquireBufferInternal (int numChannels, int numSamples);
+  Buffer* requestBufferInternal (int numChannels, int numSamples);
   void releaseBufferInternal (Buffer* buffer);
 
 private:
@@ -154,6 +157,7 @@ private:
 
 //==============================================================================
 
+/* @todo Document the AudioBufferPoolType template properly */
 #ifndef DOXYGEN
 template <class LockType = CriticalSection>
 class AudioBufferPoolType
@@ -161,11 +165,11 @@ class AudioBufferPoolType
   , public LeakChecked <AudioBufferPoolType <LockType> >
 {
 public:
-  Buffer* acquireBuffer (int numChannels, int numSamples)
+  Buffer* requestBuffer (int numChannels, int numSamples)
   {
     LockType::ScopedLockType lock (m_mutex);
 
-    return acquireBufferInternal (numChannels, numSamples);
+    return requestBufferInternal (numChannels, numSamples);
   }
 
   void releaseBuffer (Buffer* buffer)
@@ -179,102 +183,5 @@ private:
   LockType m_mutex;
 };
 #endif
-
-//------------------------------------------------------------------------------
-
-/** Scoped lifetime temporary audio buffer.
-
-    This utility class allows scoped lifetime management for acquiring temporary
-    audio buffers during processing. It is easy to use:
-
-    @code
-
-    AudioBufferPoolType <CriticalSection> pool;
-
-    {
-      // Request a stereo buffer with room for 1024 samples.
-      ScopedAudioSampleBuffer buffer (pool, 2, 1024);
-
-      // `buffer` is released when it goes out of scope.
-    }
-
-    @endcode
-
-    ScopedAudioSampleBuffer is freely convertible to AudioSampleBuffer* so it
-    can be used anywhere a pointer to AudioSampleBuffer is expected. The
-    dereference and pointer to member operators are similarly overloaded to
-    support transparent usage of the underlying AudioSampleBuffer:
-
-    @code
-
-    AudioBufferPoolType <CriticalSection> pool;
-
-    {
-      ScopedAudioSampleBuffer buffer (pool, 2, 1024);
-
-      // Call a member of AudioSampleBuffer
-      buffer->clear ();
-    }
-
-    @endcode
-
-    Note that changing the size of a buffer is undefined.
-
-    \ingroup vf_audio
-*/
-class ScopedAudioSampleBuffer
-  // NO IDEA why the leak checking fails
-  // : LeakChecked <ScopedAudioSampleBuffer>, Uncopyable
-{
-public:
-  /** Acquire a ScopedAudioSampleBuffer from a pool.
-
-      @param numChannels  The number of channels requested.
-      @param numSamples   The number of samples per channel requested.
-  */
-  ScopedAudioSampleBuffer (AudioBufferPool& pool,
-	int numChannels,
-	int numSamples)
-	: m_pool (pool)
-	, m_buffer (pool.acquireBuffer (numChannels, numSamples))
-  {
-  }
-
-  /** Destroy the ScopedAudioSampleBuffer, releasing the buffer */
-  ~ScopedAudioSampleBuffer ()
-  {
-	m_pool.releaseBuffer (m_buffer);
-  }
-
-  /** Return the object as a AudioSampleBuffer pointer */
-  VF_JUCE::AudioSampleBuffer* getBuffer ()
-  {
-	return m_buffer;
-  }
-
-  /** Return the object as a AudioSampleBuffer pointer */
-  VF_JUCE::AudioSampleBuffer* operator-> ()
-  {
-	return getBuffer();
-  }
-
-  /** Return the object as a reference to AudioSampleBuffer */
-  VF_JUCE::AudioSampleBuffer& operator* ()
-  {
-	return *getBuffer();
-  }
-
-  /** Conversion operator for pointer to AudioSampleBuffer */
-  operator VF_JUCE::AudioSampleBuffer* ()
-  {
-	return getBuffer();
-  }
-
-private:
-  AudioBufferPool& m_pool;
-  AudioBufferPool::Buffer* const m_buffer;
-
-  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedAudioSampleBuffer);
-};
 
 #endif

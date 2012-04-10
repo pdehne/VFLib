@@ -54,7 +54,7 @@ AudioBufferPool::~AudioBufferPool ()
 	delete m_buffers[i];
 }    
 
-AudioBufferPool::Buffer* AudioBufferPool::acquireBufferInternal (int numChannels, int numSamples)
+AudioBufferPool::Buffer* AudioBufferPool::requestBufferInternal (int numChannels, int numSamples)
 {
   Buffer* buffer = 0;
   int samplesNeeded = numChannels * numSamples;

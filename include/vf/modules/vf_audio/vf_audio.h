@@ -36,6 +36,7 @@ namespace vf
 
 #include "buffers/vf_AudioBufferPool.h"
 #include "buffers/vf_AudioSampleBufferArray.h"
+#include "buffers/vf_ScopedAudioSampleBuffer.h"
 #include "sources/vf_NoiseAudioSource.h"
 
 }
