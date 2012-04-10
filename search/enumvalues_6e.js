@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nomemory',['noMemory',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281da2ee0fe099e6ce67422b897a424bd4930',1,'vf::Error']]],
-  ['nomoredata',['noMoreData',['../classvf_1_1_error.html#af31477bc48f67856bedb0fa8e5b5281dab816cfa80050db3244c470791e6af9d2',1,'vf::Error']]]
+  ['nomemory',['noMemory',['../class_error.html#ab5980e13b879db253df802b0950d1708ada6fc09ed88ace56ac044cf1c89b6d11',1,'Error']]],
+  ['nomoredata',['noMoreData',['../class_error.html#ab5980e13b879db253df802b0950d1708a5cda5141cb69f01aeafab9a58498baf8',1,'Error']]]
 ];

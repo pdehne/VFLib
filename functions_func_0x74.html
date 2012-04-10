@@ -48,7 +48,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -118,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -132,36 +135,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
 <li>ThreadWithCallQueue()
-: <a class="el" href="classvf_1_1_thread_with_call_queue.html#ae3aca2d060c54375e1f45906c71ff797">ThreadWithCallQueue</a>
+: <a class="el" href="class_thread_with_call_queue.html#a89063989f0bf475c1dc06fa4c734f9b3">ThreadWithCallQueue</a>
+</li>
+<li>to_base()
+: <a class="el" href="structdb_1_1type__conversion.html#a1682d4aa1fb954e0493d15fa5ad551da">db::type_conversion&lt; T &gt;</a>
+, <a class="el" href="structdb_1_1type__conversion_3_01juce_1_1_time_01_4.html#a2b90a4a6ab9bd5fdc82e96fb0b914734">db::type_conversion&lt; juce::Time &gt;</a>
 </li>
 <li>TopLevelConstrainer()
-: <a class="el" href="classvf_1_1_top_level_constrainer.html#a29e312bf26e3558bb89a968c1f95379c">TopLevelConstrainer</a>
+: <a class="el" href="class_top_level_constrainer.html#aa635bee848b1fe5e442823b60e0dffd2">TopLevelConstrainer</a>
 </li>
 <li>toRGB()
-: <a class="el" href="classvf_1_1_x_y_z_colour.html#af8ada0c7ae82147ab35f752ca42720d0">XYZColour</a>
-, <a class="el" href="classvf_1_1_lab_colour.html#af8ada0c7ae82147ab35f752ca42720d0">LabColour</a>
+: <a class="el" href="class_lab_colour.html#a09a70c23ab6485651a4e907eed481280">LabColour</a>
+, <a class="el" href="class_x_y_z_colour.html#a2c4ac7bdda11f6e7e988f04f627492dd">XYZColour</a>
 </li>
 <li>toXYZ()
-: <a class="el" href="classvf_1_1_lab_colour.html#af3a8e4be72ff7a8d36e70a79f9f1ca2a">LabColour</a>
+: <a class="el" href="class_lab_colour.html#a67376175d56a2fc06f98bd978dae78d4">LabColour</a>
+</li>
+<li>transaction()
+: <a class="el" href="classdb_1_1transaction.html#a81baf321111b4acb510511bc8ea473dc">db::transaction</a>
 </li>
 <li>TransparentBorder()
-: <a class="el" href="classvf_1_1_transparent_border.html#aca9addac4d206e8c07ad1d83ed0d3a84">TransparentBorder</a>
+: <a class="el" href="class_transparent_border.html#a60654bf9663cd6b9a8704e1e51216dd8">TransparentBorder</a>
 </li>
 <li>try_pop_front()
-: <a class="el" href="classvf_1_1_lock_free_queue.html#a3894ce5bf8e0c140f68aa4b715a7c96d">LockFreeQueue&lt; Element, Tag &gt;</a>
+: <a class="el" href="class_lock_free_queue.html#aeb6d0d9051b8cfcb7728c5e7fefaa24d">LockFreeQueue&lt; Element, Tag &gt;</a>
 </li>
 <li>tryChangeState()
-: <a class="el" href="classvf_1_1_atomic_state.html#ac1e21d7e1e9d808e1df0302297b1fbcc">AtomicState</a>
+: <a class="el" href="class_atomic_state.html#ab3932041cba0c7490546f5b981ffff1d">AtomicState</a>
 </li>
 <li>trySignal()
-: <a class="el" href="classvf_1_1_atomic_flag.html#aaa2c42fdadc8181cfa32f5e448698fba">AtomicFlag</a>
+: <a class="el" href="class_atomic_flag.html#a612e05bf424b24ef124b4c239093b191">AtomicFlag</a>
 </li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 9 2012 21:07:16 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

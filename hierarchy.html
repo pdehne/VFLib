@@ -48,7 +48,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -80,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,107 +98,150 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock">This inheritance list is sorted roughly, but not completely, alphabetically:</div><ul>
-<li><a class="el" href="classvf_1_1_atomic_counter.html">AtomicCounter</a></li>
-<li><a class="el" href="classvf_1_1_atomic_flag.html">AtomicFlag</a></li>
-<li><a class="el" href="classvf_1_1_atomic_pointer.html">AtomicPointer&lt; P &gt;</a></li>
-<li><a class="el" href="classvf_1_1_atomic_state.html">AtomicState</a></li>
-<li><a class="el" href="classvf_1_1_audio_buffer_pool.html">AudioBufferPool</a></li>
-<li><a class="el" href="classvf_1_1_audio_sample_buffer_array.html">AudioSampleBufferArray&lt; Channels &gt;</a></li>
-<li><a class="el" href="classvf_1_1_call_queue.html">CallQueue</a><ul>
-<li><a class="el" href="classvf_1_1_gui_call_queue.html">GuiCallQueue</a></li>
-<li><a class="el" href="classvf_1_1_manual_call_queue.html">ManualCallQueue</a></li>
-<li><a class="el" href="classvf_1_1_thread_with_call_queue.html">ThreadWithCallQueue</a></li>
+<li><a class="el" href="class_allocated_by.html">AllocatedBy&lt; AllocatorType &gt;</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAsyncUpdater.html">AsyncUpdater</a><code> [external]</code><ul>
+<li><a class="el" href="class_resizable_layout.html">ResizableLayout</a></li>
+<li><a class="el" href="class_stacked_layout.html">StackedLayout</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1component_broadcast.html">componentBroadcast</a></li>
-<li><a class="el" href="classvf_1_1component_broadcast_parent.html">componentBroadcastParent</a></li>
-<li><a class="el" href="classvf_1_1_concurrent_object.html">ConcurrentObject</a></li>
-<li><a class="el" href="classvf_1_1_concurrent_state.html">ConcurrentState&lt; Object &gt;</a></li>
-<li><a class="el" href="classvf_1_1_concurrent_state_1_1_read_access.html">ConcurrentState&lt; Object &gt;::ReadAccess</a></li>
-<li><a class="el" href="classvf_1_1_concurrent_state_1_1_unlocked_access.html">ConcurrentState&lt; Object &gt;::UnlockedAccess</a></li>
-<li><a class="el" href="classvf_1_1_concurrent_state_1_1_write_access.html">ConcurrentState&lt; Object &gt;::WriteAccess</a></li>
-<li><a class="el" href="classvf_1_1_connected_edges.html">ConnectedEdges</a></li>
-<li><a class="el" href="classvf_1_1_content_component_constrainer.html">ContentComponentConstrainer</a></li>
-<li><a class="el" href="classvf_1_1detail_1_1_safe_bool_base.html">SafeBoolBase</a><ul>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Error &gt;</a><ul>
-<li><a class="el" href="classvf_1_1_error.html">Error</a></li>
-<li><a class="el" href="classvf_1_1_error.html">Error</a></li>
+<li><a class="el" href="class_atomic_counter.html">AtomicCounter</a></li>
+<li><a class="el" href="class_atomic_flag.html">AtomicFlag</a></li>
+<li><a class="el" href="class_atomic_pointer.html">AtomicPointer&lt; P &gt;</a></li>
+<li><a class="el" href="class_atomic_state.html">AtomicState</a></li>
+<li><a class="el" href="class_audio_buffer_pool.html">AudioBufferPool</a></li>
+<li><a class="el" href="class_audio_sample_buffer_array.html">AudioSampleBufferArray&lt; Channels &gt;</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSource.html">AudioSource</a><code> [external]</code><ul>
+<li><a class="el" href="class_noise_audio_source.html">NoiseAudioSource</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Error &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Error &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Error &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Interrupted &gt;</a><ul>
-<li><a class="el" href="classvf_1_1_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a></li>
+<li><a class="el" href="class_call_queue.html">CallQueue</a><ul>
+<li><a class="el" href="class_gui_call_queue.html">GuiCallQueue</a></li>
+<li><a class="el" href="class_manual_call_queue.html">ManualCallQueue</a></li>
+<li><a class="el" href="class_thread_with_call_queue.html">ThreadWithCallQueue</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Interrupted &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Interrupted &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; Interrupted &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; T &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; T &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; T &gt;</a></li>
-<li><a class="el" href="classvf_1_1_safe_bool.html">SafeBool&lt; T &gt;</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponentBoundsConstrainer.html">ComponentBoundsConstrainer</a><code> [external]</code><ul>
+<li><a class="el" href="class_content_component_constrainer.html">ContentComponentConstrainer</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_drag_and_drop_data.html">DragAndDropData</a></li>
-<li><a class="el" href="classvf_1_1_drag_and_drop_target.html">DragAndDropTarget</a></li>
-<li><a class="el" href="classvf_1_1_f_p_u_flags.html">FPUFlags</a></li>
-<li><a class="el" href="structvf_1_1_f_p_u_flags_1_1_enum.html">FPUFlags::Enum&lt; Constants &gt;</a></li>
-<li><a class="el" href="structvf_1_1_f_p_u_flags_1_1_flag.html">FPUFlags::Flag</a></li>
-<li><a class="el" href="classvf_1_1_function_3_01_r_07_t1_01t1_08_00_01_bytes_01_4.html">Function&lt; R(T1 t1), Bytes &gt;</a></li>
-<li><a class="el" href="structvf_1_1_function_3_01_r_07_t1_01t1_08_00_01_bytes_01_4_1_1_none.html">Function&lt; R(T1 t1), Bytes &gt;::None</a></li>
-<li><a class="el" href="classvf_1_1_function_3_01_r_07void_08_00_01_bytes_01_4.html">Function&lt; R(void), Bytes &gt;</a></li>
-<li><a class="el" href="structvf_1_1_function_3_01_r_07void_08_00_01_bytes_01_4_1_1_none.html">Function&lt; R(void), Bytes &gt;::None</a></li>
-<li><a class="el" href="classvf_1_1_interruptible_thread.html">InterruptibleThread</a></li>
-<li><a class="el" href="classvf_1_1_interval.html">Interval&lt; Ty &gt;</a></li>
-<li><a class="el" href="classvf_1_1_lab_colour.html">LabColour</a></li>
-<li><a class="el" href="classvf_1_1_leak_checked_base.html">LeakCheckedBase</a><ul>
-<li><a class="el" href="structvf_1_1_leak_checked.html">LeakChecked&lt; TransparentBorder &gt;</a><ul>
-<li><a class="el" href="classvf_1_1_transparent_border.html">TransparentBorder</a></li>
+<li><a class="el" href="classcomponent_broadcast.html">componentBroadcast</a></li>
+<li><a class="el" href="classcomponent_broadcast_parent.html">componentBroadcastParent</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponentListener.html">ComponentListener</a><code> [external]</code><ul>
+<li><a class="el" href="class_content_component_constrainer.html">ContentComponentConstrainer</a></li>
+<li><a class="el" href="class_resizable_layout.html">ResizableLayout</a></li>
+<li><a class="el" href="class_stacked_layout.html">StackedLayout</a></li>
+<li><a class="el" href="class_transparent_border.html">TransparentBorder</a></li>
 </ul>
 </li>
-<li><a class="el" href="structvf_1_1_leak_checked.html">LeakChecked&lt; Object &gt;</a></li>
+<li><a class="el" href="class_concurrent_object.html">ConcurrentObject</a></li>
+<li><a class="el" href="class_concurrent_state.html">ConcurrentState&lt; Object &gt;</a></li>
+<li><a class="el" href="class_concurrent_state_1_1_read_access.html">ConcurrentState&lt; Object &gt;::ReadAccess</a></li>
+<li><a class="el" href="class_concurrent_state_1_1_unlocked_access.html">ConcurrentState&lt; Object &gt;::UnlockedAccess</a></li>
+<li><a class="el" href="class_concurrent_state_1_1_write_access.html">ConcurrentState&lt; Object &gt;::WriteAccess</a></li>
+<li><a class="el" href="classdb_1_1blob.html">db::blob</a></li>
+<li><a class="el" href="classdb_1_1session.html">db::session</a></li>
+<li><a class="el" href="classdb_1_1statement.html">db::statement</a></li>
+<li><a class="el" href="classdb_1_1transaction.html">db::transaction</a></li>
+<li><a class="el" href="structdb_1_1type__conversion.html">db::type_conversion&lt; T &gt;</a></li>
+<li><a class="el" href="structdb_1_1type__conversion_3_01juce_1_1_time_01_4.html">db::type_conversion&lt; juce::Time &gt;</a></li>
+<li><a class="el" href="classdetail_1_1_safe_bool_base.html">detail::SafeBoolBase</a><ul>
+<li><a class="el" href="class_safe_bool.html">SafeBool&lt; T &gt;</a></li>
+<li><a class="el" href="class_safe_bool.html">SafeBool&lt; Error &gt;</a><ul>
+<li><a class="el" href="class_error.html">Error</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_list.html">List&lt; Element, Tag &gt;</a></li>
-<li><a class="el" href="classvf_1_1_listeners.html">Listeners&lt; ListenerClass &gt;</a></li>
-<li><a class="el" href="classvf_1_1_lock_free_queue.html">LockFreeQueue&lt; Element, Tag &gt;</a></li>
-<li><a class="el" href="classvf_1_1_lock_free_stack.html">LockFreeStack&lt; Element, Tag &gt;</a></li>
-<li><a class="el" href="classvf_1_1_mouse_enter_editable.html">MouseEnterEditable</a></li>
-<li><a class="el" href="classvf_1_1_mouse_enter_editable_1_1_container.html">MouseEnterEditable::Container</a></li>
-<li><a class="el" href="classvf_1_1_mouse_enter_group.html">MouseEnterGroup</a></li>
-<li><a class="el" href="classvf_1_1_noise_audio_source.html">NoiseAudioSource</a></li>
-<li><a class="el" href="classvf_1_1_once_per_second.html">OncePerSecond</a></li>
-<li><a class="el" href="classvf_1_1_performed_at_exit.html">PerformedAtExit</a><ul>
-<li><a class="el" href="classvf_1_1_reference_counted_singleton.html">ReferenceCountedSingleton&lt; Object &gt;</a></li>
+<li><a class="el" href="class_safe_bool.html">SafeBool&lt; Interrupted &gt;</a><ul>
+<li><a class="el" href="class_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_radial_image_convolution_kernel.html">RadialImageConvolutionKernel</a></li>
-<li><a class="el" href="classvf_1_1_read_write_mutex.html">ReadWriteMutex</a></li>
-<li><a class="el" href="classvf_1_1_resizable_child.html">ResizableChild</a><ul>
-<li><a class="el" href="classvf_1_1_resizable_layout.html">ResizableLayout</a></li>
-<li><a class="el" href="classvf_1_1_resizable_layout.html">ResizableLayout</a></li>
-<li><a class="el" href="classvf_1_1_stacked_layout.html">StackedLayout</a></li>
 </ul>
 </li>
-<li><a class="el" href="classvf_1_1_scoped_audio_sample_buffer.html">ScopedAudioSampleBuffer</a></li>
-<li><a class="el" href="classvf_1_1_scoped_f_p_u_flags.html">ScopedFPUFlags</a></li>
-<li><a class="el" href="classvf_1_1_singleton_lifetime.html">SingletonLifetime</a></li>
-<li><a class="el" href="classvf_1_1_spin_delay.html">SpinDelay</a></li>
-<li><a class="el" href="classvf_1_1_stacked_layout_1_1_band.html">StackedLayout::Band</a></li>
-<li><a class="el" href="classvf_1_1_static_1_1_initializer.html">Initializer</a></li>
-<li><a class="el" href="classvf_1_1_static_1_1_storage.html">Storage&lt; ObjectType, Tag &gt;</a></li>
-<li><a class="el" href="classvf_1_1_top_level_constrainer.html">TopLevelConstrainer</a></li>
-<li><a class="el" href="classvf_1_1_vertical_gradient.html">VerticalGradient</a></li>
-<li><a class="el" href="structvf_1_1_vf_static_assert_3_01true_01_4.html">VfStaticAssert&lt; true &gt;</a></li>
-<li><a class="el" href="classvf_1_1_x_y_z_colour.html">XYZColour</a></li>
+<li><a class="el" href="class_drag_and_drop_data.html">DragAndDropData</a></li>
+<li><a class="el" href="class_fifo_free_store_without_t_l_s.html">FifoFreeStoreWithoutTLS</a></li>
+<li><a class="el" href="class_fifo_free_store_with_t_l_s.html">FifoFreeStoreWithTLS</a></li>
+<li><a class="el" href="class_f_p_u_flags.html">FPUFlags</a></li>
+<li><a class="el" href="struct_f_p_u_flags_1_1_enum.html">FPUFlags::Enum&lt; Constants &gt;</a></li>
+<li><a class="el" href="struct_f_p_u_flags_1_1_flag.html">FPUFlags::Flag</a></li>
+<li><a class="el" href="class_free_type_faces.html">FreeTypeFaces</a></li>
+<li><a class="el" href="class_function_3_01_r_07_t1_01t1_08_00_01_bytes_01_4.html">Function&lt; R(T1 t1), Bytes &gt;</a></li>
+<li><a class="el" href="struct_function_3_01_r_07_t1_01t1_08_00_01_bytes_01_4_1_1_none.html">Function&lt; R(T1 t1), Bytes &gt;::None</a></li>
+<li><a class="el" href="class_function_3_01_r_07void_08_00_01_bytes_01_4.html">Function&lt; R(void), Bytes &gt;</a></li>
+<li><a class="el" href="struct_function_3_01_r_07void_08_00_01_bytes_01_4_1_1_none.html">Function&lt; R(void), Bytes &gt;::None</a></li>
+<li><a class="el" href="class_interruptible_thread.html">InterruptibleThread</a></li>
+<li><a class="el" href="class_interval.html">Interval&lt; Ty &gt;</a></li>
+<li><a class="el" href="class_lab_colour.html">LabColour</a></li>
+<li><a class="el" href="class_leak_checked_base.html">LeakCheckedBase</a><ul>
+<li><a class="el" href="struct_leak_checked.html">LeakChecked&lt; Object &gt;</a></li>
+<li><a class="el" href="struct_leak_checked.html">LeakChecked&lt; GlobalPagedFreeStore &gt;</a><ul>
+<li><a class="el" href="class_global_paged_free_store.html">GlobalPagedFreeStore</a></li>
+</ul>
+</li>
+<li><a class="el" href="struct_leak_checked.html">LeakChecked&lt; TransparentBorder &gt;</a><ul>
+<li><a class="el" href="class_transparent_border.html">TransparentBorder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_list.html">List&lt; Element, Tag &gt;</a></li>
+<li><a class="el" href="class_listeners.html">Listeners&lt; ListenerClass &gt;</a></li>
+<li><a class="el" href="class_lock_free_queue.html">LockFreeQueue&lt; Element, Tag &gt;</a></li>
+<li><a class="el" href="class_lock_free_stack.html">LockFreeStack&lt; Element, Tag &gt;</a></li>
+<li><a class="el" href="class_mouse_enter_editable.html">MouseEnterEditable</a></li>
+<li><a class="el" href="class_mouse_enter_group.html">MouseEnterGroup</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classMouseListener.html">MouseListener</a><code> [external]</code><ul>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a><code> [external]</code><ul>
+<li><a class="el" href="class_stacked_layout.html">StackedLayout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_once_per_second.html">OncePerSecond</a><ul>
+<li><a class="el" href="class_paged_free_store.html">PagedFreeStore</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_performed_at_exit.html">PerformedAtExit</a><ul>
+<li><a class="el" href="class_reference_counted_singleton.html">ReferenceCountedSingleton&lt; Object &gt;</a></li>
+<li><a class="el" href="class_reference_counted_singleton.html">ReferenceCountedSingleton&lt; GlobalFifoFreeStore&lt; Tag &gt; &gt;</a><ul>
+<li><a class="el" href="class_global_fifo_free_store.html">GlobalFifoFreeStore&lt; Tag &gt;</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_reference_counted_singleton.html">ReferenceCountedSingleton&lt; GlobalPagedFreeStore &gt;</a><ul>
+<li><a class="el" href="class_global_paged_free_store.html">GlobalPagedFreeStore</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="class_radial_image_convolution_kernel.html">RadialImageConvolutionKernel</a></li>
+<li><a class="el" href="class_read_write_mutex.html">ReadWriteMutex</a></li>
+<li><a class="el" href="class_resizable_child.html">ResizableChild</a><ul>
+<li><a class="el" href="class_resizable_layout.html">ResizableLayout</a></li>
+<li><a class="el" href="class_stacked_layout.html">StackedLayout</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_scoped_audio_sample_buffer.html">ScopedAudioSampleBuffer</a></li>
+<li><a class="el" href="class_scoped_f_p_u_flags.html">ScopedFPUFlags</a></li>
+<li><a class="el" href="class_singleton_lifetime.html">SingletonLifetime</a></li>
+<li><a class="el" href="class_spin_delay.html">SpinDelay</a></li>
+<li><a class="el" href="class_stacked_layout_1_1_band.html">StackedLayout::Band</a></li>
+<li><a class="el" href="class_static_1_1_initializer.html">Static::Initializer</a></li>
+<li><a class="el" href="class_static_1_1_storage.html">Static::Storage&lt; ObjectType, Tag &gt;</a></li>
+<li><a class="el" href="class_static_1_1_storage.html">Static::Storage&lt; bool, ReferenceCountedSingleton&lt; GlobalFifoFreeStore&lt; Tag &gt; &gt; &gt;</a></li>
+<li><a class="el" href="class_static_1_1_storage.html">Static::Storage&lt; bool, ReferenceCountedSingleton&lt; GlobalPagedFreeStore &gt; &gt;</a></li>
+<li><a class="el" href="class_static_1_1_storage.html">Static::Storage&lt; LockType, ReferenceCountedSingleton&lt; GlobalFifoFreeStore&lt; Tag &gt; &gt; &gt;</a></li>
+<li><a class="el" href="class_static_1_1_storage.html">Static::Storage&lt; LockType, ReferenceCountedSingleton&lt; GlobalPagedFreeStore &gt; &gt;</a></li>
+<li><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTimer.html">Timer</a><code> [external]</code><ul>
+<li><a class="el" href="class_mouse_enter_editable_1_1_container.html">MouseEnterEditable::Container</a></li>
+</ul>
+</li>
+<li><a class="el" href="class_top_level_constrainer.html">TopLevelConstrainer</a></li>
+<li><a class="el" href="class_vertical_gradient.html">VerticalGradient</a></li>
+<li><a class="el" href="class_x_y_z_colour.html">XYZColour</a></li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 9 2012 21:07:16 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['maxbordersize',['maxBorderSize',['../classvf_1_1_transparent_border.html#adc29c2ff13d900c2f185ee95427fb06cac6a2f041ff1b6d2e48253fa43be5b88d',1,'vf::TransparentBorder']]]
+  ['maxbordersize',['maxBorderSize',['../class_transparent_border.html#a7bec159f28ba55f596a232a6f80a44ecac91d106ad426dd00786c6edade76924c',1,'TransparentBorder']]]
 ];

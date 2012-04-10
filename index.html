@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>VFLib: Vinnie&#39;s Multipurpose Library (That Uses JUCE)</title>
+<title>VFLib: VFLib: A multipurpose class library built on JUCE.</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -48,7 +48,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="dirs.html"><span>Directories</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -73,7 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -84,13 +87,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Vinnie's Multipurpose Library (That Uses JUCE) </div>  </div>
+<div class="title">VFLib: A multipurpose class library built on JUCE. </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>VFLib is a source code collection of individual modules containing functionality for a variety of applications. Some modules provide support for external libraries. Usage of these external library modules is optional. They come with complete source code, as well as options for using either system or user provided variants of the external libraries.</p>
 <p>VFLib requires JUCE (Jules' Utility Class Extensions) available from <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a>. JUCE is available under both the GNU General Public License and a commercial, closed source license. Visit <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> for more details.</p>
 <p>Other than JUCE, VFLib has no external dependencies.</p>
-<h2><a class="anchor" id="Supported"></a>
+<h2><a class="anchor" id="Platforms"></a>
 Platforms</h2>
 <p>All platforms supported by JUCE are also supported by VFLib. Currently these platforms include:</p>
 <ul>
@@ -110,20 +113,26 @@ Platforms</h2>
 </ul>
 <h2><a class="anchor" id="Prerequisites"></a>
 Prerequisites</h2>
-<p>To use the library it is necessary to first download JUCE to a location where VFLib can find it. Or, you can use your existing installation of JUCE. VFLib requires recent versions of JUCE. It won't work with JUCE versions 1.53 or earlier.</p>
+<p>To use the library it is necessary to first download JUCE to a location where VFLib can find it. Or, you can use your existing installation of JUCE.</p>
 <p>The documentation for VFLib assumes that the reader has a working knowledge of JUCE. Some modules built on external libraries assume that the reader understands the operation of those external libraries. Certain modules assume that the reader understands additional domain-specific information. Modules with additional prerequisites are marked in the documentation.</p>
 <h2><a class="anchor" id="External"></a>
 Modules</h2>
 <p>Some modules bring in functionality provided by third party libraries.</p>
 <p>Description.</p>
-<h2><a class="anchor" id="Usage"></a>
-Usage</h2>
+<h2><a class="anchor" id="Integration"></a>
+Integration</h2>
+<p>VFLib requires recent versions of JUCE. It won't work with JUCE versions 1.53 or earlier.</p>
+<p>This library uses the same modularized organizational structure as JUCE.</p>
 <p>The library offers several logical sets of aggregated functionality, with sources organized in the style of a JUCE module. To use a module, first add a single path to the list of includes searched by your development environment or project, which points to the VFLib include directory. Then add the corresponding .c or .cpp file (for example, vf_concurrent.cpp) to your existing project which already uses JUCE.</p>
+<h2><a class="anchor" id="AppConfig"></a>
+AppConfig</h2>
+<h2><a class="anchor" id="References"></a>
+References</h2>
 </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 9 2012 21:07:16 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
