@@ -24,7 +24,7 @@
 
 //==============================================================================
 /** 
-    A wrapper for an array of pointers to audio data.
+    An array of movable pointers to existing audio buffers.
 
     This simple class wraps an array of pointers to multi-channel audio data.
     Provided functions can move the pointers back and forth as a group,

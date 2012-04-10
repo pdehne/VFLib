@@ -19,8 +19,6 @@
 // 
 //==============================================================================
 
-#if VF_USE_BOOST
-
 // Implementation notes
 //
 // - A Page is a large allocation from a global PageAllocator.
@@ -196,5 +194,3 @@ void FifoFreeStoreWithTLS::deallocate (void* p)
   if (page->release ())
     deletePage (page);
 }
-
-#endif

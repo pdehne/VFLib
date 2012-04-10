@@ -22,15 +22,15 @@
 #ifndef VF_PAGEDFREESTORE_VFHEADER
 #define VF_PAGEDFREESTORE_VFHEADER
 
-#ifndef DOXYGEN
+//==============================================================================
+/**
+    Lock-free memory allocator for fixed size pages.
 
-/****
-  Lock-free memory allocator for fixed size pages.
+    The ABA problem (http://en.wikipedia.org/wiki/ABA_problem) is
+    avoided by treating freed pages as garbage, and performing a
+    collection every second.
 
-  The ABA problem (http://en.wikipedia.org/wiki/ABA_problem) is
-  avoided by treating freed pages as garbage, and performing a
-  collection every second.
-
+    \ingroup vf_concurrent
 */
 class PagedFreeStore : private OncePerSecond
 {
@@ -92,7 +92,5 @@ private:
   AtomicCounter m_used;
 #endif
 };
-
-#endif
 
 #endif

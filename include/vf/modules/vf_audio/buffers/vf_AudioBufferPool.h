@@ -24,7 +24,7 @@
 
 //==============================================================================
 /**
-    Temporary buffers for audio processing calculations.
+    A pool of audio buffers for temporary calculations.
 
     The container provides a pool of audio buffers that grow to match the
     working set requirements based on actual usage. Since the buffers never

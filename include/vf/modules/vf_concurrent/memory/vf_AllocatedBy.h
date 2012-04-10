@@ -22,10 +22,9 @@
 #ifndef VF_ALLOCATEDBY_VFHEADER
 #define VF_ALLOCATEDBY_VFHEADER
 
-#ifndef DOXYGEN
+/** 
 
-/** \ingroup vf_concurrent
-
+    \ingroup vf_concurrent
 */
 // Derived classes will use the specified allocator for new and delete
 //
@@ -58,7 +57,5 @@ public:
     AllocatorType::deallocate (p);
   }
 };
-
-#endif
 
 #endif

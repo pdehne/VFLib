@@ -28,8 +28,11 @@
 
 namespace vf
 {
-#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
+#if VF_USE_BOOST
 #include "memory/vf_FifoFreeStoreWithTLS.cpp"
+#else
+#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
+#endif
 #include "memory/vf_GlobalPagedFreeStore.cpp"
 #include "memory/vf_PagedFreeStore.cpp"
 

@@ -22,13 +22,9 @@
 #ifndef VF_FIFOFREESTOREWITHTLS_VFHEADER
 #define VF_FIFOFREESTOREWITHTLS_VFHEADER
 
-#ifndef DOXYGEN
-
-#if VF_USE_BOOST
-
 #include "vf_GlobalPagedFreeStore.h"
 
-/****
+/**
   Lock-free and mostly wait-free memory allocator optimized for FIFO
   style usage patterns.
 
@@ -43,6 +39,8 @@
 
   This implementation uses Thread Local Storage to further improve
   performance. However, it requires boost style thread_specific_ptr.
+
+    \ingroup vf_concurrent
 */
 class FifoFreeStoreWithTLS
 {
@@ -68,9 +66,5 @@ private:
 
   PagedFreeStoreType::Ptr m_pages;
 };
-
-#endif
-
-#endif
 
 #endif

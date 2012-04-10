@@ -22,7 +22,7 @@
 #ifndef __VF_VFHEADER__
 #define __VF_VFHEADER__
 
-/*! \mainpage Vinnie's Multipurpose Library (That Uses JUCE)
+/*! \mainpage VFLib: A multipurpose class library built on JUCE.
 
   VFLib is a source code collection of individual modules containing
   functionality for a variety of applications. Some modules provide support
@@ -37,7 +37,7 @@
 
   Other than JUCE, VFLib has no external dependencies.
 
-  \section Supported Platforms
+  \section Platforms
 
   All platforms supported by JUCE are also supported by VFLib. Currently these
   platforms include:
@@ -57,9 +57,7 @@
   \section Prerequisites
 
   To use the library it is necessary to first download JUCE to a location where
-  VFLib can find it. Or, you can use your existing installation of JUCE. VFLib
-  requires recent versions of JUCE. It won't work with JUCE versions 1.53 or
-  earlier.
+  VFLib can find it. Or, you can use your existing installation of JUCE. 
 
   The documentation for VFLib assumes that the reader has a working knowledge
   of JUCE. Some modules built on external libraries assume that the reader
@@ -73,7 +71,12 @@
 
   Description.
 
-  \section Usage
+  \section Integration
+
+  VFLib requires recent versions of JUCE. It won't work with JUCE versions
+  1.53 or earlier.
+
+  This library uses the same modularized organizational structure as JUCE.
 
   The library offers several logical sets of aggregated functionality, with
   sources organized in the style of a JUCE module. To use a module, first add

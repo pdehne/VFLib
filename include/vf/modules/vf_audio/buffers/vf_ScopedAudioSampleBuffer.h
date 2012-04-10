@@ -24,7 +24,7 @@
 
 //==============================================================================
 /**
-    Scoped temporary audio buffer from a pool.
+    A temporary audio buffer with scoped lifetime.
 
     This utility class allows scoped lifetime management for acquiring temporary
     audio buffers from the AudioBufferPool. It is easy to use:

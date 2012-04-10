@@ -22,10 +22,12 @@
 #ifndef VF_FIFOFREESTOREWITHOUTTLS_VFHEADER
 #define VF_FIFOFREESTOREWITHOUTTLS_VFHEADER
 
-#ifndef DOXYGEN
-
 #include "vf_GlobalPagedFreeStore.h"
 
+/**
+
+    \ingroup vf_concurrent
+*/
 // Lock-free Allocator that doesn't use thread local storage.
 // This implementation is here in case a problem is found with
 // the use of thread local storage.
@@ -53,7 +55,5 @@ private:
   Block* volatile m_active;
   PagedFreeStoreType::Ptr m_pages;
 };
-
-#endif
 
 #endif

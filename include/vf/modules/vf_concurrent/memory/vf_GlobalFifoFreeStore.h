@@ -22,11 +22,14 @@
 #ifndef VF_GLOBALFIFOFREESTORE_VFHEADER
 #define VF_GLOBALFIFOFREESTORE_VFHEADER
 
-#ifndef DOXYGEN
-
 #include "vf_FifoFreeStore.h"
 
-/** A FifoFreeStore singleton. */
+//==============================================================================
+/**
+    A FifoFreeStore singleton.
+
+    \ingroup vf_concurrent
+*/
 template <class Tag>
 class GlobalFifoFreeStore : public ReferenceCountedSingleton <GlobalFifoFreeStore <Tag> >
 {
@@ -60,7 +63,5 @@ private:
 private:
   FifoFreeStoreType m_allocator;
 };
-
-#endif
 
 #endif

@@ -22,13 +22,22 @@
 #ifndef VF_FIFOFREESTORE_VFHEADER
 #define VF_FIFOFREESTORE_VFHEADER
 
+#if VF_USE_BOOST
 #include "vf_FifoFreeStoreWithTLS.h"
+
+#else
 #include "vf_FifoFreeStoreWithoutTLS.h"
+
+#endif
+
+#ifndef DOXYGEN
 
 #if VF_USE_BOOST
 typedef FifoFreeStoreWithTLS FifoFreeStoreType;
 #else
 typedef FifoFreeStoreWithoutTLS FifoFreeStoreType;
+#endif
+
 #endif
 
 #endif
