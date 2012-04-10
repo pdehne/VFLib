@@ -24,7 +24,7 @@ class ConcurrentObject::Deleter
   , LeakChecked <Deleter>
 {
 private:
-  typedef VF_JUCE::SpinLock LockType;
+  typedef juce::SpinLock LockType;
 
   Deleter ()
     : ReferenceCountedSingleton (SingletonLifetime::persistAfterCreation)

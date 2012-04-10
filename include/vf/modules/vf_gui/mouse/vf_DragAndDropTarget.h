@@ -28,7 +28,7 @@
 // DragAndDropData.
 //
 
-class DragAndDropTarget : public VF_JUCE::DragAndDropTarget
+class DragAndDropTarget : public juce::DragAndDropTarget
 {
 public:
   virtual bool isInterestedInDragSource (DragAndDropData const& data,

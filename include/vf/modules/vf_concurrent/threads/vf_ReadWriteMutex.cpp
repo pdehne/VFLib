@@ -44,7 +44,7 @@ void ReadWriteMutex::enterRead () const noexcept
 
       // block until the writer is done
       {
-		VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
+		juce::CriticalSection::ScopedLockType lock (m_mutex);
       }
 
       // now try the loop again

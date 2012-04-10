@@ -35,11 +35,11 @@ void updateAllTopLevelWindows ()
   {
     inUpdate = true;
 
-    int n = VF_JUCE::TopLevelWindow::getNumTopLevelWindows();
+    int n = juce::TopLevelWindow::getNumTopLevelWindows();
     for (int i = 0; i < n; ++i)
     {
-      VF_JUCE::TopLevelWindow* w = VF_JUCE::TopLevelWindow::getTopLevelWindow (i);
-      VF_JUCE::ComponentPeer* peer = w->getPeer ();
+      juce::TopLevelWindow* w = juce::TopLevelWindow::getTopLevelWindow (i);
+      juce::ComponentPeer* peer = w->getPeer ();
       if (peer)
         peer->performAnyPendingRepaintsNow ();
     }
@@ -55,7 +55,7 @@ GuiCallQueue::GuiCallQueue () : CallQueue ("GuiCallQueue")
 {
   // This object must be created from the Juce Message Thread.
   //
-  vfassert (VF_JUCE::MessageManager::getInstance()->isThisTheMessageThread());
+  vfassert (juce::MessageManager::getInstance()->isThisTheMessageThread());
 
   // Associate the CallQueue with the message thread right away.
   //

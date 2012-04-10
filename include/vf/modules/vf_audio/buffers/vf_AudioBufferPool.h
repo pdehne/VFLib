@@ -99,7 +99,7 @@ class AudioBufferPool
 {
 public:
 #ifndef DOXYGEN
-  class Buffer : public VF_JUCE::AudioSampleBuffer
+  class Buffer : public juce::AudioSampleBuffer
   {
   public:
 	Buffer (int numChannels, int numSamples);
@@ -153,7 +153,7 @@ protected:
   void releaseBufferInternal (Buffer* buffer);
 
 private:
-  VF_JUCE::Array <Buffer*> m_buffers;
+  juce::Array <Buffer*> m_buffers;
 };
 
 //==============================================================================

@@ -89,7 +89,7 @@ public:
                          amount of space in the memory pointed to by
                          buffer, less startingSampleIndex.
   */
-  AudioSampleBufferArray (const VF_JUCE::AudioSampleBuffer& buffer,
+  AudioSampleBufferArray (const juce::AudioSampleBuffer& buffer,
                           int startSample = 0,
                           int numSamples = -1)
   {
@@ -100,7 +100,7 @@ public:
 
       @param bufferToFill The AudioSourceChannelInfo to point to.
   */
-  AudioSampleBufferArray (const VF_JUCE::AudioSourceChannelInfo& bufferToFill)
+  AudioSampleBufferArray (const juce::AudioSourceChannelInfo& bufferToFill)
   {
     setFrom (*bufferToFill.buffer,
              bufferToFill.startSample,
@@ -108,14 +108,14 @@ public:
   }
 
   /** Assign from an AudioSampleBuffer */
-  AudioSampleBufferArray& operator= (const VF_JUCE::AudioSampleBuffer& buffer)
+  AudioSampleBufferArray& operator= (const juce::AudioSampleBuffer& buffer)
   {
     setFrom (buffer);
     return *this;
   }
 
   /** Assign from an AudioSourceChannelInfo */
-  AudioSampleBufferArray& operator= (const VF_JUCE::AudioSourceChannelInfo& bufferToFill)
+  AudioSampleBufferArray& operator= (const juce::AudioSourceChannelInfo& bufferToFill)
   {
     setFrom (bufferToFill);
     return *this;
@@ -145,7 +145,7 @@ public:
   }
 
   /** Assign from a range within an AudioSampleBuffer  */
-  void setFrom (VF_JUCE::AudioSampleBuffer const& buffer,
+  void setFrom (juce::AudioSampleBuffer const& buffer,
                 int startSample = 0,
                 int numSamples = -1)
   {
@@ -166,14 +166,14 @@ public:
   }
 
   /** Type conversion to AudioSampleBuffer */
-  operator VF_JUCE::AudioSampleBuffer()
+  operator juce::AudioSampleBuffer()
   {
-    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
+    return juce::AudioSampleBuffer (m_channels, Channels, m_numSamples);
   }
 
   operator const AudioSampleBuffer() const
   {
-    return VF_JUCE::AudioSampleBuffer (m_channels, Channels, m_numSamples);
+    return juce::AudioSampleBuffer (m_channels, Channels, m_numSamples);
   }
 
   /** Get a raw channel pointer.

@@ -36,7 +36,7 @@ void InterruptibleThread::start (const Function <void (void)>& f)
 {
   m_function = f;
 
-  VF_JUCE::Thread::startThread ();
+  juce::Thread::startThread ();
 
   // prevents data race with member variables
   m_runEvent.signal ();
@@ -44,7 +44,7 @@ void InterruptibleThread::start (const Function <void (void)>& f)
 
 void InterruptibleThread::join ()
 {
-  VF_JUCE::Thread::stopThread (-1);
+  juce::Thread::stopThread (-1);
 }
 
 bool InterruptibleThread::wait (int milliSeconds)
@@ -113,7 +113,7 @@ void InterruptibleThread::interrupt ()
     }
     else if (m_state.tryChangeState (stateWait, stateRun))
     {
-      VF_JUCE::Thread::notify ();
+      juce::Thread::notify ();
       break;
     }
   }
@@ -151,17 +151,17 @@ InterruptibleThread::id InterruptibleThread::getId () const
 
 bool InterruptibleThread::isTheCurrentThread () const
 {
-  return VF_JUCE::Thread::getCurrentThreadId () == m_threadId;
+  return juce::Thread::getCurrentThreadId () == m_threadId;
 }
 
 void InterruptibleThread::setPriority (int priority)
 {
-  VF_JUCE::Thread::setPriority (priority);
+  juce::Thread::setPriority (priority);
 }
 
 void InterruptibleThread::run ()
 {
-  m_threadId = VF_JUCE::Thread::getThreadId ();
+  m_threadId = juce::Thread::getThreadId ();
 
   m_runEvent.wait ();
 
@@ -177,7 +177,7 @@ InterruptibleThread::Interrupted interruptionPoint ()
 {
   bool interrupted;
 
-  VF_JUCE::Thread* thread = VF_JUCE::Thread::getCurrentThread();
+  juce::Thread* thread = juce::Thread::getCurrentThread();
 
   // Can't use interruption points on the message thread
   vfassert (thread != 0);

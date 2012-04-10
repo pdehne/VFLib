@@ -128,7 +128,7 @@ public:
   }
 
 private:
-  VF_JUCE::Atomic <P*> m_value;
+  juce::Atomic <P*> m_value;
 };
 
 #endif

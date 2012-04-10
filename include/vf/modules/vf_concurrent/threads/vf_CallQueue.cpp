@@ -35,7 +35,7 @@ CallQueue::~CallQueue ()
 
 bool CallQueue::isAssociatedWithCurrentThread () const
 {
-  return VF_JUCE::Thread::getCurrentThreadId () == m_id;
+  return juce::Thread::getCurrentThreadId () == m_id;
 }
 
 // Adds a call to the queue of execution.
@@ -88,7 +88,7 @@ bool CallQueue::synchronize ()
   if (m_isBeingSynchronized.trySignal ())
   {
     // Remember this thread.
-    m_id = VF_JUCE::Thread::getCurrentThreadId ();
+    m_id = juce::Thread::getCurrentThreadId ();
 
     did_something = doSynchronize ();
 

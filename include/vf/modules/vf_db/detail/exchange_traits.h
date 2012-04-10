@@ -185,7 +185,7 @@ template<> struct exchange_traits<std::wstring>
   enum { x_type = x_stdwstring };
 };
 
-template<> struct exchange_traits<VF_JUCE::String>
+template<> struct exchange_traits<juce::String>
 {
   typedef basic_type_tag type_family;
   enum { x_type = x_juceString };

@@ -71,27 +71,27 @@ struct type_conversion
   }
 };
 
-// VF_JUCE::Time
+// juce::Time
 template<>
-struct type_conversion <VF_JUCE::Time>
+struct type_conversion <juce::Time>
 {
   //typedef sqlite3_int64 base_type;
   typedef int64 base_type;
 
-  static void from_base (const base_type v, indicator ind, VF_JUCE::Time& result)
+  static void from_base (const base_type v, indicator ind, juce::Time& result)
   {
     if (ind == i_null)
     {
       // jassertfalse
-      result = VF_JUCE::Time (0);
+      result = juce::Time (0);
     }
     else
     {
-      result = VF_JUCE::Time (v);
+      result = juce::Time (v);
     }
   }
 
-  static void to_base (const VF_JUCE::Time& v, base_type& result, indicator& ind)
+  static void to_base (const juce::Time& v, base_type& result, indicator& ind)
   {
     result = v.toMilliseconds ();
     ind = i_ok;

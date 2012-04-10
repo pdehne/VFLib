@@ -124,11 +124,11 @@
 
     @endcode
 */
-class DragAndDropData : public VF_JUCE::ReferenceCountedObject
+class DragAndDropData : public juce::ReferenceCountedObject
 {
 public:
 #ifndef DOXYGEN
-  typedef VF_JUCE::ReferenceCountedObjectPtr <DragAndDropData> Ptr;
+  typedef juce::ReferenceCountedObjectPtr <DragAndDropData> Ptr;
 
   DragAndDropData ();
 

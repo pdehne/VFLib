@@ -178,7 +178,7 @@ private:
     stateInitialized
   };
 
-  VF_JUCE::Atomic <int> m_state;
+  juce::Atomic <int> m_state;
 };
 
 }

@@ -37,7 +37,7 @@
 */
 class GuiCallQueue
   : public CallQueue
-  , private VF_JUCE::AsyncUpdater
+  , private juce::AsyncUpdater
 {
 public:
   /** Create a GuiCallQueue */

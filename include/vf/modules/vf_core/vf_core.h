@@ -154,11 +154,10 @@ using namespace juce;
   #pragma pop_macro("calloc")
 #endif
 
-#define VF_JUCE juce
-using VF_JUCE::int64;
-using VF_JUCE::uint64;
-using VF_JUCE::uint32;
-using VF_JUCE::uint8;
+using juce::int64;
+using juce::uint64;
+using juce::uint32;
+using juce::uint8;
 
 #ifndef VF_USE_BOOST
 #define VF_USE_BOOST 0

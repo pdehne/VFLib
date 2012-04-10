@@ -112,7 +112,7 @@ private:
     }
 
   private:
-    VF_JUCE::Atomic <int> m_count;
+    juce::Atomic <int> m_count;
   };
 
   static const char* getLeakCheckedName ()

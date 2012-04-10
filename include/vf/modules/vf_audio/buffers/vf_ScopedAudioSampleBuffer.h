@@ -90,25 +90,25 @@ public:
   }
 
   /** Return the object as a AudioSampleBuffer pointer */
-  VF_JUCE::AudioSampleBuffer* operator-> ()
+  juce::AudioSampleBuffer* operator-> ()
   {
 	return getBuffer();
   }
 
   /** Return the object as a reference to AudioSampleBuffer */
-  VF_JUCE::AudioSampleBuffer& operator* ()
+  juce::AudioSampleBuffer& operator* ()
   {
 	return *getBuffer();
   }
 
   /** Type conversion to pointer to AudioSampleBuffer */
-  operator VF_JUCE::AudioSampleBuffer* ()
+  operator juce::AudioSampleBuffer* ()
   {
 	return getBuffer();
   }
 
   /** Return the object as a pointer to AudioSampleBuffer */
-  VF_JUCE::AudioSampleBuffer* getBuffer ()
+  juce::AudioSampleBuffer* getBuffer ()
   {
 	return m_buffer;
   }

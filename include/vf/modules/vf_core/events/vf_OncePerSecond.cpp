@@ -53,7 +53,7 @@ private:
 
   void notify ()
   {
-	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
+	juce::CriticalSection::ScopedLockType lock (m_mutex);
 
     for (List::iterator iter = m_list.begin(); iter != m_list.end();)
     {
@@ -66,14 +66,14 @@ private:
 public:
   void insert (Elem* elem)
   {
-	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
+	juce::CriticalSection::ScopedLockType lock (m_mutex);
 
     m_list.push_back (*elem);
   }
 
   void remove (Elem* elem)
   {
-	VF_JUCE::CriticalSection::ScopedLockType lock (m_mutex);
+	juce::CriticalSection::ScopedLockType lock (m_mutex);
 
     m_list.erase (m_list.iterator_to (*elem));
   }
@@ -85,7 +85,7 @@ public:
 
 private:
   InterruptibleThread m_thread;
-  VF_JUCE::CriticalSection m_mutex;
+  juce::CriticalSection m_mutex;
   List m_list;
 };
 

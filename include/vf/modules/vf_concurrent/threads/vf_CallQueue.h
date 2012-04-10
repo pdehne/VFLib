@@ -397,7 +397,7 @@ private:
 
 private:
   String const m_name;
-  VF_JUCE::Thread::ThreadID m_id;
+  juce::Thread::ThreadID m_id;
   Calls m_list;
   AtomicFlag m_closed;
   AtomicFlag m_isBeingSynchronized;

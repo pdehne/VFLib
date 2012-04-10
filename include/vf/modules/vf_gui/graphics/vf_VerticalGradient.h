@@ -24,7 +24,7 @@
 
 // Simple class to facilitate setting vertical blends
 //
-class VerticalGradient : public VF_JUCE::ColourGradient
+class VerticalGradient : public juce::ColourGradient
 {
 public:
   VerticalGradient (

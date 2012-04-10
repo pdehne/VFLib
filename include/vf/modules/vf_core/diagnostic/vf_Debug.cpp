@@ -25,7 +25,7 @@ namespace Debug {
 
 bool isDebuggerAttached ()
 {
-  return VF_JUCE::juce_isRunningUnderDebugger ();
+  return juce::juce_isRunningUnderDebugger ();
 }
 
 //------------------------------------------------------------------------------
@@ -102,13 +102,13 @@ void checkHeap ()
 
 const String getFileNameFromPath (const char* sourceFileName)
 {
-  return VF_JUCE::File::createFileWithoutCheckingPath (sourceFileName).getFileName();
+  return juce::File::createFileWithoutCheckingPath (sourceFileName).getFileName();
 }
 
 // Returns a String with double quotes escaped
 static const String withEscapedQuotes (String const& string)
 {
-  VF_JUCE::String escaped;
+  juce::String escaped;
 
   int i0 = 0;
   int i;
@@ -177,7 +177,7 @@ String stringToCommandLine (String const& string)
   int i;
   for (i = 0; i < string.length(); i++)
   {
-    VF_JUCE::juce_wchar c = string[i];
+    juce::juce_wchar c = string[i];
 
     if (c == '\n')
     {
@@ -210,7 +210,7 @@ String commandLineToString (const String& commandLine)
   int i;
   for (i = 0; i < commandLine.length(); i++)
   {
-    VF_JUCE::juce_wchar c = commandLine[i];
+    juce::juce_wchar c = commandLine[i];
 
     if (c == '\\')
     {
