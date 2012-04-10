@@ -213,13 +213,6 @@ namespace vf
 
 #define vfassert jassert
 
-// Borrowed from Juce so we are not dependent on it
-template <bool condition> struct VfStaticAssert;
-template <> struct VfStaticAssert <true>
-  { static void static_assert_failed () {} };
-#define static_vfassert(expression) \
-  vf::VfStaticAssert <expression>::static_assert_failed ();
-
 }
 
 namespace vf

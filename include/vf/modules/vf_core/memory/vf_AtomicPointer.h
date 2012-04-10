@@ -38,10 +38,10 @@ class AtomicPointer
 public:
   /** Create a pointer.
 
-      @param initialValue An option starting value (default is null).
+      @param initialValue An optional starting value (default is null).
   */
-  explicit AtomicPointer (P* const p = nullptr) noexcept
-	: m_value (p)
+  explicit AtomicPointer (P* const initialValue = nullptr) noexcept
+	: m_value (initialValue)
   {
   }
 

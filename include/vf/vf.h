@@ -88,8 +88,6 @@
 
 */
 
-#ifndef DOXYGEN
-
 #include "AppConfig.h"
 
 /** Include this header to bring in all the modules,
@@ -101,7 +99,5 @@
 #include "modules/vf_core/vf_core.h"
 #include "modules/vf_db/vf_db.h"
 #include "modules/vf_gui/vf_gui.h"
-
-#endif
 
 #endif

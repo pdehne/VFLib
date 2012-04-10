@@ -414,9 +414,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.c">
-      <Filter>VF Modules\vf_bzip2</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\crctable.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
@@ -437,6 +434,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\compress.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.c">
+      <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

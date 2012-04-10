@@ -80,14 +80,14 @@ public:
 
   /** Construct an array from an AudioSampleBuffer.
 
-      @param buffer              The AudioSampleBuffer to point to.
+      @param buffer      The AudioSampleBuffer to point to.
 
-      @param startingSampleIndex Zero based index of the first sample to use.
+      @param startSample Zero based index of the first sample to use.
 
-      @param numSamples          The number of samples in the desired range.
-                                 This must be less than or equal to the actual
-                                 amount of space in the memory pointed to by
-                                 buffer, less startingSampleIndex.
+      @param numSamples  The number of samples in the desired range.
+                         This must be less than or equal to the actual
+                         amount of space in the memory pointed to by
+                         buffer, less startingSampleIndex.
   */
   AudioSampleBufferArray (const VF_JUCE::AudioSampleBuffer& buffer,
                           int startSample = 0,
