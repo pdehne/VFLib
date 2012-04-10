@@ -23,7 +23,7 @@
 #define VF_AUDIOBUFFERPOOL_VFHEADER
 
 //==============================================================================
-/**
+/** 
     A pool of audio buffers for temporary calculations.
 
     The container provides a pool of audio buffers that grow to match the
@@ -86,15 +86,14 @@
     template parameter:
 
     @param LockType  The type of lock to use. To share the pool between threads
-                     a CriticalSection is needed. To use the pool without any
-                     locking, a DummyCriticalSection may be used.
+                      a CriticalSection is needed. To use the pool without any
+                      locking, a DummyCriticalSection may be used.
 
     @see ScopedAudioSampleBuffer
 
     \ingroup vf_audio
-
-    \todo Document the AudioBufferPoolType template properly
 */
+
 class AudioBufferPool
 {
 public:
@@ -149,8 +148,10 @@ public:
   virtual void releaseBuffer (Buffer* buffer) = 0;
 
 protected:
+#ifndef DOXYGEN
   Buffer* requestBufferInternal (int numChannels, int numSamples);
   void releaseBufferInternal (Buffer* buffer);
+#endif
 
 private:
   juce::Array <Buffer*> m_buffers;
@@ -159,7 +160,6 @@ private:
 //==============================================================================
 
 #ifndef DOXYGEN
-
 template <class LockType = CriticalSection>
 class AudioBufferPoolType
   : public AudioBufferPool
@@ -183,7 +183,6 @@ public:
 private:
   LockType m_mutex;
 };
-
 #endif
 
 #endif

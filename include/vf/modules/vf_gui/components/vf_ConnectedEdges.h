@@ -22,6 +22,8 @@
 #ifndef __VF_CONNECTEDEDGES_VFHEADER__
 #define __VF_CONNECTEDEDGES_VFHEADER__
 
+#ifndef DOXYGEN
+
 class ConnectedEdges
 {
 public:
@@ -66,5 +68,7 @@ private:
   };
   Flags connectedEdgeFlags;
 };
+
+#endif
 
 #endif

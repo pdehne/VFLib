@@ -23,7 +23,8 @@
 #define __VF_COMPONENTBROADCAST_VFHEADER__
 
 //==============================================================================
-/** Broadcast to a Component and its children, recursively.
+/**
+    Broadcast to a Component and its children, recursively.
 
     This class functor will traverse a Component and its children recursively
     and call a member function for each Component that exposes the desired
@@ -134,6 +135,8 @@
     - Broadcast interfaces can be broken up into any number of individual
       classes, they don't need to know about each other. A Component can
       expose zero, one, or any number of interfaces to receive broadcasts.
+
+    \ingroup vf_gui
 */
 class componentBroadcast
 {

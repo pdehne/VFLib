@@ -24,7 +24,7 @@
 
 //==============================================================================
 /**
-    Inspection and modification of IEEE FPU flags.
+    A set of IEEE FPU flags.
 
     Description.
 
@@ -33,6 +33,7 @@
 class FPUFlags
 {
 public:
+  /** An individual FPU flag */
   struct Flag
   {
     Flag () : m_set (false) { }
@@ -49,6 +50,7 @@ public:
     bool m_value : 1;
   };
 
+  /** A multi-valued FPU setting */
   template <typename Constants>
   struct Enum
   {
@@ -179,23 +181,20 @@ private:
 
 //==============================================================================
 /**
-    Scoped FPU flag modifications.
+    IEEE FPU flag modifications with scoped lifetime.
 
-    Allows scoped modification of the FPU flags.
+    An instance of the class saves the FPU flags and updates
 
-        inline void usageExample ()
+        FPUFlags flags;
+        flags.setUnmaskAllExceptions ();
+
         {
-          FPUFlags flags;
-          flags.setUnmaskAllExceptions ();
+          ScopedFPUFlags fpu (flags); 
 
-          {
-            ScopedFPUFlags fpu (flags); 
-
-            // Perform floating point calculations
-          }
-
-          // FPU flags are back to what they were now
+          // Perform floating point calculations
         }
+
+        // FPU flags are back to what they were now
 
     \ingroup vf_core
 */

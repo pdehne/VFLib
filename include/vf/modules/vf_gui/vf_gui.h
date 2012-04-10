@@ -22,6 +22,7 @@
 #ifndef VF_GUI_VFHEADER
 #define VF_GUI_VFHEADER
 
+//==============================================================================
 /** 
     Classes for appearance and graphical display.
 

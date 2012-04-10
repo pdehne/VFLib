@@ -25,7 +25,7 @@
 #include "vf_SafeBool.h"
 
 /**
-    A container for error details.
+    A concise error report.
 
     This lightweight but flexible class records lets you record the file and
     line where a recoverable error occurred, along with some optional human

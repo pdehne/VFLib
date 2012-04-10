@@ -194,7 +194,7 @@ SEPARATE_MEMBER_PAGES  = NO
 # The TAB_SIZE tag can be used to set the number of spaces in a tab. 
 # Doxygen uses this value to replace tabs by spaces in code fragments.
 
-TAB_SIZE               = 4
+TAB_SIZE               = 2
 
 # This tag can be used to specify a number of aliases that acts 
 # as commands in the documentation. An alias has the form "name=value". 
@@ -684,34 +684,34 @@ INPUT += \
      ../include/vf/modules/vf_concurrent/memory/ \
      ../include/vf/modules/vf_concurrent/threads/
 
-#INPUT += \
-#     ../include/vf/modules/vf_core/vf_core.h \
-#     ../include/vf/modules/vf_core/containers/ \
-#     ../include/vf/modules/vf_core/diagnostic/ \
-#     ../include/vf/modules/vf_core/events/ \
-#     ../include/vf/modules/vf_core/functor/ \
-#     ../include/vf/modules/vf_core/math/ \
-#     ../include/vf/modules/vf_core/memory/ \
-#     ../include/vf/modules/vf_core/threads/
-#
-#INPUT += \
-#     ../include/vf/modules/vf_db/vf_db.h \
-#     ../include/vf/modules/vf_db/api/
-#
-#INPUT += \
-#     ../include/vf/modules/vf_gui/vf_gui.h \
-#     ../include/vf/modules/vf_gui/components/ \
-#     ../include/vf/modules/vf_gui/graphics/ \
-#     ../include/vf/modules/vf_gui/layout/ \
-#     ../include/vf/modules/vf_gui/mouse/
-#
-#INPUT += \
-#     ../include/vf/modules/vf_bzip2/vf_bzip2.h \
-#     ../include/vf/modules/vf_freetype/vf_freetype.h \
-#     ../include/vf/modules/vf_lua/vf_lua.h \
-#     ../include/vf/modules/vf_luabridge/vf_luabridge.h \
-#     ../include/vf/modules/vf_sqlite/vf_sqlite.h \
-#     ../include/vf/modules/vf_taglib/vf_taglib.h
+INPUT += \
+     ../include/vf/modules/vf_core/vf_core.h \
+     ../include/vf/modules/vf_core/containers/ \
+     ../include/vf/modules/vf_core/diagnostic/ \
+     ../include/vf/modules/vf_core/events/ \
+     ../include/vf/modules/vf_core/functor/ \
+     ../include/vf/modules/vf_core/math/ \
+     ../include/vf/modules/vf_core/memory/ \
+     ../include/vf/modules/vf_core/threads/
+
+INPUT += \
+     ../include/vf/modules/vf_db/vf_db.h \
+     ../include/vf/modules/vf_db/api/
+
+INPUT += \
+     ../include/vf/modules/vf_gui/vf_gui.h \
+     ../include/vf/modules/vf_gui/components/ \
+     ../include/vf/modules/vf_gui/graphics/ \
+     ../include/vf/modules/vf_gui/layout/ \
+     ../include/vf/modules/vf_gui/mouse/
+
+INPUT += \
+     ../include/vf/modules/vf_bzip2/vf_bzip2.h \
+     ../include/vf/modules/vf_freetype/vf_freetype.h \
+     ../include/vf/modules/vf_lua/vf_lua.h \
+     ../include/vf/modules/vf_luabridge/vf_luabridge.h \
+     ../include/vf/modules/vf_sqlite/vf_sqlite.h \
+     ../include/vf/modules/vf_taglib/vf_taglib.h
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -1595,12 +1595,13 @@ SKIP_FUNCTION_MACROS   = YES
 # NOT include the path). If a tag file is not located in the directory in which 
 # doxygen is run, you must also specify the path to the tagfile here.
 
-TAGFILES               = 
+TAGFILES               =
+TAGFILES              += juce.tag=http://www.rawmaterialsoftware.com/juce/api/
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create 
 # a tag file that is based on the input files it reads.
 
-GENERATE_TAGFILE       = 
+GENERATE_TAGFILE       = vflib.tag
 
 # If the ALLEXTERNALS tag is set to YES all external classes will be listed 
 # in the class index. If set to NO only the inherited external classes 
