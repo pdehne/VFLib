@@ -28,8 +28,7 @@
 #include "../memory/vf_FifoFreeStore.h"
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/**
     A group of concurrent Listeners.
 
     A Listener is an object of class type which inherits from a defined
@@ -219,6 +218,8 @@
     interactions in the shared state.
 
     @see CallQueue
+
+    \ingroup vf_concurrent
 */
 
 #ifndef DOXYGEN

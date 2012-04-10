@@ -22,12 +22,14 @@
 #ifndef VF_LUABRIDGE_VFHEADER
 #define VF_LUABRIDGE_VFHEADER
 
-/** \defgroup vf_luabridge vf_luabridge
-
+//==============================================================================
+/** 
     LuaBridge: A lightweight, dependency-free library for binding Lua to C++.
 
     This is an external module that provides LuaBridge. It requires the
-    vf_lua module.
+    \ref vf_lua module.
+
+    \defgroup vf_luabridge vf_luabridge
 */
 
 #include "AppConfig.h"

@@ -22,10 +22,14 @@
 #ifndef VF_FPUFLAGS_VFHEADER
 #define VF_FPUFLAGS_VFHEADER
 
-//
-// Cross platform interface for inspecting and changing IEEE FPU flags
-//
+//==============================================================================
+/**
+    Inspection and modification of IEEE FPU flags.
 
+    Description.
+
+    \ingroup vf_core
+*/
 class FPUFlags
 {
 public:
@@ -173,9 +177,28 @@ private:
 
 //------------------------------------------------------------------------------
 
-//
-// Allows the FPU flags to be set and restored in a scope.
-//
+//==============================================================================
+/**
+    Scoped FPU flag modifications.
+
+    Allows scoped modification of the FPU flags.
+
+        inline void usageExample ()
+        {
+          FPUFlags flags;
+          flags.setUnmaskAllExceptions ();
+
+          {
+            ScopedFPUFlags fpu (flags); 
+
+            // Perform floating point calculations
+          }
+
+          // FPU flags are back to what they were now
+        }
+
+    \ingroup vf_core
+*/
 class ScopedFPUFlags
 {
 public:
@@ -194,25 +217,6 @@ public:
 private:
   FPUFlags m_savedFlags;
 };
-
-#if 0
-
-// Example for unmasking FPU exceptions
-inline void usageExample ()
-{
-  FPUFlags flags;
-  flags.setUnmaskAllExceptions ();
-
-  {
-    ScopedFPUFlags fpu (flags); 
-
-    // Perform floating point calculations
-  }
-
-  // FPU flags are back to what they were now
-}
-
-#endif
 
 #endif
 

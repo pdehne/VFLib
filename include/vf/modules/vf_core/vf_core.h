@@ -22,12 +22,14 @@
 #ifndef VF_CORE_VFHEADER
 #define VF_CORE_VFHEADER
 
-/** \defgroup vf_core vf_core
-
+//==============================================================================
+/**
     Core classes.
 
     This module provides functionality required by other modules, and classes
     useful for general development.
+
+    \defgroup vf_core vf_core
 */
 
 /** See the Juce notes regarding AppConfig.h

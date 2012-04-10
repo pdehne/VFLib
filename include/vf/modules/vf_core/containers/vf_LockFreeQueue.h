@@ -26,8 +26,7 @@
 #include "../memory/vf_AtomicPointer.h"
 
 //==============================================================================
-/** \ingroup vf_core
-
+/** 
     Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
 
     This container uses the same intrusive interface as List. It is wait-free
@@ -45,6 +44,8 @@
     @param Tag  A type name used to distinguish lists and nodes, for
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
+
+    \ingroup vf_core
 */
 
 #ifndef DOXYGEN

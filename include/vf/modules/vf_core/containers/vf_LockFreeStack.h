@@ -25,8 +25,7 @@
 #include "../memory/vf_AtomicPointer.h"
 
 //==============================================================================
-/** \ingroup vf_core
-
+/** 
     Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
 
     This stack is implemented using the same intrusive interface as List. All
@@ -38,6 +37,8 @@
     @param Tag  A type name used to distinguish lists and nodes, for
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
+
+    \ingroup vf_core
 */
 
 #ifndef DOXYGEN

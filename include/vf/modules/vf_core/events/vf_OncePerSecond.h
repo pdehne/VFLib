@@ -25,11 +25,14 @@
 #include "../containers/vf_List.h"
 
 //==============================================================================
-/** Provides a once per second notification.
+/** 
+    Provides a once per second notification.
 
     Derive your class from OncePerSecond and override doOncePerSecond(). Then,
     call startOncePerSecond() to begin receiving the notifications. No clean-up
     or other actions are required.
+
+    \ingroup vf_core
 */
 class OncePerSecond : Uncopyable
 {

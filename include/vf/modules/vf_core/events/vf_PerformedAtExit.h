@@ -25,11 +25,14 @@
 #include "../containers/vf_LockFreeStack.h"
 
 //==============================================================================
-/** Provides an opportunity to perform an action at exit
+/** 
+    Perform an action at program exit
 
     To use, derive your class from PerformedAtExit, and override performAtExit().
     The call will be made during the destruction of objects with static storage
     duration, before LeakChecked performs its diagnostics.
+
+    \ingroup vf_core
 */
 class PerformedAtExit : LockFreeStack <PerformedAtExit>::Node
 {

@@ -23,11 +23,14 @@
 #define VF_ATOMICFLAG_VFHEADER
 
 //==============================================================================
-/** A thread safe flag.
+/** 
+    A thread safe flag.
  
     This provides a simplified interface to an atomic integer suitable for
     representing a flag. The flag is signaled when on, else it is considered
     reset.
+
+    \ingroup vf_core
 */
 class AtomicFlag
 {

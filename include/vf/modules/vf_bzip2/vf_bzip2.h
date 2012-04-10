@@ -22,6 +22,7 @@
 #ifndef VF_BZIP2_VFHEADER
 #define VF_BZIP2_VFHEADER
 
+//==============================================================================
 /** 
     bZip2: a freely available, high quality data compressor.
 

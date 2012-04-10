@@ -22,11 +22,13 @@
 #ifndef VF_SQLITE_VFHEADER
 #define VF_SQLITE_VFHEADER
 
-/** \defgroup vf_sqlite vf_sqlite
-
+//==============================================================================
+/** 
     SQLite: A self-contained, serverless, zero configuration, transactional SQL engine.
 
     This is an external module that provides SQLite.
+
+    \defgroup vf_sqlite vf_sqlite
 */
 
 #include "AppConfig.h"

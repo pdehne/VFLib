@@ -26,8 +26,7 @@
 #include "../memory/vf_FifoFreeStore.h"
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/** 
     A FIFO for calling functors asynchronously.
 
     This object is an alternative to traditional locking techniques used to
@@ -136,6 +135,8 @@
     and wait-free (in the fast path) custom memory allocator.
 
     @see GuiCallQueue, ManualCallQueue
+
+    \ingroup vf_concurrent
 */
 class CallQueue
 {

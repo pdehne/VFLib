@@ -25,12 +25,15 @@
 #include "../diagnostic/vf_SafeBool.h"
 #include "../functor/vf_Function.h"
 
+//==============================================================================
 /**
-  Encapsulates an interruptible thread.
+  A thread with soft interruption support.
 
   The thread must periodically call interruptionPoint(), which returns
   true the first time an interruption has occurred since the last call to
   interruptionPoint().
+
+  \ingroup vf_core
 */
 class InterruptibleThread : public VF_JUCE::Thread
 {

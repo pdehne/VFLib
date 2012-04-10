@@ -22,6 +22,7 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
+//==============================================================================
 /**
     Audio processing classes.
 

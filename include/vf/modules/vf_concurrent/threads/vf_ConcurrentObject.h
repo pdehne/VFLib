@@ -23,8 +23,7 @@
 #define VF_CONCURRENTOBJECT_VFHEADER
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/** 
     A reference counted object, deleted on a separate thread.
 
     This is a reference counted object compatible with
@@ -41,6 +40,8 @@
 
     The deletion behavior can be overriden by providing a replacement
     for deleteConcurrentObject().
+
+    \ingroup vf_concurrent
 */
 class ConcurrentObject : Uncopyable
 {

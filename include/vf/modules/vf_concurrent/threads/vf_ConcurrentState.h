@@ -25,8 +25,7 @@
 #include "vf_ReadWriteMutex.h"
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/** 
     Encapsulation for data accessed by multiple threads.
 
     This template encloses an object typically consisting of public data members
@@ -83,6 +82,8 @@
     }
 
     @endcode
+
+    \ingroup vf_concurrent
 */
 template <class Object>
 class ConcurrentState : Uncopyable

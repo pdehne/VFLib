@@ -25,14 +25,15 @@
 #include "vf_CallQueue.h"
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/** 
     A CallQueue handled by the Juce message thread (gui).
 
     To use this, put an instance of the class in your application object
     or other central location. Calls placed in the queue will automatically
     get processed by the Juce message loop, no further action is required
     to make it work.
+
+    \ingroup vf_concurrent
 */
 class GuiCallQueue
   : public CallQueue

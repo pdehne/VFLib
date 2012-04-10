@@ -23,10 +23,13 @@
 #define VF_ATOMICSTATE_VFHEADER
 
 //==============================================================================
-/** A thread safe state variable.
+/**
+    A thread safe state variable.
 
     This provides a simplified interface to an integer used to control atomic
     state transitions. A state is distinguished by a single integer value.
+
+    \ingroup vf_core
 */ 
 class AtomicState
 {

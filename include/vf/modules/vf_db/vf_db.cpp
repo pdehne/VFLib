@@ -21,8 +21,6 @@
 
 #include "vf_db.h"
 
-#if VF_USE_SQLITE
-
 #include "../vf_sqlite/vf_sqlite.h"
 
 #if JUCE_MSVC
@@ -56,6 +54,4 @@ namespace vf
 
 #if JUCE_MSVC
 #pragma warning (pop)
-#endif
-
 #endif

@@ -23,8 +23,7 @@
 #define VF_LIST_VFHEADER
 
 //==============================================================================
-/** \ingroup vf_core
-
+/**
     Intrusive doubly linked list.
 
     The intrusive List is container similar in operation to std::list in the
@@ -128,7 +127,9 @@
     typedef List <Actor, ProcessTag> ProcessList;
     typedef List <Actor, UpdateTag> UpdateList;
 
-    struct Actor
+    // Derive from both node types so we can be in each list at once.
+    //
+    struct Actor : ProcessList::Node, UpdateList::Node
     {
       bool process ();    // returns true if we need an update
       void update ();
@@ -139,6 +140,8 @@
     @param Tag  A type name used to distinguish lists and nodes, for
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
+
+    \ingroup vf_core
 */
 
 #ifndef DOXYGEN

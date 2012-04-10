@@ -24,10 +24,8 @@
 
 #include "vf_SafeBool.h"
 
-/** \ingroup vf_core */
 /**
-
-    Error reporting object.
+    A container for error details.
 
     This lightweight but flexible class records lets you record the file and
     line where a recoverable error occurred, along with some optional human
@@ -36,6 +34,8 @@
     A recoverable error can be passed along and turned into a non recoverable
     error by throwing the object: it's derivation from std::exception is
     fully compliant with the C++ exception interface.
+
+    \ingroup vf_core
 */   
 class Error
   : public std::exception

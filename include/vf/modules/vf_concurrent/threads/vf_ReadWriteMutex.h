@@ -23,8 +23,7 @@
 #define VF_READWRITEMUTEX_VFHEADER
 
 //==============================================================================
-/** \ingroup vf_concurrent
-
+/**
     Multiple consumer, single producer (MCSP) synchronization primitive.
 
     This is an optimized lock for the multiple reader, single writer
@@ -45,6 +44,8 @@
 
     The implementation is wait-free in the fast path: acquiring read access
     for a lock without contention - just one interlocked increment!
+
+    \ingroup vf_concurrent
 */
 
 #ifndef DOXYGEN

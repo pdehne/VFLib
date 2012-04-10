@@ -23,11 +23,14 @@
 #define VF_ATOMICPOINTER_VFHEADER
 
 //==============================================================================
-/** A thread safe pointer.
+/**
+    A thread safe pointer.
  
     This provides a simplified interface to an atomic pointer suitable
     for building containers or composite classes. Operator overloads
     allow access to the underlying pointer using natural C++ syntax.
+
+    \ingroup vf_core
 */
 template <class P>
 class AtomicPointer

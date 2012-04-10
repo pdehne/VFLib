@@ -23,11 +23,14 @@
 #define VF_ATOMICCOUNTER_VFHEADER
 
 //==============================================================================
-/** A thread safe usage counter.
+/** 
+    A thread safe usage counter.
  
     This provides a simplified interface to an atomic integer suitable for
     measuring reference or usage counts. The counter is signaled when the
     count is non zero, else it is considered reset.
+
+    \ingroup vf_core
 */
 class AtomicCounter
 {
