@@ -23,7 +23,8 @@
 #define VF_CONCURRENT_VFHEADER
 
 //==============================================================================
-/**
+/** @defgroup vf_concurrent vf_concurrent
+
     Classes for building a concurrent system.
 
     This object is an alternative to traditional locking techniques used to
@@ -69,9 +70,8 @@
     combinatorial explosion of possibilities depending on the complex interaction
     of multiple threads.
 
-    @defgroup vf_concurrent vf_concurrent
- */
-/// \todo discuss limit on the size of the functor
+    @todo Discuss the limit on the size of the functor used in CallQueue and Listeners.
+*/
 
 #include "../vf_core/vf_core.h"
 

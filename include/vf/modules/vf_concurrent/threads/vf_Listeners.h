@@ -59,7 +59,7 @@
     @endcode
 
     Now set up the place where you want to send the notifications. In this
-    example, we will set up the audioDeviceIOCallback to notify anyone who is
+    example, we will set up the AudioIODeviceCallback to notify anyone who is
     interested about changes in the current audio output level. We will use
     this to implement a VU meter:
 
@@ -67,20 +67,13 @@
 
     Listeners <Listener> listeners;
 
-    void audioDeviceIOCallback (const float** inputChannelData,
-							    int numInputChannels,
-							    float** outputChannelData,
-							    int numOutputChannels,
-							    int numSamples)
-    {
-      // Process audio data
+    // (Process audio data)
 
-      // Calculate output level
-      float outputLevel = calcOutputLevel ();
+    // Calculate output level
+    float outputLevel = calcOutputLevel ();
 
-      // Notify listeners
-      listeners.call (&Listener::onOutputLevelChanged, outputLevel);
-    }
+    // Notify listeners
+    listeners.call (&Listener::onOutputLevelChanged, outputLevel);
 
     @endcode
 
@@ -514,7 +507,7 @@ public:
       parameters destroyed normally. This functionality is useful for
       high frequency notifications of non critical data, where the recipient
       may not catch up often enough. For example, the output level of the
-      audioDeviceIOCallback in the example is a candidate for the use of
+      AudioIODeviceCallback in the example is a candidate for the use of
       update().
 
       @param mf The member function to call. This may be followed by up to 8

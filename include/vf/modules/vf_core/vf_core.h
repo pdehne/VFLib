@@ -30,8 +30,11 @@
     useful for general development.
 
     @defgroup vf_core vf_core
+
+    @todo Discuss the treatment of exceptions versus Error objects in the library.
+
+    @todo Discuss the additions to AppConfig.h
 */
-/// \todo discuss exceptions
 
 /** See the Juce notes regarding AppConfig.h
 

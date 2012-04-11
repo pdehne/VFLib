@@ -25,28 +25,40 @@
 #include "vf_CallQueue.h"
 
 //==============================================================================
-/** 
+/** @ingroup vf_concurrent
+
     A CallQueue that requires periodic manual synchronization.
 
     To use this, declare an instance and then place calls into it as usual.
     Every so often, you must call synchronize() from the thread you want to
-    associate with the queue. Typically this is done with the
-    audioDeviceIOCallback:
+    associate with the queue. Typically this is done within an
+    AudioIODeviceCallback:
 
     @code
 
-    ManualCallQueue fifo ("Audio CallQueue");
-
-    void audioDeviceIOCallback (const float** inputChannelData,
-							    int numInputChannels,
-							    float** outputChannelData,
-							    int numOutputChannels,
-							    int numSamples)
+    class AudioIODeviceCallbackWithCallQueue
+      : public AudioIODeviceCallback
+      , public CallQueue
     {
-	  fifo.synchronize ();
+    public:
+      AudioIODeviceCallbackWithCallQueue () : m_fifo ("Audio CallQueue")
+      {
+      }
 
-	  // do audio i/o
-    }
+      void audioDeviceIOCallback (const float** inputChannelData,
+							      int numInputChannels,
+							      float** outputChannelData,
+							      int numOutputChannels,
+							      int numSamples)
+      {
+	    CallQueue::synchronize ();
+
+	    // do audio i/o
+      }
+
+      void signal () { } // No action required
+      void reset () { }  // No action required
+    };
 
     @endcode
 
@@ -56,8 +68,6 @@
     you can track it down.
 
     @see CallQueue
-
-    @ingroup vf_concurrent
 */
 class ManualCallQueue : public CallQueue
 {

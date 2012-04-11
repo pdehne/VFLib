@@ -28,7 +28,8 @@
 
     Derived classes will use the specified allocator for new and delete
 
-    @internal
+    @param AllocatorType The type of allocator to use.
+
     @ingroup vf_concurrent internal
 */
 template <class AllocatorType>

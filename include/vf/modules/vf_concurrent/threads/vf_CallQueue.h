@@ -61,8 +61,8 @@
     Although there is some extra work required to set up and maintain this
     system, the benefits are significant. Since shared data is only synchronized
     at well defined times, the programmer can reason and make strong statements
-    about the correctness of the concurrent system. For example, if the
-    audioDeviceIOCallback synchronizes the CallQueue only at the beginning of its
+    about the correctness of the concurrent system. For example, if an
+    AudioIODeviceCallback synchronizes the CallQueue only at the beginning of its
     execution, it is guaranteed that shared data will remain the same throughout
     the remainder of the function.
 
@@ -143,20 +143,8 @@ class CallQueue
 public:
   //============================================================================
 
-  /** @param  name  A string identifying the associated thread for debugging.
-  */
-  explicit CallQueue (String name);
-
-  /** @details It is an error to destroy a CallQueue that still contains functors.
-  */
-  ~CallQueue ();
-
-  //============================================================================
-
-  /** @internal */
   typedef FifoFreeStoreType AllocatorType;
 
-  /** @internal */
   class Call : public LockFreeQueue <Call>::Node,
                public AllocatedBy <AllocatorType>
   {
@@ -165,23 +153,28 @@ public:
     virtual void operator() () = 0;
   };
 
-  /** @internal */
   void callp (Call* call);
 
-  /** @internal */
   void queuep (Call* call);
 
-  /** @internal */
   inline AllocatorType& getAllocator ()
   {
     return m_allocator;
   }
 
-  /** @internal */
   bool isAssociatedWithCurrentThread () const;
 
-  /** @internal */
   bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
+
+  //============================================================================
+
+  /** @param  name  A string identifying the associated thread for debugging.
+  */
+  explicit CallQueue (String name);
+
+  /** @details It is an error to destroy a CallQueue that still contains functors.
+  */
+  ~CallQueue ();
 
   //============================================================================
 
@@ -200,8 +193,9 @@ public:
                to the class object.
 
       @see queue
+
+      @todo Provide an example of when synchronize() is needed in call().
   */
-  ///@todo Example of why synchronize() is needed in call()
   template <class Fn>
   void call (Fn f)
   { callf (vf::bind (f)); }

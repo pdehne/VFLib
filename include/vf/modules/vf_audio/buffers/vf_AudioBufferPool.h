@@ -23,37 +23,41 @@
 #define VF_AUDIOBUFFERPOOL_VFHEADER
 
 //==============================================================================
-/** 
+/** @ingroup vf_audio
+
     A pool of audio buffers for temporary calculations.
 
-    The container provides a pool of audio buffers that grow to match the
+    This container provides a pool of audio buffers that grow to match the
     working set requirements based on actual usage. Since the buffers never
     shrink or get deleted, there are almost no calls to the system to allocate
     or free memory.
 
-    This is ideal for audioDeviceIOCallback implementations which process
+    This is ideal for AudioIODeviceCallback implementations which process
     audio buffers and require temporary storage for intermediate calculations.
     The usage style is to request a temporary buffer of the desired size,
     perform calculations, and then release the buffer when finished.
 
-    The container will intelligently resize and recycle these buffers to
-    consume the smallest amount of memory possible based on usage patterns,
-    with no effort required by the programmer.
+    Buffers are intelligently resized and recycled to consume the smallest
+    amount of memory possible based on the usage pattern, with no effort
+    required by the programmer.
 
-    It's easy to use:
+    To use the container, create an instance of the AudioBufferPoolType
+    template, and specify the type of lock to use for synchronization. By
+    default, a CriticalSection is used but if you aren't sharing the pool
+    between threads, you can use a DummyCriticalSection instead.
+
+    Here's an example:
 
     @code
-	
+
     AudioBufferPoolType <DummyCriticalSection> pool;
 
     // Request a stereo buffer with room for 1024 samples.
-    /
     AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
     // (Process buffer)
 
     // Release the buffer to be re-used later.
-    //
     pool.releaseBuffer (buffer);
 
     @endcode
@@ -65,11 +69,9 @@
     @code
 
     // Request a stereo buffer with room for 1024 samples.
-    //
     AudioBufferPool::Buffer* buffer = pool.requestBuffer (2, 1024);
 
     // Fill out the AudioSourceChannelInfo structure with the buffer
-    //
     AudioSourceChannelInfo info;
     info.buffer = buffer;         // allowed, since AudioBufferPool::Buffer *
                                   // is-a AudioSampleBuffer *
@@ -77,26 +79,26 @@
     info.numSamples = 1024;
 
     // Clear out the range of samples
-    //
     info.clearActiveBufferRegion ();
-    
+
     @endcode
 
-    The thread safety of AudioBufferPoolType is determined by the LockType
-    template parameter:
-
-    @param LockType  The type of lock to use. To share the pool between threads
-                      a CriticalSection is needed. To use the pool without any
-                      locking, a DummyCriticalSection may be used.
-
-    @see ScopedAudioSampleBuffer
-
-    @ingroup vf_audio
+    @see AudioBufferPoolType, ScopedAudioSampleBuffer
 */
 
 class AudioBufferPool
 {
 public:
+  /** @internal
+
+      Size tracking for AudioSampleBuffer.
+
+      This provides the getNumSamplesAllocated () function necessary for the
+      implementation of AudioBufferPool. It otherwise acts like a normal
+      AudioSampleBuffer.
+
+      @ingroup internal
+  */
   class Buffer : public juce::AudioSampleBuffer
   {
   public:
@@ -126,9 +128,9 @@ public:
 
   /** Request a temporary buffer.
 
-      A buffer is returned from the pool with the specified number of channels
-      and enough room for at least numSamples. The buffer is taken out of the
-      pool, until it is released with a matching call to releaseBuffer().
+      The pool returns a buffer with the specified number of channels and
+      enough room for at least numSamples. The caller owns the buffer until it
+      is released with a matching call to releaseBuffer().
 
       @param numChannels  The number of channels requested.
 
@@ -154,29 +156,38 @@ private:
 };
 
 //==============================================================================
+/**
+    Template for AudioBufferPool with a specified lock type.
 
-template <class LockType = CriticalSection>
+    This provides an instance of AudioBufferPool using the specified type as
+    the lock. The default is to use a CriticalSection. Alternatively, a
+    DummyCriticalSection may be used when the caller is responsible for
+    synchronization.
+
+    @ingroup vf_audio
+*/
+template <class TypeOfCriticalSectionToUse = CriticalSection>
 class AudioBufferPoolType
   : public AudioBufferPool
-  , public LeakChecked <AudioBufferPoolType <LockType> >
+  , public LeakChecked <AudioBufferPoolType <TypeOfCriticalSectionToUse> >
 {
 public:
   Buffer* requestBuffer (int numChannels, int numSamples)
   {
-    LockType::ScopedLockType lock (m_mutex);
+    TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);
 
     return requestBufferInternal (numChannels, numSamples);
   }
 
   void releaseBuffer (Buffer* buffer)
   {
-    LockType::ScopedLockType lock (m_mutex);
+    TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);
 
     releaseBufferInternal (buffer);
   }    
 
 private:
-  LockType m_mutex;
+  TypeOfCriticalSectionToUse m_mutex;
 };
 
 #endif

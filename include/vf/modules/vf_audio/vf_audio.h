@@ -22,12 +22,20 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
+/** Header file for the vf_audio module.
+
+    Include this file to use the vf_audio module.
+
+    @file vf_audio.h
+    @ingroup vf_audio
+*/
+
 //==============================================================================
 /**
-    Audio processing classes.
+    Audio signal processing utilities.
 
-    This is a small collection of useful utility classes for performing audio
-    processing on buffers of sample data.
+    This is a small collection of classes for performing audio signal
+    processing.
 
     @defgroup vf_audio vf_audio
 */
@@ -39,8 +47,8 @@ namespace vf
 
 #include "buffers/vf_AudioBufferPool.h"
 #include "buffers/vf_AudioSampleBufferArray.h"
-#include "buffers/vf_ScopedAudioSampleBuffer.h"
 #include "sources/vf_NoiseAudioSource.h"
+#include "buffers/vf_ScopedAudioSampleBuffer.h"
 
 }
 

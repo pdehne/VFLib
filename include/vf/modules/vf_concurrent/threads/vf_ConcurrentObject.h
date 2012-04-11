@@ -35,8 +35,8 @@
     This class is useful for offloading the deletion work of "deep" objects
     shared by multiple threads: objects containing complex members, or a
     hierarchy of allocated structures. For example, a ValueTree. The problem
-    of performing heavyweight memory or cleanup operations from either the
-    audioDeviceIOCallback or the message thread is avoided.
+    of performing heavyweight memory or cleanup operations from either an
+    AudioIODeviceCallback or the message thread is avoided.
 
     The deletion behavior can be overriden by providing a replacement
     for deleteConcurrentObject().

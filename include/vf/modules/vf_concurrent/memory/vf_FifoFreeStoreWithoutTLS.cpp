@@ -44,7 +44,7 @@ public:
 
   ~Block ()
   {
-    vfassert (m_refs.get() == 0);
+    jassert (!m_refs.isSignaled ());
   }
 
   inline void addref ()
@@ -54,8 +54,6 @@ public:
 
   inline bool release ()
   {
-    vfassert (m_refs.get () > 0);
-
     return m_refs.release ();
   }
 

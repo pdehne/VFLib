@@ -23,22 +23,10 @@
 #define VF_NOISEAUDIOSOURCE_VFHEADER
 
 //==============================================================================
-/**
-    An AudioSource to produce noise.
+/** Filter to make pink noise from white"
 
-    The noise can be pink or white.
-
-    @ingroup vf_audio
+    From http://www.musicdsp.org/files/pink.txt
 */
-
-//==============================================================================
-
-//
-// "Filter to make pink noise from white"
-//
-// From
-// http://www.musicdsp.org/files/pink.txt
-//
 struct pink_noise_filter
 {
   // +/-0.05dB above 9.2Hz @ 44,100 Hz Fs
@@ -96,24 +84,31 @@ private:
 };
 
 //==============================================================================
+/**
+    An AudioSource to produce noise.
 
+    The noise can be pink or white.
+
+    @ingroup vf_audio
+
+    @todo Refactor to produce only white noise. Create a new AudioSource called
+          PinkNoiseFilter that can be chained onto another AudioSource. Create
+          PinkNoiseAudioSource as a composition of NoiseAudioSource and
+          PinkNoiseFilter.
+*/
 class NoiseAudioSource : public AudioSource
 {
 public:
-  /** Create a noise source.
-
-      @param pink `true for pink noise, else white noise.
-
-  */
+  /** @param pink true for pink noise. */
   explicit NoiseAudioSource (bool pink = false);
   
-  /** Destroy the noise source. */
   ~NoiseAudioSource ();
 
-  /* AudioSource overrides */
   void prepareToPlay (int samplesPerBlockExpected,
                       double sampleRate);
+
   void releaseResources();
+
   void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill);
   
 private:
