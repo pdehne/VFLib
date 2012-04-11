@@ -25,10 +25,7 @@
 /*! \mainpage VFLib: A multipurpose class library built on JUCE.
 
   VFLib is a source code collection of individual modules containing
-  functionality for a variety of applications. Some modules provide support
-  for external libraries. Usage of these external library modules is optional.
-  They come with complete source code, as well as options for using either
-  system or user provided variants of the external libraries.
+  functionality for a variety of applications. 
 
   VFLib requires JUCE (Jules' Utility Class Extensions) available from
   http://rawmaterialsoftware.com/juce.php. JUCE is available under both the
@@ -56,9 +53,6 @@
 
   \section Prerequisites
 
-  To use the library it is necessary to first download JUCE to a location where
-  VFLib can find it. Or, you can use your existing installation of JUCE. 
-
   The documentation for VFLib assumes that the reader has a working knowledge
   of JUCE. Some modules built on external libraries assume that the reader
   understands the operation of those external libraries. Certain modules assume
@@ -67,23 +61,38 @@
 
   \section External Modules
 
-  Some modules bring in functionality provided by third party libraries.
+  Some modules bring in functionality provided by external libraries. For
+  example, the \ref vf_bzip2 module provides the compression and decompression
+  algorithms in bZip2. Usage of these external library modules is optional.
+  They come with complete source code, as well as options for using either
+  system or user provided variants of the external libraries: it is not
+  necessary to download additional files to use these modules.
 
-  Description.
+  External code incorporated into VFLib is covered by a separate license.
+  See the licensing information and notes in the corresponding source files,
+  for copyright information and terms of use.
 
   \section Integration
 
   VFLib requires recent versions of JUCE. It won't work with JUCE versions
-  1.53 or earlier.
+  1.53 or earlier. To use the library it is necessary to first download JUCE to
+  a location where VFLib can find it. Or, you can use your existing installation
+  of JUCE. 
 
-  This library uses the same modularized organizational structure as JUCE.
+  This library uses the same modularized organizational structure as JUCE. To
+  use a module, first add a path to the list of includes searched by your
+  development environment or project, which points to the VFLib directory
+  named "include". Then, add the single corresponding .c or .cpp file
+  to your existing project which already uses JUCE. For example, to use the
+  \ref vf_core module, add the file vf_core.cpp to your project. Some modules
+  depend on other modules. All modules depend on \ref vf_core.
 
-  The library offers several logical sets of aggregated functionality, with
-  sources organized in the style of a JUCE module. To use a module, first add
-  a single path to the list of includes searched by your development environment
-  or project, which points to the VFLib include directory. Then add the
-  corresponding .c or .cpp file (for example, vf_concurrent.cpp) to your
-  existing project which already uses JUCE.
+  To use a module, include the appropriate header from within your source code.
+  For example, to access classes in the \ref vf_concurrent module, use this:
+
+  @code
+  #include "vf/modules/vf_concurrent/vf_concurrent.h"
+  @endcode
 
   \section AppConfig
 
