@@ -22,12 +22,24 @@
 #ifndef VF_LUA_VFHEADER
 #define VF_LUA_VFHEADER
 
-/** 
-    Lua: A powerful, fast, lightweight, embeddable scripting language.
+//==============================================================================
+/** A powerful, fast, lightweight, embeddable scripting language.
 
-    This is an external module that provides Lua.
+    This external module provides the Lua external library.
+
+    Lua is licensed separately, please visit
+    http://www.lua.org/
 
     @defgroup vf_lua vf_lua
+    @ingroup external
+*/
+
+//==============================================================================
+/** Include file for the @ref vf_lua external module.
+
+    @file vf_lua.h
+    @ingroup vf_lua
+    @ingroup external
 */
 
 #include "AppConfig.h"

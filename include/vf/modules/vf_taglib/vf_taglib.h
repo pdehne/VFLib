@@ -26,18 +26,19 @@
 #define VF_TAGLIB_VFHEADER
 
 //==============================================================================
-/** TagLib: Meta data extraction and output to multimedia files.
+/** Meta data extraction and output to multimedia files.
 
-    This external module provides the
-    <a href="http://developer.kde.org/~wheeler/taglib.html">TagLib Audio Meta-Data Library</a>.
+    This external module provides the TagLib Audio Meta-Data Library.
+
+    TagLib is licensed separately, please visit:
+    http://developer.kde.org/~wheeler/taglib.html
 
     @defgroup vf_taglib vf_taglib
     @ingroup external
 */
 
-/** External module header file.
-
-    Include this file to use the TagLib external library.
+//==============================================================================
+/** Include file for the @ref vf_taglib external module.
 
     @file vf_taglib.h
     @ingroup vf_taglib

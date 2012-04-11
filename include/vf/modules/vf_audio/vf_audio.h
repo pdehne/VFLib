@@ -32,9 +32,7 @@
 */
 
 //==============================================================================
-/** Include file for the vf_audio module.
-
-    Include this file to use the vf_audio module.
+/** Include file for the @ref vf_audio module.
 
     @file vf_audio.h
     @ingroup vf_audio

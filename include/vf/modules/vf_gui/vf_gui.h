@@ -23,13 +23,19 @@
 #define VF_GUI_VFHEADER
 
 //==============================================================================
-/** 
-    Classes for appearance and graphical display.
+/** Classes for appearance and graphical display.
 
     This module offers classes that assist with the development and presentation
     of user interface components.
 
     @defgroup vf_gui vf_gui
+*/
+
+//==============================================================================
+/** Include file for the @ref vf_gui module.
+
+    @file vf_gui.h
+    @ingroup vf_gui
 */
 
 #include "../vf_core/vf_core.h"
