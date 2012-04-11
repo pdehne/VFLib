@@ -23,12 +23,21 @@
 #define VF_DB_VFHEADER
 
 //==============================================================================
-/**
-    A SQLite wrapper with a natural, intuitive, and type-safe interface.
+/** An embedded database wrapper with an intuitive, type-safe interface.
 
-    Description.
+    This collection of classes let's you access embedded SQLite databases
+    using C++ syntax that is very similar to regular SQL.
+
+    This module requires the @ref vf_sqlite external module.
 
     @defgroup vf_db vf_db
+*/
+
+//==============================================================================
+/** Include file for the @ref vf_db module.
+
+    @file vf_db.h
+    @ingroup vf_db
 */
 
 #include "../vf_core/vf_core.h"

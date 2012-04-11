@@ -21,8 +21,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_SQLITE
-
 #if _MSC_VER
 #pragma warning (push)
 #pragma warning (disable: 4127) // conditional expression is constant
@@ -44,6 +42,4 @@
 
 #if _MSC_VER
 #pragma warning (pop)
-#endif
-
 #endif

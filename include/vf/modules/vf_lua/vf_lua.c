@@ -21,8 +21,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_LUA
-
 #ifdef _MSC_VER
 #pragma push_macro("_CRT_SECURE_NO_WARNINGS")
 #ifndef _CRT_SECURE_NO_WARNINGS
@@ -106,6 +104,4 @@ extern "C"
 
 #ifdef _MSC_VER
 #pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
-#endif
-
 #endif

@@ -48,20 +48,13 @@
 #ifndef VF_USE_BOOST
 #define VF_USE_BOOST      0
 #endif
+
 #ifndef VF_USE_BZIP2
 #define VF_USE_BZIP2      0
 #endif
+
 #ifndef VF_USE_FREETYPE
 #define VF_USE_FREETYPE   0
-#endif
-#ifndef VF_USE_LUA
-#define VF_USE_LUA        0
-#endif
-#ifndef VF_USE_LUABRIDGE
-#define VF_USE_LUABRIDGE  0
-#endif
-#ifndef VF_USE_SQLITE
-#define VF_USE_SQLITE     0
 #endif
 
 // Handy macro that lets pragma warnings be clicked in the output window

@@ -44,10 +44,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_LUA
-
 #include "lua/lua.hpp"
-
-#endif
 
 #endif

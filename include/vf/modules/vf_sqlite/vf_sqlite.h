@@ -48,10 +48,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_SQLITE
-
 #include "sqlite/sqlite3.h"
-
-#endif
 
 #endif

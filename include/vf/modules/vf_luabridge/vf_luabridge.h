@@ -48,16 +48,8 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_LUABRIDGE
-
-#if VF_USE_LUA
-#  include "../vf_lua/vf_lua.h"
-#else
-#  error vf_luabridge requires vf_lua
-#endif
+#include "../vf_lua/vf_lua.h"
 
 #include "luabridge/luabridge.hpp"
-
-#endif
 
 #endif

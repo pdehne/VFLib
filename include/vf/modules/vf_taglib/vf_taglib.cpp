@@ -21,8 +21,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_TAGLIB
-
 #ifdef _MSC_VER
 #pragma warning (push)
 #pragma warning (disable: 4018) // signed/unsigned comparison mismatch
@@ -42,6 +40,4 @@
 
 #ifdef _MSC_VER
 #pragma warning (pop)
-#endif
-
 #endif

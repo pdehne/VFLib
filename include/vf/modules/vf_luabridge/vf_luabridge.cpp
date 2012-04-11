@@ -21,11 +21,7 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_LUABRIDGE
-
 #include "vf_luabridge.h"
 
 #include "luabridge/luabridge.cpp"
 #include "luabridge/shared_ptr.cpp"
-
-#endif

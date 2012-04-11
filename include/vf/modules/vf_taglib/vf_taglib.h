@@ -47,10 +47,6 @@
 
 #include "AppConfig.h"
 
-#if VF_USE_TAGLIB
-
 #include "taglib/TagLibAmalgam.h"
-
-#endif
 
 #endif
