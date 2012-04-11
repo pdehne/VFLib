@@ -27,7 +27,7 @@
 
     This is an external module that provides Lua.
 
-    \defgroup vf_lua vf_lua
+    @defgroup vf_lua vf_lua
 */
 
 #include "AppConfig.h"

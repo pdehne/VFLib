@@ -41,7 +41,7 @@
     ContentComponentConstrainer::attachTo (yourResizableWindow). It will take
     care of deleting itself and handle everything for you, like this:
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class ContentComponentConstrainer
   : private ComponentBoundsConstrainer

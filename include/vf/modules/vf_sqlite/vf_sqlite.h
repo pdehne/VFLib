@@ -26,9 +26,10 @@
 /** 
     SQLite: A self-contained, serverless, zero configuration, transactional SQL engine.
 
-    This is an external module that provides SQLite.
+    This external module provides <a href="http://sqlite.org/">SQLite</a>, an
+    embedded database.
 
-    \defgroup vf_sqlite vf_sqlite
+    @defgroup vf_sqlite vf_sqlite
 */
 
 #include "AppConfig.h"

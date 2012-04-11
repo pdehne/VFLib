@@ -30,7 +30,7 @@
     representing a flag. The flag is signaled when on, else it is considered
     reset.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class AtomicFlag
 {
@@ -44,9 +44,9 @@ public:
   /** Signal the flag.
 
       If two or more threads simultaneously attempt to signal the flag,
-      only one will receive a `true` return value.
+      only one will receive a true return value.
 
-      @return `true` if the flag was previously reset.
+      @return true if the flag was previously reset.
   */
   inline bool trySignal () noexcept
   {
@@ -89,7 +89,7 @@ public:
       The signaled status may change immediately after this call
       returns. The caller must synchronize.
 
-      @return `true` if the flag was signaled.
+      @return true if the flag was signaled.
   */
   inline bool isSignaled () const noexcept
   {

@@ -28,7 +28,7 @@
 /**
     A FifoFreeStore singleton.
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 template <class Tag>
 class GlobalFifoFreeStore : public ReferenceCountedSingleton <GlobalFifoFreeStore <Tag> >

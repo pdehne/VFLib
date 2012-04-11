@@ -28,7 +28,7 @@
 /**
     DragAndDropTarget wrapper supporting the DragAndDropData container.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class DragAndDropTarget : public juce::DragAndDropTarget
 {

@@ -30,7 +30,7 @@
     measuring reference or usage counts. The counter is signaled when the
     count is non zero, else it is considered reset.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class AtomicCounter
 {
@@ -68,7 +68,7 @@ public:
       Note that another thread can cause the counter to become reset after
       this function returns true.
 
-      @return `true` if the counter was signaled.
+      @return true if the counter was signaled.
   */
   inline bool isSignaled () const noexcept
   {

@@ -29,7 +29,7 @@
     This provides a simplified interface to an integer used to control atomic
     state transitions. A state is distinguished by a single integer value.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */ 
 class AtomicState
 {
@@ -68,7 +68,7 @@ public:
       
       @param to     The desired new state.
 
-      @return       `true` if the state transition succeeded.
+      @return       true if the state transition succeeded.
   */
   inline bool tryChangeState (const int from, const int to) noexcept
   {

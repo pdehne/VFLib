@@ -45,7 +45,7 @@
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 
 #ifndef DOXYGEN
@@ -85,7 +85,7 @@ public:
   
       This is not thread safe, the caller must synchronize.
 
-      @return   `true` if the list is empty.
+      @return true if the list is empty.
   */
   bool empty () const
   {
@@ -96,7 +96,7 @@ public:
   
       This operation is wait-free.
 
-      @return   `true` if the list was previously empty.
+      @return true if the list was previously empty.
 
   */
   bool push_back (Node* node)
@@ -151,7 +151,7 @@ public:
       @param[out] pElem The element that was retrieved, or nullptr if the
                         list was empty.
 
-      @return           `true` if the list was uncontended.
+      @return           true if the list was uncontended.
   */
   bool try_pop_front (Element** pElem)
   {

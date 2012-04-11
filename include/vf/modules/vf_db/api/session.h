@@ -54,7 +54,7 @@ namespace db {
 /**
     A session for the embedded database.
 
-    \ingroup vf_db
+    @ingroup vf_db
 */
 class session
 {

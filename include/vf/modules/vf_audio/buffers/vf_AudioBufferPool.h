@@ -91,13 +91,12 @@
 
     @see ScopedAudioSampleBuffer
 
-    \ingroup vf_audio
+    @ingroup vf_audio
 */
 
 class AudioBufferPool
 {
 public:
-#ifndef DOXYGEN
   class Buffer : public juce::AudioSampleBuffer
   {
   public:
@@ -110,7 +109,6 @@ public:
   private:
 	int m_samplesAllocated;
   };
-#endif
 
   /** Create a new, empty pool.
   
@@ -148,10 +146,8 @@ public:
   virtual void releaseBuffer (Buffer* buffer) = 0;
 
 protected:
-#ifndef DOXYGEN
   Buffer* requestBufferInternal (int numChannels, int numSamples);
   void releaseBufferInternal (Buffer* buffer);
-#endif
 
 private:
   juce::Array <Buffer*> m_buffers;
@@ -159,7 +155,6 @@ private:
 
 //==============================================================================
 
-#ifndef DOXYGEN
 template <class LockType = CriticalSection>
 class AudioBufferPoolType
   : public AudioBufferPool
@@ -183,6 +178,5 @@ public:
 private:
   LockType m_mutex;
 };
-#endif
 
 #endif

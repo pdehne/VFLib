@@ -136,7 +136,7 @@
       classes, they don't need to know about each other. A Component can
       expose zero, one, or any number of interfaces to receive broadcasts.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class componentBroadcast
 {

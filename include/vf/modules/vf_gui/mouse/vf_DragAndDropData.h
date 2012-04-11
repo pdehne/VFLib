@@ -125,7 +125,7 @@
 
     @endcode
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class DragAndDropData : public juce::ReferenceCountedObject
 {
@@ -157,7 +157,7 @@ public:
       @param[out] pResult  Receives a copy of the object if it exists in the
                            container.
       
-      @return              `true` if the object was found.
+      @return              true if the object was found.
   */
   template <class Object>
   bool find (Object* pResult = 0) const

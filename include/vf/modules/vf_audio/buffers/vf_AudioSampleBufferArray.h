@@ -35,7 +35,7 @@
     @param Channels A template parameter specifying the number of channels in
                     the array of pointers, default to 2 (stereo).
 
-    \ingroup vf_audio
+    @ingroup vf_audio
 */
 
 // If AudioSampleBuffer ever becomes a template, we can
@@ -241,8 +241,8 @@ public:
 
   /** Determine if there are samples remaining in the array.
 
-      @return `true` if there are no more samples in the data pointed
-                     to by the array.
+      @return true if there are no more samples in the data pointed
+                   to by the array.
   */
   bool isEmpty () const
   {

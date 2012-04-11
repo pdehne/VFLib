@@ -26,7 +26,7 @@
 /**
     A vertical ColourGradient.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class VerticalGradient : public juce::ColourGradient
 {

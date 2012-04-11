@@ -60,7 +60,7 @@
 
     Note that changing the size of a buffer is undefined.
 
-    \ingroup vf_audio
+    @ingroup vf_audio
 */
 class ScopedAudioSampleBuffer
   // NO IDEA why the leak checking fails

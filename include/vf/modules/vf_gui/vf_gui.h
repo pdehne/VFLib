@@ -29,7 +29,7 @@
     This module offers classes that assist with the development and presentation
     of user interface components.
 
-    \defgroup vf_gui vf_gui
+    @defgroup vf_gui vf_gui
 */
 
 #include "../vf_core/vf_core.h"

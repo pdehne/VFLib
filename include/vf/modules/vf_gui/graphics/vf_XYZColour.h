@@ -28,7 +28,7 @@
 
     See http://en.wikipedia.org/wiki/CIE_1931_color_space
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class XYZColour
 {

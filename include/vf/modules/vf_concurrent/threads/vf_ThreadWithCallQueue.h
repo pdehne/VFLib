@@ -40,7 +40,7 @@
     initialization function is executed on the thread. When the thread exits,
     a user-defined exit function may be executed on the thread.
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class ThreadWithCallQueue : public CallQueue
 {

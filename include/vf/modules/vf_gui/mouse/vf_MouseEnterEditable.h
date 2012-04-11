@@ -30,7 +30,7 @@
     the mouse enters. For example, zoom in/out buttons can appear when the mouse
     enters, and disappear when the mouse leaves.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class MouseEnterEditable : Uncopyable
 {

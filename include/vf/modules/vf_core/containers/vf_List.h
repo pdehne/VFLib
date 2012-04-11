@@ -141,7 +141,7 @@
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 
 #ifndef DOXYGEN

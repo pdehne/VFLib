@@ -35,7 +35,7 @@
     error by throwing the object: it's derivation from std::exception is
     fully compliant with the C++ exception interface.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */   
 class Error
   : public std::exception
@@ -46,29 +46,29 @@ public:
   // results, for example, knowing that a file is locked.
   enum Code
   {
-    success,        // "the operation was successful"
+    success,        //!< "the operation was successful"
 
-    general,		// "a general error occurred"
+    general,		//!< "a general error occurred"
 
-    canceled,		// "the operation was canceled"
-    exception,		// "an exception was thrown"
-    unexpected,     // "an unexpected result was encountered"
-    platform,       // "a system exception was signaled"
+    canceled,		//!< "the operation was canceled"
+    exception,		//!< "an exception was thrown"
+    unexpected,     //!< "an unexpected result was encountered"
+    platform,       //!< "a system exception was signaled"
 
-    noMemory,       // "there was not enough memory"
-    noMoreData,		// "the end of data was reached"
-    invalidData,	// "the data is corrupt or invalid"
-    bufferSpace,	// "the buffer is too small"
-    badParameter,	// "one or more parameters were invalid"
-    assertFailed,	// "an assertion failed"
+    noMemory,       //!< "there was not enough memory"
+    noMoreData,		//!< "the end of data was reached"
+    invalidData,	//!< "the data is corrupt or invalid"
+    bufferSpace,	//!< "the buffer is too small"
+    badParameter,	//!< "one or more parameters were invalid"
+    assertFailed,	//!< "an assertion failed"
 
-    fileInUse,		// "the file is in use"
-    fileExists,		// "the file exists"
-    fileNoPerm,		// "permission was denied" (file attributes conflict)
-    fileIOError,	// "an I/O or device error occurred"
-    fileNoSpace,	// "there is no space left on the device"
-    fileNotFound,	// "the file was not found"
-    fileNameInvalid	// "the file name was illegal or malformed"
+    fileInUse,		//!< "the file is in use"
+    fileExists,		//!< "the file exists"
+    fileNoPerm,		//!< "permission was denied" (file attributes conflict)
+    fileIOError,	//!< "an I/O or device error occurred"
+    fileNoSpace,	//!< "there is no space left on the device"
+    fileNotFound,	//!< "the file was not found"
+    fileNameInvalid	//!< "the file name was illegal or malformed"
   };
 
   Error ();

@@ -57,7 +57,7 @@
 
     @see CallQueue
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class ManualCallQueue : public CallQueue
 {

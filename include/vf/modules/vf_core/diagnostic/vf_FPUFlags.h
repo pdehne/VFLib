@@ -28,7 +28,7 @@
 
     Description.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class FPUFlags
 {
@@ -196,7 +196,7 @@ private:
 
         // FPU flags are back to what they were now
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class ScopedFPUFlags
 {

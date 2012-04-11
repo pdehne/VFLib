@@ -28,7 +28,7 @@
 
     This module provides the FreeType Engine.
 
-    \defgroup vf_freetype vf_freetype
+    @defgroup vf_freetype vf_freetype
 */
 
 #include "AppConfig.h"

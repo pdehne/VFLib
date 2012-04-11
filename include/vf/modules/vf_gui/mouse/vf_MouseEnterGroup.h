@@ -30,7 +30,7 @@
     mouse enter and mouse exit messages for your component and all of it's
     children.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class MouseEnterGroup
 {

@@ -54,7 +54,7 @@
 
     @endcode
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class LabColour
 {

@@ -83,7 +83,7 @@
 
     @endcode
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 template <class Object>
 class ConcurrentState : Uncopyable

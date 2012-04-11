@@ -32,7 +32,7 @@
     call startOncePerSecond() to begin receiving the notifications. No clean-up
     or other actions are required.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class OncePerSecond : Uncopyable
 {

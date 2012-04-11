@@ -24,9 +24,25 @@
 
 #include "vf_GlobalPagedFreeStore.h"
 
+//==============================================================================
 /**
+    Lock-free and mostly wait-free memory allocator optimized for FIFO
+    style usage patterns.
 
-    \ingroup vf_concurrent
+    It is expected that over time, deallocations will occur in roughly
+    the same order as allocations.
+
+    Invariants:
+
+    #1 allocate() and deallocate() are fully concurrent
+
+    #2 The ABA problem is handled automatically
+
+    This implementation uses Thread Local Storage to further improve
+    performance. However, it requires boost style thread_specific_ptr.
+
+
+    @ingroup vf_concurrent
 */
 // Lock-free Allocator that doesn't use thread local storage.
 // This implementation is here in case a problem is found with

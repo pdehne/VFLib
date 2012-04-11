@@ -30,7 +30,7 @@
     avoided by treating freed pages as garbage, and performing a
     collection every second.
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class PagedFreeStore : private OncePerSecond
 {

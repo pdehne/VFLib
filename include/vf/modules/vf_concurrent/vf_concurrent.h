@@ -69,7 +69,7 @@
     combinatorial explosion of possibilities depending on the complex interaction
     of multiple threads.
 
-    \defgroup vf_concurrent vf_concurrent
+    @defgroup vf_concurrent vf_concurrent
  */
 /// \todo discuss limit on the size of the functor
 

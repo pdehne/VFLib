@@ -22,12 +22,15 @@
 #ifndef VF_ALLOCATEDBY_VFHEADER
 #define VF_ALLOCATEDBY_VFHEADER
 
-/** 
+//==============================================================================
+/**
+    Customized allocation for heap objects.
 
-    \ingroup vf_concurrent
+    Derived classes will use the specified allocator for new and delete
+
+    @internal
+    @ingroup vf_concurrent internal
 */
-// Derived classes will use the specified allocator for new and delete
-//
 template <class AllocatorType>
 class AllocatedBy
 {

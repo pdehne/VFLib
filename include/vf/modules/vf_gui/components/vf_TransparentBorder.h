@@ -34,7 +34,7 @@
     derived class. Then call setComponent with the size of the desired
     transparent border.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class TransparentBorder
   : private ComponentListener

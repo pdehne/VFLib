@@ -30,7 +30,7 @@
     for building containers or composite classes. Operator overloads
     allow access to the underlying pointer using natural C++ syntax.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 template <class P>
 class AtomicPointer
@@ -120,7 +120,7 @@ public:
 
       @param  oldValue  The matching old value.
 
-      @return `true` if the assignment was performed.
+      @return true if the assignment was performed.
   */
   inline bool compareAndSet (P* newValue, P* oldValue)
   {

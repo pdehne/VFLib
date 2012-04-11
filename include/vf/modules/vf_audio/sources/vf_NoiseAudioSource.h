@@ -28,12 +28,10 @@
 
     The noise can be pink or white.
 
-    \ingroup vf_audio
+    @ingroup vf_audio
 */
 
 //==============================================================================
-
-#ifndef DOXYGEN
 
 //
 // "Filter to make pink noise from white"
@@ -97,8 +95,6 @@ private:
   double b0, b1, b2, b3, b4, b5, b6;
 };
 
-#endif
-
 //==============================================================================
 
 class NoiseAudioSource : public AudioSource
@@ -114,13 +110,11 @@ public:
   /** Destroy the noise source. */
   ~NoiseAudioSource ();
 
-#ifndef DOXYGEN
   /* AudioSource overrides */
   void prepareToPlay (int samplesPerBlockExpected,
                       double sampleRate);
   void releaseResources();
   void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill);
-#endif
   
 private:
   void white_noise (int numSamples, float* dest);

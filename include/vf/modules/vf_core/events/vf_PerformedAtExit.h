@@ -32,7 +32,7 @@
     The call will be made during the destruction of objects with static storage
     duration, before LeakChecked performs its diagnostics.
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 class PerformedAtExit : LockFreeStack <PerformedAtExit>::Node
 {

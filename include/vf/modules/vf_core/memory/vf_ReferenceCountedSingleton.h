@@ -28,7 +28,7 @@
 /**
 	Construction options for ReferenceCountedSingleton
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 
 // "base classes dependent on a template parameter aren't part of lookup." - ville
@@ -63,7 +63,7 @@ public:
 
 	class Object must provide the function `Object* Object::createInstance()`
 
-    \ingroup vf_core
+    @ingroup vf_core
 */
 template <class Object>
 class ReferenceCountedSingleton : private PerformedAtExit

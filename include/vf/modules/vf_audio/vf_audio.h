@@ -29,7 +29,7 @@
     This is a small collection of useful utility classes for performing audio
     processing on buffers of sample data.
 
-    \defgroup vf_audio vf_audio
+    @defgroup vf_audio vf_audio
 */
 
 #include "../vf_core/vf_core.h"

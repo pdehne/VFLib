@@ -33,7 +33,7 @@
     get processed by the Juce message loop, no further action is required
     to make it work.
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class GuiCallQueue
   : public CallQueue

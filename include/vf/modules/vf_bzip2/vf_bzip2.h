@@ -28,7 +28,7 @@
 
     This external module brings in the bZip2 library.
 
-    \defgroup vf_bzip2 vf_bzip2
+    @defgroup vf_bzip2 vf_bzip2
 */
 
 #include "AppConfig.h"

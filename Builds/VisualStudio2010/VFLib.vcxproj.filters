@@ -437,9 +437,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
-      <Filter>VF Modules\vf_db</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
@@ -496,9 +493,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\use_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
-      <Filter>VF Modules\vf_core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_List.h">
       <Filter>VF Modules\vf_core\containers</Filter>
@@ -563,9 +557,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
-      <Filter>VF Modules\vf_audio</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClInclude>
@@ -575,14 +566,8 @@
     <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
-      <Filter>VF Modules\vf_concurrent</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
-      <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.h">
       <Filter>VF Modules\vf_core\events</Filter>
@@ -616,9 +601,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\vf.h">
-      <Filter>VF Library Code</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
@@ -691,12 +673,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
-      <Filter>VF Modules\vf_sqlite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\vf_lua.h">
-      <Filter>VF Modules\vf_lua</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldebug.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
@@ -773,9 +749,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldo.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h">
-      <Filter>VF Modules\vf_luabridge</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClInclude>
@@ -799,12 +772,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h">
       <Filter>VF Modules\vf_taglib\taglib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
-      <Filter>VF Modules\vf_taglib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.h">
-      <Filter>VF Modules\vf_bzip2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.h">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
@@ -835,6 +802,39 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_lua\vf_lua.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
+      <Filter>VF Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\vf.h">
+      <Filter>VF Library Code</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

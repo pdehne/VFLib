@@ -41,7 +41,7 @@
     The deletion behavior can be overriden by providing a replacement
     for deleteConcurrentObject().
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class ConcurrentObject : Uncopyable
 {
@@ -63,7 +63,7 @@ public:
 
       This is not thread safe, so the caller must synchronize.
 
-      @return `true` if the object has one or more references.
+      @return true if the object has one or more references.
   */
   inline bool isBeingReferenced () const
   {

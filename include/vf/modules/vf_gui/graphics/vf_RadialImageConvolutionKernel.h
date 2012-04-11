@@ -29,7 +29,7 @@
     Takes advantage of radial symmetry to implement an efficient image
     convolution.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 class RadialImageConvolutionKernel
 {

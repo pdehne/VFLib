@@ -29,7 +29,7 @@
     This is an external module that provides LuaBridge. It requires the
     \ref vf_lua module.
 
-    \defgroup vf_luabridge vf_luabridge
+    @defgroup vf_luabridge vf_luabridge
 */
 
 #include "AppConfig.h"

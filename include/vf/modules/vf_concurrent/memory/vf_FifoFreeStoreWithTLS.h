@@ -40,7 +40,7 @@
   This implementation uses Thread Local Storage to further improve
   performance. However, it requires boost style thread_specific_ptr.
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 class FifoFreeStoreWithTLS
 {

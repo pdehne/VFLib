@@ -26,7 +26,7 @@
 /**
     FreeType typefaces with font hinting.
 
-    \ingroup vf_gui
+    @ingroup vf_gui
 */
 // This singleton uses FreeType to open font files and
 // extract glyph outlines, with the option of using hinting

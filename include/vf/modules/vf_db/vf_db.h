@@ -28,7 +28,7 @@
 
     Description.
 
-    \defgroup vf_db vf_db
+    @defgroup vf_db vf_db
 */
 
 #include "../vf_core/vf_core.h"

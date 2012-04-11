@@ -29,7 +29,7 @@
     This module provides functionality required by other modules, and classes
     useful for general development.
 
-    \defgroup vf_core vf_core
+    @defgroup vf_core vf_core
 */
 /// \todo discuss exceptions
 

@@ -33,7 +33,7 @@
   true the first time an interruption has occurred since the last call to
   interruptionPoint().
 
-  \ingroup vf_core
+  @ingroup vf_core
 */
 class InterruptibleThread : public juce::Thread
 {

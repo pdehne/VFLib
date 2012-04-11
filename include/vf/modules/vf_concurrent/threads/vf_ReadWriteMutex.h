@@ -45,7 +45,7 @@
     The implementation is wait-free in the fast path: acquiring read access
     for a lock without contention - just one interlocked increment!
 
-    \ingroup vf_concurrent
+    @ingroup vf_concurrent
 */
 
 #ifndef DOXYGEN
