@@ -126,10 +126,12 @@ void* PagedFreeStore::allocate ()
         TRANS("the limit of memory allocations was reached")));
 #endif
 
-    page = new (::malloc (m_pageBytes)) Page (this);
-    if (!page)
+    void* storage = ::malloc (m_pageBytes);
+    if (!storage)
       Throw (Error().fail (__FILE__, __LINE__,
         TRANS("a memory allocation failed")));
+
+    page = new (storage) Page (this);
 
 #if LOG_GC
     m_total.addref ();

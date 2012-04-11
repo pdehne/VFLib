@@ -71,6 +71,7 @@
 
     \defgroup vf_concurrent vf_concurrent
  */
+/// \todo discuss limit on the size of the functor
 
 #include "../vf_core/vf_core.h"
 

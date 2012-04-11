@@ -31,6 +31,7 @@
 
     \defgroup vf_core vf_core
 */
+/// \todo discuss exceptions
 
 /** See the Juce notes regarding AppConfig.h
 
