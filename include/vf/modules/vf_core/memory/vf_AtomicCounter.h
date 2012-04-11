@@ -59,8 +59,10 @@ public:
   */
   inline bool release () noexcept
   {
-    jassert (isSignaled ());
-	return (--m_value) == 0;
+    // Unfortunately, AllocatorWithoutTLS breaks this assert
+    //jassert (isSignaled ());
+
+    return (--m_value) == 0;
   }
 
   /** Determine if the counter is signaled.

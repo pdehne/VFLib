@@ -466,6 +466,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ConnectedEdges.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h" />

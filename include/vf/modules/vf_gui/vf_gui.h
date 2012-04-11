@@ -50,6 +50,7 @@ namespace vf
 {
 
 #include "components/vf_ComponentBroadcast.h"
+#include "components/vf_ComponentNotifyParent.h"
 #include "components/vf_TransparentBorder.h"
 
 #include "graphics/vf_LabColour.h"

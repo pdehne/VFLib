@@ -836,6 +836,9 @@
     <ClInclude Include="..\..\include\vf\vf.h">
       <Filter>VF Library Code</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h">
+      <Filter>VF Modules\vf_gui\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />

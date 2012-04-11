@@ -19,8 +19,8 @@
 // 
 //==============================================================================
 
-#ifndef __VF_COMPONENTBROADCAST_VFHEADER__
-#define __VF_COMPONENTBROADCAST_VFHEADER__
+#ifndef VF_COMPONENTBROADCAST_VFHEADER
+#define VF_COMPONENTBROADCAST_VFHEADER
 
 //==============================================================================
 /**
@@ -30,7 +30,8 @@
     and call a member function for each Component that exposes the desired
     interface. A Component exposes the interface by deriving from the class
     containing the member function of interest. The implementation uses
-    dynamic_cast to determine if the Component is eligible.
+    dynamic_cast to determine if the Component is eligible, so the interface
+    must have a virtual table.
 
     This provides robust assistance for enforcing separation of concerns, and
     decentralizing program logic into only the areas that need it.
@@ -43,7 +44,7 @@
     @code
 
     // Interface for saving and loading Component settings across launches
-    //
+
     struct SerializableComponent
     {
       virtual void onSaveSettings (XmlElement* xml) { }
@@ -51,7 +52,7 @@
     };
 
     // Declare our component
-    //
+
     class PersistentComponent : public SerializableComponent
     {
     public:
@@ -66,35 +67,35 @@
       }
     };
 
-    // This will tell every component in every window to save the settings
-    // if it supports the interface.
-    //
+    // This will tell every component in every window to save
+    // the settings if it supports the interface.
+
     void saveAllWindowSettings (XmlElement* xmlTree)
     {
       // Go through all application windows on the desktop.
-      //
+
       for (int i = 0; i < Desktop::getInstance().getNumComponents(); ++i)
       {
         Component* c = Desktop::getInstance().getComponent (i);
 
         // Call onSaveSettings for every Component that supports the
         // interface, on the window and all its children, recursively.
-        //
+
         componentBroadcast (c, &PersistentComponent::onSaveSettings, xmlTree);
       }
     }
 
     // Create a ResizableWindow and tell it to load it's settings
-    //
+
     void createWindowFromSettings (XmlElement* xmlTree)
     {
       // First create the window
-      //
+
       ResizableWindow* w = new ResizableWindow (...);
 
       // Now call onLoadSettings for every Component in the window
       // that supports the interface, recursively.
-      //
+
       componentBroadcast (w, &PersistentComponent::onLoadSettings, xmlTree);
     }
 
@@ -143,7 +144,7 @@ class componentBroadcast
 public:
   /** Call a member function on a Component and all of it's children.
 
-      Overloads are provided for calling members with up to 8 arguments
+      Overloads are provided for calling members with up to 8 parameters.
 
       @param c  The Component to broadcast to.
       
@@ -153,42 +154,48 @@ public:
   componentBroadcast (Component* c, void (C::*f)())
   { call <C> (c, vf::bind (f, vf::_1)); }
 
-#ifndef DOXYGEN
+  /** Call a member function with one parameter. */
   template <class C, class T1>
   componentBroadcast (Component* c, void (C::*f)(T1), T1 t1)
   { call <C> (c, vf::bind (f, vf::_1, t1)); }
 
+  /** Call a member function with two parameters. */
   template <class C, class T1, class T2>
   componentBroadcast (Component* c, void (C::*f)(T1, T2), T1 t1, T2 t2)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2)); }
 
+  /** Call a member function with three parameters. */
   template <class C, class T1, class T2, class T3>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3)); }
 
+  /** Call a member function with four parameters. */
   template <class C, class T1, class T2, class T3, class T4>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4)); }
 
+  /** Call a member function with five parameters */
   template <class C, class T1, class T2, class T3, class T4, class T5>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
 
+  /** Call a member function with six parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
 
+  /** Call a member function with seven parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
 
+  /** Call a member function with eight parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
-#endif
 
 private:
   template <class Interface, class Functor>
@@ -201,72 +208,6 @@ private:
 
     for (int i = 0; i < component->getNumChildComponents (); ++i)
       call <Interface> (component->getChildComponent (i), f);
-  }
-};
-
-// Like componentBroadcast, but sends the message to the first
-// parent it finds that exposes the interface (then stops).
-//
-class componentBroadcastParent
-{
-public:
-  template <class C>
-  componentBroadcastParent (Component* c, void (C::*f)())
-  { call <C> (c, vf::bind (f, vf::_1)); }
-
-  template <class C, class T1>
-  componentBroadcastParent (Component* c, void (C::*f)(T1), T1 t1)
-  { call <C> (c, vf::bind (f, vf::_1, t1)); }
-
-  template <class C, class T1, class T2>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2), T1 t1, T2 t2)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2)); }
-
-  template <class C, class T1, class T2, class T3>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3)); }
-
-  template <class C, class T1, class T2, class T3, class T4>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4)); }
-
-  template <class C, class T1, class T2, class T3, class T4, class T5>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
-
-  template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6),
-             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
-
-  template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
-             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
-
-  template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
-  componentBroadcastParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
-             T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
-  { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
-
-private:
-  template <class Interface, class Functor>
-  void call (Component* component, Functor const& f)
-  {
-    component = component->getParentComponent();
-    
-    while (component != nullptr)
-    {
-      Interface* const object = dynamic_cast <Interface*> (component);
-
-      if (object != nullptr)
-      {
-        f (object);
-        break;
-      }
-
-      component = component->getParentComponent();
-    }
   }
 };
 
