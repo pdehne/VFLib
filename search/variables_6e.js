@@ -12,7 +12,7 @@ var searchData=
   ['noicon',['NoIcon',['http://www.rawmaterialsoftware.com/juce/api/classAlertWindow.html#a2582d1f79937cb47a6a3764c7d9bdba3a6b6648ee3f02f6832d897a214c647421',1,'AlertWindow']]],
   ['noitemstext',['noItemsText',['http://www.rawmaterialsoftware.com/juce/api/structComboBox_1_1Ids.html#a59e2f9b87b5ec4cdd8f3b96d9f354139',1,'ComboBox::Ids']]],
   ['nomodifiers',['noModifiers',['http://www.rawmaterialsoftware.com/juce/api/classModifierKeys.html#acdd2a85defa6a705d74e1a63d193678bae42cb786cbb3c1d7d50c9c1f659838a5',1,'ModifierKeys']]],
-  ['none',['none',['http://www.rawmaterialsoftware.com/juce/api/classAttributedString.html#ad752f270294ec5b2cef0c80863ee3a3cab41c5fa578ffbd8a4b8a5fbc013beae3',1,'AttributedString::none()'],['../class_interval.html#abdbd3eede76a460aef0c12173caa1baa',1,'Interval::none()']]],
+  ['none',['none',['http://www.rawmaterialsoftware.com/juce/api/classAttributedString.html#ad752f270294ec5b2cef0c80863ee3a3cab41c5fa578ffbd8a4b8a5fbc013beae3',1,'AttributedString']]],
   ['nonexistent',['nonexistent',['http://www.rawmaterialsoftware.com/juce/api/classFile.html#abdcef33a1c846d17b4405e0939358364',1,'File']]],
   ['nonzerowinding',['nonZeroWinding',['http://www.rawmaterialsoftware.com/juce/api/classDrawablePath_1_1ValueTreeWrapper.html#a233cbbc5988e65e249c94820af5b6beb',1,'DrawablePath::ValueTreeWrapper']]],
   ['normalcursor',['NormalCursor',['http://www.rawmaterialsoftware.com/juce/api/classMouseCursor.html#a5de22a8c3eb06827ac11352e76eb9a97aa05a8960e2a3e32bfad68fdcb31a1511',1,'MouseCursor']]],

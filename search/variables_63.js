@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['cachelinealignbits',['cacheLineAlignBits',['../namespace_memory.html#a1472ab6a11a9baa0d9de25ff0dfd83c2',1,'Memory']]],
-  ['cachelinealignbytes',['cacheLineAlignBytes',['../namespace_memory.html#a8e66a7d3a1f328932d96282213769de9',1,'Memory']]],
-  ['cachelinealignmask',['cacheLineAlignMask',['../namespace_memory.html#a0e92965de726b47e1519acf4a621a51e',1,'Memory']]],
   ['cadetblue',['cadetblue',['http://www.rawmaterialsoftware.com/juce/api/classColours.html#af5bca16acd0235fa3c63859465d53f7f',1,'Colours']]],
   ['cakewalksonar8',['CakewalkSonar8',['http://www.rawmaterialsoftware.com/juce/api/classPluginHostType.html#a69d9330e82ef7520f9aa8b2ad78ce5a8a9346912590305747f0c38d7c3208de17',1,'PluginHostType']]],
   ['cakewalksonargeneric',['CakewalkSonarGeneric',['http://www.rawmaterialsoftware.com/juce/api/classPluginHostType.html#a69d9330e82ef7520f9aa8b2ad78ce5a8a0b64ed512c677bef44381479de35c425',1,'PluginHostType']]],

@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="dirs.html"><span>Directories</span></a></li>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +94,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ThreadWithCallQueue Class Reference<div class="ingroups"><a class="el" href="group__vf__concurrent.html">vf_concurrent</a></div></div>  </div>
@@ -110,70 +109,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_thread_with_call_queue-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:aa84d03dc9ecd19221d0b9086d2c375fb"><td class="memItemLeft" align="right" valign="top">typedef Function&lt; const <br class="typebreak"/>
-<a class="el" href="class_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a>(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#aa84d03dc9ecd19221d0b9086d2c375fb">idle_t</a></td></tr>
-<tr class="memitem:abce2326410bcfdf129be472b6d7a346f"><td class="memItemLeft" align="right" valign="top">typedef Function&lt; void(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#abce2326410bcfdf129be472b6d7a346f">init_t</a></td></tr>
-<tr class="memitem:aaf90a3035d11bc98b1111cdf9d91b5b5"><td class="memItemLeft" align="right" valign="top">typedef Function&lt; void(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#aaf90a3035d11bc98b1111cdf9d91b5b5">exit_t</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a89063989f0bf475c1dc06fa4c734f9b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a89063989f0bf475c1dc06fa4c734f9b3">ThreadWithCallQueue</a> (<a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> name)</td></tr>
 <tr class="memdesc:a89063989f0bf475c1dc06fa4c734f9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>.  <a href="#a89063989f0bf475c1dc06fa4c734f9b3"></a><br/></td></tr>
 <tr class="memitem:aa3a5a81a009b637a02f3be717c9d7b6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#aa3a5a81a009b637a02f3be717c9d7b6e">~ThreadWithCallQueue</a> ()</td></tr>
 <tr class="memdesc:aa3a5a81a009b637a02f3be717c9d7b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>.  <a href="#aa3a5a81a009b637a02f3be717c9d7b6e"></a><br/></td></tr>
-<tr class="memitem:a53ed3c51964acf43c0ddd3f65b3ef86b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a53ed3c51964acf43c0ddd3f65b3ef86b">start</a> (<a class="el" href="class_thread_with_call_queue.html#aa84d03dc9ecd19221d0b9086d2c375fb">idle_t</a> worker_idle=idle_t::None(), <a class="el" href="class_thread_with_call_queue.html#abce2326410bcfdf129be472b6d7a346f">init_t</a> worker_init=init_t::None(), <a class="el" href="class_thread_with_call_queue.html#aaf90a3035d11bc98b1111cdf9d91b5b5">exit_t</a> worker_exit=exit_t::None())</td></tr>
-<tr class="memitem:ae01a75fb583dc318a39654295e328c43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#ae01a75fb583dc318a39654295e328c43">stop</a> (bool const wait)</td></tr>
-<tr class="memitem:a81a3c215166ef522e9386fd88a18d04b"><td class="memItemLeft" align="right" valign="top">const <br class="typebreak"/>
-<a class="el" href="class_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b">interruptionPoint</a> ()</td></tr>
-<tr class="memitem:a74115c1806aa92753f9abb815adae441"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a74115c1806aa92753f9abb815adae441">interrupt</a> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>An <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> with a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>. </p>
-<p>This combines an <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> with a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>, allowing functors to be queued for asynchronous execution on the thread.</p>
+<div class="textblock"><p>This combines an <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> with a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>, allowing functors to be queued for asynchronous execution on the thread.</p>
 <p>The thread runs an optional user-defined idle function, which must regularly check for an interruption using the <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> interface. When an interruption is signaled, the idle function returns and the <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> is synchronized. Then, the idle function is resumed.</p>
 <p>When the <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a> first starts up, an optional user-defined initialization function is executed on the thread. When the thread exits, a user-defined exit function may be executed on the thread. </p>
-</div><hr/><h2>Member Typedef Documentation</h2>
-<a class="anchor" id="aa84d03dc9ecd19221d0b9086d2c375fb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef Function&lt;const <a class="el" href="class_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a> (void)&gt; <a class="el" href="class_thread_with_call_queue.html#aa84d03dc9ecd19221d0b9086d2c375fb">ThreadWithCallQueue::idle_t</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abce2326410bcfdf129be472b6d7a346f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef Function&lt;void (void)&gt; <a class="el" href="class_thread_with_call_queue.html#abce2326410bcfdf129be472b6d7a346f">ThreadWithCallQueue::init_t</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aaf90a3035d11bc98b1111cdf9d91b5b5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef Function&lt;void (void)&gt; <a class="el" href="class_thread_with_call_queue.html#aaf90a3035d11bc98b1111cdf9d91b5b5">ThreadWithCallQueue::exit_t</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a89063989f0bf475c1dc06fa4c734f9b3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -188,8 +135,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Create a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The name of the <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> and <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>, used for diagnostics when debugging. </td></tr>
@@ -212,103 +157,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Destroy a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>. </p>
 <p>If the thread is still running it is stopped. The destructor blocks until the thread exits cleanly. </p>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a53ed3c51964acf43c0ddd3f65b3ef86b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_thread_with_call_queue.html#a53ed3c51964acf43c0ddd3f65b3ef86b">ThreadWithCallQueue::start</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_thread_with_call_queue.html#aa84d03dc9ecd19221d0b9086d2c375fb">idle_t</a>&#160;</td>
-          <td class="paramname"><em>worker_idle</em> = <code>idle_t::None()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_thread_with_call_queue.html#abce2326410bcfdf129be472b6d7a346f">init_t</a>&#160;</td>
-          <td class="paramname"><em>worker_init</em> = <code>init_t::None()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_thread_with_call_queue.html#aaf90a3035d11bc98b1111cdf9d91b5b5">exit_t</a>&#160;</td>
-          <td class="paramname"><em>worker_exit</em> = <code>exit_t::None()</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae01a75fb583dc318a39654295e328c43"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_thread_with_call_queue.html#ae01a75fb583dc318a39654295e328c43">ThreadWithCallQueue::stop</a> </td>
-          <td>(</td>
-          <td class="paramtype">bool const&#160;</td>
-          <td class="paramname"><em>wait</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a81a3c215166ef522e9386fd88a18d04b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_interruptible_thread_1_1_interrupted.html">InterruptibleThread::Interrupted</a> <a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b">ThreadWithCallQueue::interruptionPoint</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a74115c1806aa92753f9abb815adae441"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_thread_with_call_queue.html#a74115c1806aa92753f9abb815adae441">ThreadWithCallQueue::interrupt</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="vf___thread_with_call_queue_8h.html">vf_ThreadWithCallQueue.h</a></li>
+<li>vf_ThreadWithCallQueue.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 12:40:40 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

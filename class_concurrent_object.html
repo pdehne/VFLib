@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="dirs.html"><span>Directories</span></a></li>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,6 +106,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &quot;vf_ConcurrentObject.h&quot;</code></p>
 
+<p>Inherits Uncopyable.</p>
+
 <p><a href="class_concurrent_object-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
@@ -122,9 +124,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:aaa2d654e4065c897625122170254318d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the object.  <a href="#aaa2d654e4065c897625122170254318d"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>A reference counted object, deleted on a separate thread. </p>
-<p>This is a reference counted object compatible with <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a>. When the last reference is removed, the object is queued for deletion on a separate, provided thread. On program exit the thread will clean itself up - no other action is required.</p>
-<p>This class is useful for offloading the deletion work of "deep" objects shared by multiple threads: objects containing complex members, or a hierarchy of allocated structures. For example, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValueTree.html">ValueTree</a>. The problem of performing heavyweight memory or cleanup operations from either the audioDeviceIOCallback or the message thread is avoided.</p>
+<div class="textblock"><p>This is a reference counted object compatible with <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a>. When the last reference is removed, the object is queued for deletion on a separate, provided thread. On program exit the thread will clean itself up - no other action is required.</p>
+<p>This class is useful for offloading the deletion work of "deep" objects shared by multiple threads: objects containing complex members, or a hierarchy of allocated structures. For example, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValueTree.html">ValueTree</a>. The problem of performing heavyweight memory or cleanup operations from either an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a> or the message thread is avoided.</p>
 <p>The deletion behavior can be overriden by providing a replacement for deleteConcurrentObject(). </p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a35ff8d0868571aa78e6910d7059f0a40"></a>
@@ -140,8 +141,6 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Increment the reference count. </p>
 
 </div>
 </div>
@@ -159,8 +158,6 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Decrement the reference count. </p>
-
 </div>
 </div>
 <a class="anchor" id="a969dcbec75b26d3fa0936dd2198d7dec"></a>
@@ -176,10 +173,8 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Determine if the object is still being referenced. </p>
 <p>This is not thread safe, so the caller must synchronize.</p>
-<dl class="section return"><dt>Returns:</dt><dd><code>true</code> if the object has one or more references. </dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>true if the object has one or more references. </dd></dl>
 
 </div>
 </div>
@@ -196,20 +191,18 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Delete the object. </p>
 <p>The default implementation performs the delete on a separate, provided thread that cleans up after itself on exit. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="vf___concurrent_object_8h.html">vf_ConcurrentObject.h</a></li>
+<li>vf_ConcurrentObject.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 12:40:40 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

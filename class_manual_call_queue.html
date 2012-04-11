@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="dirs.html"><span>Directories</span></a></li>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -119,20 +119,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8934bcdca202c9f5d190565f68583687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize the queue by calling all pending functors.  <a href="#a8934bcdca202c9f5d190565f68583687"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>A <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> that requires periodic manual synchronization. </p>
-<p>To use this, declare an instance and then place calls into it as usual. Every so often, you must call <a class="el" href="class_manual_call_queue.html#a8934bcdca202c9f5d190565f68583687" title="Synchronize the queue by calling all pending functors.">synchronize()</a> from the thread you want to associate with the queue. Typically this is done with the audioDeviceIOCallback:</p>
-<div class="fragment"><pre class="fragment">    <a class="code" href="class_manual_call_queue.html" title="A CallQueue that requires periodic manual synchronization.">ManualCallQueue</a> fifo (<span class="stringliteral">&quot;Audio CallQueue&quot;</span>);
-
-    <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputChannelData,
-                  <span class="keywordtype">int</span> numInputChannels,
-                  <span class="keywordtype">float</span>** outputChannelData,
-                  <span class="keywordtype">int</span> numOutputChannels,
-                  <span class="keywordtype">int</span> numSamples)
+<div class="textblock"><p>To use this, declare an instance and then place calls into it as usual. Every so often, you must call <a class="el" href="class_manual_call_queue.html#a8934bcdca202c9f5d190565f68583687" title="Synchronize the queue by calling all pending functors.">synchronize()</a> from the thread you want to associate with the queue. Typically this is done within an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a>:</p>
+<div class="fragment"><pre class="fragment">    <span class="keyword">class </span>AudioIODeviceCallbackWithCallQueue
+      : <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a>
+      , <span class="keyword">public</span> <a class="code" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>
     {
-    fifo.<a class="code" href="class_gui_call_queue.html#a63f2c96d55cc954cf373d85f509f6dd3" title="Synchronize the queue.">synchronize</a> ();
+    <span class="keyword">public</span>:
+      AudioIODeviceCallbackWithCallQueue () : m_fifo (<span class="stringliteral">&quot;Audio CallQueue&quot;</span>)
+      {
+      }
 
-    <span class="comment">// do audio i/o</span>
-    }
+      <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputChannelData,
+                                  <span class="keywordtype">int</span> numInputChannels,
+                                  <span class="keywordtype">float</span>** outputChannelData,
+                                  <span class="keywordtype">int</span> numOutputChannels,
+                                  <span class="keywordtype">int</span> numSamples)
+      {
+        <a class="code" href="class_manual_call_queue.html#a8934bcdca202c9f5d190565f68583687" title="Synchronize the queue by calling all pending functors.">CallQueue::synchronize</a> ();
+
+        <span class="comment">// do audio i/o</span>
+      }
+
+      <span class="keywordtype">void</span> signal () { } <span class="comment">// No action required</span>
+      <span class="keywordtype">void</span> reset () { }  <span class="comment">// No action required</span>
+    };
 </pre></div><p>The <a class="el" href="class_manual_call_queue.html#a3cf6a182f6e459537c1275fbd95c01f1" title="Close the queue.">close()</a> function is provided for diagnostics. Call it as early as possible based on the exit or shutdown logic of your application. If calls are put into the queue after it is closed, it will generate an exception so you can track it down.</p>
 <dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -150,8 +160,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Create a <a class="el" href="class_manual_call_queue.html" title="A CallQueue that requires periodic manual synchronization.">ManualCallQueue</a>. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>A string used to help identify the associated thread for debugging. </td></tr>
@@ -175,8 +183,6 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Close the queue. </p>
 <p>If calls are placed into a closed queue, an exception is thrown. </p>
 
 <p>Reimplemented from <a class="el" href="class_call_queue.html#ace99f6efb1cd9e6b3e0dac80fbb15690">CallQueue</a>.</p>
@@ -197,20 +203,18 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Synchronize the queue by calling all pending functors. </p>
-
 <p>Reimplemented from <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7">CallQueue</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="vf___manual_call_queue_8h.html">vf_ManualCallQueue.h</a></li>
+<li>vf_ManualCallQueue.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 12:40:40 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

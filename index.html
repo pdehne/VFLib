@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li><a href="dirs.html"><span>Directories</span></a></li>
@@ -76,7 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VFLib: A multipurpose class library built on JUCE. </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>VFLib is a source code collection of individual modules containing functionality for a variety of applications. Some modules provide support for external libraries. Usage of these external library modules is optional. They come with complete source code, as well as options for using either system or user provided variants of the external libraries.</p>
+<div class="textblock"><p>VFLib is a source code collection of individual modules containing functionality for a variety of applications.</p>
 <p>VFLib requires JUCE (Jules' Utility Class Extensions) available from <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a>. JUCE is available under both the GNU General Public License and a commercial, closed source license. Visit <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> for more details.</p>
 <p>Other than JUCE, VFLib has no external dependencies.</p>
 <h2><a class="anchor" id="Platforms"></a>
@@ -113,26 +113,60 @@ Platforms</h2>
 </ul>
 <h2><a class="anchor" id="Prerequisites"></a>
 Prerequisites</h2>
-<p>To use the library it is necessary to first download JUCE to a location where VFLib can find it. Or, you can use your existing installation of JUCE.</p>
 <p>The documentation for VFLib assumes that the reader has a working knowledge of JUCE. Some modules built on external libraries assume that the reader understands the operation of those external libraries. Certain modules assume that the reader understands additional domain-specific information. Modules with additional prerequisites are marked in the documentation.</p>
 <h2><a class="anchor" id="External"></a>
 Modules</h2>
-<p>Some modules bring in functionality provided by third party libraries.</p>
-<p>Description.</p>
-<h2><a class="anchor" id="Integration"></a>
-Integration</h2>
-<p>VFLib requires recent versions of JUCE. It won't work with JUCE versions 1.53 or earlier.</p>
-<p>This library uses the same modularized organizational structure as JUCE.</p>
-<p>The library offers several logical sets of aggregated functionality, with sources organized in the style of a JUCE module. To use a module, first add a single path to the list of includes searched by your development environment or project, which points to the VFLib include directory. Then add the corresponding .c or .cpp file (for example, vf_concurrent.cpp) to your existing project which already uses JUCE.</p>
-<h2><a class="anchor" id="AppConfig"></a>
+<p>Some modules bring in functionality provided by external libraries. For example, the <a class="el" href="group__vf__bzip2.html">vf_bzip2</a> module provides the compression and decompression algorithms in bZip2. Usage of these external library modules is optional. They come with complete source code, as well as options for using either system or user provided variants of the external libraries: it is not necessary to download additional files to use these modules.</p>
+<p>External code incorporated into VFLib is covered by a separate license. See the licensing information and notes in the corresponding source files, for copyright information and terms of use.</p>
+<p>## Integration</p>
+<p>VFLib requires recent versions of JUCE. It won't work with JUCE versions 1.53 or earlier. To use the library it is necessary to first download JUCE to a location where VFLib can find it. Or, you can use your existing installation of JUCE.</p>
+<p>This library uses the same modularized organizational structure as JUCE. To use a module, first add a path to the list of includes searched by your development environment or project, which points to the VFLib directory named "include". Then, add the single corresponding .c or .cpp file to your existing project which already uses JUCE. For example, to use the <a class="el" href="group__vf__core.html">vf_core</a> module, add the file vf_core.cpp to your project. Some modules depend on other modules. All modules depend on <a class="el" href="group__vf__core.html">vf_core</a>.</p>
+<p>To use a module, include the appropriate header from within your source code. For example, to access classes in the <a class="el" href="group__vf__concurrent.html">vf_concurrent</a> module, use this:</p>
+<div class="fragment"><pre class="fragment"><span class="preprocessor">  #include &quot;vf/modules/vf_concurrent/vf_concurrent.h&quot;</span>
+</pre></div><h2><a class="anchor" id="AppConfig"></a>
 AppConfig</h2>
 <h2><a class="anchor" id="References"></a>
 References</h2>
+<p># VFLib</p>
+<p>This is my soon to be released project which is NOT QUITE READY FOR PUBLIC USE! There's unfinished documentation, no testing, and no support so unless you enjoy banging your head repeatedly against the wall wait until the official release!</p>
+<p>## Documentation</p>
+<p>Some [unfinished documentation][0] is in development.</p>
+<p>## Location</p>
+<p>VFLib is hosted on github, at <a href="https://github.com/vinniefalco/VFLib">https://github.com/vinniefalco/VFLib</a></p>
+<p>## License</p>
+<p>Copyright (C) 2008 by Vinnie Falco.</p>
+<p>Unless otherwise marked, files in VFLib are published under the [GNU General Public License, Version 2][01]. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<p>Some files contain portions of these external projects, licensed separately:</p>
+<p>### [bZip2][1]</p>
+<p>[bZip2][1] is Copyright (C) 1996-2010 Julian R Seward. All rights reserved. See the corresponding file LICENSE for licensing terms.</p>
+<p>### [FreeType][2]</p>
+<p>Portions of the software are Copyright © 1996-2001, 2006 by [The FreeType Project][2]. All rights reserved. [FreeType][2] is distributed under both the [GNU General Public License, Version 2][01], or the [FreeType License][02].</p>
+<p>### [JUCE][3]</p>
+<p>This software uses [JUCE][3], which is available under the [GNU General Public License][01]. [Commercial licenses][9] are also available.</p>
+<p>### [Lua][4]</p>
+<p>Portions of this software are Copyright © 1994–2012 [Lua.org][4], PUC-Rio. Lua is distributed under the terms of the [MIT License][03].</p>
+<p>### [Luabridge][5]</p>
+<p>[Luabridge][5] is Copyrighted (C) 2007 by Nathan Reed. [Luabridge][5] is distributed under the terms of the [BSD 3-Clause License][04].</p>
+<p>### [Soci][6]</p>
+<p>[Soci][6] is Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton, and various others noted in the corresponding source files. Soci is distributed under the [Boost Software License, Version 1.0][05].</p>
+<p>### [SQLite][7]</p>
+<p>[SQLite][7] has been placed in the public domain.</p>
+<p>### [TagLib][8]</p>
+<p>[TagLib][8] is distributed under both the [GNU Lesser General Public License, Version 2.1][06] and the [Mozilla Public License][07].</p>
+<p>[0]: <a href="http://vinniefalco.github.com/VFLib/">http://vinniefalco.github.com/VFLib/</a> "VFLib Documentation"</p>
+<p>[1]: <a href="http://www.bzip.org/">http://www.bzip.org/</a> "bZip2: Home" [2]: <a href="http://freetype.org/">http://freetype.org/</a> "The FreeType Project" [3]: <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a> "JUCE" [4]: <a href="http://www.lua.org/">http://www.lua.org/</a> "The Programming Language Lua" [5]: <a href="http://sourceforge.net/projects/luabridge/">http://sourceforge.net/projects/luabridge/</a> "luabridge" [6]: <a href="http://soci.sourceforge.net/">http://soci.sourceforge.net/</a> "SOCI" [7]: <a href="http://sqlite.org/">http://sqlite.org/</a> "SQLite Home Page" [8]: <a href="http://developer.kde.org/~wheeler/taglib.html">http://developer.kde.org/~wheeler/taglib.html</a> "TagLib" [9]: <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> "JUCE Commercial Licensing"</p>
+<p>[01]: <a href="http://www.gnu.org/licenses/gpl-2.0.html">http://www.gnu.org/licenses/gpl-2.0.html</a> "GNU General Public License, version 2" [02]: <a href="http://www.freetype.org/FTL.TXT">http://www.freetype.org/FTL.TXT</a> "The FreeType Project License" [03]: <a href="http://www.opensource.org/licenses/mit-license.html">http://www.opensource.org/licenses/mit-license.html</a> "The MIT License" [04]: <a href="http://www.opensource.org/licenses/BSD-3-Clause">http://www.opensource.org/licenses/BSD-3-Clause</a> "BSD 3-Clause License" [05]: <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a> "Boost Software License, Version 1.0" [06]: <a href="http://www.gnu.org/licenses/lgpl-2.1.html">http://www.gnu.org/licenses/lgpl-2.1.html</a> "Gnu Lesser General Public License, version 2.1" [07]: <a href="http://www.mozilla.org/MPL/1.1/">http://www.mozilla.org/MPL/1.1/</a> "Mozilla Public License"</p>
+<dl class="section author"><dt>Author:</dt><dd><a href="http://vinniefalco.com">Vinnie Falco</a> </dd></dl>
+<dl class="section version"><dt>Version:</dt><dd>0.1 </dd></dl>
+<dl class="section date"><dt>Date:</dt><dd>2008-2012 </dd></dl>
+<dl class="section copyright"><dt>Copyright:</dt><dd>Copyright (C) 2008 by Vinnie Falco. </dd>
+<dd>
+Provided by the GNU General Public License, Version 2 </dd></dl>
 </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Apr 10 2012 13:37:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 12:40:40 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

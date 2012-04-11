@@ -9,6 +9,7 @@ var searchData=
   ['pathstroketype',['PathStrokeType',['http://www.rawmaterialsoftware.com/juce/api/classPathStrokeType.html',1,'']]],
   ['performancecounter',['PerformanceCounter',['http://www.rawmaterialsoftware.com/juce/api/classPerformanceCounter.html',1,'']]],
   ['performedatexit',['PerformedAtExit',['../class_performed_at_exit.html',1,'']]],
+  ['pink_5fnoise_5ffilter',['pink_noise_filter',['../structpink__noise__filter.html',1,'']]],
   ['pixelalpha',['PixelAlpha',['http://www.rawmaterialsoftware.com/juce/api/classPixelAlpha.html',1,'']]],
   ['pixelargb',['PixelARGB',['http://www.rawmaterialsoftware.com/juce/api/classPixelARGB.html',1,'']]],
   ['pixelrgb',['PixelRGB',['http://www.rawmaterialsoftware.com/juce/api/classPixelRGB.html',1,'']]],

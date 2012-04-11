@@ -30,7 +30,5 @@ var searchData=
   ['focuschangelistener',['FocusChangeListener',['http://www.rawmaterialsoftware.com/juce/api/classFocusChangeListener.html',1,'']]],
   ['font',['Font',['http://www.rawmaterialsoftware.com/juce/api/classFont.html',1,'']]],
   ['fpuflags',['FPUFlags',['../class_f_p_u_flags.html',1,'']]],
-  ['freetypefaces',['FreeTypeFaces',['../class_free_type_faces.html',1,'']]],
-  ['function_3c_20r_28t1_20t1_29_2c_20bytes_20_3e',['Function< R(T1 t1), Bytes >',['../class_function_3_01_r_07_t1_01t1_08_00_01_bytes_01_4.html',1,'']]],
-  ['function_3c_20r_28void_29_2c_20bytes_20_3e',['Function< R(void), Bytes >',['../class_function_3_01_r_07void_08_00_01_bytes_01_4.html',1,'']]]
+  ['freetypefaces',['FreeTypeFaces',['../class_free_type_faces.html',1,'']]]
 ];

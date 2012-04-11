@@ -8,6 +8,5 @@ var searchData=
   ['speciallocationtype',['SpecialLocationType',['http://www.rawmaterialsoftware.com/juce/api/classFile.html#a3e19cafabb03c5838160263a6e76313d',1,'File']]],
   ['standardcursortype',['StandardCursorType',['http://www.rawmaterialsoftware.com/juce/api/classMouseCursor.html#a5de22a8c3eb06827ac11352e76eb9a97',1,'MouseCursor']]],
   ['storageformat',['StorageFormat',['http://www.rawmaterialsoftware.com/juce/api/classPropertiesFile.html#ac4d1ac9a6b624f7e0de7787de46dc05e',1,'PropertiesFile']]],
-  ['style',['Style',['../class_resizable_layout.html#aff762c8fee36d1ee99283fac47eaf9a8',1,'ResizableLayout']]],
   ['styleflags',['StyleFlags',['http://www.rawmaterialsoftware.com/juce/api/classComponentPeer.html#a94a21f91c61f8211774d6f43243a6ddc',1,'ComponentPeer']]]
 ];

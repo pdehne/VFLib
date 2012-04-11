@@ -4,7 +4,6 @@ var searchData=
   ['jobneedsrunningagain',['jobNeedsRunningAgain',['http://www.rawmaterialsoftware.com/juce/api/classThreadPoolJob.html#a534c077f3c60168d88555ade062420b3a42789d58048631dd96008ce23911a545',1,'ThreadPoolJob']]],
   ['jobselector',['JobSelector',['http://www.rawmaterialsoftware.com/juce/api/classThreadPool_1_1JobSelector.html',1,'ThreadPool']]],
   ['jobstatus',['JobStatus',['http://www.rawmaterialsoftware.com/juce/api/classThreadPoolJob.html#a534c077f3c60168d88555ade062420b3',1,'ThreadPoolJob']]],
-  ['join',['join',['../class_interruptible_thread.html#af3e4a8c88af1bd1daa4de30199682351',1,'InterruptibleThread']]],
   ['joinintostring',['joinIntoString',['http://www.rawmaterialsoftware.com/juce/api/classStringArray.html#a43a4cb54bc23ac770db7ea28bcd84045',1,'StringArray']]],
   ['jointstyle',['jointStyle',['http://www.rawmaterialsoftware.com/juce/api/classDrawableShape_1_1FillAndStrokeState.html#adf99bd7ed361ea8c43d293ef7f868d3e',1,'DrawableShape::FillAndStrokeState::jointStyle()'],['http://www.rawmaterialsoftware.com/juce/api/classPathStrokeType.html#af1cf21018ccb9aa84572c1da4ae513b8',1,'PathStrokeType::JointStyle()']]],
   ['jpegimageformat',['JPEGImageFormat',['http://www.rawmaterialsoftware.com/juce/api/classJPEGImageFormat.html',1,'JPEGImageFormat'],['http://www.rawmaterialsoftware.com/juce/api/classJPEGImageFormat.html#a3e000b303a2a2d90dca7be44ace102c3',1,'JPEGImageFormat::JPEGImageFormat()']]],

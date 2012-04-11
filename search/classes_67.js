@@ -2,6 +2,7 @@ var searchData=
 [
   ['genericaudioprocessoreditor',['GenericAudioProcessorEditor',['http://www.rawmaterialsoftware.com/juce/api/classGenericAudioProcessorEditor.html',1,'']]],
   ['genericscopedlock',['GenericScopedLock',['http://www.rawmaterialsoftware.com/juce/api/classGenericScopedLock.html',1,'']]],
+  ['genericscopedreadlock',['GenericScopedReadLock',['../struct_generic_scoped_read_lock.html',1,'']]],
   ['genericscopedtrylock',['GenericScopedTryLock',['http://www.rawmaterialsoftware.com/juce/api/classGenericScopedTryLock.html',1,'']]],
   ['genericscopedunlock',['GenericScopedUnlock',['http://www.rawmaterialsoftware.com/juce/api/classGenericScopedUnlock.html',1,'']]],
   ['gifimageformat',['GIFImageFormat',['http://www.rawmaterialsoftware.com/juce/api/classGIFImageFormat.html',1,'']]],

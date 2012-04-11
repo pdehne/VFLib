@@ -70,7 +70,5 @@ var searchData=
   ['fuchsia',['fuchsia',['http://www.rawmaterialsoftware.com/juce/api/classColours.html#a612e521b7168865f48fc7d1612658a79',1,'Colours']]],
   ['fullheightproportion',['fullHeightProportion',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLTextureFromImage.html#a6ed4364b74838dd77850d37a86aa58b6',1,'OpenGLTextureFromImage']]],
   ['fullwidthproportion',['fullWidthProportion',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLTextureFromImage.html#aa4ed56bf93012c120ed64c2101ab1fe0',1,'OpenGLTextureFromImage']]],
-  ['fullyopaque',['fullyOpaque',['../class_transparent_border.html#a168a729f884ab737aa3e3d72dae6e0a5',1,'TransparentBorder']]],
-  ['fullytransparent',['fullyTransparent',['../class_transparent_border.html#a5378c76eeeb3daa390e0da545db84d8d',1,'TransparentBorder']]],
   ['functiontype',['functionType',['http://www.rawmaterialsoftware.com/juce/api/classExpression.html#aa416ac50fdbe8bdea9c59f5c78f0c85ba4af6ecec6a8598073b3f70f7f1c10eb5',1,'Expression']]]
 ];
