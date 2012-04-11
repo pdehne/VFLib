@@ -34,6 +34,7 @@ var searchData=
   ['componentdragger',['ComponentDragger',['http://www.rawmaterialsoftware.com/juce/api/classComponentDragger.html',1,'']]],
   ['componentlistener',['ComponentListener',['http://www.rawmaterialsoftware.com/juce/api/classComponentListener.html',1,'']]],
   ['componentmovementwatcher',['ComponentMovementWatcher',['http://www.rawmaterialsoftware.com/juce/api/classComponentMovementWatcher.html',1,'']]],
+  ['componentnotifyparent',['componentNotifyParent',['../classcomponent_notify_parent.html',1,'']]],
   ['componentpeer',['ComponentPeer',['http://www.rawmaterialsoftware.com/juce/api/classComponentPeer.html',1,'']]],
   ['componentscope',['ComponentScope',['http://www.rawmaterialsoftware.com/juce/api/classRelativeCoordinatePositionerBase_1_1ComponentScope.html',1,'RelativeCoordinatePositionerBase']]],
   ['concurrentobject',['ConcurrentObject',['../class_concurrent_object.html',1,'']]],

@@ -116,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f7a1719540a7b25a668a1b9c54f12f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_error.html">Error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdb_1_1session.html#a1f7a1719540a7b25a668a1b9c54f12f8">open</a> (<a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> fileName, std::string options=&quot;timeout=infinite|mode=create|threads=multi&quot;)</td></tr>
-<tr class="memdesc:a1f7a1719540a7b25a668a1b9c54f12f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect string parameters.  <a href="#a1f7a1719540a7b25a668a1b9c54f12f8"></a><br/></td></tr>
+<tr class="memdesc:a1f7a1719540a7b25a668a1b9c54f12f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open a database.  <a href="#a1f7a1719540a7b25a668a1b9c54f12f8"></a><br/></td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a1f7a1719540a7b25a668a1b9c54f12f8"></a>
@@ -143,8 +143,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>"timeout={#,infinite}" | "mode={read,write,create}" | "cache={shared,private}" | "threads={single,multi}" default is serialized </p>
+<p>The database at the specified path is opened. The connection string is a set of "{key}={value}" pairs separated with the pipe symbol ('|'). Choices for key and value are:</p>
+<div class="fragment"><pre class="fragment">      timeout = (number) || <span class="stringliteral">&quot;infinite&quot;</span>
 
+      mode    = <span class="stringliteral">&quot;read&quot;</span> || <span class="stringliteral">&quot;write&quot;</span> || <span class="stringliteral">&quot;create&quot;</span>
+
+      cache   = <span class="stringliteral">&quot;shared&quot;</span> || <span class="stringliteral">&quot;private&quot;</span>
+
+      threads = <span class="stringliteral">&quot;single&quot;</span> || <span class="stringliteral">&quot;multi&quot;</span>
+</pre></div> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -154,7 +161,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 12:40:40 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 15:40:03 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
