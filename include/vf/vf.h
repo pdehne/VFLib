@@ -195,25 +195,21 @@
   @copyright Provided by the GNU General Public License, Version 2
 */
 
-/** @defgroup internal internal
-
-    Implementation classes.
+/** Implementation classes.
 
     Thase classes are used internally.
+
+    @defgroup internal internal
 */
 
-/** @defgroup external external
-
-    External modules.
+/** External modules.
 
     These modules bring in functionality from third party or system libraries.
+
+    @defgroup external external
 */
 
 #include "AppConfig.h"
-
-/** Include this header to bring in all the modules,
-    or manually include only the modules that you want
-*/
 
 #include "modules/vf_audio/vf_audio.h"
 #include "modules/vf_concurrent/vf_concurrent.h"

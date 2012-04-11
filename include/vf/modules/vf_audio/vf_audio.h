@@ -22,22 +22,22 @@
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
-/** Header file for the vf_audio module.
-
-    Include this file to use the vf_audio module.
-
-    @file vf_audio.h
-    @ingroup vf_audio
-*/
-
 //==============================================================================
-/**
-    Audio signal processing utilities.
+/** Audio signal processing utilities.
 
     This is a small collection of classes for performing audio signal
     processing.
 
     @defgroup vf_audio vf_audio
+*/
+
+//==============================================================================
+/** Include file for the vf_audio module.
+
+    Include this file to use the vf_audio module.
+
+    @file vf_audio.h
+    @ingroup vf_audio
 */
 
 #include "../vf_core/vf_core.h"

@@ -23,9 +23,7 @@
 #define VF_AUDIOBUFFERPOOL_VFHEADER
 
 //==============================================================================
-/** @ingroup vf_audio
-
-    A pool of audio buffers for temporary calculations.
+/** A pool of audio buffers for temporary calculations.
 
     This container provides a pool of audio buffers that grow to match the
     working set requirements based on actual usage. Since the buffers never
@@ -84,20 +82,21 @@
     @endcode
 
     @see AudioBufferPoolType, ScopedAudioSampleBuffer
+
+    @ingroup vf_audio
 */
 
 class AudioBufferPool
 {
 public:
-  /** @internal
-
-      Size tracking for AudioSampleBuffer.
+  /** Size tracking for AudioSampleBuffer.
 
       This provides the getNumSamplesAllocated () function necessary for the
       implementation of AudioBufferPool. It otherwise acts like a normal
       AudioSampleBuffer.
 
-      @ingroup internal
+      @internal
+      @ingroup vf_audio internal
   */
   class Buffer : public juce::AudioSampleBuffer
   {
@@ -106,20 +105,19 @@ public:
 
 	void resize (int newNumChannels, int newNumSamples);
 
+    /** @return The absolute number of samples available in the storage area,
+                regardless of the number of channels.
+    */
+                
 	int getNumSamplesAllocated () const;
 
   private:
 	int m_samplesAllocated;
   };
 
-  /** Create a new, empty pool.
-  
-      The pool starts with enough slots for 10 buffers. More slots are
-      automatically allocated if needed.
-  */
   AudioBufferPool ();
 
-  /** Destroy a pool.
+  /** @details
 
 	  All allocated buffers are freed. Any previously requested buffers must
       already be released.
@@ -172,6 +170,7 @@ class AudioBufferPoolType
   , public LeakChecked <AudioBufferPoolType <TypeOfCriticalSectionToUse> >
 {
 public:
+  /** @see AudioBufferPool::requestBuffer */
   Buffer* requestBuffer (int numChannels, int numSamples)
   {
     TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);
@@ -179,6 +178,7 @@ public:
     return requestBufferInternal (numChannels, numSamples);
   }
 
+  /** @see AudioBufferPool::releaseBuffer */
   void releaseBuffer (Buffer* buffer)
   {
     TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);

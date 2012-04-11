@@ -5,13 +5,19 @@
 #define VF_APPCONFIGTEMPLATE_VFHEADER
 
 //==============================================================================
-/** AppConfig.h template
+/** @file AppConfig.h
+    @ingroup vf_core
+    
+    Additional configuration options.
 
-    Append this section to your existing AppConfig.h to control VFLib options.
+    Append these additional conditional compilation directives to your already
+    existing AppConfig.hto control the compilations options avilable in VFLib.
 */
 
-/* Turns on Boost features. Your project will need to be
-   configured to find the Boost includes and libraries.
+/** Activate Boost features.
+
+    Your project will need to be configured to find the Boost includes
+    and libraries.
 */
 #ifndef VF_USE_BOOST
 #define VF_USE_BOOST 0

@@ -38,23 +38,27 @@
     @ingroup vf_audio
 */
 
-// If AudioSampleBuffer ever becomes a template, we can
-// move the Sample typedef into the template parameters.
-//
 template <int Channels = 2>
 class AudioSampleBufferArray
 {
 public:
+  // If AudioSampleBuffer ever becomes a template, we can
+  // move the Sample typedef into the template parameters.
   typedef float Sample;
 
-  /** Construct a new array with 0 samples. */
+  /** Create an array with no sample data */
   AudioSampleBufferArray ()
     : m_numSamples (0)
   {
   }
 
-  /** Construct an array from existing data.
+  /** Create an array pointing to existing data.
   
+      The resulting array will point to the same memory and contain the same
+      number of samples.
+  */
+
+  /**
       @param numSamples      The number of samples in the resulting array. This
                              may be less than or equal to the actual amount of
                              space in the memory pointed to by arrayOfChannels.
@@ -66,12 +70,7 @@ public:
     setFrom (numSamples, arrayOfChannels);
   }
 
-  /** Construct an array from another array.
-  
-      Both arrays will point to the same memory and contain the same number of
-      samples.
-
-      @param other The AudioSampleBufferArray to copy from.
+  /** @param other The AudioSampleBufferArray to copy from.
   */
   AudioSampleBufferArray (const AudioSampleBufferArray& other)
   {

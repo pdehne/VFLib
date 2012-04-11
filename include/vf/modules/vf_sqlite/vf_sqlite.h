@@ -30,6 +30,10 @@
     embedded database.
 
     @defgroup vf_sqlite vf_sqlite
+
+    @todo Use native SQLite libraries if available (like iOS)
+
+    @todo Allow a user provided SQLite library through AppConfig.h configuration.
 */
 
 #include "AppConfig.h"

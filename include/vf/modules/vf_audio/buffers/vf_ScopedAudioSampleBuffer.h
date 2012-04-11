@@ -34,10 +34,9 @@
     AudioBufferPoolType <CriticalSection> pool;
 
     // Request a stereo buffer with room for 1024 samples.
-    //
     ScopedAudioSampleBuffer buffer (pool, 2, 1024);
 
-    // `buffer` is released when it goes out of scope.
+    // 'buffer' is released when it goes out of scope.
 
     @endcode
 
@@ -53,7 +52,6 @@
     ScopedAudioSampleBuffer buffer (pool, 2, 1024);
 
     // Call a member of AudioSampleBuffer
-    //
     buffer->clear ();
 
     @endcode

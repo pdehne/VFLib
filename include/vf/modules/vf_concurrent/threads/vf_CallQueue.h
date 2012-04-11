@@ -172,7 +172,9 @@ public:
   */
   explicit CallQueue (String name);
 
-  /** @details It is an error to destroy a CallQueue that still contains functors.
+  /** @details
+  
+      It is an error to destroy a CallQueue that still contains functors.
   */
   ~CallQueue ();
 
