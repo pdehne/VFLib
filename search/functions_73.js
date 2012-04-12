@@ -140,6 +140,7 @@ var searchData=
   ['setcolumnvisible',['setColumnVisible',['http://www.rawmaterialsoftware.com/juce/api/classTableHeaderComponent.html#ac91853f78f09564e887b98b481bae95f',1,'TableHeaderComponent']]],
   ['setcolumnwidth',['setColumnWidth',['http://www.rawmaterialsoftware.com/juce/api/classTableHeaderComponent.html#a777fe28faa03d04b9d46105516eb1f8c',1,'TableHeaderComponent']]],
   ['setcommandtotrigger',['setCommandToTrigger',['http://www.rawmaterialsoftware.com/juce/api/classButton.html#a1e925690da1e48ceae6f233fc6cfe4bb',1,'Button']]],
+  ['setcomponent',['setComponent',['../class_transparent_border.html#a3370d138c88cd6766b8d9e557b2446ef',1,'TransparentBorder']]],
   ['setcomponenteffect',['setComponentEffect',['http://www.rawmaterialsoftware.com/juce/api/classComponent.html#a06800d0a55016e738c55078d82ef49fd',1,'Component']]],
   ['setcomponentid',['setComponentID',['http://www.rawmaterialsoftware.com/juce/api/classComponent.html#ac41c215031a087064add6d3a180abd1d',1,'Component']]],
   ['setcomponentpaintingenabled',['setComponentPaintingEnabled',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLContext.html#aaa4cf6bbdb662b106cd44c203b8abb1a',1,'OpenGLContext']]],

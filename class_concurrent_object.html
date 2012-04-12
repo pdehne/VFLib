@@ -112,10 +112,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a35ff8d0868571aa78e6910d7059f0a40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html#a35ff8d0868571aa78e6910d7059f0a40">incReferenceCount</a> () noexcept</td></tr>
-<tr class="memdesc:a35ff8d0868571aa78e6910d7059f0a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment the reference count.  <a href="#a35ff8d0868571aa78e6910d7059f0a40"></a><br/></td></tr>
-<tr class="memitem:af0e492762a311984389ed16538635929"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html#af0e492762a311984389ed16538635929">decReferenceCount</a> () noexcept</td></tr>
-<tr class="memdesc:af0e492762a311984389ed16538635929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement the reference count.  <a href="#af0e492762a311984389ed16538635929"></a><br/></td></tr>
 <tr class="memitem:a969dcbec75b26d3fa0936dd2198d7dec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html#a969dcbec75b26d3fa0936dd2198d7dec">isBeingReferenced</a> () const </td></tr>
 <tr class="memdesc:a969dcbec75b26d3fa0936dd2198d7dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the object is still being referenced.  <a href="#a969dcbec75b26d3fa0936dd2198d7dec"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
@@ -126,40 +122,8 @@ Protected Member Functions</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This is a reference counted object compatible with <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a>. When the last reference is removed, the object is queued for deletion on a separate, provided thread. On program exit the thread will clean itself up - no other action is required.</p>
 <p>This class is useful for offloading the deletion work of "deep" objects shared by multiple threads: objects containing complex members, or a hierarchy of allocated structures. For example, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValueTree.html">ValueTree</a>. The problem of performing heavyweight memory or cleanup operations from either an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a> or the message thread is avoided.</p>
-<p>The deletion behavior can be overriden by providing a replacement for deleteConcurrentObject(). </p>
+<p>The deletion behavior can be overriden by providing a replacement for <a class="el" href="class_concurrent_object.html#aaa2d654e4065c897625122170254318d" title="Delete the object.">destroyConcurrentObject()</a>. </p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a35ff8d0868571aa78e6910d7059f0a40"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_concurrent_object.html#a35ff8d0868571aa78e6910d7059f0a40">ConcurrentObject::incReferenceCount</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af0e492762a311984389ed16538635929"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_concurrent_object.html#af0e492762a311984389ed16538635929">ConcurrentObject::decReferenceCount</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a969dcbec75b26d3fa0936dd2198d7dec"></a>
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +138,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This is not thread safe, so the caller must synchronize.</p>
-<dl class="section return"><dt>Returns:</dt><dd>true if the object has one or more references. </dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>true if the object has one or more references.</dd></dl>
 
 </div>
 </div>
@@ -191,7 +155,7 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>The default implementation performs the delete on a separate, provided thread that cleans up after itself on exit. </p>
+<p>This function is called when the reference count drops to zero. The default implementation performs the delete on a separate, provided thread that cleans up after itself on exit. </p>
 
 </div>
 </div>
@@ -202,7 +166,7 @@ Protected Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 15:44:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

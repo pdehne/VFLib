@@ -112,7 +112,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a71b4169d98676c573e4ef615d4c9d626"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626">requestBuffer</a> (int numChannels, int numSamples)</td></tr>
+<tr class="memdesc:a71b4169d98676c573e4ef615d4c9d626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request a temporary buffer.  <a href="#a71b4169d98676c573e4ef615d4c9d626"></a><br/></td></tr>
 <tr class="memitem:a93183ea809aa45d97880de2282231de4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">releaseBuffer</a> (<a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *buffer)</td></tr>
+<tr class="memdesc:a93183ea809aa45d97880de2282231de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a previously requested buffer back into the pool.  <a href="#a93183ea809aa45d97880de2282231de4"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt;<br/>
@@ -146,7 +148,15 @@ template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e" title="Request a temporary buffer.">AudioBufferPool::requestBuffer</a> </dd></dl>
+<p>The pool returns a buffer with the specified number of channels and enough room for at least numSamples. The caller owns the buffer until it is released with a matching call to <a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4" title="Releases a previously requested buffer back into the pool.">releaseBuffer()</a>.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numChannels</td><td>The number of channels requested.</td></tr>
+    <tr><td class="paramname">numSamples</td><td>The number of samples per channel requested.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>The resulting buffer. </dd></dl>
 
 <p>Implements <a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e">AudioBufferPool</a>.</p>
 
@@ -168,7 +178,12 @@ template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01" title="Releases a previously requested buffer back into the pool.">AudioBufferPool::releaseBuffer</a> </dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>The buffer to release. This must have been provided by an earlier call to <a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626" title="Request a temporary buffer.">requestBuffer()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">AudioBufferPool</a>.</p>
 
@@ -181,7 +196,7 @@ template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 15:44:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

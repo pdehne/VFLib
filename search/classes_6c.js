@@ -28,7 +28,7 @@ var searchData=
   ['listener',['Listener',['http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceType_1_1Listener.html',1,'AudioIODeviceType']]],
   ['listenerlist',['ListenerList',['http://www.rawmaterialsoftware.com/juce/api/classListenerList.html',1,'']]],
   ['listenerlist_3c_20filebrowserlistener_20_3e',['ListenerList< FileBrowserListener >',['http://www.rawmaterialsoftware.com/juce/api/classListenerList.html',1,'']]],
-  ['listenersbase',['ListenersBase',['../class_listeners_base.html',1,'']]],
+  ['listeners',['Listeners',['../class_listeners.html',1,'']]],
   ['localisedstrings',['LocalisedStrings',['http://www.rawmaterialsoftware.com/juce/api/classLocalisedStrings.html',1,'']]],
   ['lockfreequeuedefaulttag',['LockFreeQueueDefaultTag',['../struct_lock_free_queue_default_tag.html',1,'']]],
   ['lockfreestackdefaulttag',['LockFreeStackDefaultTag',['../struct_lock_free_stack_default_tag.html',1,'']]],

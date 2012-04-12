@@ -93,17 +93,184 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FreeTypeFaces Class Reference<div class="ingroups"><a class="el" href="group__vf__gui.html">vf_gui</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>FreeType typefaces with font hinting.  
-</p>
+ <a href="class_free_type_faces.html#details">More...</a></p>
 
 <p><code>#include &quot;vf_FreeTypeFaces.h&quot;</code></p>
 
 <p><a href="class_free_type_faces-members.html">List of all members.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ab1f2c8bb32ce17995e9bd283e2e4a934"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934">addFaceFromMemory</a> (float minHintedHeight, float maxHintedHeight, bool useFreeTypeRendering, const void *faceFileData, int faceFileBytes, bool appendStyleToFaceName=false)</td></tr>
+<tr class="memdesc:ab1f2c8bb32ce17995e9bd283e2e4a934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a font to the list of available fonts.  <a href="#ab1f2c8bb32ce17995e9bd283e2e4a934"></a><br/></td></tr>
+<tr class="memitem:aeacb88ac842212bddac193556f6a79ac"><td class="memItemLeft" align="right" valign="top">static <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeface.html#a13053be679c87b7a72963e9ce60e34c9">Typeface::Ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_free_type_faces.html#aeacb88ac842212bddac193556f6a79ac">createTypefaceForFont</a> (const <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> &amp;font)</td></tr>
+<tr class="memdesc:aeacb88ac842212bddac193556f6a79ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a hinted typeface to match a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> specification.  <a href="#aeacb88ac842212bddac193556f6a79ac"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>This singleton uses FreeType to parse a TrueType or OpenType font that has already been loaded into memory. The resulting TypeFace will support font-hinting (adjustments to make glyphs appear crisp at small sizes).</p>
+<p>An easy way to get the font into memory is to directly embed a font into your application using the Juce BinaryBuilder. This will ensure that the font is always available , giving your program a consistent appearance.</p>
+<p>To use the class, register each font you wish to make available for use by calling <a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934" title="Add a font to the list of available fonts.">addFaceFromMemory()</a>. During the call to register you can specify what range of font heights you want to apply font hinting to. Since each height will count as a separate physical typeface, with its own set of cached glyph images, it is best to keep the range small. Usually hinting is only needed for small sizes. For example, 14 pixels or less.</p>
+<p>JUCE maintains its own internal storage for caching typefaces. Depending on the number of distinct hinted sizes and fonts, you may need to increase the size of the typeface cache by calling <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeface.html#a873c4f902b5fbfa920a4ecd3dff7ee44">Typeface::setTypefaceCacheSize</a>.</p>
+<p>Most of the time it is useful to change the default typeface used for the entire application or plugin, to a hinted font to improve the appearance. This example shows how to create a custom <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classLookAndFeel.html">LookAndFeel</a> to achieve this:</p>
+<div class="fragment"><pre class="fragment">    <span class="comment">// This is the .ttf file data for Helvetica Neue converted with BinaryBuilder.</span>
+
+    <span class="keyword">extern</span> <span class="keywordtype">char</span>* helveticaneueltcommd_ttf;
+    <span class="keyword">extern</span> <span class="keywordtype">int</span>   helveticaneueltcommd_ttfSize;
+
+    <span class="keyword">class </span>CustomLookAndFeel : <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classLookAndFeel.html">LookAndFeel</a>
+    {
+    <span class="keyword">public</span>:
+      CustomLookAndFeel()
+      {
+        <span class="comment">// Add the TrueType font &quot;Helvetica Neue LT Com 65 Medium&quot; and</span>
+        <span class="comment">// use hinting when the font height is between 7 and 12 inclusive.</span>
+
+        FreeTypeFaces::getInstance()-&gt;addFaceFromMemory(
+          7.f, 12.f,
+          helveticaneueltcommd_ttf,
+          helveticaneueltcommd_ttfSize);
+      }
+
+      <span class="keyword">const</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">Typeface::Ptr</a> CustomLookAndFeel::getTypefaceForFont (<a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> <span class="keyword">const</span>&amp; font)
+      {
+        <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">Typeface::Ptr</a> tf;
+
+        <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> faceName (font.<a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html#a66d068f203550181d57353649f8f694f">getTypefaceName</a>());
+
+        <span class="comment">// Make requests for the default sans serif font use our</span>
+        <span class="comment">// FreeType hinted font instead.</span>
+
+        <span class="keywordflow">if</span> (faceName == <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html#affc37b5ccde3bccea8108d25307b2fe5">Font::getDefaultSansSerifFontName</a>())
+        {
+          <span class="comment">// Create a new Font identical to the old one, then</span>
+          <span class="comment">// switch the name to our hinted font.</span>
+
+          <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> f (font);
+
+          <span class="comment">// You&#39;ll need to know the exact name embedded in the font. There</span>
+          <span class="comment">// are a variety of free programs for retrieving this information.</span>
+
+          f.setTypefaceName (<span class="stringliteral">&quot;Helvetica Neue LT Com 65 Medium&quot;</span>);
+
+          <span class="comment">// Now get the hinted typeface.</span>
+
+          tf = <a class="code" href="class_free_type_faces.html#aeacb88ac842212bddac193556f6a79ac" title="Create a hinted typeface to match a Font specification.">FreeTypeFaces::createTypefaceForFont</a> (f);
+        }
+
+        <span class="comment">// If we got here without creating a new typeface</span>
+        <span class="comment">// then just use the default LookAndFeel behavior.</span>
+
+        <span class="keywordflow">if</span> (!tf)
+          tf = <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classLookAndFeel.html#a9f0db849b384fb22137023583167f419">LookAndFeel::getTypefaceForFont</a> (font);
+
+        <span class="keywordflow">return</span> tf;
+      }
+    };
+</pre></div><dl class="section note"><dt>Note:</dt><dd>Multiple typefaces within a single font file are not supported - only the first font will be used. A workaround is to break the font file up into multiple individual files using available third party tools before running BinaryBuilder. </dd></dl>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ab1f2c8bb32ce17995e9bd283e2e4a934"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934">FreeTypeFaces::addFaceFromMemory</a> </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>minHintedHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>maxHintedHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>useFreeTypeRendering</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>faceFileData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>faceFileBytes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>appendStyleToFaceName</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This parses a font stored in a block of memory, and adds it to the global list. After the call returns, the typeface can be found by calling <a class="el" href="class_free_type_faces.html#aeacb88ac842212bddac193556f6a79ac" title="Create a hinted typeface to match a Font specification.">createTypefaceForFont()</a> with a matching name.</p>
+<p>If appendStyleToFaceName is true, then the style name found in the font is appended to the name of the typeface found in the font to produce the final typeface name.</p>
+<p>For example, given a font file containing the typeface "Helvetica Neue LT Com" with style "65 Medium", passing true for appendStyleToFaceName will result in the typeface having the name "Helvetica Neue LT Com 65 Medium". This means that multiple styles will be treated as completely separate typefaces: you will need to manually specify the full combined name in order to access the font.</p>
+<p>Setting appendStyleToFaceName to false is useful when you have variations from the same family and want to make use of the style flags in the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> structure, such as bold or italics.</p>
+<p>For example, if you have two font files for the family "Helvetica Neue LT Com", with styles "65 Medium" and "75 Bold", you can call <a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934" title="Add a font to the list of available fonts.">addFaceFromMemory()</a> twice to load them and pass appendStyleToFaceName as false. When a request for "Helvetica Neue LT Com" is made, the bold flag in the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> object will be checked and the appropriate styled typeface returned.</p>
+<dl class="section note"><dt>Note:</dt><dd>JUCE support for styles may not always work as expected, depending on what's in your font file. If the bold or italic styles in the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> object are not applied correctly, you may need to manually select the appropriate typeface by setting appendStyleToFaceName to true when adding the typeface.</dd></dl>
+<p>There is currently no JUCE interface for direct specification of the font weight. If you have a family with multiple weights you will need to treat each weight as its own typeface.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">minHintedHeight</td><td>The minimum font height when checking whether a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> should have hinting activated.</td></tr>
+    <tr><td class="paramname">maxHintedHeight</td><td>The maximum font height when checking whether a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> should have hinting activated.</td></tr>
+    <tr><td class="paramname">useFreeTypeRendering</td><td>This experimental feature is disabled. The parameter is ignored.</td></tr>
+    <tr><td class="paramname">faceFileData</td><td>A pointer to the memory that holds the font data.</td></tr>
+    <tr><td class="paramname">faceFileBytes</td><td>The number of bytes in the memory pointed to by faceFileData.</td></tr>
+    <tr><td class="paramname">appendStyleToFaceName</td><td>A boolean indicating whether or not the style name is appended to the family name to determine the typeface name at the time it is added.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>More. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeacb88ac842212bddac193556f6a79ac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeface.html#a13053be679c87b7a72963e9ce60e34c9">Typeface::Ptr</a> <a class="el" href="class_free_type_faces.html#aeacb88ac842212bddac193556f6a79ac">FreeTypeFaces::createTypefaceForFont</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> &amp;&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The typeface name in the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> object must exactly match the name of the font when it was added in <a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934" title="Add a font to the list of available fonts.">addFaceFromMemory()</a>.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">font</td><td>A <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classFont.html">Font</a> specifying the typeface. If the font height in the object falls within the range of heights specified in <a class="el" href="class_free_type_faces.html#ab1f2c8bb32ce17995e9bd283e2e4a934" title="Add a font to the list of available fonts.">addFaceFromMemory()</a>, the resulting <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeface.html">Typeface</a> will use font hinting.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>The <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeface.html">Typeface</a>, or nullptr if there was no match. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>vf_FreeTypeFaces.h</li>
 </ul>
@@ -111,7 +278,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 15:44:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
