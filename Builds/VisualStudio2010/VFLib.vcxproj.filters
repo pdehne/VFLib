@@ -632,9 +632,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ConnectedEdges.h">
-      <Filter>VF Modules\vf_gui\components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClInclude>
