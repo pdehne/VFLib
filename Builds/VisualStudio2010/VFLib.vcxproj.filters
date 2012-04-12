@@ -264,9 +264,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.cpp">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.cpp">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
@@ -640,9 +637,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.h">
-      <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h">
       <Filter>VF Modules\vf_gui\mouse</Filter>

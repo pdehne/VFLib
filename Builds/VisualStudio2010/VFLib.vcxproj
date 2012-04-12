@@ -221,10 +221,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -477,7 +473,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropTarget.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h" />

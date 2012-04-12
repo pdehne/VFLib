@@ -31,3 +31,52 @@ DragAndDropData::~DragAndDropData ()
     delete item;
   }
 }
+
+//==============================================================================
+
+bool DragAndDropData::Target::isInterestedInDragSource (const SourceDetails& dragSourceDetails)
+{
+  DragAndDropData* data = dragSourceDetails.description.isObject () ?
+    dynamic_cast <DragAndDropData*> (dragSourceDetails.description.getObject ()) :
+    0;
+  if (data)
+    return this->isInterestedInDragSource (*data, dragSourceDetails);
+  else
+    return false;
+}
+
+void DragAndDropData::Target::itemDragEnter (const SourceDetails& dragSourceDetails)
+{
+  DragAndDropData* data = dragSourceDetails.description.isObject () ?
+    dynamic_cast <DragAndDropData*> (dragSourceDetails.description.getObject ()) :
+    0;
+  if (data)
+    this->itemDragEnter (*data, dragSourceDetails);
+}
+
+void DragAndDropData::Target::itemDragMove (const SourceDetails& dragSourceDetails)
+{
+  DragAndDropData* data = dragSourceDetails.description.isObject () ?
+    dynamic_cast <DragAndDropData*> (dragSourceDetails.description.getObject ()) :
+    0;
+  if (data)
+    this->itemDragMove (*data, dragSourceDetails);
+}
+
+void DragAndDropData::Target::itemDragExit (const SourceDetails& dragSourceDetails)
+{
+  DragAndDropData* data = dragSourceDetails.description.isObject () ?
+    dynamic_cast <DragAndDropData*> (dragSourceDetails.description.getObject ()) :
+    0;
+  if (data)
+    this->itemDragExit (*data, dragSourceDetails);
+}
+
+void DragAndDropData::Target::itemDropped (const SourceDetails& dragSourceDetails)
+{
+  DragAndDropData* data = dragSourceDetails.description.isObject () ?
+    dynamic_cast <DragAndDropData*> (dragSourceDetails.description.getObject ()) :
+    0;
+  if (data)
+    this->itemDropped (*data, dragSourceDetails);
+}

@@ -181,6 +181,39 @@ public:
     return found;
   }
 
+public:
+  /**
+      DragAndDropTarget wrapper supporting the DragAndDropData container.
+
+      @ingroup vf_gui
+  */
+  class Target : public juce::DragAndDropTarget
+  {
+  public:
+    virtual bool isInterestedInDragSource (DragAndDropData const& data,
+                                           const SourceDetails& dragSourceDetails)
+      { return false; }
+
+    virtual void itemDragEnter (DragAndDropData const& data,
+                                const SourceDetails& dragSourceDetails) { }
+
+    virtual void itemDragMove (DragAndDropData const& data,
+                               const SourceDetails& dragSourceDetails) { }
+
+    virtual void itemDragExit (DragAndDropData const& data,
+                               const SourceDetails& dragSourceDetails) { }
+
+    virtual void itemDropped (DragAndDropData const& data,
+                              const SourceDetails& dragSourceDetails) { }
+
+  private:
+    bool isInterestedInDragSource (const SourceDetails& dragSourceDetails);
+    void itemDragEnter (const SourceDetails& dragSourceDetails);
+    void itemDragMove (const SourceDetails& dragSourceDetails);
+    void itemDragExit (const SourceDetails& dragSourceDetails);
+    void itemDropped (const SourceDetails& dragSourceDetails);
+  };
+
 private:
   class Item;
   typedef List <Item> Items;

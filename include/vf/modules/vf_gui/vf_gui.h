@@ -67,7 +67,6 @@ namespace vf
 #include "layout/vf_StackedLayout.h"
 
 #include "mouse/vf_DragAndDropData.h"
-#include "mouse/vf_DragAndDropTarget.h"
 #include "mouse/vf_MouseEnterEditable.h"
 #include "mouse/vf_MouseEnterGroup.h"
 

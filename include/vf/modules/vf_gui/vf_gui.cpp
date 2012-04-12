@@ -54,7 +54,6 @@ namespace vf
 #include "layout/vf_StackedLayout.cpp"
 
 #include "mouse/vf_DragAndDropData.cpp"
-#include "mouse/vf_DragAndDropTarget.cpp"
 #include "mouse/vf_MouseEnterEditable.cpp"
 }
 
