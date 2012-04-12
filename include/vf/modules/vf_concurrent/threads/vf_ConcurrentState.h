@@ -26,12 +26,16 @@
 
 //==============================================================================
 /** 
-    Encapsulation for data accessed by multiple threads.
+    Structured access to concurrent state.
 
-    This template encloses an object typically consisting of public data members
-    of primitive and/or class types. Access to the object is restricted through
-    the use of accessor objects, based on the type of access required. There are
-    three types of access:
+    This template wraps an object containing members representing state
+    information shared between multiple threads of execution, where any thread
+    may need to read or write as needed. Synchronized access to the concurrent
+    state is enforced at compile time through strongly typed accessor classes.
+    This interface design facilitates source code pattern matching to find all
+    areas where a concurrent state is accessed.
+
+    There are three types of access:
 
     - ReadAccess
 
@@ -83,6 +87,34 @@
 
     @endcode
 
+    Forwarding constructors with up to eight parameters are provided. This lets
+    you write constructors into the underlying data object. For example:
+
+    @code
+
+    struct SharedData
+    {
+      explicit SharedData (int numSlots)
+      {
+        m_array.reserve (numSlots);
+      }
+
+      std::vector <AudioSampleBuffer*> m_array;
+    };
+
+    // Construct SharedData with one parameter
+    ConcurrentState <SharedData> sharedState (16);
+
+    @endcode
+
+    @param Object The type of object to encapsulate.
+
+    @warning Recursive calls are not supported. It is generally not possible for
+             a thread of execution to acquire write access while it already has
+    read access. Such an attempt will result in undefined behavior. Calling into
+    unknown code while holding a lock can cause deadlock. See
+    \ref CallQueue::queue().
+
     @ingroup vf_concurrent
 */
 template <class Object>
@@ -93,15 +125,14 @@ public:
   class WriteAccess;
   class UnlockedAccess;
 
-  /** Create a ConcurrentState.
+  /** Create a concurrent state.
 
-      The Object constructor may be called with up to eight
-      parameters, using the forwarding constructors.
+      Up to 8 parameters can be specified in the constructor. These parameters
+      are forwarded to the corresponding constructor in Object. If no
+      constructor in Object matches the parameter list, a compile error is
+      generated.
   */
   ConcurrentState () { }
-
-#ifndef DOXYGEN
-  /** Forwarding constructors */
 
   template <class T1>
   explicit ConcurrentState (T1 t1) : m_obj (t1) { }
@@ -140,7 +171,6 @@ public:
   Object const* getObject () const { return const_cast <Object*> (&m_obj); }
   Object const& operator* () const { return *getObject(); }
   Object const* operator->() const { return getObject(); }
-#endif
 
 private:
   typedef ReadWriteMutex ReadWriteMutexType;
@@ -149,24 +179,18 @@ private:
   ReadWriteMutexType m_mutex;
 };
 
-/** Unlocked access to a ConcurrentState */
+/** Unlocked access to a ConcurrentState. */
 template <class Object>
 class ConcurrentState <Object>::UnlockedAccess : Uncopyable
 {
 public:
-  /** Create an UnlockedAccess from the specified ConcurrentState */
   explicit UnlockedAccess (ConcurrentState const& state)
     : m_state (state)
   {
   }
 
-  /** Obtain a read only pointer to Object */
   Object const* getObject () const { return m_state.getObject (); }
-
-  /** Obtain a read only reference to Object */
   Object const& operator* () const { return *getObject(); }
-
-  /** Obtain a read only smart pointer to Object */
   Object const* operator->() const { return getObject(); }
 
 private:

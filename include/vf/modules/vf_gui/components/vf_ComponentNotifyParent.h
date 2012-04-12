@@ -89,54 +89,46 @@ class componentNotifyParent
 public:
   /** Call a member function on some parent of a Component.
 
-      Overloads are provided for calling members with up to 8 parameters.
-
       @param c  The Component whose parent hierarchy we will search.
       
-      @param f  Any non-static class member to call.
+      @param f  Any non-static class member to call. This may be followed by up
+                to eight parameters. The parameters must match the signature of
+                the specified function.
   */
   template <class C>
   componentNotifyParent (Component* c, void (C::*f)())
   { call <C> (c, vf::bind (f, vf::_1)); }
 
-  /** Call a member function with one parameter. */
   template <class C, class T1>
   componentNotifyParent (Component* c, void (C::*f)(T1), T1 t1)
   { call <C> (c, vf::bind (f, vf::_1, t1)); }
 
-  /** Call a member function with two parameters. */
   template <class C, class T1, class T2>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2), T1 t1, T2 t2)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2)); }
 
-  /** Call a member function with three parameters. */
   template <class C, class T1, class T2, class T3>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3)); }
 
-  /** Call a member function with four parameters. */
   template <class C, class T1, class T2, class T3, class T4>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4)); }
 
-  /** Call a member function with five parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
 
-  /** Call a member function with six parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
 
-  /** Call a member function with seven parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
 
-  /** Call a member function with eight parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   componentNotifyParent (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)

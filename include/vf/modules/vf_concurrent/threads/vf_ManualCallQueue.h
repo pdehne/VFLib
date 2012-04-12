@@ -84,7 +84,10 @@ public:
   */
   void close ();
 
-  /** Synchronize the queue by calling all pending functors. */
+  /** Synchronize the queue by calling all pending functors.
+  
+      @return \c true if any functors were called.
+  */
   bool synchronize ();
 
 private:

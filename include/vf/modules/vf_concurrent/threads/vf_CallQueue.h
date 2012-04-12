@@ -134,6 +134,8 @@
 
     @see GuiCallQueue, ManualCallQueue
 
+    @todo Standardize terminology: "functor" to represent the stored item.
+
     @ingroup vf_concurrent
 */
 class CallQueue
@@ -178,8 +180,6 @@ public:
 
   //============================================================================
 
-  ///@{
-
   /** Add a function call and possibly synchronize.
 
       Parameters are evaluated immediately and added to the queue as a packaged
@@ -213,59 +213,47 @@ public:
     callp (new (m_allocator) CallType <Functor> (f));
   }
 
-  /** Add a function call with one parameter. */
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
   { callf (vf::bind (f, t1)); }
 
-  /** Add a function call with two parameters. */
   template <class Fn, typename  T1, typename  T2>
   void call (Fn f,    const T1& t1, const T2& t2)
   { callf (vf::bind (f, t1, t2)); }
 
-  /** Add a function call with three parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3)
   { callf (vf::bind (f, t1, t2, t3)); }
 
-  /** Add a function call with four parameters. */
   template <class Fn, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void call (Fn f,    const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
   { callf (vf::bind (f, t1, t2, t3, t4)); }
 
-  /** Add a function call with five parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
   { callf (vf::bind (f, t1, t2, t3, t4, t5)); }
 
-  /** Add a function call with six parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
   { callf (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
 
-  /** Add a function call with seven parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
   { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
 
-  /** Add a function call with eight parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
-
-  ///@}
-
-  ///@{
 
   /** Add a function call without synchronizing.
 
@@ -329,57 +317,47 @@ public:
     queuep (new (m_allocator) CallType <Functor> (f));
   }
 
-  /** Add a function call with one parameter. */
   template <class Fn, typename  T1>
   void queue (Fn f,   const T1& t1)
   { queuef (vf::bind (f, t1)); }
 
-  /** Add a function call with two parameters. */
   template <class Fn, typename  T1, typename  T2>
   void queue (Fn f,   const T1& t1, const T2& t2)
   { queuef (vf::bind (f, t1, t2)); }
 
-  /** Add a function call with three parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3)
   { queuef (vf::bind (f, t1, t2, t3)); }
 
-  /** Add a function call with four parameters. */
   template <class Fn, typename  T1, typename  T2,
                       typename  T3, typename  T4>
   void queue (Fn f,   const T1& t1, const T2& t2,
                       const T3& t3, const T4& t4)
   { queuef (vf::bind (f, t1, t2, t3, t4)); }
 
-  /** Add a function call with five parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5)
   { queuef (vf::bind (f, t1, t2, t3, t4, t5)); }
 
-  /** Add a function call with six parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3,
                       typename  T4, typename  T5, typename  T6>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3,
                       const T4& t4, const T5& t5, const T6& t6)
   { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6)); }
 
-  /** Add a function call with seven parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7)
   { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7)); }
 
-  /** Add a function call with eight parameters. */
   template <class Fn, typename  T1, typename  T2, typename  T3, typename  T4,
                       typename  T5, typename  T6, typename  T7, typename  T8>
   void queue (Fn f,   const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
-
-  ///@}
 
 protected:
   //============================================================================

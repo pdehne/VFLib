@@ -28,7 +28,7 @@
  
     This provides a simplified interface to an atomic integer suitable for
     measuring reference or usage counts. The counter is signaled when the
-    count is non zero, else it is considered reset.
+    count is non zero.
 
     @ingroup vf_core
 */
@@ -46,7 +46,7 @@ public:
 
   /** Increment the usage count.
 
-      Returns true if the counter was previously reset.
+      @return \c true if the counter became signaled.
   */
   inline bool addref () noexcept
   {
@@ -55,7 +55,7 @@ public:
 
   /** Decrements the usage count.
 
-      Returns true if the counter is reset.
+      @return \c true if the counter became non-signaled.
   */
   inline bool release () noexcept
   {
@@ -70,7 +70,7 @@ public:
       Note that another thread can cause the counter to become reset after
       this function returns true.
 
-      @return true if the counter was signaled.
+      @return \c true if the counter was signaled.
   */
   inline bool isSignaled () const noexcept
   {

@@ -191,10 +191,10 @@ public:
       The typeface name in the Font object must exactly match the name
       of the font when it was added in addFaceFromMemory().
 
-      param font A Font specifying the typeface. If the font height in
-                 the object falls within the range of heights specified
-                 in addFaceFromMemory(), the resulting Typeface will use
-                 font hinting.
+      @param font A Font specifying the typeface. If the font height in
+                  the object falls within the range of heights specified
+                  in addFaceFromMemory(), the resulting Typeface will use
+                  font hinting.
 
       @return The Typeface, or nullptr if there was no match.
   */

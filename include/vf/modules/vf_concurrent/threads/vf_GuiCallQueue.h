@@ -52,7 +52,9 @@ public:
 
   /** Synchronize the queue.
 
-      This can be called manually if needed
+      This can be called manually if needed.
+
+      @return \c true if any functors were called.
   */
   bool synchronize ();
 

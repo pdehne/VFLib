@@ -52,7 +52,21 @@
     and maintain the core concurrent code.
     </em> @n - Herb Sutter (From http://drdobbs.com/cpp/184401930)
 
-    
+    @section Problem
+
+    Statement of the problem:
+    "concurrent state" : mutable data accessed by multiple threads of execution
+    "concurrent object" : object of class type, member functions with a well
+    defined interface called by multiple threads of execution
+
+
+
+    @section Deadlock
+
+    Calling into unknown code can cause deadlock.
+
+
+
     This object is an alternative to traditional locking techniques used to
     implement concurrent systems. Instead of acquiring a mutex to change shared
     data, a functor is queued for later execution (usually on another thread). The

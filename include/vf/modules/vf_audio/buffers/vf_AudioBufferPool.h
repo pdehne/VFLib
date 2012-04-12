@@ -170,7 +170,6 @@ class AudioBufferPoolType
   , public LeakChecked <AudioBufferPoolType <TypeOfCriticalSectionToUse> >
 {
 public:
-  /** @see AudioBufferPool::requestBuffer */
   Buffer* requestBuffer (int numChannels, int numSamples)
   {
     TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);
@@ -178,7 +177,6 @@ public:
     return requestBufferInternal (numChannels, numSamples);
   }
 
-  /** @see AudioBufferPool::releaseBuffer */
   void releaseBuffer (Buffer* buffer)
   {
     TypeOfCriticalSectionToUse::ScopedLockType lock (m_mutex);

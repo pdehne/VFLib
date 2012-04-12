@@ -39,20 +39,18 @@
     AudioIODeviceCallback or the message thread is avoided.
 
     The deletion behavior can be overriden by providing a replacement
-    for deleteConcurrentObject().
+    for destroyConcurrentObject().
 
     @ingroup vf_concurrent
 */
 class ConcurrentObject : Uncopyable
 {
 public:
-  /** Increment the reference count. */
   inline void incReferenceCount() noexcept
   {
     m_refs.addref ();
   }
 
-  /** Decrement the reference count. */
   inline void decReferenceCount() noexcept
   {
     if (m_refs.release ())
@@ -64,6 +62,8 @@ public:
       This is not thread safe, so the caller must synchronize.
 
       @return true if the object has one or more references.
+
+      @internal
   */
   inline bool isBeingReferenced () const
   {
@@ -71,16 +71,15 @@ public:
   }
 
 protected:
-#ifndef DOXYGEN
   ConcurrentObject();
 
   virtual ~ConcurrentObject();
-#endif
 
   /** Delete the object.
 
-      The default implementation performs the delete on a separate,
-      provided thread that cleans up after itself on exit.
+      This function is called when the reference count drops to zero. The
+      default implementation performs the delete on a separate, provided thread
+      that cleans up after itself on exit.
   */
   virtual void destroyConcurrentObject ();
 

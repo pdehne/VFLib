@@ -144,54 +144,46 @@ class componentBroadcast
 public:
   /** Call a member function on a Component and all of it's children.
 
-      Overloads are provided for calling members with up to 8 parameters.
+      @param c  The Component hierarchy to broadcast to.
 
-      @param c  The Component to broadcast to.
-      
-      @param f  Any non-static class member to call.
+      @param f  Any non-static class member to call. This may be followed by up
+                to eight parameters. The parameters must match the signature
+                of the specified function.
   */
   template <class C>
   componentBroadcast (Component* c, void (C::*f)())
   { call <C> (c, vf::bind (f, vf::_1)); }
 
-  /** Call a member function with one parameter. */
   template <class C, class T1>
   componentBroadcast (Component* c, void (C::*f)(T1), T1 t1)
   { call <C> (c, vf::bind (f, vf::_1, t1)); }
 
-  /** Call a member function with two parameters. */
   template <class C, class T1, class T2>
   componentBroadcast (Component* c, void (C::*f)(T1, T2), T1 t1, T2 t2)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2)); }
 
-  /** Call a member function with three parameters. */
   template <class C, class T1, class T2, class T3>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3), T1 t1, T2 t2, T3 t3)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3)); }
 
-  /** Call a member function with four parameters. */
   template <class C, class T1, class T2, class T3, class T4>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4), T1 t1, T2 t2, T3 t3, T4 t4)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4)); }
 
-  /** Call a member function with five parameters */
   template <class C, class T1, class T2, class T3, class T4, class T5>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5), T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
 
-  /** Call a member function with six parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
 
-  /** Call a member function with seven parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
   { call <C> (c, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
 
-  /** Call a member function with eight parameters. */
   template <class C, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   componentBroadcast (Component* c, void (C::*f)(T1, T2, T3, T4, T5, T6, T7, T8),
              T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)

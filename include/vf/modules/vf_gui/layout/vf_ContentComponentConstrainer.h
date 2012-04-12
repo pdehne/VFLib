@@ -48,7 +48,10 @@ class ContentComponentConstrainer
   , private ComponentListener
 {
 public:
-  /** Attach a new ContentComponentConstrainer to a window. */
+  /** Attach a new ContentComponentConstrainer to a window.
+
+      @param resizableWindow The window to attach to.
+  */
   static void attachTo (ResizableWindow* resizableWindow)
   {
     ContentComponentConstrainer* contentConstrainer =

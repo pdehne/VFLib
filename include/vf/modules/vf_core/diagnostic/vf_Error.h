@@ -42,8 +42,12 @@ class Error
   , public SafeBool <Error>
 {
 public:
-  // These are for when the caller wants to distinguish
-  // results, for example, knowing that a file is locked.
+  /** Numeric code.
+
+      This enumeration is useful when the caller needs to take different
+      actions depending on the failure. For example, trying again later if
+      a file is locked.
+  */
   enum Code
   {
     success,        //!< "the operation was successful"

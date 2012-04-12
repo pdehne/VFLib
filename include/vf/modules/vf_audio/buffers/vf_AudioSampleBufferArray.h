@@ -26,11 +26,16 @@
 /** 
     An array of movable pointers to existing audio buffers.
 
-    This simple class wraps an array of pointers to multi-channel audio data.
-    Provided functions can move the pointers back and forth as a group,
-    making certain forms of code that manipulate audio buffers more concise.
+    This simple class wraps an already existing array of pointers to
+    multi-channel audio data. Provided functions can move the pointers back and
+    forth as a group, making certain forms of code that manipulate audio buffers
+    more concise. Type conversions to and from AudioSampleBuffer allow seamless,
+    intuitive usage.
 
-    Conversions to and from AudioSampleBuffer allow seamless, intuitive usage.
+    All constructors and assignments leave the array pointing to already
+    existing memory, none of these functions create new buffers. All arrays will
+    point to the same sample data or storage as the objects they were
+    constructed from.
 
     @param Channels A template parameter specifying the number of channels in
                     the array of pointers, default to 2 (stereo).
@@ -46,20 +51,13 @@ public:
   // move the Sample typedef into the template parameters.
   typedef float Sample;
 
-  /** Create an array with no sample data */
+  /** @details Construct an array with no samples. */
   AudioSampleBufferArray ()
     : m_numSamples (0)
   {
   }
 
-  /** Create an array pointing to existing data.
-  
-      The resulting array will point to the same memory and contain the same
-      number of samples.
-  */
-
-  /**
-      @param numSamples      The number of samples in the resulting array. This
+  /** @param numSamples      The number of samples in the resulting array. This
                              may be less than or equal to the actual amount of
                              space in the memory pointed to by arrayOfChannels.
       
@@ -77,9 +75,7 @@ public:
     setFrom (other);
   }
 
-  /** Construct an array from an AudioSampleBuffer.
-
-      @param buffer      The AudioSampleBuffer to point to.
+  /** @param buffer      The AudioSampleBuffer to point to.
 
       @param startSample Zero based index of the first sample to use.
 
@@ -95,10 +91,7 @@ public:
     setFrom (buffer, startSample, numSamples);
   }
 
-  /** Create an array from an AudioSourceChannelInfo.
-
-      @param bufferToFill The AudioSourceChannelInfo to point to.
-  */
+  /** @param bufferToFill The AudioSourceChannelInfo to point to. */
   AudioSampleBufferArray (const juce::AudioSourceChannelInfo& bufferToFill)
   {
     setFrom (*bufferToFill.buffer,
@@ -106,28 +99,42 @@ public:
              bufferToFill.numSamples);
   }
 
-  /** Assign from an AudioSampleBuffer */
+  /** @param buffer The buffer to point to.
+  
+      @return A reference to the array.
+  */
   AudioSampleBufferArray& operator= (const juce::AudioSampleBuffer& buffer)
   {
     setFrom (buffer);
     return *this;
   }
 
-  /** Assign from an AudioSourceChannelInfo */
+  /** @param bufferToFill The portion of an AudioSampleBuffer to point to.
+
+      @return A reference to the array.
+  */
   AudioSampleBufferArray& operator= (const juce::AudioSourceChannelInfo& bufferToFill)
   {
     setFrom (bufferToFill);
     return *this;
   }
 
-  /** Assign from another array. */
+  /** @param other The other AudioSampleBufferArray to point to.
+  
+      @return A reference to the array.
+  */
   AudioSampleBufferArray& operator= (const AudioSampleBufferArray& other)
   {
     setFrom (other);
     return *this;
   }
 
-  /** Manually assign a range of samples from a set of pointers. */
+  /** Manually assign a range of samples from a set of pointers.
+  
+      @param numSamples The number of samples in the desired range.
+      
+      @param channels The array of pointers to sample data.
+  */
   void setFrom (int numSamples, Sample* const* channels)
   {
     m_numSamples = numSamples;
@@ -135,7 +142,7 @@ public:
       m_channels[i]=channels[i];
   }
 
-  /** Assign from another array */
+  /** @param other The AudioSampleBufferArray to point to. */
   void setFrom (const AudioSampleBufferArray& other)
   {
     m_numSamples = other.m_numSamples;
@@ -143,7 +150,15 @@ public:
       m_channels[i] = other.m_channels[i];
   }
 
-  /** Assign from a range within an AudioSampleBuffer  */
+  /** @param buffer The AudioSampleBuffer containing the desired channel buffers.
+      
+      @param startSample Zero based index of the first sample to use.
+
+      @param numSamples  The number of samples in the desired range.
+                         This must be less than or equal to the actual
+                         amount of space in the memory pointed to by
+                         buffer, less startingSampleIndex.
+  */
   void setFrom (juce::AudioSampleBuffer const& buffer,
                 int startSample = 0,
                 int numSamples = -1)
@@ -158,18 +173,19 @@ public:
       m_channels[i] = buffer.getArrayOfChannels()[i] + startSample;
   }
 
-  /** Type conversion to an array of pointers to sample data. */
+  /** @return A const array of pointers to the channel data. */
   operator Sample* const* () const
   {
     return m_channels;
   }
 
-  /** Type conversion to AudioSampleBuffer */
+  /** @return An AudioSampleBuffer pointing to the channel data. */
   operator juce::AudioSampleBuffer()
   {
     return juce::AudioSampleBuffer (m_channels, Channels, m_numSamples);
   }
 
+  /** @return A const AudioSampleBuffer pointing to the channel data. */
   operator const AudioSampleBuffer() const
   {
     return juce::AudioSampleBuffer (m_channels, Channels, m_numSamples);
