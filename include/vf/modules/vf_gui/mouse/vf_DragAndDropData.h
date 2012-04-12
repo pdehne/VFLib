@@ -45,8 +45,7 @@
       into a STL container (i.e. support copy construction and assignment).
 
     - Type-safe: objects placed into the container are disposed of correctly.
-      If add(), find() are called with a ReferenceCountedObjectPtr, it does the
-      right thing.
+      If a ReferenceCountedObjectPtr is put inside, it does the right thing.
 
     In this example we will create a DragAndDropData for an image represented by
     a hyperlink. The container will hold two typed representations: an Image
@@ -130,13 +129,11 @@
 class DragAndDropData : public juce::ReferenceCountedObject
 {
 public:
-#ifndef DOXYGEN
   typedef juce::ReferenceCountedObjectPtr <DragAndDropData> Ptr;
 
   DragAndDropData ();
 
   ~DragAndDropData ();
-#endif
 
   /** Add an object to the container.
 
@@ -154,10 +151,12 @@ public:
 
   /** Retrieve an object from the container.
 
+      Object must be copyable.
+
       @param[out] pResult  Receives a copy of the object if it exists in the
                            container.
       
-      @return              true if the object was found.
+      @return              \c true if the object was found.
   */
   template <class Object>
   bool find (Object* pResult = 0) const
@@ -183,7 +182,6 @@ public:
   }
 
 private:
-#ifndef DOXYGEN
   class Item;
   typedef List <Item> Items;
 
@@ -208,7 +206,6 @@ private:
   private:
     Object m_object;
   };
-#endif
 
   Items m_items;
 };

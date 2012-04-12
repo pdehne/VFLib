@@ -144,15 +144,12 @@
     @ingroup vf_core
 */
 
-#ifndef DOXYGEN
 struct ListDefaultTag { };
-#endif
 
 template <class Element, class Tag = ListDefaultTag>
 class List : Uncopyable
 {
 public:
-#ifndef DOXYGEN
   typedef int size_type;
 
   typedef Element        value_type;
@@ -171,7 +168,6 @@ public:
     Node* m_next;
     Node* m_prev;
   };
-#endif
 
 private:
   template <class ElemType, class NodeType>

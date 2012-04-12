@@ -43,7 +43,6 @@
 #include "../vf_core/vf_core.h"
 
 // forward declares
-#ifndef DOXYGEN
 struct sqlite3;
 struct sqlite3_blob;
 struct sqlite3_stmt;
@@ -58,7 +57,6 @@ class blob;							// exchange_traits.h
 class session;						// statement.h
 }
 }
-#endif
 
 #if JUCE_MSVC
 #pragma warning (push)

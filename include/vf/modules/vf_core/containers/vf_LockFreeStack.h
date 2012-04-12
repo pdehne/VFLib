@@ -41,15 +41,12 @@
     @ingroup vf_core
 */
 
-#ifndef DOXYGEN
 struct LockFreeStackDefaultTag { };
-#endif
 
 template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
 {
 public:
-#ifndef DOXYGEN
   class Node : Uncopyable
   {
   public:
@@ -66,7 +63,6 @@ public:
 
     AtomicPointer <Node> m_next;
   };
-#endif
 
 public:
   LockFreeStack () : m_head (0)

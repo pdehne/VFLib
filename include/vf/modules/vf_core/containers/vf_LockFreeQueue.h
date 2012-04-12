@@ -48,15 +48,12 @@
     @ingroup vf_core
 */
 
-#ifndef DOXYGEN
 struct LockFreeQueueDefaultTag { };
-#endif
 
 template <class Element, class Tag = LockFreeQueueDefaultTag>
 class LockFreeQueue
 {
 public:
-#ifndef DOXYGEN
   class Node : Uncopyable
   {
   public:
@@ -70,7 +67,6 @@ public:
 
     AtomicPointer <Node> m_next;
   };
-#endif
 
 public:
   /** Create an empty list. */

@@ -37,10 +37,8 @@
 class OncePerSecond : Uncopyable
 {
 public:
-#ifndef DOXYGEN
   OncePerSecond ();
   ~OncePerSecond ();
-#endif
 
   /** Begin receiving notifications. */
   void startOncePerSecond ();

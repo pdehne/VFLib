@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_freetype external module.
+
+    @file vf_freetype.h
+    @ingroup vf_freetype external
+*/
+
 #ifndef VF_FREETYPE_VFHEADER
 #define VF_FREETYPE_VFHEADER
 
@@ -29,6 +35,7 @@
     This module provides the FreeType Engine.
 
     @defgroup vf_freetype vf_freetype
+    @ingroup external
 */
 
 #include "AppConfig.h"

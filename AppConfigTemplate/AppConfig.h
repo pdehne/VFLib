@@ -14,7 +14,7 @@
     existing AppConfig.hto control the compilations options avilable in VFLib.
 */
 
-/** Activate features that require Boost.
+/** Activate features that use Boost.
 
     Your project will need to be configured to find the Boost includes
     and libraries.
@@ -23,12 +23,17 @@
 #define VF_USE_BOOST 0
 #endif
 
-/** Turns on BZip2 features */
+/** Activate features that use BZip2.
+
+    Your project will require the @ref vf_bzip2 external module.
+*/
 #ifndef VF_USE_BZIP2
 #define VF_USE_BZIP2 1
 #endif
 
-/** Activate features that require FreeType.
+/** Activate features that use FreeType.
+
+    Your project will require the @ref vf_freetype external module.
 */
 #ifndef VF_USE_FREETYPE
 #define VF_USE_FREETYPE 1

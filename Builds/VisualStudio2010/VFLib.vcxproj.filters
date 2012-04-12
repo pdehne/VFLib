@@ -82,49 +82,52 @@
     <Filter Include="VF Modules\vf_gui\components">
       <UniqueIdentifier>{c04b82a4-caae-4010-80e5-ea8c0f6f1bb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_freetype">
-      <UniqueIdentifier>{736ee987-142e-44a5-a8e6-4b599c17f291}</UniqueIdentifier>
+    <Filter Include="VF Modules\external">
+      <UniqueIdentifier>{633c30ba-63f4-4b14-9b40-ae21f267cdfc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_freetype\freetype">
-      <UniqueIdentifier>{4f7641a9-6421-4b62-86ca-447c63b4bb27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_sqlite">
-      <UniqueIdentifier>{77750aaf-a021-4260-943d-ffb29fd235f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_sqlite\sqlite">
-      <UniqueIdentifier>{41878b9f-da99-49d3-84d6-fa396beda121}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_lua">
-      <UniqueIdentifier>{887bb504-83e5-4efd-b0f8-3017729914e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_lua\lua">
-      <UniqueIdentifier>{f59ac36e-ca58-4503-b837-2469396f70f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_lua\lua\include">
-      <UniqueIdentifier>{09f3599d-9389-4c7a-88df-00b6e6cb23b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_lua\lua\source">
-      <UniqueIdentifier>{cfdc7e47-4891-4337-a947-c406c78f71f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_bzip2">
-      <UniqueIdentifier>{ef3dc382-c39d-46c6-952d-53b8dc49e6cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_luabridge">
-      <UniqueIdentifier>{af2be940-f048-4b49-be6a-7ac65d216ddf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_luabridge\luabridge">
-      <UniqueIdentifier>{888c98b8-ba39-4d79-b4b2-a462e6487e87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_luabridge\luabridge\impl">
-      <UniqueIdentifier>{7854c24c-191a-4387-878a-b13717ac100e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="VF Modules\vf_taglib">
+    <Filter Include="VF Modules\external\vf_taglib">
       <UniqueIdentifier>{1eb38624-3e95-4908-b51d-8abfdccc994e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_taglib\taglib">
+    <Filter Include="VF Modules\external\vf_taglib\taglib">
       <UniqueIdentifier>{5741bdf7-2284-42a6-869f-a0585e67e3f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_bzip2\bzip2">
+    <Filter Include="VF Modules\external\vf_sqlite">
+      <UniqueIdentifier>{77750aaf-a021-4260-943d-ffb29fd235f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_sqlite\sqlite">
+      <UniqueIdentifier>{41878b9f-da99-49d3-84d6-fa396beda121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_luabridge">
+      <UniqueIdentifier>{af2be940-f048-4b49-be6a-7ac65d216ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_luabridge\luabridge">
+      <UniqueIdentifier>{888c98b8-ba39-4d79-b4b2-a462e6487e87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_luabridge\luabridge\impl">
+      <UniqueIdentifier>{7854c24c-191a-4387-878a-b13717ac100e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_lua">
+      <UniqueIdentifier>{887bb504-83e5-4efd-b0f8-3017729914e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_lua\lua">
+      <UniqueIdentifier>{f59ac36e-ca58-4503-b837-2469396f70f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_lua\lua\include">
+      <UniqueIdentifier>{09f3599d-9389-4c7a-88df-00b6e6cb23b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_lua\lua\source">
+      <UniqueIdentifier>{cfdc7e47-4891-4337-a947-c406c78f71f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_freetype">
+      <UniqueIdentifier>{736ee987-142e-44a5-a8e6-4b599c17f291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_freetype\freetype">
+      <UniqueIdentifier>{4f7641a9-6421-4b62-86ca-447c63b4bb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_bzip2">
+      <UniqueIdentifier>{ef3dc382-c39d-46c6-952d-53b8dc49e6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_bzip2\bzip2">
       <UniqueIdentifier>{95a37b44-1f41-4a2a-a2a7-4f6e8eea33e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -268,157 +271,157 @@
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.c">
-      <Filter>VF Modules\vf_freetype\freetype</Filter>
+      <Filter>VF Modules\external\vf_freetype\freetype</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_freetype\vf_freetype.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.c">
-      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+      <Filter>VF Modules\external\vf_sqlite\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.c">
-      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+      <Filter>VF Modules\external\vf_sqlite\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lua.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltm.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltablib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltable.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstrlib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstring.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstate.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lparser.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\loslib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lopcodes.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lobject.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\loadlib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lmem.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lmathlib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\llex.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\liolib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\linit.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lgc.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lfunc.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldump.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldo.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldebug.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldblib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lctype.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lcorolib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lcode.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lbitlib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lbaselib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lauxlib.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lapi.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lzio.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lvm.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lundump.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_lua\vf_lua.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.cpp">
-      <Filter>VF Modules\vf_luabridge\luabridge</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.cpp">
-      <Filter>VF Modules\vf_luabridge\luabridge</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.cpp">
-      <Filter>VF Modules\vf_taglib\taglib</Filter>
+      <Filter>VF Modules\external\vf_taglib\taglib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\crctable.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\decompress.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\huffman.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\randtable.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\blocksort.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\compress.c">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.c">
       <Filter>VF Library Code</Filter>
@@ -656,125 +659,122 @@
     <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h">
-      <Filter>VF Modules\vf_freetype</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.h">
-      <Filter>VF Modules\vf_freetype\freetype</Filter>
+      <Filter>VF Modules\external\vf_freetype\freetype</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.h">
-      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+      <Filter>VF Modules\external\vf_sqlite\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.h">
-      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+      <Filter>VF Modules\external\vf_sqlite\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h">
-      <Filter>VF Modules\vf_sqlite\sqlite</Filter>
+      <Filter>VF Modules\external\vf_sqlite\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldebug.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lctype.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lcode.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lauxlib.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lapi.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lzio.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lvm.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lundump.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lualib.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\luaconf.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lua.hpp">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lua.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ltm.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ltable.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lstring.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lstate.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lparser.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lopcodes.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lobject.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lmem.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\llimits.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\llex.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lgc.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lfunc.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldo.h">
-      <Filter>VF Modules\vf_lua\lua\include</Filter>
+      <Filter>VF Modules\external\vf_lua\lua\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\class.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\module.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\shared_ptr.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\stack.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\typelist.hpp">
-      <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
+      <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h">
-      <Filter>VF Modules\vf_taglib\taglib</Filter>
+      <Filter>VF Modules\external\vf_taglib\taglib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.h">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib_private.h">
-      <Filter>VF Modules\vf_bzip2\bzip2</Filter>
+      <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h">
       <Filter>VF Modules\vf_audio\buffers</Filter>
@@ -835,6 +835,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h">
       <Filter>VF Modules\vf_gui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h">
+      <Filter>VF Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

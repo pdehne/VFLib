@@ -48,7 +48,6 @@
     @ingroup vf_concurrent
 */
 
-#ifndef DOXYGEN
 template <class LockType>
 struct GenericScopedReadLock : Uncopyable
 {
@@ -84,7 +83,6 @@ struct GenericScopedWriteLock : Uncopyable
 private:
   LockType const& m_lock;
 };
-#endif
 
 class ReadWriteMutex
 {
