@@ -19,12 +19,17 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_concurrent module.
+
+    @file vf_concurrent.h
+    @ingroup vf_concurrent
+*/
+
 #ifndef VF_CONCURRENT_VFHEADER
 #define VF_CONCURRENT_VFHEADER
 
 //==============================================================================
-/** @defgroup vf_concurrent vf_concurrent
-
+/**
     Classes for building a concurrent system.
 
     This module offers a specially crafted set of classes that work together
@@ -111,6 +116,8 @@
     of multiple threads.
     
     @todo Discuss the limit on the size of the functor used in CallQueue and Listeners.
+
+    @defgroup vf_concurrent vf_concurrent
 */
 
 #include "../vf_core/vf_core.h"

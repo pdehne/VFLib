@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_db module.
+
+    @file vf_db.cpp
+    @ingroup vf_db
+*/
+
 #include "vf_db.h"
 
 #include "../vf_sqlite/vf_sqlite.h"

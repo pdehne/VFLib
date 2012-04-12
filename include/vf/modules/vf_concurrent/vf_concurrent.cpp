@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_concurrent module.
+
+    @file vf_concurrent.cpp
+    @ingroup vf_concurrent
+*/
+
 #include "vf_concurrent.h"
 
 #if JUCE_MSVC

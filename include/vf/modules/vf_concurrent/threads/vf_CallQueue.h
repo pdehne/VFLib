@@ -26,8 +26,9 @@
 #include "../memory/vf_FifoFreeStore.h"
 
 //==============================================================================
-/** 
-    A FIFO for calling functors asynchronously.
+/** @ingroup vf_concurrent
+
+    @brief A FIFO for calling functors asynchronously.
 
     This object is an alternative to traditional locking techniques used to
     implement concurrent systems. Instead of acquiring a mutex to change shared
@@ -135,8 +136,6 @@
     @see GuiCallQueue, ManualCallQueue
 
     @todo Standardize terminology: "functor" to represent the stored item.
-
-    @ingroup vf_concurrent
 */
 class CallQueue
 {
@@ -145,6 +144,11 @@ public:
 
   typedef FifoFreeStoreType AllocatorType;
 
+  /** @internal
+      @ingroup vf_concurrent internal
+
+      @brief Abstract nullary functor.
+  */
   class Call : public LockFreeQueue <Call>::Node,
                public AllocatedBy <AllocatorType>
   {
@@ -153,32 +157,34 @@ public:
     virtual void operator() () = 0;
   };
 
-  void callp (Call* call);
-
-  void queuep (Call* call);
-
-  inline AllocatorType& getAllocator ()
-  {
-    return m_allocator;
-  }
-
-  bool isAssociatedWithCurrentThread () const;
-
-  bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
-
   //============================================================================
 
-  /** @param  name  A string identifying the associated thread for debugging.
+  /** @param  name  A string to identify the queue during debugging.
   */
   explicit CallQueue (String name);
 
   /** @details
   
-      It is an error to destroy a CallQueue that still contains functors.
+      @invariant Destroying a queue that contains functors is undefined.
   */
   ~CallQueue ();
 
   //============================================================================
+
+  /** Add a functor and possibly synchronize.
+
+      Use this when you want to perform the bind yourself.
+
+      @param f The functor to add, typically the return value of a call
+               to bind().
+
+      @see call
+  */
+  template <class Functor>
+  void callf (Functor const& f)
+  {
+    callp (new (m_allocator) CallType <Functor> (f));
+  }
 
   /** Add a function call and possibly synchronize.
 
@@ -199,19 +205,6 @@ public:
   template <class Fn>
   void call (Fn f)
   { callf (vf::bind (f)); }
-
-  /** Add a functor and possibly synchronize.
-
-      Use this when you want to perform the bind yourself.
-
-      @param f The functor to add, typically the return value of a call
-               to bind().
-  */
-  template <class Functor>
-  void callf (Functor const& f)
-  {
-    callp (new (m_allocator) CallType <Functor> (f));
-  }
 
   template <class Fn, typename  T1>
   void call (Fn f,    const T1& t1)
@@ -254,6 +247,21 @@ public:
   void call (Fn f,    const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
+
+  /** Add a functor without synchronizing.
+
+      Use this when you want to perform the bind yourself.
+
+      @param f The functor to add, typically the return value of a call
+               to bind().
+
+      @see queue
+  */
+  template <class Functor>
+  void queuef (Functor const& f)
+  {
+    queuep (new (m_allocator) CallType <Functor> (f));
+  }
 
   /** Add a function call without synchronizing.
 
@@ -302,19 +310,6 @@ public:
   void queue (Fn f)
   {
     queuef (vf::bind (f));
-  }
-
-  /** Add a functor.
-
-      Use this when you want to perform the bind yourself.
-
-      @param f The functor to add, typically the return value of a call
-               to bind().
-  */
-  template <class Functor>
-  void queuef (Functor const& f)
-  {
-    queuep (new (m_allocator) CallType <Functor> (f));
   }
 
   template <class Fn, typename  T1>
@@ -381,19 +376,69 @@ protected:
   */
   void close ();
 
-  /** Notification when a queue is signaled.
+  /** Called when the queue becomes signaled.
 
       A queue is signaled on the transition from empty to non-empty. Derived
       classes implement this function to perform a notification so that
       synchronize() will be called. For example, by triggering a WaitableEvent.
 
-      Due to the implementation the queue can remain signaled for one extra
-      cycle. This does not happen under load and is not an issue in practice.
+      @note Due to the implementation the queue can remain signaled for one
+            extra cycle. This does not happen under load and is not an issue
+            in practice.
   */
   virtual void signal () = 0;
 
-  /** Notification when a queue becomes empty */
+  /** Called when the queue becomes non-signaled. */
   virtual void reset () = 0;
+
+public:
+  //============================================================================
+
+  ///@internal
+  ///@name Internal member functions
+  ///@{
+
+  /** @internal
+  
+      @details Add a raw Call to the queue and synchronize if possible.
+
+      @param c The call to add.
+    */
+  void callp (Call* c);
+
+  /** @internal 
+
+      @details Add a raw Call to the queue without synchronizing.
+
+      @param c The call to add.
+  */
+  void queuep (Call* c);
+
+  /** @internal
+  
+      @return The allocator to use when allocating a raw Call object.      
+   */
+  inline AllocatorType& getAllocator ()
+  {
+    return m_allocator;
+  }
+
+  /** @internal
+  
+      @return \c true if the calling thread of execution is associated with the
+              queue.
+  */
+  bool isAssociatedWithCurrentThread () const;
+
+  /** @internal
+  
+      @details This function helps provide diagnostics.
+  
+      @return \c true if the call stack contains synchronize() for this queue.
+  */
+  bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
+
+  ///@}
 
 private:
   template <class Functor>

@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_lua external module.
+
+    @file vf_lua.c
+    @ingroup vf_lua external
+*/
+
 #include "AppConfig.h"
 
 #ifdef _MSC_VER

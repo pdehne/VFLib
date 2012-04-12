@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_bzip2 external module.
+
+    @file vf_bzip2.h
+    @ingroup vf_bzip2 external
+*/
+
 #ifndef VF_BZIP2_VFHEADER
 #define VF_BZIP2_VFHEADER
 
@@ -29,6 +35,7 @@
     This external module brings in the bZip2 library.
 
     @defgroup vf_bzip2 vf_bzip2
+    @ingroup external
 */
 
 #include "AppConfig.h"

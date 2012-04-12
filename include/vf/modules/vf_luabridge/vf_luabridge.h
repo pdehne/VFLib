@@ -19,11 +19,18 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_luabridge external module.
+
+    @file vf_luabridge.h
+    @ingroup vf_luabridge external
+*/
+
 #ifndef VF_LUABRIDGE_VFHEADER
 #define VF_LUABRIDGE_VFHEADER
 
 //==============================================================================
-/** A lightweight, dependency-free library for binding Lua to C++.
+/**
+    A lightweight, dependency-free library for binding Lua to C++.
 
     This external module provides the LuaBridge external library.
 
@@ -35,14 +42,6 @@
     @see vf_lua
 
     @defgroup vf_luabridge vf_luabridge
-    @ingroup external
-*/
-
-//==============================================================================
-/** Include file for the @ref vf_luabridge external module.
-
-    @file vf_luabridge.h
-    @ingroup vf_luabridge
     @ingroup external
 */
 

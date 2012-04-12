@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_taglib external module.
+
+    @file vf_taglib.cpp
+    @ingroup vf_taglib external
+*/
+
 #include "AppConfig.h"
 
 #ifdef _MSC_VER

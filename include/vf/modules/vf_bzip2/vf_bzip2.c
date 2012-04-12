@@ -19,9 +19,13 @@
 // 
 //==============================================================================
 
-#include "AppConfig.h"
+/** Add this to get the @ref vf_bzip2 external module.
 
-#if VF_USE_BZIP2
+    @file vf_bzip2.c
+    @ingroup vf_bzip2 external
+*/
+
+#include "AppConfig.h"
 
 #if _MSC_VER
 #pragma push_macro("_CRT_SECURE_NO_WARNINGS")
@@ -47,6 +51,4 @@
 #if _MSC_VER
 #pragma warning (pop)
 #pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
-#endif
-
 #endif

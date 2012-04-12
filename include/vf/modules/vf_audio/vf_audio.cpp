@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_audio module.
+
+    @file vf_audio.cpp
+    @ingroup vf_audio
+*/
+
 #include "vf_audio.h"
 
 #if JUCE_MSVC

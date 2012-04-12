@@ -19,9 +19,13 @@
 // 
 //==============================================================================
 
-#include "AppConfig.h"
+/** Add this to get the @ref vf_freetype external module.
 
-#if VF_USE_FREETYPE
+    @file vf_freetype.c
+    @ingroup vf_freetype external
+*/
+
+#include "AppConfig.h"
 
 #ifdef _MSC_VER
 #pragma warning (push)
@@ -39,6 +43,4 @@ void z_error (char* message)
 
 #ifdef _MSC_VER
 #pragma warning (pop)
-#endif
-
 #endif

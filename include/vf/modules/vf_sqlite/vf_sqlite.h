@@ -19,11 +19,18 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_sqlite external module.
+
+    @file vf_sqlite.h
+    @ingroup vf_sqlite external
+*/
+
 #ifndef VF_SQLITE_VFHEADER
 #define VF_SQLITE_VFHEADER
 
 //==============================================================================
-/** A self-contained, serverless, zero configuration, transactional SQL engine.
+/**
+    A self-contained, serverless, zero configuration, transactional SQL engine.
 
     This external module provides the SQLite embedded database library.
 
@@ -35,14 +42,6 @@
     @todo Allow a user provided SQLite library through AppConfig.h configuration.
 
     @defgroup vf_sqlite vf_sqlite
-    @ingroup external
-*/
-
-//==============================================================================
-/** Include file for the @ref vf_sqlite external module.
-
-    @file vf_sqlite.h
-    @ingroup vf_sqlite
     @ingroup external
 */
 

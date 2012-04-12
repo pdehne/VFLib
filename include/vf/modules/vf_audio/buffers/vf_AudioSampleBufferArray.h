@@ -37,12 +37,11 @@
     point to the same sample data or storage as the objects they were
     constructed from.
 
-    @param Channels A template parameter specifying the number of channels in
-                    the array of pointers, default to 2 (stereo).
+    @tparam Channels The number of channels in the array of pointers,
+                     default to 2 (stereo).
 
     @ingroup vf_audio
 */
-
 template <int Channels = 2>
 class AudioSampleBufferArray
 {
@@ -283,18 +282,15 @@ public:
     return m_channels;
   }
 
-  /* DEPRECATED
-  Sample* const* operator()() const
-  {
-    return m_channels;
-  }
-  */
-
 private:
   int m_numSamples;
   Sample* m_channels[Channels];
 };
 
+/** An AudioSampleBufferArray with 2 channels.
+
+    @ingroup vf_audio
+*/
 typedef AudioSampleBufferArray <2> StereoSampleBuffer;
 
 #endif

@@ -19,23 +19,23 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_audio module.
+
+    @file vf_audio.h
+    @ingroup vf_audio
+*/
+
 #ifndef VF_AUDIO_VFHEADER
 #define VF_AUDIO_VFHEADER
 
 //==============================================================================
-/** Audio signal processing utilities.
+/**
+    Audio signal processing utilities.
 
     This is a small collection of classes for performing audio signal
     processing.
 
     @defgroup vf_audio vf_audio
-*/
-
-//==============================================================================
-/** Include file for the @ref vf_audio module.
-
-    @file vf_audio.h
-    @ingroup vf_audio
 */
 
 #include "../vf_core/vf_core.h"

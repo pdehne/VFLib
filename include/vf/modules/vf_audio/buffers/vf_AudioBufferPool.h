@@ -23,7 +23,8 @@
 #define VF_AUDIOBUFFERPOOL_VFHEADER
 
 //==============================================================================
-/** A pool of audio buffers for temporary calculations.
+/**
+    Temporary audio buffers for intermediate calculations.
 
     This container provides a pool of audio buffers that grow to match the
     working set requirements based on actual usage. Since the buffers never
@@ -82,20 +83,19 @@
     @endcode
 
     @see AudioBufferPoolType, ScopedAudioSampleBuffer
-
     @ingroup vf_audio
 */
-
 class AudioBufferPool
 {
 public:
-  /** Size tracking for AudioSampleBuffer.
+  /** @internal
+  
+      @brief Size tracking for AudioSampleBuffer.
 
       This provides the getNumSamplesAllocated () function necessary for the
       implementation of AudioBufferPool. It otherwise acts like a normal
       AudioSampleBuffer.
 
-      @internal
       @ingroup vf_audio internal
   */
   class Buffer : public juce::AudioSampleBuffer
@@ -108,7 +108,6 @@ public:
     /** @return The absolute number of samples available in the storage area,
                 regardless of the number of channels.
     */
-                
 	int getNumSamplesAllocated () const;
 
   private:

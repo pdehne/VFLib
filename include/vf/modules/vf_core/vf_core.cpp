@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_core module.
+
+    @file vf_core.cpp
+    @ingroup vf_core
+*/
+
 #include "vf_core.h"
 
 #if JUCE_MSVC && _DEBUG

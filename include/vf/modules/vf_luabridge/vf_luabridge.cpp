@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_luabridge external module.
+
+    @file vf_luabridge.cpp
+    @ingroup vf_luabridge external
+*/
+
 #include "AppConfig.h"
 
 #include "vf_luabridge.h"

@@ -19,11 +19,18 @@
 // 
 //==============================================================================
 
+/** Include this to get the @ref vf_lua external module.
+
+    @file vf_lua.h
+    @ingroup vf_lua external
+*/
+
 #ifndef VF_LUA_VFHEADER
 #define VF_LUA_VFHEADER
 
 //==============================================================================
-/** A powerful, fast, lightweight, embeddable scripting language.
+/**
+    A powerful, fast, lightweight, embeddable scripting language.
 
     This external module provides the Lua external library.
 
@@ -31,14 +38,6 @@
     http://www.lua.org/
 
     @defgroup vf_lua vf_lua
-    @ingroup external
-*/
-
-//==============================================================================
-/** Include file for the @ref vf_lua external module.
-
-    @file vf_lua.h
-    @ingroup vf_lua
     @ingroup external
 */
 

@@ -87,25 +87,29 @@ public:
 	m_pool.releaseBuffer (m_buffer);
   }
 
-  /** Return the object as a AudioSampleBuffer pointer */
+  /** @return A pointer to AudioSampleBuffer.
+
+      @todo Fix broken documentation hyperlink caused by juce:: scope.
+  */
   juce::AudioSampleBuffer* operator-> ()
   {
 	return getBuffer();
   }
 
-  /** Return the object as a reference to AudioSampleBuffer */
+  /** @return A reference to AudioSampleBuffer.
+  */
   juce::AudioSampleBuffer& operator* ()
   {
 	return *getBuffer();
   }
 
-  /** Type conversion to pointer to AudioSampleBuffer */
+  /** @return A pointer to AudioSampleBuffer. */
   operator juce::AudioSampleBuffer* ()
   {
 	return getBuffer();
   }
 
-  /** Return the object as a pointer to AudioSampleBuffer */
+  /** @return A pointer to AudioSampleBuffer. */
   juce::AudioSampleBuffer* getBuffer ()
   {
 	return m_buffer;

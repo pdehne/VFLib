@@ -19,6 +19,12 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_gui module.
+
+    @file vf_gui.cpp
+    @ingroup vf_gui
+*/
+
 #include "vf_gui.h"
 
 #if JUCE_MSVC

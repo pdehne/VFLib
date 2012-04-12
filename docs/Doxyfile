@@ -1,3 +1,23 @@
+# Style guide for VFLib documentation
+#
+# Constructors, destructors, operator overloads, and conversion
+# operators should not have brief comments.
+#
+# @ingroup directive goes at the bottom
+#
+# @internal directive goes at the top. If there is a brief
+# comment then a @brief directive is used after a blank line
+#
+# Any internal object should have @ingroup internal as well as the
+# module it belongs to
+#
+# External modules should have @ingroup external
+#
+
+
+
+
+
 # Doxyfile 1.8.0
 
 # This file describes the settings to be used by the documentation system
@@ -427,7 +447,7 @@ HIDE_IN_BODY_DOCS      = NO
 # to NO (the default) then the documentation will be excluded. 
 # Set it to YES to include the internal documentation.
 
-INTERNAL_DOCS          = YES
+INTERNAL_DOCS          = NO
 
 # If the CASE_SENSE_NAMES tag is set to NO then Doxygen will only generate 
 # file names in lower-case letters. If set to YES upper-case letters are also 
@@ -661,21 +681,20 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT = \
-  ../include/vf/vf.h
+INPUT = 
 
 INPUT += \
-  ../include/vf/modules/vf_audio/vf_audio.h \
+  ../include/vf/modules/vf_audio/ \
   ../include/vf/modules/vf_audio/buffers/ \
   ../include/vf/modules/vf_audio/sources/
 
 INPUT += \
-  ../include/vf/modules/vf_concurrent/vf_concurrent.h \
+  ../include/vf/modules/vf_concurrent/ \
   ../include/vf/modules/vf_concurrent/memory/ \
   ../include/vf/modules/vf_concurrent/threads/
 
 INPUT += \
-  ../include/vf/modules/vf_core/vf_core.h \
+  ../include/vf/modules/vf_core/ \
   ../include/vf/modules/vf_core/containers/ \
   ../include/vf/modules/vf_core/diagnostic/ \
   ../include/vf/modules/vf_core/events/ \
@@ -685,23 +704,23 @@ INPUT += \
   ../include/vf/modules/vf_core/threads/
 
 INPUT += \
-  ../include/vf/modules/vf_db/vf_db.h \
+  ../include/vf/modules/vf_db/ \
   ../include/vf/modules/vf_db/api/
 
 INPUT += \
-  ../include/vf/modules/vf_gui/vf_gui.h \
+  ../include/vf/modules/vf_gui/ \
   ../include/vf/modules/vf_gui/components/ \
   ../include/vf/modules/vf_gui/graphics/ \
   ../include/vf/modules/vf_gui/layout/ \
   ../include/vf/modules/vf_gui/mouse/
 
 INPUT += \
-  ../include/vf/modules/vf_bzip2/vf_bzip2.h \
-  ../include/vf/modules/vf_freetype/vf_freetype.h \
-  ../include/vf/modules/vf_lua/vf_lua.h \
-  ../include/vf/modules/vf_luabridge/vf_luabridge.h \
-  ../include/vf/modules/vf_sqlite/vf_sqlite.h \
-  ../include/vf/modules/vf_taglib/vf_taglib.h
+  ../include/vf/modules/vf_bzip2/ \
+  ../include/vf/modules/vf_freetype/ \
+  ../include/vf/modules/vf_lua/ \
+  ../include/vf/modules/vf_luabridge/ \
+  ../include/vf/modules/vf_sqlite/ \
+  ../include/vf/modules/vf_taglib/
 
 INPUT += \
   ../AppConfigTemplate/AppConfig.h
@@ -722,7 +741,7 @@ INPUT_ENCODING         = UTF-8
 # *.hxx *.hpp *.h++ *.idl *.odl *.cs *.php *.php3 *.inc *.m *.mm *.dox *.py 
 # *.f90 *.f *.for *.vhd *.vhdl
 
-FILE_PATTERNS          = *.h *.hpp
+FILE_PATTERNS          = *.c *.cpp *.h *.hpp
 
 # The RECURSIVE tag can be used to turn specify whether or not subdirectories 
 # should be searched for input files as well. Possible values are YES and NO. 

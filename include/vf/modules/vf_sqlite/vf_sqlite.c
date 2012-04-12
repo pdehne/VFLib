@@ -19,7 +19,18 @@
 // 
 //==============================================================================
 
+/** Add this to get the @ref vf_sqlite external module.
+
+    @file vf_sqlite.c
+    @ingroup vf_sqlite external
+*/
+
 #include "AppConfig.h"
+
+#define namespace
+static void JuceDummyNamespace ()
+#define JuceDummyNamespace
+#include "modules/juce_core/system/juce_TargetPlatform.h"
 
 #if _MSC_VER
 #pragma warning (push)
