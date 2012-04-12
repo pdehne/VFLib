@@ -27,12 +27,9 @@
 
 #include "AppConfig.h"
 
-#define namespace
-static void JuceDummyNamespace ()
-#define JuceDummyNamespace
 #include "modules/juce_core/system/juce_TargetPlatform.h"
 
-#if _MSC_VER
+#if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4127) // conditional expression is constant
 #pragma warning (disable: 4232) // nonstandard extension used: dllimport address 
@@ -51,6 +48,6 @@ static void JuceDummyNamespace ()
 #include "sqlite/sqlite3.c"
 #include "sqlite/sqlite3async.c"
 
-#if _MSC_VER
+#if JUCE_MSVC
 #pragma warning (pop)
 #endif

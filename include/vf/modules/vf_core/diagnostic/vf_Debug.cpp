@@ -47,7 +47,7 @@ void breakPoint ()
 
 //----------------------------------------------------------------------------
 
-#if defined(_MSC_VER) && defined (_DEBUG)
+#if JUCE_MSVC && defined (_DEBUG)
 
 void setHeapAlwaysCheck (bool bAlwaysCheck)
 {

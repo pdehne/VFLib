@@ -22,15 +22,18 @@
 #ifndef VF_BIND_VFHEADER
 #define VF_BIND_VFHEADER
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 using std::bind;
 using std::placeholders::_1;
-#endif
 
-#if defined JUCE_IOS || defined JUCE_MAC 
+#elif JUCE_IOS || JUCE_MAC
 using std::tr1::bind;
 using std::tr1::function;
 using namespace std::tr1::placeholders;
+
+#else
+#error Unknown platform in vf_Bind.h
+
 #endif
 
 #endif

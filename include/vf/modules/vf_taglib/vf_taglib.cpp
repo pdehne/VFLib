@@ -27,7 +27,9 @@
 
 #include "AppConfig.h"
 
-#ifdef _MSC_VER
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
+#if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4018) // signed/unsigned comparison mismatch
 #pragma warning (disable: 4019) // signed/unsigned comparison mismatch
@@ -44,6 +46,6 @@
 
 #include "taglib/TagLibAmalgam.cpp"
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 #pragma warning (pop)
 #endif

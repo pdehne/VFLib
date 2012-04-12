@@ -27,7 +27,9 @@
 
 #include "AppConfig.h"
 
-#ifdef _MSC_VER
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
+#if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4100)
 #endif
@@ -41,6 +43,6 @@ void z_error (char* message)
 
 #include "freetype/FreeTypeAmalgam.c"
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 #pragma warning (pop)
 #endif

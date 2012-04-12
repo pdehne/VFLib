@@ -21,6 +21,8 @@
 
 // http://code.google.com/p/smhasher/
 
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
 namespace Murmur {
 
 //-----------------------------------------------------------------------------
@@ -28,7 +30,7 @@ namespace Murmur {
 
 // Microsoft Visual Studio
 
-#if defined(_MSC_VER)
+#if JUCE_MSVC
 
 #define FORCE_INLINE    __forceinline
 
@@ -39,7 +41,7 @@ namespace Murmur {
 
 // Other compilers
 
-#else   // defined(_MSC_VER)
+#else
 
 #define FORCE_INLINE __attribute__((always_inline))
 
@@ -58,7 +60,7 @@ static inline uint64_t rotl64 ( uint64_t x, int8_t r )
 
 #define BIG_CONSTANT(x) (x##LLU)
 
-#endif // !defined(_MSC_VER)
+#endif
 
 //-----------------------------------------------------------------------------
 // Block read - if your platform needs to do endian-swapping or can only

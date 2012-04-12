@@ -27,7 +27,9 @@
 
 #include "AppConfig.h"
 
-#if _MSC_VER
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
+#if JUCE_MSVC
 #pragma push_macro("_CRT_SECURE_NO_WARNINGS")
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -48,7 +50,7 @@
 #include "bzip2/huffman.c"
 #include "bzip2/randtable.c"
 
-#if _MSC_VER
+#if JUCE_MSVC
 #pragma warning (pop)
 #pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
 #endif

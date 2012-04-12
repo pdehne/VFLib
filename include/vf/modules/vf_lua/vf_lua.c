@@ -27,7 +27,9 @@
 
 #include "AppConfig.h"
 
-#ifdef _MSC_VER
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
+#if JUCE_MSVC
 #pragma push_macro("_CRT_SECURE_NO_WARNINGS")
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -53,7 +55,7 @@ extern "C"
 #undef LUA_CORE
 #undef LUA_LIB
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4244)
 #pragma warning (disable: 4702)
@@ -100,7 +102,7 @@ extern "C"
 // so include it last to prevent errors.
 #include "lua/loadlib.c"
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 #pragma warning (pop)
 #endif
 
@@ -108,6 +110,6 @@ extern "C"
 }
 #endif
 
-#ifdef _MSC_VER
+#if JUCE_MSVC
 #pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
 #endif
