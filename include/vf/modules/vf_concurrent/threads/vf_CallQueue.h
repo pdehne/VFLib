@@ -110,21 +110,19 @@
 
     @endcode
 
-    Invariants:
+    @invariant Functors can be added from any thread at any time, to any queue
+               which is not closed.
 
-    - Functors can be added from any thread at any time,
-      to any queue which is not closed.
+    @invariant When synchronize() is called, functors are called and deleted.
 
-    - When synchronize() is called, functors are called and deleted.
+    @invariant The thread from which synchronize() is called is considered the
+               thread associated with the CallQueue.
 
-    - The thread from which synchronize() is called is considered the thread
-      associated with the CallQueue.
+    @invariant Functors queued by the same thread always execute in the same
+               order they were queued.
 
-    - Functors queued by the same thread always execute in the same order
-      they were queued.
-
-    - Functors are guaranteed to execute. It is an error if the CallQueue
-      is deleted while there are functors in it.
+    @invariant Functors are guaranteed to execute. It is an error if the
+               CallQueue is deleted while there are functors in it.
 
     Normally, you will not use CallQueue directly, but one of its subclasses
     instead. The CallQueue is one of a handful of objects that work together to

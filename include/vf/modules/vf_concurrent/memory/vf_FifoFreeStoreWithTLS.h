@@ -24,23 +24,23 @@
 
 #include "vf_GlobalPagedFreeStore.h"
 
+//==============================================================================
 /**
-  Lock-free and mostly wait-free memory allocator optimized for FIFO
-  style usage patterns.
+    Lock-free and mostly wait-free FIFO memory allocator.
 
-  It is expected that over time, deallocations will occur in roughly
-  the same order as allocations.
+    This allocator is suitable for use with CallQueue and Listeners. It is
+    expected that over time, deallocations will occur in roughly the same order
+    as allocations.
 
-  Invariants:
+    @invariant allocate() and deallocate() are fully concurrent.
 
-  #1 allocate() and deallocate() are fully concurrent
+    @invariant The ABA problem is handled automatically.
 
-  #2 The ABA problem is handled automatically
+    This implementation uses Thread Local Storage to further improve
+    performance. However, it requires boost style thread_specific_ptr.
 
-  This implementation uses Thread Local Storage to further improve
-  performance. However, it requires boost style thread_specific_ptr.
-
-    @ingroup vf_concurrent
+    @internal
+    @ingroup vf_concurrent internal
 */
 class FifoFreeStoreWithTLS
 {

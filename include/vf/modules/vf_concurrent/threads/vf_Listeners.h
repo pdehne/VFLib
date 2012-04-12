@@ -27,8 +27,11 @@
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
 
+///@{
+
 //==============================================================================
-/**
+/** @class Listeners
+
     A group of concurrent Listeners.
 
     A Listener is an object of class type which inherits from a defined
@@ -215,7 +218,6 @@
     @ingroup vf_concurrent
 */
 
-#ifndef DOXYGEN
 class ListenersBase
 {
 public:
@@ -348,15 +350,14 @@ private:
   CallAllocatorType::Ptr m_callAllocator;
 };
 
-#endif
-
-//------------------------------------------------------------------------------
-
+//==============================================================================
+/** @class Listeners
+    @ingroup vf_concurrent
+*/
 template <class ListenerClass>
 class Listeners : public ListenersBase
 {
 private:
-#ifndef DOXYGEN
   template <class Functor>
   class CallType : public Call
   {
@@ -414,7 +415,6 @@ private:
     updatep (reinterpret_cast <void*> (&member), sizeof (Member),
              new (getCallAllocator ()) CallType <Functor> (f));
   }
-#endif
 
 public:
   /** Add a listener.
@@ -549,7 +549,6 @@ public:
     queue1f (listener, vf::bind (mf, vf::_1));
   }
 
-#ifndef DOXYGEN
   /* Automatic binding for up to 8 arguments */
 
   template <class Mf, typename  T1>
@@ -777,8 +776,9 @@ public:
   inline void update (Mf mf, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
                       const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { updatef (mf, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
-#endif
 
 };
+
+///@}
 
 #endif

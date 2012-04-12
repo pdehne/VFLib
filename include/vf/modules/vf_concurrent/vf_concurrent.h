@@ -27,6 +27,32 @@
 
     Classes for building a concurrent system.
 
+    This module offers a specially crafted set of classes that work together
+    to solve the fundamental problem encountered when designing any concurrent
+    system: synchronization and sharing of state information accessed by more
+    than one thread simultaneously.
+
+    @par The Trouble with Locks
+    <em>...Unfortunately, today's reality is that only thoughtful experts can write
+    explicitly concurrent programs that are correct and efficient. This is
+    because today's programming models for concurrency are subtle, intricate,
+    and fraught with pitfalls that easily (and frequently) result in unforeseen
+    races (i.e., program corruption) deadlocks (i.e., program lockup) and
+    performance cliffs (e.g., priority inversion, convoying, and sometimes
+    complete loss of parallelism and/or even worse performance than a
+    single-threaded program). And even when a correct and efficient concurrent
+    program is written, it takes great care to maintain - it's usually brittle
+    and difficult to maintain correctly because current programming models
+    set a very high bar of expertise required to reason reliably about the
+    operation of concurrent programs, so that apparently innocuous changes to a
+    working concurrent program can (and commonly do, in practice) render it
+    entirely or intermittently nonworking in unintended and unexpected ways.
+    Because getting it right and keeping it right is so difficult, at many
+    major software companies there is a veritable priesthood of gurus who write
+    and maintain the core concurrent code.
+    </em> @n - Herb Sutter (From http://drdobbs.com/cpp/184401930)
+
+    
     This object is an alternative to traditional locking techniques used to
     implement concurrent systems. Instead of acquiring a mutex to change shared
     data, a functor is queued for later execution (usually on another thread). The
@@ -69,7 +95,7 @@
     this with the use of a mutex - the run time performance experiences a
     combinatorial explosion of possibilities depending on the complex interaction
     of multiple threads.
-
+    
     @todo Discuss the limit on the size of the functor used in CallQueue and Listeners.
 */
 

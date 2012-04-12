@@ -28,7 +28,8 @@
 /**
     A PagedFreeStore singleton.
 
-    @ingroup vf_concurrent
+    @internal
+    @ingroup vf_concurrent internal
 */
 class GlobalPagedFreeStore
   : public ReferenceCountedSingleton <GlobalPagedFreeStore>

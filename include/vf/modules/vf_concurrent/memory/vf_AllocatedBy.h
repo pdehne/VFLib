@@ -30,6 +30,7 @@
 
     @param AllocatorType The type of allocator to use.
 
+    @internal
     @ingroup vf_concurrent internal
 */
 template <class AllocatorType>

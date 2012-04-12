@@ -26,28 +26,23 @@
 
 //==============================================================================
 /**
-    Lock-free and mostly wait-free memory allocator optimized for FIFO
-    style usage patterns.
+    Lock-free FIFO memory allocator.
 
-    It is expected that over time, deallocations will occur in roughly
-    the same order as allocations.
+    This allocator is suitable for use with CallQueue and Listeners. It is
+    expected that over time, deallocations will occur in roughly the same order
+    as allocations.
 
-    Invariants:
+    @invariant allocate() and deallocate() are fully concurrent.
 
-    #1 allocate() and deallocate() are fully concurrent
+    @invariant The ABA problem is handled automatically.
 
-    #2 The ABA problem is handled automatically
+    This version of the fifo free store uses less memory and doesn't require
+    thread specific storage. However, it runs slower. The performance
+    differences are negligible for desktop class applications.
 
-    This implementation uses Thread Local Storage to further improve
-    performance. However, it requires boost style thread_specific_ptr.
-
-
-    @ingroup vf_concurrent
+    @internal
+    @ingroup vf_concurrent internal
 */
-// Lock-free Allocator that doesn't use thread local storage.
-// This implementation is here in case a problem is found with
-// the use of thread local storage.
-//
 class FifoFreeStoreWithoutTLS
 {
 public:

@@ -28,8 +28,6 @@
 /**
     A colour specified in CIELAB coordinates.
 
-    See: http://en.wikipedia.org/wiki/Lab_color_space
-
     The Lab colour space is perceptually uniform, and device-independent.
     Incrementing the L, a, or b component by the same amount will produce
     the same perceptual change regardless of the starting colour.
@@ -46,13 +44,15 @@
     @code
 
     // Returns a Colour which is a bit brighter than the starting colour.
-    //
+
     Colour calculateHiliteColour (Colour const& startingColour)
     {
       return LabColour (startingColour).withAddedLuminance (0.1f).toRGB ();
     }
 
     @endcode
+
+    @see http://en.wikipedia.org/wiki/Lab_color_space
 
     @ingroup vf_gui
 */

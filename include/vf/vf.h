@@ -34,7 +34,7 @@
 
   Other than JUCE, VFLib has no external dependencies.
 
-  \section Platforms
+  @section Platforms
 
   All platforms supported by JUCE are also supported by VFLib. Currently these
   platforms include:
@@ -51,7 +51,7 @@
 
   - Android
 
-  \section Prerequisites
+  @section Prerequisites
 
   The documentation for VFLib assumes that the reader has a working knowledge
   of JUCE. Some modules built on external libraries assume that the reader
@@ -59,7 +59,7 @@
   that the reader understands additional domain-specific information. Modules
   with additional prerequisites are marked in the documentation.
 
-  \section External Modules
+  @section External Modules
 
   Some modules bring in functionality provided by external libraries. For
   example, the \ref vf_bzip2 module provides the compression and decompression
@@ -72,7 +72,7 @@
   See the licensing information and notes in the corresponding source files,
   for copyright information and terms of use.
 
-  ## Integration
+  @section Integration
 
   VFLib requires recent versions of JUCE. It won't work with JUCE versions
   1.53 or earlier. To use the library it is necessary to first download JUCE to
@@ -94,28 +94,15 @@
   #include "vf/modules/vf_concurrent/vf_concurrent.h"
   @endcode
 
-  \section AppConfig
+  @section AppConfig
 
-  \section References
+  @subsection References
 
-
-
-  # VFLib
-
-  This is my soon to be released project which is NOT QUITE READY FOR PUBLIC USE!
-  There's unfinished documentation, no testing, and no support so unless you
-  enjoy banging your head repeatedly against the wall wait until the official
-  release!
-
-  ## Documentation
-
-  Some [unfinished documentation][0] is in development.
-
-  ## Location
+  @subsection Location
 
   VFLib is hosted on github, at https://github.com/vinniefalco/VFLib
 
-  ## License
+  @section License
 
   Copyright (C) 2008 by Vinnie Falco.
 

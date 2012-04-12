@@ -30,14 +30,15 @@
 
 #endif
 
-#ifndef DOXYGEN
+/** Selected free store based on compilation settings.
 
+    @internal
+    @ingroup internal
+*/
 #if VF_USE_BOOST
 typedef FifoFreeStoreWithTLS FifoFreeStoreType;
 #else
 typedef FifoFreeStoreWithoutTLS FifoFreeStoreType;
-#endif
-
 #endif
 
 #endif
