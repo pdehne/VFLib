@@ -144,6 +144,9 @@
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
 
+    @todo Put intrusive documentation concepts into its own section and
+          refer to it from the containers.
+
     @ingroup vf_core
 */
 
