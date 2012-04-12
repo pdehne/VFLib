@@ -77,7 +77,7 @@ var searchData=
   ['desktop',['Desktop',['http://www.rawmaterialsoftware.com/juce/api/classDesktop.html',1,'']]],
   ['destchannelindex',['destChannelIndex',['http://www.rawmaterialsoftware.com/juce/api/structAudioProcessorGraph_1_1Connection.html#a542e23f5e9b746d2b13485545cce791e',1,'AudioProcessorGraph::Connection']]],
   ['destnodeid',['destNodeId',['http://www.rawmaterialsoftware.com/juce/api/structAudioProcessorGraph_1_1Connection.html#a7f1b8d717bcb7f30c1ebc45e553ba20a',1,'AudioProcessorGraph::Connection']]],
-  ['destroyconcurrentobject',['destroyConcurrentObject',['../class_concurrent_object.html#aaa2d654e4065c897625122170254318d',1,'ConcurrentObject']]],
+  ['destroyconcurrentobject',['destroyConcurrentObject',['../class_concurrent_object.html#af9bdc099b706f30b7bdbd4925e5b8168',1,'ConcurrentObject']]],
   ['desttype',['DestType',['http://www.rawmaterialsoftware.com/juce/api/structAudioFormatReader_1_1ReadHelper.html#a0084d44db12183607466fe09e4829f67',1,'AudioFormatReader::ReadHelper::DestType()'],['http://www.rawmaterialsoftware.com/juce/api/structAudioFormatWriter_1_1WriteHelper.html#a5b7c59617fd96d69dee0062368e7f3e0',1,'AudioFormatWriter::WriteHelper::DestType()']]],
   ['detach',['detach',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLContext.html#a7504aa8928c854732090ee9583e9f37d',1,'OpenGLContext']]],
   ['dialogwindow',['DialogWindow',['http://www.rawmaterialsoftware.com/juce/api/classDialogWindow.html',1,'DialogWindow'],['http://www.rawmaterialsoftware.com/juce/api/classDialogWindow.html#ad73dba9ea7a57b5b9f8bb0d3ffd8c0a0',1,'DialogWindow::DialogWindow()']]],

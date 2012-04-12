@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="summary">
+<a href="#files">Files</a> &#124;
 <a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">vf_concurrent</div>  </div>
@@ -96,20 +97,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Classes for building a concurrent system.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:vf__concurrent_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vf__concurrent_8cpp.html">vf_concurrent.cpp</a></td></tr>
+<tr class="memdesc:vf__concurrent_8cpp"><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>Add this to get the <a class="el" href="group__vf__concurrent.html">vf_concurrent</a> module. </p>
+<br/></td></tr>
+<tr class="memitem:vf__concurrent_8h"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vf__concurrent_8h.html">vf_concurrent.h</a></td></tr>
+<tr class="memdesc:vf__concurrent_8h"><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>Include this to get the <a class="el" href="group__vf__concurrent.html">vf_concurrent</a> module. </p>
+<br/></td></tr>
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_allocated_by.html">AllocatedBy&lt; AllocatorType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Customized allocation for heap objects.  <a href="class_allocated_by.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fifo_free_store_without_t_l_s.html">FifoFreeStoreWithoutTLS</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock-free FIFO memory allocator.  <a href="class_fifo_free_store_without_t_l_s.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fifo_free_store_with_t_l_s.html">FifoFreeStoreWithTLS</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock-free and mostly wait-free FIFO memory allocator.  <a href="class_fifo_free_store_with_t_l_s.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_fifo_free_store.html">GlobalFifoFreeStore&lt; Tag &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FifoFreeStore singleton.  <a href="class_global_fifo_free_store.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_paged_free_store.html">GlobalPagedFreeStore</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="class_paged_free_store.html" title="Lock-free memory allocator for fixed size pages.">PagedFreeStore</a> singleton.  <a href="class_global_paged_free_store.html#details">More...</a><br/></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_paged_free_store.html">PagedFreeStore</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock-free memory allocator for fixed size pages.  <a href="class_paged_free_store.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html">CallQueue</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A FIFO for calling functors asynchronously.  <a href="class_call_queue.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html">ConcurrentObject</a></td></tr>
@@ -143,12 +140,12 @@ Deadlock</h2>
 <p>A <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> is considered signaled when one or more functors are present. Functors are executed during a call to synchronize(). The operation of executing functors via the call to synchronize() is called synchronizing the queue. It can more generally be thought of as synchronizing multiple copies of shared data between threads.</p>
 <p>Although there is some extra work required to set up and maintain this system, the benefits are significant. Since shared data is only synchronized at well defined times, the programmer can reason and make strong statements about the correctness of the concurrent system. For example, if the audioDeviceIOCallback synchronizes the <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> only at the beginning of its execution, it is guaranteed that shared data will remain the same throughout the remainder of the function.</p>
 <p>Because shared data is accessed for reading without a lock, upper bounds on the run time performance can easily be calculated and assured. Compare this with the use of a mutex - the run time performance experiences a combinatorial explosion of possibilities depending on the complex interaction of multiple threads.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Discuss the limit on the size of the functor used in <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> and <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Discuss the limit on the size of the functor used in <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> and <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a>.</dd></dl>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:04 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

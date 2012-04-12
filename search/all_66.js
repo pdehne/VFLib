@@ -25,7 +25,6 @@ var searchData=
   ['failures',['failures',['http://www.rawmaterialsoftware.com/juce/api/structUnitTestRunner_1_1TestResult.html#aedbec24cdf2ccef537a994d18995a85c',1,'UnitTestRunner::TestResult']]],
   ['fakemousemovegenerator',['FakeMouseMoveGenerator',['http://www.rawmaterialsoftware.com/juce/api/structFakeMouseMoveGenerator.html',1,'']]],
   ['fastforwardkey',['fastForwardKey',['http://www.rawmaterialsoftware.com/juce/api/classKeyPress.html#a5818ad479163ff4ee7d191b5c125a5ab',1,'KeyPress']]],
-  ['fifofreestoretype',['FifoFreeStoreType',['../group__internal.html#gaf194bf7bc4ef456bb50c8606dec856b0',1,'vf_FifoFreeStore.h']]],
   ['fifofreestorewithouttls',['FifoFreeStoreWithoutTLS',['../class_fifo_free_store_without_t_l_s.html',1,'']]],
   ['fifofreestorewithtls',['FifoFreeStoreWithTLS',['../class_fifo_free_store_with_t_l_s.html',1,'']]],
   ['file',['File',['http://www.rawmaterialsoftware.com/juce/api/classFile.html',1,'File'],['http://www.rawmaterialsoftware.com/juce/api/classFile.html#ae039af5807fc385f41b60644725d15d0',1,'File::File()'],['http://www.rawmaterialsoftware.com/juce/api/classFile.html#ae48b8a5611a11bf2d6e7c23551452421',1,'File::File(const String &amp;path)'],['http://www.rawmaterialsoftware.com/juce/api/classFile.html#ad1fbab59d996b3b3840986307eceb3ee',1,'File::File(const File &amp;other)']]],
@@ -211,8 +210,8 @@ var searchData=
   ['fullframe',['fullFrame',['http://www.rawmaterialsoftware.com/juce/api/classMidiMessage.html#a58a16ba76b5f789b238155359ba9379c',1,'MidiMessage']]],
   ['fullheightproportion',['fullHeightProportion',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLTextureFromImage.html#a6ed4364b74838dd77850d37a86aa58b6',1,'OpenGLTextureFromImage']]],
   ['fullwidthproportion',['fullWidthProportion',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLTextureFromImage.html#aa4ed56bf93012c120ed64c2101ab1fe0',1,'OpenGLTextureFromImage']]],
-  ['fullyopaque',['fullyOpaque',['../class_transparent_border.html#a168a729f884ab737aa3e3d72dae6e0a5',1,'TransparentBorder']]],
-  ['fullytransparent',['fullyTransparent',['../class_transparent_border.html#a5378c76eeeb3daa390e0da545db84d8d',1,'TransparentBorder']]],
+  ['fullyopaque',['fullyOpaque',['../class_transparent_border.html#a569d58c97e3b086ac7e7d49e63c5f347',1,'TransparentBorder']]],
+  ['fullytransparent',['fullyTransparent',['../class_transparent_border.html#ad0123f7291253cae5aa2408ad112798c',1,'TransparentBorder']]],
   ['function',['function',['http://www.rawmaterialsoftware.com/juce/api/classExpression.html#afd58f776e343213a4e488db47faadcb2',1,'Expression']]],
   ['functiontype',['functionType',['http://www.rawmaterialsoftware.com/juce/api/classExpression.html#aa416ac50fdbe8bdea9c59f5c78f0c85ba4af6ecec6a8598073b3f70f7f1c10eb5',1,'Expression']]]
 ];

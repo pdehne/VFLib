@@ -94,14 +94,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">AudioBufferPool Class Reference<div class="ingroups"><a class="el" href="group__vf__audio.html">vf_audio</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A pool of audio buffers for temporary calculations.  
+<p>Temporary audio buffers for intermediate calculations.  
  <a href="class_audio_buffer_pool.html#details">More...</a></p>
 
 <p><code>#include &quot;vf_AudioBufferPool.h&quot;</code></p>
@@ -110,16 +109,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_audio_buffer_pool-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size tracking for <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a>.  <a href="class_audio_buffer_pool_1_1_buffer.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad88ca8fb2127105e6c3a95bff0764923"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool.html#ad88ca8fb2127105e6c3a95bff0764923">~AudioBufferPool</a> ()</td></tr>
-<tr class="memitem:a163465dc6ccf9e1544617ab9f74aa43e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e">requestBuffer</a> (int numChannels, int numSamples)=0</td></tr>
+<tr class="memitem:a163465dc6ccf9e1544617ab9f74aa43e"><td class="memItemLeft" align="right" valign="top">virtual Buffer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e">requestBuffer</a> (int numChannels, int numSamples)=0</td></tr>
 <tr class="memdesc:a163465dc6ccf9e1544617ab9f74aa43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request a temporary buffer.  <a href="#a163465dc6ccf9e1544617ab9f74aa43e"></a><br/></td></tr>
-<tr class="memitem:aedbd43cea9d2a42cb212467eda701a01"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">releaseBuffer</a> (<a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *buffer)=0</td></tr>
+<tr class="memitem:aedbd43cea9d2a42cb212467eda701a01"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">releaseBuffer</a> (Buffer *buffer)=0</td></tr>
 <tr class="memdesc:aedbd43cea9d2a42cb212467eda701a01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a previously requested buffer back into the pool.  <a href="#aedbd43cea9d2a42cb212467eda701a01"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -131,15 +126,15 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">    <a class="code" href="class_audio_buffer_pool_type.html" title="Template for AudioBufferPool with a specified lock type.">AudioBufferPoolType &lt;DummyCriticalSection&gt;</a> pool;
 
     <span class="comment">// Request a stereo buffer with room for 1024 samples.</span>
-    <a class="code" href="class_audio_buffer_pool_1_1_buffer.html" title="Size tracking for AudioSampleBuffer.">AudioBufferPool::Buffer</a>* buffer = pool.<a class="code" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626" title="Request a temporary buffer.">requestBuffer</a> (2, 1024);
+    AudioBufferPool::Buffer* buffer = pool.<a class="code" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626" title="Request a temporary buffer.">requestBuffer</a> (2, 1024);
 
     <span class="comment">// (Process buffer)</span>
 
     <span class="comment">// Release the buffer to be re-used later.</span>
     pool.<a class="code" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4" title="Releases a previously requested buffer back into the pool.">releaseBuffer</a> (buffer);
-</pre></div><p>Since <a class="el" href="class_audio_buffer_pool_1_1_buffer.html" title="Size tracking for AudioSampleBuffer.">Buffer</a> is derived from <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a>, it can be used anywhere an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> is expected. This example requests a temporary buffer and stores it in an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/structAudioSourceChannelInfo.html">AudioSourceChannelInfo</a>:</p>
+</pre></div><p>Since Buffer is derived from <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a>, it can be used anywhere an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> is expected. This example requests a temporary buffer and stores it in an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/structAudioSourceChannelInfo.html">AudioSourceChannelInfo</a>:</p>
 <div class="fragment"><pre class="fragment">    <span class="comment">// Request a stereo buffer with room for 1024 samples.</span>
-    <a class="code" href="class_audio_buffer_pool_1_1_buffer.html" title="Size tracking for AudioSampleBuffer.">AudioBufferPool::Buffer</a>* buffer = pool.<a class="code" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626" title="Request a temporary buffer.">requestBuffer</a> (2, 1024);
+    AudioBufferPool::Buffer* buffer = pool.<a class="code" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626" title="Request a temporary buffer.">requestBuffer</a> (2, 1024);
 
     <span class="comment">// Fill out the AudioSourceChannelInfo structure with the buffer</span>
     <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/structAudioSourceChannelInfo.html">AudioSourceChannelInfo</a> info;
@@ -175,7 +170,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a>* <a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e">AudioBufferPool::requestBuffer</a> </td>
+          <td class="memname">virtual Buffer* <a class="el" href="class_audio_buffer_pool.html#a163465dc6ccf9e1544617ab9f74aa43e">AudioBufferPool::requestBuffer</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>numChannels</em>, </td>
@@ -215,7 +210,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void <a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">AudioBufferPool::releaseBuffer</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *&#160;</td>
+          <td class="paramtype">Buffer *&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -233,14 +228,15 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_AudioBufferPool.h</li>
+<li>vf_AudioBufferPool.cpp</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:04 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

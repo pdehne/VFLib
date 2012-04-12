@@ -143,9 +143,9 @@ class AudioSampleBufferArray&lt; Channels &gt;</h3>
 
 <p>This simple class wraps an already existing array of pointers to multi-channel audio data. Provided functions can move the pointers back and forth as a group, making certain forms of code that manipulate audio buffers more concise. Type conversions to and from <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> allow seamless, intuitive usage.</p>
 <p>All constructors and assignments leave the array pointing to already existing memory, none of these functions create new buffers. All arrays will point to the same sample data or storage as the objects they were constructed from.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Channels</td><td>A template parameter specifying the number of channels in the array of pointers, default to 2 (stereo). </td></tr>
+<dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">Channels</td><td>The number of channels in the array of pointers, default to 2 (stereo). </td></tr>
   </table>
   </dd>
 </dl>
@@ -682,7 +682,7 @@ template&lt;int Channels = 2&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

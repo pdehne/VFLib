@@ -116,13 +116,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a969dcbec75b26d3fa0936dd2198d7dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the object is still being referenced.  <a href="#a969dcbec75b26d3fa0936dd2198d7dec"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aaa2d654e4065c897625122170254318d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html#aaa2d654e4065c897625122170254318d">destroyConcurrentObject</a> ()</td></tr>
-<tr class="memdesc:aaa2d654e4065c897625122170254318d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the object.  <a href="#aaa2d654e4065c897625122170254318d"></a><br/></td></tr>
+<tr class="memitem:af9bdc099b706f30b7bdbd4925e5b8168"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_object.html#af9bdc099b706f30b7bdbd4925e5b8168">destroyConcurrentObject</a> ()</td></tr>
+<tr class="memdesc:af9bdc099b706f30b7bdbd4925e5b8168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the object.  <a href="#af9bdc099b706f30b7bdbd4925e5b8168"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This is a reference counted object compatible with <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a>. When the last reference is removed, the object is queued for deletion on a separate, provided thread. On program exit the thread will clean itself up - no other action is required.</p>
 <p>This class is useful for offloading the deletion work of "deep" objects shared by multiple threads: objects containing complex members, or a hierarchy of allocated structures. For example, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValueTree.html">ValueTree</a>. The problem of performing heavyweight memory or cleanup operations from either an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a> or the message thread is avoided.</p>
-<p>The deletion behavior can be overriden by providing a replacement for <a class="el" href="class_concurrent_object.html#aaa2d654e4065c897625122170254318d" title="Delete the object.">destroyConcurrentObject()</a>. </p>
+<p>The deletion behavior can be overriden by providing a replacement for <a class="el" href="class_concurrent_object.html#af9bdc099b706f30b7bdbd4925e5b8168" title="Delete the object.">destroyConcurrentObject()</a>. </p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a969dcbec75b26d3fa0936dd2198d7dec"></a>
 <div class="memitem">
@@ -138,16 +138,16 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This is not thread safe, so the caller must synchronize.</p>
-<dl class="section return"><dt>Returns:</dt><dd>true if the object has one or more references.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>true if the object has one or more references. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aaa2d654e4065c897625122170254318d"></a>
+<a class="anchor" id="af9bdc099b706f30b7bdbd4925e5b8168"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="class_concurrent_object.html#aaa2d654e4065c897625122170254318d">ConcurrentObject::destroyConcurrentObject</a> </td>
+          <td class="memname">void <a class="el" href="class_concurrent_object.html#af9bdc099b706f30b7bdbd4925e5b8168">ConcurrentObject::destroyConcurrentObject</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [protected, virtual]</code></td>
@@ -159,14 +159,15 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_ConcurrentObject.h</li>
+<li>vf_ConcurrentObject.cpp</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

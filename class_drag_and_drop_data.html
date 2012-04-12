@@ -94,6 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">DragAndDropData Class Reference<div class="ingroups"><a class="el" href="group__vf__gui.html">vf_gui</a></div></div>  </div>
@@ -107,6 +108,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="class_drag_and_drop_data-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drag_and_drop_data_1_1_target.html">Target</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropTarget.html">DragAndDropTarget</a> wrapper supporting the <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> container.  <a href="class_drag_and_drop_data_1_1_target.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac5fa28467d25813877dd93a77f4a77ed"><td class="memTemplParams" colspan="2">template&lt;class Object &gt; </td></tr>
@@ -121,13 +126,13 @@ Public Member Functions</h2></td></tr>
 <p>When a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a> receives a <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> during a drag and drop operation, it calls <a class="el" href="class_drag_and_drop_data.html#ade87fef70d7c50dc3e2dac9a282321af" title="Retrieve an object from the container.">find()</a> one or more times to determine if the data contains a suitable object.</p>
 <p><a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> is:</p>
 <ul>
-<li>Convenient. The helper class <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropTarget.html" title="DragAndDropTarget wrapper supporting the DragAndDropData container.">DragAndDropTarget</a> works with <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> to manage these objects behind the scenes and hide some of the work.</li>
+<li>Convenient. The helper class <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropTarget.html">DragAndDropTarget</a> works with <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> to manage these objects behind the scenes and hide some of the work.</li>
 </ul>
 <ul>
 <li>Flexible: A <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> container can hold any objects which can go into a STL container (i.e. support copy construction and assignment).</li>
 </ul>
 <ul>
-<li>Type-safe: objects placed into the container are disposed of correctly. If <a class="el" href="class_drag_and_drop_data.html#ac5fa28467d25813877dd93a77f4a77ed" title="Add an object to the container.">add()</a>, <a class="el" href="class_drag_and_drop_data.html#ade87fef70d7c50dc3e2dac9a282321af" title="Retrieve an object from the container.">find()</a> are called with a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a>, it does the right thing.</li>
+<li>Type-safe: objects placed into the container are disposed of correctly. If a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classReferenceCountedObjectPtr.html">ReferenceCountedObjectPtr</a> is put inside, it does the right thing.</li>
 </ul>
 <p>In this example we will create a <a class="el" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> for an image represented by a hyperlink. The container will hold two typed representations: an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classImage.html">Image</a> with the actual pixels, and a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> for the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classURL.html">URL</a>.</p>
 <p>First we declare the data types:</p>
@@ -155,8 +160,8 @@ Public Member Functions</h2></td></tr>
     <span class="comment">// Perform the drag</span>
     <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropContainer.html">DragAndDropContainer</a>* container = findDragAndDropContainer (thisComponent);
     container-&gt;<a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropContainer.html#ad1a4517773d3276e59ba6d2f098b0742">startDragging</a> (dragData, ...);
-</pre></div><p>To modify a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a> to receive the container, simply derive it from <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropTarget.html" title="DragAndDropTarget wrapper supporting the DragAndDropData container.">DragAndDropTarget</a>, then override the desired members:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">class </span>MyComponent : <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDragAndDropTarget.html" title="DragAndDropTarget wrapper supporting the DragAndDropData container.">DragAndDropTarget</a>
+</pre></div><p>To modify a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a> to receive the container, simply derive it from <a class="el" href="class_drag_and_drop_data_1_1_target.html" title="DragAndDropTarget wrapper supporting the DragAndDropData container.">DragAndDropData::Target</a>, then override the desired members:</p>
+<div class="fragment"><pre class="fragment">    <span class="keyword">class </span>MyComponent : <span class="keyword">public</span> <a class="code" href="class_drag_and_drop_data_1_1_target.html" title="DragAndDropTarget wrapper supporting the DragAndDropData container.">DragAndDropData::Target</a>
     {
     <span class="keyword">public</span>:
       <span class="keywordtype">void</span> itemDropped (<a class="code" href="class_drag_and_drop_data.html" title="Flexible container for drag and drop data.">DragAndDropData</a> <span class="keyword">const</span>&amp; data,
@@ -226,24 +231,26 @@ template&lt;class Object &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+<p>Object must be copyable.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">pResult</td><td>Receives a copy of the object if it exists in the container.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>true if the object was found. </dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd><code>true</code> if the object was found. </dd></dl>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_DragAndDropData.h</li>
+<li>vf_DragAndDropData.cpp</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

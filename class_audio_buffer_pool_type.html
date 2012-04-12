@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Template for <a class="el" href="class_audio_buffer_pool.html" title="A pool of audio buffers for temporary calculations.">AudioBufferPool</a> with a specified lock type.  
+<p>Template for <a class="el" href="class_audio_buffer_pool.html" title="Temporary audio buffers for intermediate calculations.">AudioBufferPool</a> with a specified lock type.  
  <a href="class_audio_buffer_pool_type.html#details">More...</a></p>
 
 <p><code>#include &quot;vf_AudioBufferPool.h&quot;</code></p>
@@ -111,16 +111,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a71b4169d98676c573e4ef615d4c9d626"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626">requestBuffer</a> (int numChannels, int numSamples)</td></tr>
+<tr class="memitem:a71b4169d98676c573e4ef615d4c9d626"><td class="memItemLeft" align="right" valign="top">Buffer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626">requestBuffer</a> (int numChannels, int numSamples)</td></tr>
 <tr class="memdesc:a71b4169d98676c573e4ef615d4c9d626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request a temporary buffer.  <a href="#a71b4169d98676c573e4ef615d4c9d626"></a><br/></td></tr>
-<tr class="memitem:a93183ea809aa45d97880de2282231de4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">releaseBuffer</a> (<a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *buffer)</td></tr>
+<tr class="memitem:a93183ea809aa45d97880de2282231de4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">releaseBuffer</a> (Buffer *buffer)</td></tr>
 <tr class="memdesc:a93183ea809aa45d97880de2282231de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases a previously requested buffer back into the pool.  <a href="#a93183ea809aa45d97880de2282231de4"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt;<br/>
 class AudioBufferPoolType&lt; TypeOfCriticalSectionToUse &gt;</h3>
 
-<p>This provides an instance of <a class="el" href="class_audio_buffer_pool.html" title="A pool of audio buffers for temporary calculations.">AudioBufferPool</a> using the specified type as the lock. The default is to use a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classCriticalSection.html">CriticalSection</a>. Alternatively, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDummyCriticalSection.html">DummyCriticalSection</a> may be used when the caller is responsible for synchronization. </p>
+<p>This provides an instance of <a class="el" href="class_audio_buffer_pool.html" title="Temporary audio buffers for intermediate calculations.">AudioBufferPool</a> using the specified type as the lock. The default is to use a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classCriticalSection.html">CriticalSection</a>. Alternatively, a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDummyCriticalSection.html">DummyCriticalSection</a> may be used when the caller is responsible for synchronization. </p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a71b4169d98676c573e4ef615d4c9d626"></a>
 <div class="memitem">
@@ -129,7 +129,7 @@ class AudioBufferPoolType&lt; TypeOfCriticalSectionToUse &gt;</h3>
 template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a>* <a class="el" href="class_audio_buffer_pool_type.html">AudioBufferPoolType</a>&lt; <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeOfCriticalSectionToUse.html">TypeOfCriticalSectionToUse</a> &gt;::<a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626">requestBuffer</a> </td>
+          <td class="memname">Buffer* <a class="el" href="class_audio_buffer_pool_type.html">AudioBufferPoolType</a>&lt; <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeOfCriticalSectionToUse.html">TypeOfCriticalSectionToUse</a> &gt;::<a class="el" href="class_audio_buffer_pool_type.html#a71b4169d98676c573e4ef615d4c9d626">requestBuffer</a> </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>numChannels</em>, </td>
@@ -171,7 +171,7 @@ template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_audio_buffer_pool_type.html">AudioBufferPoolType</a>&lt; <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classTypeOfCriticalSectionToUse.html">TypeOfCriticalSectionToUse</a> &gt;::<a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">releaseBuffer</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_audio_buffer_pool_1_1_buffer.html">Buffer</a> *&#160;</td>
+          <td class="paramtype">Buffer *&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
           <td><code> [virtual]</code></td>
         </tr>
@@ -196,7 +196,7 @@ template&lt;class TypeOfCriticalSectionToUse = CriticalSection&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:04 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

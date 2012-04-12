@@ -114,18 +114,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a89de47524d62877f2198a58d78d1b0ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a89de47524d62877f2198a58d78d1b0ed">CallQueue</a> (<a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> name)</td></tr>
 <tr class="memitem:a243ab6a2217eb227bf4b6050447ead01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a243ab6a2217eb227bf4b6050447ead01">~CallQueue</a> ()</td></tr>
-<tr class="memitem:a7cbce7a131504706ba6c36bcab846f87"><td class="memTemplParams" colspan="2">template&lt;class Fn &gt; </td></tr>
-<tr class="memitem:a7cbce7a131504706ba6c36bcab846f87"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87">call</a> (Fn f)</td></tr>
-<tr class="memdesc:a7cbce7a131504706ba6c36bcab846f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a function call and possibly synchronize.  <a href="#a7cbce7a131504706ba6c36bcab846f87"></a><br/></td></tr>
 <tr class="memitem:aeb35530fa2af19554d407028bdb18621"><td class="memTemplParams" colspan="2">template&lt;class Functor &gt; </td></tr>
 <tr class="memitem:aeb35530fa2af19554d407028bdb18621"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#aeb35530fa2af19554d407028bdb18621">callf</a> (Functor const &amp;f)</td></tr>
 <tr class="memdesc:aeb35530fa2af19554d407028bdb18621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a functor and possibly synchronize.  <a href="#aeb35530fa2af19554d407028bdb18621"></a><br/></td></tr>
+<tr class="memitem:a7cbce7a131504706ba6c36bcab846f87"><td class="memTemplParams" colspan="2">template&lt;class Fn &gt; </td></tr>
+<tr class="memitem:a7cbce7a131504706ba6c36bcab846f87"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87">call</a> (Fn f)</td></tr>
+<tr class="memdesc:a7cbce7a131504706ba6c36bcab846f87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a function call and possibly synchronize.  <a href="#a7cbce7a131504706ba6c36bcab846f87"></a><br/></td></tr>
+<tr class="memitem:aa5b9237e85067d7199fab8b1bd20bb90"><td class="memTemplParams" colspan="2">template&lt;class Functor &gt; </td></tr>
+<tr class="memitem:aa5b9237e85067d7199fab8b1bd20bb90"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#aa5b9237e85067d7199fab8b1bd20bb90">queuef</a> (Functor const &amp;f)</td></tr>
+<tr class="memdesc:aa5b9237e85067d7199fab8b1bd20bb90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a functor without synchronizing.  <a href="#aa5b9237e85067d7199fab8b1bd20bb90"></a><br/></td></tr>
 <tr class="memitem:a7b7121a53b44c35b82358544a6a7cea0"><td class="memTemplParams" colspan="2">template&lt;class Fn &gt; </td></tr>
 <tr class="memitem:a7b7121a53b44c35b82358544a6a7cea0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a7b7121a53b44c35b82358544a6a7cea0">queue</a> (Fn f)</td></tr>
 <tr class="memdesc:a7b7121a53b44c35b82358544a6a7cea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a function call without synchronizing.  <a href="#a7b7121a53b44c35b82358544a6a7cea0"></a><br/></td></tr>
-<tr class="memitem:aa5b9237e85067d7199fab8b1bd20bb90"><td class="memTemplParams" colspan="2">template&lt;class Functor &gt; </td></tr>
-<tr class="memitem:aa5b9237e85067d7199fab8b1bd20bb90"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_call_queue.html#aa5b9237e85067d7199fab8b1bd20bb90">queuef</a> (Functor const &amp;f)</td></tr>
-<tr class="memdesc:aa5b9237e85067d7199fab8b1bd20bb90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a functor.  <a href="#aa5b9237e85067d7199fab8b1bd20bb90"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7b4ecb95445c00c815bc2407c9e008b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7">synchronize</a> ()</td></tr>
@@ -133,10 +133,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ace99f6efb1cd9e6b3e0dac80fbb15690"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#ace99f6efb1cd9e6b3e0dac80fbb15690">close</a> ()</td></tr>
 <tr class="memdesc:ace99f6efb1cd9e6b3e0dac80fbb15690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the queue.  <a href="#ace99f6efb1cd9e6b3e0dac80fbb15690"></a><br/></td></tr>
 <tr class="memitem:a0b243598ec53b127ac0557a1be058a4c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a0b243598ec53b127ac0557a1be058a4c">signal</a> ()=0</td></tr>
-<tr class="memdesc:a0b243598ec53b127ac0557a1be058a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a queue is signaled.  <a href="#a0b243598ec53b127ac0557a1be058a4c"></a><br/></td></tr>
-<tr class="memitem:a171530cbaa7b1b4f4712aa940e7cd64c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a171530cbaa7b1b4f4712aa940e7cd64c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a171530cbaa7b1b4f4712aa940e7cd64c">reset</a> ()=0</td></tr>
-<tr class="memdesc:a171530cbaa7b1b4f4712aa940e7cd64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification when a queue becomes empty. <br/></td></tr>
+<tr class="memdesc:a0b243598ec53b127ac0557a1be058a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the queue becomes signaled.  <a href="#a0b243598ec53b127ac0557a1be058a4c"></a><br/></td></tr>
+<tr class="memitem:a171530cbaa7b1b4f4712aa940e7cd64c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_call_queue.html#a171530cbaa7b1b4f4712aa940e7cd64c">reset</a> ()=0</td></tr>
+<tr class="memdesc:a171530cbaa7b1b4f4712aa940e7cd64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the queue becomes non-signaled.  <a href="#a171530cbaa7b1b4f4712aa940e7cd64c"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This object is an alternative to traditional locking techniques used to implement concurrent systems. Instead of acquiring a mutex to change shared data, a functor is queued for later execution (usually on another thread). The execution of the functor applies the transformation to the shared state that was formerly performed within a lock (i.e. <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classCriticalSection.html">CriticalSection</a>).</p>
@@ -187,7 +186,7 @@ Functors are guaranteed to execute. It is an error if the <a class="el" href="cl
 <p>Normally, you will not use <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> directly, but one of its subclasses instead. The <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> is one of a handful of objects that work together to implement this system of concurrent data access.</p>
 <p>For performance considerations, this implementation is wait-free for producers and mostly wait-free for consumers. It also uses a lock-free and wait-free (in the fast path) custom memory allocator.</p>
 <dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_gui_call_queue.html" title="A CallQueue handled by the Juce message thread (gui).">GuiCallQueue</a>, <a class="el" href="class_manual_call_queue.html" title="A CallQueue that requires periodic manual synchronization.">ManualCallQueue</a></dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Standardize terminology: "functor" to represent the stored item.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Standardize terminology: "functor" to represent the stored item. </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a89de47524d62877f2198a58d78d1b0ed"></a>
 <div class="memitem">
@@ -205,7 +204,7 @@ Functors are guaranteed to execute. It is an error if the <a class="el" href="cl
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>A string identifying the associated thread for debugging. </td></tr>
+    <tr><td class="paramname">name</td><td>A string to identify the queue during debugging. </td></tr>
   </table>
   </dd>
 </dl>
@@ -225,11 +224,38 @@ Functors are guaranteed to execute. It is an error if the <a class="el" href="cl
       </table>
 </div>
 <div class="memdoc">
-<p>It is an error to destroy a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> that still contains functors. </p>
+<dl class="section invariant"><dt>Invariant:</dt><dd>Destroying a queue that contains functors is undefined. </dd></dl>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aeb35530fa2af19554d407028bdb18621"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Functor &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_call_queue.html#aeb35530fa2af19554d407028bdb18621">CallQueue::callf</a> </td>
+          <td>(</td>
+          <td class="paramtype">Functor const &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Use this when you want to perform the bind yourself.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>The functor to add, typically the return value of a call to bind().</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87" title="Add a function call and possibly synchronize.">call</a> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a7cbce7a131504706ba6c36bcab846f87"></a>
 <div class="memitem">
 <div class="memproto">
@@ -254,18 +280,18 @@ template&lt;class Fn &gt; </div>
   </dd>
 </dl>
 <dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html#a7b7121a53b44c35b82358544a6a7cea0" title="Add a function call without synchronizing.">queue</a></dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Provide an example of when <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7" title="Synchronize the queue.">synchronize()</a> is needed in <a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87" title="Add a function call and possibly synchronize.">call()</a>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Provide an example of when <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7" title="Synchronize the queue.">synchronize()</a> is needed in <a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87" title="Add a function call and possibly synchronize.">call()</a>. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="aeb35530fa2af19554d407028bdb18621"></a>
+<a class="anchor" id="aa5b9237e85067d7199fab8b1bd20bb90"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Functor &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_call_queue.html#aeb35530fa2af19554d407028bdb18621">CallQueue::callf</a> </td>
+          <td class="memname">void <a class="el" href="class_call_queue.html#aa5b9237e85067d7199fab8b1bd20bb90">CallQueue::queuef</a> </td>
           <td>(</td>
           <td class="paramtype">Functor const &amp;&#160;</td>
           <td class="paramname"><em>f</em></td><td>)</td>
@@ -277,10 +303,11 @@ template&lt;class Functor &gt; </div>
 <p>Use this when you want to perform the bind yourself.</p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">f</td><td>The functor to add, typically the return value of a call to bind(). </td></tr>
+    <tr><td class="paramname">f</td><td>The functor to add, typically the return value of a call to bind().</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html#a7b7121a53b44c35b82358544a6a7cea0" title="Add a function call without synchronizing.">queue</a> </dd></dl>
 
 </div>
 </div>
@@ -332,32 +359,6 @@ template&lt;class Fn &gt; </div>
   </dd>
 </dl>
 <dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87" title="Add a function call and possibly synchronize.">call</a> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa5b9237e85067d7199fab8b1bd20bb90"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Functor &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="class_call_queue.html#aa5b9237e85067d7199fab8b1bd20bb90">CallQueue::queuef</a> </td>
-          <td>(</td>
-          <td class="paramtype">Functor const &amp;&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Use this when you want to perform the bind yourself.</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>The functor to add, typically the return value of a call to bind(). </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -414,18 +415,35 @@ template&lt;class Functor &gt; </div>
 </div>
 <div class="memdoc">
 <p>A queue is signaled on the transition from empty to non-empty. Derived classes implement this function to perform a notification so that <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7" title="Synchronize the queue.">synchronize()</a> will be called. For example, by triggering a <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classWaitableEvent.html">WaitableEvent</a>.</p>
-<p>Due to the implementation the queue can remain signaled for one extra cycle. This does not happen under load and is not an issue in practice. </p>
+<dl class="section note"><dt>Note:</dt><dd>Due to the implementation the queue can remain signaled for one extra cycle. This does not happen under load and is not an issue in practice. </dd></dl>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a class="anchor" id="a171530cbaa7b1b4f4712aa940e7cd64c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void <a class="el" href="class_call_queue.html#a171530cbaa7b1b4f4712aa940e7cd64c">CallQueue::reset</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [protected, pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_CallQueue.h</li>
+<li>vf_CallQueue.cpp</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 11 2012 20:56:29 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

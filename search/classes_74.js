@@ -6,6 +6,7 @@ var searchData=
   ['tableheadercomponent',['TableHeaderComponent',['http://www.rawmaterialsoftware.com/juce/api/classTableHeaderComponent.html',1,'']]],
   ['tablelistbox',['TableListBox',['http://www.rawmaterialsoftware.com/juce/api/classTableListBox.html',1,'']]],
   ['tablelistboxmodel',['TableListBoxModel',['http://www.rawmaterialsoftware.com/juce/api/classTableListBoxModel.html',1,'']]],
+  ['target',['Target',['../class_drag_and_drop_data_1_1_target.html',1,'DragAndDropData']]],
   ['temporaryfile',['TemporaryFile',['http://www.rawmaterialsoftware.com/juce/api/classTemporaryFile.html',1,'']]],
   ['testresult',['TestResult',['http://www.rawmaterialsoftware.com/juce/api/structUnitTestRunner_1_1TestResult.html',1,'UnitTestRunner']]],
   ['textbutton',['TextButton',['http://www.rawmaterialsoftware.com/juce/api/classTextButton.html',1,'']]],

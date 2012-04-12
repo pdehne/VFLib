@@ -11,7 +11,6 @@ var searchData=
   ['browserplugincomponent',['BrowserPluginComponent',['http://www.rawmaterialsoftware.com/juce/api/classBrowserPluginComponent.html',1,'']]],
   ['bubblecomponent',['BubbleComponent',['http://www.rawmaterialsoftware.com/juce/api/classBubbleComponent.html',1,'']]],
   ['bubblemessagecomponent',['BubbleMessageComponent',['http://www.rawmaterialsoftware.com/juce/api/classBubbleMessageComponent.html',1,'']]],
-  ['buffer',['Buffer',['../class_audio_buffer_pool_1_1_buffer.html',1,'AudioBufferPool']]],
   ['bufferedinputstream',['BufferedInputStream',['http://www.rawmaterialsoftware.com/juce/api/classBufferedInputStream.html',1,'']]],
   ['bufferingaudiosource',['BufferingAudioSource',['http://www.rawmaterialsoftware.com/juce/api/classBufferingAudioSource.html',1,'']]],
   ['builder',['Builder',['http://www.rawmaterialsoftware.com/juce/api/classZipFile_1_1Builder.html',1,'ZipFile']]],
