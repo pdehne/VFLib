@@ -49,9 +49,17 @@ public:
     maxBorderSize = 0x1fffffff
   };
 
-  static const BorderSize <int> fullyOpaque;
-  static const BorderSize <int> fullyTransparent;
+  static const BorderSize <int> fullyOpaque;      //!< No transparency
+  static const BorderSize <int> fullyTransparent; //!< Full transparency
 
+  /** Set up a Component to have a transparent border.
+
+      The Component should have setOpaque (false).
+
+      @param component The Component to have a transparent border.
+
+      @param borderSize The number of transparent pixels on each side.
+  */
   void setComponent (Component *component,
                      BorderSize <int> borderSize = BorderSize<int>());
 
