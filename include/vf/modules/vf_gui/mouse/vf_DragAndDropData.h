@@ -90,11 +90,11 @@
     @endcode
 
     To modify a Component to receive the container, simply derive it from
-    DragAndDropTarget, then override the desired members:
+    DragAndDropData::Target, then override the desired members:
 
     @code
 
-    class MyComponent : public DragAndDropTarget
+    class MyComponent : public DragAndDropData::Target
     {
     public:
       void itemDropped (DragAndDropData const& data,
@@ -185,26 +185,53 @@ public:
   /**
       DragAndDropTarget wrapper supporting the DragAndDropData container.
 
+      Derive your Component from this instead of DragAndDropTarget, to receive
+      drag notifications with a DragAndDropData.
+
+      @see DragAndDropData
+
       @ingroup vf_gui
   */
   class Target : public juce::DragAndDropTarget
   {
   public:
+    /** @param data The DragAndDropData.
+        
+        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+      
+        @return \c true if we want to receive further drag notifications.
+    */
     virtual bool isInterestedInDragSource (DragAndDropData const& data,
-                                           const SourceDetails& dragSourceDetails)
+                                           DragAndDropTarget::SourceDetails const& dragSourceDetails)
       { return false; }
 
+    /** @param data The DragAndDropData.
+        
+        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+    */
     virtual void itemDragEnter (DragAndDropData const& data,
-                                const SourceDetails& dragSourceDetails) { }
+                                DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
+    /** @param data The DragAndDropData.
+        
+        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+    */
     virtual void itemDragMove (DragAndDropData const& data,
-                               const SourceDetails& dragSourceDetails) { }
+                               DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
+    /** @param data The DragAndDropData.
+        
+        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+    */
     virtual void itemDragExit (DragAndDropData const& data,
-                               const SourceDetails& dragSourceDetails) { }
+                               DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
+    /** @param data The DragAndDropData.
+        
+        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+    */
     virtual void itemDropped (DragAndDropData const& data,
-                              const SourceDetails& dragSourceDetails) { }
+                              DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
   private:
     bool isInterestedInDragSource (const SourceDetails& dragSourceDetails);

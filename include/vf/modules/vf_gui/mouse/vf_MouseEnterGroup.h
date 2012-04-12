@@ -27,8 +27,8 @@
     Consolidated mouse enter and exits for a Component and its children.
 
     Derive your Component-derived class from this object in order to receive
-    mouse enter and mouse exit messages for your component and all of it's
-    children.
+    mouse enter and mouse exit messages that treat your component and all of
+    it's children as a group.
 
     @ingroup vf_gui
 */
