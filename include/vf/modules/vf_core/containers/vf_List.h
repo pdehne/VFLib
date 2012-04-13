@@ -181,7 +181,7 @@ private:
 	std::bidirectional_iterator_tag, int>
   {
   public:
-	typedef Value value_type;
+	typedef ElemType value_type;
     typedef ElemType* pointer;
 	typedef ElemType& reference;
 	
