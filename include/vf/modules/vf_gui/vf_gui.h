@@ -40,6 +40,8 @@
 
 #include "../vf_core/vf_core.h"
 
+#include "modules/juce_gui_basics/juce_gui_basics.h"
+
 #if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4100) // unreferenced formal parameter

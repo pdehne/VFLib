@@ -40,6 +40,8 @@
 
 #include "../vf_core/vf_core.h"
 
+#include "modules/juce_audio_basics/juce_audio_basics.h"
+
 namespace vf
 {
 

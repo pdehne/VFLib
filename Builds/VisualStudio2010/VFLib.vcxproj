@@ -620,7 +620,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h" />
-    <ClInclude Include="..\..\include\vf\vf.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\docs\Doxyfile" />
