@@ -11,6 +11,82 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Array.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Button.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Label.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Meter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\PopupButton.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizablePanel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizingPanes.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Slider.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\SolidColourFacade.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Static.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Value.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Button.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Control.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Facade.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Model.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Static.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_UiBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\Pipe.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -184,6 +260,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp" />
+    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.cpp" />
     <ClCompile Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -385,6 +462,32 @@
     <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Array.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\binary_tree.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Range.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Button.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Label.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Meter.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\PopupButton.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizablePanel.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizingPanes.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Slider.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\SolidColourFacade.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Static.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Value.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Button.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_ConnectedEdges.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Control.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Facade.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Model.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Static.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_UiBase.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\block_pool.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\destroy_n.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\fixed_pool.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\page_pool.h" />
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\Pipe.h" />
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
@@ -459,6 +562,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\type_ptr.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\detail\use_type.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />

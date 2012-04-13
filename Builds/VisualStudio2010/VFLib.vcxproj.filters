@@ -130,6 +130,18 @@
     <Filter Include="VF Modules\external\vf_bzip2\bzip2">
       <UniqueIdentifier>{95a37b44-1f41-4a2a-a2a7-4f6e8eea33e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="VF Modules\vf_deprecated">
+      <UniqueIdentifier>{99dc5ce5-8fc2-4fd9-802d-bb201eec3018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_deprecated\containers">
+      <UniqueIdentifier>{a66275d7-9064-4aab-95db-01c4dccf0bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_deprecated\gui">
+      <UniqueIdentifier>{47707b25-a729-4df7-8d65-a385ae87322a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\vf_deprecated\memory">
+      <UniqueIdentifier>{f8cdb9ea-6fca-4a89-8912-1388ad428d8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
@@ -434,6 +446,66 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.cpp">
+      <Filter>VF Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Array.cpp">
+      <Filter>VF Modules\vf_deprecated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Button.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Label.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Meter.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\PopupButton.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizablePanel.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizingPanes.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Slider.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\SolidColourFacade.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Static.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Value.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Button.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Control.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Facade.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Model.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Static.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_UiBase.cpp">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\Pipe.cpp">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -794,44 +866,125 @@
     <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\vf_lua.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
-      <Filter>VF Modules</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\vf.h">
       <Filter>VF Library Code</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
+      <Filter>VF Modules\vf_audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.h">
+      <Filter>VF Modules\external\vf_bzip2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
+      <Filter>VF Modules\vf_concurrent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
+      <Filter>VF Modules\vf_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.h">
+      <Filter>VF Modules\vf_deprecated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
+      <Filter>VF Modules\vf_db</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h">
-      <Filter>VF Modules</Filter>
+      <Filter>VF Modules\external\vf_freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
+      <Filter>VF Modules\vf_gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_lua\vf_lua.h">
+      <Filter>VF Modules\external\vf_lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h">
+      <Filter>VF Modules\external\vf_luabridge</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
+      <Filter>VF Modules\external\vf_sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
+      <Filter>VF Modules\external\vf_taglib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Array.h">
+      <Filter>VF Modules\vf_deprecated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\binary_tree.h">
+      <Filter>VF Modules\vf_deprecated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\containers\Range.h">
+      <Filter>VF Modules\vf_deprecated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Button.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Label.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Meter.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\PopupButton.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizablePanel.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\ResizingPanes.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Slider.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\SolidColourFacade.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Static.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\Value.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Button.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_ConnectedEdges.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Control.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Facade.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Model.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_Static.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\gui\vf_UiBase.h">
+      <Filter>VF Modules\vf_deprecated\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\block_pool.h">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\destroy_n.h">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\fixed_pool.h">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\page_pool.h">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\vfp\include\vf\modules\vf_deprecated\memory\Pipe.h">
+      <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

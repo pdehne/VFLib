@@ -694,6 +694,12 @@ INPUT += \
   ../include/vf/modules/vf_concurrent/threads/
 
 INPUT += \
+  ../include/vf/modules/vf_deprecated/ \
+  ../include/vf/modules/vf_deprecated/containers/ \
+  ../include/vf/modules/vf_deprecated/gui/ \
+  ../include/vf/modules/vf_deprecated/memory/
+
+INPUT += \
   ../include/vf/modules/vf_core/ \
   ../include/vf/modules/vf_core/containers/ \
   ../include/vf/modules/vf_core/diagnostic/ \
