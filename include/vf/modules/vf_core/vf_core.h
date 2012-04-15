@@ -32,6 +32,8 @@
 /**
     @mainpage VFLib: A multipurpose class library built on JUCE.
 
+    @details
+
     VFLib is a source code collection of individual modules containing
     functionality for a variety of applications. 
 
@@ -42,7 +44,7 @@
 
     Other than JUCE, VFLib has no external dependencies.
 
-    @section Platforms
+    ## Platforms
 
     All platforms supported by JUCE are also supported by VFLib. Currently these
     platforms include:
@@ -59,7 +61,7 @@
 
     - Android
 
-    @section Prerequisites
+    ## Prerequisites
 
     The documentation for VFLib assumes that the reader has a working knowledge
     of JUCE. Some modules built on external libraries assume that the reader
@@ -67,7 +69,7 @@
     that the reader understands additional domain-specific information. Modules
     with additional prerequisites are marked in the documentation.
 
-    @section External Modules
+    ## External Modules
 
     Some modules bring in functionality provided by external libraries. For
     example, the \ref vf_bzip2 module provides the compression and decompression
@@ -80,7 +82,7 @@
     See the licensing information and notes in the corresponding source files,
     for copyright information and terms of use.
 
-    @section Integration
+    ## Integration
 
     VFLib requires recent versions of JUCE. It won't work with JUCE versions
     1.53 or earlier. To use the library it is necessary to first download JUCE to
@@ -102,11 +104,11 @@
     #include "vf/modules/vf_concurrent/vf_concurrent.h"
     @endcode
 
-    @section AppConfig
+    ## AppConfig
 
-    @subsection References
+    ## References
 
-    @subsection Location
+    ##Location
 
     VFLib is hosted on github, at https://github.com/vinniefalco/VFLib
 
@@ -192,37 +194,37 @@
 
 //==============================================================================
 /**
-    @internal
+  @internal
 
-    Implementation classes.
+  Implementation classes.
 
-    Thase classes are used internally.
+  Thase classes are used internally.
 
-    @defgroup internal internal
+  @defgroup internal internal
 */
 //==============================================================================
 /**
-    External modules.
+  External modules.
 
-    These modules bring in functionality from third party or system libraries.
+  These modules bring in functionality from third party or system libraries.
 
-    @defgroup external external
+  @defgroup external external
 */
 //==============================================================================
 /**
-    Core classes.
+  Core classes.
 
-    This module provides core required functionality, and classes useful for
-    general development. All other modules require this module.
+  This module provides core required functionality, and classes useful for
+  general development. All other modules require this module.
 
-    @todo Discuss the treatment of exceptions versus Error objects in the library.
+  @todo Discuss the treatment of exceptions versus Error objects in the library.
 
-    @todo Discuss the additions to AppConfig.h
+  @todo Discuss the additions to AppConfig.h
 
-    @defgroup vf_core vf_core
+  @defgroup vf_core vf_core
 */
 
-/** See the Juce notes regarding AppConfig.h
+/*  See the Juce notes regarding AppConfig.h
 
     This file must always be included before any Juce headers.
 

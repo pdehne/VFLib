@@ -21,6 +21,8 @@
 
 /** This contains deprecated code.
 
+    This file is here for compatibility and should not be used.
+
     @file vf_deprecated.h
 
     @deprecated
@@ -28,16 +30,6 @@
 
 #ifndef VF_DEPRECATED_VFHEADER
 #define VF_DEPRECATED_VFHEADER
-
-//==============================================================================
-/**
-    Deprecated classes.
-
-    These classes are here for compatibility and should not be used.
-
-    @defgroup vf_deprecated vf_deprecated
-    @deprecated
-*/
 
 #include "vf/modules/vf_core/vf_core.h"
 #include "vf/modules/vf_gui/vf_gui.h"

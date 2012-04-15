@@ -29,20 +29,20 @@
 #define VF_SQLITE_VFHEADER
 
 //==============================================================================
-/**
-    A self-contained, serverless, zero configuration, transactional SQL engine.
+/** 
+  A self-contained, serverless, zero configuration, transactional
+  SQL engine.
 
-    This external module provides the SQLite embedded database library.
+  This external module provides the SQLite embedded database library.
+    
+  SQLite is public domain software, visit http://sqlite.org
 
-    SQLite is public domain software, visit
-    http://sqlite.org
+  @todo Use native SQLite libraries if available (like iOS)
 
-    @todo Use native SQLite libraries if available (like iOS)
+  @todo Allow a user provided SQLite library through AppConfig.h configuration.
 
-    @todo Allow a user provided SQLite library through AppConfig.h configuration.
-
-    @defgroup vf_sqlite vf_sqlite
-    @ingroup external
+  @defgroup vf_sqlite vf_sqlite
+  @ingroup external
 */
 
 #include "AppConfig.h"

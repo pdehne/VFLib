@@ -9,12 +9,6 @@ namespace tr1 = std::tr1;
 namespace tr1 = std;
 #endif
 
-/** Destroy an array of objects, only if the destructor is non trivial
-
-    @function destroy_n
-    @deprecated
-*/
-
 namespace detail {
 
 template<class Ty, bool hasTrivialDestructor>
@@ -37,6 +31,13 @@ struct destroyer<Ty, true>
 };
 
 }
+
+/** @internal
+
+    @brief Destroy an array of objects, only if the destructor is non trivial
+
+    @deprecated
+*/
 
 template<class Ty>
 void destroy_n( Ty* p, std::size_t n )

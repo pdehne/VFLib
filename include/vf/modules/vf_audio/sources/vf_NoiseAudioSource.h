@@ -23,13 +23,14 @@
 #define VF_NOISEAUDIOSOURCE_VFHEADER
 
 //==============================================================================
-/** @internal
+/**
+  @internal
+ 
+  @brief Filter to make pink noise from white.
 
-    Filter to make pink noise from white"
+  From http://www.musicdsp.org/files/pink.txt
 
-    From http://www.musicdsp.org/files/pink.txt
-
-    @ingroup vf_audio internal
+  @ingroup vf_audio internal
 */
 struct pink_noise_filter
 {
@@ -63,6 +64,7 @@ private:
   double b0, b1, b2, b3, b4, b5, b6;
 };
 
+//==============================================================================
 /** @internal
 
     @brief A faster but less accurate pink noise filter.

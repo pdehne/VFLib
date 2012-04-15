@@ -9,7 +9,7 @@
     Additional configuration options.
 
     Append these additional conditional compilation directives to your already
-    existing AppConfig.hto control the compilations options avilable in VFLib.
+    existing AppConfig.h to customize the available compilations options.
 
     @file AppConfig.h
     @ingroup vf_core

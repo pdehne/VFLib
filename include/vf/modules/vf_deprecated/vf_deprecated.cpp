@@ -21,6 +21,8 @@
 
 /** This contains deprecated code.
 
+    This file is here for compatibility and should not be used.
+
     @file vf_deprecated.cpp
 
     @deprecated

@@ -26,7 +26,7 @@
 
 //==============================================================================
 /** 
-    Structured access to concurrent state.
+    Structured access to a shared state.
 
     This template wraps an object containing members representing state
     information shared between multiple threads of execution, where any thread
