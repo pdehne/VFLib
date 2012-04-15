@@ -29,7 +29,8 @@
 #define VF_CORE_VFHEADER
 
 //==============================================================================
-/** @mainpage VFLib: A multipurpose class library built on JUCE.
+/**
+    @mainpage VFLib: A multipurpose class library built on JUCE.
 
     VFLib is a source code collection of individual modules containing
     functionality for a variety of applications. 

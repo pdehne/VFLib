@@ -24,8 +24,7 @@
 
 #include "../functor/vf_Function.h"
 
-/**
-    Exception catcher.
+/** Exception catcher.
 
     Executes the function and catches any exception.
     In addition to C++ exceptions, this will also catch

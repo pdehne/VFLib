@@ -26,6 +26,8 @@
 #include "../memory/vf_AtomicPointer.h"
 #include "../threads/vf_SpinDelay.h"
 
+struct LockFreeQueueDefaultTag;
+
 //==============================================================================
 /** 
     Multiple Producer, Single Consumer (MPSC) intrusive FIFO.
@@ -46,10 +48,8 @@
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
 
-    @ingroup vf_core
+    @ingroup vf_core intrusive
 */
-
-struct LockFreeQueueDefaultTag { };
 
 template <class Element, class Tag = LockFreeQueueDefaultTag>
 class LockFreeQueue
@@ -219,5 +219,12 @@ private:
   Node* m_tail;
   Node m_null;
 };
+
+//==============================================================================
+/** Default tag for LockFreeQueue
+
+    @ingroup vf_core intrusive
+*/
+struct LockFreeQueueDefaultTag { };
 
 #endif

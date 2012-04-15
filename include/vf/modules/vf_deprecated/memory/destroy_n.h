@@ -9,9 +9,11 @@ namespace tr1 = std::tr1;
 namespace tr1 = std;
 #endif
 
-//! destroy_n
-//!
-//! destroy an array of objects, only if the destructor is non trivial
+/** Destroy an array of objects, only if the destructor is non trivial
+
+    @function destroy_n
+    @deprecated
+*/
 
 namespace detail {
 

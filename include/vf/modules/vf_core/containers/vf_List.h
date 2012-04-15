@@ -25,24 +25,56 @@
 #include "../diagnostic/vf_Error.h"
 #include "../diagnostic/vf_Throw.h"
 
+struct ListDefaultTag;
+
+//==============================================================================
+/**
+    Intrusive Containers
+
+    Intrusive containers are special containers that offer better performance
+    and exception safety guarantees than non-intrusive containers (like the
+    STL containers). They are useful building blocks for high performance
+    concurrent systems or other purposes where allocations are restricted
+    (such as the AudioDeviceIOCallback object), because intrusive list
+    operations do not allocate or free memory.
+
+    While intrusive containers were and are widely used in C, they became more
+    and more forgotten in C++ due to the presence of the standard containers
+    which don't support intrusive techniques. VFLib not only reintroduces this
+    technique to C++ for lists, it also encapsulates the implementation in a
+    mostly compliant STL interface. Hence anyone familiar with standard
+    containers can easily use them.
+
+    @section intrusive_interface Intrusive Interface
+
+    The interface for intrusive elements in this library is unified for all
+    containers. Unlike STL containers, objects placed into intrusive containers
+    are not copied. Instead, a pointer to the object is stored. All
+    responsibility for object lifetime is the responsibility of the caller -
+    the intrusive container just keeps track of what is in it.
+
+    Summary of intrusive container differences:
+
+    - Holds pointers to caller provided objects
+
+    - Does not allocate or free any objects
+
+    - Requires a element's class declaration to be modified
+
+
+    @defgroup intrusive intrusive
+    @ingroup vf_core
+*/
+
 //==============================================================================
 /**
     Intrusive doubly linked list.
 
-    The intrusive List is container similar in operation to std::list in the
-    Standard Template Library (STL). Intrusive containers are special containers
-    that offer better performance and exception safety guarantees than
-    non-intrusive containers (like the STL containers). They are useful building
-    blocks for high performance concurrent systems or other purposes where
-    allocations are restricted (such as the audioDeviceIOCallback), because
-    intrusive list operations do not allocate or free memory.
+    This intrusive List is a container similar in operation to std::list in the
+    Standard Template Library (STL).
+    
 
-    While intrusive containers were and are widely used in C, they became more
-    and more forgotten in C++ due to the presence of the standard containers
-    which don't support intrusive techniques. List not only reintroduces this
-    technique to C++ for doubly linked lists, but also encapsulates the
-    implementation in a mostly compliant STL interface. Hence anyone familiar
-    with standard containers can easily use it.
+
 
     To use the list, we first derive the object we want to place into the list
     from List::Node:
@@ -147,10 +179,8 @@
     @todo Put intrusive documentation concepts into its own section and
           refer to it from the containers.
 
-    @ingroup vf_core
+    @ingroup vf_core intrusive
 */
-
-struct ListDefaultTag { };
 
 template <class Element, class Tag = ListDefaultTag>
 class List : Uncopyable
@@ -495,5 +525,12 @@ private:
   Node m_head;
   Node m_tail;
 };
+
+//==============================================================================
+/** Default tag for List
+
+    @ingroup vf_core intrusive
+*/
+struct ListDefaultTag { };
 
 #endif

@@ -22,7 +22,7 @@
 /** This contains deprecated code.
 
     @file vf_deprecated.h
-    @ingroup vf_deprecated
+
     @deprecated
 */
 

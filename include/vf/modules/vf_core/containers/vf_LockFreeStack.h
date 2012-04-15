@@ -24,6 +24,8 @@
 
 #include "../memory/vf_AtomicPointer.h"
 
+struct LockFreeStackDefaultTag;
+
 //==============================================================================
 /** 
     Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
@@ -38,11 +40,8 @@
                 putting objects in multiple lists. If this parameter is
                 omitted, the default tag is used.
 
-    @ingroup vf_core
+    @ingroup vf_core intrusive
 */
-
-struct LockFreeStackDefaultTag { };
-
 template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
 {
@@ -156,5 +155,12 @@ public:
 private:
   AtomicPointer <Node> m_head;
 };
+
+//==============================================================================
+/** Default tag for LockFreeStack
+
+    @ingroup vf_core intrusive
+*/
+struct LockFreeStackDefaultTag { };
 
 #endif

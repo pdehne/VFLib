@@ -25,8 +25,7 @@
 #include "vf_CallQueue.h"
 
 //==============================================================================
-/** @ingroup vf_concurrent
-
+/**
     A CallQueue that requires periodic manual synchronization.
 
     To use this, declare an instance and then place calls into it as usual.
@@ -68,6 +67,8 @@
     you can track it down.
 
     @see CallQueue
+
+    @ingroup vf_concurrent
 */
 class ManualCallQueue : public CallQueue
 {

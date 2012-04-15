@@ -30,8 +30,7 @@
 ///@{
 
 //==============================================================================
-/** @class Listeners
-
+/**
     A group of concurrent Listeners.
 
     A Listener is an object of class type which inherits from a defined
@@ -215,6 +214,7 @@
 
     @see CallQueue
 
+    @class Listeners
     @ingroup vf_concurrent
 */
 
