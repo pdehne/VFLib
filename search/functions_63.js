@@ -32,6 +32,7 @@ var searchData=
   ['canundo',['canUndo',['http://www.rawmaterialsoftware.com/juce/api/classUndoManager.html#a530c911b964fc6759b0b68dbf0bb2335',1,'UndoManager']]],
   ['canusesemitransparentwindows',['canUseSemiTransparentWindows',['http://www.rawmaterialsoftware.com/juce/api/classDesktop.html#af15bdf2abd33c022d88f9335a5b5d098',1,'Desktop']]],
   ['caretcomponent',['CaretComponent',['http://www.rawmaterialsoftware.com/juce/api/classCaretComponent.html#a4d0d34bc6f55b6aa99c5c7f05f39b711',1,'CaretComponent']]],
+  ['catchany',['CatchAny',['../group__vf__core.html#gadb21dbf93d1e53fa31fbbd5c69ab40f8',1,'CatchAny(Function&lt; void(void)&gt; f, bool returnFromException):&#160;vf_CatchAny.cpp'],['../group__vf__core.html#gadb21dbf93d1e53fa31fbbd5c69ab40f8',1,'CatchAny(Function&lt; void(void)&gt; f, bool returnFromException=false):&#160;vf_CatchAny.cpp']]],
   ['cellclicked',['cellClicked',['http://www.rawmaterialsoftware.com/juce/api/classTableListBoxModel.html#a4aff1b6737036ccc7d115ce78363153a',1,'TableListBoxModel']]],
   ['celldoubleclicked',['cellDoubleClicked',['http://www.rawmaterialsoftware.com/juce/api/classTableListBoxModel.html#ab2e56617913183ba054d7a67c64578f5',1,'TableListBoxModel']]],
   ['centrearoundcomponent',['centreAroundComponent',['http://www.rawmaterialsoftware.com/juce/api/classTopLevelWindow.html#a24c4beccd6e394c68a2def2e38a3213a',1,'TopLevelWindow']]],

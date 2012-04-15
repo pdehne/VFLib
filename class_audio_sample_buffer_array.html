@@ -264,9 +264,12 @@ template&lt;int Channels = 2&gt; </div>
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>The <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> to point to.</td></tr>
-    <tr><td class="paramname">startSample</td><td>Zero based index of the first sample to use.</td></tr>
-    <tr><td class="paramname">numSamples</td><td>The number of samples in the desired range. This must be less than or equal to the actual amount of space in the memory pointed to by buffer, less startingSampleIndex. </td></tr>
+    <tr><td class="paramname">buffer</td><td>The <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> to point to. <div class="fragment"><pre class="fragment"> @param startSample Zero based index of the first sample to use.
+
+ @param numSamples  The number of samples in the desired range.
+                    This must be less than or equal to the actual
+                    amount of space in the memory pointed to by
+                    buffer, less startingSampleIndex.</pre></div> </td></tr>
   </table>
   </dd>
 </dl>
@@ -317,11 +320,10 @@ template&lt;int Channels = 2&gt; </div>
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>The buffer to point to.</td></tr>
+    <tr><td class="paramname">buffer</td><td>The buffer to point to. <div class="fragment"><pre class="fragment"> @return A reference to the array.</pre></div> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>A reference to the array. </dd></dl>
 
 </div>
 </div>
@@ -343,11 +345,10 @@ template&lt;int Channels = 2&gt; </div>
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">bufferToFill</td><td>The portion of an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> to point to.</td></tr>
+    <tr><td class="paramname">bufferToFill</td><td>The portion of an <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> to point to. <div class="fragment"><pre class="fragment"> @return A reference to the array.</pre></div> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>A reference to the array. </dd></dl>
 
 </div>
 </div>
@@ -369,11 +370,10 @@ template&lt;int Channels = 2&gt; </div>
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">other</td><td>The other <a class="el" href="class_audio_sample_buffer_array.html" title="An array of movable pointers to existing audio buffers.">AudioSampleBufferArray</a> to point to.</td></tr>
+    <tr><td class="paramname">other</td><td>The other <a class="el" href="class_audio_sample_buffer_array.html" title="An array of movable pointers to existing audio buffers.">AudioSampleBufferArray</a> to point to. <div class="fragment"><pre class="fragment"> @return A reference to the array.</pre></div> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns:</dt><dd>A reference to the array. </dd></dl>
 
 </div>
 </div>
@@ -472,9 +472,12 @@ template&lt;int Channels = 2&gt; </div>
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>The <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> containing the desired channel buffers.</td></tr>
-    <tr><td class="paramname">startSample</td><td>Zero based index of the first sample to use.</td></tr>
-    <tr><td class="paramname">numSamples</td><td>The number of samples in the desired range. This must be less than or equal to the actual amount of space in the memory pointed to by buffer, less startingSampleIndex. </td></tr>
+    <tr><td class="paramname">buffer</td><td>The <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSampleBuffer.html">AudioSampleBuffer</a> containing the desired channel buffers. <div class="fragment"><pre class="fragment"> @param startSample Zero based index of the first sample to use.
+
+ @param numSamples  The number of samples in the desired range.
+                    This must be less than or equal to the actual
+                    amount of space in the memory pointed to by
+                    buffer, less startingSampleIndex.</pre></div> </td></tr>
   </table>
   </dd>
 </dl>
@@ -682,7 +685,7 @@ template&lt;int Channels = 2&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

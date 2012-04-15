@@ -95,6 +95,7 @@ var searchData=
   ['trimend',['trimEnd',['http://www.rawmaterialsoftware.com/juce/api/classString.html#a87ccf2ec72c1a478e69d44495c367194',1,'String']]],
   ['trimstart',['trimStart',['http://www.rawmaterialsoftware.com/juce/api/classString.html#afc8c1ef8badb8787ca6057506ad9b742',1,'String']]],
   ['truncate',['truncate',['http://www.rawmaterialsoftware.com/juce/api/classFileOutputStream.html#a663c7e264306c74ed58f2639acec5797',1,'FileOutputStream']]],
+  ['try_5fpop_5ffront',['try_pop_front',['../class_lock_free_queue.html#aeb6d0d9051b8cfcb7728c5e7fefaa24d',1,'LockFreeQueue']]],
   ['trychangestate',['tryChangeState',['../class_atomic_state.html#ab3932041cba0c7490546f5b981ffff1d',1,'AtomicState']]],
   ['tryenter',['tryEnter',['http://www.rawmaterialsoftware.com/juce/api/classCriticalSection.html#a2c12101da7ebf8455de49652f377d313',1,'CriticalSection::tryEnter()'],['http://www.rawmaterialsoftware.com/juce/api/classDummyCriticalSection.html#a55f19ff3a0b0f91a1d025939d1c03a3c',1,'DummyCriticalSection::tryEnter()'],['http://www.rawmaterialsoftware.com/juce/api/classSpinLock.html#a4581a24b50dad1a9803b19f65af70aaf',1,'SpinLock::tryEnter()']]],
   ['tryenterwrite',['tryEnterWrite',['http://www.rawmaterialsoftware.com/juce/api/classReadWriteLock.html#ac7f0b0aefca34943957ac1623b97a8a2',1,'ReadWriteLock']]],

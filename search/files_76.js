@@ -10,6 +10,7 @@ var searchData=
   ['vf_5fcore_2eh',['vf_core.h',['../vf__core_8h.html',1,'']]],
   ['vf_5fdb_2ecpp',['vf_db.cpp',['../vf__db_8cpp.html',1,'']]],
   ['vf_5fdb_2eh',['vf_db.h',['../vf__db_8h.html',1,'']]],
+  ['vf_5fdeprecated_2eh',['vf_deprecated.h',['../vf__deprecated_8h.html',1,'']]],
   ['vf_5ffreetype_2ec',['vf_freetype.c',['../vf__freetype_8c.html',1,'']]],
   ['vf_5ffreetype_2eh',['vf_freetype.h',['../vf__freetype_8h.html',1,'']]],
   ['vf_5fgui_2ecpp',['vf_gui.cpp',['../vf__gui_8cpp.html',1,'']]],

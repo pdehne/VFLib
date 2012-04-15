@@ -19,7 +19,7 @@ var searchData=
   ['elements',['elements',['http://www.rawmaterialsoftware.com/juce/api/classArrayAllocationBase.html#a68e9e3954a47f3a9b0721c979d4d9fe7',1,'ArrayAllocationBase::elements()'],['http://www.rawmaterialsoftware.com/juce/api/classRelativePointPath.html#a975cc963b8500afa8d33dac6d7c7ac50',1,'RelativePointPath::elements()']]],
   ['elementtype',['ElementType',['http://www.rawmaterialsoftware.com/juce/api/classRelativePointPath.html#a741fbc9bca4a156a84514f20987483e9',1,'RelativePointPath::ElementType()'],['http://www.rawmaterialsoftware.com/juce/api/classPath_1_1Iterator.html#a3b33636d181ff130a4c0e475da2824db',1,'Path::Iterator::elementType()']]],
   ['emagiclogic',['EmagicLogic',['http://www.rawmaterialsoftware.com/juce/api/classPluginHostType.html#a69d9330e82ef7520f9aa8b2ad78ce5a8a80d4f48afc7a55bd087144b92e27bc88',1,'PluginHostType']]],
-  ['empty',['empty',['http://www.rawmaterialsoftware.com/juce/api/classString.html#afd02116a5571fcc8bc1e6fdabe132a85',1,'String']]],
+  ['empty',['empty',['http://www.rawmaterialsoftware.com/juce/api/classString.html#afd02116a5571fcc8bc1e6fdabe132a85',1,'String::empty()'],['../class_lock_free_queue.html#a7227ca9d8c4260d162cb4d68eb5bd376',1,'LockFreeQueue::empty()']]],
   ['emptyrange',['emptyRange',['http://www.rawmaterialsoftware.com/juce/api/classRange.html#ad7d026bfc44eaa1dc8725fd13bfe8d77',1,'Range']]],
   ['enableindexscanning',['enableIndexScanning',['http://www.rawmaterialsoftware.com/juce/api/classAudioCDReader.html#a7119f9f8fb88977c79ed5479b4f694ed',1,'AudioCDReader']]],
   ['enableinputlevelmeasurement',['enableInputLevelMeasurement',['http://www.rawmaterialsoftware.com/juce/api/classAudioDeviceManager.html#a6a351316f351119fc2a75b69913b4a69',1,'AudioDeviceManager']]],

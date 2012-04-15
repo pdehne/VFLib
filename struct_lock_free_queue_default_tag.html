@@ -94,40 +94,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">LockFreeQueueDefaultTag Struct Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a></div></div>  </div>
+<div class="title">LockFreeQueueDefaultTag Struct Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a> &#124; <a class="el" href="group__intrusive.html">intrusive</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Multiple Producer, Single Consumer (MPSC) intrusive FIFO.  
- <a href="struct_lock_free_queue_default_tag.html#details">More...</a></p>
+<p>Default tag for <a class="el" href="class_lock_free_queue.html" title="Multiple Producer, Single Consumer (MPSC) intrusive FIFO.">LockFreeQueue</a>.  
+</p>
 
 <p><code>#include &quot;vf_LockFreeQueue.h&quot;</code></p>
-<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This container uses the same intrusive interface as List. It is wait-free for producers and lock-free for consumers. The caller is responsible for preventing the ABA problem (<a href="http://en.wikipedia.org/wiki/ABA_problem">http://en.wikipedia.org/wiki/ABA_problem</a>)</p>
-<p>Invariants:</p>
-<ul>
-<li>Any thread may call push_back() at any time (Multiple Producer).</li>
-</ul>
-<ul>
-<li>Only one thread may call try_pop_front() at a time (Single Consumer)</li>
-</ul>
-<ul>
-<li>The queue is signaled if there are one or more elements.</li>
-</ul>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Tag</td><td>A type name used to distinguish lists and nodes, for putting objects in multiple lists. If this parameter is omitted, the default tag is used. </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>vf_LockFreeQueue.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

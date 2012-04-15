@@ -87,8 +87,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#files">Files</a> &#124;
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">vf_core</div>  </div>
 </div><!--header-->
@@ -97,6 +99,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Core classes.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__intrusive"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__intrusive.html">intrusive</a></td></tr>
+<tr class="memdesc:group__intrusive"><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>Intrusive Containers. </p>
+<br/></td></tr>
 <tr><td colspan="2"><h2><a name="files"></a>
 Files</h2></td></tr>
 <tr class="memitem:vf__core_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vf__core_8cpp.html">vf_core.cpp</a></td></tr>
@@ -110,12 +117,18 @@ Files</h2></td></tr>
 <br/></td></tr>
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html">List&lt; Element, Tag &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intrusive doubly linked list.  <a href="class_list.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_list_default_tag.html">ListDefaultTag</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intrusive doubly linked list.  <a href="struct_list_default_tag.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default tag for <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a>.  <a href="struct_list_default_tag.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_queue.html">LockFreeQueue&lt; Element, Tag &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiple Producer, Single Consumer (MPSC) intrusive FIFO.  <a href="class_lock_free_queue.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_lock_free_queue_default_tag.html">LockFreeQueueDefaultTag</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiple Producer, Single Consumer (MPSC) intrusive FIFO.  <a href="struct_lock_free_queue_default_tag.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default tag for <a class="el" href="class_lock_free_queue.html" title="Multiple Producer, Single Consumer (MPSC) intrusive FIFO.">LockFreeQueue</a>.  <a href="struct_lock_free_queue_default_tag.html#details">More...</a><br/></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_lock_free_stack.html">LockFreeStack&lt; Element, Tag &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiple Producer, Multiple Consumer (MPMC) intrusive stack.  <a href="class_lock_free_stack.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_lock_free_stack_default_tag.html">LockFreeStackDefaultTag</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiple Producer, Multiple Consumer (MPMC) intrusive stack.  <a href="struct_lock_free_stack_default_tag.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default tag for <a class="el" href="class_lock_free_stack.html" title="Multiple Producer, Multiple Consumer (MPMC) intrusive stack.">LockFreeStack</a>.  <a href="struct_lock_free_stack_default_tag.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_error.html">Error</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A concise error report.  <a href="class_error.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_p_u_flags.html">FPUFlags</a></td></tr>
@@ -140,16 +153,52 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread-safe singleton which comes into existence on first use.  <a href="class_reference_counted_singleton.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_interruptible_thread.html">InterruptibleThread</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A thread with soft interruption support.  <a href="class_interruptible_thread.html#details">More...</a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gadb21dbf93d1e53fa31fbbd5c69ab40f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vf__core.html#gadb21dbf93d1e53fa31fbbd5c69ab40f8">CatchAny</a> (Function&lt; void(void)&gt; f, bool returnFromException=false)</td></tr>
+<tr class="memdesc:gadb21dbf93d1e53fa31fbbd5c69ab40f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception catcher.  <a href="#gadb21dbf93d1e53fa31fbbd5c69ab40f8"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>This module provides core required functionality, and classes useful for general development. All other modules require this module.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Discuss the treatment of exceptions versus <a class="el" href="class_error.html" title="A concise error report.">Error</a> objects in the library.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Discuss the additions to <a class="el" href="_app_config_8h.html" title="Additional configuration options.">AppConfig.h</a></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Discuss the treatment of exceptions versus <a class="el" href="class_error.html" title="A concise error report.">Error</a> objects in the library.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Discuss the additions to <a class="el" href="_app_config_8h.html" title="Additional configuration options.">AppConfig.h</a></dd></dl>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gadb21dbf93d1e53fa31fbbd5c69ab40f8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="group__vf__core.html#gadb21dbf93d1e53fa31fbbd5c69ab40f8">CatchAny</a> </td>
+          <td>(</td>
+          <td class="paramtype">Function&lt; void(void)&gt;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>returnFromException</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Executes the function and catches any exception. In addition to C++ exceptions, this will also catch any platform-specific exceptions. For example, SEH (Structured Exception Handling) on Windows, or POSIX signals if they are available.</p>
+<p>If returnFromException is false then a framework specific unhandled exception handler will be called. Otherwise, this function will return true if it catches something or else false.</p>
+<p>The return value approach is useful for detecting when outside code fails (for example, a VST plugin), and disabling its future use for example.</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>Remove dependence on the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classJUCEApplication.html">JUCEApplication</a> object and remove juce_gui_basics.h from <a class="el" href="vf__core_8cpp.html" title="Add this to get the vf_core module.">vf_core.cpp</a></dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:04 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

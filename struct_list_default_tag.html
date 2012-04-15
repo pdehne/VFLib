@@ -94,76 +94,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">ListDefaultTag Struct Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a></div></div>  </div>
+<div class="title">ListDefaultTag Struct Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a> &#124; <a class="el" href="group__intrusive.html">intrusive</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Intrusive doubly linked list.  
- <a href="struct_list_default_tag.html#details">More...</a></p>
+<p>Default tag for <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a>.  
+</p>
 
 <p><code>#include &quot;vf_List.h&quot;</code></p>
-<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>The intrusive List is container similar in operation to std::list in the Standard Template Library (STL). Intrusive containers are special containers that offer better performance and exception safety guarantees than non-intrusive containers (like the STL containers). They are useful building blocks for high performance concurrent systems or other purposes where allocations are restricted (such as the audioDeviceIOCallback), because intrusive list operations do not allocate or free memory.</p>
-<p>While intrusive containers were and are widely used in C, they became more and more forgotten in C++ due to the presence of the standard containers which don't support intrusive techniques. List not only reintroduces this technique to C++ for doubly linked lists, but also encapsulates the implementation in a mostly compliant STL interface. Hence anyone familiar with standard containers can easily use it.</p>
-<p>To use the list, we first derive the object we want to place into the list from List::Node:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>Object : List &lt;Object&gt;::Node
-    {
-      Object (<span class="keywordtype">int</span> value) : m_value (value)
-      {
-      }
-      
-      <span class="keywordtype">int</span> m_value;
-    };
-</pre></div><p>Now we declare the list, and add a couple of items.</p>
-<div class="fragment"><pre class="fragment">    List &lt;Object&gt; list;
-
-    list.push_back (* (<span class="keyword">new</span> Object (1)));
-    list.push_back (* (<span class="keyword">new</span> Object (2)));
-</pre></div><p>For compatibility with the standard containers, push_back() expects a reference to the object. Unlike the standard container, however, push_back() places the actual object in the list and not a copy-constructed duplicate.</p>
-<p>Iterating over the list follows the same idiom as the STL:</p>
-<div class="fragment"><pre class="fragment">    <span class="keywordflow">for</span> (List &lt;Object&gt;::iterator iter = list.begin();
-         iter != list.end;
-         ++iter)
-      std::cout &lt;&lt; iter-&gt;m_value;
-</pre></div><p>You can even use BOOST_FOREACH, or range based for loops:</p>
-<div class="fragment"><pre class="fragment">    BOOST_FOREACH (Object&amp; <span class="keywordtype">object</span>, list)  <span class="comment">// boost only</span>
-      std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
-
-    for (Object&amp; <span class="keywordtype">object</span> : list)           <span class="comment">// c++11 only</span>
-      std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
-</pre></div><p>Because List is mostly STL compliant, it can be passed into STL algorithms: e.g. std::for_each() or std::find_first_of.</p>
-<p>In general, objects placed into a List should be dynamically allocated although this cannot be enforced at compile time. Since the caller provides the storage for the object, the caller is also responsible for deleting the object. An object still exists after being removed from a List, until the caller deletes it. This means an element can be moved from one List to another with practically no overhead.</p>
-<p>Unlike the standard containers, an object may only exist in one list at a time, unless special preparations are made. The Tag template parameter is used to distinguish between different list types for the same object, allowing the object to exist in more than one list simultaneously.</p>
-<p>For example, consider an actor system where a global list of actors is maintained, so that they can each be periodically receive processing time. We wish to also maintain a list of the subset of actors that require a domain-dependent update. To achieve this, we declare two tags, the associated list types, and the list element thusly:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>Actor;         <span class="comment">// Forward declaration required</span>
-
-    <span class="keyword">struct </span>ProcessTag { };
-    <span class="keyword">struct </span>UpdateTag { };
-
-    <span class="keyword">typedef</span> List &lt;Actor, ProcessTag&gt; ProcessList;
-    <span class="keyword">typedef</span> List &lt;Actor, UpdateTag&gt; UpdateList;
-
-    <span class="comment">// Derive from both node types so we can be in each list at once.</span>
-    <span class="comment">//</span>
-    <span class="keyword">struct </span>Actor : ProcessList::Node, UpdateList::Node
-    {
-      <span class="keywordtype">bool</span> process ();    <span class="comment">// returns true if we need an update</span>
-      <span class="keywordtype">void</span> update ();
-    };
-</pre></div><dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Tag</td><td>A type name used to distinguish lists and nodes, for putting objects in multiple lists. If this parameter is omitted, the default tag is used. </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>vf_List.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

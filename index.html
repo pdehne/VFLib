@@ -90,10 +90,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">VFLib: A multipurpose class library built on JUCE. </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>VFLib is a source code collection of individual modules containing functionality for a variety of applications. VFLib requires JUCE (Jules' Utility Class Extensions) available from <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a>. JUCE is available under both the GNU General Public License and a commercial, closed source license. Visit <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> for more details.</p>
+<div class="textblock"><p>VFLib is a source code collection of individual modules containing functionality for a variety of applications.</p>
+<p>VFLib requires JUCE (Jules' Utility Class Extensions) available from <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a>. JUCE is available under both the GNU General Public License and a commercial, closed source license. Visit <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> for more details.</p>
 <p>Other than JUCE, VFLib has no external dependencies.</p>
-<h2><a class="anchor" id="Platforms"></a>
-Platforms</h2>
+<h2>Platforms</h2>
 <p>All platforms supported by JUCE are also supported by VFLib. Currently these platforms include:</p>
 <ul>
 <li>Windows: Applications and VST/RTAS/NPAPI/ActiveX plugins can be built using MS Visual Studio. The results are all fully compatible with Windows XP, Vista or Win7</li>
@@ -110,50 +110,41 @@ Platforms</h2>
 <ul>
 <li>Android</li>
 </ul>
-<h2><a class="anchor" id="Prerequisites"></a>
-Prerequisites</h2>
+<h2>Prerequisites</h2>
 <p>The documentation for VFLib assumes that the reader has a working knowledge of JUCE. Some modules built on external libraries assume that the reader understands the operation of those external libraries. Certain modules assume that the reader understands additional domain-specific information. Modules with additional prerequisites are marked in the documentation.</p>
-<h2><a class="anchor" id="External"></a>
-Modules</h2>
+<h2>External Modules</h2>
 <p>Some modules bring in functionality provided by external libraries. For example, the <a class="el" href="group__vf__bzip2.html">vf_bzip2</a> module provides the compression and decompression algorithms in bZip2. Usage of these external library modules is optional. They come with complete source code, as well as options for using either system or user provided variants of the external libraries: it is not necessary to download additional files to use these modules.</p>
 <p>External code incorporated into VFLib is covered by a separate license. See the licensing information and notes in the corresponding source files, for copyright information and terms of use.</p>
-<h2><a class="anchor" id="Integration"></a>
-Integration</h2>
+<h2>Integration</h2>
 <p>VFLib requires recent versions of JUCE. It won't work with JUCE versions 1.53 or earlier. To use the library it is necessary to first download JUCE to a location where VFLib can find it. Or, you can use your existing installation of JUCE.</p>
 <p>This library uses the same modularized organizational structure as JUCE. To use a module, first add a path to the list of includes searched by your development environment or project, which points to the VFLib directory named "include". Then, add the single corresponding .c or .cpp file to your existing project which already uses JUCE. For example, to use the <a class="el" href="group__vf__core.html">vf_core</a> module, add the file <a class="el" href="vf__core_8cpp.html" title="Add this to get the vf_core module.">vf_core.cpp</a> to your project. Some modules depend on other modules. All modules depend on <a class="el" href="group__vf__core.html">vf_core</a>.</p>
 <p>To use a module, include the appropriate header from within your source code. For example, to access classes in the <a class="el" href="group__vf__concurrent.html">vf_concurrent</a> module, use this:</p>
 <div class="fragment"><pre class="fragment"><span class="preprocessor">    #include &quot;<a class="code" href="vf__concurrent_8h.html" title="Include this to get the vf_concurrent module.">vf/modules/vf_concurrent/vf_concurrent.h</a>&quot;</span>
-</pre></div><h2><a class="anchor" id="AppConfig"></a>
-AppConfig</h2>
-<h3><a class="anchor" id="References"></a>
-References</h3>
-<h3><a class="anchor" id="Location"></a>
-Location</h3>
+</pre></div><h2>AppConfig</h2>
+<h2>References</h2>
+<h2>Location</h2>
 <p>VFLib is hosted on github, at <a href="https://github.com/vinniefalco/VFLib">https://github.com/vinniefalco/VFLib</a></p>
 <h2><a class="anchor" id="License"></a>
 License</h2>
 <p>Copyright (C) 2008 by Vinnie Falco.</p>
-<p>Unless otherwise marked, files in VFLib are published under the [GNU General Public License, Version 2][01]. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+<p>Unless otherwise marked, files in VFLib are published under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" title="GNU General Public License, version 2">GNU General Public License, Version 2</a>. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
 <p>Some files contain portions of these external projects, licensed separately:</p>
-<p>### [bZip2][1]</p>
-<p>[bZip2][1] is Copyright (C) 1996-2010 Julian R Seward. All rights reserved. See the corresponding file LICENSE for licensing terms.</p>
-<p>### [FreeType][2]</p>
-<p>Portions of the software are Copyright © 1996-2001, 2006 by [The FreeType Project][2]. All rights reserved. [FreeType][2] is distributed under both the [GNU General Public License, Version 2][01], or the [FreeType License][02].</p>
-<p>### [JUCE][3]</p>
-<p>This software uses [JUCE][3], which is available under the [GNU General Public License][01]. [Commercial licenses][9] are also available.</p>
-<p>### [Lua][4]</p>
-<p>Portions of this software are Copyright © 1994–2012 [Lua.org][4], PUC-Rio. Lua is distributed under the terms of the [MIT License][03].</p>
-<p>### [Luabridge][5]</p>
-<p>[Luabridge][5] is Copyrighted (C) 2007 by Nathan Reed. [Luabridge][5] is distributed under the terms of the [BSD 3-Clause License][04].</p>
-<p>### [Soci][6]</p>
-<p>[Soci][6] is Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton, and various others noted in the corresponding source files. Soci is distributed under the [Boost Software License, Version 1.0][05].</p>
-<p>### [SQLite][7]</p>
-<p>[SQLite][7] has been placed in the public domain.</p>
-<p>### [TagLib][8]</p>
-<p>[TagLib][8] is distributed under both the [GNU Lesser General Public License, Version 2.1][06] and the [Mozilla Public License][07].</p>
-<p>[0]: <a href="http://vinniefalco.github.com/VFLib/">http://vinniefalco.github.com/VFLib/</a> "VFLib Documentation"</p>
-<p>[1]: <a href="http://www.bzip.org/">http://www.bzip.org/</a> "bZip2: Home" [2]: <a href="http://freetype.org/">http://freetype.org/</a> "The FreeType Project" [3]: <a href="http://rawmaterialsoftware.com/juce.php">http://rawmaterialsoftware.com/juce.php</a> "JUCE" [4]: <a href="http://www.lua.org/">http://www.lua.org/</a> "The Programming Language Lua" [5]: <a href="http://sourceforge.net/projects/luabridge/">http://sourceforge.net/projects/luabridge/</a> "luabridge" [6]: <a href="http://soci.sourceforge.net/">http://soci.sourceforge.net/</a> "SOCI" [7]: <a href="http://sqlite.org/">http://sqlite.org/</a> "SQLite Home Page" [8]: <a href="http://developer.kde.org/~wheeler/taglib.html">http://developer.kde.org/~wheeler/taglib.html</a> "TagLib" [9]: <a href="http://rawmaterialsoftware.com/jucelicense.php">http://rawmaterialsoftware.com/jucelicense.php</a> "JUCE Commercial Licensing"</p>
-<p>[01]: <a href="http://www.gnu.org/licenses/gpl-2.0.html">http://www.gnu.org/licenses/gpl-2.0.html</a> "GNU General Public License, version 2" [02]: <a href="http://www.freetype.org/FTL.TXT">http://www.freetype.org/FTL.TXT</a> "The FreeType Project License" [03]: <a href="http://www.opensource.org/licenses/mit-license.html">http://www.opensource.org/licenses/mit-license.html</a> "The MIT License" [04]: <a href="http://www.opensource.org/licenses/BSD-3-Clause">http://www.opensource.org/licenses/BSD-3-Clause</a> "BSD 3-Clause License" [05]: <a href="http://www.boost.org/LICENSE_1_0.txt">http://www.boost.org/LICENSE_1_0.txt</a> "Boost Software License, Version 1.0" [06]: <a href="http://www.gnu.org/licenses/lgpl-2.1.html">http://www.gnu.org/licenses/lgpl-2.1.html</a> "Gnu Lesser General Public License, version 2.1" [07]: <a href="http://www.mozilla.org/MPL/1.1/">http://www.mozilla.org/MPL/1.1/</a> "Mozilla Public License"</p>
+<h3><a href="http://www.bzip.org/" title="bZip2: Home">bZip2</a></h3>
+<p><a href="http://www.bzip.org/" title="bZip2: Home">bZip2</a> is Copyright (C) 1996-2010 Julian R Seward. All rights reserved. See the corresponding file LICENSE for licensing terms.</p>
+<h3><a href="http://freetype.org/" title="The FreeType Project">FreeType</a></h3>
+<p>Portions of the software are Copyright © 1996-2001, 2006 by <a href="http://freetype.org/" title="The FreeType Project">The FreeType Project</a>. All rights reserved. <a href="http://freetype.org/" title="The FreeType Project">FreeType</a> is distributed under both the <a href="http://www.gnu.org/licenses/gpl-2.0.html" title="GNU General Public License, version 2">GNU General Public License, Version 2</a>, or the <a href="http://www.freetype.org/FTL.TXT" title="The FreeType Project License">FreeType License</a>.</p>
+<h3><a href="http://rawmaterialsoftware.com/juce.php" title="JUCE">JUCE</a></h3>
+<p>This software uses <a href="http://rawmaterialsoftware.com/juce.php" title="JUCE">JUCE</a>, which is available under the <a href="http://www.gnu.org/licenses/gpl-2.0.html" title="GNU General Public License, version 2">GNU General Public License</a>. <a href="http://rawmaterialsoftware.com/jucelicense.php" title="JUCE Commercial Licensing">Commercial licenses</a> are also available.</p>
+<h3><a href="http://www.lua.org/" title="The Programming Language Lua">Lua</a></h3>
+<p>Portions of this software are Copyright © 1994–2012 <a href="http://www.lua.org/" title="The Programming Language Lua">Lua.org</a>, PUC-Rio. Lua is distributed under the terms of the <a href="http://www.opensource.org/licenses/mit-license.html" title="The MIT License">MIT License</a>.</p>
+<h3><a href="http://sourceforge.net/projects/luabridge/" title="luabridge">Luabridge</a></h3>
+<p><a href="http://sourceforge.net/projects/luabridge/" title="luabridge">Luabridge</a> is Copyrighted (C) 2007 by Nathan Reed. <a href="http://sourceforge.net/projects/luabridge/" title="luabridge">Luabridge</a> is distributed under the terms of the <a href="http://www.opensource.org/licenses/BSD-3-Clause" title="BSD 3-Clause License">BSD 3-Clause License</a>.</p>
+<h3><a href="http://soci.sourceforge.net/" title="SOCI">Soci</a></h3>
+<p><a href="http://soci.sourceforge.net/" title="SOCI">Soci</a> is Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton, and various others noted in the corresponding source files. Soci is distributed under the <a href="http://www.boost.org/LICENSE_1_0.txt" title="Boost Software License, Version 1.0">Boost Software License, Version 1.0</a>.</p>
+<h3><a href="http://sqlite.org/" title="SQLite Home Page">SQLite</a></h3>
+<p><a href="http://sqlite.org/" title="SQLite Home Page">SQLite</a> has been placed in the public domain.</p>
+<h3><a href="http://developer.kde.org/~wheeler/taglib.html" title="TagLib">TagLib</a></h3>
+<p><a href="http://developer.kde.org/~wheeler/taglib.html" title="TagLib">TagLib</a> is distributed under both the <a href="http://www.gnu.org/licenses/lgpl-2.1.html" title="Gnu Lesser General Public License, version 2.1">GNU Lesser General Public License, Version 2.1</a> and the <a href="http://www.mozilla.org/MPL/1.1/" title="Mozilla Public License">Mozilla Public License</a>.</p>
 <dl class="section author"><dt>Author:</dt><dd><a href="http://vinniefalco.com">Vinnie Falco</a> </dd></dl>
 <dl class="section version"><dt>Version:</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date:</dt><dd>2008-2012 </dd></dl>
@@ -164,7 +155,7 @@ Provided by the GNU General Public License, Version 2 </dd></dl>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

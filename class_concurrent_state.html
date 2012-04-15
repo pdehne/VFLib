@@ -101,7 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Structured access to concurrent state.  
+<p>Structured access to a shared state.  
  <a href="class_concurrent_state.html#details">More...</a></p>
 
 <p><code>#include &quot;vf_ConcurrentState.h&quot;</code></p>
@@ -113,11 +113,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_state_1_1_read_access.html">ReadAccess</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read only access to a <a class="el" href="class_concurrent_state.html" title="Structured access to concurrent state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_read_access.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read only access to a <a class="el" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_read_access.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_state_1_1_unlocked_access.html">UnlockedAccess</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocked access to a <a class="el" href="class_concurrent_state.html" title="Structured access to concurrent state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_unlocked_access.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocked access to a <a class="el" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_unlocked_access.html#details">More...</a><br/></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_state_1_1_write_access.html">WriteAccess</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read/write access to a <a class="el" href="class_concurrent_state.html" title="Structured access to concurrent state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_write_access.html#details">More...</a><br/></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read/write access to a <a class="el" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState</a>.  <a href="class_concurrent_state_1_1_write_access.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8211a66be1ab71888bfc9ac66c2421b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_concurrent_state.html#a8211a66be1ab71888bfc9ac66c2421b0">ConcurrentState</a> ()</td></tr>
@@ -150,7 +150,7 @@ class ConcurrentState&lt; Object &gt;</h3>
       <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> value2;
     };
 
-    <span class="keyword">typedef</span> <a class="code" href="class_concurrent_state.html" title="Structured access to concurrent state.">ConcurrentState &lt;SharedData&gt;</a> SharedState;
+    <span class="keyword">typedef</span> <a class="code" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState &lt;SharedData&gt;</a> SharedState;
 
     SharedState sharedState;
 
@@ -182,7 +182,7 @@ class ConcurrentState&lt; Object &gt;</h3>
     };
 
     <span class="comment">// Construct SharedData with one parameter</span>
-    <a class="code" href="class_concurrent_state.html" title="Structured access to concurrent state.">ConcurrentState &lt;SharedData&gt;</a> sharedState (16);
+    <a class="code" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState &lt;SharedData&gt;</a> sharedState (16);
 </pre></div><dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">Object</td><td>The type of object to encapsulate.</td></tr>
@@ -217,7 +217,7 @@ template&lt;class Object&gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 12 2012 11:24:05 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

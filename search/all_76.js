@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value',['Value',['http://www.rawmaterialsoftware.com/juce/api/classValue.html',1,'Value'],['http://www.rawmaterialsoftware.com/juce/api/classAtomic.html#a4c042c01777b1efe30266a45b7df36f4',1,'Atomic::value()'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#abc2a5a2e6484fac66dae2539cc955667',1,'Value::Value()'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#acc427785c9007f762772d1dbe7535295',1,'Value::Value(const Value &amp;other)'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#ad20df25aa8a6b58ae7220abb5abea977',1,'Value::Value(const var &amp;initialValue)'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#a9ef2a029c366ec777e9485cb4aadcf8b',1,'Value::Value(ValueSource *valueSource)']]],
+  ['value',['Value',['http://www.rawmaterialsoftware.com/juce/api/classValue.html',1,'Value'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#abc2a5a2e6484fac66dae2539cc955667',1,'Value::Value()'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#acc427785c9007f762772d1dbe7535295',1,'Value::Value(const Value &amp;other)'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#ad20df25aa8a6b58ae7220abb5abea977',1,'Value::Value(const var &amp;initialValue)'],['http://www.rawmaterialsoftware.com/juce/api/classValue.html#a9ef2a029c366ec777e9485cb4aadcf8b',1,'Value::Value(ValueSource *valueSource)'],['http://www.rawmaterialsoftware.com/juce/api/classAtomic.html#a4c042c01777b1efe30266a45b7df36f4',1,'Atomic::value()']]],
   ['valuechanged',['valueChanged',['http://www.rawmaterialsoftware.com/juce/api/classButton.html#a4a97b7340319e3c0edce572d6f44f219',1,'Button::valueChanged()'],['http://www.rawmaterialsoftware.com/juce/api/classComboBox.html#a76c62167633c14047c0f60f1ac8dd310',1,'ComboBox::valueChanged()'],['http://www.rawmaterialsoftware.com/juce/api/classLabel.html#aec3e90374cfdbcda0fcb5c664f52cd02',1,'Label::valueChanged()'],['http://www.rawmaterialsoftware.com/juce/api/classSlider.html#a5988f8e1b98cb0b28330522117d46c1c',1,'Slider::valueChanged()'],['http://www.rawmaterialsoftware.com/juce/api/classSlider.html#a06ae697e6d5376071190fbabc3819dc0',1,'Slider::valueChanged(Value &amp;value)'],['http://www.rawmaterialsoftware.com/juce/api/classValue_1_1Listener.html#ab1f072eabd128b8e9a99b4926f2231a8',1,'Value::Listener::valueChanged()']]],
   ['valueexists',['valueExists',['http://www.rawmaterialsoftware.com/juce/api/classWindowsRegistry.html#ac4fadd7f5d05f582ef8c71463d5aaabc',1,'WindowsRegistry']]],
   ['valuesource',['ValueSource',['http://www.rawmaterialsoftware.com/juce/api/classValue_1_1ValueSource.html',1,'Value']]],
@@ -43,6 +43,7 @@ var searchData=
   ['vf_5fcore_2eh',['vf_core.h',['../vf__core_8h.html',1,'']]],
   ['vf_5fdb_2ecpp',['vf_db.cpp',['../vf__db_8cpp.html',1,'']]],
   ['vf_5fdb_2eh',['vf_db.h',['../vf__db_8h.html',1,'']]],
+  ['vf_5fdeprecated_2eh',['vf_deprecated.h',['../vf__deprecated_8h.html',1,'']]],
   ['vf_5ffreetype_2ec',['vf_freetype.c',['../vf__freetype_8c.html',1,'']]],
   ['vf_5ffreetype_2eh',['vf_freetype.h',['../vf__freetype_8h.html',1,'']]],
   ['vf_5fgui_2ecpp',['vf_gui.cpp',['../vf__gui_8cpp.html',1,'']]],
@@ -55,7 +56,7 @@ var searchData=
   ['vf_5fsqlite_2eh',['vf_sqlite.h',['../vf__sqlite_8h.html',1,'']]],
   ['vf_5ftaglib_2ecpp',['vf_taglib.cpp',['../vf__taglib_8cpp.html',1,'']]],
   ['vf_5ftaglib_2eh',['vf_taglib.h',['../vf__taglib_8h.html',1,'']]],
-  ['vf_5fuse_5fboost',['VF_USE_BOOST',['../vf__core_8h.html#a00b356de0ad70ddff464d305c0b37147',1,'VF_USE_BOOST():&#160;vf_core.h'],['../_app_config_8h.html#a00b356de0ad70ddff464d305c0b37147',1,'VF_USE_BOOST():&#160;AppConfig.h']]],
+  ['vf_5fuse_5fboost',['VF_USE_BOOST',['../_app_config_8h.html#a00b356de0ad70ddff464d305c0b37147',1,'AppConfig.h']]],
   ['vf_5fuse_5fbzip2',['VF_USE_BZIP2',['../_app_config_8h.html#a7d0c96f2daf8f3e5e4b13cad977dca9a',1,'AppConfig.h']]],
   ['vf_5fuse_5ffreetype',['VF_USE_FREETYPE',['../_app_config_8h.html#a2923a28e61dbd2cf83afbf8f7bf5b2f1',1,'AppConfig.h']]],
   ['videorenderertype',['VideoRendererType',['http://www.rawmaterialsoftware.com/juce/api/classDirectShowComponent.html#aa3d9ec3787a0af2478c59ff11a830f75',1,'DirectShowComponent']]],
