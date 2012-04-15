@@ -19,13 +19,15 @@
 // 
 //==============================================================================
 
-/** This contains deprecated code.
+/**
+  @internal
 
-    This file is here for compatibility and should not be used.
+  This contains deprecated code.
 
-    @file vf_deprecated.cpp
+  This file is here for compatibility and should not be used.
 
-    @deprecated
+  @file vf_deprecated.cpp
+  @deprecated
 */
 
 #include "vf_deprecated.h"
