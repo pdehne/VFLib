@@ -36,27 +36,27 @@ template <class AllocatorType>
 class AllocatedBy
 {
 public:
-  inline void* operator new (size_t bytes, AllocatorType& allocator) noexcept
+  static inline void* operator new (size_t bytes, AllocatorType& allocator) noexcept
   {
     return allocator.allocate (bytes);
   }
 
-  inline void* operator new (size_t bytes, AllocatorType* allocator) noexcept
+  static inline void* operator new (size_t bytes, AllocatorType* allocator) noexcept
   {
     return allocator->allocate (bytes);
   }
 
-  inline void operator delete (void* p, AllocatorType&) noexcept
+  static inline void operator delete (void* p, AllocatorType&) noexcept
   {
     AllocatorType::deallocate (p);
   }
 
-  inline void operator delete (void* p, AllocatorType*) noexcept
+  static inline void operator delete (void* p, AllocatorType*) noexcept
   {
     AllocatorType::deallocate (p);
   }
 
-  inline void operator delete (void* p) noexcept
+  static inline void operator delete (void* p) noexcept
   {
     AllocatorType::deallocate (p);
   }
