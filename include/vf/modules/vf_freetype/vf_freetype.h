@@ -43,7 +43,7 @@
 #if VF_USE_FREETYPE
 
 // Amalgamated
-#include "freetype/FreeTypeAmalgam.h"
+#include "FreeTypeAmalgam/FreeTypeAmalgam.h"
 
 // Shared library
 //#include <ft2build.h>

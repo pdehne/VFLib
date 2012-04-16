@@ -41,7 +41,7 @@ void z_error (char* message)
   (message);
 }
 
-#include "freetype/FreeTypeAmalgam.c"
+#include "FreeTypeAmalgam/FreeTypeAmalgam.c"
 
 #if JUCE_MSVC
 #pragma warning (pop)

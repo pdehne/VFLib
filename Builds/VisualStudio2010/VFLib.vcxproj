@@ -261,7 +261,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.cpp" />
-    <ClCompile Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.c">
+    <ClCompile Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -563,7 +563,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\page_pool.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\Pipe.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_freetype\freetype\FreeTypeAmalgam.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h" />
