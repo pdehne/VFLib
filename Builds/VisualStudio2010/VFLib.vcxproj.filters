@@ -88,9 +88,6 @@
     <Filter Include="VF Modules\external\vf_taglib">
       <UniqueIdentifier>{1eb38624-3e95-4908-b51d-8abfdccc994e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\external\vf_taglib\taglib">
-      <UniqueIdentifier>{5741bdf7-2284-42a6-869f-a0585e67e3f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\external\vf_sqlite">
       <UniqueIdentifier>{77750aaf-a021-4260-943d-ffb29fd235f7}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="VF Modules\external\vf_freetype\FreeTypeAmalgam">
       <UniqueIdentifier>{4f7641a9-6421-4b62-86ca-447c63b4bb27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VF Modules\external\vf_taglib\TagLibAmalgam">
+      <UniqueIdentifier>{dbd10d70-619f-41d2-ba7c-fa68eb39e0e9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -402,9 +402,6 @@
     <ClCompile Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.cpp">
-      <Filter>VF Modules\external\vf_taglib\taglib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
@@ -506,6 +503,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.c">
       <Filter>VF Modules\external\vf_freetype\FreeTypeAmalgam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.cpp">
+      <Filter>VF Modules\external\vf_taglib\TagLibAmalgam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -830,9 +830,6 @@
     <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\typelist.hpp">
       <Filter>VF Modules\external\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h">
-      <Filter>VF Modules\external\vf_taglib\taglib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.h">
       <Filter>VF Modules\external\vf_bzip2\bzip2</Filter>
     </ClInclude>
@@ -982,6 +979,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.h">
       <Filter>VF Modules\external\vf_freetype\FreeTypeAmalgam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h">
+      <Filter>VF Modules\external\vf_taglib\TagLibAmalgam</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

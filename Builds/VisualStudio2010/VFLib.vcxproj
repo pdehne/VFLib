@@ -455,7 +455,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.c" />
-    <ClCompile Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.cpp">
+    <ClCompile Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -618,7 +618,7 @@
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h" />
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\taglib\TagLibAmalgam.h" />
+    <ClInclude Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h" />
     <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h" />
   </ItemGroup>
   <ItemGroup>

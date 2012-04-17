@@ -43,6 +43,6 @@
 
 #include "AppConfig.h"
 
-#include "taglib/TagLibAmalgam.h"
+#include "TagLibAmalgam/TagLibAmalgam.h"
 
 #endif

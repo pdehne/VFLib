@@ -44,7 +44,7 @@
 
 //#define HAVE_ZLIB 0
 
-#include "taglib/TagLibAmalgam.cpp"
+#include "TagLibAmalgam/TagLibAmalgam.cpp"
 
 #if JUCE_MSVC
 #pragma warning (pop)
