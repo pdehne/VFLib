@@ -57,9 +57,13 @@ extern "C"
 
 #if JUCE_MSVC
 #pragma warning (push)
-#pragma warning (disable: 4244)
-#pragma warning (disable: 4702)
+#pragma warning (disable: 4244) // Possible loss of data
+#pragma warning (disable: 4702) // Unreachable code
 #endif
+
+// Include this early to prevent the conflict with luai_hashnum
+// and supress the warning caused by #define lua_assert
+#include "lua/ltable.c"
 
 #include "lua/lauxlib.c"
 #include "lua/lbaselib.c"
@@ -73,9 +77,6 @@ extern "C"
 #include "lua/loslib.c"
 #include "lua/lstrlib.c"
 #include "lua/ltablib.c"
-
-// Must come before any include of llimits.h, for luai_hashnum
-#include "lua/ltable.c"
 
 #include "lua/lapi.c"
 #include "lua/lcode.c"

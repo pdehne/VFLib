@@ -34,6 +34,13 @@
 #include "../vf_core/vf_core.h"
 #include "../vf_gui/vf_gui.h"
 
+#if JUCE_MSVC
+#pragma warning (push)
+#pragma warning (disable: 4100) // unreferenced formal parmaeter
+#pragma warning (disable: 4244) // conversion: possible loss of data
+#pragma warning (disable: 4355) // 'this' used in base member
+#endif
+
 namespace vf
 {
 #include "containers/binary_tree.h"
@@ -66,5 +73,9 @@ namespace vf
 #include "gui/Static.h"
 #include "gui/Value.h"
 }
+
+#if JUCE_MSVC
+#pragma warning (pop)
+#endif
 
 #endif
