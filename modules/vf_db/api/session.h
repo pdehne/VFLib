@@ -1,4 +1,4 @@
-//==============================================================================
+/*============================================================================*/
 // 
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // 
@@ -43,14 +43,14 @@
 // Artyom Tonkikh, Roger Orr, Robert Massaioli, Sergey Nikulov,
 // Shridhar Daithankar, Sören Meyer-Eppler, Mario Valesco.
 // 
-//==============================================================================
+/*============================================================================*/
 
 #ifndef VF_DB_SESSION_VFHEADER
 #define VF_DB_SESSION_VFHEADER
 
 namespace db {
 
-//==============================================================================
+/*============================================================================*/
 /** A session for the embedded database.
 
     @ingroup vf_db

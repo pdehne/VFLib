@@ -1,4 +1,4 @@
-//==============================================================================
+/*============================================================================*/
 //
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // See the file GNU_GPL_v2.txt for full licensing terms.
@@ -17,7 +17,7 @@
 // this program; if not, write to the Free Software Foundation, Inc., 51
 // Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // 
-//==============================================================================
+/*============================================================================*/
 
 /** Include this to get the @ref vf_gui module.
 
@@ -28,7 +28,7 @@
 #ifndef VF_GUI_VFHEADER
 #define VF_GUI_VFHEADER
 
-//==============================================================================
+/*============================================================================*/
 /**
     Classes for appearance and graphical display.
 

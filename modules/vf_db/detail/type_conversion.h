@@ -1,4 +1,4 @@
-//==============================================================================
+/*============================================================================*/
 // 
 // Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
 // 
@@ -43,7 +43,7 @@
 // Artyom Tonkikh, Roger Orr, Robert Massaioli, Sergey Nikulov,
 // Shridhar Daithankar, Sören Meyer-Eppler, Mario Valesco.
 // 
-//==============================================================================
+/*============================================================================*/
 
 #ifndef VF_DB_DETAIL_TYPE_CONVERSION_VFHEADER
 #define VF_DB_DETAIL_TYPE_CONVERSION_VFHEADER

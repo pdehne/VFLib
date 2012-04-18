@@ -1,23 +1,23 @@
-//==============================================================================
-//
-// Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-// See the file GNU_GPL_v2.txt for full licensing terms.
-// 
-// This program is free software; you can redistribute it and/or modify it
-// under the terms of the GNU General Public License as published by the Free
-// Software Foundation; either version 2 of the License, or (at your option)
-// any later version.
-// 
-// This program is distributed in the hope that it will be useful, but WITHOUT
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-// FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-// details.
-// 
-// You should have received a copy of the GNU General Public License along with
-// this program; if not, write to the Free Software Foundation, Inc., 51
-// Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-// 
-//==============================================================================
+/*============================================================================*/
+/*
+  Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+  See the file GNU_GPL_v2.txt for full licensing terms.
+
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+  details.
+
+  You should have received a copy of the GNU General Public License along with
+  this program; if not, write to the Free Software Foundation, Inc., 51
+  Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
+/*============================================================================*/
 
 /** Add this to get the @ref vf_lua external module.
 
@@ -41,10 +41,10 @@ extern "C"
 {
 #endif
 
-// luaconf.h only declares some things if it is being included
-// from certain source files. We define all the relevant macros
-// and include luaconf.h once so we get all the declarations.
-//
+/* luaconf.h only declares some things if it is being included
+   from certain source files. We define all the relevant macros
+   and include luaconf.h once so we get all the declarations.
+*/
 #define lobject_c
 #define lvm_c
 #define LUA_CORE
@@ -57,12 +57,13 @@ extern "C"
 
 #if JUCE_MSVC
 #pragma warning (push)
-#pragma warning (disable: 4244) // Possible loss of data
-#pragma warning (disable: 4702) // Unreachable code
+#pragma warning (disable: 4244) /* Possible loss of data */
+#pragma warning (disable: 4702) /* Unreachable code */
 #endif
 
-// Include this early to prevent the conflict with luai_hashnum
-// and supress the warning caused by #define lua_assert
+/* Include this early to prevent the conflict with luai_hashnum
+   and supress the warning caused by #define lua_assert
+*/
 #include "lua/ltable.c"
 
 #include "lua/lauxlib.c"
@@ -99,8 +100,9 @@ extern "C"
 #include "lua/lvm.c"
 #include "lua/lzio.c"
 
-// loadlib.c includes Windows.h, which defines the LoadString macro,
-// so include it last to prevent errors.
+/* loadlib.c includes Windows.h, which defines the LoadString macro,
+   so include it last to prevent errors.
+*/
 #include "lua/loadlib.c"
 
 #if JUCE_MSVC
