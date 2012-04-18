@@ -33,8 +33,6 @@
 namespace vf
 {
 
-#include "vf/modules/vf_core/threads/vf_Mutex.h"
-
 namespace {
 
 //
