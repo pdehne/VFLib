@@ -141,843 +141,843 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\include\vf\modules\vf_audio\vf_audio.cpp">
+    <ClCompile Include="..\..\modules\vf_audio\vf_audio.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\vf_concurrent.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\vf_core.cpp">
+    <ClCompile Include="..\..\modules\vf_core\vf_core.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\vf_db.cpp">
+    <ClCompile Include="..\..\modules\vf_db\vf_db.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\vf_gui.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\vf_gui.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\blob.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\blob.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\error_codes.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\error_codes.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\into_type.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\into_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\once_temp_type.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\once_temp_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\prepare_temp_type.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\prepare_temp_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\ref_counted_prepare_info.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\ref_counted_prepare_info.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\ref_counted_statement.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\ref_counted_statement.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\session.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\session.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\statement.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\statement.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\statement_imp.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\statement_imp.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\transaction.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\transaction.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_db\source\use_type.cpp">
+    <ClCompile Include="..\..\modules\vf_db\source\use_type.cpp">
       <Filter>VF Modules\vf_db\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\native\vf_win32_FPUFlags.cpp">
+    <ClCompile Include="..\..\modules\vf_core\native\vf_win32_FPUFlags.cpp">
       <Filter>VF Modules\vf_core\native</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_CatchAny.cpp">
+    <ClCompile Include="..\..\modules\vf_core\diagnostic\vf_CatchAny.cpp">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Debug.cpp">
+    <ClCompile Include="..\..\modules\vf_core\diagnostic\vf_Debug.cpp">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Error.cpp">
+    <ClCompile Include="..\..\modules\vf_core\diagnostic\vf_Error.cpp">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_FPUFlags.cpp">
+    <ClCompile Include="..\..\modules\vf_core\diagnostic\vf_FPUFlags.cpp">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\diagnostic\vf_LeakChecked.cpp">
+    <ClCompile Include="..\..\modules\vf_core\diagnostic\vf_LeakChecked.cpp">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\math\vf_MurmurHash.cpp">
+    <ClCompile Include="..\..\modules\vf_core\math\vf_MurmurHash.cpp">
       <Filter>VF Modules\vf_core\math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
+    <ClCompile Include="..\..\modules\vf_audio\buffers\vf_AudioBufferPool.cpp">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.cpp">
+    <ClCompile Include="..\..\modules\vf_audio\sources\vf_NoiseAudioSource.cpp">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.cpp">
+    <ClCompile Include="..\..\modules\vf_core\events\vf_PerformedAtExit.cpp">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.cpp">
+    <ClCompile Include="..\..\modules\vf_core\events\vf_OncePerSecond.cpp">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.cpp">
+    <ClCompile Include="..\..\modules\vf_core\threads\vf_InterruptibleThread.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ManualCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_CallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_GuiCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_Listeners.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentObject.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_XYZColour.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_LabColour.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\components\vf_TransparentBorder.cpp">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\layout\vf_StackedLayout.cpp">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\layout\vf_ResizableLayout.cpp">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\mouse\vf_MouseEnterEditable.cpp">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\mouse\vf_DragAndDropData.cpp">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_freetype\vf_freetype.c">
+    <ClCompile Include="..\..\modules\vf_freetype\vf_freetype.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.c">
+    <ClCompile Include="..\..\modules\vf_sqlite\sqlite\sqlite3async.c">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.c">
+    <ClCompile Include="..\..\modules\vf_sqlite\sqlite\sqlite3.c">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.c">
+    <ClCompile Include="..\..\modules\vf_sqlite\vf_sqlite.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lua.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lua.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltm.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ltm.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltablib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ltablib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ltable.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ltable.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstrlib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lstrlib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstring.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lstring.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lstate.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lstate.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lparser.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lparser.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\loslib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\loslib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lopcodes.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lopcodes.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lobject.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lobject.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\loadlib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\loadlib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lmem.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lmem.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lmathlib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lmathlib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\llex.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\llex.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\liolib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\liolib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\linit.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\linit.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lgc.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lgc.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lfunc.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lfunc.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldump.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ldump.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldo.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ldo.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldebug.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ldebug.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\ldblib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\ldblib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lctype.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lctype.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lcorolib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lcorolib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lcode.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lcode.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lbitlib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lbitlib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lbaselib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lbaselib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lauxlib.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lauxlib.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lapi.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lapi.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lzio.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lzio.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lvm.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lvm.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\lua\lundump.c">
+    <ClCompile Include="..\..\modules\vf_lua\lua\lundump.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_lua\vf_lua.c">
+    <ClCompile Include="..\..\modules\vf_lua\vf_lua.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.cpp">
+    <ClCompile Include="..\..\modules\vf_luabridge\luabridge\shared_ptr.cpp">
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.cpp">
+    <ClCompile Include="..\..\modules\vf_luabridge\luabridge\luabridge.cpp">
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.cpp">
+    <ClCompile Include="..\..\modules\vf_luabridge\vf_luabridge.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_taglib\vf_taglib.cpp">
+    <ClCompile Include="..\..\modules\vf_taglib\vf_taglib.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\crctable.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\crctable.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\decompress.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\decompress.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\huffman.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\huffman.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\randtable.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\randtable.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\blocksort.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\blocksort.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\bzlib.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\bzip2\compress.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\bzip2\compress.c">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.c">
+    <ClCompile Include="..\..\modules\vf_bzip2\vf_bzip2.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
+    <ClCompile Include="..\..\modules\vf_concurrent\memory\vf_PagedFreeStore.cpp">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\vf_deprecated.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\containers\Array.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\containers\Array.cpp">
       <Filter>VF Modules\vf_deprecated\containers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Button.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Button.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\ColouredImageMaskFacade.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Label.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Label.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Meter.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Meter.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\PopupButton.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\PopupButton.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\ResizablePanel.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\ResizablePanel.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\ResizingPanes.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\ResizingPanes.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Slider.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Slider.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\SolidColourFacade.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\SolidColourFacade.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Static.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Static.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\Value.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\Value.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Button.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_Button.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Control.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_Control.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Facade.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_Facade.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Model.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_Model.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Static.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_Static.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\gui\vf_UiBase.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\gui\vf_UiBase.cpp">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_deprecated\memory\Pipe.cpp">
+    <ClCompile Include="..\..\modules\vf_deprecated\memory\Pipe.cpp">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.c">
+    <ClCompile Include="..\..\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.c">
       <Filter>VF Modules\vf_freetype\FreeTypeAmalgam</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.cpp">
+    <ClCompile Include="..\..\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.cpp">
       <Filter>VF Modules\vf_taglib\TagLibAmalgam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\backend.h">
+    <ClInclude Include="..\..\modules\vf_db\api\backend.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\blob.h">
+    <ClInclude Include="..\..\modules\vf_db\api\blob.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\into.h">
+    <ClInclude Include="..\..\modules\vf_db\api\into.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\session.h">
+    <ClInclude Include="..\..\modules\vf_db\api\session.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\statement.h">
+    <ClInclude Include="..\..\modules\vf_db\api\statement.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\transaction.h">
+    <ClInclude Include="..\..\modules\vf_db\api\transaction.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\type_conversion_traits.h">
+    <ClInclude Include="..\..\modules\vf_db\api\type_conversion_traits.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\api\use.h">
+    <ClInclude Include="..\..\modules\vf_db\api\use.h">
       <Filter>VF Modules\vf_db\api</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\error_codes.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\error_codes.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\exchange_traits.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\exchange_traits.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\into_type.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\into_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\once_temp_type.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\once_temp_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\prepare_temp_type.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\prepare_temp_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\ref_counted_prepare_info.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\ref_counted_prepare_info.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\ref_counted_statement.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\ref_counted_statement.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\statement_imp.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\statement_imp.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\type_conversion.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\type_conversion.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\type_ptr.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\type_ptr.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\detail\use_type.h">
+    <ClInclude Include="..\..\modules\vf_db\detail\use_type.h">
       <Filter>VF Modules\vf_db\detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_List.h">
+    <ClInclude Include="..\..\modules\vf_core\containers\vf_List.h">
       <Filter>VF Modules\vf_core\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_CacheLine.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_CacheLine.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_MemoryAlignment.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_MemoryAlignment.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_StaticObject.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_StaticObject.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicCounter.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_AtomicCounter.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicFlag.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_AtomicFlag.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicState.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_AtomicState.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_AtomicPointer.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_AtomicPointer.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_CatchAny.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_CatchAny.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Debug.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_Debug.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Error.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_Error.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_FPUFlags.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_FPUFlags.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_LeakChecked.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_LeakChecked.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_SafeBool.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_SafeBool.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\diagnostic\vf_Throw.h">
+    <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_Throw.h">
       <Filter>VF Modules\vf_core\diagnostic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\functor\vf_Bind.h">
+    <ClInclude Include="..\..\modules\vf_core\functor\vf_Bind.h">
       <Filter>VF Modules\vf_core\functor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\functor\vf_Function.h">
+    <ClInclude Include="..\..\modules\vf_core\functor\vf_Function.h">
       <Filter>VF Modules\vf_core\functor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_Interval.h">
+    <ClInclude Include="..\..\modules\vf_core\math\vf_Interval.h">
       <Filter>VF Modules\vf_core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_Math.h">
+    <ClInclude Include="..\..\modules\vf_core\math\vf_Math.h">
       <Filter>VF Modules\vf_core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\math\vf_MurmurHash.h">
+    <ClInclude Include="..\..\modules\vf_core\math\vf_MurmurHash.h">
       <Filter>VF Modules\vf_core\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_SpinDelay.h">
+    <ClInclude Include="..\..\modules\vf_core\threads\vf_SpinDelay.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioBufferPool.h">
+    <ClInclude Include="..\..\modules\vf_audio\buffers\vf_AudioBufferPool.h">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h">
+    <ClInclude Include="..\..\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\sources\vf_NoiseAudioSource.h">
+    <ClInclude Include="..\..\modules\vf_audio\sources\vf_NoiseAudioSource.h">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_PerformedAtExit.h">
+    <ClInclude Include="..\..\modules\vf_core\events\vf_PerformedAtExit.h">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\events\vf_OncePerSecond.h">
+    <ClInclude Include="..\..\modules\vf_core\events\vf_OncePerSecond.h">
       <Filter>VF Modules\vf_core\events</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_ReferenceCountedSingleton.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_ReferenceCountedSingleton.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\memory\vf_Uncopyable.h">
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_Uncopyable.h">
       <Filter>VF Modules\vf_core\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\threads\vf_InterruptibleThread.h">
+    <ClInclude Include="..\..\modules\vf_core\threads\vf_InterruptibleThread.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ManualCallQueue.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ManualCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_CallQueue.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_CallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_GuiCallQueue.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GuiCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_Listeners.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_Listeners.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentState.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentState.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentObject.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h">
       <Filter>AppConfigTemplate</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ThreadWithCallQueue.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_LockFreeStack.h">
+    <ClInclude Include="..\..\modules\vf_core\containers\vf_LockFreeStack.h">
       <Filter>VF Modules\vf_core\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\containers\vf_LockFreeQueue.h">
+    <ClInclude Include="..\..\modules\vf_core\containers\vf_LockFreeQueue.h">
       <Filter>VF Modules\vf_core\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h">
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_VerticalGradient.h">
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_VerticalGradient.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_XYZColour.h">
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_XYZColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_LabColour.h">
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_LabColour.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_TransparentBorder.h">
+    <ClInclude Include="..\..\modules\vf_gui\components\vf_TransparentBorder.h">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentBroadcast.h">
+    <ClInclude Include="..\..\modules\vf_gui\components\vf_ComponentBroadcast.h">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_StackedLayout.h">
+    <ClInclude Include="..\..\modules\vf_gui\layout\vf_StackedLayout.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ResizableLayout.h">
+    <ClInclude Include="..\..\modules\vf_gui\layout\vf_ResizableLayout.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterEditable.h">
+    <ClInclude Include="..\..\modules\vf_gui\mouse\vf_MouseEnterEditable.h">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_MouseEnterGroup.h">
+    <ClInclude Include="..\..\modules\vf_gui\mouse\vf_MouseEnterGroup.h">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\mouse\vf_DragAndDropData.h">
+    <ClInclude Include="..\..\modules\vf_gui\mouse\vf_DragAndDropData.h">
       <Filter>VF Modules\vf_gui\mouse</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\layout\vf_ContentComponentConstrainer.h">
+    <ClInclude Include="..\..\modules\vf_gui\layout\vf_ContentComponentConstrainer.h">
       <Filter>VF Modules\vf_gui\layout</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_FreeTypeFaces.h">
       <Filter>VF Modules\vf_gui\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3.h">
+    <ClInclude Include="..\..\modules\vf_sqlite\sqlite\sqlite3.h">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3async.h">
+    <ClInclude Include="..\..\modules\vf_sqlite\sqlite\sqlite3async.h">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\sqlite\sqlite3ext.h">
+    <ClInclude Include="..\..\modules\vf_sqlite\sqlite\sqlite3ext.h">
       <Filter>VF Modules\vf_sqlite\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldebug.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\ldebug.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lctype.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lctype.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lcode.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lcode.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lauxlib.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lauxlib.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lapi.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lapi.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lzio.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lzio.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lvm.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lvm.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lundump.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lundump.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lualib.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lualib.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\luaconf.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\luaconf.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lua.hpp">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lua.hpp">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lua.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lua.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ltm.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\ltm.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ltable.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\ltable.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lstring.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lstring.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lstate.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lstate.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lparser.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lparser.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lopcodes.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lopcodes.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lobject.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lobject.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lmem.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lmem.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\llimits.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\llimits.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\llex.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\llex.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lgc.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lgc.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\lfunc.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\lfunc.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\lua\ldo.h">
+    <ClInclude Include="..\..\modules\vf_lua\lua\ldo.h">
       <Filter>VF Modules\vf_lua\lua\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\luabridge.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\luabridge.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\shared_ptr.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\shared_ptr.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\class.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\impl\class.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\module.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\impl\module.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\shared_ptr.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\impl\shared_ptr.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\stack.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\impl\stack.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\luabridge\impl\typelist.hpp">
+    <ClInclude Include="..\..\modules\vf_luabridge\luabridge\impl\typelist.hpp">
       <Filter>VF Modules\vf_luabridge\luabridge\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib.h">
+    <ClInclude Include="..\..\modules\vf_bzip2\bzip2\bzlib.h">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\bzip2\bzlib_private.h">
+    <ClInclude Include="..\..\modules\vf_bzip2\bzip2\bzlib_private.h">
       <Filter>VF Modules\vf_bzip2\bzip2</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h">
+    <ClInclude Include="..\..\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h">
       <Filter>VF Modules\vf_audio\buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_AllocatedBy.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_AllocatedBy.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_PagedFreeStore.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_PagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStore.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_FifoFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_FifoFreeStoreWithoutTLS.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_FifoFreeStoreWithTLS.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_GlobalFifoFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h">
       <Filter>VF Modules\vf_concurrent\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\components\vf_ComponentNotifyParent.h">
+    <ClInclude Include="..\..\modules\vf_gui\components\vf_ComponentNotifyParent.h">
       <Filter>VF Modules\vf_gui\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_audio\vf_audio.h">
+    <ClInclude Include="..\..\modules\vf_audio\vf_audio.h">
       <Filter>VF Modules\vf_audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_bzip2\vf_bzip2.h">
+    <ClInclude Include="..\..\modules\vf_bzip2\vf_bzip2.h">
       <Filter>VF Modules\vf_bzip2</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_concurrent\vf_concurrent.h">
+    <ClInclude Include="..\..\modules\vf_concurrent\vf_concurrent.h">
       <Filter>VF Modules\vf_concurrent</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_core\vf_core.h">
+    <ClInclude Include="..\..\modules\vf_core\vf_core.h">
       <Filter>VF Modules\vf_core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\vf_deprecated.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\vf_deprecated.h">
       <Filter>VF Modules\vf_deprecated</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_db\vf_db.h">
+    <ClInclude Include="..\..\modules\vf_db\vf_db.h">
       <Filter>VF Modules\vf_db</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_freetype\vf_freetype.h">
+    <ClInclude Include="..\..\modules\vf_freetype\vf_freetype.h">
       <Filter>VF Modules\vf_freetype</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_gui\vf_gui.h">
+    <ClInclude Include="..\..\modules\vf_gui\vf_gui.h">
       <Filter>VF Modules\vf_gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_lua\vf_lua.h">
+    <ClInclude Include="..\..\modules\vf_lua\vf_lua.h">
       <Filter>VF Modules\vf_lua</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_luabridge\vf_luabridge.h">
+    <ClInclude Include="..\..\modules\vf_luabridge\vf_luabridge.h">
       <Filter>VF Modules\vf_luabridge</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_sqlite\vf_sqlite.h">
+    <ClInclude Include="..\..\modules\vf_sqlite\vf_sqlite.h">
       <Filter>VF Modules\vf_sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\vf_taglib.h">
+    <ClInclude Include="..\..\modules\vf_taglib\vf_taglib.h">
       <Filter>VF Modules\vf_taglib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\containers\Array.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\containers\Array.h">
       <Filter>VF Modules\vf_deprecated\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\containers\binary_tree.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\containers\binary_tree.h">
       <Filter>VF Modules\vf_deprecated\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\containers\Range.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\containers\Range.h">
       <Filter>VF Modules\vf_deprecated\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Button.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Button.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\ColouredImageMaskFacade.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\ColouredImageMaskFacade.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Label.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Label.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Meter.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Meter.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\PopupButton.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\PopupButton.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\ResizablePanel.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\ResizablePanel.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\ResizingPanes.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\ResizingPanes.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Slider.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Slider.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\SolidColourFacade.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\SolidColourFacade.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Static.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Static.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\Value.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\Value.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Button.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_Button.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_ConnectedEdges.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_ConnectedEdges.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Control.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_Control.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Facade.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_Facade.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Model.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_Model.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_Static.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_Static.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\gui\vf_UiBase.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\gui\vf_UiBase.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\block_pool.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\memory\block_pool.h">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\destroy_n.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\memory\destroy_n.h">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\fixed_pool.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\memory\fixed_pool.h">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\page_pool.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\memory\page_pool.h">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_deprecated\memory\Pipe.h">
+    <ClInclude Include="..\..\modules\vf_deprecated\memory\Pipe.h">
       <Filter>VF Modules\vf_deprecated\memory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.h">
+    <ClInclude Include="..\..\modules\vf_freetype\FreeTypeAmalgam\FreeTypeAmalgam.h">
       <Filter>VF Modules\vf_freetype\FreeTypeAmalgam</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\vf\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h">
+    <ClInclude Include="..\..\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h">
       <Filter>VF Modules\vf_taglib\TagLibAmalgam</Filter>
     </ClInclude>
   </ItemGroup>

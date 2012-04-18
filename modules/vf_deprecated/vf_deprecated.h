@@ -31,8 +31,8 @@
 #ifndef VF_DEPRECATED_VFHEADER
 #define VF_DEPRECATED_VFHEADER
 
-#include "vf/modules/vf_core/vf_core.h"
-#include "vf/modules/vf_gui/vf_gui.h"
+#include "../vf_core/vf_core.h"
+#include "../vf_gui/vf_gui.h"
 
 namespace vf
 {

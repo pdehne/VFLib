@@ -684,49 +684,49 @@ WARN_LOGFILE           =
 INPUT = 
 
 INPUT += \
-  ../include/vf/modules/vf_audio/ \
-  ../include/vf/modules/vf_audio/buffers/ \
-  ../include/vf/modules/vf_audio/sources/
+  ../modules/vf_audio/ \
+  ../modules/vf_audio/buffers/ \
+  ../modules/vf_audio/sources/
 
 INPUT += \
-  ../include/vf/modules/vf_concurrent/ \
-  ../include/vf/modules/vf_concurrent/memory/ \
-  ../include/vf/modules/vf_concurrent/threads/
+  ../modules/vf_concurrent/ \
+  ../modules/vf_concurrent/memory/ \
+  ../modules/vf_concurrent/threads/
 
 INPUT += \
-  ../include/vf/modules/vf_deprecated/ \
-  ../include/vf/modules/vf_deprecated/containers/ \
-  ../include/vf/modules/vf_deprecated/gui/ \
-  ../include/vf/modules/vf_deprecated/memory/
+  ../modules/vf_deprecated/ \
+  ../modules/vf_deprecated/containers/ \
+  ../modules/vf_deprecated/gui/ \
+  ../modules/vf_deprecated/memory/
 
 INPUT += \
-  ../include/vf/modules/vf_core/ \
-  ../include/vf/modules/vf_core/containers/ \
-  ../include/vf/modules/vf_core/diagnostic/ \
-  ../include/vf/modules/vf_core/events/ \
-  ../include/vf/modules/vf_core/functor/ \
-  ../include/vf/modules/vf_core/math/ \
-  ../include/vf/modules/vf_core/memory/ \
-  ../include/vf/modules/vf_core/threads/
+  ../modules/vf_core/ \
+  ../modules/vf_core/containers/ \
+  ../modules/vf_core/diagnostic/ \
+  ../modules/vf_core/events/ \
+  ../modules/vf_core/functor/ \
+  ../modules/vf_core/math/ \
+  ../modules/vf_core/memory/ \
+  ../modules/vf_core/threads/
 
 INPUT += \
-  ../include/vf/modules/vf_db/ \
-  ../include/vf/modules/vf_db/api/
+  ../modules/vf_db/ \
+  ../modules/vf_db/api/
 
 INPUT += \
-  ../include/vf/modules/vf_gui/ \
-  ../include/vf/modules/vf_gui/components/ \
-  ../include/vf/modules/vf_gui/graphics/ \
-  ../include/vf/modules/vf_gui/layout/ \
-  ../include/vf/modules/vf_gui/mouse/
+  ../modules/vf_gui/ \
+  ../modules/vf_gui/components/ \
+  ../modules/vf_gui/graphics/ \
+  ../modules/vf_gui/layout/ \
+  ../modules/vf_gui/mouse/
 
 INPUT += \
-  ../include/vf/modules/vf_bzip2/ \
-  ../include/vf/modules/vf_freetype/ \
-  ../include/vf/modules/vf_lua/ \
-  ../include/vf/modules/vf_luabridge/ \
-  ../include/vf/modules/vf_sqlite/ \
-  ../include/vf/modules/vf_taglib/
+  ../modules/vf_bzip2/ \
+  ../modules/vf_freetype/ \
+  ../modules/vf_lua/ \
+  ../modules/vf_luabridge/ \
+  ../modules/vf_sqlite/ \
+  ../modules/vf_taglib/
 
 INPUT += \
   ../AppConfigTemplate/AppConfig.h
