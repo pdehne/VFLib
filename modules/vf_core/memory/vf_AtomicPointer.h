@@ -41,14 +41,14 @@ public:
       @param initialValue An optional starting value (default is null).
   */
   explicit AtomicPointer (P* const initialValue = nullptr) noexcept
-	: m_value (initialValue)
+    : m_value (initialValue)
   {
   }
 
   /** Retrieve the pointer value */
   inline P* get () const noexcept
   {
-	return m_value.get();
+    return m_value.get();
   }
 
   /** Obtain a pointer to P through type conversion.
@@ -59,7 +59,7 @@ public:
   */
   inline operator P* () const noexcept
   {
-	return get ();
+    return get ();
   }
 
   /** Dereference operator
@@ -70,7 +70,7 @@ public:
   */
   inline P& operator* () const noexcept
   {
-	return &get();
+    return &get();
   }
 
   /** Member selection
@@ -81,12 +81,12 @@ public:
   */
   inline P* operator-> () const noexcept
   {
-	return get();
+    return get();
   }
 
   inline void set (P* p)
   {
-	m_value.set (p);
+    m_value.set (p);
   }
 
   /** Atomically assign a new pointer
@@ -95,7 +95,7 @@ public:
   */
   inline void operator= (P* newValue) noexcept
   {
-	set (newValue);
+    set (newValue);
   }
 
   /** Atomically assign a new pointer and return the old value.
@@ -106,7 +106,7 @@ public:
   */
   inline P* exchange (P* newValue)
   {
-	return m_value.exchange (newValue);
+    return m_value.exchange (newValue);
   }
 
   /** Conditionally perform an atomic assignment.

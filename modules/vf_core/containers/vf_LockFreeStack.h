@@ -1,21 +1,21 @@
 /*============================================================================*/
 /*
-  Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-  See the file GNU_GPL_v2.txt for full licensing terms.
+Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+See the file GNU_GPL_v2.txt for full licensing terms.
 
-  This program is free software; you can redistribute it and/or modify it
-  under the terms of the GNU General Public License as published by the Free
-  Software Foundation; either version 2 of the License, or (at your option)
-  any later version.
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
 
-  This program is distributed in the hope that it will be useful, but WITHOUT
-  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-  details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.
 
-  You should have received a copy of the GNU General Public License along with
-  this program; if not, write to the Free Software Foundation, Inc., 51
-  Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 51
+Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 /*============================================================================*/
 
@@ -28,19 +28,19 @@ struct LockFreeStackDefaultTag;
 
 /*============================================================================*/
 /** 
-    Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
+  Multiple Producer, Multiple Consumer (MPMC) intrusive stack.
 
-    This stack is implemented using the same intrusive interface as List. All
-    operations are lock-free.
+  This stack is implemented using the same intrusive interface as List. All
+  operations are lock-free.
 
-    The caller is responsible for preventing the "ABA" problem
-      (http://en.wikipedia.org/wiki/ABA_problem)
+  The caller is responsible for preventing the "ABA" problem
+  (http://en.wikipedia.org/wiki/ABA_problem)
 
-    @param Tag  A type name used to distinguish lists and nodes, for
-                putting objects in multiple lists. If this parameter is
-                omitted, the default tag is used.
+  @param Tag  A type name used to distinguish lists and nodes, for
+  putting objects in multiple lists. If this parameter is
+  omitted, the default tag is used.
 
-    @ingroup vf_core intrusive
+  @ingroup vf_core intrusive
 */
 template <class Element, class Tag = LockFreeStackDefaultTag>
 class LockFreeStack : Uncopyable
@@ -50,13 +50,13 @@ public:
   {
   public:
     Node ()
-	{
-	}
+    {
+    }
 
-	explicit Node (Node* next) : m_next (next)
-	{
-	}
-  
+    explicit Node (Node* next) : m_next (next)
+    {
+    }
+
   private:
     friend class LockFreeStack;
 
