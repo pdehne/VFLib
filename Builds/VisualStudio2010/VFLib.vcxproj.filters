@@ -902,9 +902,6 @@
     <ClInclude Include="..\..\modules\vf_deprecated\containers\binary_tree.h">
       <Filter>VF Modules\vf_deprecated\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\modules\vf_deprecated\containers\Range.h">
-      <Filter>VF Modules\vf_deprecated\containers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\modules\vf_deprecated\gui\Button.h">
       <Filter>VF Modules\vf_deprecated\gui</Filter>
     </ClInclude>

@@ -538,7 +538,6 @@
     <ClInclude Include="..\..\modules\vf_db\vf_db.h" />
     <ClInclude Include="..\..\modules\vf_deprecated\containers\Array.h" />
     <ClInclude Include="..\..\modules\vf_deprecated\containers\binary_tree.h" />
-    <ClInclude Include="..\..\modules\vf_deprecated\containers\Range.h" />
     <ClInclude Include="..\..\modules\vf_deprecated\gui\Button.h" />
     <ClInclude Include="..\..\modules\vf_deprecated\gui\ColouredImageMaskFacade.h" />
     <ClInclude Include="..\..\modules\vf_deprecated\gui\Label.h" />

@@ -1,21 +1,21 @@
 /*============================================================================*/
 /*
-Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-See the file GNU_GPL_v2.txt for full licensing terms.
+  Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
+  See the file GNU_GPL_v2.txt for full licensing terms.
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by the Free
-Software Foundation; either version 2 of the License, or (at your option)
-any later version.
+  This program is free software; you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by the Free
+  Software Foundation; either version 2 of the License, or (at your option)
+  any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-details.
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+  details.
 
-You should have received a copy of the GNU General Public License along with
-this program; if not, write to the Free Software Foundation, Inc., 51
-Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  You should have received a copy of the GNU General Public License along with
+  this program; if not, write to the Free Software Foundation, Inc., 51
+  Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 /*============================================================================*/
 
@@ -25,17 +25,17 @@ Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "vf_SafeBool.h"
 
 /**
-A concise error report.
+  A concise error report.
 
-This lightweight but flexible class records lets you record the file and
-line where a recoverable error occurred, along with some optional human
-readable text.
+  This lightweight but flexible class records lets you record the file and
+  line where a recoverable error occurred, along with some optional human
+  readable text.
 
-A recoverable error can be passed along and turned into a non recoverable
-error by throwing the object: it's derivation from std::exception is
-fully compliant with the C++ exception interface.
+  A recoverable error can be passed along and turned into a non recoverable
+  error by throwing the object: it's derivation from std::exception is
+  fully compliant with the C++ exception interface.
 
-@ingroup vf_core
+  @ingroup vf_core
 */   
 class Error
   : public std::exception
@@ -44,9 +44,9 @@ class Error
 public:
   /** Numeric code.
 
-  This enumeration is useful when the caller needs to take different
-  actions depending on the failure. For example, trying again later if
-  a file is locked.
+    This enumeration is useful when the caller needs to take different
+    actions depending on the failure. For example, trying again later if
+    a file is locked.
   */
   enum Code
   {
