@@ -41,7 +41,7 @@ FPUFlags FPUFlags::getCurrent ()
   flags.setFlushDenormals  ((currentControl & _DN_FLUSH)      == _DN_FLUSH);
   flags.setInfinitySigned  ((currentControl & _IC_AFFINE)     == _IC_AFFINE);
 
-  Rounding rounding;
+  Rounding rounding = roundDown;
   switch (currentControl & _MCW_RC)
   {
   case _RC_CHOP: rounding = roundChop; break;
@@ -53,7 +53,7 @@ FPUFlags FPUFlags::getCurrent ()
   };
   flags.setRounding (rounding);
 
-  Precision precision;
+  Precision precision = bits64;
   switch (currentControl & _MCW_PC )
   {
   case _PC_64: precision = bits64; break;
