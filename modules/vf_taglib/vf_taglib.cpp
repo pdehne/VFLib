@@ -32,14 +32,9 @@
 #if JUCE_MSVC
 #pragma warning (push)
 #pragma warning (disable: 4018) // signed/unsigned comparison mismatch
-#pragma warning (disable: 4019) // signed/unsigned comparison mismatch
-#pragma warning (disable: 4127) // conditional expression is constant
-#pragma warning (disable: 4244) // conversion, possible loss of data
 #pragma warning (disable: 4309) // assignment truncates constant value
 #pragma warning (disable: 4310) // cast truncates constant value
-#pragma warning (disable: 4390) // empty controlled statement
-#pragma warning (disable: 4512) // assignment operator could not be generated
-#pragma warning (disable: 4996) // deprecated POSIX name
+#pragma warning (disable: 4244) // conversion, possible loss of data
 #endif
 
 //#define HAVE_ZLIB 0
