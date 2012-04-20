@@ -307,9 +307,6 @@
 
 #include "modules/juce_core/juce_core.h"
 
-// YIKES What is this doing here?? REMOVE ASAP
-using namespace juce;
-
 #ifdef _CRTDBG_MAP_ALLOC
   #pragma pop_macro("_aligned_msize")
   #pragma pop_macro("_aligned_offset_recalloc")
@@ -384,7 +381,7 @@ using juce::uint8;
 namespace vf
 {
 
-//using namespace juce;
+using namespace juce;
 
 #define vfassert jassert
 
