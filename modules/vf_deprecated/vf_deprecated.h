@@ -45,7 +45,6 @@ namespace vf
 {
 #include "containers/binary_tree.h"
 #include "containers/Array.h"
-#include "containers/Range.h"
 
 #include "memory/block_pool.h"
 #include "memory/destroy_n.h"
