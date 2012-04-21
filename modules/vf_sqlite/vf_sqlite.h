@@ -37,8 +37,6 @@
     
   SQLite is public domain software, visit http://sqlite.org
 
-  @todo Use native SQLite libraries if available (like iOS)
-
   @todo Allow a user provided SQLite library through AppConfig.h configuration.
 
   @defgroup vf_sqlite vf_sqlite
