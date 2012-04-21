@@ -288,9 +288,6 @@
     <ClCompile Include="..\..\modules\vf_sqlite\vf_sqlite.c">
       <Filter>VF Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_lua\lua\lua.c">
-      <Filter>VF Modules\vf_lua\lua\source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\modules\vf_lua\lua\ltm.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
