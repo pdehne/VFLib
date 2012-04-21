@@ -47,6 +47,22 @@
 
 #include "AppConfig.h"
 
+#include "modules/juce_core/system/juce_TargetPlatform.h"
+
+#ifndef VF_USE_NATIVE_SQLITE_IF_AVAILABLE
+#define VF_USE_NATIVE_SQLITE_IF_AVAILABLE 0
+#endif
+
+#if VF_USE_NATIVE_SQLITE_IF_AVAILABLE
+#if JUCE_IOS || JUCE_MAC
+#define VF_USE_NATIVE_SQLITE 1
+#endif
+#endif
+
+#if VF_USE_NATIVE_SQLITE
+#include <sqlite3.h>
+#else
 #include "sqlite/sqlite3.h"
+#endif
 
 #endif
