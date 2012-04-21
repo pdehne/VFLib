@@ -27,7 +27,7 @@
 
 #include "vf_sqlite.h"
 
-#if !VF_USE_NATIVE_SQLITE
+#if ! VF_USE_NATIVE_SQLITE
 
 #if JUCE_MSVC
 #pragma warning (push)

@@ -58,8 +58,7 @@
 #define VF_USE_FREETYPE 1
 #endif
 
-/** Use native sqlite on plattforms where it is available.
-
+/** Use native sqlite on platforms where it is available.
 */
 #ifndef VF_USE_NATIVE_SQLITE_IF_AVAILABLE
 #define VF_USE_NATIVE_SQLITE_IF_AVAILABLE 1
