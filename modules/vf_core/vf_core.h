@@ -231,8 +231,12 @@
     There are some VFLib specific build options that may be placed
     into this file. See the AppConfig.h provided with VFLib.
 */
-#include "AppConfig.h"
 
+/* AppConfig.h must be included before this file */
+
+/* Use sensible default configurations if they forgot
+   to append the necessary macros into their AppConfig.h.
+*/
 #ifndef VF_USE_BOOST
 #define VF_USE_BOOST      0
 #endif
@@ -244,6 +248,21 @@
 #ifndef VF_USE_FREETYPE
 #define VF_USE_FREETYPE   0
 #endif
+
+#ifndef VF_USE_NATIVE_FREETYPE
+#define VF_USE_NATIVE_FREETYPE 1
+#endif
+
+#ifndef VF_USE_NATIVE_SQLITE
+#define VF_USE_NATIVE_SQLITE 1
+#endif
+
+#ifndef VF_USE_LEAKCHECKED
+#define VF_USE_LEAKCHECKED JUCE_CHECK_MEMORY_LEAKS
+#endif
+
+/* Get this early so we can use it. */
+#include "modules/juce_core/system/juce_TargetPlatform.h"
 
 // Handy macro that lets pragma warnings be clicked in the output window
 // Usage: #pragma message(VF_LOC_"Advertise here!")
@@ -257,11 +276,57 @@
 #define VF_DEBUG JUCE_DEBUG // get the flag from Juce
 #endif
 
-// Enables leak checking
-//
-#ifndef VF_CHECK_LEAKS
-#define VF_CHECK_LEAKS JUCE_CHECK_MEMORY_LEAKS
+#if VF_USE_BOOST
+#include <boost/thread/tss.hpp>
 #endif
+
+#if JUCE_MSVC
+# include <crtdbg.h>
+# include <functional>
+#elif JUCE_IOS || JUCE_MAC
+# if VF_USE_BOOST
+#  include <boost/bind.hpp>
+#  include <boost/function.hpp>
+# else
+#  include <tr1/functional>
+# endif
+#else
+# include <bind>
+# include <functional>
+#endif
+
+#include <algorithm>
+#include <cfloat>
+#include <cmath>
+#include <cstdarg>
+#include <cstddef>
+#include <exception>
+#include <istream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <new>
+#include <numeric>
+#include <ostream>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <typeinfo>
+#include <vector>
+
+#include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <float.h>
+#include <locale.h>
+#include <math.h>
+#include <memory.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // Includes Juce
 
@@ -327,61 +392,6 @@ using juce::int64;
 using juce::uint64;
 using juce::uint32;
 using juce::uint8;
-
-#ifndef VF_USE_BOOST
-#define VF_USE_BOOST 0
-#endif
-
-#if VF_USE_BOOST
-#include <boost/thread/tss.hpp>
-#endif
-
-#if JUCE_MSVC
-#include <crtdbg.h>
-#include <functional>
-#endif
-
-#if JUCE_IOS || JUCE_MAC
-#if VF_USE_BOOST
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
-#else
-#include <tr1/functional>
-#endif
-#endif
-
-#include <algorithm>
-#include <cfloat>
-#include <cmath>
-#include <cstdarg>
-#include <cstddef>
-#include <exception>
-#include <istream>
-#include <iterator>
-#include <limits>
-#include <list>
-#include <map>
-#include <new>
-#include <numeric>
-#include <ostream>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <typeinfo>
-#include <vector>
-
-#include <assert.h>
-#include <ctype.h>
-#include <errno.h>
-#include <float.h>
-#include <locale.h>
-#include <math.h>
-#include <memory.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 namespace vf
 {

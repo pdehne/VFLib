@@ -31,7 +31,7 @@
 // Derived classes are automatically leak-checked on exit
 //
 
-#if VF_CHECK_LEAKS
+#if VF_USE_LEAKCHECKED
 
 class LeakCheckedBase
 {

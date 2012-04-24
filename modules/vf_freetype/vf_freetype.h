@@ -38,17 +38,15 @@
     @ingroup external
 */
 
-#include "AppConfig.h"
+#if VF_USE_NATIVE_FREETYPE
+  // Shared library
+  #include <ft2build.h>
+  #include <freetype/freetype.h>
+  #include <freetype/ftgasp.h>
 
-#if VF_USE_FREETYPE
-
-// Amalgamated
-#include "FreeTypeAmalgam/FreeTypeAmalgam.h"
-
-// Shared library
-//#include <ft2build.h>
-//#include <freetype/freetype.h>
-//#include <freetype/ftgasp.h>
+#else
+  // Amalgamated
+  #include "FreeTypeAmalgam/FreeTypeAmalgam.h"
 
 #endif
 

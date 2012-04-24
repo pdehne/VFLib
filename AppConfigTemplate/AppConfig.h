@@ -58,10 +58,22 @@
 #define VF_USE_FREETYPE 1
 #endif
 
+/** Use native FreeType on platforms where it is available.
+*/
+#ifndef VF_USE_NATIVE_FREETYPE
+#define VF_USE_NATIVE_FREETYPE 0
+#endif
+
 /** Use native sqlite on platforms where it is available.
 */
-#ifndef VF_USE_NATIVE_SQLITE_IF_AVAILABLE
-#define VF_USE_NATIVE_SQLITE_IF_AVAILABLE 1
+#ifndef VF_USE_NATIVE_SQLITE
+#define VF_USE_NATIVE_SQLITE 1
+#endif
+
+/** Use custom leak checking code.
+*/
+#ifndef VF_USE_LEAKCHECKED
+#define VF_USE_LEAKCHECKED 1
 #endif
 
 /*============================================================================*/

@@ -25,6 +25,8 @@
     @ingroup vf_gui
 */
 
+#include "AppConfig.h"
+
 #include "vf_gui.h"
 
 #if JUCE_MSVC

@@ -25,6 +25,8 @@
     @ingroup vf_db
 */
 
+#include "AppConfig.h"
+
 #include "vf_db.h"
 
 #include "../vf_sqlite/vf_sqlite.h"

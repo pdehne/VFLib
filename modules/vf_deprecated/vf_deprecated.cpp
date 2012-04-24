@@ -30,6 +30,8 @@
   @deprecated
 */
 
+#include "AppConfig.h"
+
 #include "vf_deprecated.h"
 
 #if JUCE_MSVC

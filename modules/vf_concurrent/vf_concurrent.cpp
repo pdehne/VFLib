@@ -25,6 +25,8 @@
     @ingroup vf_concurrent
 */
 
+#include "AppConfig.h"
+
 #include "vf_concurrent.h"
 
 #if JUCE_MSVC

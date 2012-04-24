@@ -45,8 +45,6 @@
     @ingroup external
 */
 
-#include "AppConfig.h"
-
 #include "../vf_lua/vf_lua.h"
 
 #include "luabridge/luabridge.hpp"

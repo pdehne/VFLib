@@ -25,9 +25,14 @@
     @ingroup vf_sqlite external
 */
 
+#include "AppConfig.h"
+
+// Prevents sqlite.h from being included, since it screws up the .c
+#define VF_SQLITE_PRIVATE_INTERFACE
+
 #include "vf_sqlite.h"
 
-#if ! VF_USE_NATIVE_SQLITE
+#if ! (VF_USE_NATIVE_SQLITE && VF_HAVE_NATIVE_SQLITE)
 
 #if JUCE_MSVC
 #pragma warning (push)

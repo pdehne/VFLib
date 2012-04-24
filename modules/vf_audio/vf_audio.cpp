@@ -25,6 +25,8 @@
     @ingroup vf_audio
 */
 
+#include "AppConfig.h"
+
 #include "vf_audio.h"
 
 #if JUCE_MSVC

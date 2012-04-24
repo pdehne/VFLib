@@ -41,8 +41,6 @@
     @ingroup external
 */
 
-#include "AppConfig.h"
-
 #include "lua/lua.hpp"
 
 #endif
