@@ -397,9 +397,10 @@ namespace vf
 
 #include "memory/vf_Uncopyable.h"
 
+#include "containers/vf_List.h"
 #include "containers/vf_LockFreeStack.h"
 #include "containers/vf_LockFreeQueue.h"
-#include "containers/vf_List.h"
+#include "containers/vf_SortedLookupTable.h"
 
 #include "diagnostic/vf_CatchAny.h"
 #include "diagnostic/vf_Debug.h"

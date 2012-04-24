@@ -486,6 +486,7 @@
     <ClInclude Include="..\..\modules\vf_core\containers\vf_List.h" />
     <ClInclude Include="..\..\modules\vf_core\containers\vf_LockFreeQueue.h" />
     <ClInclude Include="..\..\modules\vf_core\containers\vf_LockFreeStack.h" />
+    <ClInclude Include="..\..\modules\vf_core\containers\vf_SortedLookupTable.h" />
     <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_CatchAny.h" />
     <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_Debug.h" />
     <ClInclude Include="..\..\modules\vf_core\diagnostic\vf_Error.h" />

@@ -974,6 +974,9 @@
     <ClInclude Include="..\..\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h">
       <Filter>VF Modules\vf_taglib\TagLibAmalgam</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\modules\vf_core\containers\vf_SortedLookupTable.h">
+      <Filter>VF Modules\vf_core\containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />
