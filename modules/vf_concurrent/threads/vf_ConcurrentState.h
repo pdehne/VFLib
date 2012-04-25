@@ -165,13 +165,6 @@ public:
                T5 t5, T6 t6, T7 t7, T8 t8)
                : m_obj (t1, t2, t3, t4, t5, t6, t7, t8) { }
 
-  // Unlocked read access.
-  //
-  // DEPRECATED
-  Object const* getObject () const { return const_cast <Object*> (&m_obj); }
-  Object const& operator* () const { return *getObject(); }
-  Object const* operator->() const { return getObject(); }
-
 private:
   typedef ReadWriteMutex ReadWriteMutexType;
 
@@ -179,7 +172,10 @@ private:
   ReadWriteMutexType m_mutex;
 };
 
-/** Unlocked access to a ConcurrentState. */
+/** Unlocked access to a ConcurrentState.
+
+    Use sparingly.
+*/
 template <class Object>
 class ConcurrentState <Object>::UnlockedAccess : Uncopyable
 {
@@ -189,9 +185,9 @@ public:
   {
   }
 
-  Object const* getObject () const { return m_state.getObject (); }
-  Object const& operator* () const { return *getObject(); }
-  Object const* operator->() const { return getObject(); }
+  Object const& getObject () const { return m_state.m_obj; }
+  Object const& operator* () const { return getObject(); }
+  Object const* operator->() const { return &getObject(); }
 
 private:
   ConcurrentState const& m_state;
@@ -209,14 +205,14 @@ public:
   {
   }
 
-  /** Obtain a read only pointer to Object */
-  Object const* getObject () const { return m_state.getObject (); }
+  /** Obtain a read only reference to Object */
+  Object const& getObject () const { return m_state.m_obj; }
 
   /** Obtain a read only reference to Object */
-  Object const& operator* () const { return *getObject(); }
+  Object const& operator* () const { return getObject(); }
 
   /** Obtain a read only smart pointer to Object */
-  Object const* operator->() const { return getObject(); }
+  Object const* operator->() const { return &getObject(); }
 
 private:
   ConcurrentState const& m_state;
@@ -234,23 +230,23 @@ public:
   {
   }
 
-  /** Obtain a read only pointer to Object */
-  Object const* getObject () const { return m_state.getObject (); }
+  /** Obtain a read only reference to Object */
+  Object const* getObject () const { return m_state.m_obj; }
 
   /** Obtain a read only reference to Object */
-  Object const& operator* () const { return *getObject(); }
+  Object const& operator* () const { return getObject(); }
 
   /** Obtain a read only smart pointer to Object */
-  Object const* operator->() const { return getObject(); }
+  Object const* operator->() const { return &getObject(); }
 
   /** Obtain a read/write pointer to Object */
-  Object* getObject () { return &m_state.m_obj; }
+  Object& getObject () { return m_state.m_obj; }
 
   /** Obtain a read/write reference to Object */
-  Object& operator* () { return *getObject(); }
+  Object& operator* () { return getObject(); }
 
   /** Obtain a read/write smart pointer to Object */
-  Object* operator->() { return getObject(); }
+  Object* operator->() { return &getObject(); }
 
 private:
   ConcurrentState& m_state;
