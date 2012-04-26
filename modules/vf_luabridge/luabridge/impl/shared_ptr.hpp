@@ -12,7 +12,7 @@
 		size_t operator () (const void * const v) const
 		{
 			static __gnu_cxx::hash<unsigned int> H;
-			return H((unsigned int)v);
+			return H(uintptr_t(v));
 		}
 	};
 	typedef __gnu_cxx::hash_map<const void *, int, ptr_hash> refcounts_t;

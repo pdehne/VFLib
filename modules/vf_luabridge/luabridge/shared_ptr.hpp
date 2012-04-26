@@ -16,6 +16,7 @@
 #	pragma warning (pop)
 #else
 #	include <ext/hash_map>
+# include <stdint.h>
 #endif
 
 namespace luabridge
