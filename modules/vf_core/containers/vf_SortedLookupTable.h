@@ -138,7 +138,7 @@ public:
   {
     bool found;
 
-    std::pair <values_t::iterator, values_t::iterator> result =
+    std::pair <typename values_t::iterator, typename values_t::iterator> result =
       std::equal_range (m_values.begin (), m_values.end (), key, FindCompare ());
 
     if (result.first != result.second)
