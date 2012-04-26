@@ -183,6 +183,9 @@ Error session::open (String fileName, std::string options)
         Throw (err.fail (__FILE__, __LINE__, Error::badParameter));
       }
     }
+    /* Most native SQLite libraries don't have these experimental features.
+    */
+#if ! VF_USE_NATIVE_SQLITE
     else if( "cache" == key )
     {
       if( ! ( flags & ( SQLITE_OPEN_SHAREDCACHE | SQLITE_OPEN_PRIVATECACHE ) ) )
@@ -206,6 +209,7 @@ Error session::open (String fileName, std::string options)
         Throw (err.fail (__FILE__, __LINE__, Error::badParameter));
       }
     }
+#endif
     else if( "threads" == key )
     {
       if( ! ( flags & ( SQLITE_OPEN_NOMUTEX | SQLITE_OPEN_FULLMUTEX ) ) )
