@@ -52,7 +52,7 @@ class session::Sqlite3 : public ReferenceCountedSingleton <Sqlite3>
 private:
   friend class ReferenceCountedSingleton <Sqlite3>;
 
-  Sqlite3 () : ReferenceCountedSingleton (SingletonLifetime::persistAfterCreation)
+  Sqlite3 () : ReferenceCountedSingleton <Sqlite3> (SingletonLifetime::persistAfterCreation)
   {
     int threadSafe = sqlite3_threadsafe ();
 
