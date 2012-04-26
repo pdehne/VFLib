@@ -2,7 +2,7 @@
 
 ## (This is pre-release software)
 
-VFLib is a source code collection of individual \ref modules containing
+VFLib is a source code collection of individual **modules** containing
 functionality for a variety of applications, with an emphasis on building
 concurrent systems. VFLib requires [JUCE][3] (Jules' Utility Class
 Extensions), available from [Raw Material Software][4]. JUCE is available
@@ -42,7 +42,7 @@ additional prerequisites are marked in the documentation.
 ## External Modules
 
 Some modules bring in functionality provided by external libraries. For
-example, the \ref vf_bzip2 module provides the compression and decompression
+example, the **[vf_bzip2][vf_bzip2]** module provides the compression and decompression
 algorithms in [bZip2][7]. Usage of these external library modules is optional.
 They come with complete source code, as well as options for using either
 system or user provided variants of the external libraries: it is not
@@ -63,14 +63,15 @@ This library uses the same modularized organizational structure as JUCE. To
 use a module, first add a path to the list of includes searched by your
 development environment or project, which points to the VFLib directory. Then,
 add the single corresponding .c or .cpp file to your existing project which
-already uses JUCE. For example, to use the \ref vf_core module, add the file
+already uses JUCE. For example, to use the **[vf_core][vf_core]** module, add the file
 vf_core.cpp to your project. Some modules depend on other modules. All modules
-depend on \ref vf_core.
+depend on **[vf_core][vf_core]**.
 
 To use a module, include the appropriate header from within your source code.
-For example, to access classes in the \ref vf_concurrent module, use this:
+For example, to access classes in the **[vf_concurrent][vf_concurrent]** module,
+use this:
 
-  #include "modules/vf_concurrent/vf_concurrent.h"
+    #include "modules/vf_concurrent/vf_concurrent.h"
 
 ## AppConfig
 
@@ -136,3 +137,7 @@ Version 2.1][17] and the [Mozilla Public License][18].
 [16]: http://developer.kde.org/~wheeler/taglib.html "TagLib"
 [17]: http://www.gnu.org/licenses/lgpl-2.1.html "Gnu Lesser General Public License, version 2.1"
 [18]: http://www.mozilla.org/MPL/1.1/ "Mozilla Public License"
+
+[vf_bzip2]:      http://vinniefalco.github.com/VFLib/group__vf__bzip2.html "bZip2"
+[vf_core]:       http://vinniefalco.github.com/VFLib/group__vf__core.html "vf_core"
+[vf_concurrent]: http://vinniefalco.github.com/VFLib/group__vf__concurrent.html "vf_concurrent"

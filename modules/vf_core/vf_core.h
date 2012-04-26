@@ -102,7 +102,11 @@
   To use a module, include the appropriate header from within your source code.
   For example, to access classes in the \ref vf_concurrent module, use this:
 
-      #include "modules/vf_concurrent/vf_concurrent.h"
+  @code
+
+  #include "modules/vf_concurrent/vf_concurrent.h"
+
+  @endcode
 
   ## AppConfig
 
