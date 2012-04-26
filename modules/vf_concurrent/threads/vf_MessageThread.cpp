@@ -19,41 +19,20 @@
 */
 /*============================================================================*/
 
-/** Add this to get the @ref vf_concurrent module.
-
-    @file vf_concurrent.cpp
-    @ingroup vf_concurrent
-*/
-
-#include "AppConfig.h"
-
-#include "vf_concurrent.h"
-
-#if JUCE_MSVC
-#pragma warning (push)
-#pragma warning (disable: 4100) // unreferenced formal parmaeter
-#endif
-
-namespace vf
+MessageThread& MessageThread::getInstance ()
 {
-#if VF_USE_BOOST
-#include "memory/vf_FifoFreeStoreWithTLS.cpp"
-#else
-#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
-#endif
-#include "memory/vf_GlobalPagedFreeStore.cpp"
-#include "memory/vf_PagedFreeStore.cpp"
+  static MessageThread* instance = new MessageThread;
 
-#include "threads/vf_CallQueue.cpp"
-#include "threads/vf_ConcurrentObject.cpp"
-#include "threads/vf_GuiCallQueue.cpp"
-#include "threads/vf_Listeners.cpp"
-#include "threads/vf_ManualCallQueue.cpp"
-#include "threads/vf_MessageThread.h"
-#include "threads/vf_ReadWriteMutex.cpp"
-#include "threads/vf_ThreadWithCallQueue.cpp"
+  return *instance;
 }
 
-#if JUCE_MSVC
-#pragma warning (pop)
-#endif
+MessageThread::MessageThread ()
+{
+}
+
+MessageThread::~MessageThread ()
+{
+  close ();
+
+  synchronize ();
+}

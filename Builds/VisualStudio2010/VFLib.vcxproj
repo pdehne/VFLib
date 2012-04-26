@@ -81,6 +81,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -478,6 +482,7 @@
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GuiCallQueue.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_Listeners.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ManualCallQueue.h" />
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentObject.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentState.h" />

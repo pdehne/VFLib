@@ -19,41 +19,29 @@
 */
 /*============================================================================*/
 
-/** Add this to get the @ref vf_concurrent module.
+#ifndef VF_MESSAGETHREAD_VFHEADER
+#define VF_MESSAGETHREAD_VFHEADER
 
-    @file vf_concurrent.cpp
-    @ingroup vf_concurrent
+#include "vf_GuiCallQueue.h"
+
+/*============================================================================*/
+/**
+  A GuiCallQueue singleton for the message thread.
 */
-
-#include "AppConfig.h"
-
-#include "vf_concurrent.h"
-
-#if JUCE_MSVC
-#pragma warning (push)
-#pragma warning (disable: 4100) // unreferenced formal parmaeter
-#endif
-
-namespace vf
+class MessageThread
+  : public GuiCallQueue
+  , private DeletedAtShutdown
+  , LeakChecked <MessageThread>
 {
-#if VF_USE_BOOST
-#include "memory/vf_FifoFreeStoreWithTLS.cpp"
-#else
-#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
-#endif
-#include "memory/vf_GlobalPagedFreeStore.cpp"
-#include "memory/vf_PagedFreeStore.cpp"
+public:
+  /* This is not thread safe nor does it need to be, since by
+     definition we are only operating on the message thread.
+  */
+  static MessageThread& getInstance ();
 
-#include "threads/vf_CallQueue.cpp"
-#include "threads/vf_ConcurrentObject.cpp"
-#include "threads/vf_GuiCallQueue.cpp"
-#include "threads/vf_Listeners.cpp"
-#include "threads/vf_ManualCallQueue.cpp"
-#include "threads/vf_MessageThread.h"
-#include "threads/vf_ReadWriteMutex.cpp"
-#include "threads/vf_ThreadWithCallQueue.cpp"
-}
+private:
+  MessageThread ();
+  ~MessageThread ();
+};
 
-#if JUCE_MSVC
-#pragma warning (pop)
 #endif

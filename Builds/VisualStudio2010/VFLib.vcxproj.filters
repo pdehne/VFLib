@@ -501,6 +501,9 @@
     <ClCompile Include="..\..\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.cpp">
       <Filter>VF Modules\vf_taglib\TagLibAmalgam</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\modules\vf_db\api\backend.h">
@@ -976,6 +979,9 @@
     </ClInclude>
     <ClInclude Include="..\..\modules\vf_core\containers\vf_SortedLookupTable.h">
       <Filter>VF Modules\vf_core\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
