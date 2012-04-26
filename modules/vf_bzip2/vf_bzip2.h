@@ -38,10 +38,6 @@
     @ingroup external
 */
 
-#if VF_USE_BZIP2
-
 #include "bzip2/bzlib.h"
-
-#endif
 
 #endif

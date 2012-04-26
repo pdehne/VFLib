@@ -30,11 +30,11 @@
 
 //==============================================================================
 /**
-  @mainpage VFLib: A multipurpose class library built on JUCE.
+  @mainpage VFLib: A multipurpose library built on JUCE.
 
   @details
 
-  VFLib is a source code collection of individual modules containing
+  VFLib is a source code collection of individual \ref modules containing
   functionality for a variety of applications, with an emphasis on building
   concurrent systems. VFLib requires [JUCE][3] (Jules' Utility Class
   Extensions), available from [Raw Material Software][4]. JUCE is available
@@ -120,12 +120,15 @@
 
   ## License
 
-  Copyright (C) 2008 by Vinnie Falco.
+  Copyright (C) 2008 by Vinnie Falco (<a href="mailto:vinnie.falco@gmail.com">email</a>)
 
   Unless otherwise marked, files in VFLib are published under the [GNU General
-  Public License, Version 2][5].  This program is distributed in the hope that
-  it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  Public License][5].  This program is distributed in the hope that it will be
+  useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+  Commercial, closed source licenses for VFLib are available, contact the
+  author for details.
 
   Some files contain portions of these external projects, licensed separately:
 
@@ -134,10 +137,10 @@
 
   - Portions of the software are Copyright (C) 1996-2001, 2006 by [The FreeType
     Project][8]. All rights reserved. [FreeType][8] is distributed
-    under both the [GNU General Public License, Version 2][5], or the
+    under both the [GNU General Public License][5], or the
     [FreeType License][9].
 
-  - Portions of this software are Copyright (C) 1994–2012 [Lua.org][10], PUC-Rio.
+  - Portions of this software are Copyright (C) 1994-2012 [Lua.org][10], PUC-Rio.
     Lua is distributed under the terms of the [MIT License][11].
 
   - [Luabridge][12] is Copyrighted (C) 2007 by Nathan Reed. [Luabridge][12] is
@@ -171,11 +174,11 @@
   [17]: http://www.gnu.org/licenses/lgpl-2.1.html "Gnu Lesser General Public License, version 2.1"
   [18]: http://www.mozilla.org/MPL/1.1/ "Mozilla Public License"
 
-  @author <a href="http://vinniefalco.com">Vinnie Falco</a>
-  @version 0.1
-  @date 2008-2012
+  @author Vinnie Falco (<a href="mailto:vinnie.falco@gmail.com">email</a>)
+  @version 0.9.0 pre-release
+  @date 2008
   @copyright Copyright (C) 2008 by Vinnie Falco.
-  @copyright Provided by the GNU General Public License, Version 2
+  @copyright Provided under the [GNU General Public License][5]
 */
 
 /*============================================================================*/
@@ -188,6 +191,7 @@
 
   @defgroup internal internal
 */
+
 /*============================================================================*/
 /**
   External modules.
@@ -196,6 +200,7 @@
 
   @defgroup external external
 */
+
 /*============================================================================*/
 /**
   Core classes.
