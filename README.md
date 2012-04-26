@@ -19,13 +19,13 @@ All platforms supported by JUCE are also supported by VFLib. Currently these
 platforms include:
 
 - **Windows**: Applications and VST/RTAS/NPAPI/ActiveX plugins can be built 
-  using MS Visual Studio. The results are all fully compatible with Windows
-  XP, Vista or Windows 7.
+using MS Visual Studio. The results are all fully compatible with Windows
+XP, Vista or Windows 7.
 
 - **Mac OS X**: Applications and VST/AudioUnit/RTAS/NPAPI plugins with Xcode.
 
 - **GNU/Linux**: Applications and plugins can be built for any kernel 2.6 or
-  later.
+later.
 
 - **iOS**: Native iPhone and iPad apps.
 
@@ -70,7 +70,7 @@ depend on \ref vf_core.
 To use a module, include the appropriate header from within your source code.
 For example, to access classes in the \ref vf_concurrent module, use this:
 
-    #include "modules/vf_concurrent/vf_concurrent.h"
+  #include "modules/vf_concurrent/vf_concurrent.h"
 
 ## AppConfig
 
@@ -82,41 +82,42 @@ convention).
 
 ## License
 
-Copyright (C) 2008 by Vinnie Falco (<a href="mailto:vinnie.falco@gmail.com">email</a>)
+Copyright (C) 2008 by Vinnie Falco ([email][0])
 
 Unless otherwise marked, files in VFLib are published under the [GNU General
 Public License][5].  This program is distributed in the hope that it will be
 useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-Commercial, closed source licenses for VFLib are available, contact the
-author for details.
+Commercial, closed source licenses for VFLib are available, [contact the
+author][0] for details.
 
 Some files contain portions of these external projects, licensed separately:
 
 - [bZip2][7] is Copyright (C) 1996-2010 Julian R Seward. All rights
-  reserved. See the corresponding file LICENSE for licensing terms.
+reserved. See the corresponding file LICENSE for licensing terms.
 
 - Portions of the software are Copyright (C) 1996-2001, 2006 by [The FreeType
-  Project][8]. All rights reserved. [FreeType][8] is distributed
-  under both the [GNU General Public License][5], or the
-  [FreeType License][9].
+Project][8]. All rights reserved. [FreeType][8] is distributed
+under both the [GNU General Public License][5], or the
+[FreeType License][9].
 
 - Portions of this software are Copyright (C) 1994-2012 [Lua.org][10], PUC-Rio.
-  Lua is distributed under the terms of the [MIT License][11].
+Lua is distributed under the terms of the [MIT License][11].
 
 - [Luabridge][12] is Copyrighted (C) 2007 by Nathan Reed. [Luabridge][12] is
-  distributed under the terms of the [MIT License][11].
+distributed under the terms of the [MIT License][11].
 
 - [Soci][13] is Copyright (C) 2004-2008 Maciej Sobczak, Stephen Hutton, and
-  various others noted in the corresponding source files. Soci is distributed
-  under the [Boost Software License, Version 1.0][14].
+various others noted in the corresponding source files. Soci is distributed
+under the [Boost Software License, Version 1.0][14].
 
 - [SQLite][15], placed in the public domain.
 
 - [TagLib][16] is distributed under both the [GNU Lesser General Public License,
 Version 2.1][17] and the [Mozilla Public License][18].
 
+[0]: mailto:vinnie.falco@gmail.com "Vinnie Falco (Email)"
 [1]: https://github.com/vinniefalco/VFLib "VFLib Project"
 [2]: http://vinniefalco.github.com/VFLib/ "VFLib Documentation"
 [3]: http://rawmaterialsoftware.com/juce.php "JUCE"

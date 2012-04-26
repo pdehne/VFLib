@@ -114,15 +114,15 @@
 
   ## License
 
-  Copyright (C) 2008 by Vinnie Falco (<a href="mailto:vinnie.falco@gmail.com">email</a>)
+  Copyright (C) 2008 by Vinnie Falco ([email][0])
 
   Unless otherwise marked, files in VFLib are published under the [GNU General
   Public License][5].  This program is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-  Commercial, closed source licenses for VFLib are available, contact the
-  author for details.
+  Commercial, closed source licenses for VFLib are available, [contact the
+  author][0] for details.
 
   Some files contain portions of these external projects, licensed separately:
 
@@ -149,6 +149,7 @@
   - [TagLib][16] is distributed under both the [GNU Lesser General Public License,
   Version 2.1][17] and the [Mozilla Public License][18].
 
+  [0]: mailto:vinnie.falco@gmail.com "Vinnie Falco (Email)"
   [1]: https://github.com/vinniefalco/VFLib "VFLib Project"
   [2]: http://vinniefalco.github.com/VFLib/ "VFLib Documentation"
   [3]: http://rawmaterialsoftware.com/juce.php "JUCE"
