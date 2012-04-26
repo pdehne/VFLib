@@ -113,7 +113,7 @@
              a thread of execution to acquire write access while it already has
     read access. Such an attempt will result in undefined behavior. Calling into
     unknown code while holding a lock can cause deadlock. See
-    \ref CallQueue::queue().
+    @ref CallQueue::queue().
 
     @ingroup vf_concurrent
 */

@@ -103,9 +103,9 @@ private:
   The noise can be pink or white.
 
   @todo Refactor to produce only white noise. Create a new AudioSource called
-        *PinkNoiseFilter* that can be chained onto another AudioSource. Create
-        *PinkNoiseAudioSource* as a composition of NoiseAudioSource and
-        *PinkNoiseFilter*.
+        PinkNoiseFilter that can be chained onto another AudioSource. Create
+        PinkNoiseAudioSource as a composition of NoiseAudioSource and
+        PinkNoiseFilter.
 
   @ingroup vf_audio
 */

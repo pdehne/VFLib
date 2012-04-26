@@ -195,41 +195,41 @@ public:
   class Target : public juce::DragAndDropTarget
   {
   public:
-    /** @param data The DragAndDropData.
+/** @param data The DragAndDropData.
         
-        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+    @param dragSourceDetails The original DragAndDropTarget::SourceDetails
       
-        @return \c true if we want to receive further drag notifications.
-    */
+    @return \c true if we want to receive further drag notifications.
+*/
     virtual bool isInterestedInDragSource (DragAndDropData const& data,
                                            DragAndDropTarget::SourceDetails const& dragSourceDetails)
       { return false; }
 
-    /** @param data The DragAndDropData.
+/** @param data The DragAndDropData.
         
-        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
-    */
+    @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+*/
     virtual void itemDragEnter (DragAndDropData const& data,
                                 DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
-    /** @param data The DragAndDropData.
+/** @param data The DragAndDropData.
         
-        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
-    */
+    @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+*/
     virtual void itemDragMove (DragAndDropData const& data,
                                DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
-    /** @param data The DragAndDropData.
+/** @param data The DragAndDropData.
         
-        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
-    */
+    @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+*/
     virtual void itemDragExit (DragAndDropData const& data,
                                DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 
-    /** @param data The DragAndDropData.
+/** @param data The DragAndDropData.
         
-        @param dragSourceDetails The original DragAndDropTarget::SourceDetails
-    */
+    @param dragSourceDetails The original DragAndDropTarget::SourceDetails
+*/
     virtual void itemDropped (DragAndDropData const& data,
                               DragAndDropTarget::SourceDetails const& dragSourceDetails) { }
 

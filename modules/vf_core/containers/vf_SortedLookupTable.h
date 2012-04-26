@@ -24,28 +24,28 @@
 
 //==============================================================================
 /**
-    Sorted map for fast lookups.
+  Sorted map for fast lookups.
 
-    This container is optimized for a data set with fixed elements.
+  This container is optimized for a data set with fixed elements.
 
-    SchemaType obeys this concept:
+  SchemaType obeys this concept:
 
-    @code
+  @code
 
-    struct SchemaType
-    {
-      typename KeyType;
-      typename ValueType;
+  struct SchemaType
+  {
+    typename KeyType;
+    typename ValueType;
 
-      // Retrieve the key for a specified value.
-      KeyType getKey (Value const& value);
-    };
+    // Retrieve the key for a specified value.
+    KeyType getKey (Value const& value);
+  };
 
-    @endcode
+  @endcode
 
-    To use the table, reserve space with reserveSpaceForValues() if the number
-    of elements is known ahead of time. Then, call insert() for  all the your
-    elements. Call prepareForLookups() once then call lookupValueByKey () 
+  To use the table, reserve space with reserveSpaceForValues() if the number
+  of elements is known ahead of time. Then, call insert() for  all the your
+  elements. Call prepareForLookups() once then call lookupValueByKey () 
 */
 template <class SchemaType>
 class SortedLookupTable

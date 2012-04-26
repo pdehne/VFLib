@@ -51,9 +51,10 @@
 namespace db {
 
 /*============================================================================*/
-/** A session for the embedded database.
+/**
+  @brief A session for the embedded database.
 
-    @ingroup vf_db
+  @ingroup vf_db
 */
 class session
 {
@@ -66,22 +67,25 @@ public:
   explicit session (session const& deferredClone);
   Error clone ();
 
-  /** Open a database.
+/**
+  Open a database.
+      
+  The database at the specified path is opened. The connection string is
+  a set of "{key}={value}" pairs separated with the pipe symbol ('|').
+  Choices for key and value are:
 
-      The database at the specified path is opened. The connection string is
-      a set of "{key}={value}" pairs separated with the pipe symbol ('|').
-      Choices for key and value are:
+  @code
 
-      @code
-      timeout = (number) || "infinite"
+  timeout = (number) || "infinite"
 
-      mode    = "read" || "write" || "create"
+  mode    = "read" || "write" || "create"
 
-      cache   = "shared" || "private"
+  cache   = "shared" || "private"
 
-      threads = "single" || "multi"
-      @endcode
-  */
+  threads = "single" || "multi"
+
+  @endcode
+*/
   Error open (String fileName,
               std::string options = "timeout=infinite|mode=create|threads=multi");
   

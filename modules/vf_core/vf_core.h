@@ -34,7 +34,7 @@
 
   @details
 
-  VFLib is a source code collection of individual \ref modules containing
+  VFLib is a source code collection of individual @ref modules containing
   functionality for a variety of applications, with an emphasis on building
   concurrent systems. VFLib requires [JUCE][3] (Jules' Utility Class
   Extensions), available from [Raw Material Software][4]. JUCE is available
@@ -74,7 +74,7 @@
   ## External Modules
 
   Some modules bring in functionality provided by external libraries. For
-  example, the \ref vf_bzip2 module provides the compression and decompression
+  example, the @ref vf_bzip2 module provides the compression and decompression
   algorithms in [bZip2][7]. Usage of these external library modules is optional.
   They come with complete source code, as well as options for using either
   system or user provided variants of the external libraries: it is not
@@ -95,11 +95,11 @@
   use a module, first add a path to the list of includes searched by your
   development environment or project, which points to the VFLib directory. Then,
   add the single corresponding .c or .cpp file to your existing project which
-  already uses JUCE. For example, to use the \ref vf_core module, add the file
+  already uses JUCE. For example, to use the @ref vf_core module, add the file
   vf_core.cpp to your project. Some modules depend on other modules.
 
   To use a module, include the appropriate header from within your source code.
-  For example, to access classes in the \ref vf_concurrent module, use this:
+  For example, to access classes in the @ref vf_concurrent module, use this:
 
   @code
 

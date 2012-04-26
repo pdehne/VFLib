@@ -30,14 +30,14 @@
 
 /*============================================================================*/
 /**
-    An embedded database wrapper with an intuitive, type-safe interface.
+  An embedded database wrapper with an intuitive, type-safe interface.
 
-    This collection of classes let's you access embedded SQLite databases
-    using C++ syntax that is very similar to regular SQL.
+  This collection of classes let's you access embedded SQLite databases
+  using C++ syntax that is very similar to regular SQL.
 
-    This module requires the @ref vf_sqlite external module.
+  This module requires the @ref vf_sqlite external module.
 
-    @defgroup vf_db vf_db
+  @defgroup vf_db vf_db
 */
 
 #include "../vf_core/vf_core.h"
@@ -50,11 +50,11 @@ namespace vf {
 namespace db {
 namespace detail {
 class prepare_temp_type;
-class ref_counted_statement;		// statement.h
-class statement_imp;				// into_type.h, use_type.h
+class ref_counted_statement; // statement.h
+class statement_imp;         // into_type.h, use_type.h
 }
-class blob;							// exchange_traits.h
-class session;						// statement.h
+class blob;                  // exchange_traits.h
+class session;               // statement.h
 }
 }
 
