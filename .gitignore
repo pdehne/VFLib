@@ -1,8 +1,6 @@
-docs/html
-
+Documentation
 Builds/Xcode4/VFLib.xcodeproj/xcuserdata
 Builds/Xcode4/VFLib.xcodeproj/project.xcworkspace
-
 Builds/VisualStudio2010/Debug
 Builds/VisualStudio2010/Release
 Builds/VisualStudio2010/*.user

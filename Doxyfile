@@ -684,52 +684,52 @@ WARN_LOGFILE           =
 INPUT = 
 
 INPUT += \
-  ../modules/vf_audio/ \
-  ../modules/vf_audio/buffers/ \
-  ../modules/vf_audio/sources/
+  modules/vf_audio/ \
+  modules/vf_audio/buffers/ \
+  modules/vf_audio/sources/
 
 INPUT += \
-  ../modules/vf_concurrent/ \
-  ../modules/vf_concurrent/memory/ \
-  ../modules/vf_concurrent/threads/
+  modules/vf_concurrent/ \
+  modules/vf_concurrent/memory/ \
+  modules/vf_concurrent/threads/
 
 INPUT += \
-  ../modules/vf_deprecated/ \
-  ../modules/vf_deprecated/containers/ \
-  ../modules/vf_deprecated/gui/ \
-  ../modules/vf_deprecated/memory/
+  modules/vf_deprecated/ \
+  modules/vf_deprecated/containers/ \
+  modules/vf_deprecated/gui/ \
+  modules/vf_deprecated/memory/
 
 INPUT += \
-  ../modules/vf_core/ \
-  ../modules/vf_core/containers/ \
-  ../modules/vf_core/diagnostic/ \
-  ../modules/vf_core/events/ \
-  ../modules/vf_core/functor/ \
-  ../modules/vf_core/math/ \
-  ../modules/vf_core/memory/ \
-  ../modules/vf_core/threads/
+  modules/vf_core/ \
+  modules/vf_core/containers/ \
+  modules/vf_core/diagnostic/ \
+  modules/vf_core/events/ \
+  modules/vf_core/functor/ \
+  modules/vf_core/math/ \
+  modules/vf_core/memory/ \
+  modules/vf_core/threads/
 
 INPUT += \
-  ../modules/vf_db/ \
-  ../modules/vf_db/api/
+  modules/vf_db/ \
+  modules/vf_db/api/
 
 INPUT += \
-  ../modules/vf_gui/ \
-  ../modules/vf_gui/components/ \
-  ../modules/vf_gui/graphics/ \
-  ../modules/vf_gui/layout/ \
-  ../modules/vf_gui/mouse/
+  modules/vf_gui/ \
+  modules/vf_gui/components/ \
+  modules/vf_gui/graphics/ \
+  modules/vf_gui/layout/ \
+  modules/vf_gui/mouse/
 
 INPUT += \
-  ../modules/vf_bzip2/ \
-  ../modules/vf_freetype/ \
-  ../modules/vf_lua/ \
-  ../modules/vf_luabridge/ \
-  ../modules/vf_sqlite/ \
-  ../modules/vf_taglib/
+  modules/vf_bzip2/ \
+  modules/vf_freetype/ \
+  modules/vf_lua/ \
+  modules/vf_luabridge/ \
+  modules/vf_sqlite/ \
+  modules/vf_taglib/
 
 INPUT += \
-  ../AppConfigTemplate/AppConfig.h
+  AppConfigTemplate/AppConfig.h
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -789,7 +789,7 @@ EXCLUDE_SYMBOLS        =
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = ../
+EXAMPLE_PATH           = ./
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -935,7 +935,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be 
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = html
+HTML_OUTPUT            = Documentation
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for 
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank 
@@ -1614,8 +1614,7 @@ SKIP_FUNCTION_MACROS   = YES
 # NOT include the path). If a tag file is not located in the directory in which 
 # doxygen is run, you must also specify the path to the tagfile here.
 
-TAGFILES               =
-TAGFILES              += juce.tag=http://www.rawmaterialsoftware.com/juce/api/
+TAGFILES = tags/juce.tag=http://www.rawmaterialsoftware.com/juce/api/
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create 
 # a tag file that is based on the input files it reads.
