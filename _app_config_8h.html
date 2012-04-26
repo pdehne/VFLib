@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="dir_922e74d0d613dd233df4aae4fc343af7.html">AppConfigTemplate</a>      </li>
+      <li class="navelem"><a class="el" href="dir_d97a2c0ee1606c5798c90756a4ecd9e9.html">AppConfigTemplate</a>      </li>
     </ul>
   </div>
 </div>
@@ -112,12 +112,22 @@ Defines</h2></td></tr>
 <tr class="memitem:a00b356de0ad70ddff464d305c0b37147"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#a00b356de0ad70ddff464d305c0b37147">VF_USE_BOOST</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:a00b356de0ad70ddff464d305c0b37147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate features that use Boost.  <a href="#a00b356de0ad70ddff464d305c0b37147"></a><br/></td></tr>
 <tr class="memitem:a7d0c96f2daf8f3e5e4b13cad977dca9a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#a7d0c96f2daf8f3e5e4b13cad977dca9a">VF_USE_BZIP2</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:a7d0c96f2daf8f3e5e4b13cad977dca9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate features that use BZip2.  <a href="#a7d0c96f2daf8f3e5e4b13cad977dca9a"></a><br/></td></tr>
+<tr class="memdesc:a7d0c96f2daf8f3e5e4b13cad977dca9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate features that use bZip2.  <a href="#a7d0c96f2daf8f3e5e4b13cad977dca9a"></a><br/></td></tr>
 <tr class="memitem:a2923a28e61dbd2cf83afbf8f7bf5b2f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#a2923a28e61dbd2cf83afbf8f7bf5b2f1">VF_USE_FREETYPE</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:a2923a28e61dbd2cf83afbf8f7bf5b2f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate features that use FreeType.  <a href="#a2923a28e61dbd2cf83afbf8f7bf5b2f1"></a><br/></td></tr>
+<tr class="memitem:a228de71138f1f65a8981f77c0ee1dc07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a228de71138f1f65a8981f77c0ee1dc07"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#a228de71138f1f65a8981f77c0ee1dc07">VF_USE_NATIVE_FREETYPE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a228de71138f1f65a8981f77c0ee1dc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use native FreeType on platforms where it is available. <br/></td></tr>
+<tr class="memitem:a89e785ae193464871dd9da5bfe9e36d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89e785ae193464871dd9da5bfe9e36d8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#a89e785ae193464871dd9da5bfe9e36d8">VF_USE_NATIVE_SQLITE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a89e785ae193464871dd9da5bfe9e36d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use native sqlite on platforms where it is available. <br/></td></tr>
+<tr class="memitem:ae5840fcf450bfea8ed8d578d75d6304d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5840fcf450bfea8ed8d578d75d6304d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_app_config_8h.html#ae5840fcf450bfea8ed8d578d75d6304d">VF_USE_LEAKCHECKED</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ae5840fcf450bfea8ed8d578d75d6304d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use custom leak checking code. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Append these additional conditional compilation directives to your already existing <a class="el" href="_app_config_8h.html" title="Additional configuration options.">AppConfig.h</a> to customize the available compilations options. </p>
+<div class="textblock"><p>Append these additional conditional compilation directives to your already existing <a class="el" href="_app_config_8h.html" title="Additional configuration options.">AppConfig.h</a> to customize the available compilations options.</p>
+<dl class="section note"><dt>Note:</dt><dd><a class="el" href="_app_config_8h.html" title="Additional configuration options.">AppConfig.h</a> must be included before any VFLib or JUCE headers. </dd></dl>
 </div><hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a00b356de0ad70ddff464d305c0b37147"></a>
 <div class="memitem">
@@ -165,7 +175,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 15 2012 02:13:43 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 21:09:07 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

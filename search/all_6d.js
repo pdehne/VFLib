@@ -79,6 +79,7 @@ var searchData=
   ['messagemanagerlock',['MessageManagerLock',['http://www.rawmaterialsoftware.com/juce/api/classMessageManagerLock.html',1,'MessageManagerLock'],['http://www.rawmaterialsoftware.com/juce/api/classMessageManagerLock.html#a294fab36d4e9fe48cc2b52b36974111c',1,'MessageManagerLock::MessageManagerLock(Thread *threadToCheckForExitSignal=nullptr)'],['http://www.rawmaterialsoftware.com/juce/api/classMessageManagerLock.html#ac6da971e61e376e8216da1f39ccb5582',1,'MessageManagerLock::MessageManagerLock(ThreadPoolJob *jobToCheckForExitSignal)']]],
   ['messagereceived',['messageReceived',['http://www.rawmaterialsoftware.com/juce/api/classInterprocessConnection.html#a69549dd1bda0584d212940d3faf7457a',1,'InterprocessConnection']]],
   ['messages',['messages',['http://www.rawmaterialsoftware.com/juce/api/structUnitTestRunner_1_1TestResult.html#ae94f7a271e7f4a5725939036156595bb',1,'UnitTestRunner::TestResult']]],
+  ['messagethread',['MessageThread',['../class_message_thread.html',1,'']]],
   ['metadatavalues',['metadataValues',['http://www.rawmaterialsoftware.com/juce/api/classAudioFormatReader.html#a8dfe48ed0e171928185c716811f5ecdb',1,'AudioFormatReader']]],
   ['methodfunction',['MethodFunction',['http://www.rawmaterialsoftware.com/juce/api/classvar.html#a97719c009a2b23429bd0d88fbb2066ca',1,'var']]],
   ['middlebuttonmodifier',['middleButtonModifier',['http://www.rawmaterialsoftware.com/juce/api/classModifierKeys.html#acdd2a85defa6a705d74e1a63d193678ba332cb354a7b1cb322e97c6678d94ee22',1,'ModifierKeys']]],

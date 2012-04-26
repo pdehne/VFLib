@@ -40,6 +40,7 @@ var searchData=
   ['smallestfloattype',['SmallestFloatType',['http://www.rawmaterialsoftware.com/juce/api/structTypeHelpers_1_1SmallestFloatType.html',1,'']]],
   ['smallestfloattype_3c_20double_20_3e',['SmallestFloatType< double >',['http://www.rawmaterialsoftware.com/juce/api/structTypeHelpers_1_1SmallestFloatType_3_01double_01_4.html',1,'']]],
   ['softwareimagetype',['SoftwareImageType',['http://www.rawmaterialsoftware.com/juce/api/classSoftwareImageType.html',1,'']]],
+  ['sortedlookuptable',['SortedLookupTable',['../class_sorted_lookup_table.html',1,'']]],
   ['sortedset',['SortedSet',['http://www.rawmaterialsoftware.com/juce/api/classSortedSet.html',1,'']]],
   ['sortedset_3c_20anchor_20_3e',['SortedSet< Anchor >',['http://www.rawmaterialsoftware.com/juce/api/classSortedSet.html',1,'']]],
   ['sortedset_3c_20state_20_3e',['SortedSet< State >',['http://www.rawmaterialsoftware.com/juce/api/classSortedSet.html',1,'']]],

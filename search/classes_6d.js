@@ -19,6 +19,7 @@ var searchData=
   ['messagelistener',['MessageListener',['http://www.rawmaterialsoftware.com/juce/api/classMessageListener.html',1,'']]],
   ['messagemanager',['MessageManager',['http://www.rawmaterialsoftware.com/juce/api/classMessageManager.html',1,'']]],
   ['messagemanagerlock',['MessageManagerLock',['http://www.rawmaterialsoftware.com/juce/api/classMessageManagerLock.html',1,'']]],
+  ['messagethread',['MessageThread',['../class_message_thread.html',1,'']]],
   ['midibuffer',['MidiBuffer',['http://www.rawmaterialsoftware.com/juce/api/classMidiBuffer.html',1,'']]],
   ['midieventholder',['MidiEventHolder',['http://www.rawmaterialsoftware.com/juce/api/classMidiMessageSequence_1_1MidiEventHolder.html',1,'MidiMessageSequence']]],
   ['midifile',['MidiFile',['http://www.rawmaterialsoftware.com/juce/api/classMidiFile.html',1,'']]],
