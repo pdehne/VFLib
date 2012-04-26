@@ -46,6 +46,8 @@
   When the JUCE application terminates, or when the JUCE GUI is shutdown,
   the MessageThread object will be automatically cleaned up, no further action
   is required.
+
+  @ingroup vf_concurrent
 */
 class MessageThread
   : public GuiCallQueue

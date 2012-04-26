@@ -49,7 +49,7 @@ namespace vf
 #include "threads/vf_GuiCallQueue.cpp"
 #include "threads/vf_Listeners.cpp"
 #include "threads/vf_ManualCallQueue.cpp"
-#include "threads/vf_MessageThread.h"
+#include "threads/vf_MessageThread.cpp"
 #include "threads/vf_ReadWriteMutex.cpp"
 #include "threads/vf_ThreadWithCallQueue.cpp"
 }
