@@ -99,14 +99,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 
 <p>A <a class="el" href="class_gui_call_queue.html" title="A CallQueue handled by the Juce message thread (gui).">GuiCallQueue</a> singleton for the message thread.  
-</p>
+ <a href="class_message_thread.html#details">More...</a></p>
 
 <p><code>#include &quot;vf_MessageThread.h&quot;</code></p>
 
 <p>Inherits <a class="el" href="class_gui_call_queue.html">GuiCallQueue</a>, <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classDeletedAtShutdown.html">DeletedAtShutdown</a>, and LeakChecked&lt; Object &gt;.</p>
 
 <p><a href="class_message_thread-members.html">List of all members.</a></p>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>This convenient singleton lets you easily provide a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> for synchronizing on the message thread (the thread of execution that operates the Graphical User Interface / GUI). The <code>getInstance()</code> member provides the a <a class="el" href="class_gui_call_queue.html" title="A CallQueue handled by the Juce message thread (gui).">GuiCallQueue</a>:</p>
+<div class="fragment"><pre class="fragment">  <span class="keywordtype">void</span> performedOnMessageThread ()
+  {
+  }
+
+  MessageThread::getInstance().<a class="code" href="class_call_queue.html#a7cbce7a131504706ba6c36bcab846f87" title="Add a function call and possibly synchronize.">call</a> (&amp;performedOnMessageThread);
+</pre></div><p>When the JUCE application terminates, or when the JUCE GUI is shutdown, the <a class="el" href="class_message_thread.html" title="A GuiCallQueue singleton for the message thread.">MessageThread</a> object will be automatically cleaned up, no further action is required. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_MessageThread.h</li>
 <li>vf_MessageThread.cpp</li>
 </ul>
@@ -114,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 22:08:30 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

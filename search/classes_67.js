@@ -5,6 +5,7 @@ var searchData=
   ['genericscopedreadlock',['GenericScopedReadLock',['../struct_generic_scoped_read_lock.html',1,'']]],
   ['genericscopedtrylock',['GenericScopedTryLock',['http://www.rawmaterialsoftware.com/juce/api/classGenericScopedTryLock.html',1,'']]],
   ['genericscopedunlock',['GenericScopedUnlock',['http://www.rawmaterialsoftware.com/juce/api/classGenericScopedUnlock.html',1,'']]],
+  ['genericscopedwritelock',['GenericScopedWriteLock',['../struct_generic_scoped_write_lock.html',1,'']]],
   ['gifimageformat',['GIFImageFormat',['http://www.rawmaterialsoftware.com/juce/api/classGIFImageFormat.html',1,'']]],
   ['globalfifofreestore',['GlobalFifoFreeStore',['../class_global_fifo_free_store.html',1,'']]],
   ['globalpagedfreestore',['GlobalPagedFreeStore',['../class_global_paged_free_store.html',1,'']]],

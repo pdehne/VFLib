@@ -40,6 +40,7 @@ var searchData=
   ['readstring',['readString',['http://www.rawmaterialsoftware.com/juce/api/classBufferedInputStream.html#a461344690c07cf3bb08ef4965da05d03',1,'BufferedInputStream::readString()'],['http://www.rawmaterialsoftware.com/juce/api/classInputStream.html#abff18ad6e416d45f19d347abd3433665',1,'InputStream::readString()']]],
   ['readvariablelengthval',['readVariableLengthVal',['http://www.rawmaterialsoftware.com/juce/api/classMidiMessage.html#a7a9fc08ca4beba20e50afaf91c0c316b',1,'MidiMessage']]],
   ['readwritelock',['ReadWriteLock',['http://www.rawmaterialsoftware.com/juce/api/classReadWriteLock.html#ac4d03ea1fd3a24c1813492b8487134af',1,'ReadWriteLock']]],
+  ['readwritemutex',['ReadWriteMutex',['../class_read_write_mutex.html#a1d4144fae4cbcc3ece57fe15f4f8021c',1,'ReadWriteMutex']]],
   ['realloc',['realloc',['http://www.rawmaterialsoftware.com/juce/api/classHeapBlock.html#a75f22feaa5bb7278e6a6234ec5d19778',1,'HeapBlock']]],
   ['reallycontains',['reallyContains',['http://www.rawmaterialsoftware.com/juce/api/classComponent.html#a885b5316a36ac7123bf0b5fd3032ad28',1,'Component']]],
   ['recalculatecoords',['recalculateCoords',['http://www.rawmaterialsoftware.com/juce/api/classDrawableShape_1_1RelativeFillType.html#a076d32c0ce212574c253038bc39d7e5f',1,'DrawableShape::RelativeFillType']]],

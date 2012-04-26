@@ -98,44 +98,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Multiple consumer, single producer (MCSP) synchronization primitive.  
- <a href="struct_generic_scoped_read_lock.html#details">More...</a></p>
+<p>Scoped read lock for <a class="el" href="class_read_write_mutex.html" title="Multiple consumer, single producer (MCSP) synchronization primitive.">ReadWriteMutex</a>.  
+</p>
 
 <p><code>#include &quot;vf_ReadWriteMutex.h&quot;</code></p>
 
 <p>Inherits Uncopyable.</p>
 
 <p><a href="struct_generic_scoped_read_lock-members.html">List of all members.</a></p>
-<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class LockType&gt;<br/>
-struct GenericScopedReadLock&lt; LockType &gt;</h3>
+<h3>template&lt;class LockType&gt;<br/>
+ struct GenericScopedReadLock&lt; LockType &gt;</h3>
 
-<p>This is an optimized lock for the multiple reader, single writer scenario. It provides only a subset of features of the more general traditional read/write lock. Specifically, these rules apply:</p>
-<ul>
-<li>A caller cannot hold a read lock while acquiring a write lock.</li>
-</ul>
-<ul>
-<li>Write locks are only recursive with respect to write locks.</li>
-</ul>
-<ul>
-<li>Read locks are only recursive with respect to read locks.</li>
-</ul>
-<ul>
-<li>A write lock cannot be downgraded.</li>
-</ul>
-<ul>
-<li>Writes are preferenced over reads.</li>
-</ul>
-<p>For real-time applications, these restrictions are often not an issue.</p>
-<p>The implementation is wait-free in the fast path: acquiring read access for a lock without contention - just one interlocked increment! </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>vf_ReadWriteMutex.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 22:08:30 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

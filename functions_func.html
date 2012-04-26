@@ -246,11 +246,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>endOncePerSecond()
 : <a class="el" href="class_once_per_second.html#a44f31fe12817d7c797f028fa7fc63b9b">OncePerSecond</a>
 </li>
+<li>enterRead()
+: <a class="el" href="class_read_write_mutex.html#a0809fefdbebf964983495220fff0d21b">ReadWriteMutex</a>
+</li>
+<li>enterWrite()
+: <a class="el" href="class_read_write_mutex.html#a702c1f30685147349ffa265acc8ed351">ReadWriteMutex</a>
+</li>
 <li>erase()
 : <a class="el" href="class_list.html#a59a820ec7dd5524d5bfacd5ef8c4b3aa">List&lt; Element, Tag &gt;</a>
 </li>
 <li>exchange()
 : <a class="el" href="class_atomic_pointer.html#a34c628f10cb51353f2b5a222c64f4721">AtomicPointer&lt; P &gt;</a>
+</li>
+<li>exitRead()
+: <a class="el" href="class_read_write_mutex.html#aa92e0f2576979fcd719601a6018254c8">ReadWriteMutex</a>
+</li>
+<li>exitWrite()
+: <a class="el" href="class_read_write_mutex.html#ac0030f2d38e5e10f8ddb3b51786f3407">ReadWriteMutex</a>
 </li>
 </ul>
 
@@ -293,6 +305,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_list.html#ad132d2652f0badeba8e5a31d0ad14c1b">List&lt; Element, Tag &gt;</a>
 , <a class="el" href="class_sorted_lookup_table.html#aab53bd0de6812f31f138c4f9e94de31f">SortedLookupTable&lt; SchemaType &gt;</a>
 </li>
+<li>interruptionPoint()
+: <a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b">ThreadWithCallQueue</a>
+</li>
 <li>isBeingReferenced()
 : <a class="el" href="class_concurrent_object.html#a969dcbec75b26d3fa0936dd2198d7dec">ConcurrentObject</a>
 </li>
@@ -303,8 +318,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_drag_and_drop_data_1_1_target.html#a834d17faba5913675582a7a9fc44edea">DragAndDropData::Target</a>
 </li>
 <li>isSignaled()
-: <a class="el" href="class_atomic_flag.html#a14875b387258ad3264f9900c96cb47e8">AtomicFlag</a>
-, <a class="el" href="class_atomic_counter.html#a41623f9815d7e7fd0d334dc1adbe85ab">AtomicCounter</a>
+: <a class="el" href="class_atomic_counter.html#a41623f9815d7e7fd0d334dc1adbe85ab">AtomicCounter</a>
+, <a class="el" href="class_atomic_flag.html#a14875b387258ad3264f9900c96cb47e8">AtomicFlag</a>
 </li>
 <li>itemDragEnter()
 : <a class="el" href="class_drag_and_drop_data_1_1_target.html#abf9a059fd618908564abf49eb13efc50">DragAndDropData::Target</a>
@@ -448,12 +463,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>ReadAccess()
 : <a class="el" href="class_concurrent_state_1_1_read_access.html#ae12b1503fb6755c684eb278c8e1d33f6">ConcurrentState&lt; Object &gt;::ReadAccess</a>
 </li>
+<li>ReadWriteMutex()
+: <a class="el" href="class_read_write_mutex.html#a1d4144fae4cbcc3ece57fe15f4f8021c">ReadWriteMutex</a>
+</li>
 <li>release()
 : <a class="el" href="class_atomic_counter.html#ab5469732ca90c0fe9271d194141191b0">AtomicCounter</a>
 </li>
 <li>releaseBuffer()
-: <a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">AudioBufferPoolType&lt; TypeOfCriticalSectionToUse &gt;</a>
-, <a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">AudioBufferPool</a>
+: <a class="el" href="class_audio_buffer_pool.html#aedbd43cea9d2a42cb212467eda701a01">AudioBufferPool</a>
+, <a class="el" href="class_audio_buffer_pool_type.html#a93183ea809aa45d97880de2282231de4">AudioBufferPoolType&lt; TypeOfCriticalSectionToUse &gt;</a>
 </li>
 <li>remove()
 : <a class="el" href="class_listeners.html#ab403aed0868a7919f0e8ce95296cdf46">Listeners&lt; ListenerClass &gt;</a>
@@ -489,6 +507,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>size()
 : <a class="el" href="class_list.html#a95ca90c9a538e895f5a0acee07d475d8">List&lt; Element, Tag &gt;</a>
 </li>
+<li>start()
+: <a class="el" href="class_thread_with_call_queue.html#af44df9dc66824d2ade4264ac4f54e37a">ThreadWithCallQueue</a>
+</li>
 <li>startOncePerSecond()
 : <a class="el" href="class_once_per_second.html#a699ac14cdd87d1e477a15f95c013d701">OncePerSecond</a>
 </li>
@@ -497,9 +518,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_lock_free_stack.html#a2ae1200e7735864463f628c9dcb7025a">LockFreeStack&lt; Element, Tag &gt;</a>
 </li>
 <li>synchronize()
-: <a class="el" href="class_manual_call_queue.html#a8934bcdca202c9f5d190565f68583687">ManualCallQueue</a>
+: <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7">CallQueue</a>
+, <a class="el" href="class_manual_call_queue.html#a8934bcdca202c9f5d190565f68583687">ManualCallQueue</a>
 , <a class="el" href="class_gui_call_queue.html#a63f2c96d55cc954cf373d85f509f6dd3">GuiCallQueue</a>
-, <a class="el" href="class_call_queue.html#a7b4ecb95445c00c815bc2407c9e008b7">CallQueue</a>
 </li>
 </ul>
 
@@ -534,6 +555,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>~CallQueue()
 : <a class="el" href="class_call_queue.html#a243ab6a2217eb227bf4b6050447ead01">CallQueue</a>
 </li>
+<li>~ReadWriteMutex()
+: <a class="el" href="class_read_write_mutex.html#a8b2220f648c62305987609297bf04f82">ReadWriteMutex</a>
+</li>
 <li>~ScopedAudioSampleBuffer()
 : <a class="el" href="class_scoped_audio_sample_buffer.html#a35f35b73fa0a5f735a687cffd859dbae">ScopedAudioSampleBuffer</a>
 </li>
@@ -545,7 +569,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 22:08:30 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

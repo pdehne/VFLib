@@ -7,6 +7,7 @@ var searchData=
   ['readaccess',['ReadAccess',['../class_concurrent_state_1_1_read_access.html',1,'ConcurrentState']]],
   ['readhelper',['ReadHelper',['http://www.rawmaterialsoftware.com/juce/api/structAudioFormatReader_1_1ReadHelper.html',1,'AudioFormatReader']]],
   ['readwritelock',['ReadWriteLock',['http://www.rawmaterialsoftware.com/juce/api/classReadWriteLock.html',1,'']]],
+  ['readwritemutex',['ReadWriteMutex',['../class_read_write_mutex.html',1,'']]],
   ['recentlyopenedfileslist',['RecentlyOpenedFilesList',['http://www.rawmaterialsoftware.com/juce/api/classRecentlyOpenedFilesList.html',1,'']]],
   ['rectangle',['Rectangle',['http://www.rawmaterialsoftware.com/juce/api/classRectangle.html',1,'']]],
   ['rectangle_3c_20int_20_3e',['Rectangle< int >',['http://www.rawmaterialsoftware.com/juce/api/classRectangle.html',1,'']]],

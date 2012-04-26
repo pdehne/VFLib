@@ -284,6 +284,7 @@ var searchData=
   ['_7erandom',['~Random',['http://www.rawmaterialsoftware.com/juce/api/classRandom.html#a98b1bf7fbd8c122c08c9f35b9e603923',1,'Random']]],
   ['_7erange',['~Range',['http://www.rawmaterialsoftware.com/juce/api/classRange.html#a8b6dd7dcdbbc6b3ccd60e4e60b9b42dd',1,'Range']]],
   ['_7ereadwritelock',['~ReadWriteLock',['http://www.rawmaterialsoftware.com/juce/api/classReadWriteLock.html#af57fd41f09be7654f33cc0e4aa458e5a',1,'ReadWriteLock']]],
+  ['_7ereadwritemutex',['~ReadWriteMutex',['../class_read_write_mutex.html#a8b2220f648c62305987609297bf04f82',1,'ReadWriteMutex']]],
   ['_7erecentlyopenedfileslist',['~RecentlyOpenedFilesList',['http://www.rawmaterialsoftware.com/juce/api/classRecentlyOpenedFilesList.html#afdd6264636158fdecd942bc522336dd9',1,'RecentlyOpenedFilesList']]],
   ['_7erectangle',['~Rectangle',['http://www.rawmaterialsoftware.com/juce/api/classRectangle.html#ae4f36d6e7f37a57ec4a557a67679f114',1,'Rectangle']]],
   ['_7erectanglelist',['~RectangleList',['http://www.rawmaterialsoftware.com/juce/api/classRectangleList.html#ae5fd08d0c262225635d9016f7bfa5360',1,'RectangleList']]],

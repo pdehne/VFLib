@@ -112,9 +112,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a89063989f0bf475c1dc06fa4c734f9b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a89063989f0bf475c1dc06fa4c734f9b3">ThreadWithCallQueue</a> (<a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classString.html">String</a> name)</td></tr>
-<tr class="memdesc:a89063989f0bf475c1dc06fa4c734f9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>.  <a href="#a89063989f0bf475c1dc06fa4c734f9b3"></a><br/></td></tr>
+<tr class="memdesc:a89063989f0bf475c1dc06fa4c734f9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a thread.  <a href="#a89063989f0bf475c1dc06fa4c734f9b3"></a><br/></td></tr>
 <tr class="memitem:aa3a5a81a009b637a02f3be717c9d7b6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#aa3a5a81a009b637a02f3be717c9d7b6e">~ThreadWithCallQueue</a> ()</td></tr>
 <tr class="memdesc:aa3a5a81a009b637a02f3be717c9d7b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a <a class="el" href="class_thread_with_call_queue.html" title="An InterruptibleThread with a CallQueue.">ThreadWithCallQueue</a>.  <a href="#aa3a5a81a009b637a02f3be717c9d7b6e"></a><br/></td></tr>
+<tr class="memitem:af44df9dc66824d2ade4264ac4f54e37a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#af44df9dc66824d2ade4264ac4f54e37a">start</a> (idle_t thread_idle=idle_t::None(), init_t thread_init=init_t::None(), exit_t thread_exit=exit_t::None())</td></tr>
+<tr class="memdesc:af44df9dc66824d2ade4264ac4f54e37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the thread.  <a href="#af44df9dc66824d2ade4264ac4f54e37a"></a><br/></td></tr>
+<tr class="memitem:a81a3c215166ef522e9386fd88a18d04b"><td class="memItemLeft" align="right" valign="top">const <br class="typebreak"/>
+InterruptibleThread::Interrupted&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b">interruptionPoint</a> ()</td></tr>
+<tr class="memdesc:a81a3c215166ef522e9386fd88a18d04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the thread needs interruption.  <a href="#a81a3c215166ef522e9386fd88a18d04b"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This combines an <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> with a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>, allowing functors to be queued for asynchronous execution on the thread.</p>
@@ -161,6 +166,68 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af44df9dc66824d2ade4264ac4f54e37a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_thread_with_call_queue.html#af44df9dc66824d2ade4264ac4f54e37a">ThreadWithCallQueue::start</a> </td>
+          <td>(</td>
+          <td class="paramtype">idle_t&#160;</td>
+          <td class="paramname"><em>thread_idle</em> = <code>idle_t::None()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">init_t&#160;</td>
+          <td class="paramname"><em>thread_init</em> = <code>init_t::None()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">exit_t&#160;</td>
+          <td class="paramname"><em>thread_exit</em> = <code>exit_t::None()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>All thread functions are invoked from the thread:</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread_idle</td><td>The function to call when the thread is idle.</td></tr>
+    <tr><td class="paramname">thread_init</td><td>The function to call when the thread starts.</td></tr>
+    <tr><td class="paramname">thread_exit</td><td>The function to call when the thread stops. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a81a3c215166ef522e9386fd88a18d04b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const InterruptibleThread::Interrupted <a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b">ThreadWithCallQueue::interruptionPoint</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Should be called periodically by the idle function. If interruptionPoint returns true or throws, it must not be called again until the idle function returns and is re-entered.</p>
+<dl class="section invariant"><dt>Invariant:</dt><dd>No previous calls to <a class="el" href="class_thread_with_call_queue.html#a81a3c215166ef522e9386fd88a18d04b" title="Determine if the thread needs interruption.">interruptionPoint()</a> made after the idle function entry point returned <code>true</code>.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd><code>false</code> if the idle function may continue, or <code>true</code> if the idle function must return as soon as possible. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>vf_ThreadWithCallQueue.h</li>
 <li>vf_ThreadWithCallQueue.cpp</li>
@@ -169,7 +236,7 @@ Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 22:08:30 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

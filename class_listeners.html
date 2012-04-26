@@ -138,130 +138,130 @@ class Listeners&lt; ListenerClass &gt;</h3>
 <p>A Listener is an object of class type which inherits from a defined interface, and registers on a provided instance of <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a> to receive asynchronous notifications of changes to concurrent states. Another way of defining <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a>, is that it is similar to a Juce <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classListenerList.html">ListenerList</a> but with the provision that the Listener registers with the <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> upon which the notification should be made.</p>
 <p><a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a> makes extensive use of <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> for providing the notifications, and provides a higher level facility for implementing the concurrent synchronization strategy outlined in <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>. Therefore, the same notes which apply to functors in <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> also apply to Listener member invocations. Their execution time should be brief, limited in scope to updating the recipient's view of a shared state, and use reference counting for parameters of class type.</p>
 <p>To use this system, first declare your Listener interface:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>Listener
-    {
-      <span class="comment">// Sent on every output block</span>
-      <span class="keyword">virtual</span> <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keyword">const</span> <span class="keywordtype">float</span> outputLevel) { }
-    };
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>Listener
+  {
+    <span class="comment">// Sent on every output block</span>
+    <span class="keyword">virtual</span> <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keyword">const</span> <span class="keywordtype">float</span> outputLevel) { }
+  };
 </pre></div><p>Now set up the place where you want to send the notifications. In this example, we will set up the <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a> to notify anyone who is interested about changes in the current audio output level. We will use this to implement a VU meter:</p>
-<div class="fragment"><pre class="fragment">    <a class="code" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners &lt;Listener&gt;</a> listeners;
+<div class="fragment"><pre class="fragment">  <a class="code" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners &lt;Listener&gt;</a> listeners;
 
-    <span class="comment">// (Process audio data)</span>
+  <span class="comment">// (Process audio data)</span>
 
-    <span class="comment">// Calculate output level</span>
-    <span class="keywordtype">float</span> outputLevel = calcOutputLevel ();
+  <span class="comment">// Calculate output level</span>
+  <span class="keywordtype">float</span> outputLevel = calcOutputLevel ();
 
-    <span class="comment">// Notify listeners</span>
-    listeners.<a class="code" href="class_listeners.html#a174db6d8ac775775578f860c6e97b600" title="Call a member function on every added listener, on its associated CallQueue.">call</a> (&amp;Listener::onOutputLevelChanged, outputLevel);
+  <span class="comment">// Notify listeners</span>
+  listeners.<a class="code" href="class_listeners.html#a174db6d8ac775775578f860c6e97b600" title="Call a member function on every added listener, on its associated CallQueue.">call</a> (&amp;Listener::onOutputLevelChanged, outputLevel);
 </pre></div><p>To receive notifications, derive from Listener and then add yourself to the <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a> object using the desired <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>.</p>
-<div class="fragment"><pre class="fragment">    <span class="comment">// We want notifications on the message thread</span>
-    <a class="code" href="class_gui_call_queue.html" title="A CallQueue handled by the Juce message thread (gui).">GuiCallQueue</a> fifo;
+<div class="fragment"><pre class="fragment">  <span class="comment">// We want notifications on the message thread</span>
+  <a class="code" href="class_gui_call_queue.html" title="A CallQueue handled by the Juce message thread (gui).">GuiCallQueue</a> fifo;
 
-    <span class="keyword">struct </span>VUMeter : <span class="keyword">public</span> Listener, <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a>
+  <span class="keyword">struct </span>VUMeter : <span class="keyword">public</span> Listener, <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a>
+  {
+    VUMeter () : m_outputLevel (0)
     {
-      VUMeter () : m_outputLevel (0)
-      {
-        listeners.<a class="code" href="class_listeners.html#aa6addccea031c809ac4b3f4bb699f4c6" title="Add a listener.">add</a> (<span class="keyword">this</span>, fifo);
-      }
+      listeners.<a class="code" href="class_listeners.html#aa6addccea031c809ac4b3f4bb699f4c6" title="Add a listener.">add</a> (<span class="keyword">this</span>, fifo);
+    }
 
-      ~VUMeter ()
-      {
-        listeners.<a class="code" href="class_listeners.html#ab403aed0868a7919f0e8ce95296cdf46" title="Remove a listener.">remove</a> (<span class="keyword">this</span>);
-      }
+    ~VUMeter ()
+    {
+      listeners.<a class="code" href="class_listeners.html#ab403aed0868a7919f0e8ce95296cdf46" title="Remove a listener.">remove</a> (<span class="keyword">this</span>);
+    }
 
-      <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keywordtype">float</span> outputLevel)
-      {
-        <span class="comment">// Update our copy of the output level shared state.</span>
-        m_outputLevel = outputLevel;
+    <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keywordtype">float</span> outputLevel)
+    {
+      <span class="comment">// Update our copy of the output level shared state.</span>
+      m_outputLevel = outputLevel;
         
-        <span class="comment">// Now trigger a redraw of the control.</span>
-        repaint ();
-      }
+      <span class="comment">// Now trigger a redraw of the control.</span>
+      repaint ();
+    }
 
-      <span class="keywordtype">float</span> m_outputLevel;
-    };
+    <span class="keywordtype">float</span> m_outputLevel;
+  };
 </pre></div><p>In this example, the VUMeter constructs with the output level set to zero, and must wait for a notification before it shows up to date data. For a simple VU meter, this is likely not a problem. But if the shared state contains complex information, such as dynamically allocated objects with rich data, then we need a more solid system.</p>
 <p>We will add some classes to create a complete robust example of the use of <a class="el" href="class_listeners.html" title="A group of concurrent Listeners.">Listeners</a> to synchronize shared state:</p>
-<div class="fragment"><pre class="fragment">    <span class="comment">// Handles audio device output.</span>
-    <span class="keyword">class </span>AudioDeviceOutput : <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a>
+<div class="fragment"><pre class="fragment">  <span class="comment">// Handles audio device output.</span>
+  <span class="keyword">class </span>AudioDeviceOutput : <span class="keyword">public</span> <a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioIODeviceCallback.html">AudioIODeviceCallback</a>
+  {
+  <span class="keyword">public</span>:
+    <span class="keyword">struct </span>Listener
     {
-    <span class="keyword">public</span>:
-      <span class="keyword">struct </span>Listener
-      {
-        <span class="comment">// Sent on every output block.</span>
-        <span class="keyword">virtual</span> <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keywordtype">float</span> outputLevel) { }
-      };
-
-      AudioDeviceOutput () : AudioDeviceOutput (<span class="stringliteral">&quot;Audio CallQueue&quot;</span>)
-      {
-      }
-
-      ~AudioDeviceOutput ()
-      {
-        <span class="comment">// Synchronize required since we&#39;re using a ManualCallQueue.</span>
-        m_fifo.synchronize ();
-
-        m_fifo.close ();
-      }
-
-      <span class="keywordtype">void</span> addListener (Listener* listener, <a class="code" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>&amp; callQueue)
-      {
-        <span class="comment">// Acquire read access to the shared state.</span>
-        <a class="code" href="class_concurrent_state_1_1_read_access.html" title="Read only access to a ConcurrentState.">ConcurrentState &lt;State&gt;::ReadAccess</a> state (m_state);
-
-        <span class="comment">// Add the listener.</span>
-        m_listeners.add (listener, callQueue);
-
-        <span class="comment">// Queue an update for the listener to receive the initial state.</span>
-        m_listeners.queue1 (listener,
-                            &amp;Listener::onOutputLevelChanged,
-                            state-&gt;outputLevel);
-      }
-
-      <span class="keywordtype">void</span> removeListener (Listener* listener)
-      {
-        m_listeners.remove (listener);
-      }
-
-    <span class="keyword">protected</span>:
-      <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputChannelData,
-                                  <span class="keywordtype">int</span> numInputChannels,
-                                  <span class="keywordtype">float</span>** outputChannelData,
-                                  <span class="keywordtype">int</span> numOutputChannels,
-                                  <span class="keywordtype">int</span> numSamples)
-      {
-        <span class="comment">// Synchronize our call queue. Not needed for this example but</span>
-        <span class="comment">// included here as a best-practice for audio device I/O callbacks.</span>
-        m_fifo.synchronize ();
-
-        <span class="comment">// (Process audio data)</span>
-
-        <span class="comment">// Calculate output level.</span>
-        <span class="keywordtype">float</span> newOutputLevel = calcOutputLevel ();
-
-        <span class="comment">// Update shared state.</span>
-        {
-          <a class="code" href="class_concurrent_state_1_1_write_access.html" title="Read/write access to a ConcurrentState.">ConcurrentState &lt;State&gt;::WriteAccess</a> state (m_state);
-          
-          m_state-&gt;outputLevel = newOutputLevel;
-        }
-
-        <span class="comment">// Notify listeners.</span>
-        listeners.<a class="code" href="class_listeners.html#a174db6d8ac775775578f860c6e97b600" title="Call a member function on every added listener, on its associated CallQueue.">call</a> (&amp;Listener::onOutputLevelChanged, newOutputLevel);
-      }
-
-    <span class="keyword">private</span>:
-      <span class="keyword">struct </span>State
-      {
-        State () : outputLevel (0) { }
-
-        <span class="keywordtype">float</span> outputLevel;
-      };
-
-      <a class="code" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState &lt;State&gt;</a> m_state;
-
-      <a class="code" href="class_manual_call_queue.html" title="A CallQueue that requires periodic manual synchronization.">ManualCallQueue</a> m_fifo;
+      <span class="comment">// Sent on every output block.</span>
+      <span class="keyword">virtual</span> <span class="keywordtype">void</span> onOutputLevelChanged (<span class="keywordtype">float</span> outputLevel) { }
     };
+
+    AudioDeviceOutput () : AudioDeviceOutput (<span class="stringliteral">&quot;Audio CallQueue&quot;</span>)
+    {
+    }
+
+    ~AudioDeviceOutput ()
+    {
+      <span class="comment">// Synchronize required since we&#39;re using a ManualCallQueue.</span>
+      m_fifo.synchronize ();
+
+      m_fifo.close ();
+    }
+
+    <span class="keywordtype">void</span> addListener (Listener* listener, <a class="code" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a>&amp; callQueue)
+    {
+      <span class="comment">// Acquire read access to the shared state.</span>
+      <a class="code" href="class_concurrent_state_1_1_read_access.html" title="Read only access to a ConcurrentState.">ConcurrentState &lt;State&gt;::ReadAccess</a> state (m_state);
+
+      <span class="comment">// Add the listener.</span>
+      m_listeners.add (listener, callQueue);
+
+      <span class="comment">// Queue an update for the listener to receive the initial state.</span>
+      m_listeners.queue1 (listener,
+                          &amp;Listener::onOutputLevelChanged,
+                          state-&gt;outputLevel);
+    }
+
+    <span class="keywordtype">void</span> removeListener (Listener* listener)
+    {
+      m_listeners.remove (listener);
+    }
+
+  <span class="keyword">protected</span>:
+    <span class="keywordtype">void</span> audioDeviceIOCallback (<span class="keyword">const</span> <span class="keywordtype">float</span>** inputChannelData,
+                          <span class="keywordtype">int</span> numInputChannels,
+                          <span class="keywordtype">float</span>** outputChannelData,
+                          <span class="keywordtype">int</span> numOutputChannels,
+                          <span class="keywordtype">int</span> numSamples)
+    {
+      <span class="comment">// Synchronize our call queue. Not needed for this example but</span>
+      <span class="comment">// included here as a best-practice for audio device I/O callbacks.</span>
+      m_fifo.synchronize ();
+
+      <span class="comment">// (Process audio data)</span>
+
+      <span class="comment">// Calculate output level.</span>
+      <span class="keywordtype">float</span> newOutputLevel = calcOutputLevel ();
+
+      <span class="comment">// Update shared state.</span>
+      {
+        <a class="code" href="class_concurrent_state_1_1_write_access.html" title="Read/write access to a ConcurrentState.">ConcurrentState &lt;State&gt;::WriteAccess</a> state (m_state);
+          
+        m_state-&gt;outputLevel = newOutputLevel;
+      }
+
+      <span class="comment">// Notify listeners.</span>
+      listeners.<a class="code" href="class_listeners.html#a174db6d8ac775775578f860c6e97b600" title="Call a member function on every added listener, on its associated CallQueue.">call</a> (&amp;Listener::onOutputLevelChanged, newOutputLevel);
+    }
+
+  <span class="keyword">private</span>:
+    <span class="keyword">struct </span>State
+    {
+      State () : outputLevel (0) { }
+
+      <span class="keywordtype">float</span> outputLevel;
+    };
+
+    <a class="code" href="class_concurrent_state.html" title="Structured access to a shared state.">ConcurrentState &lt;State&gt;</a> m_state;
+
+    <a class="code" href="class_manual_call_queue.html" title="A CallQueue that requires periodic manual synchronization.">ManualCallQueue</a> m_fifo;
+  };
 </pre></div><p>Although the rigor demonstrated in the example above is not strictly required when the shared state consists only of a single float, it becomes necessary when there are dynamically allocated objects with complex interactions in the shared state.</p>
 <dl class="section see"><dt>See also:</dt><dd><a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> </dd></dl>
 </div><hr/><h2>Member Function Documentation</h2>
@@ -530,7 +530,7 @@ template&lt;class Mf &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 22:08:30 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
