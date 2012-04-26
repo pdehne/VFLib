@@ -102,11 +102,7 @@
   To use a module, include the appropriate header from within your source code.
   For example, to access classes in the \ref vf_concurrent module, use this:
 
-  @code
-
-  #include "modules/vf_concurrent/vf_concurrent.h"
-
-  @endcode
+      #include "modules/vf_concurrent/vf_concurrent.h"
 
   ## AppConfig
 
@@ -115,8 +111,6 @@
   described in AppConfig.h, located in the AppConfigTemplate directory. Copy
   the provided settings into your existing AppConfig.h (a file used by JUCE
   convention).
-
-  @note AppConfig.h must be included before including any VFLib headers.
 
   ## License
 

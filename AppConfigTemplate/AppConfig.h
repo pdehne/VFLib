@@ -24,13 +24,15 @@
 
 /*============================================================================*/
 /**     
-    Additional configuration options.
+  Additional configuration options.
 
-    Append these additional conditional compilation directives to your already
-    existing AppConfig.h to customize the available compilations options.
+  Append these additional conditional compilation directives to your already
+  existing AppConfig.h to customize the available compilations options.
 
-    @file AppConfig.h
-    @ingroup vf_core
+  @note AppConfig.h must be included before any VFLib or JUCE headers.
+
+  @file AppConfig.h
+  @ingroup vf_core
 */
 
 /** Activate features that use Boost.
@@ -42,7 +44,7 @@
 #define VF_USE_BOOST 0
 #endif
 
-/** Activate features that use BZip2.
+/** Activate features that use bZip2.
 
     Your project will require the @ref vf_bzip2 external module.
 */
