@@ -22,6 +22,8 @@
 #ifndef VF_DESTROY_N_H
 #define VF_DESTROY_N_H
 
+#if 0
+
 #ifdef _MSC_VER
 namespace tr1 = std::tr1;
 #else
@@ -63,6 +65,8 @@ void destroy_n( Ty* p, std::size_t n )
 {
   detail::destroyer<Ty, tr1::has_trivial_destructor<Ty>::value>::destroy (p, n);
 }
+
+#endif
 
 #endif
 
