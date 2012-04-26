@@ -791,7 +791,7 @@ public:
   {
   }
 
-  FreeTypeFacesImplementation::~FreeTypeFacesImplementation()
+  ~FreeTypeFacesImplementation()
   {
     clearSingletonInstance();
   }
