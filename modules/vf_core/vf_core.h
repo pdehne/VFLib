@@ -96,8 +96,7 @@
   development environment or project, which points to the VFLib directory. Then,
   add the single corresponding .c or .cpp file to your existing project which
   already uses JUCE. For example, to use the \ref vf_core module, add the file
-  vf_core.cpp to your project. Some modules depend on other modules. All modules
-  depend on \ref vf_core.
+  vf_core.cpp to your project. Some modules depend on other modules.
 
   To use a module, include the appropriate header from within your source code.
   For example, to access classes in the \ref vf_concurrent module, use this:
@@ -107,6 +106,8 @@
   #include "modules/vf_concurrent/vf_concurrent.h"
 
   @endcode
+
+  Then add the corresponding file vf_concurrent.cpp to your build.
 
   ## AppConfig
 

@@ -64,14 +64,17 @@ use a module, first add a path to the list of includes searched by your
 development environment or project, which points to the VFLib directory. Then,
 add the single corresponding .c or .cpp file to your existing project which
 already uses JUCE. For example, to use the **[vf_core][vf_core]** module, add the file
-vf_core.cpp to your project. Some modules depend on other modules. All modules
-depend on **[vf_core][vf_core]**.
+**[vf_core.cpp][vf_core.cpp]** to your project. Some modules depend on other
+modules.
 
 To use a module, include the appropriate header from within your source code.
 For example, to access classes in the **[vf_concurrent][vf_concurrent]** module,
 use this:
 
     #include "modules/vf_concurrent/vf_concurrent.h"
+
+Then add the corresponding file **[vf_concurrent.cpp][vf_concurrent.cpp]** to
+your build.
 
 ## AppConfig
 
@@ -138,6 +141,8 @@ Version 2.1][17] and the [Mozilla Public License][18].
 [17]: http://www.gnu.org/licenses/lgpl-2.1.html "Gnu Lesser General Public License, version 2.1"
 [18]: http://www.mozilla.org/MPL/1.1/ "Mozilla Public License"
 
-[vf_bzip2]:      http://vinniefalco.github.com/VFLib/group__vf__bzip2.html "bZip2"
-[vf_core]:       http://vinniefalco.github.com/VFLib/group__vf__core.html "vf_core"
-[vf_concurrent]: http://vinniefalco.github.com/VFLib/group__vf__concurrent.html "vf_concurrent"
+[vf_bzip2]:          http://vinniefalco.github.com/VFLib/group__vf__bzip2.html "bZip2"
+[vf_core]:           http://vinniefalco.github.com/VFLib/group__vf__core.html "vf_core"
+[vf_concurrent]:     http://vinniefalco.github.com/VFLib/group__vf__concurrent.html "vf_concurrent"
+[vf_core.cpp]:       http://vinniefalco.github.com/VFLib/vf__core_8cpp.html "vf_core.cpp"
+[vf_concurrent.cpp]: http://vinniefalco.github.com/VFLib/vf__concurrent_8cpp.html "vf_concurrent.cpp"
