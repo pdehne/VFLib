@@ -24,30 +24,37 @@
 
 /*============================================================================*/
 /**
-    Multiple consumer, single producer (MCSP) synchronization primitive.
+  Multiple consumer, single producer (MCSP) synchronization primitive.
 
-    This is an optimized lock for the multiple reader, single writer
-    scenario. It provides only a subset of features of the more general
-    traditional read/write lock. Specifically, these rules apply:
+  This is an optimized lock for the multiple reader, single writer
+  scenario. It provides only a subset of features of the more general
+  traditional read/write lock. Specifically, these rules apply:
 
-    - A caller cannot hold a read lock while acquiring a write lock.
+  - A caller cannot hold a read lock while acquiring a write lock.
 
-    - Write locks are only recursive with respect to write locks.
+  - Write locks are only recursive with respect to write locks.
 
-    - Read locks are only recursive with respect to read locks.
+  - Read locks are only recursive with respect to read locks.
 
-    - A write lock cannot be downgraded.
+  - A write lock cannot be downgraded.
 
-    - Writes are preferenced over reads.
+  - Writes are preferenced over reads.
 
-    For real-time applications, these restrictions are often not an issue.
+  For real-time applications, these restrictions are often not an issue.
 
-    The implementation is wait-free in the fast path: acquiring read access
-    for a lock without contention - just one interlocked increment!
+  The implementation is wait-free in the fast path: acquiring read access
+  for a lock without contention - just one interlocked increment!
 
-    @ingroup vf_concurrent
+  @class ReadWriteMutex
+  @ingroup vf_concurrent
 */
 
+/*============================================================================*/
+/**
+  Scoped read lock for ReadWriteMutex.
+
+  @ingroup vf_concurrent
+*/
 template <class LockType>
 struct GenericScopedReadLock : Uncopyable
 {
@@ -66,6 +73,12 @@ private:
   LockType const& m_lock;
 };
 
+/*============================================================================*/
+/**
+  Scoped write lock for ReadWriteMutex.
+
+  @ingroup vf_concurrent
+*/
 template <class LockType>
 struct GenericScopedWriteLock : Uncopyable
 {

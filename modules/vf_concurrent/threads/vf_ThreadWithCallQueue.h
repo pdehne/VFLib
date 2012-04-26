@@ -49,7 +49,7 @@ public:
   typedef Function <void (void)> init_t;
   typedef Function <void (void)> exit_t;
 
-  /** Create a ThreadWithCallQueue.
+  /** Create a thread.
 
       @param name The name of the InterruptibleThread and CallQueue, used
                   for diagnostics when debugging.
@@ -63,39 +63,57 @@ public:
   */
   ~ThreadWithCallQueue ();
 
-  //
-  // Starts the worker.
-  //
-  void start (idle_t worker_idle = idle_t::None(),
-              init_t worker_init = init_t::None(),
-              exit_t worker_exit = exit_t::None());
+  /** Start the thread.
 
-  //
-  // Stop the thread and optionally wait until it exits.
-  // It is safe to call this function at any time and as many times as desired.
-  // It is an error to call stop(true) from inside any of the worker functions.
-  //
-  // During a call to stop() the CallQueue is closed, and attempts to
-  // queue new calls will throw a runtime exception.
-  //
-  // Any listeners registered on the worker need to be removed
-  // before stop is called
-  //
+      All thread functions are invoked from the thread:
+
+      @param thread_idle The function to call when the thread is idle.
+
+      @param thread_init The function to call when the thread starts.
+
+      @param thread_exit The function to call when the thread stops.
+  */
+  void start (idle_t thread_idle = idle_t::None(),
+              init_t thread_init = init_t::None(),
+              exit_t thread_exit = exit_t::None());
+
+  /* Stop the thread.
+
+     Stops the thread and optionally wait until it exits. It is safe to call
+     this function at any time and as many times as desired.
+     
+     After a call to stop () the CallQueue is closed, and attempts to queue new
+     functors will throw a runtime exception. Existing functors will still
+     execute.
+
+     Any listeners registered on the CallQueue need to be removed
+     before stop is called
+
+     @invariant The caller is not on the associated thread.
+
+     @param wait `true` if the function should wait until the thread exits
+                 before returning.
+  */
+     
   void stop (bool const wait);
 
-  // Should be called periodically by the idle function.
-  // There are three possible results:
-  //
-  // #1 Returns false. The idle function may continue or return.
-  // #2 Returns true. The idle function should return as soon as possible.
-  // #3 Throws a Thread::Interruption exception.
-  //
-  // If interruptionPoint returns true or throws, it must
-  // not be called again before the thread has the opportunity to reset.
-  //
+  /**
+    Determine if the thread needs interruption.
+    
+    Should be called periodically by the idle function. If interruptionPoint
+    returns true or throws, it must not be called again until the idle function
+    returns and is re-entered.
+
+    @invariant No previous calls to interruptionPoint() made after the idle
+               function entry point returned `true`.
+
+    @return `false` if the idle function may continue, or `true` if the
+            idle function must return as soon as possible.
+  */
   const InterruptibleThread::Interrupted interruptionPoint ();
 
-  // Interrupts the idle function by queueing a call that does nothing.
+  /* Interrupts the idle function.
+  */
   void interrupt ();
 
 private:

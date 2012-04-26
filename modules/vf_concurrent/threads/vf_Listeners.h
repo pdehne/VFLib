@@ -27,195 +27,193 @@
 #include "../memory/vf_AllocatedBy.h"
 #include "../memory/vf_FifoFreeStore.h"
 
-///@{
-
 /*============================================================================*/
 /**
-    A group of concurrent Listeners.
+  A group of concurrent Listeners.
 
-    A Listener is an object of class type which inherits from a defined
-    interface, and registers on a provided instance of Listeners to receive
-    asynchronous notifications of changes to concurrent states. Another way of
-    defining Listeners, is that it is similar to a Juce ListenerList but with
-    the provision that the Listener registers with the CallQueue upon which the
-    notification should be made.
+  A Listener is an object of class type which inherits from a defined
+  interface, and registers on a provided instance of Listeners to receive
+  asynchronous notifications of changes to concurrent states. Another way of
+  defining Listeners, is that it is similar to a Juce ListenerList but with
+  the provision that the Listener registers with the CallQueue upon which the
+  notification should be made.
 
-    Listeners makes extensive use of CallQueue for providing the notifications,
-    and provides a higher level facility for implementing the concurrent
-    synchronization strategy outlined in CallQueue. Therefore, the same notes
-    which apply to functors in CallQueue also apply to Listener member
-    invocations. Their execution time should be brief, limited in scope to
-    updating the recipient's view of a shared state, and use reference counting
-    for parameters of class type.
+  Listeners makes extensive use of CallQueue for providing the notifications,
+  and provides a higher level facility for implementing the concurrent
+  synchronization strategy outlined in CallQueue. Therefore, the same notes
+  which apply to functors in CallQueue also apply to Listener member
+  invocations. Their execution time should be brief, limited in scope to
+  updating the recipient's view of a shared state, and use reference counting
+  for parameters of class type.
   
-    To use this system, first declare your Listener interface:
+  To use this system, first declare your Listener interface:
 
-    @code
+  @code
 
+  struct Listener
+  {
+    // Sent on every output block
+    virtual void onOutputLevelChanged (const float outputLevel) { }
+  };
+
+  @endcode
+
+  Now set up the place where you want to send the notifications. In this
+  example, we will set up the AudioIODeviceCallback to notify anyone who is
+  interested about changes in the current audio output level. We will use
+  this to implement a VU meter:
+
+  @code
+
+  Listeners <Listener> listeners;
+
+  // (Process audio data)
+
+  // Calculate output level
+  float outputLevel = calcOutputLevel ();
+
+  // Notify listeners
+  listeners.call (&Listener::onOutputLevelChanged, outputLevel);
+
+  @endcode
+
+  To receive notifications, derive from Listener and then add yourself to the
+  Listeners object using the desired CallQueue.
+
+  @code
+
+  // We want notifications on the message thread
+  GuiCallQueue fifo;
+
+  struct VUMeter : public Listener, public Component
+  {
+    VUMeter () : m_outputLevel (0)
+    {
+      listeners.add (this, fifo);
+    }
+
+    ~VUMeter ()
+    {
+      listeners.remove (this);
+    }
+
+    void onOutputLevelChanged (float outputLevel)
+    {
+      // Update our copy of the output level shared state.
+      m_outputLevel = outputLevel;
+        
+      // Now trigger a redraw of the control.
+      repaint ();
+    }
+
+    float m_outputLevel;
+  };
+
+  @endcode
+
+  In this example, the VUMeter constructs with the output level set to zero,
+  and must wait for a notification before it shows up to date data. For a
+  simple VU meter, this is likely not a problem. But if the shared state
+  contains complex information, such as dynamically allocated objects with
+  rich data, then we need a more solid system.
+
+  We will add some classes to create a complete robust example of the use of
+  Listeners to synchronize shared state:
+
+  @code
+
+  // Handles audio device output.
+  class AudioDeviceOutput : public AudioIODeviceCallback
+  {
+  public:
     struct Listener
     {
-      // Sent on every output block
-      virtual void onOutputLevelChanged (const float outputLevel) { }
+      // Sent on every output block.
+      virtual void onOutputLevelChanged (float outputLevel) { }
     };
 
-    @endcode
-
-    Now set up the place where you want to send the notifications. In this
-    example, we will set up the AudioIODeviceCallback to notify anyone who is
-    interested about changes in the current audio output level. We will use
-    this to implement a VU meter:
-
-    @code
-
-    Listeners <Listener> listeners;
-
-    // (Process audio data)
-
-    // Calculate output level
-    float outputLevel = calcOutputLevel ();
-
-    // Notify listeners
-    listeners.call (&Listener::onOutputLevelChanged, outputLevel);
-
-    @endcode
-
-    To receive notifications, derive from Listener and then add yourself to the
-    Listeners object using the desired CallQueue.
-
-    @code
-
-    // We want notifications on the message thread
-    GuiCallQueue fifo;
-
-    struct VUMeter : public Listener, public Component
+    AudioDeviceOutput () : AudioDeviceOutput ("Audio CallQueue")
     {
-      VUMeter () : m_outputLevel (0)
-      {
-        listeners.add (this, fifo);
-      }
+    }
 
-      ~VUMeter ()
-      {
-        listeners.remove (this);
-      }
-
-      void onOutputLevelChanged (float outputLevel)
-      {
-        // Update our copy of the output level shared state.
-        m_outputLevel = outputLevel;
-        
-        // Now trigger a redraw of the control.
-        repaint ();
-      }
-
-      float m_outputLevel;
-    };
-
-    @endcode
-
-    In this example, the VUMeter constructs with the output level set to zero,
-    and must wait for a notification before it shows up to date data. For a
-    simple VU meter, this is likely not a problem. But if the shared state
-    contains complex information, such as dynamically allocated objects with
-    rich data, then we need a more solid system.
-
-    We will add some classes to create a complete robust example of the use of
-    Listeners to synchronize shared state:
-
-    @code
-
-    // Handles audio device output.
-    class AudioDeviceOutput : public AudioIODeviceCallback
+    ~AudioDeviceOutput ()
     {
-    public:
-      struct Listener
+      // Synchronize required since we're using a ManualCallQueue.
+      m_fifo.synchronize ();
+
+      m_fifo.close ();
+    }
+
+    void addListener (Listener* listener, CallQueue& callQueue)
+    {
+      // Acquire read access to the shared state.
+      ConcurrentState <State>::ReadAccess state (m_state);
+
+      // Add the listener.
+      m_listeners.add (listener, callQueue);
+
+      // Queue an update for the listener to receive the initial state.
+      m_listeners.queue1 (listener,
+                          &Listener::onOutputLevelChanged,
+                          state->outputLevel);
+    }
+
+    void removeListener (Listener* listener)
+    {
+      m_listeners.remove (listener);
+    }
+
+  protected:
+    void audioDeviceIOCallback (const float** inputChannelData,
+					      int numInputChannels,
+					      float** outputChannelData,
+					      int numOutputChannels,
+					      int numSamples)
+    {
+      // Synchronize our call queue. Not needed for this example but
+      // included here as a best-practice for audio device I/O callbacks.
+      m_fifo.synchronize ();
+
+      // (Process audio data)
+
+      // Calculate output level.
+      float newOutputLevel = calcOutputLevel ();
+
+      // Update shared state.
       {
-        // Sent on every output block.
-        virtual void onOutputLevelChanged (float outputLevel) { }
-      };
-
-      AudioDeviceOutput () : AudioDeviceOutput ("Audio CallQueue")
-      {
-      }
-
-      ~AudioDeviceOutput ()
-      {
-        // Synchronize required since we're using a ManualCallQueue.
-        m_fifo.synchronize ();
-
-        m_fifo.close ();
-      }
-
-      void addListener (Listener* listener, CallQueue& callQueue)
-      {
-        // Acquire read access to the shared state.
-        ConcurrentState <State>::ReadAccess state (m_state);
-
-        // Add the listener.
-        m_listeners.add (listener, callQueue);
-
-        // Queue an update for the listener to receive the initial state.
-        m_listeners.queue1 (listener,
-                            &Listener::onOutputLevelChanged,
-                            state->outputLevel);
-      }
-
-      void removeListener (Listener* listener)
-      {
-        m_listeners.remove (listener);
-      }
-
-    protected:
-      void audioDeviceIOCallback (const float** inputChannelData,
-							      int numInputChannels,
-							      float** outputChannelData,
-							      int numOutputChannels,
-							      int numSamples)
-      {
-        // Synchronize our call queue. Not needed for this example but
-        // included here as a best-practice for audio device I/O callbacks.
-        m_fifo.synchronize ();
-
-        // (Process audio data)
-
-        // Calculate output level.
-        float newOutputLevel = calcOutputLevel ();
-
-        // Update shared state.
-        {
-          ConcurrentState <State>::WriteAccess state (m_state);
+        ConcurrentState <State>::WriteAccess state (m_state);
           
-          m_state->outputLevel = newOutputLevel;
-        }
-
-        // Notify listeners.
-        listeners.call (&Listener::onOutputLevelChanged, newOutputLevel);
+        m_state->outputLevel = newOutputLevel;
       }
 
-    private:
-      struct State
-      {
-        State () : outputLevel (0) { }
+      // Notify listeners.
+      listeners.call (&Listener::onOutputLevelChanged, newOutputLevel);
+    }
 
-        float outputLevel;
-      };
+  private:
+    struct State
+    {
+      State () : outputLevel (0) { }
 
-      ConcurrentState <State> m_state;
-
-      ManualCallQueue m_fifo;
+      float outputLevel;
     };
 
-    @endcode
+    ConcurrentState <State> m_state;
 
-    Although the rigor demonstrated in the example above is not strictly
-    required when the shared state consists only of a single float, it
-    becomes necessary when there are dynamically allocated objects with complex
-    interactions in the shared state.
+    ManualCallQueue m_fifo;
+  };
 
-    @see CallQueue
+  @endcode
 
-    @class Listeners
-    @ingroup vf_concurrent
+  Although the rigor demonstrated in the example above is not strictly
+  required when the shared state consists only of a single float, it
+  becomes necessary when there are dynamically allocated objects with complex
+  interactions in the shared state.
+
+  @see CallQueue
+
+  @class Listeners
+  @ingroup vf_concurrent
 */
 
 class ListenersBase
@@ -779,7 +777,5 @@ public:
   { updatef (mf, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
 };
-
-///@}
 
 #endif

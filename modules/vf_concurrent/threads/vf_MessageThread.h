@@ -27,6 +27,25 @@
 /*============================================================================*/
 /**
   A GuiCallQueue singleton for the message thread.
+
+  This convenient singleton lets you easily provide a CallQueue for
+  synchronizing on the message thread (the thread of execution that operates
+  the Graphical User Interface / GUI). The `getInstance()` member provides
+  the a GuiCallQueue:
+
+  @code
+
+  void performedOnMessageThread ()
+  {
+  }
+
+  MessageThread::getInstance().call (&performedOnMessageThread);
+
+  @endcode
+
+  When the JUCE application terminates, or when the JUCE GUI is shutdown,
+  the MessageThread object will be automatically cleaned up, no further action
+  is required.
 */
 class MessageThread
   : public GuiCallQueue
