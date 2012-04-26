@@ -124,6 +124,11 @@ juce::Image RadialImageConvolutionKernel::createConvolvedImageFull (juce::Image 
     ci[0] = 0;
     nc = 0;
     alpha = true;
+    break;
+
+  default:
+    Throw (Error ().fail (__FILE__, __LINE__));
+    break;
   }
 
   // edge-replicate each row in source to temp, and convolve into dest
