@@ -26,7 +26,9 @@ namespace Control {
 Static::Static (Facade::Base* facade, ReferenceCountedObjectPtr <Model::Base> model)
   : Base (this,
           facade,
-          (model == nullptr) ? (new Model::Base) : model)
+          (model == nullptr) ? 
+          ReferenceCountedObjectPtr <Model::Base> (new Model::Base) :
+          ReferenceCountedObjectPtr <Model::Base> (model) )
 {
 }
 
