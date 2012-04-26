@@ -27,9 +27,10 @@
 
 #include "AppConfig.h"
 
-#include "modules/juce_core/system/juce_TargetPlatform.h"
+// This screws up bZip and UInt32
+//#include "modules/juce_core/system/juce_TargetPlatform.h"
 
-#if JUCE_MSVC
+#if _MSC_VER
 #pragma push_macro("_CRT_SECURE_NO_WARNINGS")
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -50,7 +51,7 @@
 #include "bzip2/huffman.c"
 #include "bzip2/randtable.c"
 
-#if JUCE_MSVC
+#if _MSC_VER
 #pragma warning (pop)
 #pragma pop_macro("_CRT_SECURE_NO_WARNINGS")
 #endif
