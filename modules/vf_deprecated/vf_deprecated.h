@@ -19,13 +19,13 @@
 */
 /*============================================================================*/
 
-/** This contains deprecated code.
+/**
+  This contains deprecated code.
 
-    This file is here for compatibility and should not be used.
+  This file is here for compatibility and should not be used.
 
-    @file vf_deprecated.h
-
-    @deprecated
+  @file vf_deprecated.h
+  @deprecated
 */
 
 #ifndef VF_DEPRECATED_VFHEADER

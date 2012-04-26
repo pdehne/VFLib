@@ -34,10 +34,11 @@
   SQL engine.
 
   This external module provides the SQLite embedded database library.
-    
+
   SQLite is public domain software, visit http://sqlite.org
 
-  @todo Allow a user provided SQLite library through AppConfig.h configuration.
+  @note To control the use of the native SQLite library on supported platforms,
+        see AppConfig.h.
 
   @defgroup vf_sqlite vf_sqlite
   @ingroup external

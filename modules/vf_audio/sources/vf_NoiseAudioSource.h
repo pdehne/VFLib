@@ -65,11 +65,12 @@ private:
 };
 
 /*============================================================================*/
-/** @internal
+/**
+  @internal
 
-    @brief A faster but less accurate pink noise filter.
+  @brief A faster but less accurate pink noise filter.
 
-    @ingroup vf_audio internal
+  @ingroup vf_audio internal
 */
 struct fast_pink_noise_filter
 {
@@ -97,16 +98,16 @@ private:
 
 /*============================================================================*/
 /**
-    An AudioSource to produce noise.
+  An AudioSource to produce noise.
 
-    The noise can be pink or white.
+  The noise can be pink or white.
 
-    @todo Refactor to produce only white noise. Create a new AudioSource called
-          PinkNoiseFilter that can be chained onto another AudioSource. Create
-          PinkNoiseAudioSource as a composition of NoiseAudioSource and
-          PinkNoiseFilter.
+  @todo Refactor to produce only white noise. Create a new AudioSource called
+        *PinkNoiseFilter* that can be chained onto another AudioSource. Create
+        *PinkNoiseAudioSource* as a composition of NoiseAudioSource and
+        *PinkNoiseFilter*.
 
-    @ingroup vf_audio
+  @ingroup vf_audio
 */
 class NoiseAudioSource : public AudioSource
 {
