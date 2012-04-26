@@ -93,6 +93,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">List&lt; Element, Tag &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a> &#124; <a class="el" href="group__intrusive.html">intrusive</a></div></div>  </div>
 </div><!--header-->
@@ -106,73 +109,721 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Inherits Uncopyable.</p>
 
 <p><a href="class_list-members.html">List of all members.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8fc220b8cab580699fa6c4371304b28e"><td class="memItemLeft" align="right" valign="top">typedef iterator_base&lt; Element, <br class="typebreak"/>
+Node &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a></td></tr>
+<tr class="memdesc:a8fc220b8cab580699fa6c4371304b28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A read/write <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> iterator.  <a href="#a8fc220b8cab580699fa6c4371304b28e"></a><br/></td></tr>
+<tr class="memitem:a7e15d39166c82401b6b3c4022bc4c876"><td class="memItemLeft" align="right" valign="top">typedef iterator_base&lt; Element <br class="typebreak"/>
+const, Node const  &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a></td></tr>
+<tr class="memdesc:a7e15d39166c82401b6b3c4022bc4c876"><td class="mdescLeft">&#160;</td><td class="mdescRight">A read-only <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> iterator.  <a href="#a7e15d39166c82401b6b3c4022bc4c876"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae1c55dd44f5e78df24df2fa6ea9d65da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ae1c55dd44f5e78df24df2fa6ea9d65da">List</a> ()</td></tr>
+<tr class="memdesc:ae1c55dd44f5e78df24df2fa6ea9d65da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty list.  <a href="#ae1c55dd44f5e78df24df2fa6ea9d65da"></a><br/></td></tr>
+<tr class="memitem:a95ca90c9a538e895f5a0acee07d475d8"><td class="memItemLeft" align="right" valign="top">size_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a95ca90c9a538e895f5a0acee07d475d8">size</a> () const </td></tr>
+<tr class="memdesc:a95ca90c9a538e895f5a0acee07d475d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in the list.  <a href="#a95ca90c9a538e895f5a0acee07d475d8"></a><br/></td></tr>
+<tr class="memitem:ab19c89f79370fff56abf5c0f2fdf5f0b"><td class="memItemLeft" align="right" valign="top">reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ab19c89f79370fff56abf5c0f2fdf5f0b">front</a> ()</td></tr>
+<tr class="memdesc:ab19c89f79370fff56abf5c0f2fdf5f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a reference to the first element.  <a href="#ab19c89f79370fff56abf5c0f2fdf5f0b"></a><br/></td></tr>
+<tr class="memitem:ab1dc703fb7a9fc2cbee9872e247c51c6"><td class="memItemLeft" align="right" valign="top">const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ab1dc703fb7a9fc2cbee9872e247c51c6">front</a> () const </td></tr>
+<tr class="memdesc:ab1dc703fb7a9fc2cbee9872e247c51c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const reference to the first element.  <a href="#ab1dc703fb7a9fc2cbee9872e247c51c6"></a><br/></td></tr>
+<tr class="memitem:af1f54b129033f1ccd10c8fcbaf267550"><td class="memItemLeft" align="right" valign="top">reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#af1f54b129033f1ccd10c8fcbaf267550">back</a> ()</td></tr>
+<tr class="memdesc:af1f54b129033f1ccd10c8fcbaf267550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a reference to the last element.  <a href="#af1f54b129033f1ccd10c8fcbaf267550"></a><br/></td></tr>
+<tr class="memitem:aacfb03b8f94c0aee03334d8565c132a3"><td class="memItemLeft" align="right" valign="top">const_reference&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#aacfb03b8f94c0aee03334d8565c132a3">back</a> () const </td></tr>
+<tr class="memdesc:aacfb03b8f94c0aee03334d8565c132a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const reference to the last element.  <a href="#aacfb03b8f94c0aee03334d8565c132a3"></a><br/></td></tr>
+<tr class="memitem:a6631bb9bd8775cd0daffc1e8ba5115d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a6631bb9bd8775cd0daffc1e8ba5115d1">begin</a> ()</td></tr>
+<tr class="memdesc:a6631bb9bd8775cd0daffc1e8ba5115d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain an iterator to the beginning of the list.  <a href="#a6631bb9bd8775cd0daffc1e8ba5115d1"></a><br/></td></tr>
+<tr class="memitem:adb5cdc63aa650441f0806c7f6fe34a39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#adb5cdc63aa650441f0806c7f6fe34a39">begin</a> () const </td></tr>
+<tr class="memdesc:adb5cdc63aa650441f0806c7f6fe34a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const iterator to the beginning of the list.  <a href="#adb5cdc63aa650441f0806c7f6fe34a39"></a><br/></td></tr>
+<tr class="memitem:a8024c7c509ffa8b19dea94eb3a111b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a8024c7c509ffa8b19dea94eb3a111b97">cbegin</a> () const </td></tr>
+<tr class="memdesc:a8024c7c509ffa8b19dea94eb3a111b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const iterator to the beginning of the list.  <a href="#a8024c7c509ffa8b19dea94eb3a111b97"></a><br/></td></tr>
+<tr class="memitem:aa55b40c7225e5b4b206243df5a0222db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#aa55b40c7225e5b4b206243df5a0222db">end</a> ()</td></tr>
+<tr class="memdesc:aa55b40c7225e5b4b206243df5a0222db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a iterator to the end of the list.  <a href="#aa55b40c7225e5b4b206243df5a0222db"></a><br/></td></tr>
+<tr class="memitem:ab858e5bc2ff9abd32b5bc6f3ee91c026"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ab858e5bc2ff9abd32b5bc6f3ee91c026">end</a> () const </td></tr>
+<tr class="memdesc:ab858e5bc2ff9abd32b5bc6f3ee91c026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const iterator to the end of the list.  <a href="#ab858e5bc2ff9abd32b5bc6f3ee91c026"></a><br/></td></tr>
+<tr class="memitem:aa13e02a63512846df1da362a81af2e1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#aa13e02a63512846df1da362a81af2e1a">cend</a> () const </td></tr>
+<tr class="memdesc:aa13e02a63512846df1da362a81af2e1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const iterator to the end of the list.  <a href="#aa13e02a63512846df1da362a81af2e1a"></a><br/></td></tr>
+<tr class="memitem:a172d1e7de6944570ddb1ec3330397906"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a172d1e7de6944570ddb1ec3330397906">empty</a> () const </td></tr>
+<tr class="memdesc:a172d1e7de6944570ddb1ec3330397906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the list is empty.  <a href="#a172d1e7de6944570ddb1ec3330397906"></a><br/></td></tr>
+<tr class="memitem:a14b60a0ec361f088bb6242d0d9514ad9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a14b60a0ec361f088bb6242d0d9514ad9">clear</a> ()</td></tr>
+<tr class="memdesc:a14b60a0ec361f088bb6242d0d9514ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the list.  <a href="#a14b60a0ec361f088bb6242d0d9514ad9"></a><br/></td></tr>
+<tr class="memitem:ad132d2652f0badeba8e5a31d0ad14c1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ad132d2652f0badeba8e5a31d0ad14c1b">insert</a> (<a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> pos, Element &amp;elem)</td></tr>
+<tr class="memdesc:ad132d2652f0badeba8e5a31d0ad14c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an element.  <a href="#ad132d2652f0badeba8e5a31d0ad14c1b"></a><br/></td></tr>
+<tr class="memitem:ae7e199719fef2e2817a1b5b89399b26c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ae7e199719fef2e2817a1b5b89399b26c">insert</a> (<a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> pos, <a class="el" href="class_list.html">List</a> &amp;other)</td></tr>
+<tr class="memdesc:ae7e199719fef2e2817a1b5b89399b26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert another list into this one.  <a href="#ae7e199719fef2e2817a1b5b89399b26c"></a><br/></td></tr>
+<tr class="memitem:a59a820ec7dd5524d5bfacd5ef8c4b3aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a59a820ec7dd5524d5bfacd5ef8c4b3aa">erase</a> (<a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> pos)</td></tr>
+<tr class="memdesc:a59a820ec7dd5524d5bfacd5ef8c4b3aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove an element.  <a href="#a59a820ec7dd5524d5bfacd5ef8c4b3aa"></a><br/></td></tr>
+<tr class="memitem:ab470662568214e4a02b0d1f25b02948e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ab470662568214e4a02b0d1f25b02948e">push_front</a> (Element &amp;elem)</td></tr>
+<tr class="memdesc:ab470662568214e4a02b0d1f25b02948e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an element at the beginning of the list.  <a href="#ab470662568214e4a02b0d1f25b02948e"></a><br/></td></tr>
+<tr class="memitem:ab213a5e4e48d00e9a38b3a7ab8433da0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#ab213a5e4e48d00e9a38b3a7ab8433da0">pop_front</a> ()</td></tr>
+<tr class="memdesc:ab213a5e4e48d00e9a38b3a7ab8433da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the element at the beginning of the list.  <a href="#ab213a5e4e48d00e9a38b3a7ab8433da0"></a><br/></td></tr>
+<tr class="memitem:a2f5e86e4c9fae989495fea6c79a48be2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2">push_back</a> (Element &amp;elem)</td></tr>
+<tr class="memdesc:a2f5e86e4c9fae989495fea6c79a48be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append an element at the end of the list.  <a href="#a2f5e86e4c9fae989495fea6c79a48be2"></a><br/></td></tr>
+<tr class="memitem:a47e5bbe8182a9e2689e30f745c1ee4b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a47e5bbe8182a9e2689e30f745c1ee4b4">pop_back</a> ()</td></tr>
+<tr class="memdesc:a47e5bbe8182a9e2689e30f745c1ee4b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the element at the end of the list.  <a href="#a47e5bbe8182a9e2689e30f745c1ee4b4"></a><br/></td></tr>
+<tr class="memitem:a64687d3be96c3e87123383a6ec728774"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64687d3be96c3e87123383a6ec728774"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a64687d3be96c3e87123383a6ec728774">swap</a> (<a class="el" href="class_list.html">List</a> &amp;other)</td></tr>
+<tr class="memdesc:a64687d3be96c3e87123383a6ec728774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap contents with another list. <br/></td></tr>
+<tr class="memitem:a3bc09abb9f3d52da90de2b4167070cc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a3bc09abb9f3d52da90de2b4167070cc8">prepend</a> (<a class="el" href="class_list.html">List</a> &amp;list)</td></tr>
+<tr class="memdesc:a3bc09abb9f3d52da90de2b4167070cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert another list at the beginning of this list.  <a href="#a3bc09abb9f3d52da90de2b4167070cc8"></a><br/></td></tr>
+<tr class="memitem:af591f2144527b8c0b407f404b3af7279"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#af591f2144527b8c0b407f404b3af7279">append</a> (<a class="el" href="class_list.html">List</a> &amp;list)</td></tr>
+<tr class="memdesc:af591f2144527b8c0b407f404b3af7279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append another list at the end of this list.  <a href="#af591f2144527b8c0b407f404b3af7279"></a><br/></td></tr>
+<tr class="memitem:a72c2318a03339050836339fd3860f2fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a72c2318a03339050836339fd3860f2fb">iterator_to</a> (Element &amp;elem) const </td></tr>
+<tr class="memdesc:a72c2318a03339050836339fd3860f2fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain an iterator from an element.  <a href="#a72c2318a03339050836339fd3860f2fb"></a><br/></td></tr>
+<tr class="memitem:a62e726665a09f9987bbd5b931f267a60"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_list.html#a62e726665a09f9987bbd5b931f267a60">const_iterator_to</a> (Element const &amp;elem) const </td></tr>
+<tr class="memdesc:a62e726665a09f9987bbd5b931f267a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain a const iterator from an element.  <a href="#a62e726665a09f9987bbd5b931f267a60"></a><br/></td></tr>
+</table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Element, class Tag = ListDefaultTag&gt;<br/>
 class List&lt; Element, Tag &gt;</h3>
 
-<div class="fragment"><pre class="fragment">This intrusive List is a container similar in operation to std::list in the
-Standard Template Library (STL).
-
-To use the list, we first derive the object we want to place into the list
-from List::Node:</pre></div> <div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>Object : <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object&gt;::Node
+<p>This intrusive <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> is a container similar in operation to std::list in the Standard Template Library (STL). Like all <a class="el" href="group__intrusive.html">intrusive</a> containers, <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> requires you to first derive your class from List&lt;&gt;::Node:</p>
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>Object : <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object&gt;::Node
+  {
+    Object (<span class="keywordtype">int</span> value) : m_value (value)
     {
-      Object (<span class="keywordtype">int</span> value) : m_value (value)
-      {
-      }
+    }
       
-      <span class="keywordtype">int</span> m_value;
-    };
-</pre></div><p>Now we declare the list, and add a couple of items.</p>
-<div class="fragment"><pre class="fragment">    <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;</a> list;
+    <span class="keywordtype">int</span> m_value;
+  };
+</pre></div><p>Now we define the list, and add a couple of items.</p>
+<div class="fragment"><pre class="fragment">  <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;</a> list;
 
-    list.push_back (* (<span class="keyword">new</span> Object (1)));
-    list.push_back (* (<span class="keyword">new</span> Object (2)));
-</pre></div><p>For compatibility with the standard containers, push_back() expects a reference to the object. Unlike the standard container, however, push_back() places the actual object in the list and not a copy-constructed duplicate.</p>
+  list.<a class="code" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2" title="Append an element at the end of the list.">push_back</a> (* (<span class="keyword">new</span> Object (1)));
+  list.<a class="code" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2" title="Append an element at the end of the list.">push_back</a> (* (<span class="keyword">new</span> Object (2)));
+</pre></div><p>For compatibility with the standard containers, <a class="el" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2" title="Append an element at the end of the list.">push_back()</a> expects a reference to the object. Unlike the standard container, however, <a class="el" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2" title="Append an element at the end of the list.">push_back()</a> places the actual object in the list and not a copy-constructed duplicate.</p>
 <p>Iterating over the list follows the same idiom as the STL:</p>
-<div class="fragment"><pre class="fragment">    <span class="keywordflow">for</span> (List &lt;Object&gt;::iterator iter = list.begin();
-         iter != list.end;
-         ++iter)
-      std::cout &lt;&lt; iter-&gt;m_value;
+<div class="fragment"><pre class="fragment">  <span class="keywordflow">for</span> (<a class="code" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e" title="A read/write List iterator.">List &lt;Object&gt;::iterator</a> iter = list.<a class="code" href="class_list.html#a6631bb9bd8775cd0daffc1e8ba5115d1" title="Obtain an iterator to the beginning of the list.">begin</a>(); iter != list.<a class="code" href="class_list.html#aa55b40c7225e5b4b206243df5a0222db" title="Obtain a iterator to the end of the list.">end</a>; ++iter)
+    std::cout &lt;&lt; iter-&gt;m_value;
 </pre></div><p>You can even use BOOST_FOREACH, or range based for loops:</p>
-<div class="fragment"><pre class="fragment">    BOOST_FOREACH (Object&amp; <span class="keywordtype">object</span>, list)  <span class="comment">// boost only</span>
-      std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
+<div class="fragment"><pre class="fragment">  BOOST_FOREACH (Object&amp; <span class="keywordtype">object</span>, list)  <span class="comment">// boost only</span>
+    std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
 
-    for (Object&amp; <span class="keywordtype">object</span> : list)           <span class="comment">// c++11 only</span>
-      std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
+  for (Object&amp; <span class="keywordtype">object</span> : list)           <span class="comment">// C++11 only</span>
+    std::cout &lt;&lt; <span class="keywordtype">object</span>.m_value;
 </pre></div><p>Because <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> is mostly STL compliant, it can be passed into STL algorithms: e.g. std::for_each() or std::find_first_of.</p>
 <p>In general, objects placed into a <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> should be dynamically allocated although this cannot be enforced at compile time. Since the caller provides the storage for the object, the caller is also responsible for deleting the object. An object still exists after being removed from a <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a>, until the caller deletes it. This means an element can be moved from one <a class="el" href="class_list.html" title="Intrusive doubly linked list.">List</a> to another with practically no overhead.</p>
 <p>Unlike the standard containers, an object may only exist in one list at a time, unless special preparations are made. The Tag template parameter is used to distinguish between different list types for the same object, allowing the object to exist in more than one list simultaneously.</p>
 <p>For example, consider an actor system where a global list of actors is maintained, so that they can each be periodically receive processing time. We wish to also maintain a list of the subset of actors that require a domain-dependent update. To achieve this, we declare two tags, the associated list types, and the list element thusly:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>Actor;         <span class="comment">// Forward declaration required</span>
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>Actor;         <span class="comment">// Forward declaration required</span>
 
-    <span class="keyword">struct </span>ProcessTag { };
-    <span class="keyword">struct </span>UpdateTag { };
+  <span class="keyword">struct </span>ProcessTag { };
+  <span class="keyword">struct </span>UpdateTag { };
 
-    <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Actor, ProcessTag&gt;</a> ProcessList;
-    <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Actor, UpdateTag&gt;</a> UpdateList;
+  <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Actor, ProcessTag&gt;</a> ProcessList;
+  <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Actor, UpdateTag&gt;</a> UpdateList;
 
-    <span class="comment">// Derive from both node types so we can be in each list at once.</span>
-    <span class="comment">//</span>
-    <span class="keyword">struct </span>Actor : ProcessList::Node, UpdateList::Node
-    {
-      <span class="keywordtype">bool</span> process ();    <span class="comment">// returns true if we need an update</span>
-      <span class="keywordtype">void</span> update ();
-    };
-</pre></div><dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Tag</td><td>A type name used to distinguish lists and nodes, for putting objects in multiple lists. If this parameter is omitted, the default tag is used.</td></tr>
+  <span class="comment">// Derive from both node types so we can be in each list at once.</span>
+  <span class="comment">//</span>
+  <span class="keyword">struct </span>Actor : ProcessList::Node, UpdateList::Node
+  {
+    <span class="keywordtype">bool</span> process ();    <span class="comment">// returns true if we need an update</span>
+    <span class="keywordtype">void</span> update ();
+  };
+</pre></div><dl class=""><dt><b>Template Parameters:</b></dt><dd>
+  <table class="">
+    <tr><td class="paramname">Element</td><td>The base type of element which the list will store pointers to.</td></tr>
+    <tr><td class="paramname">Tag</td><td>An optional unique type name used to distinguish lists and nodes, when the object can exist in multiple lists simultaneously. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>Put intrusive documentation concepts into its own section and refer to it from the containers.</dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a8fc220b8cab580699fa6c4371304b28e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef iterator_base&lt;Element, Node&gt; <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e15d39166c82401b6b3c4022bc4c876"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef iterator_base&lt;Element const, Node const&gt; <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae1c55dd44f5e78df24df2fa6ea9d65da"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html">List</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a95ca90c9a538e895f5a0acee07d475d8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">size_type <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a95ca90c9a538e895f5a0acee07d475d8">size</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>The number of elements in the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab19c89f79370fff56abf5c0f2fdf5f0b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">reference <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ab19c89f79370fff56abf5c0f2fdf5f0b">front</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list may not be empty.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>A reference to the first element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab1dc703fb7a9fc2cbee9872e247c51c6"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const_reference <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ab19c89f79370fff56abf5c0f2fdf5f0b">front</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list may not be empty.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>A const reference to the first element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af1f54b129033f1ccd10c8fcbaf267550"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">reference <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#af1f54b129033f1ccd10c8fcbaf267550">back</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list may not be empty.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>A reference to the last element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aacfb03b8f94c0aee03334d8565c132a3"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const_reference <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#af1f54b129033f1ccd10c8fcbaf267550">back</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list may not be empty.</dd></dl>
+<dl class="section return"><dt>Returns:</dt><dd>A const reference to the last element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6631bb9bd8775cd0daffc1e8ba5115d1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a6631bb9bd8775cd0daffc1e8ba5115d1">begin</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>An iterator pointing to the beginning of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="adb5cdc63aa650441f0806c7f6fe34a39"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a6631bb9bd8775cd0daffc1e8ba5115d1">begin</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>A const iterator pointing to the beginning of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8024c7c509ffa8b19dea94eb3a111b97"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a8024c7c509ffa8b19dea94eb3a111b97">cbegin</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>A const iterator pointing to the beginning of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa55b40c7225e5b4b206243df5a0222db"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#aa55b40c7225e5b4b206243df5a0222db">end</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>An iterator pointing to the end of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab858e5bc2ff9abd32b5bc6f3ee91c026"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#aa55b40c7225e5b4b206243df5a0222db">end</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>A constiterator pointing to the end of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa13e02a63512846df1da362a81af2e1a"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#aa13e02a63512846df1da362a81af2e1a">cend</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd>A constiterator pointing to the end of the list. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a172d1e7de6944570ddb1ec3330397906"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a172d1e7de6944570ddb1ec3330397906">empty</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section return"><dt>Returns:</dt><dd><code>true</code> if the list is empty. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a14b60a0ec361f088bb6242d0d9514ad9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a14b60a0ec361f088bb6242d0d9514ad9">clear</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section note"><dt>Note:</dt><dd>This does not free the elements. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad132d2652f0badeba8e5a31d0ad14c1b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ad132d2652f0badeba8e5a31d0ad14c1b">insert</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Element &amp;&#160;</td>
+          <td class="paramname"><em>elem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must not already be in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>The location to insert after.</td></tr>
+    <tr><td class="paramname">elem</td><td>The element to insert.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>An iterator pointing to the newly inserted element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae7e199719fef2e2817a1b5b89399b26c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ad132d2652f0badeba8e5a31d0ad14c1b">insert</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The other list is cleared.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>The location to insert after.</td></tr>
+    <tr><td class="paramname">other</td><td>The list to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a59a820ec7dd5524d5bfacd5ef8c4b3aa"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a59a820ec7dd5524d5bfacd5ef8c4b3aa">erase</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a>&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must exist in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>An iterator pointing to the element to remove.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>An iterator pointing to the next element after the one removed. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab470662568214e4a02b0d1f25b02948e"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ab470662568214e4a02b0d1f25b02948e">push_front</a> </td>
+          <td>(</td>
+          <td class="paramtype">Element &amp;&#160;</td>
+          <td class="paramname"><em>elem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must not exist in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elem</td><td>The element to insert. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab213a5e4e48d00e9a38b3a7ab8433da0"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#ab213a5e4e48d00e9a38b3a7ab8433da0">pop_front</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list must not be empty. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2f5e86e4c9fae989495fea6c79a48be2"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a2f5e86e4c9fae989495fea6c79a48be2">push_back</a> </td>
+          <td>(</td>
+          <td class="paramtype">Element &amp;&#160;</td>
+          <td class="paramname"><em>elem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must not exist in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elem</td><td>The element to append. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a47e5bbe8182a9e2689e30f745c1ee4b4"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a47e5bbe8182a9e2689e30f745c1ee4b4">pop_back</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The list must not be empty. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3bc09abb9f3d52da90de2b4167070cc8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a3bc09abb9f3d52da90de2b4167070cc8">prepend</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The other list is cleared. </p>
+
+</div>
+</div>
+<a class="anchor" id="af591f2144527b8c0b407f404b3af7279"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#af591f2144527b8c0b407f404b3af7279">append</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt; &amp;&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The other list is cleared. </p>
+
+</div>
+</div>
+<a class="anchor" id="a72c2318a03339050836339fd3860f2fb"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a8fc220b8cab580699fa6c4371304b28e">iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a72c2318a03339050836339fd3860f2fb">iterator_to</a> </td>
+          <td>(</td>
+          <td class="paramtype">Element &amp;&#160;</td>
+          <td class="paramname"><em>elem</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must exist in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elem</td><td>The element to obtain an iterator for.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>An iterator to the element. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a62e726665a09f9987bbd5b931f267a60"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Element, class Tag = ListDefaultTag&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_list.html#a7e15d39166c82401b6b3c4022bc4c876">const_iterator</a> <a class="el" href="class_list.html">List</a>&lt; Element, Tag &gt;::<a class="el" href="class_list.html#a62e726665a09f9987bbd5b931f267a60">const_iterator_to</a> </td>
+          <td>(</td>
+          <td class="paramtype">Element const &amp;&#160;</td>
+          <td class="paramname"><em>elem</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="section invariant"><dt>Invariant:</dt><dd>The element must exist in the list.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elem</td><td>The element to obtain an iterator for.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns:</dt><dd>A const iterator to the element. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>vf_List.h</li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:09:07 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

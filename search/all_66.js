@@ -203,6 +203,7 @@ var searchData=
   ['fromutf32',['fromUTF32',['http://www.rawmaterialsoftware.com/juce/api/classMD5.html#a77bcb27f700db51a8514e00960f9d728',1,'MD5']]],
   ['fromutf8',['fromUTF8',['http://www.rawmaterialsoftware.com/juce/api/classString.html#aa0116dc51d7bdd363d14c72bba60060a',1,'String']]],
   ['fromxml',['fromXml',['http://www.rawmaterialsoftware.com/juce/api/classValueTree.html#a0d2f1bdd6313e53f256ed015986f837a',1,'ValueTree']]],
+  ['front',['front',['../class_list.html#ab19c89f79370fff56abf5c0f2fdf5f0b',1,'List::front()'],['../class_list.html#ab1dc703fb7a9fc2cbee9872e247c51c6',1,'List::front() const ']]],
   ['frontoutlinecolourid',['frontOutlineColourId',['http://www.rawmaterialsoftware.com/juce/api/classTabbedButtonBar.html#a1193bcbd9622a87f4dbdee8db8f9806dab1821bb1f7b2d4055a1e8e035649cc3f',1,'TabbedButtonBar']]],
   ['fronttextcolourid',['frontTextColourId',['http://www.rawmaterialsoftware.com/juce/api/classTabbedButtonBar.html#a1193bcbd9622a87f4dbdee8db8f9806da53c37ddad54ae89b891b438e9e94ec0f',1,'TabbedButtonBar']]],
   ['fruityloops',['FruityLoops',['http://www.rawmaterialsoftware.com/juce/api/classPluginHostType.html#a69d9330e82ef7520f9aa8b2ad78ce5a8aafe10f6ddbe74f8f788f29312fa5b2b9',1,'PluginHostType']]],

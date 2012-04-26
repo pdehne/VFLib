@@ -132,89 +132,88 @@ Classes</h2></td></tr>
 </ul>
 <h1>Usage</h1>
 <p>Like STL containers, intrusive containers are all template based, where the template argument specifies the type of object that the container will hold. These declarations specify a doubly linked list where each element points to a user defined class:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">class </span>Object; <span class="comment">// Forward declaration</span>
+<div class="fragment"><pre class="fragment">  <span class="keyword">class </span>Object; <span class="comment">// Forward declaration</span>
 
-    <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;</a> ListType; <span class="comment">// Linked list of Object</span>
+  <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;</a> list; <span class="comment">// Doubly-linked list of Object</span>
 </pre></div><p>Because intrusive containers allocate no memory, allowing objects to be placed inside requires a modification to their cless declaration. Each intrusive container declares a nested class Node which elements must be derived from, using the Curiously Recurring Template Pattern (CRTP). We will continue to fully declare the Object type from the previous example to support emplacement into an intrusive container:</p>
-<div class="fragment"><pre class="fragment">    <span class="comment">// Declare our object as a ListType element</span>
-
-    <span class="keyword">class </span>Object : <span class="keyword">public</span> ListType::Node <span class="comment">// must be public</span>
-    {
-    <span class="keyword">public</span>:
-      <span class="keywordtype">void</span> performAction ();
-    };
-
-    <span class="comment">// Define a list</span>
-
-    ListType list;
+<div class="fragment"><pre class="fragment">  <span class="keyword">class </span>Object : <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object&gt;::Node <span class="comment">// Required for List</span>
+  {
+  <span class="keyword">public</span>:
+    <span class="keywordtype">void</span> performAction ();
+  };
 </pre></div><p>Usage of a typedef eliminates redundant specification of the template arguments but requires a forward declaration. The following code is equivalent.</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">class </span>Object : <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object&gt;::Node
-    {
-      <span class="keywordtype">void</span> performAction ();
-    };
+<div class="fragment"><pre class="fragment">  <span class="keyword">class </span>Object; <span class="comment">// Forward declaration</span>
 
-    <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;::Node</a> list;
+  <span class="comment">// Specify template parameters just once</span>
+  <span class="keyword">typedef</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object&gt;</a> ListType;
+
+  <span class="keyword">class </span>Object : <span class="keyword">public</span> ListType::Node
+  {
+    <span class="keywordtype">void</span> performAction ();
+  };
+
+  ListType::Node list;
 </pre></div><p>With these declarations we may proceed to create our objects, add them to the list, and perform operations:</p>
-<div class="fragment"><pre class="fragment">    <span class="comment">// Create a few objects and put them in the list</span>
-    <span class="keywordflow">for</span> (i = 0; i &lt; 5; ++i)
-      list.push_back (*<span class="keyword">new</span> Object);
+<div class="fragment"><pre class="fragment">  <span class="comment">// Create a few objects and put them in the list</span>
+  <span class="keywordflow">for</span> (i = 0; i &lt; 5; ++i)
+    list.push_back (*<span class="keyword">new</span> Object);
 
-    <span class="comment">// Call a method on each list</span>
-    <span class="keywordflow">for</span> (ListType::iterator iter = list.begin(); iter != list.end; ++iter)
-      iter-&gt;performAction ();
-</pre></div><p>Unlike regular STL containers, an object derived from an intrusive container node cannot exist in more than one instance of that list at a time. This is because the book-keeping information for maintaining the list is kept in the object rather than the list.</p>
+  <span class="comment">// Call a method on each list</span>
+  <span class="keywordflow">for</span> (ListType::iterator iter = list.begin(); iter != list.end; ++iter)
+    iter-&gt;performAction ();
+</pre></div><p>Unlike regular STL containers, an object derived from an intrusive container node cannot exist in more than one instance of that list at a time. This is because the bookkeeping information for maintaining the list is kept in the object rather than the list.</p>
 <p>To support objects existing in multiple containers, templates variations are instantiated by distinguishing them with an empty structure, called a tag. The object is derived from multiple instances of Node, where each instance specifies a unique tag. The tag is passed as the second template argument. When the second argument is unspecified, the default tag is used.</p>
 <p>This declaration example shows the usage of tags to allow an object to exist simultaneously in two separate lists:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>GlobalListTag { }; <span class="comment">// list of all objects</span>
-    <span class="keyword">struct </span>ActiveListTag { }; <span class="comment">// subset of all objects that are active</span>
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>GlobalListTag { }; <span class="comment">// list of all objects</span>
+  <span class="keyword">struct </span>ActiveListTag { }; <span class="comment">// subset of all objects that are active</span>
 
-    <span class="keyword">class </span>Object : <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, GlobalListTag&gt;
-                 , <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, ActiveListTag&gt;
+  <span class="keyword">class </span>Object : <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, GlobalListTag&gt;
+                , <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, ActiveListTag&gt;
+  {
+  <span class="keyword">public</span>:
+    Object () : m_isActive (false)
     {
-    <span class="keyword">public</span>:
-      Object () : m_isActive (false)
-      {
-        <span class="comment">// Add ourselves to the global list</span>
-        s_globalList.push_front (*<span class="keyword">this</span>);
-      }
-
-      ~Object ()
-      {
-        deactivate ();
-      }
-
-      <span class="keywordtype">void</span> becomeActive ()
-      {
-        <span class="comment">// Add ourselves to the active list</span>
-        <span class="keywordflow">if</span> (!m_isActive)
-        {
-          s_activeList.push_front (*<span class="keyword">this</span>);
-          m_isActive = <span class="keyword">true</span>;
-        }
-      }
-
-      <span class="keywordtype">void</span> deactivate ()
-      {
-        <span class="keywordflow">if</span> (m_isActive)
-        {
-          <span class="comment">// Doesn&#39;t delete the object</span>
-          s_activeList.remove (<span class="keyword">this</span>);
-
-          m_isActive = <span class="keyword">false</span>;
-        }
-      }
-
-    <span class="keyword">private</span>:
-      <span class="keywordtype">bool</span> m_isActive;
-
-      <span class="keyword">static</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object, GlobalListTag&gt;</a> s_globalList;
-      <span class="keyword">static</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object, ActiveListTag&gt;</a> s_activeList;
+      <span class="comment">// Add ourselves to the global list</span>
+      s_globalList.push_front (*<span class="keyword">this</span>);
     }
+
+    ~Object ()
+    {
+      deactivate ();
+    }
+
+    <span class="keywordtype">void</span> becomeActive ()
+    {
+      <span class="comment">// Add ourselves to the active list</span>
+      <span class="keywordflow">if</span> (!m_isActive)
+      {
+        s_activeList.push_front (*<span class="keyword">this</span>);
+        m_isActive = <span class="keyword">true</span>;
+      }
+    }
+
+    <span class="keywordtype">void</span> deactivate ()
+    {
+      <span class="keywordflow">if</span> (m_isActive)
+      {
+        <span class="comment">// Doesn&#39;t delete the object</span>
+        s_activeList.remove (<span class="keyword">this</span>);
+
+        m_isActive = <span class="keyword">false</span>;
+      }
+    }
+
+  <span class="keyword">private</span>:
+    <span class="keywordtype">bool</span> m_isActive;
+
+    <span class="keyword">static</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object, GlobalListTag&gt;</a> s_globalList;
+    <span class="keyword">static</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List &lt;Object, ActiveListTag&gt;</a> s_activeList;
+  }
 </pre></div> </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:09:07 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

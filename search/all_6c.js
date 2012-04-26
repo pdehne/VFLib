@@ -72,7 +72,7 @@ var searchData=
   ['link',['link',['http://www.rawmaterialsoftware.com/juce/api/classOpenGLShaderProgram.html#a930959c2890c748a91cb8a72aee9814a',1,'OpenGLShaderProgram']]],
   ['linkedlistpointer',['LinkedListPointer',['http://www.rawmaterialsoftware.com/juce/api/classLinkedListPointer.html',1,'LinkedListPointer&lt; ObjectType &gt;'],['http://www.rawmaterialsoftware.com/juce/api/classLinkedListPointer.html#a044598f5b6b8ac53a221fb934fa41724',1,'LinkedListPointer::LinkedListPointer() noexcept'],['http://www.rawmaterialsoftware.com/juce/api/classLinkedListPointer.html#ac971f23361914ad4adef583e766e9d7f',1,'LinkedListPointer::LinkedListPointer(ObjectType *const headItem) noexcept']]],
   ['linux',['Linux',['http://www.rawmaterialsoftware.com/juce/api/classSystemStats.html#a7697c468b5f6c391096ab483690b68eaa2d87a056c510cc59626e6df7be6fe72d',1,'SystemStats']]],
-  ['list',['List',['../class_list.html',1,'']]],
+  ['list',['List',['../class_list.html',1,'List&lt; Element, Tag &gt;'],['../class_list.html#ae1c55dd44f5e78df24df2fa6ea9d65da',1,'List::List()']]],
   ['list_3c_20entry_20_3e',['List< Entry >',['../class_list.html',1,'']]],
   ['list_3c_20group_20_3e',['List< Group >',['../class_list.html',1,'']]],
   ['list_3c_20item_20_3e',['List< Item >',['../class_list.html',1,'']]],

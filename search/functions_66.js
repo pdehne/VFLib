@@ -117,6 +117,7 @@ var searchData=
   ['fromutf32',['fromUTF32',['http://www.rawmaterialsoftware.com/juce/api/classMD5.html#a77bcb27f700db51a8514e00960f9d728',1,'MD5']]],
   ['fromutf8',['fromUTF8',['http://www.rawmaterialsoftware.com/juce/api/classString.html#aa0116dc51d7bdd363d14c72bba60060a',1,'String']]],
   ['fromxml',['fromXml',['http://www.rawmaterialsoftware.com/juce/api/classValueTree.html#a0d2f1bdd6313e53f256ed015986f837a',1,'ValueTree']]],
+  ['front',['front',['../class_list.html#ab19c89f79370fff56abf5c0f2fdf5f0b',1,'List::front()'],['../class_list.html#ab1dc703fb7a9fc2cbee9872e247c51c6',1,'List::front() const ']]],
   ['fullframe',['fullFrame',['http://www.rawmaterialsoftware.com/juce/api/classMidiMessage.html#a58a16ba76b5f789b238155359ba9379c',1,'MidiMessage']]],
   ['function',['function',['http://www.rawmaterialsoftware.com/juce/api/classExpression.html#afd58f776e343213a4e488db47faadcb2',1,'Expression']]]
 ];

@@ -124,14 +124,14 @@ class SortedLookupTable&lt; SchemaType &gt;</h3>
 
 <p>This container is optimized for a data set with fixed elements.</p>
 <p>SchemaType obeys this concept:</p>
-<div class="fragment"><pre class="fragment">    <span class="keyword">struct </span>SchemaType
-    {
-      <span class="keyword">typename</span> KeyType;
-      <span class="keyword">typename</span> ValueType;
+<div class="fragment"><pre class="fragment">  <span class="keyword">struct </span>SchemaType
+  {
+    <span class="keyword">typename</span> KeyType;
+    <span class="keyword">typename</span> ValueType;
 
-      <span class="comment">// Retrieve the key for a specified value.</span>
-      KeyType getKey (<a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValue.html">Value</a> <span class="keyword">const</span>&amp; value);
-    };
+    <span class="comment">// Retrieve the key for a specified value.</span>
+    KeyType getKey (<a class="codeRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classValue.html">Value</a> <span class="keyword">const</span>&amp; value);
+  };
 </pre></div><p>To use the table, reserve space with <a class="el" href="class_sorted_lookup_table.html#af10cc690631ca028daeb426c52e54e79" title="Reserve space for values.">reserveSpaceForValues()</a> if the number of elements is known ahead of time. Then, call <a class="el" href="class_sorted_lookup_table.html#aab53bd0de6812f31f138c4f9e94de31f" title="Insert a value into the index.">insert()</a> for all the your elements. Call <a class="el" href="class_sorted_lookup_table.html#afcd4474107e66da4674c41c955378565" title="Prepare the index for lookups.">prepareForLookups()</a> once then call lookupValueByKey () </p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="af10cc690631ca028daeb426c52e54e79"></a>
@@ -251,7 +251,7 @@ template&lt;class SchemaType &gt; </div>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2012 21:09:07 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 25 2012 21:48:56 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
