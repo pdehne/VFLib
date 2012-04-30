@@ -85,6 +85,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ParallelFor.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -134,11 +138,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_core\native\vf_posix_Threads.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\modules\vf_core\native\vf_win32_FPUFlags.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_core\native\vf_win32_Threads.cpp" />
     <ClCompile Include="..\..\modules\vf_core\threads\vf_InterruptibleThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_core\threads\vf_Semaphore.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -487,6 +500,7 @@
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_Listeners.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ManualCallQueue.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.h" />
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ParallelFor.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ReadWriteMutex.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentObject.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ConcurrentState.h" />
@@ -520,6 +534,7 @@
     <ClInclude Include="..\..\modules\vf_core\memory\vf_Uncopyable.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_StaticObject.h" />
+    <ClInclude Include="..\..\modules\vf_core\threads\vf_Semaphore.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_SpinDelay.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_InterruptibleThread.h" />
     <ClInclude Include="..\..\modules\vf_core\vf_core.h" />
