@@ -154,6 +154,7 @@ namespace vf
 #include "threads/vf_MessageThread.h"
 #include "threads/vf_ManualCallQueue.h"
 #include "threads/vf_ReadWriteMutex.h"
+#include "threads/vf_ThreadGroup.h"
 #include "threads/vf_ThreadWithCallQueue.h"
 }
 

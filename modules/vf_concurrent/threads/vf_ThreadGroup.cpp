@@ -19,42 +19,29 @@
 */
 /*============================================================================*/
 
-/** Add this to get the @ref vf_concurrent module.
-
-    @file vf_concurrent.cpp
-    @ingroup vf_concurrent
-*/
-
-#include "AppConfig.h"
-
-#include "vf_concurrent.h"
-
-#if JUCE_MSVC
-#pragma warning (push)
-#pragma warning (disable: 4100) // unreferenced formal parmaeter
-#endif
-
-namespace vf
+ThreadGroup::ThreadGroup ()
 {
-#if VF_USE_BOOST
-#include "memory/vf_FifoFreeStoreWithTLS.cpp"
-#else
-#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
-#endif
-#include "memory/vf_GlobalPagedFreeStore.cpp"
-#include "memory/vf_PagedFreeStore.cpp"
-
-#include "threads/vf_CallQueue.cpp"
-#include "threads/vf_ConcurrentObject.cpp"
-#include "threads/vf_GuiCallQueue.cpp"
-#include "threads/vf_Listeners.cpp"
-#include "threads/vf_ManualCallQueue.cpp"
-#include "threads/vf_MessageThread.cpp"
-#include "threads/vf_ReadWriteMutex.cpp"
-#include "threads/vf_ThreadGroup.cpp"
-#include "threads/vf_ThreadWithCallQueue.cpp"
+  setNumberOfThreads (SystemStats::getNumCpus ());
 }
 
-#if JUCE_MSVC
-#pragma warning (pop)
-#endif
+ThreadGroup::ThreadGroup (int numberOfThreads)
+{
+  setNumberOfThreads (numberOfThreads);
+}
+
+void ThreadGroup::setNumberOfThreads (int numberOfThreads)
+{
+}
+
+void ThreadGroup::thread_init ()
+{
+}
+
+void ThreadGroup::thread_exit ()
+{
+}
+
+const InterruptibleThread::Interrupted ThreadGroup::thread_idle ()
+{
+  return InterruptibleThread::Interrupted (false);
+}
