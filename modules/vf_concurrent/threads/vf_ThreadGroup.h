@@ -56,10 +56,23 @@ public:
   */
   void setNumberOfThreads (int numberOfThreads);
 
+  /** Calls a functor on all threads simultaneously.
+  */
   template <class Functor>
   void callf (Functor const& f)
   {
-    callw (new (m_allocator) WorkType <Functor> (f));
+    LockType::ScopedLockType lock (m_mutex);
+
+    if (m_threads.size () > 0)
+    {
+      for (List <Worker>::iterator iter = m_threads.begin ();
+           iter != m_threads.end (); ++iter)
+        iter->queue (new (m_allocator) WorkType <Functor> (f));
+    }
+    else
+    {
+      f ();
+    }
   }
 
   template <class Fn>
@@ -110,7 +123,7 @@ public:
 
   //============================================================================
 private:
-  class Work : public LockFreeStack <Work>::Node,
+  class Work : public LockFreeQueue <Work>::Node,
                public AllocatedBy <AllocatorType>
   {
   public:
@@ -130,33 +143,30 @@ private:
     Functor m_f;
   };
 
-  void callw (Work* w);
-
 private:
-  struct Jobs
-  {
-  };
-
   class Worker
     : public List <Worker>::Node
     , public Thread
   {
   public:
-    Worker (ThreadGroup& group, String name);
-
+    explicit Worker (String name);
     ~Worker ();
 
+    void queue (Work* work);
+
+  private:
     void run ();
 
   private:
-    ThreadGroup& m_group;
+    LockFreeQueue <Work> m_queue;
+    WaitableEvent m_event;
   };
 
+  typedef SpinLock LockType;
+  
   AllocatorType m_allocator;
-  LockFreeStack <Work> m_queue;
-  List <Worker> m_workers;
-  CriticalSection m_mutex;
-  Semaphore m_semaphore;
+  List <Worker> m_threads;
+  LockType m_mutex;
 };
 
 #endif

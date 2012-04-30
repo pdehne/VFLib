@@ -19,14 +19,39 @@
 */
 /*============================================================================*/
 
-ParallelFor::ParallelFor (ThreadGroup& threadGroup)
-  : m_threadGroup (threadGroup)
+ParallelFor::ParallelFor (ThreadGroup& pool)
+  : m_pool (pool)
   , m_event (false) // auto-reset
 {
 }
 
-void ParallelFor::doForEach (int numberOfIterations, Iteration& iteration)
+void ParallelFor::iterate (Iteration* iteration)
 {
-  m_counter.set (numberOfIterations);
+  ++m_numberOfInstances;
 
+  for (;;)
+  {
+    int const loopIndex = ++m_currentIndex;
+
+    if (loopIndex < m_numberOfIterations)
+      (*iteration) (loopIndex);
+    else
+      break;
+  }
+
+  if (--m_numberOfInstances == 0)
+    m_event.signal ();
 }
+
+void ParallelFor::doLoop (int numberOfIterations, Iteration* iteration)
+{
+  m_currentIndex = 0;
+  m_numberOfInstances = 0;
+
+  m_numberOfIterations = numberOfIterations;
+
+  m_pool.call (&ParallelFor::iterate, this, iteration);
+
+  m_event.wait ();
+}
+

@@ -60,6 +60,7 @@ private:
   int m_counter;
   CriticalSection m_mutex;
   List <WaitingThread> m_waitingThreads;
+  List <WaitingThread> m_deletedList;
 };
 
 #endif

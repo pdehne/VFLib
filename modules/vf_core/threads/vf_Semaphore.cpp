@@ -26,6 +26,11 @@ Semaphore::Semaphore (int initialCount)
 
 Semaphore::~Semaphore ()
 {
+  for (List <WaitingThread>::iterator iter = m_deletedList.begin ();
+       iter != m_deletedList.end ();)
+  {
+    delete &(*iter++);
+  }
 }
 
 void Semaphore::signal (int amount)
@@ -60,7 +65,16 @@ bool Semaphore::wait (int timeoutMilliseconds)
 
     if (--m_counter < 0)
     {
-      w = new WaitingThread;
+      if (m_deletedList.size () > 0)
+      {
+        w = &m_deletedList.front ();
+        
+        m_deletedList.pop_front ();
+      }
+      else
+      {
+        w = new WaitingThread;
+      }
 
       m_waitingThreads.push_front (*w);
     }
@@ -78,7 +92,7 @@ bool Semaphore::wait (int timeoutMilliseconds)
       m_waitingThreads.erase (w);
     }
 
-    delete w;
+    m_deletedList.push_front (*w);
   }
 
   return isSignaled;

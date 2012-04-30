@@ -504,9 +504,6 @@
     <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ThreadGroup.cpp">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\modules\vf_core\threads\vf_Semaphore.cpp">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClCompile>
@@ -517,6 +514,9 @@
       <Filter>VF Modules\vf_core\native</Filter>
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ParallelFor.cpp">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_ThreadGroup.cpp">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClCompile>
   </ItemGroup>
@@ -998,13 +998,13 @@
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_MessageThread.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ThreadGroup.h">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\modules\vf_core\threads\vf_Semaphore.h">
       <Filter>VF Modules\vf_core\threads</Filter>
     </ClInclude>
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ParallelFor.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ThreadGroup.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
   </ItemGroup>

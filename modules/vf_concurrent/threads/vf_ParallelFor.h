@@ -36,7 +36,7 @@
   @code
 
   for (int i = 0; i < numberOfIterations; ++i)
-    function (i, ...);
+    function (..., i);
 
   @endcode
 
@@ -44,14 +44,14 @@
   for automatic binding to member or non member functions with up to 8
   arguments (not including the loop index).
 
-  The first argument to function() is always the array index.
+  @note The last argument to function () is always the loop index.
 
   @see ThreadGroup
 */
 class ParallelFor : Uncopyable
 {
 public:
-  explicit ParallelFor (ThreadGroup& threadGroup);
+  explicit ParallelFor (ThreadGroup& pool);
 
   /** Execute parallel for loop.
 
@@ -59,59 +59,58 @@ public:
       [0, numberOfIterations), using the ThreadGroup.
   */
   template <class Functor>
-  void doForEach (int numberOfIterations,
-                  Functor const& f)
+  void loopf (int numberOfIterations, Functor const& f)
   {
     IterationType <Functor> iteration (f);
 
-    doForEach (numberOfIterations, f);
+    doLoop (numberOfIterations, &f);
   }
 
   template <class Fn>
-  void doForEach (int n, Fn f)
-  { doForEach (n, vf::bind (f, vf::_1)); }
+  void loop (int n, Fn f)
+  { loopf (n, vf::bind (f, vf::_1)); }
 
-  template <class Fn,          typename  T1>
-  void doForEach (int n, Fn f, const T1& t1)
-  { doForEach (n, vf::bind (f, vf::_1, 1)); }
+  template <class Fn,     typename  T1>
+  void loop (int n, Fn f, const T1& t1)
+  { loopf (n, vf::bind (f, 1, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2)); }
+  template <class Fn,     typename  T1, typename  T2>
+  void loop (int n, Fn f, const T1& t1, const T2& t2)
+  { loopf (n, vf::bind (f, t1, t2, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2, typename  T3>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2, const T3& t3)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3)); }
+  template <class Fn,     typename  T1, typename  T2, typename  T3>
+  void loop (int n, Fn f, const T1& t1, const T2& t2, const T3& t3)
+  { loopf (n, vf::bind (f, t1, t2, t3, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2,
-                               typename  T3, typename  T4>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2,
-                               const T3& t3, const T4& t4)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3, t4)); }
+  template <class Fn,     typename  T1, typename  T2,
+                          typename  T3, typename  T4>
+  void loop (int n, Fn f, const T1& t1, const T2& t2,
+                          const T3& t3, const T4& t4)
+  { loopf (n, vf::bind (f, t1, t2, t3, t4, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2, typename  T3,
-                               typename  T4, typename  T5>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2, const T3& t3,
-                               const T4& t4, const T5& t5)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3, t4, t5)); }
+  template <class Fn,     typename  T1, typename  T2, typename  T3,
+                          typename  T4, typename  T5>
+  void loop (int n, Fn f, const T1& t1, const T2& t2, const T3& t3,
+                          const T4& t4, const T5& t5)
+  { loopf (n, vf::bind (f, t1, t2, t3, t4, t5, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2, typename  T3,
-                               typename  T4, typename  T5, typename  T6>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2, const T3& t3,
+  template <class Fn,     typename  T1, typename  T2, typename  T3,
+                          typename  T4, typename  T5, typename  T6>
+  void loop (int n, Fn f, const T1& t1, const T2& t2, const T3& t3,
                                const T4& t4, const T5& t5, const T6& t6)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6)); }
+  { loopf (n, vf::bind (f, t1, t2, t3, t4, t5, t6, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2, typename  T3, typename  T4,
-                               typename  T5, typename  T6, typename  T7>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                               const T5& t5, const T6& t6, const T7& t7)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7)); }
+  template <class Fn,     typename  T1, typename  T2, typename  T3, typename  T4,
+                          typename  T5, typename  T6, typename  T7>
+  void loop (int n, Fn f, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                          const T5& t5, const T6& t6, const T7& t7)
+  { loopf (n, vf::bind (f, t1, t2, t3, t4, t5, t6, t7, vf::_1)); }
 
-  template <class Fn,          typename  T1, typename  T2, typename  T3, typename  T4,
-                               typename  T5, typename  T6, typename  T7, typename  T8>
-  void doForEach (int n, Fn f, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
-                               const T5& t5, const T6& t6, const T7& t7, const T8& t8)
-  { doForEach (n, vf::bind (f, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8)); }
+  template <class Fn,     typename  T1, typename  T2, typename  T3, typename  T4,
+                          typename  T5, typename  T6, typename  T7, typename  T8>
+  void loop (int n, Fn f, const T1& t1, const T2& t2, const T3& t3, const T4& t4,
+                          const T5& t5, const T6& t6, const T7& t7, const T8& t8)
+  { loopf (n, vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8, vf::_1)); }
 
 private:
   class Iteration
@@ -134,18 +133,20 @@ private:
     }
 
   private:
-    Functor m_f;
+    Functor const& m_f;
   };
 
 private:
-  void doOne (int index, Iteration& iteration);
+  void iterate (Iteration* iteration);
 
-  void doForEach (int numberOfIterations, Iteration& iteration);
+  void doLoop (int numberOfIterations, Iteration* iteration);
 
 private:
-  ThreadGroup& m_threadGroup;
-  Atomic <int> m_counter;
+  ThreadGroup& m_pool;
   WaitableEvent m_event;
+  Atomic <int> m_currentIndex;
+  Atomic <int> m_numberOfInstances;
+  int m_numberOfIterations;
 };
 
 #endif

@@ -19,9 +19,9 @@
 */
 /*============================================================================*/
 
-ThreadGroup::Worker::Worker (ThreadGroup& group, String name)
+ThreadGroup::Worker::Worker (String name)
   : Thread (name)
-  , m_group (group)
+  , m_event (false) // auto reset
 {
   startThread ();
 }
@@ -31,17 +31,34 @@ ThreadGroup::Worker::~Worker ()
   stopThread (-1);
 }
 
+void ThreadGroup::Worker::queue (Work* work)
+{
+  bool const becameSignaled = m_queue.push_back (work);
+
+  if (becameSignaled)
+    notify ();
+}
+
 void ThreadGroup::Worker::run ()
 {
   while (!threadShouldExit ())
   {
-    m_group.m_semaphore.wait ();
+    wait (-1);
 
-    Work* w = m_group.m_queue.pop_front ();
+    Work* w;
+    
+    do
+    {
+      w = m_queue.pop_front ();
 
-    w->operator() ();
+      if (w)
+      {
+        w->operator() ();
 
-    delete w;
+        delete w;
+      }
+    }
+    while (w);
   }
 }
 
@@ -66,31 +83,31 @@ void ThreadGroup::setNumberOfThreads (int numberOfThreads)
 {
   jassert (numberOfThreads >= 0);
 
-  ScopedLock lock (m_mutex);
+  LockType::ScopedLockType lock (m_mutex);
 
-  int previousSize = m_workers.size ();
+  int previousSize = m_threads.size ();
 
   if (numberOfThreads > previousSize)
   {
-    while (m_workers.size () < numberOfThreads)
+    while (m_threads.size () < numberOfThreads)
     {
       String s;
-      s << "ThreadGroup (" << (m_workers.size () + 1) << ")";
+      s << "ThreadGroup (" << (m_threads.size () + 1) << ")";
 
-      Worker* worker = new Worker (*this, s);
+      Worker* worker = new Worker (s);
 
-      m_workers.push_back (*worker);
+      m_threads.push_back (*worker);
     }
   }
   else
   {
-    jassertfalse;
+    while (m_threads.size () > numberOfThreads)
+    {
+      Worker* worker = &m_threads.front ();
+
+      m_threads.erase (worker);
+
+      delete worker;
+    }
   }
-}
-
-void ThreadGroup::callw (Work* w)
-{
-  m_queue.push_front (w);
-
-  m_semaphore.signal ();
 }
