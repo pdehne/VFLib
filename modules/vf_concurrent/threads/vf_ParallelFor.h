@@ -22,6 +22,7 @@
 #ifndef VF_PARALLELFOR_VFHEADER
 #define VF_PARALLELFOR_VFHEADER
 
+#include "vf_GlobalThreadGroup.h"
 #include "vf_ThreadGroup.h"
 
 /*============================================================================*/
@@ -51,7 +52,7 @@
 class ParallelFor : Uncopyable
 {
 public:
-  explicit ParallelFor (ThreadGroup& pool);
+  explicit ParallelFor (ThreadGroup& pool = *GlobalThreadGroup::getInstance ());
 
   /** Execute parallel for loop.
 

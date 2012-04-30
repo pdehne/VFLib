@@ -32,7 +32,8 @@
 
   @see ThreadGroup
 */
-class GlobalThreadGroup : public ReferenceCountedSingleton <GlobalThreadGroup>
+class GlobalThreadGroup : public ThreadGroup,
+                          public ReferenceCountedSingleton <GlobalThreadGroup>
 {
 private:
   friend class ReferenceCountedSingleton <GlobalThreadGroup>;
