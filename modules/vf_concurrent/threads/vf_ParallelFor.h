@@ -64,7 +64,7 @@ public:
   {
     IterationType <Functor> iteration (f);
 
-    doLoop (numberOfIterations, &f);
+    doLoop (numberOfIterations, &iteration);
   }
 
   template <class Fn>
@@ -73,7 +73,7 @@ public:
 
   template <class Fn,     typename  T1>
   void loop (int n, Fn f, const T1& t1)
-  { loopf (n, vf::bind (f, 1, vf::_1)); }
+  { loopf (n, vf::bind (f, t1, vf::_1)); }
 
   template <class Fn,     typename  T1, typename  T2>
   void loop (int n, Fn f, const T1& t1, const T2& t2)
@@ -121,7 +121,7 @@ private:
   };
 
   template <class Functor>
-  class IterationType : public Iteration
+  class IterationType : public Iteration, Uncopyable
   {
   public:
     explicit IterationType (Functor const& f) : m_f (f)
@@ -134,7 +134,7 @@ private:
     }
 
   private:
-    Functor const& m_f;
+    Functor m_f;
   };
 
 private:

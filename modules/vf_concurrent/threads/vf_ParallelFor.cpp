@@ -45,7 +45,7 @@ void ParallelFor::iterate (Iteration* iteration)
 
 void ParallelFor::doLoop (int numberOfIterations, Iteration* iteration)
 {
-  m_currentIndex = 0;
+  m_currentIndex = -1;
   m_numberOfInstances = 0;
 
   m_numberOfIterations = numberOfIterations;
