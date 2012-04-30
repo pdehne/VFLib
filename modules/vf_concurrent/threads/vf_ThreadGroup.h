@@ -48,6 +48,8 @@ public:
   */
   explicit ThreadGroup (int numberOfThreads);
 
+  ~ThreadGroup ();
+
   /** Sets the number of concurrent threads.
       If the number of threads is reduced, excess threads will
       complete their calls before destroying themselves.
@@ -108,7 +110,7 @@ public:
 
   //============================================================================
 private:
-  class Work : public LockFreeQueue <Work>::Node,
+  class Work : public LockFreeStack <Work>::Node,
                public AllocatedBy <AllocatorType>
   {
   public:
@@ -130,15 +132,31 @@ private:
 
   void callw (Work* w);
 
-  void thread_init ();
-
-  void thread_exit ();
-
-  const vf::InterruptibleThread::Interrupted thread_idle ();
-
 private:
+  struct Jobs
+  {
+  };
+
+  class Worker
+    : public List <Worker>::Node
+    , public Thread
+  {
+  public:
+    Worker (ThreadGroup& group, String name);
+
+    ~Worker ();
+
+    void run ();
+
+  private:
+    ThreadGroup& m_group;
+  };
+
   AllocatorType m_allocator;
-  LockFreeQueue <Work> m_queue;
+  LockFreeStack <Work> m_queue;
+  List <Worker> m_workers;
+  CriticalSection m_mutex;
+  Semaphore m_semaphore;
 };
 
 #endif

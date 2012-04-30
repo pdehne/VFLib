@@ -19,6 +19,34 @@
 */
 /*============================================================================*/
 
+ThreadGroup::Worker::Worker (ThreadGroup& group, String name)
+  : Thread (name)
+  , m_group (group)
+{
+  startThread ();
+}
+
+ThreadGroup::Worker::~Worker ()
+{
+  stopThread (-1);
+}
+
+void ThreadGroup::Worker::run ()
+{
+  while (!threadShouldExit ())
+  {
+    m_group.m_semaphore.wait ();
+
+    Work* w = m_group.m_queue.pop_front ();
+
+    w->operator() ();
+
+    delete w;
+  }
+}
+
+//==============================================================================
+
 ThreadGroup::ThreadGroup ()
 {
   setNumberOfThreads (SystemStats::getNumCpus ());
@@ -29,19 +57,40 @@ ThreadGroup::ThreadGroup (int numberOfThreads)
   setNumberOfThreads (numberOfThreads);
 }
 
+ThreadGroup::~ThreadGroup ()
+{
+  setNumberOfThreads (0);
+}
+
 void ThreadGroup::setNumberOfThreads (int numberOfThreads)
 {
+  jassert (numberOfThreads >= 0);
+
+  ScopedLock lock (m_mutex);
+
+  int previousSize = m_workers.size ();
+
+  if (numberOfThreads > previousSize)
+  {
+    while (m_workers.size () < numberOfThreads)
+    {
+      String s;
+      s << "ThreadGroup (" << (m_workers.size () + 1) << ")";
+
+      Worker* worker = new Worker (*this, s);
+
+      m_workers.push_back (*worker);
+    }
+  }
+  else
+  {
+    jassertfalse;
+  }
 }
 
-void ThreadGroup::thread_init ()
+void ThreadGroup::callw (Work* w)
 {
-}
+  m_queue.push_front (w);
 
-void ThreadGroup::thread_exit ()
-{
-}
-
-const InterruptibleThread::Interrupted ThreadGroup::thread_idle ()
-{
-  return InterruptibleThread::Interrupted (false);
+  m_semaphore.signal ();
 }
