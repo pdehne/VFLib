@@ -496,6 +496,7 @@
     <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_GlobalPagedFreeStore.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\memory\vf_PagedFreeStore.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_CallQueue.h" />
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GlobalThreadGroup.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GuiCallQueue.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_Listeners.h" />
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ManualCallQueue.h" />

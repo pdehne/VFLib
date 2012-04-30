@@ -1007,6 +1007,9 @@
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_ThreadGroup.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GlobalThreadGroup.h">
+      <Filter>VF Modules\vf_concurrent\threads</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />
