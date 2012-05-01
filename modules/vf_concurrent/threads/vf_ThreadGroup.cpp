@@ -74,12 +74,19 @@ ThreadGroup::ThreadGroup (int numberOfThreads)
 
 ThreadGroup::~ThreadGroup ()
 {
-  setNumberOfThreads (0);
+  while (m_threads.size () > 0)
+  {
+    Worker* worker = &m_threads.front ();
+
+    m_threads.erase (worker);
+
+    delete worker;
+  }
 }
 
 void ThreadGroup::setNumberOfThreads (int numberOfThreads)
 {
-  jassert (numberOfThreads >= 0);
+  jassert (numberOfThreads > 0);
 
   LockType::ScopedLockType lock (m_mutex);
 
