@@ -274,7 +274,7 @@ void Button::enablementChanged ()
 
 void Button::mouseDrag (MouseEvent const& e)
 {
-  if (juce::Button::isEnabled ())
+  if (Button::isEnabled ())
   {
     if (!m_bEnabledUnboundedMouseMovement && isMomentary ())
     {
@@ -283,17 +283,17 @@ void Button::mouseDrag (MouseEvent const& e)
       m_bEnabledUnboundedMouseMovement = true;
     }
 
-    juce::Button::mouseDrag (e);
+    Button::mouseDrag (e);
   }
 }
 
 void Button::mouseUp (MouseEvent const& e)
 {
-  if (juce::Button::isEnabled ())
+  if (Button::isEnabled ())
   {
     m_bEnabledUnboundedMouseMovement = false;
 
-    juce::Button::mouseUp (e);
+    Button::mouseUp (e);
   }
 }
 
