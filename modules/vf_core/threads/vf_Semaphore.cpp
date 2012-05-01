@@ -26,6 +26,9 @@ Semaphore::Semaphore (int initialCount)
 
 Semaphore::~Semaphore ()
 {
+  // Can't delete the semaphore while threads are waiting on it!!
+  jassert (m_waitingThreads.empty ());
+
   for (List <WaitingThread>::iterator iter = m_deletedList.begin ();
        iter != m_deletedList.end ();)
   {

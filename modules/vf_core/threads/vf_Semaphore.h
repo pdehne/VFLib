@@ -33,13 +33,26 @@
 class Semaphore
 {
 public:
+  /** Create a semaphore with the specified number of resources.
+
+      @param initialCount The starting number of resources.
+  */
   Semaphore (int initialCount = 0);
 
   ~Semaphore ();
 
+  /** Increase the number of available resources.
+
+      @param amount The number of new resources available.
+  */
   void signal (int amount = 1);
 
-  /** Returns true if the resource was acquired without a timeout.
+  /** Wait for a resource..
+
+      @param timeoutMilliseconds The amount of time to wait before returning,
+                                 or -1 to wait forever.
+
+      @return `true` if the resource was acquired without a timeout.
   */
   bool wait (int timeoutMilliseconds = -1);
 
