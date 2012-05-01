@@ -19,7 +19,8 @@
 */
 /*============================================================================*/
 
-class ParallelFor::LoopState : public AllocatedBy <ThreadGroup::AllocatorType>
+class ParallelFor::LoopState
+  : public AllocatedBy <ThreadGroup::AllocatorType>
   , Uncopyable
 {
 private:
@@ -31,10 +32,10 @@ private:
   Atomic <int> m_numberOfParallelInstances;
 
 public:
-  explicit LoopState (Iteration& iteration,
-                      WaitableEvent& finishedEvent,
-                      int numberOfIterations,
-                      int numberOfParallelInstances)
+  LoopState (Iteration& iteration,
+             WaitableEvent& finishedEvent,
+             int numberOfIterations,
+             int numberOfParallelInstances)
     : m_iteration (iteration)
     , m_finishedEvent (finishedEvent)
     , m_numberOfIterations (numberOfIterations)
