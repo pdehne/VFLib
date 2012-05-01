@@ -65,7 +65,9 @@ public:
   /** Sets the number of concurrent threads.
 
       If the number of threads is reduced, excess threads will complete
-      their calls before destroying themselves.
+      their work before being destroyed.
+
+      @note This is not thread safe with call().
 
       @param numberOfThreads The number of threads in the group. This must be
                              greater than zero.
@@ -84,15 +86,16 @@ public:
   {
     jassert (maxThreads > 0 || maxThreads == -1);
 
-    LockType::ScopedLockType lock (m_mutex);
-
     int numberOfThreads = getNumberOfThreads ();
 
-    if (maxThreads > 0 && maxThreads < numberOfThreads)
+    if (maxThreads != -1 && maxThreads < numberOfThreads)
       numberOfThreads = maxThreads;
 
-    for (List <Worker>::iterator iter = m_threads.begin (); numberOfThreads--; ++iter)
-      iter->queue (new (m_allocator) WorkType <Functor> (f));
+    while (numberOfThreads--)
+    {
+      m_queue.push_front (new (getAllocator ()) WorkType <Functor> (f));
+      m_semaphore.signal ();
+    }
   }
 
   /** Allocator access.
@@ -148,14 +151,43 @@ public:
                                    const T5& t5, const T6& t6, const T7& t7, const T8& t8)
   { callf (maxThreads, vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8)); }
 
+private:
+  void killOneWorker ();
+
   //============================================================================
 private:
-  class Work : public LockFreeQueue <Work>::Node,
+  /** A thread in the group.
+  */
+  class Worker
+    : public List <Worker>::Node
+    , public Thread
+  {
+  public:
+    Worker (String name,
+            ThreadGroup& group);
+
+    ~Worker ();
+
+  private:
+    void run ();
+
+  private:
+    ThreadGroup& m_group;
+  };
+
+  //============================================================================
+private:
+  /** Abstract work item.
+  */
+  class Work : public LockFreeStack <Work>::Node,
                public AllocatedBy <AllocatorType>
   {
   public:
     virtual ~Work () { }
-    virtual void operator() () = 0;
+
+    /* The worker is passed in so we can make it quit later.
+    */
+    virtual void operator() (Worker* worker) = 0;
   };
 
   template <class Functor>
@@ -164,35 +196,25 @@ private:
   public:
     explicit WorkType (Functor const& f) : m_f (f) { }
     ~WorkType () { }
-    void operator() () { m_f (); }
+    void operator() (Worker*) { m_f (); }
 
   private:
     Functor m_f;
   };
 
-private:
-  class Worker
-    : public List <Worker>::Node
-    , public Thread
+  /** Used to make a Worker stop
+  */
+  class QuitType : public Work
   {
   public:
-    explicit Worker (String name);
-    ~Worker ();
-
-    void queue (Work* work);
-
-  private:
-    void run ();
-
-  private:
-    LockFreeQueue <Work> m_queue;
+    void operator() (Worker* worker);
   };
 
-  typedef SpinLock LockType;
-  
+private:
+  Semaphore m_semaphore;
   AllocatorType m_allocator;
   List <Worker> m_threads;
-  LockType m_mutex;
+  LockFreeStack <Work> m_queue;
 };
 
 #endif
