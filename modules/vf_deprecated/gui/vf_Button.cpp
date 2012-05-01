@@ -283,7 +283,7 @@ void Button::mouseDrag (MouseEvent const& e)
       m_bEnabledUnboundedMouseMovement = true;
     }
 
-    Button::mouseDrag (e);
+    juce::Button::mouseDrag (e);
   }
 }
 
@@ -293,7 +293,7 @@ void Button::mouseUp (MouseEvent const& e)
   {
     m_bEnabledUnboundedMouseMovement = false;
 
-    Button::mouseUp (e);
+    juce::Button::mouseUp (e);
   }
 }
 
