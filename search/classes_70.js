@@ -1,6 +1,7 @@
 var searchData=
 [
   ['pagedfreestore',['PagedFreeStore',['../class_paged_free_store.html',1,'']]],
+  ['parallelfor',['ParallelFor',['../class_parallel_for.html',1,'']]],
   ['parameters',['Parameters',['http://www.rawmaterialsoftware.com/juce/api/structReverb_1_1Parameters.html',1,'Reverb']]],
   ['parametertype',['ParameterType',['http://www.rawmaterialsoftware.com/juce/api/structTypeHelpers_1_1ParameterType.html',1,'']]],
   ['parseerror',['ParseError',['http://www.rawmaterialsoftware.com/juce/api/classExpression_1_1ParseError.html',1,'Expression']]],

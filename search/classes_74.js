@@ -17,6 +17,7 @@ var searchData=
   ['textpropertycomponent',['TextPropertyComponent',['http://www.rawmaterialsoftware.com/juce/api/classTextPropertyComponent.html',1,'']]],
   ['thread',['Thread',['http://www.rawmaterialsoftware.com/juce/api/classThread.html',1,'']]],
   ['threadedwriter',['ThreadedWriter',['http://www.rawmaterialsoftware.com/juce/api/classAudioFormatWriter_1_1ThreadedWriter.html',1,'AudioFormatWriter']]],
+  ['threadgroup',['ThreadGroup',['../class_thread_group.html',1,'']]],
   ['threadlocalvalue',['ThreadLocalValue',['http://www.rawmaterialsoftware.com/juce/api/classThreadLocalValue.html',1,'']]],
   ['threadpool',['ThreadPool',['http://www.rawmaterialsoftware.com/juce/api/classThreadPool.html',1,'']]],
   ['threadpooljob',['ThreadPoolJob',['http://www.rawmaterialsoftware.com/juce/api/classThreadPoolJob.html',1,'']]],

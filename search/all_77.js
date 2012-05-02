@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['wait',['wait',['http://www.rawmaterialsoftware.com/juce/api/classThread.html#a17aca9c9609310f830298d6a0206d18d',1,'Thread::wait()'],['http://www.rawmaterialsoftware.com/juce/api/classWaitableEvent.html#aade120bc7686f4fabfc740aff8f56dfa',1,'WaitableEvent::wait()']]],
+  ['wait',['wait',['http://www.rawmaterialsoftware.com/juce/api/classThread.html#a17aca9c9609310f830298d6a0206d18d',1,'Thread::wait()'],['http://www.rawmaterialsoftware.com/juce/api/classWaitableEvent.html#aade120bc7686f4fabfc740aff8f56dfa',1,'WaitableEvent::wait()'],['../class_semaphore.html#a85500356c2f7d1057d4568227e7f35b7',1,'Semaphore::wait()']]],
   ['waitableevent',['WaitableEvent',['http://www.rawmaterialsoftware.com/juce/api/classWaitableEvent.html',1,'WaitableEvent'],['http://www.rawmaterialsoftware.com/juce/api/classWaitableEvent.html#aa3622062e48a177ec721120443ea17d2',1,'WaitableEvent::WaitableEvent()']]],
   ['waitcursor',['WaitCursor',['http://www.rawmaterialsoftware.com/juce/api/classMouseCursor.html#a5de22a8c3eb06827ac11352e76eb9a97a42461326b47b05238177df410c2245f9',1,'MouseCursor']]],
   ['waitforjobtofinish',['waitForJobToFinish',['http://www.rawmaterialsoftware.com/juce/api/classThreadPool.html#ada78c3d08d41bb195006b5c96a6514f5',1,'ThreadPool']]],

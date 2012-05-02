@@ -29,6 +29,7 @@ var searchData=
   ['textwasedited',['textWasEdited',['http://www.rawmaterialsoftware.com/juce/api/classLabel.html#ac25aabade178c65badaaf2773e0c26b4',1,'Label::textWasEdited()'],['http://www.rawmaterialsoftware.com/juce/api/classTextPropertyComponent.html#a8c5ef860b25f29f1f69c4571cd39a4ea',1,'TextPropertyComponent::textWasEdited()']]],
   ['thread',['Thread',['http://www.rawmaterialsoftware.com/juce/api/classThread.html#ae696c3b7ca36394cd214288cee31eaba',1,'Thread']]],
   ['threadedwriter',['ThreadedWriter',['http://www.rawmaterialsoftware.com/juce/api/classAudioFormatWriter_1_1ThreadedWriter.html#a8efb067cf742fdac8b2bc6e21a084531',1,'AudioFormatWriter::ThreadedWriter']]],
+  ['threadgroup',['ThreadGroup',['../class_thread_group.html#abb0424eda8038912f6eb856a7b04a2fb',1,'ThreadGroup']]],
   ['threadlocalvalue',['ThreadLocalValue',['http://www.rawmaterialsoftware.com/juce/api/classThreadLocalValue.html#a6cfe38fdd495adcfdad8dc3dc736f371',1,'ThreadLocalValue']]],
   ['threadpool',['ThreadPool',['http://www.rawmaterialsoftware.com/juce/api/classThreadPool.html#af59341f9ab24fda771109bc3ee8cdef2',1,'ThreadPool::ThreadPool(int numberOfThreads)'],['http://www.rawmaterialsoftware.com/juce/api/classThreadPool.html#a3225e86aa7835545b3f6c2c8d363d5e5',1,'ThreadPool::ThreadPool()']]],
   ['threadpooljob',['ThreadPoolJob',['http://www.rawmaterialsoftware.com/juce/api/classThreadPoolJob.html#a701138425809122d1271561fcfa1c20d',1,'ThreadPoolJob']]],

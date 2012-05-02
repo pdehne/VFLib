@@ -128,6 +128,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey"><a class="el" href="struct_generic_scoped_write_lock.html">GenericScopedWriteLock&lt; LockType &gt;</a></td><td class="indexvalue">Scoped write lock for <a class="el" href="class_read_write_mutex.html" title="Multiple consumer, single producer (MCSP) synchronization primitive.">ReadWriteMutex</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_global_fifo_free_store.html">GlobalFifoFreeStore&lt; Tag &gt;</a></td><td class="indexvalue">A FifoFreeStore singleton </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_global_paged_free_store.html">GlobalPagedFreeStore</a></td><td class="indexvalue">A <a class="el" href="class_paged_free_store.html" title="Lock-free memory allocator for fixed size pages.">PagedFreeStore</a> singleton </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_global_thread_group.html">GlobalThreadGroup</a></td><td class="indexvalue">A <a class="el" href="class_thread_group.html" title="A group of threads for parallelizing tasks.">ThreadGroup</a> singleton </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_gui_call_queue.html">GuiCallQueue</a></td><td class="indexvalue">A <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> handled by the Juce message thread (gui) </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_interruptible_thread.html">InterruptibleThread</a></td><td class="indexvalue">A thread with soft interruption support </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_lab_colour.html">LabColour</a></td><td class="indexvalue">A colour specified in CIELAB coordinates </td></tr>
@@ -145,14 +146,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="indexkey"><a class="el" href="class_noise_audio_source.html">NoiseAudioSource</a></td><td class="indexvalue">An <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classAudioSource.html">AudioSource</a> to produce noise </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_once_per_second.html">OncePerSecond</a></td><td class="indexvalue">Provides a once per second notification </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_paged_free_store.html">PagedFreeStore</a></td><td class="indexvalue">Lock-free memory allocator for fixed size pages </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_parallel_for.html">ParallelFor</a></td><td class="indexvalue">Parallel for loop </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_performed_at_exit.html">PerformedAtExit</a></td><td class="indexvalue">Perform an action at program exit </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_radial_image_convolution_kernel.html">RadialImageConvolutionKernel</a></td><td class="indexvalue">Fast <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classImage.html">Image</a> convolution with radially symmetric kernels </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_read_write_mutex.html">ReadWriteMutex</a></td><td class="indexvalue">Multiple consumer, single producer (MCSP) synchronization primitive </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_reference_counted_singleton.html">ReferenceCountedSingleton&lt; Object &gt;</a></td><td class="indexvalue">Thread-safe singleton which comes into existence on first use </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_scoped_audio_sample_buffer.html">ScopedAudioSampleBuffer</a></td><td class="indexvalue">A temporary audio buffer with scoped lifetime </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_scoped_f_p_u_flags.html">ScopedFPUFlags</a></td><td class="indexvalue">IEEE FPU flag modifications with scoped lifetime </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_semaphore.html">Semaphore</a></td><td class="indexvalue">A semaphore </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_singleton_lifetime.html">SingletonLifetime</a></td><td class="indexvalue">Construction options for <a class="el" href="class_reference_counted_singleton.html" title="Thread-safe singleton which comes into existence on first use.">ReferenceCountedSingleton</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_sorted_lookup_table.html">SortedLookupTable&lt; SchemaType &gt;</a></td><td class="indexvalue">Sorted map for fast lookups </td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_thread_group.html">ThreadGroup</a></td><td class="indexvalue">A group of threads for parallelizing tasks </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_thread_with_call_queue.html">ThreadWithCallQueue</a></td><td class="indexvalue">An <a class="el" href="class_interruptible_thread.html" title="A thread with soft interruption support.">InterruptibleThread</a> with a <a class="el" href="class_call_queue.html" title="A FIFO for calling functors asynchronously.">CallQueue</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_transparent_border.html">TransparentBorder</a></td><td class="indexvalue">Transparent border for an opaque <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classComponent.html">Component</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_vertical_gradient.html">VerticalGradient</a></td><td class="indexvalue">A vertical <a class="elRef" doxygen="juce.tag:http://www.rawmaterialsoftware.com/juce/api//" href="http://www.rawmaterialsoftware.com/juce/api/classColourGradient.html">ColourGradient</a> </td></tr>
@@ -162,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 27 2012 21:51:47 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 1 2012 18:56:28 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

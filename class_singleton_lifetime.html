@@ -93,6 +93,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a>  </div>
   <div class="headertitle">
 <div class="title">SingletonLifetime Class Reference<div class="ingroups"><a class="el" href="group__vf__core.html">vf_core</a></div></div>  </div>
 </div><!--header-->
@@ -104,6 +106,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p><code>#include &quot;vf_ReferenceCountedSingleton.h&quot;</code></p>
 
 <p><a href="class_singleton_lifetime-members.html">List of all members.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9b008fe514a5b1eb71a1eb7f439da5a2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2">Lifetime</a> { <a class="el" href="class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2a1e2725e778aa8d0f99589bfe980f362f">createOnDemand</a>, 
+<a class="el" href="class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2ab159ee90f788a298c261780fb5b84dd3">createOnDemandOnce</a>
+ }</td></tr>
+</table>
+<hr/><h2>Member Enumeration Documentation</h2>
+<a class="anchor" id="a9b008fe514a5b1eb71a1eb7f439da5a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_singleton_lifetime.html#a9b008fe514a5b1eb71a1eb7f439da5a2">SingletonLifetime::Lifetime</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a9b008fe514a5b1eb71a1eb7f439da5a2a1e2725e778aa8d0f99589bfe980f362f"></a>createOnDemand</em>&nbsp;</td><td>
+<p>Singleton is created on first use and destroyed when the last reference is removed. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a9b008fe514a5b1eb71a1eb7f439da5a2ab159ee90f788a298c261780fb5b84dd3"></a>createOnDemandOnce</em>&nbsp;</td><td>
+<p>Like createOnDemand, but after the Singleton is destroyed an exception will be thrown if an attempt is made to create it again. </p>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>vf_ReferenceCountedSingleton.h</li>
 </ul>
@@ -111,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 27 2012 21:51:47 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 1 2012 18:56:28 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

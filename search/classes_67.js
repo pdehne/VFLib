@@ -9,6 +9,7 @@ var searchData=
   ['gifimageformat',['GIFImageFormat',['http://www.rawmaterialsoftware.com/juce/api/classGIFImageFormat.html',1,'']]],
   ['globalfifofreestore',['GlobalFifoFreeStore',['../class_global_fifo_free_store.html',1,'']]],
   ['globalpagedfreestore',['GlobalPagedFreeStore',['../class_global_paged_free_store.html',1,'']]],
+  ['globalthreadgroup',['GlobalThreadGroup',['../class_global_thread_group.html',1,'']]],
   ['gloweffect',['GlowEffect',['http://www.rawmaterialsoftware.com/juce/api/classGlowEffect.html',1,'']]],
   ['glyph',['Glyph',['http://www.rawmaterialsoftware.com/juce/api/classTextLayout_1_1Glyph.html',1,'TextLayout']]],
   ['glypharrangement',['GlyphArrangement',['http://www.rawmaterialsoftware.com/juce/api/classGlyphArrangement.html',1,'']]],

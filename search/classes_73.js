@@ -28,6 +28,7 @@ var searchData=
   ['scopedwritelock',['ScopedWriteLock',['http://www.rawmaterialsoftware.com/juce/api/classScopedWriteLock.html',1,'']]],
   ['scrollbar',['ScrollBar',['http://www.rawmaterialsoftware.com/juce/api/classScrollBar.html',1,'']]],
   ['selecteditemset',['SelectedItemSet',['http://www.rawmaterialsoftware.com/juce/api/classSelectedItemSet.html',1,'']]],
+  ['semaphore',['Semaphore',['../class_semaphore.html',1,'']]],
   ['session',['session',['../classdb_1_1session.html',1,'db']]],
   ['settabletooltipclient',['SettableTooltipClient',['http://www.rawmaterialsoftware.com/juce/api/classSettableTooltipClient.html',1,'']]],
   ['sha256',['SHA256',['http://www.rawmaterialsoftware.com/juce/api/classSHA256.html',1,'']]],

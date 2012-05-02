@@ -168,7 +168,7 @@ Classes</h2></td></tr>
   <span class="keyword">struct </span>ActiveListTag { }; <span class="comment">// subset of all objects that are active</span>
 
   <span class="keyword">class </span>Object : <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, GlobalListTag&gt;
-                , <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, ActiveListTag&gt;
+               , <span class="keyword">public</span> <a class="code" href="class_list.html" title="Intrusive doubly linked list.">List</a> &lt;Object, ActiveListTag&gt;
   {
   <span class="keyword">public</span>:
     Object () : m_isActive (false)
@@ -197,7 +197,7 @@ Classes</h2></td></tr>
       <span class="keywordflow">if</span> (m_isActive)
       {
         <span class="comment">// Doesn&#39;t delete the object</span>
-        s_activeList.remove (<span class="keyword">this</span>);
+        s_activeList.erase (s_activeList.iterator_to (<span class="keyword">this</span>));
 
         m_isActive = <span class="keyword">false</span>;
       }
@@ -213,7 +213,7 @@ Classes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 27 2012 21:51:47 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 1 2012 18:56:27 for VFLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
