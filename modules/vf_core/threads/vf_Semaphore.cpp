@@ -24,6 +24,16 @@ Semaphore::WaitingThread::WaitingThread ()
 {
 }
 
+void Semaphore::WaitingThread::wait ()
+{
+  m_event.wait ();
+}
+
+void Semaphore::WaitingThread::signal ()
+{
+  m_event.signal ();
+}
+
 //==============================================================================
 
 Semaphore::Semaphore (int initialCount)
@@ -62,7 +72,7 @@ void Semaphore::signal (int amount)
 
       jassert (waitingThread != nullptr);
 
-      waitingThread->m_event.signal ();
+      waitingThread->signal ();
     }
   }
 }
@@ -98,7 +108,7 @@ void Semaphore::wait ()
   if (waitingThread != nullptr)
   {
     // Yes so do it.
-    waitingThread->m_event.wait ();
+    waitingThread->wait ();
 
     // If the wait is satisfied, then we've been taken off the
     // waiting list so put waitingThread back in the delete list.

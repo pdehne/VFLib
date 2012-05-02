@@ -62,6 +62,10 @@ private:
   public:
     WaitingThread ();
 
+    void wait ();
+    void signal ();
+
+  private:
     WaitableEvent m_event;
   };
 
