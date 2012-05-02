@@ -28,7 +28,7 @@ var searchData=
   ['paleturquoise',['paleturquoise',['http://www.rawmaterialsoftware.com/juce/api/classColours.html#a2b17126a05b24d3e936527e260cd9f47',1,'Colours']]],
   ['palevioletred',['palevioletred',['http://www.rawmaterialsoftware.com/juce/api/classColours.html#aff1ccf8323d8231e42e1342a7d7b293a',1,'Colours']]],
   ['papayawhip',['papayawhip',['http://www.rawmaterialsoftware.com/juce/api/classColours.html#a8b6fb5bd196ba71f78c2d0a17c712783',1,'Colours']]],
-  ['parallelfor',['ParallelFor',['../class_parallel_for.html',1,'']]],
+  ['parallelfor',['ParallelFor',['../class_parallel_for.html',1,'ParallelFor'],['../class_parallel_for.html#a1f332bcbc6213a76b8bc690b2ba51f0d',1,'ParallelFor::ParallelFor()']]],
   ['parameter_5ftype',['PARAMETER_TYPE',['http://www.rawmaterialsoftware.com/juce/api/classSelectedItemSet.html#a80e1e81065dbc4cb307bf4dd0d41fedd',1,'SelectedItemSet']]],
   ['parameters',['Parameters',['http://www.rawmaterialsoftware.com/juce/api/structReverb_1_1Parameters.html#a23796df8b292d4d9390a896ae2ebe29f',1,'Reverb::Parameters']]],
   ['parameters',['Parameters',['http://www.rawmaterialsoftware.com/juce/api/structReverb_1_1Parameters.html',1,'Reverb']]],
