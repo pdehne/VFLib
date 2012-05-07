@@ -29,5 +29,5 @@
 
 #include "vf_luabridge.h"
 
-#include "luabridge/luabridge.cpp"
-#include "luabridge/shared_ptr.cpp"
+#include "LuaBridge/src/luabridge.cpp"
+#include "LuaBridge/src/shared_ptr.cpp"
