@@ -390,9 +390,6 @@
     <ClCompile Include="..\..\modules\vf_lua\lua\lundump.c">
       <Filter>VF Modules\vf_lua\lua\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_lua\vf_lua.c">
-      <Filter>VF Library Code</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\modules\vf_luabridge\vf_luabridge.cpp">
       <Filter>VF Library Code</Filter>
     </ClCompile>
@@ -524,6 +521,9 @@
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_luabridge\LuaBridge\src\luabridge.cpp">
       <Filter>VF Modules\vf_luabridge\LuaBridge\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_lua\vf_lua.cpp">
+      <Filter>VF Library Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
