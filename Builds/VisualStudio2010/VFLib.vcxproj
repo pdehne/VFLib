@@ -324,14 +324,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_gui\vf_gui.cpp" />
-    <ClCompile Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\luabridge.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\shared_ptr.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\modules\vf_luabridge\vf_luabridge.cpp" />
     <ClCompile Include="..\..\modules\vf_lua\lua\lapi.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -602,12 +594,7 @@
     <ClInclude Include="..\..\modules\vf_gui\mouse\vf_MouseEnterEditable.h" />
     <ClInclude Include="..\..\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\modules\vf_gui\vf_gui.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\class.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\luabridge.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\scope.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\shared_ptr.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\stack.h" />
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge\typelist.h" />
+    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge.h" />
     <ClInclude Include="..\..\modules\vf_luabridge\vf_luabridge.h" />
     <ClInclude Include="..\..\modules\vf_lua\lua\lapi.h" />
     <ClInclude Include="..\..\modules\vf_lua\lua\lauxlib.h" />

@@ -29,5 +29,13 @@
 
 #include "vf_luabridge.h"
 
-#include "LuaBridge/LuaBridge/luabridge.cpp"
-#include "LuaBridge/LuaBridge/shared_ptr.cpp"
+// LuaBridge is header-only
+
+namespace
+{
+
+void unused ()
+{
+}
+
+}
