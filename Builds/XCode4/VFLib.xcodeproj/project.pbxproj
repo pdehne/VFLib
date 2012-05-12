@@ -16,10 +16,11 @@
 		2E08D9EB1549F0C6006A6931 /* vf_deprecated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9DF1549F0C6006A6931 /* vf_deprecated.cpp */; };
 		2E08D9EC1549F0C6006A6931 /* vf_freetype.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E01549F0C6006A6931 /* vf_freetype.c */; };
 		2E08D9ED1549F0C6006A6931 /* vf_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E11549F0C6006A6931 /* vf_gui.cpp */; };
-		2E08D9EE1549F0C6006A6931 /* vf_lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E21549F0C6006A6931 /* vf_lua.c */; };
 		2E08D9EF1549F0C6006A6931 /* vf_luabridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E31549F0C6006A6931 /* vf_luabridge.cpp */; };
 		2E08D9F01549F0C6006A6931 /* vf_sqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E41549F0C6006A6931 /* vf_sqlite.c */; };
 		2E08D9F11549F0C6006A6931 /* vf_taglib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E51549F0C6006A6931 /* vf_taglib.cpp */; };
+		2E41C742155F0391006D524F /* vf_lua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E41C741155F0391006D524F /* vf_lua.cpp */; };
+		2E41C743155F0391006D524F /* vf_lua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E41C741155F0391006D524F /* vf_lua.cpp */; };
 		2E84C44D1549FD10006923F8 /* vf_audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9DA1549F0C6006A6931 /* vf_audio.cpp */; };
 		2E84C44E1549FD10006923F8 /* vf_bzip2.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9DB1549F0C6006A6931 /* vf_bzip2.c */; };
 		2E84C44F1549FD10006923F8 /* vf_concurrent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9DC1549F0C6006A6931 /* vf_concurrent.cpp */; };
@@ -28,7 +29,6 @@
 		2E84C4521549FD10006923F8 /* vf_deprecated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9DF1549F0C6006A6931 /* vf_deprecated.cpp */; };
 		2E84C4531549FD10006923F8 /* vf_freetype.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E01549F0C6006A6931 /* vf_freetype.c */; };
 		2E84C4541549FD10006923F8 /* vf_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E11549F0C6006A6931 /* vf_gui.cpp */; };
-		2E84C4551549FD10006923F8 /* vf_lua.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E21549F0C6006A6931 /* vf_lua.c */; };
 		2E84C4561549FD10006923F8 /* vf_luabridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E31549F0C6006A6931 /* vf_luabridge.cpp */; };
 		2E84C4571549FD10006923F8 /* vf_sqlite.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E41549F0C6006A6931 /* vf_sqlite.c */; };
 		2E84C4581549FD10006923F8 /* vf_taglib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E08D9E51549F0C6006A6931 /* vf_taglib.cpp */; };
@@ -49,10 +49,10 @@
 		2E08D9DF1549F0C6006A6931 /* vf_deprecated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_deprecated.cpp; path = ../../modules/vf_deprecated/vf_deprecated.cpp; sourceTree = "<group>"; };
 		2E08D9E01549F0C6006A6931 /* vf_freetype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vf_freetype.c; path = ../../modules/vf_freetype/vf_freetype.c; sourceTree = "<group>"; };
 		2E08D9E11549F0C6006A6931 /* vf_gui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_gui.cpp; path = ../../modules/vf_gui/vf_gui.cpp; sourceTree = "<group>"; };
-		2E08D9E21549F0C6006A6931 /* vf_lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vf_lua.c; path = ../../modules/vf_lua/vf_lua.c; sourceTree = "<group>"; };
 		2E08D9E31549F0C6006A6931 /* vf_luabridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_luabridge.cpp; path = ../../modules/vf_luabridge/vf_luabridge.cpp; sourceTree = "<group>"; };
 		2E08D9E41549F0C6006A6931 /* vf_sqlite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vf_sqlite.c; path = ../../modules/vf_sqlite/vf_sqlite.c; sourceTree = "<group>"; };
 		2E08D9E51549F0C6006A6931 /* vf_taglib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_taglib.cpp; path = ../../modules/vf_taglib/vf_taglib.cpp; sourceTree = "<group>"; };
+		2E41C741155F0391006D524F /* vf_lua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vf_lua.cpp; path = ../../modules/vf_lua/vf_lua.cpp; sourceTree = "<group>"; };
 		2E84C4391549F72A006923F8 /* modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = modules; path = ../../modules; sourceTree = "<group>"; };
 		2E84C45F1549FD10006923F8 /* libOSX copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libOSX copy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -118,7 +118,7 @@
 				2E08D9DF1549F0C6006A6931 /* vf_deprecated.cpp */,
 				2E08D9E01549F0C6006A6931 /* vf_freetype.c */,
 				2E08D9E11549F0C6006A6931 /* vf_gui.cpp */,
-				2E08D9E21549F0C6006A6931 /* vf_lua.c */,
+				2E41C741155F0391006D524F /* vf_lua.cpp */,
 				2E08D9E31549F0C6006A6931 /* vf_luabridge.cpp */,
 				2E08D9E41549F0C6006A6931 /* vf_sqlite.c */,
 				2E08D9E51549F0C6006A6931 /* vf_taglib.cpp */,
@@ -220,10 +220,10 @@
 				2E08D9EB1549F0C6006A6931 /* vf_deprecated.cpp in Sources */,
 				2E08D9EC1549F0C6006A6931 /* vf_freetype.c in Sources */,
 				2E08D9ED1549F0C6006A6931 /* vf_gui.cpp in Sources */,
-				2E08D9EE1549F0C6006A6931 /* vf_lua.c in Sources */,
 				2E08D9EF1549F0C6006A6931 /* vf_luabridge.cpp in Sources */,
 				2E08D9F01549F0C6006A6931 /* vf_sqlite.c in Sources */,
 				2E08D9F11549F0C6006A6931 /* vf_taglib.cpp in Sources */,
+				2E41C742155F0391006D524F /* vf_lua.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,10 +239,10 @@
 				2E84C4521549FD10006923F8 /* vf_deprecated.cpp in Sources */,
 				2E84C4531549FD10006923F8 /* vf_freetype.c in Sources */,
 				2E84C4541549FD10006923F8 /* vf_gui.cpp in Sources */,
-				2E84C4551549FD10006923F8 /* vf_lua.c in Sources */,
 				2E84C4561549FD10006923F8 /* vf_luabridge.cpp in Sources */,
 				2E84C4571549FD10006923F8 /* vf_sqlite.c in Sources */,
 				2E84C4581549FD10006923F8 /* vf_taglib.cpp in Sources */,
+				2E41C743155F0391006D524F /* vf_lua.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +271,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				USER_HEADER_SEARCH_PATHS = "../../AppConfigTemplate/** ../../../JUCE/**";
 			};
 			name = Debug;
@@ -291,7 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 				USER_HEADER_SEARCH_PATHS = "../../AppConfigTemplate/** ../../../JUCE/**";
 			};
 			name = Release;
@@ -317,7 +317,7 @@
 		2E84C45D1549FD10006923F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				PRODUCT_NAME = "OSX copy";
 				SDKROOT = iphoneos5.1;
 			};
@@ -326,7 +326,7 @@
 		2E84C45E1549FD10006923F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				PRODUCT_NAME = "OSX copy";
 				SDKROOT = iphoneos5.1;
 			};
