@@ -983,6 +983,9 @@
     <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge.h">
       <Filter>VF Modules\vf_luabridge\LuaBridge</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridgeExtras.h">
+      <Filter>VF Modules\vf_luabridge\LuaBridge</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />

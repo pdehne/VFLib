@@ -595,6 +595,7 @@
     <ClInclude Include="..\..\modules\vf_gui\mouse\vf_MouseEnterGroup.h" />
     <ClInclude Include="..\..\modules\vf_gui\vf_gui.h" />
     <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge.h" />
+    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridgeExtras.h" />
     <ClInclude Include="..\..\modules\vf_luabridge\vf_luabridge.h" />
     <ClInclude Include="..\..\modules\vf_lua\lua\lapi.h" />
     <ClInclude Include="..\..\modules\vf_lua\lua\lauxlib.h" />
