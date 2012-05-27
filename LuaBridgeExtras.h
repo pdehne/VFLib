@@ -4,7 +4,6 @@
   https://github.com/vinniefalco/LuaBridgeDemo
   
   Copyright (C) 2012, Vinnie Falco <vinnie.falco@gmail.com>
-  Copyright (C) 2007, Nathan Reed
 
   License: The MIT License (http://www.opensource.org/licenses/mit-license.php)
 
@@ -25,27 +24,15 @@
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
-
-  This file incorporates work covered by the following copyright and
-  permission notice:  
-
-    The Loki Library
-    Copyright (c) 2001 by Andrei Alexandrescu
-    This code accompanies the book:
-    Alexandrescu, Andrei. "Modern C++ Design: Generic Programming and Design 
-        Patterns Applied". Copyright (c) 2001. Addison-Wesley.
-    Permission to use, copy, modify, distribute and sell this software for any 
-        purpose is hereby granted without fee, provided that the above copyright 
-        notice appear in all copies and that both that copyright notice and this 
-        permission notice appear in supporting documentation.
-    The author or Addison-Welsey Longman make no representations about the 
-        suitability of this software for any purpose. It is provided "as is" 
-        without express or implied warranty.
 */
 //==============================================================================
 
 #ifndef LUABRIDGE_LUABRIDGEEXTRAS_HEADER
 #define LUABRIDGE_LUABRIDGEEXTRAS_HEADER
+
+/*
+  EXPERIMENTAL STUFF
+*/
 
 namespace luabridge
 {
@@ -229,6 +216,11 @@ public:
   void push ()  const
   {
     m_ref.push ();
+  }
+
+  lua_State* L ()
+  {
+    return m_ref.L ();
   }
 
   /** Call the function with up to 8 arguments and a possible return value.
