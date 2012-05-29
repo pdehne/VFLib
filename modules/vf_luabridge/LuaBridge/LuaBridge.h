@@ -61,7 +61,7 @@
   <img src="http://vinniefalco.github.com/LuaBridgeDemo/powered-by-lua.png">
   </a><br>
 
-  # LuaBridge
+  # LuaBridge 1.0
 
   [LuaBridge][3] is a lightweight, dependency-free library for making C++ data,
   functions, and classes available to Lua. It works with Lua revisions starting
@@ -96,6 +96,16 @@
   It contains template code to automatically generate at compile-time the
   various Lua C API calls necessary to export your program's classes and
   functions to the Lua environment.
+
+  ### Version
+
+  LuaBridge repository branches are as follows:
+
+  - **[master][7]**: Tagged, stable release versions.
+
+  - **[release][8]**: Tagged candidates for imminent release.
+
+  - **[develop][9]**: Work in progress.
 
   ## LuaBridge Demo and Tests
 
@@ -838,6 +848,9 @@
   [4]: https://github.com/vinniefalco/LuaBridgeDemo "LuaBridge Demo"
   [5]: http://lua.org "The Lua Programming Language"
   [6]: http://www.rawmaterialsoftware.com/juce/api/classString.html "juce::String"
+  [7]: https://github.com/vinniefalco/LuaBridge "LuaBridge master branch"
+  [8]: https://github.com/vinniefalco/LuaBridge/tree/release "LuaBridge release branch"
+  [9]: https://github.com/vinniefalco/LuaBridge/tree/develop "LuaBridge develop branch"
 */
 
 #include <cassert>
