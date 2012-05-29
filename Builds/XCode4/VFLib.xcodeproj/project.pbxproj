@@ -58,7 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E08D9BF1549EF2E006A6931 /* libOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOSX.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E08D9BF1549EF2E006A6931 /* libVFLib OSX Apple.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVFLib OSX Apple.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E08D9C21549EF2E006A6931 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2E08D9C51549EF2E006A6931 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2E08D9C61549EF2E006A6931 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -130,7 +130,7 @@
 		2E08D9C01549EF2E006A6931 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2E08D9BF1549EF2E006A6931 /* libOSX.a */,
+				2E08D9BF1549EF2E006A6931 /* libVFLib OSX Apple.a */,
 				2E915CE91575228C00929EBA /* libVFLib OSX Apple copy.a */,
 				2E915CFD1575229D00929EBA /* libVFLib iOS Apple-iPad.a */,
 				2E915D12157522A900929EBA /* libVFLib iOS Apple copy.a */,
@@ -222,7 +222,7 @@
 			);
 			name = "VFLib OSX Apple";
 			productName = VFLib;
-			productReference = 2E08D9BF1549EF2E006A6931 /* libOSX.a */;
+			productReference = 2E08D9BF1549EF2E006A6931 /* libVFLib OSX Apple.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		2E915CD61575228C00929EBA /* VFLib OSX GCC */ = {
@@ -433,7 +433,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -442,7 +441,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
@@ -451,7 +449,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = "VFLib OSX Apple copy";
-				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -460,7 +457,6 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = "VFLib OSX Apple copy";
-				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
@@ -470,7 +466,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "VFLib iOS Apple-iPad";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -481,7 +477,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "VFLib iOS Apple-iPad";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -492,7 +488,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "VFLib iOS Apple copy";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -503,7 +499,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "VFLib iOS Apple copy";
-				SDKROOT = iphoneos5.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
