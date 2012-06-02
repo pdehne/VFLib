@@ -19,42 +19,23 @@
 */
 /*============================================================================*/
 
-/** Include this to get the @ref vf_audio module.
+#ifndef VF_MIDIINPUT_VFHEADER
+#define VF_MIDIINPUT_VFHEADER
 
-    @file vf_audio.h
-    @ingroup vf_audio
-*/
-
-#ifndef VF_AUDIO_VFHEADER
-#define VF_AUDIO_VFHEADER
-
-/*============================================================================*/
 /**
-    Audio signal processing utilities.
-
-    This is a small collection of classes for performing audio signal
-    processing.
-
-    @defgroup vf_audio vf_audio
+  Facade to make the JUCE MidiInput work with RAII.
 */
-
-#include "../vf_core/vf_core.h"
-
-#include "modules/juce_audio_basics/juce_audio_basics.h"
-#include "modules/juce_audio_devices/juce_audio_devices.h"
-
-namespace vf
+class MidiInput : Uncopyable
 {
+public:
+  explicit MidiInput (int deviceIndex);
+  ~MidiInput ();
 
-#include "buffers/vf_AudioBufferPool.h"
-#include "buffers/vf_AudioSampleBufferArray.h"
-#include "buffers/vf_ScopedAudioSampleBuffer.h"
+  bool start (juce::MidiInputCallback* callback);
 
-#include "midi/vf_MidiInput.h"
-
-#include "sources/vf_NoiseAudioSource.h"
-
-}
+private:
+  int const m_deviceIndex;
+  ScopedPointer <juce::MidiInput> m_input;
+};
 
 #endif
-

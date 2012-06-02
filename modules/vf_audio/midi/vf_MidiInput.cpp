@@ -19,42 +19,25 @@
 */
 /*============================================================================*/
 
-/** Include this to get the @ref vf_audio module.
-
-    @file vf_audio.h
-    @ingroup vf_audio
-*/
-
-#ifndef VF_AUDIO_VFHEADER
-#define VF_AUDIO_VFHEADER
-
-/*============================================================================*/
-/**
-    Audio signal processing utilities.
-
-    This is a small collection of classes for performing audio signal
-    processing.
-
-    @defgroup vf_audio vf_audio
-*/
-
-#include "../vf_core/vf_core.h"
-
-#include "modules/juce_audio_basics/juce_audio_basics.h"
-#include "modules/juce_audio_devices/juce_audio_devices.h"
-
-namespace vf
+MidiInput::MidiInput (int deviceIndex)
+  : m_deviceIndex (deviceIndex)
 {
-
-#include "buffers/vf_AudioBufferPool.h"
-#include "buffers/vf_AudioSampleBufferArray.h"
-#include "buffers/vf_ScopedAudioSampleBuffer.h"
-
-#include "midi/vf_MidiInput.h"
-
-#include "sources/vf_NoiseAudioSource.h"
-
 }
 
-#endif
+MidiInput::~MidiInput ()
+{
+}
 
+bool MidiInput::start (juce::MidiInputCallback* callback)
+{
+  bool success = false;
+
+  m_input = juce::MidiInput::openDevice (m_deviceIndex, callback);
+
+  if (m_input != nullptr)
+    m_input->start ();
+  else
+    success = false;
+
+  return success;
+}
