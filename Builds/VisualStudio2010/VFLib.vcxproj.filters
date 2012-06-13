@@ -516,6 +516,9 @@
     <ClCompile Include="..\..\modules\vf_audio\midi\vf_MidiInput.cpp">
       <Filter>VF Modules\vf_audio\midi</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.cpp">
+      <Filter>VF Modules\vf_audio\sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\modules\vf_db\api\backend.h">
@@ -994,6 +997,9 @@
     </ClInclude>
     <ClInclude Include="..\..\modules\vf_audio\midi\vf_MidiInput.h">
       <Filter>VF Modules\vf_audio\midi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.h">
+      <Filter>VF Modules\vf_audio\sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

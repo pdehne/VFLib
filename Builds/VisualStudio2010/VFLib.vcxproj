@@ -23,6 +23,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\modules\vf_audio\vf_audio.cpp" />
     <ClCompile Include="..\..\modules\vf_bzip2\bzip2\blocksort.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -481,6 +485,7 @@
     <ClInclude Include="..\..\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h" />
     <ClInclude Include="..\..\modules\vf_audio\midi\vf_MidiInput.h" />
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_NoiseAudioSource.h" />
+    <ClInclude Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.h" />
     <ClInclude Include="..\..\modules\vf_audio\vf_audio.h" />
     <ClInclude Include="..\..\modules\vf_bzip2\bzip2\bzlib.h" />
     <ClInclude Include="..\..\modules\vf_bzip2\bzip2\bzlib_private.h" />
