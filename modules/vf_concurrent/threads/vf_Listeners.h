@@ -22,11 +22,6 @@
 #ifndef VF_LISTENERS_VFHEADER
 #define VF_LISTENERS_VFHEADER
 
-#include "vf_CallQueue.h"
-#include "vf_ReadWriteMutex.h"
-#include "../memory/vf_AllocatedBy.h"
-#include "../memory/vf_FifoFreeStore.h"
-
 /*============================================================================*/
 /**
   A group of concurrent Listeners.

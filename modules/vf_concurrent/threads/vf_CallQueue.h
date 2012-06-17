@@ -22,9 +22,6 @@
 #ifndef VF_CALLQUEUE_VFHEADER
 #define VF_CALLQUEUE_VFHEADER
 
-#include "../memory/vf_AllocatedBy.h"
-#include "../memory/vf_FifoFreeStore.h"
-
 /*============================================================================*/
 /**
   @ingroup vf_concurrent

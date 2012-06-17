@@ -22,8 +22,6 @@
 #ifndef VF_THREADWITHCALLQUEUE_VFHEADER
 #define VF_THREADWITHCALLQUEUE_VFHEADER
 
-#include "vf_CallQueue.h"
-
 /*============================================================================*/
 /** 
     An InterruptibleThread with a CallQueue.
