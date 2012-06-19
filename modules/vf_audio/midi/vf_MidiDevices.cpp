@@ -19,7 +19,7 @@
 */
 /*============================================================================*/
 
-class MidiDevicesImp : public MidiDevices
+class MidiDevicesImp : public MidiDevices, private Timer, private Thread
 {
 private:
   struct CompareDevices
@@ -116,11 +116,21 @@ private:
   vf::Listeners <Listener> m_listeners;
 
 public:
-  MidiDevicesImp ()
+  //============================================================================
+
+  MidiDevicesImp () : Thread ("MidiDevices")
   {
     // This object must be created from the JUCE Message Thread.
     //
     vfassert (MessageManager::getInstance()->isThisTheMessageThread());
+
+    //startTimer (1000);
+    startThread ();
+  }
+
+  ~MidiDevicesImp ()
+  {
+    stopThread (-1);
   }
 
   void addListener (Listener* listener, CallQueue& thread)
@@ -134,15 +144,21 @@ public:
   }
 
 private:
+  //----------------------------------------------------------------------------
+
   void scanInputDevices ()
   {
     StateType::WriteAccess state (m_state);
 
-    // Make a copy of the original sorted list.
+    // Make a copy of the currently connected devices.
     Array <InputImp*> disconnected;
     disconnected.ensureStorageAllocated (state->inputs.size ());
     for (int i = 0; i < state->inputs.size (); ++i)
-      disconnected.add (state->inputs [i]);
+    {
+      InputImp* const device = state->inputs [i];
+      if (device->getDeviceIndex () != -1)
+        disconnected.add (device);
+    }
 
     // Enumerate connected devices.
     StringArray const devices (juce::MidiInput::getDevices ());
@@ -168,7 +184,11 @@ private:
 
         // Notify listeners with connected status.
         if (device->getDeviceIndex () == -1)
-          m_listeners.queue (&Listener::onMidiDevicesConnect, device, true);
+        {
+          m_listeners.queue (&Listener::onMidiDevicesStatus, device, true);
+
+          Logger::outputDebugString (device->getName () + ": connected");
+        }
 
         device->setDeviceIndex (deviceIndex);
       }
@@ -186,15 +206,39 @@ private:
       InputImp* const device = disconnected [i];
       device->setDeviceIndex (-1);
 
-      m_listeners.queue (&Listener::onMidiDevicesConnect, device, false);
+      m_listeners.queue (&Listener::onMidiDevicesStatus, device, false);
+
+      Logger::outputDebugString (device->getName () + ": disconnected");
     }
   }
+
+  //----------------------------------------------------------------------------
 
   void scanOutputDevices ()
   {
     StateType::WriteAccess state (m_state);
 
     StringArray const devices (juce::MidiOutput::getDevices ());
+  }
+
+  //----------------------------------------------------------------------------
+
+  void timerCallback ()
+  {
+    scanInputDevices ();
+    scanOutputDevices ();
+  }
+
+  void run ()
+  {
+    do
+    {
+      wait (1000);
+
+      scanInputDevices ();
+      scanOutputDevices ();
+    }
+    while (!threadShouldExit ());
   }
 };
 

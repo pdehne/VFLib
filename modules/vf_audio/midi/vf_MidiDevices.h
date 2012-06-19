@@ -63,7 +63,17 @@ public:
 public:
   struct Listener
   {
-    virtual void onMidiDevicesConnect (Device* device, bool isConnected);
+    /**
+      Called when the connection status of a device changes.
+    */
+    virtual void onMidiDevicesStatus (Device* device, bool isConnected) { }
+
+    /**
+      Called when the connection status of any devices changes.
+
+      This is usually a good opportunity to rebuild user interface lists.
+    */
+    virtual void onMidiDevicesChanged () { }
   };
 
   /**
