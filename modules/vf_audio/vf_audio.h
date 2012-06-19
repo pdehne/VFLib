@@ -47,6 +47,11 @@
 namespace vf
 {
 
+#ifdef _MSC_VER
+#pragma warning (push)
+#pragma warning (disable: 4100)
+#endif
+
 #include "buffers/vf_AudioBufferPool.h"
 #include "buffers/vf_AudioSampleBufferArray.h"
 #include "buffers/vf_ScopedAudioSampleBuffer.h"
@@ -58,6 +63,10 @@ namespace vf
 #include "sources/vf_SampleSource.h"
 #include "sources/vf_SeekingSampleSource.h"
 #include "sources/vf_SeekingAudioSource.h"
+
+#ifdef _MSC_VER
+#pragma warning (pop)
+#endif
 
 }
 
