@@ -19,44 +19,30 @@
 */
 /*============================================================================*/
 
-/** Include this to get the @ref vf_audio module.
+#ifndef VF_SAMPLESOURCE_VFHEADER
+#define VF_SAMPLESOURCE_VFHEADER
 
-    @file vf_audio.h
-    @ingroup vf_audio
-*/
-
-#ifndef VF_AUDIO_VFHEADER
-#define VF_AUDIO_VFHEADER
-
-/*============================================================================*/
+//==============================================================================
 /**
-    Audio signal processing utilities.
+  Abstract source of audio samples.
 
-    This is a small collection of classes for performing audio signal
-    processing.
+  This interface is used to retrieve sequentual raw audio samples from an
+  abstract source. It is intended as a facade for @ref AudioSource, with these
+  features:
 
-    @defgroup vf_audio vf_audio
+  - No thread safety; the caller is responsible for all synchronization.
+
+  - The preparation state feature is removed (along with its methods).
+
+  @ingroup vf_audio
 */
-
-#include "../vf_core/vf_core.h"
-
-#include "modules/juce_audio_basics/juce_audio_basics.h"
-#include "modules/juce_audio_devices/juce_audio_devices.h"
-
-namespace vf
+class SampleSource
 {
-
-#include "buffers/vf_AudioBufferPool.h"
-#include "buffers/vf_AudioSampleBufferArray.h"
-#include "buffers/vf_ScopedAudioSampleBuffer.h"
-
-#include "midi/vf_MidiInput.h"
-
-#include "sources/vf_NoiseAudioSource.h"
-#include "sources/vf_SampleSource.h"
-#include "sources/vf_SeekingSampleSource.h"
-#include "sources/vf_SeekingAudioSource.h"
-
-}
+public:
+  /**
+    Read the next block of samples.
+  */
+  virtual void getNextAudioBlock (AudioSourceChannelInfo const& bufferToFill) = 0;
+};
 
 #endif

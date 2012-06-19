@@ -19,44 +19,39 @@
 */
 /*============================================================================*/
 
-/** Include this to get the @ref vf_audio module.
+#ifndef VF_SEEKINGSAMPLESOURCE_VFHEADER
+#define VF_SEEKINGSAMPLESOURCE_VFHEADER
 
-    @file vf_audio.h
-    @ingroup vf_audio
-*/
-
-#ifndef VF_AUDIO_VFHEADER
-#define VF_AUDIO_VFHEADER
-
-/*============================================================================*/
+//==============================================================================
 /**
-    Audio signal processing utilities.
+  Abstract positionable source of audio samples.
 
-    This is a small collection of classes for performing audio signal
-    processing.
+  This interface adds positionable capabilities to a SampleSource. It is
+  intended as a facade for @ref PositionableAudioSource, with these features:
 
-    @defgroup vf_audio vf_audio
+  - No thread safety; the caller is responsible for all synchronization.
+
+  - The looping and total length features have been removed.
+
+  @ingroup vf_audio
 */
-
-#include "../vf_core/vf_core.h"
-
-#include "modules/juce_audio_basics/juce_audio_basics.h"
-#include "modules/juce_audio_devices/juce_audio_devices.h"
-
-namespace vf
+class SeekingSampleSource : public SampleSource
 {
+public:
+  /**
+    Move the read position.
 
-#include "buffers/vf_AudioBufferPool.h"
-#include "buffers/vf_AudioSampleBufferArray.h"
-#include "buffers/vf_ScopedAudioSampleBuffer.h"
+    Calling this indicates that the next call to SampleSource::getNextAudioBlock()
+    should return samples from this position.
+  */
+  virtual void setNextReadPosition (int64 newPosition) = 0;
 
-#include "midi/vf_MidiInput.h"
+  /**
+    Returns the position from which the next block will be returned.
 
-#include "sources/vf_NoiseAudioSource.h"
-#include "sources/vf_SampleSource.h"
-#include "sources/vf_SeekingSampleSource.h"
-#include "sources/vf_SeekingAudioSource.h"
-
-}
+    @see setNextReadPosition
+  */
+  virtual int64 getNextReadPosition () const = 0;
+};
 
 #endif

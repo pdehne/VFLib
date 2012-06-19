@@ -1001,6 +1001,12 @@
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.h">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\modules\vf_audio\sources\vf_SampleSource.h">
+      <Filter>VF Modules\vf_audio\sources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\modules\vf_audio\sources\vf_SeekingSampleSource.h">
+      <Filter>VF Modules\vf_audio\sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" />
