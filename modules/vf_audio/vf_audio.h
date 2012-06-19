@@ -38,10 +38,11 @@
     @defgroup vf_audio vf_audio
 */
 
-#include "../vf_core/vf_core.h"
-
 #include "modules/juce_audio_basics/juce_audio_basics.h"
 #include "modules/juce_audio_devices/juce_audio_devices.h"
+
+#include "../vf_core/vf_core.h"
+#include "../vf_concurrent/vf_concurrent.h"
 
 namespace vf
 {
@@ -51,6 +52,7 @@ namespace vf
 #include "buffers/vf_ScopedAudioSampleBuffer.h"
 
 #include "midi/vf_MidiInput.h"
+#include "midi/vf_MidiDevices.h"
 
 #include "sources/vf_NoiseAudioSource.h"
 #include "sources/vf_SampleSource.h"
