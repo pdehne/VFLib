@@ -38,65 +38,8 @@
 class InterruptibleThread : public Thread
 {
 public:
-  // This is the flag used to indicate if an interruption
-  // occurred when using the polling model. It is designed
-  // to detect improper usage (specifically, not checking
-  // the flag, which would result in incorrect behavior).
-  //
-  // #1 The default constructor must produce an object that
-  //    is considered non-signaled (i.e. not interrupted)
-  //    in order for ThreadWithCallQueue that uses a default Callable
-  //    for its idle function to work.
-  //
-  class Interrupted : public SafeBool <Interrupted>
-  {
-  public:
-    Interrupted ()
-     : m_interrupted (false)
-     , m_checked (false)
-    {
-    }
-
-    explicit Interrupted (bool interrupted)
-     : m_interrupted (interrupted)
-     , m_checked (false)
-    {
-    }
-
-    Interrupted (const Interrupted& other)
-      : m_interrupted (other.m_interrupted)
-      , m_checked (false)
-    {
-      other.m_checked = true;
-    }
-
-    ~Interrupted ()
-    {
-      vfassert (!m_interrupted || m_checked);
-    }
-
-    Interrupted& operator= (const Interrupted& other)
-    {
-      m_interrupted = other.m_interrupted;
-      m_checked = false;
-      other.m_checked = true;
-      return *this;
-    }
-
-    bool asBoolean () const
-    {
-      m_checked = true;
-      return m_interrupted;
-    }
-
-  private:
-    bool m_interrupted;
-    bool mutable m_checked;
-  };
-
   typedef Thread::ThreadID id;
 
-public:
   /**
     Construct an interruptible thread.
 
@@ -155,7 +98,7 @@ public:
 
     @return \c true if an interrupt was requested.
   */
-  Interrupted interruptionPoint ();
+  bool interruptionPoint ();
 
   /**
     Get the ID of the associated thread.
@@ -205,7 +148,7 @@ private:
 namespace CurrentInterruptibleThread
 {
 
-extern InterruptibleThread::Interrupted interruptionPoint ();
+extern bool interruptionPoint ();
 
 }
 
