@@ -148,6 +148,7 @@ private:
 
   void scanInputDevices ()
   {
+#if 0
     StateType::WriteAccess state (m_state);
 
     // Make a copy of the currently connected devices.
@@ -210,6 +211,9 @@ private:
 
       Logger::outputDebugString (device->getName () + ": disconnected");
     }
+#else
+    jassertfalse;
+#endif
   }
 
   //----------------------------------------------------------------------------
