@@ -20,12 +20,8 @@
 /*============================================================================*/
 
 SeekingSampleSource::PositionableAdapter::PositionableAdapter (
-  SeekingSampleSource* source,
-  bool takeOwnership,
-  int64 totalLength)
+  SeekingSampleSource* source, bool takeOwnership)
   : m_source (source, takeOwnership)
-  , m_totalLength (totalLength)
-  , m_shouldLoop (false)
 {
 }
 
@@ -41,17 +37,22 @@ int64 SeekingSampleSource::PositionableAdapter::getNextReadPosition () const
 
 int64 SeekingSampleSource::PositionableAdapter::getTotalLength () const
 {
-  return m_totalLength;
+  // Unsupported
+  jassertfalse;
+  return 0;
 }
 
 bool SeekingSampleSource::PositionableAdapter::isLooping () const
 {
-  return m_shouldLoop;
+  // Unsupported
+  jassertfalse;
+  return false;
 }
 
 void SeekingSampleSource::PositionableAdapter::setLooping (bool shouldLoop)
 {
-  m_shouldLoop = shouldLoop;
+  // Unsupported
+  jassertfalse;
 }
 
 void SeekingSampleSource::PositionableAdapter::prepareToPlay (
@@ -66,53 +67,5 @@ void SeekingSampleSource::PositionableAdapter::releaseResources ()
 void SeekingSampleSource::PositionableAdapter::getNextAudioBlock (
   const AudioSourceChannelInfo& bufferToFill)
 {
-  if (m_shouldLoop)
-  {
-    int64 nextReadPosition = m_source->getNextReadPosition ();
-
-    if (nextReadPosition < m_totalLength)
-    {
-      int outputPosition = 0; // relative to bufferToFill
-
-      while (outputPosition < bufferToFill.numSamples)
-      {
-        int amountToProcess = bufferToFill.numSamples - outputPosition;
-        int64 remainingInputSamples = m_totalLength - nextReadPosition;
-
-        // inequality is for the edge case, to rewind the read position.
-        if (amountToProcess >= remainingInputSamples)
-        {
-          // copy remaining input till end
-          amountToProcess = static_cast <int> (remainingInputSamples);
-          m_source->getNextAudioBlock (AudioSourceChannelInfo (
-            bufferToFill.buffer,
-            bufferToFill.startSample + outputPosition,
-            amountToProcess));
-
-          // rewind
-          nextReadPosition = 0;
-          m_source->setNextReadPosition (nextReadPosition);
-        }
-        else
-        {
-          m_source->getNextAudioBlock (AudioSourceChannelInfo (
-            bufferToFill.buffer,
-            bufferToFill.startSample + outputPosition,
-            amountToProcess));
-        }
-
-        // advance
-        outputPosition += amountToProcess;
-      }
-    }
-    else
-    {
-      // already past the end
-      m_source->getNextAudioBlock (bufferToFill);
-    }
-  }
-  else
-  {
-    m_source->getNextAudioBlock (bufferToFill);
-  }
+  m_source->getNextAudioBlock (bufferToFill);
 }

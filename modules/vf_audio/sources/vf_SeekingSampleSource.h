@@ -63,9 +63,7 @@ public:
   class PositionableAdapter : public PositionableAudioSource, Uncopyable
   {
   public:
-    PositionableAdapter (SeekingSampleSource* source,
-                         bool takeOwnership,
-                         int64 totalLength);
+    PositionableAdapter (SeekingSampleSource* source, bool takeOwnership);
 
     void setNextReadPosition (int64 newPosition);
 
@@ -86,8 +84,6 @@ public:
 
   private:
     OptionalScopedPointer <SeekingSampleSource> m_source;
-    int64 const m_totalLength;
-    bool m_shouldLoop;
   };
 };
 
