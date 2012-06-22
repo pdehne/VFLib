@@ -35,23 +35,17 @@
 
   @ingroup vf_audio
 */
-class SeekingAudioSource : public AudioSource
+class SeekingAudioSource : public SeekingSampleSource
 {
 public:
-  /**
-    Move the read position.
-
-    Calling this indicates that the next call to @ref AudioSource::getNextAudioBlock()
-    should return samples from this position.
+  /** Tells the source to prepare for playing.
   */
-  virtual void setNextReadPosition (int64 newPosition) = 0;
+  virtual void prepareToPlay (int samplesPerBlockExpected,
+                              double sampleRate) = 0;
 
-  /**
-    Returns the position from which the next block will be returned.
-
-    @see setNextReadPosition
+  /** Allows the source to release anything it no longer needs after playback has stopped.
   */
-  virtual int64 getNextReadPosition() const = 0;
+  virtual void releaseResources() = 0;
 
 public:
   //============================================================================
