@@ -31,6 +31,8 @@
 
   - No thread safety; the caller is responsible for all synchronization.
 
+  - Forward and reverse playback is supported.
+
   - The looping and total length features have been removed.
 
   @ingroup vf_audio
@@ -38,6 +40,30 @@
 class SeekingSampleSource : public SampleSource
 {
 public:
+  enum Direction
+  {
+    forward,
+    reverse
+  };
+
+  /**
+    Get the direction for the retrieval of samples.
+  */
+  virtual Direction getNextReadDirection () const = 0;
+
+  /**
+    Set the direction for the retrieval of samples.
+  */
+
+  virtual void setNextReadDirection (Direction direction) = 0;
+
+  /**
+    Get the position of the next returned sample.
+
+    @see setNextReadPosition
+  */
+  virtual int64 getNextReadPosition () const = 0;
+
   /**
     Move the read position.
 
@@ -45,13 +71,6 @@ public:
     should return samples from this position.
   */
   virtual void setNextReadPosition (int64 newPosition) = 0;
-
-  /**
-    Returns the position from which the next block will be returned.
-
-    @see setNextReadPosition
-  */
-  virtual int64 getNextReadPosition () const = 0;
 
 public:
   //============================================================================
