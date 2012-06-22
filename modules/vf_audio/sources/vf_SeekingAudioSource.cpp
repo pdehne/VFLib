@@ -57,6 +57,7 @@ void SeekingAudioSource::PositionableAdapter::setLooping (bool shouldLoop)
 void SeekingAudioSource::PositionableAdapter::prepareToPlay (
   int samplesPerBlockExpected, double sampleRate)
 {
+  m_source->prepareToPlay (samplesPerBlockExpected, sampleRate);
 }
 
 void SeekingAudioSource::PositionableAdapter::releaseResources ()
