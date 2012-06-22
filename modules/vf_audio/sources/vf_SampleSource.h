@@ -39,6 +39,8 @@
 class SampleSource
 {
 public:
+  virtual ~SampleSource () { }
+
   /**
     Read the next block of samples.
   */
