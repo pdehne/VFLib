@@ -43,6 +43,8 @@ namespace vf
 #include "midi/vf_MidiInput.cpp"
 
 #include "sources/vf_NoiseAudioSource.cpp"
+#include "sources/vf_SeekingAudioSource.cpp"
+#include "sources/vf_SeekingSampleSource.cpp"
 
 }
 

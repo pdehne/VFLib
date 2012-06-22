@@ -522,6 +522,9 @@
     <ClCompile Include="..\..\modules\vf_audio\midi\vf_MidiDevices.cpp">
       <Filter>VF Modules\vf_audio\midi</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_audio\sources\vf_SeekingSampleSource.cpp">
+      <Filter>VF Modules\vf_audio\sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\modules\vf_db\api\backend.h">

@@ -52,6 +52,43 @@ public:
     @see setNextReadPosition
   */
   virtual int64 getNextReadPosition () const = 0;
+
+public:
+  //============================================================================
+  /**
+    Adapter to appear as a @ref PositionableAudioSource.
+
+    @ingroup vf_audio
+  */
+  class PositionableAdapter : public PositionableAudioSource, Uncopyable
+  {
+  public:
+    PositionableAdapter (SeekingSampleSource* source,
+                         bool takeOwnership,
+                         int64 totalLength);
+
+    void setNextReadPosition (int64 newPosition);
+
+    int64 getNextReadPosition() const;
+
+    int64 getTotalLength() const;
+
+    bool isLooping() const;
+
+    void setLooping (bool shouldLoop);
+
+    void prepareToPlay (int samplesPerBlockExpected,
+                        double sampleRate);
+
+    void releaseResources();
+
+    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill);
+
+  private:
+    OptionalScopedPointer <SeekingSampleSource> m_source;
+    int64 const m_totalLength;
+    bool m_shouldLoop;
+  };
 };
 
 #endif
