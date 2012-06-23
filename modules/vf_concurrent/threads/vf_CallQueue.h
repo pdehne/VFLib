@@ -374,6 +374,8 @@ protected:
       Functors may not be added after this routine is called. This is used for
       diagnostics, to track down spurious calls during application shutdown
       or exit. Derived classes may call this if the appropriate time is known.
+
+      The queue is synchronized after it is closed.
   */
   void close ();
 

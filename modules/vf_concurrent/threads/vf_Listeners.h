@@ -133,9 +133,6 @@
 
     ~AudioDeviceOutput ()
     {
-      // Synchronize required since we're using a ManualCallQueue.
-      m_fifo.synchronize ();
-
       m_fifo.close ();
     }
 
