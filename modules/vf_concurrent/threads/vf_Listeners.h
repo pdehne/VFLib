@@ -707,7 +707,7 @@ public:
   template <class Mf, class T1, class T2, class T3, class T4>
   void call1 (ListenerClass* const listener, Mf mf, T1 t1, T2 t2, T3 t3, T4 t4)
   {
-    call1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
+    call1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4));
   }
 
   template <class Mf, class T1, class T2, class T3, class T4, class T5>
@@ -755,7 +755,7 @@ public:
   template <class Mf, class T1, class T2, class T3, class T4>
   void queue1 (ListenerClass* const listener, Mf mf, T1 t1, T2 t2, T3 t3, T4 t4)
   {
-    queue1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
+    queue1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4));
   }
 
   template <class Mf, class T1, class T2, class T3, class T4, class T5>
