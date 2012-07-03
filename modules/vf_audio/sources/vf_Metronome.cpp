@@ -47,7 +47,7 @@ public:
 
   void setTickSample (void const* audioData, int dataBytes)
   {
-    ScopedPointer <MemoryInputStream> mis = new MemoryInputStream (audioData, dataBytes, false);
+    ScopedPointer <MemoryInputStream> mis (new MemoryInputStream (audioData, dataBytes, false));
 
     m_synth.clearVoices ();
     m_synth.clearSounds ();
@@ -56,7 +56,7 @@ public:
     afm.registerBasicFormats ();
     
     {
-      ScopedPointer <AudioFormatReader> afr = afm.createReaderFor (mis);
+      ScopedPointer <AudioFormatReader> afr (afm.createReaderFor (mis));
 
       if (afr != nullptr)
       {
