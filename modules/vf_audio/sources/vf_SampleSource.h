@@ -68,6 +68,30 @@ public:
   private:
     OptionalScopedPointer <SampleSource> m_source;
   };
+
+public:
+  class Adapter;
+};
+
+//------------------------------------------------------------------------------
+
+/** Adapter to appear as a @ref SampleSource.
+*/
+class SampleSource::Adapter : public SampleSource
+{
+public:
+  Adapter (AudioSource* source, bool takeOwnership)
+    : m_source (source, takeOwnership)
+  {
+  }
+
+  void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
+  {
+    m_source->getNextAudioBlock (bufferToFill);
+  }
+
+private:
+  OptionalScopedPointer <AudioSource> m_source;
 };
 
 #endif
