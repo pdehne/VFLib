@@ -540,6 +540,9 @@
     <ClCompile Include="..\..\modules\vf_audio\sources\vf_Metronome.cpp">
       <Filter>VF Modules\vf_audio\sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\modules\vf_audio\sources\vf_SampleSource.cpp">
+      <Filter>VF Modules\vf_audio\sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\modules\vf_db\api\backend.h">

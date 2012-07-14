@@ -41,10 +41,33 @@ class SampleSource
 public:
   virtual ~SampleSource () { }
 
-  /**
-    Read the next block of samples.
+  /** Read the next block of samples.
   */
   virtual void getNextAudioBlock (AudioSourceChannelInfo const& bufferToFill) = 0;
+
+public:
+  /** Adapter to appear as an @ref AudioSource.
+  */
+  class AudioSourceAdapter : public AudioSource, Uncopyable
+  {
+  public:
+    AudioSourceAdapter (SampleSource* source, bool takeOwnership)
+      : m_source (source, takeOwnership)
+    {
+    }
+
+    void prepareToPlay (int samplesPerBlockExpected, double sampleRate) { }
+
+    void releaseResources() { }
+
+    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
+    {
+      m_source->getNextAudioBlock (bufferToFill);
+    }
+
+  private:
+    OptionalScopedPointer <SampleSource> m_source;
+  };
 };
 
 #endif
