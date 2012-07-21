@@ -45,6 +45,8 @@
 
   ### Version 1.1
 
+  Copyright (C) 2008 by Vinnie Falco \<vinnie.falco@gmail.com\> ([e-mail][0])
+
   VFLib is a source code collection of individual modules containing
   functionality for a variety of applications, with an emphasis on building
   concurrent systems. VFLib requires [JUCE][3] (Jules' Utility Class
@@ -180,7 +182,7 @@
   - [TagLib][16] is distributed under both the [GNU Lesser General Public License,
   Version 2.1][17] and the [Mozilla Public License][18].
 
-  [0]: vinnie.falco@gmail.com "Vinnie Falco (Email)"
+  [0]: mailto:vinnie.falco@gmail.com "Vinnie Falco (Email)"
   [1]: https://github.com/vinniefalco/VFLib "VFLib Project"
   [2]: http://vinniefalco.github.com/VFLib/ "VFLib Documentation"
   [3]: http://rawmaterialsoftware.com/juce.php "JUCE"
@@ -200,7 +202,6 @@
   [17]: http://www.gnu.org/licenses/lgpl-2.1.html "Gnu Lesser General Public License, version 2.1"
   [18]: http://www.mozilla.org/MPL/1.1/ "Mozilla Public License"
 
-  @author Vinnie Falco (<a href="vinnie.falco@gmail.com">email</a>)
   @copyright Copyright (C) 2008 by Vinnie Falco \<vinnie.falco@gmail.com\> ([e-mail][0])
   @copyright Provided under the [MIT License][11]
 */
