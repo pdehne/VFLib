@@ -1,4 +1,4 @@
-@mainpage VFLib: A multipurpose library built on JUCE.
+# VFLib: A multipurpose library built on JUCE.
 
 ### Version 1.1
 
@@ -71,11 +71,7 @@ already uses JUCE. For example, to use the [vf_core][vf_core] module, add the fi
 To use a module, include the appropriate header from within your source code.
 For example, to access classes in the [vf_concurrent][vf_concurrent] module, use this:
 
-@code
-
-#include "modules/vf_concurrent/vf_concurrent.h"
-
-@endcode
+    #include "modules/vf_concurrent/vf_concurrent.h"
 
 Then add the corresponding file [vf_concurrent.cpp][vf_concurrent.cpp] to your build.
 
