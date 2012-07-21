@@ -84,7 +84,7 @@ convention).
 
 ## License
 
-Copyright (C) 2008 by Vinnie Falco ([e-mail][0])
+Copyright (C) 2008 by Vinnie Falco <vinnie.falco@gmail.com> ([e-mail][0])
 
 Unless otherwise marked, files in VFLib are published under the [GNU General
 Public License][5].  This program is distributed in the hope that it will be
