@@ -122,6 +122,14 @@ RECURSIVE              = YES
 
 REPEAT_BRIEF           = YES
 
+# If this flag is set to YES, the members of anonymous namespaces will be
+# extracted and appear in the documentation as a namespace called
+# 'anonymous_namespace{file}', where file will be replaced with the base
+# name of the file that contains the anonymous namespace. By default
+# anonymous namespaces are hidden.
+
+EXTRACT_ANON_NSPACES   = YES
+
 
 #---------------------------------------------------------------------------
 
@@ -488,14 +496,6 @@ EXTRACT_LOCAL_CLASSES  = NO
 # If set to NO (the default) only methods in the interface are included.
 
 EXTRACT_LOCAL_METHODS  = NO
-
-# If this flag is set to YES, the members of anonymous namespaces will be
-# extracted and appear in the documentation as a namespace called
-# 'anonymous_namespace{file}', where file will be replaced with the base
-# name of the file that contains the anonymous namespace. By default
-# anonymous namespaces are hidden.
-
-EXTRACT_ANON_NSPACES   = NO
 
 # If the HIDE_FRIEND_COMPOUNDS tag is set to YES, Doxygen will hide all
 # friend (class|struct|union) declarations.
