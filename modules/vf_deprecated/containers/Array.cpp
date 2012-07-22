@@ -42,9 +42,9 @@ ArrayStorage::ArrayStorage(
   size_t elemBytes,
   size_t blockBytes)
 {
-  vfassert( blockBytes>=sizeof(void*) );
-  vfassert( elemBytes>0 );
-  vfassert( elemBytes<blockBytes );
+  jassert( blockBytes>=sizeof(void*) );
+  jassert( elemBytes>0 );
+  jassert( elemBytes<blockBytes );
 
   m_elemBytes=elemBytes;
   m_blockBytes=blockBytes;
@@ -121,7 +121,7 @@ ArrayStorage::Index ArrayStorage::Create( void )
 
 void* ArrayStorage::Elem( Index oneBasedIndex )
 {
-  vfassert( oneBasedIndex>=1 && oneBasedIndex<=m_count );
+  jassert( oneBasedIndex>=1 && oneBasedIndex<=m_count );
 
   Index zeroBasedIndex=oneBasedIndex-1;
   Index n=zeroBasedIndex/m_blockElems;
@@ -137,7 +137,7 @@ void* ArrayStorage::Elem( Index oneBasedIndex )
 
 const void* ArrayStorage::Elem( Index oneBasedIndex ) const
 {
-  vfassert( oneBasedIndex>=1 && oneBasedIndex<=m_count );
+  jassert( oneBasedIndex>=1 && oneBasedIndex<=m_count );
 
   Index zeroBasedIndex=oneBasedIndex-1;
   Index n=zeroBasedIndex/m_blockElems;
@@ -264,7 +264,7 @@ int ArrayStorage::BSearch(
       else
       {
         // one element left
-        vfassert( num==1 );
+        jassert( num==1 );
 
         comp = CompareProc( key, Elem(lo)  );
 
@@ -293,8 +293,8 @@ int ArrayStorage::BSearch(
     result=0;
   }
 
-  vfassert( m_count==0 || ( index>=1 && index<=m_count ) );
-  vfassert( index==0 || CompareProc( key, Elem(index) )==result );
+  jassert( m_count==0 || ( index>=1 && index<=m_count ) );
+  jassert( index==0 || CompareProc( key, Elem(index) )==result );
 
   if( pIndex!=0 )
     *pIndex=index;

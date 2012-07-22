@@ -71,7 +71,7 @@ public:
 
       This can be called manually if needed.
 
-      @return \c true if any functors were called.
+      @return `true` if any functors were called.
   */
   bool synchronize ();
 

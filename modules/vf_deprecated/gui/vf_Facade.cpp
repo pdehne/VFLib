@@ -57,13 +57,13 @@ Base::~Base()
 
 Model::Base& Base::getModel ()
 {
-  vfassert (m_model != nullptr);
+  jassert (m_model != nullptr);
   return *m_model;
 }
 
 Control::Base& Base::getControl ()
 {
-  vfassert (m_control != nullptr);
+  jassert (m_control != nullptr);
   return *m_control;
 }
 
@@ -123,7 +123,7 @@ void Base::paintOverChildren (Graphics& g, const Rectangle<int>& bounds)
 
 void Base::attach (Model::Base* model, Control::Base* control)
 {
-  vfassert (m_control == nullptr && m_model == nullptr);
+  jassert (m_control == nullptr && m_model == nullptr);
 
   m_model = model;
   m_control = control;

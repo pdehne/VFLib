@@ -42,7 +42,7 @@
   @ingroup vf_concurrent
 */
 class GlobalPagedFreeStore
-  : public ReferenceCountedSingleton <GlobalPagedFreeStore>
+  : public RefCountedSingleton <GlobalPagedFreeStore>
   , LeakChecked <GlobalPagedFreeStore>
 {
 private:

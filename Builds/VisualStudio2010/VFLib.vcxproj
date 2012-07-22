@@ -578,7 +578,7 @@
     <ClInclude Include="..\..\modules\vf_core\memory\vf_CacheLine.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_MemoryAlignment.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_Uncopyable.h" />
-    <ClInclude Include="..\..\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_RefCountedSingleton.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_Semaphore.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_SpinDelay.h" />

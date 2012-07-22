@@ -240,7 +240,7 @@ void Base::onModelEnablement (Model::Base* model)
 
 void Base::handleAsyncUpdate ()
 {
-  vfassert (m_model != nullptr);
+  jassert (m_model != nullptr);
 
   Component* component = dynamic_cast <Component*> (this);
 

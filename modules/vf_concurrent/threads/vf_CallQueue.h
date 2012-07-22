@@ -471,7 +471,7 @@ public:
 
   /** See if the caller is on the association thread.
 
-      @return \c true if the calling thread of execution is associated with the
+      @return `true` if the calling thread of execution is associated with the
               queue.
   */
   bool isAssociatedWithCurrentThread () const;
@@ -483,7 +483,7 @@ public:
       @note This must be called from the associated thread or else the return
             value is undefined.
 
-      @return \c true if the call stack contains synchronize() for this queue.
+      @return `true` if the call stack contains synchronize() for this queue.
   */
   bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
 

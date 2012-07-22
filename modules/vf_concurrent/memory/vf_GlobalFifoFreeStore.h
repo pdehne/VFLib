@@ -42,7 +42,7 @@
   @ingroup vf_concurrent
 */
 template <class Tag>
-class GlobalFifoFreeStore : public ReferenceCountedSingleton <GlobalFifoFreeStore <Tag> >
+class GlobalFifoFreeStore : public RefCountedSingleton <GlobalFifoFreeStore <Tag> >
 {
 public:
   inline void* allocate (size_t bytes)
@@ -62,7 +62,7 @@ public:
 
 private:
   GlobalFifoFreeStore ()
-	: ReferenceCountedSingleton <GlobalFifoFreeStore <Tag> >
+	: RefCountedSingleton <GlobalFifoFreeStore <Tag> >
 		(SingletonLifetime::persistAfterCreation)
   {
   }
