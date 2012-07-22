@@ -15,23 +15,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_audio\midi\vf_MidiDevices.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\modules\vf_audio\midi\vf_MidiInput.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\modules\vf_audio\sources\vf_Metronome.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_audio\sources\vf_NoiseAudioSource.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\modules\vf_audio\sources\vf_SampleSource.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -319,15 +307,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_BlendPixels.cpp">
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_BlendImage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_ChannelImageType.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_gui\graphics\vf_FreeTypeFaces.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\modules\vf_gui\graphics\vf_ImageGraphics.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -509,14 +497,33 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\modules\vf_taglib\vf_taglib.cpp" />
+    <ClCompile Include="..\..\modules\vf_unfinished\graphics\vf_BackgroundContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_unfinished\graphics\vf_BlendImage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_unfinished\graphics\vf_LayerContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_unfinished\midi\vf_MidiDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_unfinished\midi\vf_MidiInput.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\modules\vf_unfinished\vf_unfinished.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AppConfigTemplate\AppConfig.h" />
     <ClInclude Include="..\..\modules\vf_audio\buffers\vf_AudioBufferPool.h" />
     <ClInclude Include="..\..\modules\vf_audio\buffers\vf_AudioSampleBufferArray.h" />
     <ClInclude Include="..\..\modules\vf_audio\buffers\vf_ScopedAudioSampleBuffer.h" />
-    <ClInclude Include="..\..\modules\vf_audio\midi\vf_MidiDevices.h" />
-    <ClInclude Include="..\..\modules\vf_audio\midi\vf_MidiInput.h" />
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_Metronome.h" />
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_NoiseAudioSource.h" />
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_SampleSource.h" />
@@ -571,7 +578,7 @@
     <ClInclude Include="..\..\modules\vf_core\memory\vf_CacheLine.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_MemoryAlignment.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_Uncopyable.h" />
-    <ClInclude Include="..\..\modules\vf_core\memory\vf_ReferenceCountedSingleton.h" />
+    <ClInclude Include="..\..\modules\vf_core\memory\vf_RefCountedSingleton.h" />
     <ClInclude Include="..\..\modules\vf_core\memory\vf_StaticObject.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_Semaphore.h" />
     <ClInclude Include="..\..\modules\vf_core\threads\vf_SpinDelay.h" />
@@ -629,11 +636,12 @@
     <ClInclude Include="..\..\modules\vf_gui\components\vf_ComponentNotifyParent.h" />
     <ClInclude Include="..\..\modules\vf_gui\components\vf_TransparentBorder.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_BackgroundContext.h" />
-    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_BlendPixels.h" />
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_BlendImage.h" />
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_ChannelImageType.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_FreeTypeFaces.h" />
-    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_ImageGraphics.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_LabColour.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_LayerContext.h" />
+    <ClInclude Include="..\..\modules\vf_gui\graphics\vf_Pixels.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_RadialImageConvolutionKernel.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_VerticalGradient.h" />
     <ClInclude Include="..\..\modules\vf_gui\graphics\vf_XYZColour.h" />
@@ -679,10 +687,17 @@
     <ClInclude Include="..\..\modules\vf_sqlite\vf_sqlite.h" />
     <ClInclude Include="..\..\modules\vf_taglib\TagLibAmalgam\TagLibAmalgam.h" />
     <ClInclude Include="..\..\modules\vf_taglib\vf_taglib.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\graphics\vf_BackgroundContext.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\graphics\vf_BlendImage.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\graphics\vf_LayerContext.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\graphics\vf_Pixels.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\midi\vf_MidiDevices.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\midi\vf_MidiInput.h" />
+    <ClInclude Include="..\..\modules\vf_unfinished\vf_unfinished.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\docs\Doxyfile" />
-    <None Include="..\..\GNU_GPL_v2.txt" />
+    <None Include="..\..\COPYRIGHT" />
+    <None Include="..\..\Doxyfile" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

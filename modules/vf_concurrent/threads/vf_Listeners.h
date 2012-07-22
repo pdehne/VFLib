@@ -1,21 +1,32 @@
 /*============================================================================*/
 /*
-  Copyright (C) 2008 by Vinnie Falco, this file is part of VFLib.
-  See the file GNU_GPL_v2.txt for full licensing terms.
+  VFLib: https://github.com/vinniefalco/VFLib
 
-  This program is free software; you can redistribute it and/or modify it
-  under the terms of the GNU General Public License as published by the Free
-  Software Foundation; either version 2 of the License, or (at your option)
-  any later version.
+  Copyright (C) 2008 by Vinnie Falco <vinnie.falco@gmail.com>
 
-  This program is distributed in the hope that it will be useful, but WITHOUT
-  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-  details.
+  This library contains portions of other open source products covered by
+  separate licenses. Please see the corresponding source files for specific
+  terms.
+  
+  VFLib is provided under the terms of The MIT License (MIT):
 
-  You should have received a copy of the GNU General Public License along with
-  this program; if not, write to the Free Software Foundation, Inc., 51
-  Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
 */
 /*============================================================================*/
 
@@ -207,7 +218,6 @@
   @class Listeners
   @ingroup vf_concurrent
 */
-
 class ListenersBase
 {
 public:
@@ -341,9 +351,7 @@ private:
 };
 
 /*============================================================================*/
-/** @class Listeners
-    @ingroup vf_concurrent
-*/
+
 template <class ListenerClass>
 class Listeners : public ListenersBase
 {
@@ -470,77 +478,12 @@ public:
       @param mf The member function to call. This may be followed by up to 8
                 arguments.
   */
+  /** @{ */
   template <class Mf>
   inline void call (Mf mf)
   {
     callf (vf::bind (mf, vf::_1));
   }
-
-  /** Queue a member function on every added listener, without synchronizing.
-
-      Operates like call(), but no CallQueue synchronization takes place. This
-      can be necessary when the call to queue() is made inside a held lock.
-
-      @param mf The member function to call. This may be followed by up to 8
-                arguments.
-  */
-  template <class Mf>
-  inline void queue (Mf mf)
-  {
-    queuef (vf::bind (mf, vf::_1));
-  }
-
-  /** Call a member function on every added listener, replacing pending
-      calls to the same member.
-
-      This operates like call(), except that if there are pending unprocessed
-      calls to the same member function,they will be replaced, with the previous
-      parameters destroyed normally. This functionality is useful for
-      high frequency notifications of non critical data, where the recipient
-      may not catch up often enough. For example, the output level of the
-      AudioIODeviceCallback in the example is a candidate for the use of
-      update().
-
-      @param mf The member function to call. This may be followed by up to 8
-                arguments.
-  */
-  template <class Mf>
-  inline void update (Mf mf)
-  { updatef (mf, vf::bind (mf, vf::_1)); }
-
-  /** Call a member function on a specific listener.
-
-      Like call(), except that one listener is targeted only. This is useful when
-      builing complex behaviors during the addition of a listener, such as
-      providing an initial state.
-
-      @param listener The listener to call.
-
-      @param mf       The member function to call. This may be followed by up
-                      to 8 arguments.
-  */
-  template <class Mf>
-  inline void call1 (ListenerClass* const listener, Mf mf)
-  {
-    call1f (listener, vf::bind (mf, vf::_1));
-  }
-
-  /** Queue a member function on a specific listener.
-
-      Like call1(), except that no CallQueue synchronization takes place.
-
-      @param listener The listener to call.
-
-      @param mf       The member function to call. This may be followed by up
-                      to 8 arguments.
-  */
-  template <class Mf>
-  inline void queue1 (ListenerClass* const listener, Mf mf)
-  {
-    queue1f (listener, vf::bind (mf, vf::_1));
-  }
-
-  /* Automatic binding for up to 8 arguments */
 
   template <class Mf, class T1>
   void call (Mf mf, T1 t1)
@@ -588,6 +531,22 @@ public:
   void call (Mf mf, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
   {
     callf (vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
+  }
+  /** @} */
+
+  /** Queue a member function on every added listener, without synchronizing.
+
+      Operates like call(), but no CallQueue synchronization takes place. This
+      can be necessary when the call to queue() is made inside a held lock.
+
+      @param mf The member function to call. This may be followed by up to 8
+                arguments.
+  */
+  /** @{ */
+  template <class Mf>
+  inline void queue (Mf mf)
+  {
+    queuef (vf::bind (mf, vf::_1));
   }
 
   template <class Mf, class T1>
@@ -637,6 +596,26 @@ public:
   {
     queuef (vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+  /** @} */
+
+  /** Call a member function on every added listener, replacing pending
+      calls to the same member.
+
+      This operates like call(), except that if there are pending unprocessed
+      calls to the same member function,they will be replaced, with the previous
+      parameters destroyed normally. This functionality is useful for
+      high frequency notifications of non critical data, where the recipient
+      may not catch up often enough. For example, the output level of the
+      AudioIODeviceCallback in the example is a candidate for the use of
+      update().
+
+      @param mf The member function to call. This may be followed by up to 8
+                arguments.
+  */
+  /** @{ */
+  template <class Mf>
+  inline void update (Mf mf)
+  { updatef (mf, vf::bind (mf, vf::_1)); }
 
   template <class Mf, class T1>
   void update (Mf mf, T1 t1)
@@ -684,6 +663,25 @@ public:
   void update (Mf mf, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
   {
     updatef (mf, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
+  }
+  /** @} */
+
+  /** Call a member function on a specific listener.
+
+      Like call(), except that one listener is targeted only. This is useful when
+      builing complex behaviors during the addition of a listener, such as
+      providing an initial state.
+
+      @param listener The listener to call.
+
+      @param mf       The member function to call. This may be followed by up
+                      to 8 arguments.
+  */
+  /** @{ */
+  template <class Mf>
+  inline void call1 (ListenerClass* const listener, Mf mf)
+  {
+    call1f (listener, vf::bind (mf, vf::_1));
   }
 
   template <class Mf, class T1>
@@ -733,6 +731,23 @@ public:
   {
     call1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+  /** @} */
+
+  /** Queue a member function on a specific listener.
+
+      Like call1(), except that no CallQueue synchronization takes place.
+
+      @param listener The listener to call.
+
+      @param mf       The member function to call. This may be followed by up
+                      to 8 arguments.
+  */
+  /** @{ */
+  template <class Mf>
+  inline void queue1 (ListenerClass* const listener, Mf mf)
+  {
+    queue1f (listener, vf::bind (mf, vf::_1));
+  }
 
   template <class Mf, class T1>
   void queue1 (ListenerClass* const listener, Mf mf, T1 t1)
@@ -781,6 +796,8 @@ public:
   {
     queue1f (listener, vf::bind (mf, vf::_1, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+  /** @} */
 };
+/** @} */
 
 #endif
