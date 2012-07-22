@@ -697,7 +697,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\COPYRIGHT" />
-    <None Include="..\..\docs\Doxyfile" />
+    <None Include="..\..\Doxyfile" />
     <None Include="..\..\README.md" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

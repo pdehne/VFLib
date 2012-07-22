@@ -150,30 +150,47 @@ class CallQueue
 public:
   //============================================================================
 
+  /** Type of allocator to use.
+  
+      @internal
+  */
   typedef FifoFreeStoreType AllocatorType;
 
-  /** @internal
-      @ingroup vf_concurrent internal
+  /** Abstract nullary functor in a @ref CallQueue.
 
-      @brief Abstract nullary functor.
+      Custom implementations may derive from this object for efficiency instead
+      of using the automatic binding functions.
   */
   class Call : public LockFreeQueue <Call>::Node,
                public AllocatedBy <AllocatorType>
   {
   public:
     virtual ~Call () { }
+
+    /** Calls the functor.
+
+        This executes during the queue's call to synchronize().
+    */
     virtual void operator() () = 0;
   };
 
   //============================================================================
 
-  /** @param  name  A string to identify the queue during debugging.
+  /** Create the CallQueue.
+  
+      The queue starts out open and empty.
+
+      @param name A string to identify the queue during debugging.
   */
   explicit CallQueue (String name);
 
-  /** @details
+  /** Destroy the CallQueue.
   
-      @invariant Destroying a queue that contains functors is undefined.
+      @invariant Destroying a queue that contains functors results in undefined
+                 behavior.
+
+      @note It is customary to call close() on the CallQueue early in the
+            shutdown process to catch functors going into the queue late.
   */
   ~CallQueue ();
 
@@ -201,15 +218,16 @@ public:
       associated with the CallQueue, synchronize() is called automatically. This
       behavior can be avoided by using queue() instead.
 
-      @param f The function to call followed by up to eight parameters, evaluated
-                immediately. The parameter list must match the function signature.
-                For class member functions, the first argument must be a pointer
-                to the class object.
+      @param f The function to call followed by up to eight parameters,
+               evaluated immediately. The parameter list must match the function
+      signature. For class member functions, the first argument must be a
+      pointer to the class object.
 
       @see queue
 
       @todo Provide an example of when synchronize() is needed in call().
   */
+  /** @{ */
   template <class Fn>
   void call (Fn f)
   {
@@ -263,6 +281,7 @@ public:
   {
     callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+  /** @} */
 
   /** Add a functor without synchronizing.
 
@@ -322,6 +341,7 @@ public:
 
       @see call
   */
+  /** @{ */
   template <class Fn>
   void queue (Fn f)
   {
@@ -375,6 +395,7 @@ public:
   {
     queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+  /** @} */
 
 protected:
   //============================================================================
@@ -412,30 +433,36 @@ protected:
   */
   virtual void signal () = 0;
 
-  /** Called when the queue becomes non-signaled. */
+  /** Called when the queue is reset.
+
+      A queue is reset when it was previously signaled and then becomes empty
+      as a result of a call to synchronize.
+  */
   virtual void reset () = 0;
 
 public:
   //============================================================================
 
-  /** @internal
-  
-      @details Add a raw Call to the queue and synchronize if possible.
+  /** Add a raw call.
 
-      @param c The call to add.
-    */
+      @internal
+
+      Custom implementations use this to control the allocation.
+
+      @param c The call to add. The memory must come from the allocator.
+  */
   void callp (Call* c);
 
-  /** @internal 
+  /** Queue a raw call.
+  
+      Custom implementations use this to control the allocation.
 
-      @details Add a raw Call to the queue without synchronizing.
-
-      @param c The call to add.
+      @param c The call to add. The memory must come from the allocator.
   */
   void queuep (Call* c);
 
-  /** @internal
-  
+  /** Retrieve the allocator.
+
       @return The allocator to use when allocating a raw Call object.      
    */
   inline AllocatorType& getAllocator ()
@@ -443,17 +470,20 @@ public:
     return m_allocator;
   }
 
-  /** @internal
-  
+  /** See if the caller is on the association thread.
+
       @return \c true if the calling thread of execution is associated with the
               queue.
   */
   bool isAssociatedWithCurrentThread () const;
 
-  /** @internal
+  /** See if the queue is being synchronized.
+
+      This is used for diagnostics.
   
-      @details This function helps provide diagnostics.
-  
+      @note This must be called from the associated thread or else the return
+            value is undefined.
+
       @return \c true if the call stack contains synchronize() for this queue.
   */
   bool isBeingSynchronized () const { return m_isBeingSynchronized.isSignaled(); }
