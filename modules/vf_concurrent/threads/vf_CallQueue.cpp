@@ -50,7 +50,7 @@ bool CallQueue::isAssociatedWithCurrentThread () const
 }
 
 // Adds a call to the queue of execution.
-void CallQueue::queuep (Call* c)
+void CallQueue::queuep (Work* c)
 {
   // If this goes off it means calls are being made after the
   // queue is closed, and probably there is no one around to
@@ -61,11 +61,11 @@ void CallQueue::queuep (Call* c)
     signal ();
 }
 
-// Append the Call to the queue. If this call is made from the same
+// Append the Work to the queue. If this call is made from the same
 // thread as the last thread that called synchronize(), then the call
 // will execute synchronously.
 //
-void CallQueue::callp (Call* c)
+void CallQueue::callp (Work* c)
 {
   queuep (c);
 
@@ -137,7 +137,7 @@ bool CallQueue::doSynchronize ()
   //
   reset ();
 
-  Call* call = m_queue.pop_front ();
+  Work* call = m_queue.pop_front ();
 
   if (call)
   {

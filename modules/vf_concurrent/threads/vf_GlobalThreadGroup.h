@@ -35,11 +35,11 @@
 
 /*============================================================================*/
 /**
-  @ingroup vf_concurrent
-
-  @brief A ThreadGroup singleton.
+  A ThreadGroup singleton.
 
   @see ThreadGroup
+
+  @ingroup vf_concurrent
 */
 class GlobalThreadGroup : public ThreadGroup,
                           public ReferenceCountedSingleton <GlobalThreadGroup>

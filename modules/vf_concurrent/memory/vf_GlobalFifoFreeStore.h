@@ -37,10 +37,9 @@
 
 /*============================================================================*/
 /**
-    A FifoFreeStore singleton.
+  A @ref FifoFreeStoreType singleton.
 
-    @internal
-    @ingroup vf_concurrent internal
+  @ingroup vf_concurrent
 */
 template <class Tag>
 class GlobalFifoFreeStore : public ReferenceCountedSingleton <GlobalFifoFreeStore <Tag> >

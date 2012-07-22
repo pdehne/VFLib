@@ -33,7 +33,7 @@
 // CallQueue item to process a Call for a particular listener.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::CallWork : public CallQueue::Call
+class ListenersBase::CallWork : public CallQueue::Work
 {
 public:
   inline CallWork (ListenersBase::Call* const c, void* const listener)
@@ -56,7 +56,7 @@ private:
 // CallQueue item to process a Call for a group.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::GroupWork : public CallQueue::Call
+class ListenersBase::GroupWork : public CallQueue::Work
 {
 public:
   inline GroupWork (Group* group,
@@ -84,7 +84,7 @@ private:
 // CallQueue item to process a call for a particular listener.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::GroupWork1 : public CallQueue::Call
+class ListenersBase::GroupWork1 : public CallQueue::Work
 {
 public:
   inline GroupWork1 (Group* group,
@@ -360,7 +360,7 @@ void ListenersBase::Group::do_call1 (Call* const c, const timestamp_t timestamp,
 // CallQueue item for processing a an Entry for a Proxy.
 // This is used to avoid bind overhead.
 //
-class ListenersBase::Proxy::Work : public CallQueue::Call
+class ListenersBase::Proxy::Work : public CallQueue::Work
 {
 public:
   inline Work (Proxy* proxy,
