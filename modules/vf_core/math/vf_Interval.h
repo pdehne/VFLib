@@ -251,7 +251,7 @@ public:
   template <class To>
   bool superset_of (Interval <To> const& other) const
   {
-    return interval.empty() ||
+    return other.empty() ||
            (notEmpty() && begin () <= other.begin ()
                        && end () >= other.end ());
   }
