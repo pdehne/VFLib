@@ -933,8 +933,6 @@
   <ItemGroup>
     <None Include="..\..\README.md" />
     <None Include="..\..\COPYRIGHT" />
-    <None Include="..\..\Doxyfile">
-      <Filter>VF Modules</Filter>
-    </None>
+    <None Include="..\..\Doxyfile" />
   </ItemGroup>
 </Project>
