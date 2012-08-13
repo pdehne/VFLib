@@ -55,8 +55,6 @@ protected:
   public:
     CounterBase ();
 
-    virtual ~CounterBase () { }
-  
     static void detectAllLeaks ();
 
   private:
@@ -101,7 +99,7 @@ protected:
   }
 
 private:
-  class Counter : private CounterBase
+  class Counter : public CounterBase
   {
   public:
     inline int increment ()
