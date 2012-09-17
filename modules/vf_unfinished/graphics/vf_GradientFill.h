@@ -30,83 +30,31 @@
 */
 /*============================================================================*/
 
-#ifndef VF_MIDIDEVICES_VFHEADER
-#define VF_MIDIDEVICES_VFHEADER
+#ifndef VF_GRADIENTFILL_VFHEADER
+#define VF_GRADIENTFILL_VFHEADER
 
-/**
-  Midi input and output device manager.
+/** Specifies the parameters for drawing a gradient fill.
 
-  This wraps JUCE support for Midi devices, with the following features:
-
-  - Add/remove notification.
-
-  - Midi input and output devices identified by a permanent handle.
-
+    @ingroup vf_gui
 */
-class MidiDevices : public RefCountedSingleton <MidiDevices>
+struct GradientFill
 {
-public:
-  /**
-    Common Midi device characteristics.
-  */
-  class Device
+  enum Style
   {
-  public:
-    virtual ~Device () { }
-    virtual String getName () const = 0;
+    styleLinear = 1,
+    styleRadial,
+    styleAngle,
+    styleReflected,
+    styleDiamond,
+    styleShapeBurst
   };
 
-  /**
-    An input device.
-  */
-  class Input : public Device
-  {
-  public:
-  };
-
-  /**
-    An output device.
-  */
-  class Output : public Device
-  {
-  public:
-  };
-
-public:
-  struct Listener
-  {
-    /**
-      Called when the connection status of a device changes.
-    */
-    virtual void onMidiDevicesStatus (Device* device, bool isConnected) { }
-
-    /**
-      Called when the connection status of any devices changes.
-
-      This is usually a good opportunity to rebuild user interface lists.
-    */
-    virtual void onMidiDevicesChanged () { }
-  };
-
-  /**
-    Add a device notification listener.
-  */
-  virtual void addListener (Listener* listener, CallQueue& thread) = 0;
-
-  /**
-    Remove a device notification listener.
-  */
-  virtual void removeListener (Listener* listener) = 0;
-
-protected:
-  friend class RefCountedSingleton <MidiDevices>;
-
-  MidiDevices () : RefCountedSingleton <MidiDevices> (
-    SingletonLifetime::persistAfterCreation)
-  {
-  }
-
-  static MidiDevices* createInstance ();
+  Style style;
+  GradientColours colours;
+  bool reverse;
+  double angle;
+  double scale;             // [0.1 ... 1.5]
+  Point <double> origin;
 };
 
 #endif

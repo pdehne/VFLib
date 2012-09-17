@@ -30,55 +30,18 @@
 */
 /*============================================================================*/
 
-#ifndef VF_BACKGROUNDCONTEXT_VFHEADER
-#define VF_BACKGROUNDCONTEXT_VFHEADER
+#ifndef VF_PATTERNFILL_VFHEADER
+#define VF_PATTERNFILL_VFHEADER
 
-//------------------------------------------------------------------------------
-
-/** Context Image container base.
-
-    This holds the image and bounding rectangle used for our custom
-    contexts, to resolve the order of construction issues.
-
-    @ingroup vf_gui
-
-    @internal
-*/
-class ContextImageBase : vf::Uncopyable
-{
-protected:
-  ContextImageBase (Rectangle <int> const& imageBounds,
-                    Image::PixelFormat pixelFormat);
-
-public:
-  Rectangle <int> getImageBounds () const;
-
-  Image getImage () const;
-
-private:
-  Rectangle <int> const m_imageBounds;
-  Image m_image;
-};
-
-//------------------------------------------------------------------------------
-
-/** Graphics context for image compositing.
-
-    This wraps a Graphics context with an image to provide a background
-    for compositing layers.
+/** Specifies the parameters for drawing a pattern fill.
 
     @ingroup vf_gui
 */
-class BackgroundContext : public ContextImageBase, public Graphics
+struct PatternFill
 {
-public:
-  BackgroundContext (Graphics& destinationContext,
-                     Rectangle <int> const& drawBounds);
-
-  ~BackgroundContext ();
-
-private:
-  Graphics& m_destinationContext;
+  Image image;              // [0.01 ... 10]
+  double scale;             // [0.1 ... 1.5]
+  Point <int> origin;       
 };
 
 #endif
