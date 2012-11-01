@@ -42,7 +42,7 @@ GuiCallQueue::GuiCallQueue ()
   //
   synchronize ();
 
-  m_thread.start ();
+  m_thread.start (this);
 }
 
 void GuiCallQueue::close ()
