@@ -53,7 +53,9 @@
 
   @ingroup vf_concurrent
 */
-class ThreadWithCallQueue : public CallQueue
+class ThreadWithCallQueue
+  : public CallQueue
+  , private InterruptibleThread::EntryPoint
 {
 public:
   typedef Function <bool (void)> idle_t;
@@ -132,7 +134,8 @@ private:
   void reset ();
 
   void do_stop ();
-  void run ();
+
+  void threadRun ();
 
 private:
   InterruptibleThread m_thread;

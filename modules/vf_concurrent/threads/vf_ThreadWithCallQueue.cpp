@@ -61,7 +61,7 @@ void ThreadWithCallQueue::start (idle_t worker_idle,
   m_idle = worker_idle;
   m_exit = worker_exit;
 
-  m_thread.start (vf::bind (&ThreadWithCallQueue::run, this));
+  m_thread.start (this);
 }
 
 void ThreadWithCallQueue::stop (bool const wait)
@@ -131,7 +131,7 @@ void ThreadWithCallQueue::do_stop ()
   m_shouldStop = true;
 }
 
-void ThreadWithCallQueue::run ()
+void ThreadWithCallQueue::threadRun ()
 {
   m_init ();
 
