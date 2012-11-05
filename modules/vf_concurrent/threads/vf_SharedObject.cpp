@@ -30,45 +30,38 @@
 */
 /*============================================================================*/
 
-/** Add this to get the @ref vf_concurrent module.
-
-    @file vf_concurrent.cpp
-    @ingroup vf_concurrent
-*/
-
-#include "AppConfig.h"
-
-#include "vf_concurrent.h"
-
-#if JUCE_MSVC
-#pragma warning (push)
-#pragma warning (disable: 4100) // unreferenced formal parmaeter
-#endif
-
-namespace vf
+SharedObject::ThreadedScope::ThreadedScope (char const* name)
+  : ThreadWithCallQueue (name)
 {
-#if VF_USE_BOOST
-#include "memory/vf_FifoFreeStoreWithTLS.cpp"
-#else
-#include "memory/vf_FifoFreeStoreWithoutTLS.cpp"
-#endif
-#include "memory/vf_GlobalPagedFreeStore.cpp"
-#include "memory/vf_PagedFreeStore.cpp"
-
-#include "threads/vf_CallQueue.cpp"
-#include "threads/vf_ConcurrentObject.cpp"
-#include "threads/vf_Listeners.cpp"
-#include "threads/vf_ManualCallQueue.cpp"
-#include "threads/vf_MessageThread.cpp"
-#include "threads/vf_ParallelFor.cpp"
-#include "threads/vf_ReadWriteMutex.cpp"
-#include "threads/vf_SharedObject.cpp"
-#include "threads/vf_ThreadGroup.cpp"
-#include "threads/vf_ThreadWithCallQueue.cpp"
-
-#include "threads/vf_GuiCallQueue.cpp"
 }
 
-#if JUCE_MSVC
-#pragma warning (pop)
-#endif
+void SharedObject::ThreadedScope::destroySharedObject (SharedObject* const object)
+{
+  callf (Delete <SharedObject> (object));
+}
+
+//------------------------------------------------------------------------------
+
+SharedObject::SharedObject (Scope& scope) : m_scope (&scope)
+{
+}
+
+SharedObject::SharedObject () : m_scope (nullptr)
+{
+}
+
+SharedObject::~SharedObject ()
+{
+}
+
+void SharedObject::destroySharedObject ()
+{
+  if (m_scope != nullptr)
+  {
+    m_scope->destroySharedObject (this);
+  }
+  else
+  {
+    delete this;
+  }
+}
