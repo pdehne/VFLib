@@ -33,15 +33,15 @@
 #ifndef VF_SHAREDOBJECT_VFHEADER
 #define VF_SHAREDOBJECT_VFHEADER
 
-/*============================================================================*/
+//==============================================================================
 /**
     A reference counted object with overridable destroy behavior.
 
-    This is a reference counted object compatible with
-    ReferenceCountedObjectPtr or {name}. When the last reference is removed,
-    the scope provided at the time of construction is used to destroy the
-    object. This is typically used to perform the delete on a separate thread.
-    If no scope is specified, the object is deleted directly.
+    This is a reference counted object compatible with SharedObjectPtr or
+    ReferenceCountedObjectPtr. When the last reference is removed, an
+    overridable virtual function is called to destroy the object. The default
+    behavior simply calls operator delete. Overrides can perform more complex
+    dispose actions, typically to destroy the object on a separate thread.
 
     @ingroup vf_concurrent
 */
@@ -67,14 +67,22 @@ public:
   */
   class ThreadedScope
     : public Scope
-    , public ThreadWithCallQueue
-    , public ThreadWithCallQueue::EntryPoints
+    , private ThreadWithCallQueue::EntryPoints
   {
   public:
+    /** Create a ThreadedScope.
+
+        @param name The name of the provided thread, for diagnostics.
+    */
     explicit ThreadedScope (char const* name);
 
     void destroySharedObject (SharedObject* const object);
 
+    /** Delete a dynamic object asynchronously.
+
+        This convenient template will delete a dynamically allocated
+        object on the provided thread.
+    */
     template <class Object>
     void deleteAsync (Object* const object)
     {
@@ -97,34 +105,27 @@ public:
       }
 
     private:
-      Delete& operator= (Delete const& other);
-
+      Delete& operator= (Delete const&);
+  
       Object* const m_object;
     };
+
+  private:
+    ThreadWithCallQueue m_thread;
   };
 
 protected:
-  /** Construct a shared object.
+  /** Construct a SharedObject.
 
-      The specified scope will be used to destroy the object when its
-      reference count drops to zero.
+      The constructor is protected to require subclassing.
   */
-  explicit SharedObject (Scope& scope);
+  SharedObject () { }
 
-  /** Construct a shared object.
-
-      With no scope specified, the default destroy behavior will call
-      operator delete directly unless overridden.
-  */
-  SharedObject ();
-
-  virtual ~SharedObject ();
+  virtual ~SharedObject () { }
 
   /** Delete the object.
 
-      This function is called when the reference count drops to zero.
-      The default implementation uses the scope to delete the object if
-      one was provided, or uses operator delete if no scope was specified.
+      The default behavior calls operator delete.
   */
   virtual void destroySharedObject ();
 
@@ -153,8 +154,157 @@ public:
   }
 
 private:
-  Scope* const m_scope;
   AtomicCounter m_refs;
 };
+
+//------------------------------------------------------------------------------
+
+/** RAII container for SharedObject.
+
+    This container is used to hold a pointer to a SharedObject and manage the
+    reference counts for you.
+*/
+template <class Object>
+class SharedObjectPtr
+{
+public:
+  typedef Object ReferencedType;
+
+  inline SharedObjectPtr() noexcept
+    : m_object (nullptr)
+  {
+  }
+
+  inline SharedObjectPtr (Object* const refCountedObject) noexcept
+      : m_object (refCountedObject)
+  {
+    if (refCountedObject != nullptr)
+      refCountedObject->incReferenceCount();
+  }
+
+  inline SharedObjectPtr (const SharedObjectPtr& other) noexcept
+      : m_object (other.m_object)
+  {
+      if (m_object != nullptr)
+          m_object->incReferenceCount();
+  }
+
+#if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
+  inline SharedObjectPtr (SharedObjectPtr&& other) noexcept
+      : m_object (other.m_object)
+  {
+    other.m_object = nullptr;
+  }
+#endif
+
+  template <class DerivedClass>
+  inline SharedObjectPtr (const SharedObjectPtr <DerivedClass>& other) noexcept
+      : m_object (static_cast <Object*> (other.get()))
+  {
+    if (m_object != nullptr)
+      m_object->incReferenceCount();
+  }
+
+  SharedObjectPtr& operator= (const SharedObjectPtr& other)
+  {
+    return operator= (other.m_object);
+  }
+
+  template <class DerivedClass>
+  SharedObjectPtr& operator= (const SharedObjectPtr <DerivedClass>& other)
+  {
+    return operator= (static_cast <Object*> (other.get()));
+  }
+
+#if JUCE_COMPILER_SUPPORTS_MOVE_SEMANTICS
+  SharedObjectPtr& operator= (SharedObjectPtr&& other)
+  {
+    std::swap (m_object, other.m_object);
+    return *this;
+  }
+#endif
+
+  SharedObjectPtr& operator= (Object* const newObject)
+  {
+    if (m_object != newObject)
+    {
+      if (newObject != nullptr)
+        newObject->incReferenceCount();
+
+      Object* const oldObject = m_object;
+      m_object = newObject;
+
+      if (oldObject != nullptr)
+        oldObject->decReferenceCount();
+    }
+
+    return *this;
+  }
+
+  inline ~SharedObjectPtr()
+  {
+    if (m_object != nullptr)
+      m_object->decReferenceCount();
+  }
+
+  inline operator Object*() const noexcept
+  {
+    return m_object;
+  }
+
+  inline Object* operator->() const noexcept
+  {
+    return m_object;
+  }
+
+  inline Object* get() const noexcept
+  {
+    return m_object;
+  }
+
+  inline Object* getObject() const noexcept
+  {
+    return m_object;
+  }
+
+private:
+  Object* m_object;
+};
+
+template <class Object>
+bool operator== (const SharedObjectPtr <Object>& object1, Object* const object2) noexcept
+{
+  return object1.get() == object2;
+}
+
+template <class Object>
+bool operator== (const SharedObjectPtr <Object>& object1, const SharedObjectPtr <Object>& object2) noexcept
+{
+  return object1.get() == object2.get();
+}
+
+template <class Object>
+bool operator== (Object* object1, SharedObjectPtr <Object>& object2) noexcept
+{
+  return object1 == object2.get();
+}
+
+template <class Object>
+bool operator!= (const SharedObjectPtr <Object>& object1, const Object* object2) noexcept
+{
+  return object1.get() != object2;
+}
+
+template <class Object>
+bool operator!= (const SharedObjectPtr <Object>& object1, SharedObjectPtr <Object>& object2) noexcept
+{
+  return object1.get() != object2.get();
+}
+
+template <class Object>
+bool operator!= (Object* object1, SharedObjectPtr <Object>& object2) noexcept
+{
+  return object1 != object2.get();
+}
 
 #endif

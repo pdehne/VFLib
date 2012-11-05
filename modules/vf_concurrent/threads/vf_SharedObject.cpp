@@ -31,38 +31,19 @@
 /*============================================================================*/
 
 SharedObject::ThreadedScope::ThreadedScope (char const* name)
-  : ThreadWithCallQueue (name)
+  : m_thread (name)
 {
-  start (this);
+  m_thread.start (this);
 }
 
 void SharedObject::ThreadedScope::destroySharedObject (SharedObject* const object)
 {
-  callf (Delete <SharedObject> (object));
+  m_thread.callf (Delete <SharedObject> (object));
 }
 
 //------------------------------------------------------------------------------
 
-SharedObject::SharedObject (Scope& scope) : m_scope (&scope)
-{
-}
-
-SharedObject::SharedObject () : m_scope (nullptr)
-{
-}
-
-SharedObject::~SharedObject ()
-{
-}
-
 void SharedObject::destroySharedObject ()
 {
-  if (m_scope != nullptr)
-  {
-    m_scope->destroySharedObject (this);
-  }
-  else
-  {
-    delete this;
-  }
+  delete this;
 }
