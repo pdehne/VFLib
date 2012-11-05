@@ -33,6 +33,7 @@
 SharedObject::ThreadedScope::ThreadedScope (char const* name)
   : ThreadWithCallQueue (name)
 {
+  start (this);
 }
 
 void SharedObject::ThreadedScope::destroySharedObject (SharedObject* const object)

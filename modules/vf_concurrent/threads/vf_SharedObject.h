@@ -65,7 +65,10 @@ public:
 
       This Scope deletes the shared object on a separate provided thread.
   */
-  class ThreadedScope : public Scope, public ThreadWithCallQueue
+  class ThreadedScope
+    : public Scope
+    , public ThreadWithCallQueue
+    , public ThreadWithCallQueue::EntryPoints
   {
   public:
     explicit ThreadedScope (char const* name);
