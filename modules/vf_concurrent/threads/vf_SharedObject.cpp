@@ -38,7 +38,7 @@ SharedObject::ThreadedScope::ThreadedScope (char const* name)
 
 void SharedObject::ThreadedScope::destroySharedObject (SharedObject* const object)
 {
-  m_thread.callf (Delete <SharedObject> (object));
+  deleteAsync (object);
 }
 
 //------------------------------------------------------------------------------

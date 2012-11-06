@@ -86,7 +86,15 @@ public:
     template <class Object>
     void deleteAsync (Object* const object)
     {
-      callf (Delete (object));
+      // If an object being deleted recursively triggers async deletes,
+      // it is possible that the call queue has already been closed.
+      // We detect this condition by checking the associated thread and
+      // doing the delete directly.
+      //
+      if (m_thread.isAssociatedWithCurrentThread ())
+        delete object;
+      else
+        m_thread.callf (Delete <Object> (object));
     }
 
   private:
