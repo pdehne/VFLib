@@ -204,7 +204,7 @@ public:
 
 private:
   template <class Interface, class Functor>
-  void call (Component* component, Functor const& f)
+  void call (Component* component, Functor f)
   {
     Interface* const object = dynamic_cast <Interface*> (component);
 

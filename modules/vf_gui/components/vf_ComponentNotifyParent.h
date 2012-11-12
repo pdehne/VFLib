@@ -147,7 +147,7 @@ public:
 
 private:
   template <class Interface, class Functor>
-  void call (Component* component, Functor const& f)
+  void call (Component* component, Functor f)
   {
     component = component->getParentComponent();
     
