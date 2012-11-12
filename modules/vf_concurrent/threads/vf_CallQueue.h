@@ -205,7 +205,7 @@ public:
       @see call
   */
   template <class Functor>
-  void callf (Functor const& f)
+  void callf (Functor f)
   {
     callp (new (m_allocator) CallType <Functor> (f));
   }
@@ -492,7 +492,7 @@ private:
   class CallType : public Work
   {
   public:
-    explicit CallType (Functor const& f) : m_f (f) { }
+    explicit CallType (Functor f) : m_f (f) { }
     void operator() () { m_f (); }
 
   private:

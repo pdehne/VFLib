@@ -359,7 +359,7 @@ private:
   class CallType : public Call
   {
   public:
-    CallType (const Functor& f) : m_f (f)
+    CallType (Functor f) : m_f (f)
     {
     }
 
@@ -374,13 +374,13 @@ private:
   };
 
   template <class Functor>
-  inline void callf (const Functor& f)
+  inline void callf (Functor f)
   {
     callp (new (getCallAllocator ()) CallType <Functor> (f));
   }
 
   template <class Functor>
-  inline void queuef (const Functor& f)
+  inline void queuef (Functor f)
   {
     queuep (new (getCallAllocator ()) CallType <Functor> (f));
   }
@@ -396,19 +396,19 @@ private:
   }
 
   template <class Functor>
-  inline void call1f (ListenerClass* const listener, const Functor& f)
+  inline void call1f (ListenerClass* const listener, Functor f)
   {
     call1p (listener, new (getCallAllocator ()) CallType <Functor> (f));
   }
 
   template <class Functor>
-  inline void queue1f (ListenerClass* const listener, const Functor& f)
+  inline void queue1f (ListenerClass* const listener, Functor f)
   {
     queue1p (listener, new (getCallAllocator ()) CallType <Functor> (f));
   }
 
   template <class Member, class Functor>
-  inline void updatef (Member member, const Functor& f)
+  inline void updatef (Member member, Functor f)
   {
     updatep (reinterpret_cast <void*> (&member), sizeof (Member),
              new (getCallAllocator ()) CallType <Functor> (f));
