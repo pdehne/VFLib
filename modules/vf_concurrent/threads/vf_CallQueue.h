@@ -227,59 +227,77 @@ public:
       @todo Provide an example of when synchronize() is needed in call().
   */
   /** @{ */
+#if VFLIB_VARIADIC_MAX >= 1
   template <class Fn>
   void call (Fn f)
   {
     callf (vf::bind (f));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 2
   template <class Fn, class T1>
   void call (Fn f, T1 t1)
   {
     callf (vf::bind (f, t1));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 3
   template <class Fn, class T1, class T2>
   void call (Fn f, T1 t1, T2 t2)
   {
     callf (vf::bind (f, t1, t2));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 4
   template <class Fn, class T1, class T2, class T3>
   void call (Fn f, T1 t1, T2 t2, T3 t3)
   {
     callf (vf::bind (f, t1, t2, t3));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 5
   template <class Fn, class T1, class T2, class T3, class T4>
   void call (Fn f, T1 t1, T2 t2, T3 t3, T4 t4)
   {
     callf (vf::bind (f, t1, t2, t3, t4));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 6
   template <class Fn, class T1, class T2, class T3, class T4, class T5>
   void call (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
   {
     callf (vf::bind (f, t1, t2, t3, t4, t5));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 7
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6>
   void call (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
   {
     callf (vf::bind (f, t1, t2, t3, t4, t5, t6));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 8
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   void call (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
   {
     callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 9
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   void call (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
   {
     callf (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+#endif
   /** @} */
 
   /** Add a functor without synchronizing.
@@ -341,59 +359,77 @@ public:
       @see call
   */
   /** @{ */
+#if VFLIB_VARIADIC_MAX >= 1
   template <class Fn>
   void queue (Fn f)
   {
     queuef (vf::bind (f));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 2
   template <class Fn, class T1>
   void queue (Fn f, T1 t1)
   {
     queuef (vf::bind (f, t1));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 3
   template <class Fn, class T1, class T2>
   void queue (Fn f, T1 t1, T2 t2)
   {
     queuef (vf::bind (f, t1, t2));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 4
   template <class Fn, class T1, class T2, class T3>
   void queue (Fn f, T1 t1, T2 t2, T3 t3)
   {
     queuef (vf::bind (f, t1, t2, t3));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 5
   template <class Fn, class T1, class T2, class T3, class T4>
   void queue (Fn f, T1 t1, T2 t2, T3 t3, T4 t4)
   {
     queuef (vf::bind (f, t1, t2, t3, t4));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 6
   template <class Fn, class T1, class T2, class T3, class T4, class T5>
   void queue (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5)
   {
     queuef (vf::bind (f, t1, t2, t3, t4, t5));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 7
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6>
   void queue (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6)
   {
     queuef (vf::bind (f, t1, t2, t3, t4, t5, t6));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 8
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6, class T7>
   void queue (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
   {
     queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7));
   }
+#endif
 
+#if VFLIB_VARIADIC_MAX >= 9
   template <class Fn, class T1, class T2, class T3, class T4, class T5, class T6, class T7, class T8>
   void queue (Fn f, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
   {
     queuef (vf::bind (f, t1, t2, t3, t4, t5, t6, t7, t8));
   }
+#endif
   /** @} */
 
 protected:

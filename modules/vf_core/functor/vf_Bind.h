@@ -79,4 +79,16 @@
 
 #endif
 
+/** Max number of arguments to bind, total.
+*/
+#if JUCE_MSVC
+# ifdef _VARIADIC_MAX
+#  define VFLIB_VARIADIC_MAX _VARIADIC_MAX
+# else
+#  define VFLIB_VARIADIC_MAX 9
+# endif
+#else
+# define VFLIB_VARIADIC_MAX 9
+#endif
+
 #endif
