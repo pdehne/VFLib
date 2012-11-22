@@ -337,7 +337,7 @@ protected:
                      const size_t bytes, Call::Ptr cp);
 
 private:
-  Proxy* find_proxy (const void* member, int bytes);
+  Proxy* find_proxy (const void* member, size_t bytes);
 
 private:
   Groups m_groups;

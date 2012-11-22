@@ -756,7 +756,7 @@ void ListenersBase::updatep (void const* const member,
 // Searches for a proxy that matches the pointer to member.
 // Caller synchronizes.
 //
-ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, int bytes)
+ListenersBase::Proxy* ListenersBase::find_proxy (const void* member, size_t bytes)
 {
   for (Proxies::iterator iter = m_proxies.begin (); iter != m_proxies.end ();)
   {
