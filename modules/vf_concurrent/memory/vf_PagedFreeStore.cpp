@@ -95,7 +95,7 @@ inline PagedFreeStore::Page* PagedFreeStore::toPage (void* const p)
 PagedFreeStore::PagedFreeStore (const size_t pageBytes)
   : m_pageBytes (pageBytes)
   , m_pageBytesAvailable (pageBytes - Memory::sizeAdjustedForAlignment (sizeof (Page)))
-  , m_newPagesLeft ((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes)
+  , m_newPagesLeft (int((hardLimitMegaBytes * 1024 * 1024) / m_pageBytes))
 #if LOG_GC
   , m_swaps (0)
 #endif
