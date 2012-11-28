@@ -58,6 +58,6 @@
 
 #include "../vf_lua/vf_lua.h"
 
-#include "LuaBridge/LuaBridge.h"
+#include "LuaBridge/Source/LuaBridge/LuaBridge.h"
 
 #endif
