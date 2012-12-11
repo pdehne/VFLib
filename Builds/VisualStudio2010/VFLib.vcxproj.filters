@@ -121,9 +121,6 @@
     <Filter Include="VF Modules\vf_sqlite\sqlite">
       <UniqueIdentifier>{41878b9f-da99-49d3-84d6-fa396beda121}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VF Modules\vf_luabridge\LuaBridge">
-      <UniqueIdentifier>{b749b783-719d-41c3-b726-4de765d75a8f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="VF Modules\vf_unfinished">
       <UniqueIdentifier>{fc13727b-31bd-45ad-85c4-4a5b1dad20af}</UniqueIdentifier>
     </Filter>
@@ -516,9 +513,6 @@
     <ClCompile Include="..\..\modules\vf_unfinished\graphics\vf_PatternOverlayStyle.cpp">
       <Filter>VF Modules\vf_unfinished\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\modules\vf_concurrent\threads\vf_SharedObject.cpp">
-      <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\modules\vf_db\api\backend.h">
@@ -907,12 +901,6 @@
     </ClInclude>
     <ClInclude Include="..\..\modules\vf_concurrent\threads\vf_GlobalThreadGroup.h">
       <Filter>VF Modules\vf_concurrent\threads</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridge.h">
-      <Filter>VF Modules\vf_luabridge\LuaBridge</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\modules\vf_luabridge\LuaBridge\LuaBridgeExtras.h">
-      <Filter>VF Modules\vf_luabridge\LuaBridge</Filter>
     </ClInclude>
     <ClInclude Include="..\..\modules\vf_audio\sources\vf_SeekingAudioSource.h">
       <Filter>VF Modules\vf_audio\sources</Filter>
