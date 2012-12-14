@@ -33,6 +33,8 @@
 #ifndef VF_APPCONFIGTEMPLATE_VFHEADER
 #define VF_APPCONFIGTEMPLATE_VFHEADER
 
+#define JUCE_MODULE_AVAILABLE_juce_core 1
+
 /*============================================================================*/
 /**     
   Additional configuration options.

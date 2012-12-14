@@ -1,4 +1,5 @@
-*         text=auto
+*                  text=auto
 
-*.sln     text merge=union eol=crlf
-
+*.sln              text merge=union eol=crlf
+*.vcxproj          text eol=crlf
+*.vcxproj.filters  text eol=crlf
