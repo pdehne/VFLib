@@ -41,6 +41,7 @@ public:
   {
     BoxBlurAndDilateSettings (int sizeInPixels, float spread)
     {
+      m_enlargePixels = sizeInPixels + 2;
       m_dilatePixels = int (sizeInPixels * spread + 0.5);
 
       int blurPixels = sizeInPixels - m_dilatePixels;
@@ -48,6 +49,11 @@ public:
       // Photoshop fudge factor by Brian Fiete
       float const fudge = 1.85f - 0.45f * std::min (1.0f, blurPixels / 10.f);
       m_boxBlurRadius = std::max (blurPixels - fudge, 0.f);
+    }
+
+    int getEnlargePixels () const
+    {
+      return m_enlargePixels;
     }
 
     int getDilatePixels () const
@@ -61,6 +67,7 @@ public:
     }
 
   private:
+    int m_enlargePixels;
     int m_dilatePixels;
     float m_boxBlurRadius;
   };
@@ -70,22 +77,121 @@ public:
   struct GrayscaleDilation
   {
     template <class In, class Out>
-    void operator () (In in, Out out, int width, int height, int size) const
+    void operator () (
+      In in,
+      int inRows,
+      int inCols,
+      Out out,
+      int outRows,
+      int outCols,
+      int outX,
+      int outY,
+      int size) const
     {
-      if (size > 0)
+      //if (size > 0)
       {
-        DistanceTransform::Chamfer () (in, Output (out, size), width, height);
+        ChamferDistance () (
+          in,
+          inRows,
+          inCols,
+          Output (out, size),
+          outRows,
+          outCols,
+          outX,
+          outY,
+          ChamferDistance::MaskInit ());
       }
+#if 0
       else
       {
-        for (int y = 0; y < height; ++y)
+        assert (0);
+        for (int y = 0; y < outRows; ++y)
         {
-          for (int x = 0; x < width; ++x)
+          for (int x = 0; x < outCols; ++x)
           {
             out (x, y) = in (x, y) * 256;
           }
         }
       }
+#endif
+    }
+
+  private:
+    struct Output
+    {
+      Output (Map2D <int> dest, int size)
+        : m_dest (dest)
+        , m_size (size * 256)
+        , m_sizePlusOne (m_size + 256)
+      {
+      }
+
+      // Distance has 8 bits fixed precision
+      //
+      template <class T>
+      void operator () (int x, int y, T distance)
+      {
+        if (distance <= m_size)
+          m_dest (x, y) = 255 * 256;
+        else if (distance < m_sizePlusOne)
+          m_dest (x, y) = (255 - (distance - m_size)) * 256;
+        else
+          m_dest (x, y) = 0;
+      }
+
+    private:
+      Map2D <int> m_dest;
+      int m_size;
+      int m_sizePlusOne;
+    };
+  };
+
+  /** Produce grayscale dilation.
+  */
+  struct GrayscaleDilation2
+  {
+    template <class Out>
+    void operator () (
+      int const inRows,
+      int const inCols,
+      unsigned char* inBaseAddr,
+      int const inRowBytes,
+      int const inColBytes,
+      int inX,
+      int inY,
+      Out out,
+      int outRows,
+      int outCols,
+      int size) const
+    {
+      //if (size > 0)
+      {
+        ChamferDistance2 () (
+          inRows,
+          inCols,
+          inBaseAddr,
+          inRowBytes,
+          inColBytes,
+          inX,
+          inY,
+          Output (out, size),
+          outRows,
+          outCols,
+          ChamferDistance::MaskInit ());
+      }
+#if 0
+      else
+      {
+        assert (0);
+        for (int y = 0; y < outRows; ++y)
+        {
+          for (int x = 0; x < outCols; ++x)
+          {
+            out (x, y) = in (x, y) * 256;
+          }
+        }
+      }
+#endif
     }
 
   private:
@@ -127,7 +233,16 @@ public:
     {
       if (size > 0)
       {
-        DistanceTransform::Chamfer () (Input <In> (in), Output (out, size), width, height);
+        ChamferDistance () (
+          in,
+          height,
+          width,
+          Output (out, size),
+          height,
+          width,
+          0,
+          0,
+          ChamferDistance::InverseMaskInit ());
       }
       else
       {
@@ -196,7 +311,16 @@ public:
     {
       if (size > 0)
       {
-        DistanceTransform::Chamfer () (in, Output <Out> (out, size), width, height);
+        ChamferDistance () (
+          in,
+          height,
+          width,
+          Output <Out> (out, size),
+          height,
+          width,
+          0,
+          0,
+          ChamferDistance::MaskInit ());
       }
       else
       {

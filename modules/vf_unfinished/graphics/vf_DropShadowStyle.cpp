@@ -93,121 +93,173 @@ static inline unsigned char contour (int input)
 }
 #endif
 
+/*
+String toString (Rectangle <int> const& r)
+{
+  String s;
+  s << "("
+    << r.getY () << ", "
+    << r.getX () << ", "
+    << r.getBottom () << ", "
+    << r.getRight () << ")";
+  return s;
+}
+*/
+
 void DropShadowStyle::operator() (Pixels destPixels, Pixels stencilPixels)
 {
   if (!active)
     return;
 
-  int const width = stencilPixels.getWidth ();
-  int const height = stencilPixels.getHeight ();
-
-  int const xOffset = - static_cast <int> (cos (angle) * distance + 0.5);
-  int const yOffset = static_cast <int> (sin (angle) * distance + 0.5);
-
   // Calculate blur radius and dilate size from settings
   //
   LayerStyles::BoxBlurAndDilateSettings bd (size, spread);
 
-  // Create enlarged mask
-  //
+  int const xExpand = bd.getEnlargePixels ();
+  int const yExpand = bd.getEnlargePixels ();
+  int const xOffset = - static_cast <int> (cos (angle) * distance + 0.5);
+  int const yOffset = static_cast <int> (sin (angle) * distance + 0.5);
+
+  Rectangle <int> const stencilRect = stencilPixels.getBounds ().translated (xOffset, yOffset);
+
+  // Portion of destination image to fill.
+  Rectangle <int> destRect;
+  Rectangle <int> maskRect;
+  Rectangle <int> srcRect;
+  Point <int> srcOrigin;
+
+  maskRect = stencilRect.expanded (xExpand, yExpand);
+  maskRect = maskRect.getIntersection (destPixels.getBounds ().expanded (xExpand, yExpand));
+
+  srcRect = maskRect.getIntersection (stencilRect);
+
+  destRect = maskRect.getIntersection (destPixels.getBounds ());
+
+  srcOrigin.setX (destRect.getX () - maskRect.getX ());
+  srcOrigin.setY (destRect.getY () - maskRect.getY ());
+
+  maskRect.translate (-xOffset, -yOffset);
+  srcRect.translate (-xOffset, -yOffset);
+
   /*
-  Map2D <int> temp1 (width + size * 2, height + size * 2);
-  for (int y = 0; y < temp1.getRows (); ++y)
-  {
-    for (int x = 0; x < temp1.getCols (); ++x)
-    {
-    }
-  }
+  String s;
+  s << "offset = ("<< xOffset << ", " << yOffset << ")" << "\n";
+  s << "expand = ("<< xExpand << ", " << yExpand << ")" << "\n";
+  s << "srcOrigin = ("<< srcOrigin.getX () << ", " << srcOrigin.getY () << ")" << "\n";
+  s << "maskRect = " << toString (maskRect) << "\n";
+  s << "srcRect = " << toString (srcRect) << "\n";
+  s << "destRect = " << toString (destRect) << "\n";
+  Logger::outputDebugString (s);
+  Logger::outputDebugString ("");
   */
 
-
-  // Dilate 8-bit unsigned mask.
-  //
-  Map2D <int> dist (stencilPixels.getWidth (), stencilPixels.getHeight ());
-
-  LayerStyles::GrayscaleDilation () (
-    Pixels::Map2D (stencilPixels),
-    dist,
-    stencilPixels.getWidth (),
-    stencilPixels.getHeight (),
-    bd.getDilatePixels ());
-
-  // Blur 32-bit signed mask
-  // Output is 32-bit signed with 8-bit fixed point.
-  //
-  Map2D <int> blur (stencilPixels.getWidth (), stencilPixels.getHeight ());
-
-  BoxBlur () (dist, blur, blur.getCols (), blur.getRows (), bd.getBoxBlurRadius ());
-
-  // Transform fixed point mask to 8-bit unsigned mask using contour curve
-  //
-  Image mask (Image::SingleChannel, width, height, false);
-  Pixels maskPixels (mask);
+  if (! destRect.isEmpty ())
   {
-    for (int y = 0; y < height; ++y)
-    {
-      for (int x = 0; x < width; ++x)
-      {
-        int const alpha = blur (x, y);
+    int const width = maskRect.getWidth ();
+    int const height = maskRect.getHeight ();
 
-        jassert (alpha < 65536);
+    // Intermediate storage
+    //
+    Map2D <int> distanceMap (width, height);
+    Map2D <int> blurMap (width, height);
 
-        *maskPixels.getPixelPointer (x, y) = contour (alpha);
-      }
-    }
-  }
-
-  // Calculate compositing rectangles
-  //
-  Rectangle <int> srcRect;
-  Rectangle <int> destRect;
-  {
-    srcRect = mask.getBounds ();
-    destRect = destPixels.getBounds ();
-    destRect.translate (xOffset, yOffset);
-    destRect = destPixels.getBounds ().getIntersection (destRect);
-
-    srcRect = destRect.translated (-xOffset, -yOffset);
-  }
-  jassert (srcRect.getWidth () == destRect.getWidth ());
-  jassert (srcRect.getHeight () == destRect.getHeight ());
-  jassert (mask.getBounds ().contains (srcRect));
-  jassert (destPixels.getBounds ().contains (destRect));
-
-  PixelProcs procs;
-
-  if (knockout)
-  {
-    procs.copyGray (
+    // Dilate stencil mask
+    //
+    LayerStyles::GrayscaleDilation2 () (
       srcRect.getHeight (),
       srcRect.getWidth (),
-      stencilPixels.getPixelPointer (destRect.getX (), destRect.getY ()),
+      stencilPixels.getPixelPointer (srcRect.getX (), srcRect.getY ()),
       stencilPixels.getRowBytes (),
       stencilPixels.getColBytes (),
-      maskPixels.getPixelPointer (srcRect.getX (), srcRect.getY ()),
-      maskPixels.getRowBytes (),
-      maskPixels.getColBytes (),
-      BlendMode::subtract ());
+      srcRect.getX () - maskRect.getX (),
+      srcRect.getY () - maskRect.getY (),
+      distanceMap,
+      height,
+      width,
+      bd.getDilatePixels ());
+
+    // Blur 32-bit signed mask
+    // Output is 32-bit signed with 8-bit fixed point.
+    //
+
+    BoxBlur () (
+      distanceMap,
+      blurMap,
+      width,
+      height,
+      bd.getBoxBlurRadius ());
+
+    // Compute fill alpha channel using contour curve
+    //
+    Image alphaChannel (
+      Image::SingleChannel,
+      destRect.getWidth (),
+      destRect.getHeight (),
+      false);
+
+    Pixels alphaPixels (alphaChannel);
+
+    {
+      int const rows = destRect.getHeight ();
+      int const cols = destRect.getWidth ();
+
+      for (int y = 0; y < rows; ++y)
+      {
+        for (int x = 0; x < cols; ++x)
+        {
+          int const alpha = blurMap (
+            x + srcOrigin.getX (),
+            y + srcOrigin.getY ());
+
+          jassert (alpha < 65536);
+
+          *alphaPixels.getPixelPointer (x, y) = contour (alpha);
+        }
+      }
+    }
+
+    PixelProcs procs;
+
+  #if 0
+    if (knockout)
+    {
+      procs.copyGray (
+        maskRect.getHeight (),
+        maskRect.getWidth (),
+        stencilPixels.getPixelPointer (destRect.getX (), destRect.getY ()),
+        stencilPixels.getRowBytes (),
+        stencilPixels.getColBytes (),
+        alphaPixels.getPixelPointer (maskRect.getX (), maskRect.getY ()),
+        alphaPixels.getRowBytes (),
+        alphaPixels.getColBytes (),
+        BlendMode::subtract ());
+    }
+  #endif
+
+    // Fill destination using alpha channel.
+    //
+    {
+      unsigned char c [3];
+      c [PixelRGB::indexR] = colour.getRed ();
+      c [PixelRGB::indexG] = colour.getGreen ();
+      c [PixelRGB::indexB] = colour.getBlue ();
+
+      procs.fillRGB (
+        destRect.getHeight (),
+        destRect.getWidth (),
+        c,
+        opacity,
+        alphaPixels.getPixelPointer (0, 0),
+        alphaPixels.getRowBytes (),
+        alphaPixels.getColBytes (),
+        destPixels.getPixelPointer (destRect.getX (), destRect.getY ()),
+        destPixels.getRowBytes (),
+        destPixels.getColBytes (),
+        mode);
+    }
   }
-
-  // Colorize destination using mask
+  else
   {
-    unsigned char c [3];
-    c [PixelRGB::indexR] = colour.getRed ();
-    c [PixelRGB::indexG] = colour.getGreen ();
-    c [PixelRGB::indexB] = colour.getBlue ();
-
-    procs.fillRGB (
-      srcRect.getHeight (),
-      srcRect.getWidth (),
-      c,
-      opacity,
-      maskPixels.getPixelPointer (srcRect.getX (), srcRect.getY ()),
-      maskPixels.getRowBytes (),
-      maskPixels.getColBytes (),
-      destPixels.getPixelPointer (destRect.getX (), destRect.getY ()),
-      destPixels.getRowBytes (),
-      destPixels.getColBytes (),
-      mode);
+    Logger::outputDebugString ("destRect.isEmpty ()");
   }
 }
